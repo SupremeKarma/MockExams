@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { db } from "@/lib/firebase";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
 import { useAuth } from "@/context/AuthContext";
-import { BookOpen, Target, TrendingUp, Plus, Brain, ArrowRight } from "lucide-react";
+import { BookOpen, Target, TrendingUp, Plus, Brain, ArrowRight, Users } from "lucide-react";
 import Link from "next/link";
 
 export default function ExaminerDashboard() {
@@ -37,12 +37,17 @@ export default function ExaminerDashboard() {
       // Latest attempts across my exams - Global View for Examiner
       const attemptsQ = query(
         collection(db, "exam_attempts"),
-        where("exam_id", "in", myExamIds.slice(0, 10)), // Firestore limit
-        orderBy("attempted_at", "desc")
+        where("exam_id", "in", myExamIds.slice(0, 10))
       );
       
       const attemptsSnap = await getDocs(attemptsQ);
-      const allAttempts = attemptsSnap.docs.map(d => ({ id: d.id, ...d.data() as any }));
+      const allAttempts = attemptsSnap.docs
+        .map(d => ({ id: d.id, ...d.data() as any }))
+        .sort((a, b) => {
+          const tA = a.attempted_at ? new Date(a.attempted_at).getTime() : 0;
+          const tB = b.attempted_at ? new Date(b.attempted_at).getTime() : 0;
+          return tB - tA;
+        });
       
       let totalPct = 0;
       allAttempts.forEach(a => totalPct += Number(a.percentage) || 0);
@@ -140,7 +145,6 @@ export default function ExaminerDashboard() {
           </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }

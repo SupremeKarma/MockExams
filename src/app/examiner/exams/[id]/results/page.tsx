@@ -30,10 +30,16 @@ export default function ExamResultsPage({ params }: { params: any }) {
 
       const attSnap = await getDocs(query(
         collection(db, "exam_attempts"),
-        where("exam_id", "==", examId),
-        orderBy("attempted_at", "desc")
+        where("exam_id", "==", examId)
       ));
-      setAttempts(attSnap.docs.map(d => ({ id: d.id, ...d.data() })));
+      const sortedAttempts = attSnap.docs
+        .map(d => ({ id: d.id, ...d.data() as any }))
+        .sort((a, b) => {
+          const tA = a.attempted_at ? new Date(a.attempted_at).getTime() : 0;
+          const tB = b.attempted_at ? new Date(b.attempted_at).getTime() : 0;
+          return tB - tA;
+        });
+      setAttempts(sortedAttempts);
     } catch (err) { console.error(err); }
     finally { setLoading(false); }
   };

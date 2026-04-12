@@ -171,17 +171,17 @@ export default function ExamResultsPage({ params }: { params: any }) {
 
           <div className="flex flex-col md:flex-row gap-4 justify-center mb-16">
             <Link 
-              href="/exams" 
-              className="px-10 py-4 bg-white text-black rounded-2xl font-black hover:bg-slate-200 transition-all text-center flex-1 active:scale-[0.98] shadow-xl"
+              href={`/exams/${attempt.exam_id}/take`} 
+              className="px-10 py-4 bg-primary text-white rounded-2xl font-black shadow-lg shadow-primary/20 hover:opacity-90 transition-all text-center flex-1 active:scale-[0.98]"
             >
-              Take Another Exam
+              Retake Exam
             </Link>
-            <button 
-              onClick={() => window.print()}
+            <Link 
+              href="/exams"
               className="px-10 py-4 glass border-white/10 text-white rounded-2xl font-black hover:bg-white/5 transition-all text-center flex-1 active:scale-[0.98]"
             >
-              Download Report
-            </button>
+              Browse More Exams
+            </Link>
           </div>
 
           <div className="space-y-6">

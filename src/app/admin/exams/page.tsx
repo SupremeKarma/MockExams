@@ -20,7 +20,7 @@ export default function AdminExamsPage() {
       const examsRef = collection(db, 'exams');
       const q = query(examsRef, orderBy('created_at', 'desc'));
       const querySnapshot = await getDocs(q);
-      const data = querySnapshot.docs.map(doc => ({
+      const data = querySnapshot.docs.map((doc: any) => ({
         id: doc.id,
         ...doc.data()
       }));

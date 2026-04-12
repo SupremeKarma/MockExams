@@ -6,47 +6,53 @@ import Image from "next/image";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { useState, useEffect } from "react";
+import { db } from "@/lib/firebase";
+import { collection, query, getDocs, orderBy } from "firebase/firestore";
 
 export default function LeaderboardPage() {
   const { user } = useAuth();
-  const [period, setPeriod] = useState("All Time");
+  const [selectedExam, setSelectedExam] = useState("");
+  const [exams, setExams] = useState<any[]>([]);
   const [leaderboard, setLeaderboard] = useState<any[]>([]);
   const [currentUserEntry, setCurrentUserEntry] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    async function fetchLeaderboard() {
+    async function fetchData() {
       setLoading(true);
       try {
-        const headers: HeadersInit = {};
-        if (user) {
-          const token = await user.getIdToken();
-          headers["Authorization"] = `Bearer ${token}`;
-        }
-
-        const response = await fetch("/api/leaderboard?limit=50", { headers });
+        // Fetch Exams for filter dropdown (only published public ones)
+        const { query, where } = await import("firebase/firestore");
+        const examsQ = query(
+          collection(db, "exams"),
+          where("is_published", "==", true),
+          where("visibility", "==", "public")
+        );
+        const examsSnapshot = await getDocs(examsQ);
+        setExams(examsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+        
+        // Fetch Leaderboard from API
+        const token = await user?.getIdToken();
+        const url = `/api/leaderboard?${selectedExam ? `examId=${selectedExam}` : ""}`;
+        const response = await fetch(url, {
+          headers: token ? { "Authorization": `Bearer ${token}` } : {}
+        });
+        
         const data = await response.json();
         
-        if (data && data.entries && Array.isArray(data.entries)) {
+        if (data.entries) {
           setLeaderboard(data.entries);
           setCurrentUserEntry(data.currentUserEntry || null);
-        } else if (Array.isArray(data)) {
-          setLeaderboard(data);
-        } else {
-          setLeaderboard([]);
-          console.warn("Leaderboard API returned non-array data:", data);
         }
-      } catch (err) {
-        console.error("Error fetching leaderboard:", err);
-        setLeaderboard([]);
+      } catch (error) {
+        console.error("Error fetching leaderboard data:", error);
       } finally {
         setLoading(false);
       }
     }
-
-    fetchLeaderboard();
-  }, [period, user]);
+    fetchData();
+  }, [selectedExam, user]);
 
   const filteredLeaderboard = leaderboard.filter(entry => 
     entry.displayName.toLowerCase().includes(searchTerm.toLowerCase())
@@ -108,22 +114,28 @@ export default function LeaderboardPage() {
         </motion.div>
       )}
 
-      {/* Period Selection */}
+      {/* Exam Selection Filter */}
       <div className="flex justify-center mb-12">
-        <div className="glass p-1 rounded-2xl flex items-center">
-          {["Weekly", "Monthly", "All Time"].map(p => (
-            <button
-              key={p}
-              onClick={() => setPeriod(p)}
-              className={`px-8 py-2.5 rounded-xl text-sm font-bold transition-all ${
-                period === p 
-                  ? "bg-white text-black shadow-lg" 
-                  : "text-slate-400 hover:text-slate-200"
-              }`}
-            >
-              {p}
-            </button>
-          ))}
+        <div className="glass p-2 rounded-2xl flex items-center gap-3">
+          <span className="text-xs font-bold text-slate-500 uppercase tracking-widest ml-3">Filter by Exam:</span>
+          <select
+            value={selectedExam}
+            onChange={(e) => setSelectedExam(e.target.value)}
+            className="bg-white/5 border border-white/10 text-white rounded-xl px-4 py-2 text-sm font-bold focus:outline-none focus:border-primary/50 transition-all appearance-none cursor-pointer pr-10 relative"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'right 12px center',
+              backgroundSize: '16px'
+            }}
+          >
+            <option value="" className="bg-slate-900">All Exams (Global)</option>
+            {exams.map(exam => (
+              <option key={exam.id} value={exam.id} className="bg-slate-900">
+                {exam.title}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 

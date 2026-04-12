@@ -1,232 +1,406 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { 
+  Users, 
+  FileText, 
+  CheckCircle, 
+  PlusCircle, 
+  Search, 
+  Filter, 
+  ChevronRight,
+  TrendingUp,
+  BarChart3,
+  Settings,
+  ShieldCheck,
+  Brain,
+  Zap,
+  LayoutDashboard,
+  Database,
+  Globe,
+  BookOpen,
+  ArrowRight,
+  Target,
+  X
+} from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 import { motion } from "framer-motion";
-import { Users, BookOpen, Target, Brain, ArrowRight, Building2 } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { db } from "@/lib/firebase";
-import { collection, getCountFromServer } from "firebase/firestore";
+import { collection, query, getDocs, orderBy, limit, doc, updateDoc } from "firebase/firestore";
 
-export default function AdminDashboardPage() {
+export default function AdminDashboard() {
+  const { user, isAdmin: isAuthAdmin, loading: authLoading } = useAuth();
   const [stats, setStats] = useState({
-    users: 0,
-    exams: 0,
-    attempts: 0,
+    totalExams: 0,
+    totalAttempts: 0,
+    totalQuestions: 0,
+    totalUsers: 0
   });
+  const [recentExams, setRecentExams] = useState<any[]>([]);
   const [recentUsers, setRecentUsers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchData() {
+    if (authLoading || !isAuthAdmin) return;
+
+    async function fetchStats() {
       try {
-        const usersRef = collection(db, 'users');
-        const examsRef = collection(db, 'exams');
-        const attemptsRef = collection(db, 'exam_attempts');
-        
-        const [userSnap, examSnap, attemptSnap] = await Promise.all([
-          getCountFromServer(usersRef),
-          getCountFromServer(examsRef),
-          getCountFromServer(attemptsRef),
-          // Also fetch recent users
-          getDocs(query(collection(db, 'users'), orderBy('created_at', 'desc'), limit(5)))
+        const [examsSnap, attemptsSnap, questionsSnap, usersSnap] = await Promise.all([
+          getDocs(collection(db, "exams")),
+          getDocs(collection(db, "exam_attempts")),
+          getDocs(collection(db, "questions")),
+          getDocs(collection(db, "users"))
         ]);
-        
+
         setStats({
-          users: userSnap.data().count,
-          exams: examSnap.data().count,
-          attempts: attemptSnap.data().count,
+          totalExams: examsSnap.size,
+          totalAttempts: attemptsSnap.size,
+          totalQuestions: questionsSnap.size,
+          totalUsers: usersSnap.size
         });
 
-        const usersDocs = await getDocs(query(collection(db, 'users'), orderBy('created_at', 'desc'), limit(5)));
-        setRecentUsers(usersDocs.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+        // Use standard queries but handle them carefully
+        // If sorting fails due to missing index, we fall back to unsorted
+        try {
+          const qExams = query(collection(db, "exams"), orderBy("updated_at", "desc"), limit(4));
+          const recentExamsSnap = await getDocs(qExams);
+          setRecentExams(recentExamsSnap.docs.map((doc: any) => ({ id: doc.id, ...doc.data() })));
+        } catch (e) {
+          console.warn("Index not found for sorted exams, showing first 4:", e);
+          const qExamsSimple = query(collection(db, "exams"), limit(4));
+          const recentExamsSnapSimple = await getDocs(qExamsSimple);
+          setRecentExams(recentExamsSnapSimple.docs.map((doc: any) => ({ id: doc.id, ...doc.data() })));
+        }
+
+        try {
+          const qUsers = query(collection(db, "users"), orderBy("created_at", "desc"), limit(5));
+          const recentUsersSnap = await getDocs(qUsers);
+          setRecentUsers(recentUsersSnap.docs.map((doc: any) => ({ id: doc.id, ...doc.data() })));
+        } catch (e) {
+          console.warn("Index not found for sorted users, showing first 5:", e);
+          const qUsersSimple = query(collection(db, "users"), limit(5));
+          const recentUsersSnapSimple = await getDocs(qUsersSimple);
+          setRecentUsers(recentUsersSnapSimple.docs.map((doc: any) => ({ id: doc.id, ...doc.data() })));
+        }
 
       } catch (err) {
-        console.error("Error fetching admin data:", err);
+        console.error("Critical error fetching admin stats:", err);
       } finally {
         setLoading(false);
       }
     }
-    fetchData();
-  }, []);
+    fetchStats();
+  }, [authLoading, isAuthAdmin]);
+
+  const changeUserRole = async (userId: string, newRole: string) => {
+    try {
+      await updateDoc(doc(db, "users", userId), { role: newRole });
+      setRecentUsers(prev => prev.map(u => u.id === userId ? { ...u, role: newRole } : u));
+    } catch (err) {
+      console.error("Failed to update user role:", err);
+      alert("Role update failed. Check console for details.");
+    }
+  };
+
+  if (authLoading || loading) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center">
+        <div className="w-20 h-20 relative mb-8">
+          <div className="absolute inset-0 rounded-3xl bg-primary/20 animate-ping"></div>
+          <div className="relative z-10 w-full h-full glass rounded-2xl flex items-center justify-center">
+            <ShieldCheck className="w-10 h-10 text-primary animate-pulse" />
+          </div>
+        </div>
+        <h2 className="text-2xl font-black text-white mb-2 tracking-tight">Scanning Security Clearance</h2>
+        <p className="text-slate-500 font-medium">Synchronizing administrative metadata and repository nodes...</p>
+      </div>
+    );
+  }
+
+  if (!isAuthAdmin) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center">
+        <div className="w-24 h-24 bg-rose-500/10 rounded-[2rem] flex items-center justify-center mb-10 border border-rose-500/20">
+          <X className="w-12 h-12 text-rose-500" />
+        </div>
+        <h1 className="text-4xl font-black text-gradient mb-4">Access Denied</h1>
+        <p className="text-slate-500 max-w-md mx-auto font-medium leading-relaxed mb-12">
+          Your current security clearance level is insufficient to access the platform's Command Center. 
+          Please contact the system architect if you believe this is an error.
+        </p>
+        <Link 
+          href="/dashboard" 
+          className="px-12 py-4 bg-white text-slate-950 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-slate-100 transition-all active:scale-95"
+        >
+          Return to Dashboard
+        </Link>
+      </div>
+    );
+  }
 
   return (
-    <div className="space-y-12">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div>
-          <h2 className="text-4xl font-black tracking-tight flex items-center gap-3">
-            System <span className="text-primary">Command</span>
-            <div className="px-3 py-1 bg-emerald-500/10 text-emerald-500 text-[10px] font-black uppercase tracking-widest rounded-full flex items-center gap-1.5 border border-emerald-500/20">
-              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              Healthy
+    <div className="pb-20">
+      <div className="max-w-7xl mx-auto">
+        
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row items-center justify-between mb-12 gap-8">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-500 text-xs font-black uppercase tracking-widest mb-4">
+              <ShieldCheck className="w-4 h-4" />
+              <span>System Administrator</span>
             </div>
-          </h2>
-          <p className="text-slate-400 font-medium mt-1">Supervising all platform activities from one central hub.</p>
+            <h1 className="text-3xl font-black text-white tracking-tight">
+              Command <span className="text-gradient">Center</span>
+            </h1>
+            <p className="text-slate-400 font-medium mt-1">Supervising all platform activities from one central hub.</p>
+          </motion.div>
+          
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="flex items-center gap-3"
+          >
+            <Link 
+              href="/admin/exams/new" 
+              className="px-6 py-3 bg-primary text-white rounded-2xl font-black flex items-center gap-2 hover:bg-primary-dark transition-all shadow-xl shadow-primary/20"
+            >
+              <PlusCircle className="w-5 h-5" />
+              Build New Exam
+            </Link>
+            <button className="p-3 glass border-white/10 text-white rounded-2xl hover:bg-white/5 transition-all">
+              <Settings className="w-6 h-6" />
+            </button>
+          </motion.div>
         </div>
-        <div className="flex items-center gap-3">
-          <Link href="/admin/settings" className="p-3 bg-white/5 hover:bg-white/10 rounded-2xl border border-white/5 transition-all">
-            <Target className="w-5 h-5 text-slate-400" />
-          </Link>
-          <Link href="/admin/users" className="px-6 py-3 bg-white text-black rounded-2xl font-bold hover:bg-slate-200 transition-all">
-            Manage All Users
-          </Link>
-        </div>
-      </div>
-      
-      {/* Platform Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <StatCard 
-          title="Global Aspirants" 
-          value={loading ? "..." : stats.users.toLocaleString()} 
-          icon={<Users className="w-6 h-6" />} 
-          color="text-blue-500" 
-          bgColor="bg-blue-500/10" 
-          trend="+12% this week"
-        />
-        <StatCard 
-          title="Curriculum Base" 
-          value={loading ? "..." : stats.exams.toLocaleString()} 
-          icon={<BookOpen className="w-6 h-6" />} 
-          color="text-emerald-500" 
-          bgColor="bg-emerald-500/10" 
-          trend="+3 new exams"
-        />
-        <StatCard 
-          title="Practice Sessions" 
-          value={loading ? "..." : stats.attempts.toLocaleString()} 
-          icon={<Target className="w-6 h-6" />} 
-          color="text-amber-500" 
-          bgColor="bg-amber-500/10" 
-          trend="89 completions today"
-        />
-      </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Recent Registrations */}
-        <div className="lg:col-span-2 glass-card rounded-[2.5rem] border border-white/5 overflow-hidden">
-          <div className="p-8 border-b border-white/5 flex items-center justify-between bg-white/[0.01]">
-            <h3 className="text-xl font-black">Latest Registrations</h3>
-            <Link href="/admin/users" className="text-primary text-xs font-bold hover:underline">Full Database</Link>
-          </div>
-          <div className="px-2">
-            <table className="w-full text-left">
-              <thead>
-                <tr className="text-[10px] text-slate-500 font-black uppercase tracking-[0.2em]">
-                  <th className="p-6">User / Identity</th>
-                  <th className="p-6">Role</th>
-                  <th className="p-6 text-right">Join Date</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-white/5">
-                {recentUsers.length > 0 ? (
-                  recentUsers.map(u => (
-                    <tr key={u.id} className="group hover:bg-white/[0.02] transition-colors">
-                      <td className="p-6">
-                        <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-white/10 to-transparent flex items-center justify-center font-bold text-xs">
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <AdminStatCard icon={<Database />} label="Total Repository" value={stats.totalExams} subValue="Exams Managed" color="text-indigo-400" />
+          <AdminStatCard icon={<Zap />} label="Active Traffic" value={stats.totalAttempts} subValue="Results Processed" color="text-amber-400" />
+          <AdminStatCard icon={<Brain />} label="Knowledge Base" value={stats.totalQuestions} subValue="Questions Stored" color="text-emerald-400" />
+          <AdminStatCard icon={<Users />} label="Member Base" value={stats.totalUsers} subValue="Total Users" color="text-rose-400" />
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Recent Assets & Users */}
+          <div className="lg:col-span-2 space-y-8">
+            <div className="glass-card rounded-[2.5rem] border border-white/10 overflow-hidden">
+              <div className="p-8 border-b border-white/5 flex items-center justify-between">
+                <h2 className="text-xl font-bold flex items-center gap-2 text-white">
+                  <LayoutDashboard className="w-5 h-5 text-primary" />
+                  Recent Infrastructure Updates
+                </h2>
+                <Link href="/admin/exams" className="text-sm font-bold text-primary hover:underline">View Repository</Link>
+              </div>
+              <div className="divide-y divide-white/5">
+                {recentExams.map((exam) => (
+                  <div key={exam.id} className="p-8 flex items-center justify-between hover:bg-white/5 transition-colors group">
+                    <div className="flex items-center gap-6">
+                       <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center font-black text-xs text-slate-500 group-hover:bg-primary/20 group-hover:text-primary transition-all">
+                         {exam.category?.substring(0, 2).toUpperCase() || "EX"}
+                       </div>
+                       <div>
+                         <h4 className="font-bold text-white mb-1">{exam.title}</h4>
+                         <p className="text-xs text-slate-500 font-medium whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px]">
+                           ID: {exam.id}
+                         </p>
+                       </div>
+                    </div>
+                    <Link href={`/admin/exams/${exam.id}`} className="p-3 bg-white/5 rounded-2xl text-slate-400 hover:text-white hover:bg-white/10 transition-all">
+                      <ChevronRight className="w-5 h-5" />
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div className="glass-card rounded-[2.5rem] border border-white/10 overflow-hidden">
+               <div className="p-8 border-b border-white/5">
+                 <h2 className="text-xl font-bold text-white">Latest Registrations</h2>
+               </div>
+               <div className="divide-y divide-white/5">
+                 {recentUsers.map(u => (
+                    <div key={u.id} className="p-6 flex items-center justify-between hover:bg-white/[0.01]">
+                       <div className="flex items-center gap-4">
+                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-white/10 to-transparent flex items-center justify-center font-bold text-xs uppercase">
                             {u.displayName?.[0] || u.email?.[0] || "U"}
                           </div>
                           <div>
-                            <p className="font-bold text-sm tracking-tight">{u.displayName || "New User"}</p>
+                            <p className="font-bold text-sm text-white">{u.displayName || "New Member"}</p>
                             <p className="text-[11px] text-slate-500 font-medium">{u.email}</p>
                           </div>
-                        </div>
-                      </td>
-                      <td className="p-6">
-                        <span className={`px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest ${
-                          u.role === 'admin' ? 'bg-primary/20 text-primary' : 
-                          u.role === 'examiner' ? 'bg-amber-400/20 text-amber-400' : 'bg-emerald-400/20 text-emerald-400'
-                        }`}>
-                          {u.role || 'Student'}
-                        </span>
-                      </td>
-                      <td className="p-6 text-right text-xs font-bold text-slate-400">
-                        {u.created_at ? new Date(u.created_at).toLocaleDateString() : 'Recent'}
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan={3} className="p-20 text-center text-slate-500 font-medium italic">Scanning for new activity...</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        {/* Quick Actions Panel */}
-        <div className="space-y-6">
-          <div className="glass-card p-8 rounded-[2.5rem] border border-white/5">
-            <h3 className="text-xl font-black mb-6">Management</h3>
-            <div className="space-y-3">
-              <ActionButton 
-                href="/admin/exams/generate" 
-                icon={<Brain className="w-5 h-5" />} 
-                title="AI Command" 
-                desc="Global AI Exam Setup"
-                color="text-primary"
-              />
-              <ActionButton 
-                href="/admin/organizations" 
-                icon={<Building2 className="w-5 h-5" />} 
-                title="Institutes" 
-                desc="Review Org Requests"
-                color="text-emerald-400"
-              />
-              <ActionButton 
-                href="/admin/stats/advanced" 
-                icon={<TrendingUp className="w-5 h-5" />} 
-                title="Intelligence" 
-                desc="Deep Platform Analytics"
-                color="text-amber-400"
-              />
+                       </div>
+                       <div className="text-right flex items-center gap-3">
+                          <select
+                            value={u.role || 'student'}
+                            onChange={(e) => changeUserRole(u.id, e.target.value)}
+                            className="bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-lg focus:outline-none focus:border-primary/50 transition-all cursor-pointer"
+                          >
+                            <option value="student" className="bg-slate-900">Student</option>
+                            <option value="examiner" className="bg-slate-900">Examiner</option>
+                            <option value="org_admin" className="bg-slate-900">Org Admin</option>
+                            <option value="admin" className="bg-slate-900">Admin</option>
+                          </select>
+                       </div>
+                    </div>
+                 ))}
+               </div>
             </div>
           </div>
 
-          {/* System Announcement Box */}
-          <div className="bg-primary/20 p-8 rounded-[2.5rem] border border-primary/20 relative overflow-hidden group hover:bg-primary/30 transition-colors">
-            <div className="relative z-10">
-              <h4 className="font-bold text-primary text-sm uppercase tracking-widest mb-2">New Release</h4>
-              <p className="text-white text-lg font-black leading-tight mb-4">V3.0 Deployment Pipeline is live.</p>
-              <button className="text-xs font-bold px-4 py-2 bg-primary text-white rounded-xl shadow-lg shadow-primary/20">Check Changelog</button>
+          {/* Quick Actions & System Health */}
+          <div className="space-y-8">
+            <div className="glass-card p-8 rounded-[2rem] border border-white/10">
+                <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
+                    <TrendingUp className="w-5 h-5 text-primary" /> System Metrics
+                </h3>
+                <div className="space-y-6">
+                    <HealthBar label="Database Pulse" status="Healthy" progress={98} color="bg-emerald-500" />
+                    <HealthBar label="API Latency" status="Optimal" progress={95} color="bg-primary" />
+                    <HealthBar label="Auth Service" status="Active" progress={100} color="bg-indigo-500" />
+                </div>
             </div>
-            <div className="absolute -right-4 -bottom-4 w-32 h-32 bg-primary blur-3xl opacity-20" />
+
+            <div className="bg-gradient-to-br from-rose-600 to-rose-900 rounded-[2rem] p-8 text-white relative overflow-hidden shadow-2xl shadow-rose-500/20">
+                <div className="relative z-10">
+                    <h3 className="text-xl font-black mb-1">Global Lockdown</h3>
+                    <p className="text-rose-100/70 text-xs font-medium mb-6 leading-relaxed">
+                        Immediately disable all public exam access and institutional logins across the entire platform.
+                    </p>
+                    <button className="w-full py-4 bg-white text-rose-600 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-rose-50 transition-all active:scale-95">
+                        Enter Security Mode
+                    </button>
+                </div>
+                <ShieldCheck className="absolute -bottom-8 -right-8 w-32 h-32 opacity-10 -rotate-12" />
+            </div>
+
+             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+               <AdminNavCard 
+                 icon={<Users className="w-8 h-8" />}
+                 title="Manage Users"
+                 desc="Permissions & Accounts"
+                 href="/admin/users"
+                 color="bg-blue-500/10 text-blue-500"
+               />
+               <AdminNavCard 
+                 icon={<FileText className="w-8 h-8" />}
+                 title="Exam Studio"
+                 desc="Content Management"
+                 href="/admin/exams"
+                 color="bg-emerald-500/10 text-emerald-500"
+               />
+               <AdminNavCard 
+                 icon={<Database className="w-8 h-8" />}
+                 title="Organizations"
+                 desc="Entity Control"
+                 href="/admin/organizations"
+                 color="bg-amber-500/10 text-amber-500"
+               />
+               <AdminNavCard 
+                 icon={<Settings className="w-8 h-8" />}
+                 title="Settings"
+                 desc="System Configuration"
+                 href="/admin/settings"
+                 color="bg-purple-500/10 text-purple-500"
+               />
+             </div>
+
+            <div className="grid grid-cols-1 gap-4">
+                <ManagementTile 
+                    title="User Directory" 
+                    path="/admin/users"
+                    icon={<Users className="w-5 h-5 text-primary" />}
+                />
+                <ManagementTile 
+                    title="Organizations" 
+                    path="/admin/organizations"
+                    icon={<Globe className="w-5 h-5 text-emerald-400" />}
+                />
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   );
 }
 
-function ActionButton({ href, icon, title, desc, color }: any) {
-  return (
-    <Link href={href} className="flex items-center justify-between p-4 bg-white/5 hover:bg-white/10 rounded-2xl transition-all group border border-transparent hover:border-white/10">
-      <div className="flex items-center gap-4">
-        <div className={`p-3 bg-white/5 rounded-xl group-hover:bg-white/10 transition-colors ${color}`}>
-          {icon}
-        </div>
-        <div>
-          <h4 className="font-bold text-sm tracking-tight">{title}</h4>
-          <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">{desc}</p>
-        </div>
-      </div>
-      <ArrowRight className="w-4 h-4 text-slate-600 group-hover:text-white transition-all translate-x-0 group-hover:translate-x-1" />
-    </Link>
-  );
+function AdminStatCard({ icon, label, value, subValue, color }: any) {
+    return (
+        <motion.div 
+            whileHover={{ y: -5 }}
+            className="glass-card p-8 rounded-[2rem] border border-white/10 transition-all hover:border-white/20 group"
+        >
+            <div className="flex items-start justify-between mb-6">
+                <div className={`p-4 bg-white/5 rounded-2xl ${color} group-hover:scale-110 transition-transform`}>
+                    {icon}
+                </div>
+                <div className="flex flex-col items-end text-right">
+                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mb-1">{label}</p>
+                    <span className="text-[10px] font-bold text-slate-600 truncate max-w-[100px]">{subValue}</span>
+                </div>
+            </div>
+            <h3 className="text-4xl font-black text-white tracking-tight">{value}</h3>
+        </motion.div>
+    );
 }
 
-function StatCard({ title, value, icon, color, bgColor, trend }: any) {
-  return (
-    <div className="glass-card p-8 rounded-[2.5rem] border border-white/5 hover:border-white/10 transition-all group">
-      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-xl ${bgColor} ${color} group-hover:scale-110 transition-transform`}>
-        {icon}
-      </div>
-      <h3 className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] mb-1">{title}</h3>
-      <div className="text-4xl font-black tracking-tighter mb-4">{value}</div>
-      <div className="flex items-center gap-1.5 px-3 py-1 bg-white/5 rounded-full w-fit">
-        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-        <span className="text-[10px] font-bold text-slate-400">{trend}</span>
-      </div>
-    </div>
-  );
+function HealthBar({ label, status, progress, color }: any) {
+    return (
+        <div className="space-y-2">
+            <div className="flex justify-between items-end">
+                <span className="text-xs font-bold text-slate-400">{label}</span>
+                <span className={`text-[10px] font-black uppercase tracking-widest ${status === 'Healthy' || status === 'Active' || status === 'Optimal' ? 'text-emerald-400' : 'text-rose-400'}`}>{status}</span>
+            </div>
+            <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                <motion.div 
+                   initial={{ width: 0 }}
+                   animate={{ width: `${progress}%` }}
+                   className={`h-full ${color}`} 
+                />
+            </div>
+        </div>
+    );
+}
+
+function ManagementTile({ title, path, icon }: any) {
+    return (
+        <Link 
+            href={path} 
+            className="glass-card p-6 rounded-2xl border border-white/10 hover:border-primary/30 transition-all group flex items-center justify-between"
+        >
+            <div className="flex items-center gap-4">
+               <div className="p-3 bg-white/5 rounded-xl group-hover:bg-primary/10 transition-colors">
+                  {icon}
+               </div>
+               <h3 className="font-bold text-white text-sm">{title}</h3>
+            </div>
+            <ChevronRight className="w-5 h-5 text-slate-600 group-hover:text-white transition-all group-hover:translate-x-1" />
+        </Link>
+    );
+}
+
+function AdminNavCard({ icon, title, desc, href, color }: any) {
+    return (
+        <Link href={href}>
+            <motion.div 
+                whileHover={{ scale: 1.02, y: -5 }}
+                whileTap={{ scale: 0.98 }}
+                className="glass-card p-8 rounded-[2rem] border border-white/10 hover:border-white/20 transition-all h-full group"
+            >
+                <div className={`w-14 h-14 rounded-2xl ${color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                    {icon}
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
+                <p className="text-slate-500 text-xs font-medium leading-relaxed">{desc}</p>
+                <div className="mt-8 flex items-center gap-2 text-white/40 group-hover:text-white transition-colors text-[10px] font-black uppercase tracking-[0.2em]">
+                    Access Tools <ChevronRight className="w-3 h-3" />
+                </div>
+            </motion.div>
+        </Link>
+    );
 }

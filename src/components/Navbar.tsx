@@ -1,18 +1,30 @@
 "use client";
 
-import { BookOpen, Search, User, Bell, X, ShieldCheck, GraduationCap, Building2 } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { useNotifications } from "@/components/NotificationProvider";
+import { 
+  LogOut, 
+  Menu, 
+  X, 
+  LayoutDashboard, 
+  BookOpen, 
+  Bell, 
+  User, 
+  Settings, 
+  Crown,
+  ChevronDown,
+  Sparkles,
+  Search,
+  Zap
+} from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-export default function Navbar() {
+export const Navbar = () => {
+  const { user, signOut, isAdmin, isExaminer } = useAuth();
+  const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { user, signOut, isAdmin, isExaminer, orgId } = useAuth();
-  const { notifications, unreadCount } = useNotifications();
-  const [showNotifs, setShowNotifs] = useState(false);
-  const pathname = usePathname();
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -20,181 +32,176 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleSignOut = async () => {
-    await signOut();
-  };
+  const navLinks = [
+    { name: "Live Exams", href: "/exams", icon: Zap },
+    { name: "Global Ranking", href: "/leaderboard", icon: Crown },
+    { name: "Community Notes", href: "/notes", icon: Sparkles },
+  ];
 
-  if (pathname?.includes("/take")) return null;
+  if (isExaminer) {
+    navLinks.push({ name: "Examiner", href: "/examiner", icon: LayoutDashboard });
+  }
+
+  if (isAdmin) {
+    navLinks.push({ name: "Admin Nexus", href: "/admin", icon: Settings });
+  }
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "py-4 glass border-b border-white/5" : "py-6 bg-transparent"
+    <nav 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled 
+          ? "bg-slate-950/80 backdrop-blur-2xl border-b border-white/5 py-3" 
+          : "bg-transparent py-6"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
-            <BookOpen className="text-white w-6 h-6" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center bg-white/5 border border-white/5 rounded-3xl px-6 py-2 backdrop-blur-md shadow-2xl">
+          <div className="flex items-center gap-12">
+            {/* Logo */}
+            <Link href="/" className="flex items-center group">
+              <div className="relative w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center mr-3 shadow-lg shadow-indigo-500/30 group-hover:rotate-12 transition-transform duration-300">
+                <BookOpen className="w-6 h-6 text-white" />
+                <div className="absolute inset-0 bg-white/20 rounded-xl animate-pulse"></div>
+              </div>
+              <span className="text-xl font-black text-white tracking-tighter">
+                MOCK<span className="text-indigo-400 font-medium">EXAM</span>
+              </span>
+            </Link>
+
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center gap-8">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="group flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-white transition-all"
+                >
+                  <link.icon className="w-4 h-4 text-slate-500 group-hover:text-indigo-400 transition-colors" />
+                  {link.name}
+                </Link>
+              ))}
+            </div>
           </div>
-          <span className="text-xl font-black tracking-tighter">MockExams</span>
-        </Link>
 
-        {/* Center Nav */}
-        <div className="hidden md:flex items-center gap-8">
-          <NavLink href="/exams">Exams</NavLink>
-          <NavLink href="/notes">Notes</NavLink>
-          <NavLink href="/leaderboard">Leaderboard</NavLink>
-          <NavLink href="/pricing">Pricing</NavLink>
-          <NavLink href="/about">About</NavLink>
-        </div>
+          <div className="flex items-center gap-4">
+            <div className="hidden sm:flex items-center gap-2 p-1 bg-slate-900 border border-white/5 rounded-2xl mr-4">
+              <div className="flex items-center gap-2 px-4 py-1.5 text-xs font-black text-slate-400">
+                <Search className="w-4 h-4" />
+                <span className="hidden xl:inline">Search Exams...</span>
+              </div>
+            </div>
 
-        {/* Right Side */}
-        <div className="flex items-center gap-3">
-          <button className="p-2 hover:bg-white/5 rounded-full transition-colors hidden sm:block">
-            <Search className="w-5 h-5 text-slate-400" />
-          </button>
-
-          {/* Notifications */}
-          {user && (
-            <div className="relative">
-              <button
-                onClick={() => setShowNotifs(!showNotifs)}
-                className="p-2 hover:bg-white/5 rounded-full transition-colors relative"
-              >
-                <Bell className={`w-5 h-5 ${unreadCount > 0 ? "text-primary" : "text-slate-400"}`} />
-                {unreadCount > 0 && (
-                  <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-primary rounded-full border-2 border-[#030711]" />
-                )}
-              </button>
-
-              {showNotifs && (
-                <div className="absolute top-full right-0 mt-4 w-80 glass-card rounded-2xl border border-white/10 shadow-2xl overflow-hidden py-2 z-50">
-                  <div className="px-4 py-2 border-b border-white/5 flex items-center justify-between">
-                    <span className="text-xs font-black uppercase tracking-widest text-slate-500">Notifications</span>
-                    <button onClick={() => setShowNotifs(false)}><X className="w-3 h-3" /></button>
-                  </div>
-                  <div className="max-h-96 overflow-y-auto">
-                    {notifications.length === 0 ? (
-                      <div className="p-8 text-center text-xs text-slate-500 italic">No notifications yet.</div>
-                    ) : (
-                      notifications.map(n => (
-                        <Link
-                          key={n.id}
-                          href={n.link || "#"}
-                          className="flex gap-3 p-4 hover:bg-white/5 transition-colors border-b border-white/5 last:border-0"
-                          onClick={() => setShowNotifs(false)}
-                        >
-                          <div className={`w-8 h-8 rounded-lg shrink-0 flex items-center justify-center ${
-                            n.type === 'success' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-primary/10 text-primary'
-                          }`}>
-                            <Bell className="w-4 h-4" />
-                          </div>
-                          <div>
-                            <div className="text-sm font-bold">{n.title}</div>
-                            <div className="text-xs text-slate-400 line-clamp-2">{n.message}</div>
-                          </div>
-                        </Link>
-                      ))
-                    )}
-                  </div>
-                  <Link
-                    href="/dashboard"
-                    className="block p-3 text-center text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors"
+            {user ? (
+              <div className="flex items-center gap-5">
+                <button className="relative p-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-xl transition-all">
+                  <Bell className="w-5 h-5" />
+                  <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-rose-500 rounded-full border-2 border-slate-950"></span>
+                </button>
+                
+                <div className="relative">
+                  <button 
+                    onClick={() => setIsProfileOpen(!isProfileOpen)}
+                    className="flex items-center gap-3 p-1.5 pr-4 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl hover:bg-indigo-500/20 transition-all group"
                   >
-                    View All Activity
-                  </Link>
+                    <div className="w-9 h-9 rounded-xl overflow-hidden border border-indigo-500/50">
+                      {user.photoURL ? (
+                        <img src={user.photoURL} alt="User" />
+                      ) : (
+                        <div className="w-full h-full bg-indigo-600 flex items-center justify-center text-white text-xs font-black">
+                          {user.email?.[0].toUpperCase()}
+                        </div>
+                      )}
+                    </div>
+                    <ChevronDown className={`w-4 h-4 text-indigo-400 transition-transform ${isProfileOpen ? 'rotate-180' : ''}`} />
+                  </button>
+
+                  <AnimatePresence>
+                    {isProfileOpen && (
+                      <motion.div 
+                        initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                        className="absolute right-0 mt-4 w-64 bg-slate-900 border border-white/10 rounded-[2rem] shadow-2xl p-4 overflow-hidden z-[60]"
+                      >
+                        <div className="px-4 py-6 border-b border-white/5 mb-2">
+                           <p className="text-xs font-black text-slate-500 uppercase tracking-widest mb-1">Authenticated Account</p>
+                           <p className="text-sm font-bold text-white truncate">{user.email}</p>
+                        </div>
+                        <div className="space-y-1">
+                          <Link href="/dashboard" className="flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+                            <LayoutDashboard className="w-4 h-4" /> Dashboard
+                          </Link>
+                          <Link href="/profile" className="flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+                            <User className="w-4 h-4" /> Profile Matrix
+                          </Link>
+                          <button 
+                            onClick={() => { signOut(); setIsProfileOpen(false); }}
+                            className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold text-rose-400 hover:bg-rose-500/10 transition-all"
+                          >
+                            <LogOut className="w-4 h-4" /> Terminal Logoff
+                          </button>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-              )}
-            </div>
-          )}
-
-          {user ? (
-            <div className="flex items-center gap-2">
-              {/* Role-aware portal links */}
-              {isAdmin && (
-                <Link
-                  href="/admin"
-                  className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-rose-500/10 border border-rose-500/20 text-rose-400 rounded-lg text-xs font-bold hover:bg-rose-500/20 transition-all"
-                  title="Admin Panel"
-                >
-                  <ShieldCheck className="w-3.5 h-3.5" /> Admin
+              </div>
+            ) : (
+              <div className="flex items-center gap-4">
+                <Link href="/login" className="text-sm font-black text-white px-6 py-2.5 rounded-xl hover:bg-white/5 transition-all">
+                  Sign In
                 </Link>
-              )}
-
-              {isExaminer && !isAdmin && (
-                <Link
-                  href="/examiner"
-                  className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-lg text-xs font-bold hover:bg-amber-500/20 transition-all"
-                  title="Examiner Portal"
-                >
-                  <GraduationCap className="w-3.5 h-3.5" /> My Exams
+                <Link href="/signup" className="bg-indigo-600 text-white text-sm font-black px-8 py-2.5 rounded-xl hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-500/20">
+                  Get Started
                 </Link>
-              )}
+              </div>
+            )}
 
-              {orgId && (
-                <Link
-                  href={`/organization/${orgId}`}
-                  className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-lg text-xs font-bold hover:bg-emerald-500/20 transition-all"
-                  title="My Organization"
-                >
-                  <Building2 className="w-3.5 h-3.5" /> My Org
-                </Link>
-              )}
-
-              <Link
-                href="/dashboard"
-                className="px-4 py-2 hover:text-white transition-colors text-slate-400 font-medium text-sm"
-              >
-                Dashboard
-              </Link>
-
-              <Link
-                href="/profile"
-                className="p-2 hover:bg-white/5 rounded-full transition-colors text-slate-400 hover:text-white"
-                title="Profile"
-              >
-                <User className="w-5 h-5" />
-              </Link>
-
-              <button
-                onClick={handleSignOut}
-                className="px-4 py-2 glass border-white/10 text-white rounded-lg font-bold hover:bg-white/5 transition-all text-sm"
-              >
-                Sign Out
-              </button>
-            </div>
-          ) : (
-            <>
-              <Link
-                href="/login"
-                className="px-5 py-2 hover:text-white transition-colors text-slate-400 font-medium"
-              >
-                Sign In
-              </Link>
-              <Link
-                href="/signup"
-                className="px-5 py-2 bg-white text-black rounded-lg font-bold hover:bg-slate-200 transition-all shadow-lg"
-              >
-                Get Started
-              </Link>
-            </>
-          )}
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="lg:hidden p-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-xl"
+            >
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
       </div>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden bg-slate-950 border-b border-white/5 pt-4 pb-12 px-4 space-y-4"
+          >
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="flex items-center gap-4 px-6 py-4 rounded-3xl text-lg font-black text-slate-400 bg-white/5 hover:text-white active:scale-95 transition-all"
+                onClick={() => setIsOpen(false)}
+              >
+                <link.icon className="w-6 h-6 text-indigo-400" />
+                {link.name}
+              </Link>
+            ))}
+            {!user && (
+              <div className="grid grid-cols-2 gap-4 pt-8">
+                <Link href="/login" className="flex items-center justify-center py-4 rounded-3xl text-sm font-black text-white bg-white/5">
+                  Sign In
+                </Link>
+                <Link href="/signup" className="flex items-center justify-center py-4 rounded-3xl text-sm font-black text-white bg-indigo-600 shadow-xl shadow-indigo-500/20">
+                  Get Started
+                </Link>
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
-}
-
-function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <Link
-      href={href}
-      className="text-slate-400 hover:text-white font-medium transition-colors relative group"
-    >
-      {children}
-      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
-    </Link>
-  );
-}
+};
+export default Navbar;

@@ -17,11 +17,17 @@ export default function HistoryPage() {
     getDocs(
       query(
         collection(db, "exam_attempts"),
-        where("user_id", "==", user.uid),
-        orderBy("attempted_at", "desc")
+        where("user_id", "==", user.uid)
       )
     ).then(snap => {
-      setAttempts(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+      const sorted = snap.docs
+        .map(d => ({ id: d.id, ...d.data() as any }))
+        .sort((a, b) => {
+          const tA = a.attempted_at ? new Date(a.attempted_at).getTime() : 0;
+          const tB = b.attempted_at ? new Date(b.attempted_at).getTime() : 0;
+          return tB - tA;
+        });
+      setAttempts(sorted);
     }).catch(console.error).finally(() => setLoading(false));
   }, [user]);
 

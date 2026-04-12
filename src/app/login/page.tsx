@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Brain, MoveLeft, Github, Mail, Lock, Loader2 } from "lucide-react";
+import { Brain, MoveLeft, Github, Mail, Lock, Loader2, GraduationCap } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { auth } from "@/lib/firebase";
@@ -38,7 +38,25 @@ export default function LoginPage() {
         ? new GoogleAuthProvider() 
         : new GithubAuthProvider();
       
-      await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, provider);
+      
+      // Ensure user document exists (for new social logins)
+      const { db } = await import("@/lib/firebase");
+      const { doc, getDoc, setDoc, serverTimestamp } = await import("firebase/firestore");
+      const userRef = doc(db, "users", result.user.uid);
+      const userSnap = await getDoc(userRef);
+
+      if (!userSnap.exists()) {
+        await setDoc(userRef, {
+          email: result.user.email,
+          displayName: result.user.displayName,
+          photoURL: result.user.photoURL,
+          role: "student",
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp()
+        });
+      }
+
       router.push("/dashboard");
     } catch (err: any) {
       setError(err.message || `Failed to sign in with ${providerName}`);
@@ -59,8 +77,8 @@ export default function LoginPage() {
             Back to home
           </Link>
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-              <Brain className="text-white w-6 h-6" />
+            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white">
+              <GraduationCap className="w-6 h-6" />
             </div>
             <h1 className="text-2xl font-bold">Welcome Back</h1>
           </div>
@@ -74,11 +92,12 @@ export default function LoginPage() {
             </div>
           )}
 
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-300 ml-1">Email Address</label>
+           <div className="space-y-2">
+            <label htmlFor="email" className="text-sm font-medium text-slate-300 ml-1">Email Address</label>
             <div className="relative group">
               <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-primary transition-colors" />
               <input 
+                id="email"
                 type="email" 
                 placeholder="name@example.com"
                 required
@@ -89,14 +108,15 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <div className="space-y-2">
+           <div className="space-y-2">
             <div className="flex items-center justify-between ml-1">
-              <label className="text-sm font-medium text-slate-300">Password</label>
+              <label htmlFor="password" className="text-sm font-medium text-slate-300">Password</label>
               <Link href="/forgot-password" className="text-xs text-primary hover:underline">Forgot password?</Link>
             </div>
             <div className="relative group">
               <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-primary transition-colors" />
               <input 
+                id="password"
                 type="password" 
                 placeholder="••••••••"
                 required

@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Firebase
+.firebase/
+*-firebase-adminsdk-*.json
+
+# Local project files
+plan.zip
+/plans/
+/scratch/
+MockExams_Presentation.pptx

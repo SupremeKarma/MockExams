@@ -12,9 +12,14 @@ import {
   ChevronRight,
   Star,
   Clock,
-  Layers
+  Layers,
+  Lock,
+  Crown
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { db } from "@/lib/firebase";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 
 // Mock data for the template
 const CATEGORIES = ["All", "Physics", "Chemistry", "Mathematics", "Biology", "Computer Science", "Engineering", "Medicine"];
@@ -282,11 +287,49 @@ const RESOURCES = [
   }
 ];
 
+
 export default function NotesPage() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
+  const [resources, setResources] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
-  const filteredResources = RESOURCES.filter(res => {
+  useEffect(() => {
+    async function fetchResources() {
+      try {
+        const q = collection(db, "resources");
+        const snap = await getDocs(q);
+        const fbData = snap.docs.map((doc: any) => ({ id: doc.id, ...doc.data() }));
+        fbData.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
+        
+        // If DB is empty, use the high-fidelity mock resources for the demo
+        if (fbData.length === 0) {
+          setResources(RESOURCES);
+        } else {
+          // Merge/Fill missing fields with defaults for Firestore data
+          const processed = fbData.map((res: any, idx: number) => ({
+            ...res,
+            // Fallback for fields not in seed-firestore.ts
+            color: res.color || RESOURCES[idx % RESOURCES.length].color,
+            image: res.image || RESOURCES[idx % RESOURCES.length].image,
+            downloads: res.downloads || `${Math.floor(Math.random() * 500) + 100}`,
+            date: res.date || new Date().toISOString().split('T')[0],
+            rating: res.rating || 4.5
+          }));
+          setResources(processed);
+        }
+      } catch (err) {
+        console.error("Failed to load resources:", err);
+        setResources(RESOURCES); // Ultimate fallback
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchResources();
+  }, []);
+
+  const filteredResources = resources.filter(res => {
     const matchesCategory = activeCategory === "All" || res.category === activeCategory;
     const matchesSearch = res.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                          res.author.toLowerCase().includes(searchQuery.toLowerCase());
@@ -396,14 +439,17 @@ export default function NotesPage() {
             </div>
 
             {/* Premium Upsell Card */}
-            <div className="bg-gradient-to-br from-primary/20 to-secondary/20 border border-white/10 rounded-3xl p-6 relative overflow-hidden group">
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl transition-all group-hover:scale-150" />
+            <div className="bg-gradient-to-br from-amber-600/20 to-yellow-600/20 border border-amber-500/20 rounded-3xl p-6 relative overflow-hidden group">
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-amber-500/20 rounded-full blur-2xl transition-all group-hover:scale-150" />
               <div className="relative z-10">
-                <Bookmark className="text-primary w-8 h-8 mb-4" />
-                <h3 className="font-bold text-xl mb-2">Pro Library</h3>
+                <Crown className="text-amber-500 w-8 h-8 mb-4" />
+                <h3 className="font-bold text-xl mb-2 text-amber-500">Pro Library</h3>
                 <p className="text-slate-400 text-sm mb-4">Get unlimited access to premium verified textbooks and offline downloads.</p>
-                <button className="w-full py-3 bg-white text-black font-bold rounded-xl hover:bg-slate-200 transition-colors flex items-center justify-center gap-2">
-                  Upgrade Now <ChevronRight className="w-4 h-4" />
+                <button 
+                  onClick={() => router.push("/subscription")}
+                  className="w-full py-3 bg-amber-500 text-black font-bold rounded-xl hover:bg-amber-400 transition-colors flex items-center justify-center gap-2"
+                >
+                  Explore Plans <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
             </div>
@@ -411,7 +457,13 @@ export default function NotesPage() {
 
           {/* Resources Grid */}
           <div className="lg:col-span-3">
-            {filteredResources.length > 0 ? (
+            {loading ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                {[1, 2, 3].map(i => (
+                  <div key={i} className="h-80 glass border-white/5 animate-pulse rounded-[2.5rem]" />
+                ))}
+              </div>
+            ) : filteredResources.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {filteredResources.map((res, idx) => (
                   <ResourceCard key={res.id} res={res} index={idx} />
@@ -434,38 +486,53 @@ export default function NotesPage() {
 }
 
 function ResourceCard({ res, index }: { res: any, index: number }) {
+  const router = useRouter();
+
+  const handlePremiumClick = () => {
+    router.push("/subscription");
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
-      className="group relative h-full flex flex-col glass border-white/5 rounded-[2.5rem] overflow-hidden hover:border-primary/30 transition-all duration-500"
+      onClick={handlePremiumClick}
+      className="group relative h-full flex flex-col glass border-white/5 rounded-[2.5rem] overflow-hidden hover:border-amber-500/30 transition-all duration-500 cursor-pointer shadow-xl hover:shadow-amber-500/10"
     >
+      {/* Premium Ribbon */}
+      <div className="absolute top-5 -right-12 z-30 bg-gradient-to-r from-amber-600 to-yellow-400 text-black text-[10px] font-black uppercase tracking-widest px-10 py-1 rotate-45 shadow-lg border-y border-white/20">
+        Premium
+      </div>
+
       {/* Card Image Wrapper */}
       <div className="h-48 overflow-hidden relative">
         <div className={`absolute inset-0 bg-gradient-to-br ${res.color} mix-blend-overlay z-10`} />
         <img 
           src={res.image} 
           alt={res.title}
-          className="w-full h-full object-cover grayscale-[20%] group-hover:scale-110 transition-transform duration-700" 
+          className="w-full h-full object-cover grayscale-[20%] group-hover:scale-110 transition-transform duration-700 opacity-60" 
         />
+        
+        {/* Lock Overlay */}
+        <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="bg-white/10 backdrop-blur-md p-4 rounded-full border border-white/20 scale-50 group-hover:scale-100 transition-transform duration-500">
+            <Lock className="w-8 h-8 text-amber-500" />
+          </div>
+        </div>
+
         <div className="absolute top-4 left-4 z-20">
           <span className="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-[10px] uppercase font-bold tracking-widest text-white border border-white/10">
             {res.type}
           </span>
         </div>
-        <div className="absolute top-4 right-4 z-20">
-          <button className="p-2 bg-black/50 backdrop-blur-md rounded-full text-white/70 hover:text-primary border border-white/10 transition-colors">
-            <Bookmark className="w-4 h-4" />
-          </button>
-        </div>
       </div>
 
       {/* Card Content */}
-      <div className="p-6 flex-1 flex flex-col">
+      <div className="p-6 flex-1 flex flex-col relative">
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-[10px] font-bold text-primary uppercase tracking-tighter px-2 py-0.5 bg-primary/10 rounded">
-            {res.category}
+          <span className="text-[10px] font-bold text-amber-500 uppercase tracking-tighter px-2 py-0.5 bg-amber-500/10 rounded border border-amber-500/20">
+            PRO ACCESS
           </span>
           <div className="flex items-center text-yellow-500 text-[10px] font-bold ml-auto">
             <Star className="w-3 h-3 fill-current mr-1" />
@@ -473,7 +540,7 @@ function ResourceCard({ res, index }: { res: any, index: number }) {
           </div>
         </div>
 
-        <h3 className="text-lg font-bold leading-tight mb-2 group-hover:text-primary transition-colors flex-1 line-clamp-2">
+        <h3 className="text-lg font-bold leading-tight mb-2 group-hover:text-amber-500 transition-colors flex-1 line-clamp-2 pr-4">
           {res.title}
         </h3>
         
@@ -493,11 +560,8 @@ function ResourceCard({ res, index }: { res: any, index: number }) {
         </div>
 
         <div className="flex items-center gap-2">
-          <button className="flex-1 py-3 bg-white/5 border border-white/5 rounded-xl text-sm font-bold hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
-            <Eye className="w-4 h-4 text-slate-400" /> Preview
-          </button>
-          <button className="px-4 py-3 bg-primary text-white rounded-xl hover:bg-primary/80 transition-shadow shadow-lg shadow-primary/20 flex items-center justify-center">
-            <Download className="w-4 h-4" />
+          <button className="flex-1 py-3 bg-amber-500/10 border border-amber-500/20 rounded-xl text-sm font-bold text-amber-500 hover:bg-amber-500 hover:text-black transition-all flex items-center justify-center gap-2 group/btn">
+            Unlock Content <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
           </button>
         </div>
       </div>

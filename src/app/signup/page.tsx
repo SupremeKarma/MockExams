@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Brain, MoveLeft, User, Mail, Lock, Phone, Loader2, Github } from "lucide-react";
+import { Brain, MoveLeft, User, Mail, Lock, Phone, Loader2, Github, GraduationCap } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { auth, db } from "@/lib/firebase";
@@ -40,11 +40,15 @@ export default function SignupPage() {
       });
 
       // 3. Store additional data in Firestore
+      // AUTO-ADMIN for owner
+      const initialRole = formData.email.toLowerCase() === "amanmahato321@gmail.com" ? 'admin' : 'student';
+
       await setDoc(doc(db, "users", user.uid), {
         name: formData.name,
+        displayName: formData.name,
         email: formData.email,
         phone: formData.phone,
-        role: 'student',
+        role: initialRole,
         createdAt: serverTimestamp()
       });
 
@@ -69,6 +73,7 @@ export default function SignupPage() {
       // Sync social user to Firestore if new
       await setDoc(doc(db, "users", user.uid), {
         name: user.displayName,
+        displayName: user.displayName,
         email: user.email,
         role: 'student',
         updatedAt: serverTimestamp()
@@ -94,8 +99,8 @@ export default function SignupPage() {
             Back to home
           </Link>
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-              <Brain className="text-white w-6 h-6" />
+            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white">
+              <GraduationCap className="w-6 h-6" />
             </div>
             <h1 className="text-2xl font-bold">Create Account</h1>
           </div>

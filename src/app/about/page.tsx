@@ -38,8 +38,8 @@ export default function AboutPage() {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed"
           >
-            ExamAI is an advanced agentic platform designed to bridge the gap between education and certification. 
-            We provide students with the world's most accurate entrance simulations and board preparation tools.
+            MockExams is a sophisticated examination platform designed to facilitate rigorous academic evaluation. 
+            We provide students with high-fidelity entrance simulations and entrance preparation systems.
           </motion.p>
         </div>
       </section>
@@ -47,10 +47,10 @@ export default function AboutPage() {
       {/* Stats Section */}
       <section className="py-20 bg-slate-900/50 border-y border-white/5">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
-          <StatItem label="Exams Hosted" value="1.2M+" />
-          <StatItem label="Global Jurisdictions" value="150+" />
-          <StatItem label="Student Success Rate" value="94%" />
-          <StatItem label="AI Evaluations" value="50M+" />
+          <StatItem label="Questions Verified" value="25,000+" />
+          <StatItem label="Categories" value="40+" />
+          <StatItem label="Active Students" value="10k+" />
+          <StatItem label="Accuracy Rate" value="99.9%" />
         </div>
       </section>
 
@@ -64,9 +64,9 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <ValueCard 
-              icon={<Cpu className="w-8 h-8 text-primary" />}
-              title="Agentic Reasoning"
-              description="Our system doesn't just grade; it analyzes. We provide deep cognitive insights into your problem-solving patterns."
+              icon={<Target className="w-8 h-8 text-primary" />}
+              title="Expert Curation"
+              description="Every question is manually verified by subject matter experts to ensure complete alignment with official curricula."
             />
             <ValueCard 
               icon={<Shield className="w-8 h-8 text-cyan-400" />}
@@ -97,7 +97,7 @@ export default function AboutPage() {
                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
                  <div className="absolute bottom-6 left-6 right-6">
                     <p className="text-sm font-bold text-primary mb-2">OUR MISSION</p>
-                    <h3 className="text-2xl font-bold">Democratizing elite education through AI.</h3>
+                    <h3 className="text-2xl font-bold">Bridging the gap in academic evaluation.</h3>
                  </div>
               </div>
             </div>
@@ -128,7 +128,7 @@ export default function AboutPage() {
       <section className="py-32 px-6 text-center">
         <div className="max-w-3xl mx-auto glass-card p-12 rounded-[3rem] border-white/10">
           <h2 className="text-3xl font-bold mb-6">Ready to reach your potential?</h2>
-          <p className="text-slate-400 mb-10">Join over 5,000,000 students who are already using ExamAI to prepare for their future.</p>
+          <p className="text-slate-400 mb-10">Join thousands of students who are already using MockExams to prepare for their future.</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
              <button className="px-10 py-4 bg-primary text-white rounded-2xl font-bold hover:bg-primary-dark transition-all shadow-xl shadow-primary/20 scale-100 hover:scale-105">
                 Join our Community

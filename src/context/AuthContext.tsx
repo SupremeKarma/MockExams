@@ -43,29 +43,32 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      setUser(firebaseUser);
-
       if (firebaseUser) {
+        setUser(firebaseUser);
         try {
-          // Hardcoded owner fallback (while DB might not be seeded)
+          // 1. Fetch User Profile
+          const userSnap = await getDoc(doc(db, "users", firebaseUser.uid));
+          const userData = userSnap.exists() ? userSnap.data() : null;
+          
+          // 2. Resolve Role
+          let userRole: UserRole = userData?.role || 'student';
+          
+          // Hardcoded override for developer convenience
           if (firebaseUser.email === "amanmahato321@gmail.com") {
-            setRole('admin');
-            setIsAdmin(true);
-            setIsExaminer(true);
-            setOrgId(null);
-          } else {
-            // Read role from Firestore users doc
-            const userSnap = await getDoc(doc(db, "users", firebaseUser.uid));
-            const userRole: UserRole = userSnap.exists()
-              ? (userSnap.data().role as UserRole) ?? 'student'
-              : 'student';
+            userRole = 'admin';
+          }
+          
+          setRole(userRole);
+          setIsAdmin(userRole === 'admin');
+          setIsExaminer(['admin', 'org_admin', 'examiner'].includes(userRole as any));
 
-            setRole(userRole);
-            setIsAdmin(userRole === 'admin');
-            setIsExaminer(['admin', 'org_admin', 'examiner'].includes(userRole ?? ''));
-
-            // Resolve org membership for org_admin / examiner
-            if (userRole === 'org_admin' || userRole === 'examiner') {
+          // 3. Resolve Organization Membership
+          if (userRole === 'org_admin' || userRole === 'examiner' || userData?.org_id) {
+            // Check direct org_id first
+            if (userData?.org_id) {
+              setOrgId(userData.org_id);
+            } else {
+              // Fallback to searching org_members collection
               const memberQ = query(
                 collection(db, "org_members"),
                 where("user_id", "==", firebaseUser.uid),
@@ -73,29 +76,25 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 limit(1)
               );
               const memberSnap = await getDocs(memberQ);
-              if (!memberSnap.empty) {
-                setOrgId(memberSnap.docs[0].data().org_id);
-              } else {
-                setOrgId(null);
-              }
-            } else {
-              setOrgId(null);
+              setOrgId(!memberSnap.empty ? memberSnap.docs[0].data().org_id : null);
             }
+          } else {
+            setOrgId(null);
           }
         } catch (err) {
-          console.error("AuthContext: error resolving role", err);
+          console.error("AuthContext: Profile resolution failed", err);
           setRole('student');
           setIsAdmin(false);
           setIsExaminer(false);
           setOrgId(null);
         }
       } else {
+        setUser(null);
         setRole(null);
         setIsAdmin(false);
         setIsExaminer(false);
         setOrgId(null);
       }
-
       setLoading(false);
     });
 

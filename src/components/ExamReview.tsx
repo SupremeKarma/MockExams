@@ -123,7 +123,7 @@ export function ExamReview({ breakdown }: ExamReviewProps) {
                     }`}>
                       {opt}
                     </div>
-                    <span className="font-medium">{item[`option_${opt as keyof QuestionBreakdown}`]}</span>
+                    <span className="font-medium">{item[`option_${opt}` as keyof QuestionBreakdown]}</span>
                     {isCorrectOpt && <CheckCircle2 className="w-4 h-4 ml-auto shrink-0 text-emerald-400" />}
                     {isSelected && !isCorrectOpt && <XCircle className="w-4 h-4 ml-auto shrink-0 text-rose-400" />}
                   </div>

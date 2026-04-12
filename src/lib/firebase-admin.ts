@@ -14,22 +14,27 @@ function initFirebase() {
     const rawPrivateKey = process.env.FIREBASE_PRIVATE_KEY;
 
     if (!rawProjectId || !rawClientEmail || !rawPrivateKey) {
-      console.warn("Firebase environment variables are missing. Initialization skipped.");
+      console.warn("Firebase Admin SDK: Environment variables are missing. Initialization skipped.");
       return;
     }
 
     // Modern PEM cleaning:
-    // 1. Remove optional surrounding quotes (Next.js does it sometimes, but being safe)
-    // 2. Correct double-escaped newlines (\n to literal newline)
-    // 3. Ensure the string actually starts with the PEM header
     let privateKey = rawPrivateKey;
+    
+    // Remove surrounding quotes if they exist (common in some env setups)
     if (privateKey.startsWith('"') && privateKey.endsWith('"')) {
       privateKey = privateKey.substring(1, privateKey.length - 1);
     }
+    
+    // Replace literal '\n' characters with actual newlines
+    // This handles cases where \n is literally in the .env file
     privateKey = privateKey.replace(/\\n/g, "\n");
+    
+    // Normalize newlines in case of Windows/Unix mix
+    privateKey = privateKey.replace(/\r\n/g, "\n");
 
     if (!privateKey.includes("-----BEGIN PRIVATE KEY-----")) {
-      console.error("FIREBASE_PRIVATE_KEY appears to be malformed (missing PEM header).");
+      console.error("Firebase Admin SDK: FIREBASE_PRIVATE_KEY appears to be malformed (missing PEM header).");
       return;
     }
 
@@ -40,8 +45,7 @@ function initFirebase() {
         privateKey: privateKey,
       }),
     });
-    isInitialized = true;
-    console.log("Firebase Admin SDK successfully initialized.");
+    console.log("✅ Firebase Admin SDK successfully initialized.");
   } catch (error: any) {
     console.error("Firebase admin initialization failed FATALLY:", error.message);
     // We don't re-throw to prevent module-level crashes, 

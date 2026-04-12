@@ -52,18 +52,20 @@ export const NotificationProvider = ({ children }: { children: React.ReactNode }
     // In a real app, we might also listen for user-specific ones
     const q = query(
       collection(db, "notifications"),
+      where("user_id", "==", user.uid),
       orderBy("created_at", "desc"),
       limit(10)
     );
 
+    let active = true;
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const newNotifs = snapshot.docs.map(doc => ({
+      if (!active) return;
+      const newNotifs = snapshot.docs.map((doc: any) => ({
         id: doc.id,
         ...doc.data()
       })) as Notification[];
 
       // Check for strictly "new" notifications to show as toasts
-      // Only if they were created in the last 10 seconds to avoid flooding on load
       const now = Date.now();
       snapshot.docChanges().forEach((change) => {
         if (change.type === "added") {
@@ -73,16 +75,26 @@ export const NotificationProvider = ({ children }: { children: React.ReactNode }
             const toast = { id: change.doc.id, ...data } as Notification;
             setToasts(prev => [...prev, toast]);
             setTimeout(() => {
-              setToasts(prev => prev.filter(t => t.id !== toast.id));
+              if (active) setToasts(prev => prev.filter(t => t.id !== toast.id));
             }, 6000);
           }
         }
       });
 
       setNotifications(newNotifs);
+    }, (error) => {
+      if (!active) return;
+      console.warn("Notification stream error:", error);
     });
 
-    return () => unsubscribe();
+    return () => {
+      active = false;
+      try {
+        unsubscribe();
+      } catch (e) {
+        console.warn("Notification listener cleanup suppressed error:", e);
+      }
+    };
   }, [user]);
 
   const markAsRead = (id: string) => {

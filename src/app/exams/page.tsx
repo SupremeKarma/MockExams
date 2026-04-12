@@ -1,477 +1,309 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 import { 
   Search, 
-  MapPin, 
-  Globe2, 
-  Building2, 
-  ChevronDown,
-  ArrowRight,
-  GraduationCap,
-  Loader2,
-  AlertCircle,
-  Clock,
-  Briefcase
+  Filter, 
+  Clock, 
+  BookOpen, 
+  ArrowRight, 
+  Zap, 
+  ShieldCheck, 
+  Star,
+  Layers,
+  Sparkles,
+  Trophy,
+  Flame,
+  LayoutGrid,
+  List as ListIcon
 } from "lucide-react";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { db } from "@/lib/firebase";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, orderBy, onSnapshot } from "firebase/firestore";
 
-// High-level filter configuration
-const COUNTRIES = [
-  "Global (All)", "Nepal", "India", "USA", "UK", "Australia"
-];
-
-const EDUCATION_LEVELS = [
-  { id: "all", name: "All Levels", icon: Globe2 },
-  { id: "early-childhood", name: "Early Childhood (Pre-K to Grade 5)", icon: Building2 },
-  { id: "middle-school", name: "Middle School (Grades 6-8)", icon: Building2 },
-  { id: "high-school", name: "High School & Boards (SEE/NEB/CBSE)", icon: GraduationCap },
-  { id: "university-entrance", name: "University Entrance (IOE/CEE/SAT/JEE)", icon: Building2 },
-  { id: "professional", name: "Professional & Licensing (Medical/Engineering)", icon: Briefcase },
-  { id: "government", name: "Government & Public Service (Lok Sewa)", icon: Building2 },
-  { id: "corporate", name: "Corporate Certifications (IT/Management)", icon: Building2 },
-  { id: "senior", name: "Senior Cognitive & Lifelong", icon: Clock },
-];
-
-export default function GlobalExamsPortal() {
-  const [activeCountry, setActiveCountry] = useState("Nepal"); // Default to Nepal since it's the target market
-  const [activeLevel, setActiveLevel] = useState("university-entrance");
-  const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
-  
+export default function ExamsListingPage() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [exams, setExams] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState("");
 
-  const MOCK_EXAMS = [
-    {
-      id: "real-ioe-entrance",
-      title: "IOE Entrance Model Exam 2081",
-      category: "University Entrance",
-      difficulty: "Hard",
-      price: "Free Access",
-      is_published: true,
-      country: "Nepal",
-      level: "university-entrance",
-      is_featured: true
-    },
-    {
-      id: "neb-physics-12",
-      title: "NEB Grade 12 Physics Final Prep",
-      category: "High School & Boards",
-      difficulty: "Medium",
-      price: "Premium",
-      is_published: true,
-      country: "Nepal",
-      level: "high-school"
-    },
-    {
-      id: "neb-math-12",
-      title: "NEB Grade 12 Mathematics Mock",
-      category: "High School & Boards",
-      difficulty: "Hard",
-      price: "Free Access",
-      is_published: true,
-      country: "Nepal",
-      level: "high-school"
-    },
-    {
-      id: "iom-mbbs-mock",
-      title: "IOM MBBS Entrance Mock Test",
-      category: "University Entrance",
-      difficulty: "Hard",
-      price: "Premium",
-      is_published: true,
-      country: "Nepal",
-      level: "university-entrance"
-    },
-    {
-      id: "sat-practice-1",
-      title: "SAT Digital Practice Test 1",
-      category: "University Entrance",
-      difficulty: "Medium",
-      price: "Free Access",
-      is_published: true,
-      country: "USA",
-      level: "university-entrance"
-    },
-    {
-      id: "ielts-academic-mock",
-      title: "IELTS Academic Full Mock Test",
-      category: "Professional & Licensing",
-      difficulty: "Medium",
-      price: "Premium",
-      is_published: true,
-      country: "UK",
-      level: "professional"
-    },
-    {
-      id: "upsc-prelims-gs",
-      title: "UPSC Prelims General Studies (Mock 1)",
-      category: "Government & Public Service",
-      difficulty: "Hard",
-      price: "Free Access",
-      is_published: true,
-      country: "India",
-      level: "government"
-    },
-    {
-      id: "lok-sewa-kharidar",
-      title: "Lok Sewa Aayog Kharidar Mock",
-      category: "Government & Public Service",
-      difficulty: "Hard",
-      price: "Premium",
-      is_published: true,
-      country: "Nepal",
-      level: "government"
-    },
-    {
-      id: "see-comp-science",
-      title: "SEE Computer Science Board Prep",
-      category: "High School & Boards",
-      difficulty: "Easy",
-      price: "Free Access",
-      is_published: true,
-      country: "Nepal",
-      level: "high-school"
-    },
-    {
-      id: "jee-mains-phys",
-      title: "JEE Mains Physics Mock 2024",
-      category: "University Entrance",
-      difficulty: "Hard",
-      price: "Premium",
-      is_published: true,
-      country: "India",
-      level: "university-entrance"
-    },
-    {
-      id: "mcat-full-length",
-      title: "MCAT Biology & Biochem Foundation",
-      category: "University Entrance",
-      difficulty: "Hard",
-      price: "Premium",
-      is_published: true,
-      country: "USA",
-      level: "university-entrance"
-    },
-    {
-      id: "pte-scored-practice",
-      title: "PTE Pearson Official Mock B",
-      category: "Professional & Licensing",
-      difficulty: "Medium",
-      price: "Premium",
-      is_published: true,
-      country: "Australia",
-      level: "professional"
-    },
-    {
-      id: "medical-licensing-nepal",
-      title: "NMC Licensing Exam Prep",
-      category: "Professional & Licensing",
-      difficulty: "Hard",
-      price: "Premium",
-      is_published: true,
-      country: "Nepal",
-      level: "professional"
-    },
-    {
-      id: "gre-quant-reasoning",
-      title: "GRE Quantitative Reasoning Mastery",
-      category: "University Entrance",
-      difficulty: "Hard",
-      price: "Premium",
-      is_published: true,
-      country: "Global (All)",
-      level: "university-entrance"
-    },
-    {
-      id: "gmat-data-insights",
-      title: "GMAT Focus Edition: Data Insights",
-      category: "University Entrance",
-      difficulty: "Hard",
-      price: "Premium",
-      is_published: true,
-      country: "Global (All)",
-      level: "university-entrance"
-    },
-    {
-      id: "nclex-rn-sim",
-      title: "NCLEX-RN Adaptive Simulation",
-      category: "Professional & Licensing",
-      difficulty: "Hard",
-      price: "Premium",
-      is_published: true,
-      country: "Global (All)",
-      level: "professional"
-    },
-    {
-      id: "bar-exam-mbe",
-      title: "Multistate Bar Exam (MBE) Prep",
-      category: "Professional & Licensing",
-      difficulty: "Hardest",
-      price: "Premium",
-      is_published: true,
-      country: "USA",
-      level: "professional"
-    },
-    {
-      id: "toefl-ibt-reading",
-      title: "TOEFL iBT Reading & Listening",
-      category: "Professional & Licensing",
-      difficulty: "Medium",
-      price: "Free Access",
-      is_published: true,
-      country: "Global (All)",
-      level: "professional"
-    }
-  ];
+  const categories = ["All", "Science", "Mathematics", "Engineering", "Medical", "Competitive"];
 
   useEffect(() => {
-    async function fetchExams() {
-      setLoading(true);
+    let active = true;
+    let unsubscribe: (() => void) | undefined;
+
+    const fetchExams = async () => {
       try {
-        const examsRef = collection(db, "exams");
-        const q = query(examsRef, where("is_published", "==", true));
-        const querySnapshot = await getDocs(q);
-        const data = querySnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-        setExams(data);
+        // Simplified query to avoid missing index error (ID: 55)
+        // We filter visibility and sort by date client-side to ensure immediate usability
+        const q = query(
+          collection(db, "exams"), 
+          where("is_published", "==", true)
+        );
+      
+        unsubscribe = onSnapshot(q, (snapshot) => {
+           if (!active) return;
+           const examsData = snapshot.docs
+             .map(doc => ({
+               id: doc.id,
+               ...doc.data()
+             }))
+             .filter((exam: any) => exam.visibility === "public")
+             .sort((a: any, b: any) => {
+                const timeA = a.created_at?.toMillis?.() || 0;
+                const timeB = b.created_at?.toMillis?.() || 0;
+                return timeB - timeA;
+             });
+
+           setExams(examsData);
+           setLoading(false);
+        }, (error) => {
+           if (!active) return;
+           console.error("Error fetching exams logic:", error);
+           setLoading(false);
+        });
       } catch (err) {
-        console.error("Error fetching exams:", err);
-      } finally {
+        if (!active) return;
+        console.error("Failed to initialize exam stream:", err);
         setLoading(false);
       }
-    }
+    };
 
     fetchExams();
+
+    return () => {
+      active = false;
+      if (unsubscribe) {
+        try {
+          unsubscribe();
+        } catch (e) {
+          console.warn("Firestore listener cleanup suppressed internal error:", e);
+        }
+      }
+    };
   }, []);
 
-  // Soft-filtering on client side to handle legacy DB structure without breaking
-  const filteredExams = [...MOCK_EXAMS, ...exams].filter(exam => {
-    const matchesSearch = exam.title?.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          (exam.category && exam.category.toLowerCase().includes(searchQuery.toLowerCase()));
-    
-    const matchesCountry = activeCountry === "Global (All)" || exam.country === activeCountry || !exam.country;
-    const matchesLevel = activeLevel === "all" || exam.level === activeLevel || !exam.level;
-
-    return matchesSearch && matchesCountry && matchesLevel;
+  const filteredExams = exams.filter(exam => {
+    const matchesSearch = (exam.title || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         (exam.description || "").toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === "All" || exam.category === selectedCategory;
+    return matchesSearch && matchesCategory;
   });
 
   return (
-    <div className="w-full min-h-screen bg-slate-950">
-      {/* 🚀 Giant Global Hero */}
-      <div className="bg-slate-900 border-b border-slate-800 pt-16 pb-12 px-4 relative overflow-hidden">
-        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 blur-[100px] rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
-        
-        <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center text-center">
-          <div className="inline-flex items-center gap-2 bg-slate-800/80 border border-slate-700 text-slate-300 px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest mb-8 shadow-inner">
-            <Globe2 className="w-4 h-4 text-primary" />
-            <span>The World's Exam Authority</span>
-          </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight tracking-tight text-white max-w-4xl">
-            One platform. <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-400">Every certification.</span>
-          </h1>
-          <p className="text-lg text-slate-400 leading-relaxed max-w-2xl mb-12">
-            Select your country and educational demographic to discover standardized tests, local board exams, 
-            university entrances, and professional licenses tailored exclusively to your jurisdiction.
-          </p>
-
-          {/* 🌍 Jurisdiction Selectors */}
-          <div className="w-full max-w-3xl flex flex-col sm:flex-row gap-4 bg-slate-950 p-4 rounded-3xl border border-slate-800 shadow-2xl">
-            
-            {/* Country Dropdown */}
-            <div className="relative w-full sm:w-1/3">
-              <button 
-                onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
-                className="w-full flex items-center justify-between px-6 py-4 bg-slate-900 border border-slate-700 hover:border-slate-600 rounded-2xl text-left transition-all"
-              >
-                <div className="flex items-center gap-3">
-                  <MapPin className="w-5 h-5 text-primary" />
-                  <div className="flex flex-col">
-                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-0.5">Jurisdiction</span>
-                    <span className="font-bold text-white leading-none">{activeCountry}</span>
-                  </div>
-                </div>
-                <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${isCountryDropdownOpen ? 'rotate-180' : ''}`} />
-              </button>
-
-              <AnimatePresence>
-                {isCountryDropdownOpen && (
-                  <motion.div 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    className="absolute top-full lg:left-0 left-0 right-0 mt-3 bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl z-50 overflow-hidden"
-                  >
-                    {COUNTRIES.map(country => (
-                      <button
-                        key={country}
-                        onClick={() => { setActiveCountry(country); setIsCountryDropdownOpen(false); }}
-                        className={`w-full flex items-center pl-12 pr-6 py-4 text-left transition-colors font-bold ${activeCountry === country ? 'bg-primary/10 text-primary border-l-4 border-primary' : 'text-slate-300 hover:bg-slate-800 border-l-4 border-transparent'}`}
-                      >
-                        {country}
-                      </button>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* Global Search */}
-            <div className="relative w-full sm:w-2/3">
-              <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
-              <input 
-                type="text" 
-                placeholder="Search specific exam, e.g. 'IOE Entrance'..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full h-full pl-14 pr-6 py-5 sm:py-0 bg-slate-900 border border-slate-700 rounded-2xl focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all text-white font-medium"
-              />
-            </div>
-
-          </div>
-        </div>
+    <div className="min-h-screen bg-[#020617] text-slate-100 selection:bg-indigo-500/30">
+      {/* 🌌 Background Elements */}
+      <div className="fixed top-0 left-0 w-full h-full pointer-events-none -z-10 overflow-hidden">
+        <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-indigo-500/10 blur-[150px] rounded-full"></div>
+        <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/5 blur-[150px] rounded-full"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-12 flex flex-col lg:flex-row gap-12">
-        
-        {/* 📚 Left Sidebar: Education Tiers */}
-        <div className="w-full lg:w-1/4 shrink-0">
-          <div className="sticky top-28 bg-slate-900 p-6 rounded-[2rem] border border-slate-800">
-            <h3 className="text-xs font-black text-slate-500 uppercase tracking-widest mb-6 px-2">Educational Pipeline</h3>
-            <div className="flex flex-col gap-2">
-              {EDUCATION_LEVELS.map(level => {
-                const Icon = level.icon;
-                const isActive = activeLevel === level.id;
-                return (
-                  <button
-                    key={level.id}
-                    onClick={() => setActiveLevel(level.id)}
-                    className={`flex items-start gap-3 p-4 rounded-2xl text-left transition-all group ${
-                      isActive 
-                        ? "bg-primary text-white shadow-lg shadow-primary/20" 
-                        : "hover:bg-slate-800 text-slate-400 hover:text-white"
-                    }`}
-                  >
-                    <Icon className={`w-5 h-5 shrink-0 mt-0.5 ${isActive ? "text-white" : "text-slate-500 group-hover:text-white"}`} />
-                    <span className="font-bold text-sm leading-tight">{level.name}</span>
-                  </button>
-                );
-              })}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
+        {/* 🚀 Header & Filtering */}
+        <div className="relative mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center lg:text-left mb-12"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[10px] font-black uppercase tracking-[0.3em] mb-6">
+              <Sparkles className="w-3 h-3" /> Explore Repository
             </div>
-          </div>
-        </div>
+            <h1 className="text-4xl md:text-6xl font-black tracking-tighter mb-4">
+              Advanced <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-cyan-400 to-emerald-400">Exam Matrix.</span>
+            </h1>
+            <p className="text-slate-400 text-lg max-w-2xl font-medium leading-relaxed">
+              Precision-engineered mock sessions calibrated for the 2026 academic cycle. Select your domain and initiate evaluation.
+            </p>
+          </motion.div>
 
-        {/* 📊 Right Content: Exam Repository */}
-        <div className="w-full lg:w-3/4">
-          <div className="flex items-center justify-between mb-8 pb-6 border-b border-slate-800">
-            <div>
-              <h2 className="text-2xl font-bold text-white mb-1">
-                {EDUCATION_LEVELS.find(l => l.id === activeLevel)?.name.split("(")[0]}
-              </h2>
-              <p className="text-slate-400 text-sm font-medium flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5" /> Showing exams relevant to {activeCountry}
-              </p>
+          {/* Controls */}
+          <div className="flex flex-col lg:flex-row gap-6 items-center justify-between p-6 bg-slate-900/40 border border-white/5 rounded-[2rem] backdrop-blur-xl shadow-2xl">
+            <div className="relative w-full lg:w-[400px] group">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 group-focus-within:text-indigo-400 transition-colors" />
+              <input 
+                type="text" 
+                placeholder="Search simulations..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full bg-white/5 border border-white/10 rounded-2xl pl-12 pr-4 py-4 text-sm font-bold focus:outline-none focus:border-indigo-500/50 transition-all placeholder:text-slate-600"
+              />
+              <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2 px-2 py-1 bg-white/5 rounded-lg border border-white/10 text-[10px] font-black text-slate-500">
+                <kbd>/</kbd> SEED
+              </div>
             </div>
-            <div className="px-4 py-2 bg-slate-900 border border-slate-700 rounded-xl text-sm font-bold text-slate-300">
-              {filteredExams.length} Exams Listed
-            </div>
-          </div>
 
-          {loading ? (
-            <div className="py-24 flex flex-col items-center justify-center gap-6 bg-slate-900 rounded-[2rem] border border-dashed border-slate-800">
-              <Loader2 className="w-10 h-10 text-primary animate-spin" />
-              <p className="text-slate-400 font-bold">Querying the global registry...</p>
-            </div>
-          ) : filteredExams.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {filteredExams.map((exam) => (
-                <ExamCard 
-                  key={exam.id}
-                  id={exam.id}
-                  title={exam.title}
-                  category={exam.category || "General"}
-                  difficulty={exam.difficulty || "Medium"}
-                  price={exam.price === 0 ? "Free Access" : "Premium"}
-                />
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${
+                    selectedCategory === cat 
+                      ? "bg-indigo-600 text-white shadow-[0_0_20px_rgba(79,70,229,0.3)]" 
+                      : "bg-white/5 text-slate-500 border border-white/5 hover:border-white/20 hover:text-white"
+                  }`}
+                >
+                  {cat}
+                </button>
               ))}
             </div>
-          ) : (
-            <div className="py-24 text-center bg-slate-900 rounded-[2rem] border border-slate-800 flex flex-col items-center">
-              <div className="w-20 h-20 bg-slate-950 rounded-full flex items-center justify-center mb-6 border border-slate-800">
-                <AlertCircle className="w-10 h-10 text-slate-600" />
-              </div>
-              <h3 className="text-2xl font-bold mb-3 text-white">No Exams Registered Yet</h3>
-              <p className="text-slate-400 max-w-sm mb-8">
-                We are actively adding new exams for <span className="text-white font-bold">{activeCountry}</span> in this educational tier.
-              </p>
-              <button onClick={() => { setSearchQuery(""); setActiveLevel("all"); }} className="px-8 py-3 bg-white text-black font-bold rounded-xl hover:bg-slate-200 transition-all shadow-xl">
-                Browse All Global Exams
+
+            <div className="hidden sm:flex items-center gap-2 p-1 bg-slate-950/50 border border-white/5 rounded-xl">
+              <button 
+                onClick={() => setViewMode("grid")}
+                className={`p-2 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-indigo-600/20 text-indigo-400' : 'text-slate-500 hover:text-slate-300'}`}
+              >
+                <LayoutGrid className="w-5 h-5" />
+              </button>
+              <button 
+                onClick={() => setViewMode("list")}
+                className={`p-2 rounded-lg transition-all ${viewMode === 'list' ? 'bg-indigo-600/20 text-indigo-400' : 'text-slate-500 hover:text-slate-300'}`}
+              >
+                <ListIcon className="w-5 h-5" />
               </button>
             </div>
-          )}
+          </div>
         </div>
 
+        {/* 📦 Exam Grid */}
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1,2,3,4,5,6].map(i => (
+              <div key={i} className="h-[400px] bg-white/5 border border-white/5 rounded-[2.5rem] animate-pulse"></div>
+            ))}
+          </div>
+        ) : filteredExams.length > 0 ? (
+          <div className={viewMode === 'grid' 
+            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" 
+            : "flex flex-col gap-6"
+          }>
+            <AnimatePresence mode="popLayout">
+              {filteredExams.map((exam, index) => (
+                <ExamCard key={exam.id} exam={exam} index={index} viewMode={viewMode} />
+              ))}
+            </AnimatePresence>
+          </div>
+        ) : (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex flex-col items-center justify-center py-40 text-center"
+          >
+            <div className="w-24 h-24 bg-indigo-500/10 rounded-full flex items-center justify-center mb-8 border border-indigo-500/20">
+               <Layers className="w-12 h-12 text-indigo-400 opacity-50" />
+            </div>
+            <h3 className="text-2xl font-black text-white mb-2">Simulation Void Detected</h3>
+            <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">No matches found in current neural repository</p>
+            <button 
+              onClick={() => {setSearchTerm(""); setSelectedCategory("All");}}
+              className="mt-8 px-8 py-3 bg-white/5 border border-white/10 rounded-xl text-xs font-black text-slate-300 hover:text-white transition-all uppercase tracking-widest"
+            >
+              Reset Matrix
+            </button>
+          </motion.div>
+        )}
       </div>
     </div>
   );
 }
 
-// ----------------------------------------------------
-// Specialized Exam Card
-// ----------------------------------------------------
+function ExamCard({ exam, index, viewMode }: any) {
+  const isPremium = false; // All exams are now standard/free
 
-interface ExamCardProps {
-  id: string;
-  title: string;
-  category: string;
-  difficulty: string;
-  price: string;
-}
-
-function ExamCard({ id, title, category, difficulty, price }: ExamCardProps) {
-  return (
-    <Link href={`/exams/${id}/take`}>
-      <motion.div 
-        initial={{ opacity: 0, y: 15 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        viewport={{ once: true }}
-        className="bg-slate-900 flex flex-col p-8 rounded-[2rem] border border-slate-800 hover:border-primary/50 hover:bg-slate-800/80 transition-all cursor-pointer h-full shadow-lg"
+  if (viewMode === 'list') {
+    return (
+      <motion.div
+        layout
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: index * 0.05 }}
+        className="group relative bg-slate-900/40 border border-white/5 hover:border-indigo-500/30 rounded-3xl p-6 transition-all flex items-center justify-between"
       >
-        <div className="flex items-start justify-between mb-6">
-          <span className={`text-[10px] font-black px-3 py-1.5 rounded-lg uppercase tracking-widest ${
-            difficulty.toLowerCase() === "hard" ? "bg-rose-500/10 text-rose-500 border border-rose-500/20" : 
-            difficulty.toLowerCase() === "medium" ? "bg-amber-500/10 text-amber-500 border border-amber-500/20" : 
-            "bg-emerald-500/10 text-emerald-500 border border-emerald-500/20"
-          }`}>
-            {difficulty}
-          </span>
-          <span className="text-sm font-black text-slate-300">
-            {price}
-          </span>
+        <div className="flex items-center gap-8">
+           <div className={`w-16 h-16 rounded-2xl flex items-center justify-center font-black text-xl shadow-inner ${
+             exam.category === 'Medical' ? 'bg-rose-500/10 text-rose-400' :
+             exam.category === 'Science' ? 'bg-indigo-500/10 text-indigo-400' :
+             'bg-emerald-500/10 text-emerald-400'
+           }`}>
+             {exam.category?.charAt(0)}
+           </div>
+           <div>
+             <h3 className="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors">{exam.title}</h3>
+             <div className="flex items-center gap-4 mt-2">
+               <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">{exam.category}</span>
+               <span className="w-1 h-1 rounded-full bg-slate-700"></span>
+               <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 flex items-center gap-1.5"><Clock className="w-3 h-3" /> {exam.duration_minutes}m Session</span>
+             </div>
+           </div>
         </div>
-
-        <h3 className="text-xl md:text-2xl font-bold mb-4 text-white leading-tight">
-          {title}
-        </h3>
-        
-        <div className="mt-auto pt-6 border-t border-slate-800 flex items-center justify-between">
-          <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">
-            {category}
-          </span>
-          
-          <div className="flex items-center gap-2 text-primary font-bold text-sm hover:translate-x-1 transition-transform">
-            Start Exam <ArrowRight className="w-4 h-4" />
-          </div>
-        </div>
+        <Link 
+          href={`/exams/${exam.id}/take`}
+          className="h-14 px-8 bg-white/5 hover:bg-indigo-600 border border-white/5 hover:border-indigo-500 rounded-2xl text-xs font-black text-white transition-all flex items-center gap-3 active:scale-95"
+        >
+          Initiate <ArrowRight className="w-4 h-4" />
+        </Link>
       </motion.div>
-    </Link>
+    );
+  }
+
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: index * 0.05 }}
+      className={`glass-card group relative flex flex-col h-full bg-slate-900/40 border border-white/5 hover:border-indigo-500/30 rounded-[2.5rem] p-8 transition-all hover:translate-y-[-8px] hover:shadow-[0_20px_60px_rgba(79,70,229,0.2)] overflow-hidden`}
+    >
+      {/* Visual Accent */}
+      <div className={`absolute top-0 right-0 w-32 h-32 blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity -z-10 ${
+        isPremium ? "bg-amber-500" : "bg-indigo-500"
+      }`}></div>
+
+      <div className="flex justify-between items-start mb-8">
+        <div className={`p-4 rounded-2xl border transition-colors ${
+          exam.category === 'Medical' ? 'bg-rose-500/10 border-rose-500/20 text-rose-400' :
+          exam.category === 'Engineering' ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' :
+          'bg-indigo-500/10 border-indigo-500/20 text-indigo-400'
+        }`}>
+          <Zap className="w-6 h-6" />
+        </div>
+        
+        {/* Premium badge removed */}
+      </div>
+
+      <div className="space-y-4 mb-10 flex-grow">
+        <h3 className="text-2xl font-black text-white leading-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-indigo-400 group-hover:to-cyan-400 transition-all duration-500">
+          {exam.title}
+        </h3>
+        <p className="text-slate-400 text-sm font-medium leading-relaxed line-clamp-2">
+          {exam.description || "Synthesizing full-spectrum evaluation metrics for domain mastery."}
+        </p>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4 mb-8">
+        <div className="p-4 bg-white/5 rounded-2xl border border-white/5 text-center transition-colors group-hover:bg-white/[0.08]">
+          <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Time Alloc</p>
+          <p className="text-lg font-black text-white tabular-nums">{exam.duration_minutes}m</p>
+        </div>
+        <div className="p-4 bg-white/5 rounded-2xl border border-white/5 text-center transition-colors group-hover:bg-white/[0.08]">
+          <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Questions</p>
+          <p className="text-lg font-black text-white tabular-nums">{exam.questions_count || 10}</p>
+        </div>
+      </div>
+
+      <Link 
+        href={`/exams/${exam.id}/take`}
+        className="w-full h-16 rounded-2xl font-black text-sm uppercase tracking-[0.2em] flex items-center justify-center gap-3 transition-all relative overflow-hidden group/btn bg-indigo-600 text-white shadow-[0_10px_30px_rgba(79,70,229,0.2)] hover:bg-indigo-500"
+      >
+        <span className="relative z-10 flex items-center gap-3">
+          Initiate Sequence <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
+        </span>
+        <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover/btn:translate-x-0 transition-transform duration-500"></div>
+      </Link>
+    </motion.div>
   );
 }

@@ -67,22 +67,26 @@ export async function GET(request: NextRequest) {
     let isMock = false;
 
     try {
-      let query: any = adminDb.collection("leaderboard");
+      let queryRef: any = adminDb.collection("leaderboard");
 
       if (examId) {
-        query = query.where("exam_id", "==", examId);
+        queryRef = queryRef.where("exam_id", "==", examId);
       }
 
-      const snapshot = await query
-        .orderBy("percentage", "desc")
-        .orderBy("last_attempt", "asc")
-        .get();
+      const snapshot = await queryRef.get();
 
       if (snapshot.empty) {
         allDocs = getMockData(examId);
         isMock = true;
       } else {
-        allDocs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() as any }));
+        allDocs = snapshot.docs.map((doc: any) => ({ id: doc.id, ...doc.data() as any }));
+        // Sort in-memory to avoid index requirements
+        allDocs.sort((a, b) => {
+          if ((b.percentage || 0) !== (a.percentage || 0)) {
+            return (b.percentage || 0) - (a.percentage || 0);
+          }
+          return (a.last_attempt || "").localeCompare(b.last_attempt || "");
+        });
       }
     } catch (error: any) {
       console.warn("Firestore query failed, performing fallback to mock data:", error.message);

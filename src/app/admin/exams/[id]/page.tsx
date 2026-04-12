@@ -48,8 +48,8 @@ export default function ExamDetailPage({ params }: { params: any }) {
     try {
       const examSnap = await getDoc(doc(db, "exams", examId));
       if (!examSnap.exists()) { router.push("/admin/exams"); return; }
-      const data = { id: examSnap.id, ...examSnap.data() };
-      setExam(data);
+      const data = examSnap.data() as any;
+      setExam({ id: examSnap.id, ...data });
       setFormData({
         title: data.title ?? "",
         category: data.category ?? "Science",
@@ -253,25 +253,19 @@ export default function ExamDetailPage({ params }: { params: any }) {
           </h2>
           <div className="flex items-center gap-3">
             <Link
-              href={`/admin/exams/${examId}/generate`}
-              className="flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 text-primary rounded-xl text-sm font-bold hover:bg-primary/20 transition-all"
-            >
-              <Sparkles className="w-4 h-4" /> Generate with AI
-            </Link>
-            <Link
               href={`/admin/exams/${examId}/questions/new`}
-              className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-xl text-sm font-bold hover:opacity-90 transition-all"
+              className="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-2xl font-bold hover:opacity-90 transition-all shadow-lg shadow-primary/20"
             >
-              <Plus className="w-4 h-4" /> Add Question
+              <Plus className="w-5 h-5" /> Add New Question
             </Link>
           </div>
         </div>
 
         {questions.length === 0 ? (
           <div className="glass-card p-16 rounded-3xl border border-white/10 text-center text-slate-500">
-            <Brain className="w-12 h-12 mx-auto mb-4 opacity-30" />
-            <p className="font-medium">No questions yet.</p>
-            <p className="text-sm mt-1">Add questions manually or generate them with AI.</p>
+            <BookOpen className="w-12 h-12 mx-auto mb-4 opacity-30" />
+            <p className="font-medium text-lg text-slate-400">No questions yet.</p>
+            <p className="text-sm mt-1">Start building your exam by adding questions manually.</p>
           </div>
         ) : (
           <div className="glass-card rounded-2xl border border-white/10 overflow-hidden">

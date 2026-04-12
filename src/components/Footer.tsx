@@ -67,11 +67,13 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-medium">
-          <p>© 2026 MockExams. All rights reserved.</p>
+          <div className="flex flex-col gap-1">
+            <p>© 2026 MockExams. All rights reserved.</p>
+            <p className="text-slate-600">Final Project Submission | Department of Computer Engineering | IOE, Tribhuvan University</p>
+          </div>
           <div className="flex items-center gap-6">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
             <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
-            <Link href="/cookies" className="hover:text-white transition-colors">Cookies</Link>
           </div>
         </div>
       </div>

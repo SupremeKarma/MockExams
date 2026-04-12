@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { db, auth } from "@/lib/firebase";
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc, serverTimestamp } from "firebase/firestore";
 import { updateProfile } from "firebase/auth";
 import { 
   User as UserIcon, 
@@ -65,12 +65,21 @@ export default function SettingsPage() {
     fetchProfile();
   }, [user]);
 
+  const [error, setError] = useState<string | null>(null);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) return;
 
+    if (!form.displayName.trim()) {
+      setError("Display name cannot be empty.");
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
     setSaving(true);
     setSuccess(false);
+    setError(null);
     try {
       // 1. Update Firebase Auth Profile (DisplayName)
       if (form.displayName !== user.displayName) {
@@ -85,14 +94,14 @@ export default function SettingsPage() {
         studyGoal: form.studyGoal,
         targetExam: form.targetExam,
         emailNotifications: form.emailNotifications,
-        updated_at: new Date().toISOString()
+        updatedAt: serverTimestamp()
       }, { merge: true });
 
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
     } catch (err) {
       console.error("Error saving profile:", err);
-      alert("Failed to save settings.");
+      setError("Failed to save settings. Please try again.");
     } finally {
       setSaving(false);
     }
@@ -133,6 +142,11 @@ export default function SettingsPage() {
         {/* Main Content */}
         <div className="lg:col-span-3">
           <form onSubmit={handleSubmit} className="space-y-8">
+            {error && (
+              <div className="p-4 bg-rose-500/10 border border-rose-500/20 rounded-2xl text-rose-500 text-sm font-medium">
+                {error}
+              </div>
+            )}
             {/* Avatar Section */}
             <div className="glass-card p-8 rounded-[2rem] border border-white/10 flex items-center gap-8 group">
                <div className="relative">

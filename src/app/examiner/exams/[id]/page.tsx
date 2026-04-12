@@ -122,10 +122,7 @@ export default function ExaminerExamDetailPage({ params }: { params: any }) {
             <Link href={`/examiner/exams/${examId}/results`} className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 text-slate-300 rounded-xl text-sm font-bold hover:bg-white/10 transition-all">
               <BarChart2 className="w-4 h-4" /> Results
             </Link>
-            <Link href={`/examiner/exams/${examId}/generate`} className="flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 text-primary rounded-xl text-sm font-bold hover:bg-primary/20 transition-all">
-              <Sparkles className="w-4 h-4" /> AI Generate
-            </Link>
-            <Link href={`/examiner/exams/${examId}/questions/new`} className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-xl text-sm font-bold hover:opacity-90 transition-all">
+            <Link href={`/examiner/exams/${examId}/questions/new`} className="flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-xl text-sm font-bold hover:opacity-90 transition-all">
               <Plus className="w-4 h-4" /> Add Question
             </Link>
           </div>

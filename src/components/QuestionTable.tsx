@@ -1,6 +1,6 @@
 "use client";
 
-import { Edit, Trash2, Brain } from "lucide-react";
+import { Edit, Trash2, BookOpen } from "lucide-react";
 import Link from "next/link";
 
 const DIFFICULTY_COLORS: Record<string, string> = {
@@ -27,9 +27,9 @@ export default function QuestionTable({ questions, examId, basePath, onDelete }:
   if (questions.length === 0) {
     return (
       <div className="glass-card p-16 rounded-3xl border border-white/10 text-center text-slate-500">
-        <Brain className="w-12 h-12 mx-auto mb-4 opacity-30" />
-        <p className="font-medium">No questions yet.</p>
-        <p className="text-sm mt-1">Add questions manually or generate them with AI.</p>
+        <BookOpen className="w-12 h-12 mx-auto mb-4 opacity-30" />
+        <p className="font-medium text-lg text-slate-400">No questions yet.</p>
+        <p className="text-sm mt-1">Add questions manually to build your exam.</p>
       </div>
     );
   }

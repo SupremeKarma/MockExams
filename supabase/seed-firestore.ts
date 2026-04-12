@@ -1,198 +1,201 @@
-import * as admin from 'firebase-admin';
+import admin from 'firebase-admin';
 import * as dotenv from 'dotenv';
 import * as path from 'path';
-
-import * as fs from 'fs';
 
 // Load env
 dotenv.config({ path: path.join(process.cwd(), '.env.local') });
 
-if (!admin.apps.length) {
-  let pk = (process.env.FIREBASE_PRIVATE_KEY || '');
-  // Trim quotes if they were kept by the loader
+if (admin.apps.length === 0) {
+  const rawProjectId = process.env.FIREBASE_PROJECT_ID;
+  const rawClientEmail = process.env.FIREBASE_CLIENT_EMAIL;
+  let pk = process.env.FIREBASE_PRIVATE_KEY || '';
+  
+  // Clean the private key
   if (pk.startsWith('"') && pk.endsWith('"')) {
     pk = pk.slice(1, -1);
   }
   pk = pk.replace(/\\n/g, '\n');
-  
-  console.log('Final Private Key starting with:', pk.substring(0, 40));
-  
-  admin.initializeApp({
-    credential: admin.credential.cert({
-      projectId: process.env.FIREBASE_PROJECT_ID,
-      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-      privateKey: pk,
-    }),
-  });
+  pk = pk.replace(/\r\n/g, '\n');
+
+  if (!pk || !rawProjectId || !rawClientEmail) {
+    console.error('❌ Firebase environment variables are missing.');
+    process.exit(1);
+  }
+
+  try {
+    admin.initializeApp({
+      credential: admin.credential.cert({
+        projectId: rawProjectId,
+        clientEmail: rawClientEmail,
+        privateKey: pk,
+      }),
+    });
+    console.log('✅ Firebase Admin initialized successfully.');
+  } catch (initErr: any) {
+    console.error('❌ Failed to initialize Firebase Admin:', initErr.message);
+    process.exit(1);
+  }
 }
 
 const db = admin.firestore();
 
+const RESOURCES = [
+  {
+    title: "IOE Entrance Preparation Guide 2081",
+    author: "Er. Gopal Khanal",
+    type: "Book",
+    format: "PDF",
+    category: "Engineering",
+    subject: "IOE Entrance",
+    rating: 4.8,
+    downloadUrl: "",
+    externalUrl: "https://ioe.edu.np",
+  },
+  {
+    title: "NEB Physics Grade 12 Notes",
+    author: "Physics Department, JCC",
+    type: "Notes",
+    format: "PDF",
+    category: "Physics",
+    subject: "NEB Grade 12",
+    rating: 4.6,
+    downloadUrl: "",
+    externalUrl: "",
+  },
+  {
+    title: "Mathematics Formula Sheet — IOE",
+    author: "Er. Ram Prasad Sharma",
+    type: "Notes",
+    format: "PDF",
+    category: "Mathematics",
+    subject: "IOE Entrance",
+    rating: 4.9,
+    downloadUrl: "",
+    externalUrl: "",
+  },
+  {
+    title: "NEB Chemistry Grade 12 — Past Papers 2075-2081",
+    author: "NEB Archive",
+    type: "Past Papers",
+    format: "PDF",
+    category: "Chemistry",
+    subject: "NEB Grade 12",
+    rating: 4.7,
+    downloadUrl: "",
+    externalUrl: "",
+  },
+  {
+    title: "Computer Science — IOE Syllabus Notes",
+    author: "IOE Study Group",
+    type: "Notes",
+    format: "PDF",
+    category: "Computer Science",
+    subject: "IOE Entrance",
+    rating: 4.4,
+    downloadUrl: "",
+    externalUrl: "",
+  },
+];
+
 const EXAMS = [
   {
-    title: 'IOE Entrance Mock 2026',
+    title: 'IOE Entrance Model Exam 2081',
     category: 'Engineering',
     duration_minutes: 120,
     passing_score: 50,
     is_published: true,
     difficulty: 'Hard',
     price: 0,
+    negative_marking: true,
     questions: [
-      {
-        question_text: 'The value of g is maximum at:',
-        option_a: 'Equator',
-        option_b: 'Poles',
-        option_c: 'Center of Earth',
-        option_d: 'Mount Everest',
-        correct_option: 'b',
-        explanation: 'The polar radius is smaller than the equatorial radius, making gravity stronger at the poles.',
-        order_in_exam: 1
-      },
-      {
-        question_text: 'Which of the following is a scalar quantity?',
-        option_a: 'Force',
-        option_b: 'Velocity',
-        option_c: 'Work',
-        option_d: 'Acceleration',
-        correct_option: 'c',
-        explanation: 'Work is the dot product of two vectors (Force and Displacement), resulting in a scalar quantity.',
-        order_in_exam: 2
-      },
-      {
-        question_text: 'The escape velocity from the Earth is approximately:',
-        option_a: '11.2 km/s',
-        option_b: '9.8 km/s',
-        option_c: '3.0 x 10^8 m/s',
-        option_d: '7.9 km/s',
-        correct_option: 'a',
-        explanation: 'Escape velocity is calculated as sqrt(2gR) which gives 11.2 km/s for Earth.',
-        order_in_exam: 3
-      },
-      {
-        question_text: 'Integration of cos(x) dx is:',
-        option_a: 'sin(x) + c',
-        option_b: '-sin(x) + c',
-        option_c: 'cos(x) + c',
-        option_d: '-cos(x) + c',
-        correct_option: 'a',
-        explanation: 'The derivative of sin(x) is cos(x). Therefore, the integral of cos(x) is sin(x).',
-        order_in_exam: 4
-      },
-      {
-        question_text: 'Which gas is most abundant in the Earth\'s atmosphere?',
-        option_a: 'Oxygen',
-        option_b: 'Carbon Dioxide',
-        option_c: 'Argon',
-        option_d: 'Nitrogen',
-        correct_option: 'd',
-        explanation: 'Nitrogen makes up approximately 78% of the Earth\'s atmosphere.',
-        order_in_exam: 5
-      }
+      { question_text: 'The value of g is maximum at:', option_a: 'Equator', option_b: 'Poles', option_c: 'Center of Earth', option_d: 'Mount Everest', correct_option: 'b', explanation: 'Gravity is strongest at poles due to earth flattening.', subject: 'Physics' },
+      { question_text: 'Which is a scalar?', option_a: 'Force', option_b: 'Velocity', option_c: 'Work', option_d: 'Acceleration', correct_option: 'c', explanation: 'Work is force dot displacement.', subject: 'Physics' },
+      { question_text: 'Escape velocity from Earth is:', option_a: '11.2 km/s', option_b: '9.8 km/s', option_c: '7.9 km/s', option_d: '1 km/s', correct_option: 'a', explanation: 'sqrt(2gR).', subject: 'Physics' },
+      { question_text: 'Unit of viscosity is:', option_a: 'Poise', option_b: 'Watt', option_c: 'Joule', option_d: 'Pascal', correct_option: 'a', explanation: 'Poise is CGS unit of viscosity.', subject: 'Physics' },
+      { question_text: 'Specific heat of water is:', option_a: '1 cal/g°C', option_b: '4.2 J/g°C', option_c: 'Both a & b', option_d: '1000 J/kg°C', correct_option: 'c', explanation: 'It is 1 cal/g°C or 4184 J/kg°C.', subject: 'Physics' },
+      { question_text: 'Integration of sin(x):', option_a: 'cos(x)', option_b: '-cos(x)', option_c: 'tan(x)', option_d: 'sec(x)', correct_option: 'b', explanation: 'd/dx(-cos x) = sin x.', subject: 'Mathematics' },
+      { question_text: 'd/dx (log x) is:', option_a: '1/x', option_b: 'e^x', option_c: 'x', option_d: 'log x', correct_option: 'a', explanation: 'Standard derivative.', subject: 'Mathematics' },
+      { question_text: 'Sum of internal angles of a triangle:', option_a: '90°', option_b: '180°', option_c: '360°', option_d: '270°', correct_option: 'b', explanation: 'Euclidean geometry basic.', subject: 'Mathematics' },
+      { question_text: 'Atomic number of Gold (Au):', option_a: '79', option_b: '47', option_c: '82', option_d: '11', correct_option: 'a', explanation: 'Gold is 79.', subject: 'Chemistry' },
+      { question_text: 'pH of pure water:', option_a: '0', option_b: '7', option_c: '14', option_d: '1', correct_option: 'b', explanation: 'Neutral pH is 7.', subject: 'Chemistry' },
+      // ... Add more to reach 40 if needed, for now let's do a few more distinct ones
+      { question_text: 'Synonym of "Amicable":', option_a: 'Hostile', option_b: 'Friendly', option_c: 'Hateful', option_d: 'Cold', correct_option: 'b', explanation: 'Amicable means friendly.', subject: 'English' },
+      { question_text: 'Opposite of "Arrogant":', option_a: 'Humble', option_b: 'Proud', option_c: 'Rude', option_d: 'Eager', correct_option: 'a', explanation: 'Self-explanatory.', subject: 'English' },
     ]
   },
   {
-    title: 'NEB Physics Mastery',
+    title: 'NEB Grade 12 Physics Final Prep',
     category: 'Science',
-    duration_minutes: 60,
+    duration_minutes: 90,
     passing_score: 40,
     is_published: true,
     difficulty: 'Medium',
     price: 0,
     questions: [
-      {
-        question_text: 'What is the SI unit of electric current?',
-        option_a: 'Volt',
-        option_b: 'Ohm',
-        option_c: 'Ampere',
-        option_d: 'Watt',
-        correct_option: 'c',
-        explanation: 'Ampere is the SI unit representing the flow of electric charge.',
-        order_in_exam: 1
-      },
-      {
-        question_text: 'According to Ohm\'s Law, Voltage (V) is equal to:',
-        option_a: 'I / R',
-        option_b: 'I + R',
-        option_c: 'I * R',
-        option_d: 'R / I',
-        correct_option: 'c',
-        explanation: 'Ohm\'s Law states that Voltage equals Current multiplied by Resistance (V = IR).',
-        order_in_exam: 2
-      },
-      {
-        question_text: 'The phenomenon of splitting of white light into its component colors is called:',
-        option_a: 'Reflection',
-        option_b: 'Refraction',
-        option_c: 'Diffraction',
-        option_d: 'Dispersion',
-        correct_option: 'd',
-        explanation: 'Dispersion is the separation of visible light into its different colors.',
-        order_in_exam: 3
-      }
-    ]
-  },
-  {
-    title: 'Basic JavaScript Programming',
-    category: 'Engineering',
-    duration_minutes: 45,
-    passing_score: 60,
-    is_published: true,
-    difficulty: 'Easy',
-    price: 0,
-    questions: [
-      {
-        question_text: 'Which symbol is used for strictly equals in JS?',
-        option_a: '==',
-        option_b: '===',
-        option_c: '=',
-        option_d: '=>',
-        correct_option: 'b',
-        explanation: 'The triple equal (===) checks for both value and type equality.',
-        order_in_exam: 1
-      },
-      {
-        question_text: 'How do you declare a constant variable in ES6?',
-        option_a: 'var',
-        option_b: 'let',
-        option_c: 'const',
-        option_d: 'constant',
-        correct_option: 'c',
-        explanation: 'The const keyword is used to declare variables whose values cannot be reassigned.',
-        order_in_exam: 2
-      }
+      { question_text: 'SI unit of current:', option_a: 'Volt', option_b: 'Ampere', option_c: 'Ohm', option_d: 'Watt', correct_option: 'b', subject: 'Physics' },
+      { question_text: 'Ohm\'s Law is V = ?', option_a: 'IR', option_b: 'I/R', option_c: 'R/I', option_d: 'I+R', correct_option: 'a', subject: 'Physics' },
+      { question_text: 'Lens maker\'s formula relates:', option_a: 'f, R, mu', option_b: 'u, v, f', option_c: 'I, V, R', option_d: 'E, m, c^2', correct_option: 'a', subject: 'Physics' },
     ]
   }
 ];
 
 async function seed() {
-  console.log('🚀 Starting Firestore exam seeding...');
+  console.log('🚀 Starting content seeding...');
 
   try {
+    // 1. Seed Resources
+    console.log('--- Seeding Resources ---');
+    for (const res of RESOURCES) {
+      await db.collection('resources').add({
+        ...res,
+        created_at: admin.firestore.FieldValue.serverTimestamp()
+      });
+      console.log(`✅ Resource: ${res.title}`);
+    }
+
+    // 2. Seed Exams
+    console.log('--- Seeding Exams ---');
     for (const examData of EXAMS) {
       const { questions, ...exam } = examData;
-      
       const examRef = await db.collection('exams').add({
         ...exam,
         total_questions: questions.length,
+        visibility: 'public',
+        negativeMarkingEnabled: examData.negative_marking || false,
+        defaultMarksPerQuestion: 1,
+        defaultNegativeMarks: 0.25,
         created_at: admin.firestore.FieldValue.serverTimestamp()
       });
-
-      console.log(`✅ Created Exam: ${exam.title} (${examRef.id})`);
+      console.log(`✅ Exam: ${exam.title} (${examRef.id})`);
 
       const batch = db.batch();
-      questions.forEach((q) => {
-        const qRef = examRef.collection('questions').doc();
+      questions.forEach((q, idx) => {
+        // Add to top-level 'questions' collection as expected by the app
+        const qRef = db.collection('questions').doc();
         batch.set(qRef, {
           ...q,
+          exam_id: examRef.id,
+          order_in_exam: idx + 1,
+          marks: 1,
+          negative_marks: examData.negative_marking ? 0.25 : 0,
+          created_at: admin.firestore.FieldValue.serverTimestamp()
+        });
+        
+        // Also add to sub-collection for extra robustness
+        const subQRef = examRef.collection('questions').doc(qRef.id);
+        batch.set(subQRef, {
+          ...q,
+          order_in_exam: idx + 1,
+          marks: 1,
+          negative_marks: examData.negative_marking ? 0.25 : 0,
           created_at: admin.firestore.FieldValue.serverTimestamp()
         });
       });
-
       await batch.commit();
-      console.log(`   - Inserted ${questions.length} questions`);
+      console.log(`   - Added ${questions.length} questions`);
     }
 
-    console.log('🎉 Firebase seeding complete!');
+    console.log('🎉 Seeding successful!');
   } catch (err) {
     console.error('❌ Seeding failed:', err);
   } finally {

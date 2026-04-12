@@ -9,143 +9,131 @@ service cloud.firestore {
       return request.auth != null;
     }
 
+    // A user is an admin if they have the dev email or their role in /users/{uid} is 'admin'
     function isAdmin() {
-      return isSignedIn() &&
-        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
-        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+      return isSignedIn() && (
+        request.auth.token.email == 'amanmahato321@gmail.com' ||
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin')
+      );
     }
 
     // examiner | org_admin | admin can create/manage exams
     function isExaminer() {
-      return isSignedIn() &&
-        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
-        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'org_admin', 'examiner'];
-    }
-
-    function ownsResource(createdBy) {
-      return isSignedIn() && request.auth.uid == createdBy;
-    }
-
-    // Check active org membership (role-agnostic)
-    function isActiveMember(orgId) {
-      return isSignedIn() &&
-        exists(/databases/$(database)/documents/org_members/$(request.auth.uid + '_' + orgId)) == false &&
-        // Use a query-based check: look for any doc in org_members matching the user + org
-        // (Firestore rules don't support queries, so we use a composite key pattern instead)
-        // The app enforces membership; rules enforce ownership fallback
-        true; // relaxed — org membership enforced at app level for reads
-    }
-
-    function isOrgAdminOf(orgId) {
-      return isSignedIn() &&
-        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
-        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'org_admin';
-      // Full org-specific check would require composite key lookup; app layer enforces org_id match
+      return isSignedIn() && (
+        request.auth.token.email == 'amanmahato321@gmail.com' ||
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'org_admin', 'examiner'])
+      );
     }
 
     // ── Users ─────────────────────────────────────────────────────────────────
 
     match /users/{userId} {
-      allow get:   if isSignedIn() && (request.auth.uid == userId || isAdmin());
-      allow list:  if isAdmin();
-      allow write: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+      // Users can see their own data, and admins can see everyone
+      allow get: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+      // Admins can list all users for the management directory
+      allow list: if isAdmin();
+      // Allow users to create their initial profile OR admins to manage
+      allow create, update: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+      allow delete: if isAdmin();
     }
 
     // ── Exams ─────────────────────────────────────────────────────────────────
 
     match /exams/{examId} {
-      // Public exams: anyone can read. Org/private: app layer enforces.
-      // Admins and exam owners can always read.
-      allow read: if isAdmin()
-        || (resource.data.is_published == true && resource.data.visibility != 'private')
-        || (isSignedIn() && resource.data.created_by == request.auth.uid);
-
-      // Any examiner (teacher, org_admin, admin) can create an exam
+      // 1. Admins/Dev can read all
+      // 2. Public can read if published
+      // 3. Creator can read their own
+      // 4. Org members can read exams for their org
+      allow read: if isAdmin() 
+                  || (resource.data.get('is_published', false) == true)
+                  || (isSignedIn() && (
+                      resource.data.get('created_by', '') == request.auth.uid ||
+                      (resource.data.get('org_id', '') != '' && 
+                       exists(/databases/$(database)/documents/org_members/$(request.auth.uid + '_' + resource.data.org_id)))
+                  ));
+      
       allow create: if isExaminer();
+      allow update: if isAdmin() 
+                    || (isSignedIn() && resource.data.get('created_by', '') == request.auth.uid);
+      allow delete: if isAdmin();
 
-      // Only the exam creator or an admin can update/delete
-      allow update, delete: if isAdmin()
-        || (isSignedIn() && resource.data.created_by == request.auth.uid);
-
-      // Sub-collection: questions
+      // Sub-collection Questions
       match /questions/{questionId} {
-        allow read: if isSignedIn();
-        allow write: if isAdmin()
-          || (isSignedIn() && get(/databases/$(database)/documents/exams/$(examId)).data.created_by == request.auth.uid);
+        allow read: if isAdmin() 
+                    || isExaminer() 
+                    || get(/databases/$(database)/documents/exams/$(examId)).data.get('is_published', false) == true
+                    || get(/databases/$(database)/documents/exams/$(examId)).data.get('created_by', '') == request.auth.uid;
+        allow write: if isAdmin() || isExaminer();
       }
     }
 
-    // ── Questions (top-level collection) ──────────────────────────────────────
+    // ── Questions (top-level flat structure for faster access) ────────────────
 
     match /questions/{questionId} {
-      allow read: if isSignedIn();
-      // Write allowed if admin, or if the question's exam is owned by this user
-      allow create: if isExaminer();
-      allow update, delete: if isAdmin()
-        || (isSignedIn() &&
-            exists(/databases/$(database)/documents/exams/$(resource.data.exam_id)) &&
-            get(/databases/$(database)/documents/exams/$(resource.data.exam_id)).data.created_by == request.auth.uid);
+      // Used by random/mixed assessments
+      allow read: if true; 
+      allow write: if isExaminer();
     }
 
     // ── Exam Attempts ─────────────────────────────────────────────────────────
 
     match /exam_attempts/{attemptId} {
-      allow read:   if isAdmin()
-        || (isSignedIn() && resource.data.user_id == request.auth.uid)
-        // Exam creator can read attempts on their exam
-        || (isExaminer() && isSignedIn() &&
-            exists(/databases/$(database)/documents/exams/$(resource.data.exam_id)) &&
-            get(/databases/$(database)/documents/exams/$(resource.data.exam_id)).data.created_by == request.auth.uid);
-      allow create: if isSignedIn() && request.resource.data.user_id == request.auth.uid;
+      // Allow reading if it's yours, or if you're an admin/examiner
+      allow read: if isAdmin() 
+                  || (isSignedIn() && (resource.data.user_id == request.auth.uid || isExaminer()));
+      
+      // Allow list if admin, or student/examiner
+      allow list: if isAdmin() || isSignedIn(); 
+
+      allow create: if isSignedIn();
       allow update, delete: if isAdmin();
     }
 
     // ── Leaderboard ───────────────────────────────────────────────────────────
 
     match /leaderboard/{entryId} {
-      allow read:  if isSignedIn();
-      allow write: if isAdmin();
+      allow read: if true;
+      allow write: if isSignedIn(); 
     }
 
     // ── Notifications ─────────────────────────────────────────────────────────
 
     match /notifications/{notificationId} {
-      allow read:   if isSignedIn();
-      allow create: if isAdmin() || isExaminer(); // examiners can notify their students
-      allow update, delete: if isAdmin();
+      allow read: if isAdmin() 
+                  || (isSignedIn() && (resource.data.user_id == request.auth.uid || resource.data.user_id == 'all'));
+      allow write: if isAdmin();
     }
 
     // ── Organizations ─────────────────────────────────────────────────────────
 
     match /organizations/{orgId} {
-      // Org admins and platform admins can read
-      allow read: if isAdmin() || isOrgAdminOf(orgId);
-      // Only platform admin can create/approve/suspend orgs
-      allow create, update, delete: if isAdmin();
+      allow read: if true; 
+      allow write: if isAdmin();
     }
-
-    // ── Org Members ───────────────────────────────────────────────────────────
 
     match /org_members/{memberId} {
-      // Members can read their own record; org admins and platform admins read all
-      allow read: if isAdmin()
-        || (isSignedIn() && resource.data.user_id == request.auth.uid)
-        || isOrgAdminOf(resource.data.org_id);
-      // Org admins and platform admins can manage membership
-      allow write: if isAdmin() || isOrgAdminOf(resource.data.org_id);
+      allow read: if isSignedIn();
+      allow write: if isAdmin() || isExaminer();
     }
 
-    // ── Org Requests ──────────────────────────────────────────────────────────
-
     match /org_requests/{requestId} {
-      // Any logged-in user can submit a request
+      allow read: if isAdmin() || (isSignedIn() && resource.data.submitted_by == request.auth.uid);
       allow create: if isSignedIn();
-      // Only the submitter can read their own; admins read all
-      allow read: if isAdmin()
-        || (isSignedIn() && resource.data.submitted_by == request.auth.uid);
-      // Only admins can approve/reject
       allow update, delete: if isAdmin();
     }
 
+    // ── Resources & Notes ────────────────────────────────────────────────────
+    match /resources/{resourceId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /notes/{noteId} {
+      allow read: if true;
+      allow write: if isAdmin() || isExaminer();
+    }
   }
 }
+
