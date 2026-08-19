@@ -22,7 +22,7 @@ interface QuestionBreakdown {
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: any }
+  { params }: { params: { id: string } }
 ) {
   try {
     const { id: examId } = await params;
@@ -41,11 +41,22 @@ export async function POST(
     }
     const userId = decodedToken.uid;
 
-    // Fetch user's displayName from users collection (Task 3.4)
+    // Verify user is enrolled in this exam
+    const enrollmentSnap = await adminDb.collection('enrollments')
+      .where('user_id', '==', userId)
+      .where('exam_id', '==', examId)
+      .limit(1)
+      .get();
+
+    if (enrollmentSnap.empty) {
+      return NextResponse.json({ success: false, error: "Not enrolled in this exam" }, { status: 403 });
+    }
+
+    // Fetch user's displayName from users collection
     const userSnap = await adminDb.collection("users").doc(userId).get();
     const displayName = userSnap.exists
-      ? (userSnap.data()?.displayName ?? userSnap.data()?.name ?? decodedToken.name ?? decodedToken.email?.split('@')[0] ?? "Student")
-      : (decodedToken.name || decodedToken.email?.split('@')[0] || "Student");
+      ? (userSnap.data()?.displayName ?? userSnap.data()?.name ?? decodedToken.name ?? "Student")
+      : (decodedToken.name || "Student");
 
     let body: SubmitBody;
     try {
@@ -70,8 +81,8 @@ export async function POST(
     }
 
     const questions = questionsRes.docs
-      .map((doc: any) => ({ id: doc.id, ...doc.data() as any }))
-      .sort((a: any, b: any) => (a.order_in_exam || 0) - (b.order_in_exam || 0));
+      .map((doc) => ({ id: doc.id, ...doc.data() }))
+      .sort((a, b) => ((a as any).order_in_exam || 0) - ((b as any).order_in_exam || 0));
 
     const negativeMarkingEnabled = exam.negativeMarkingEnabled ?? false;
     const defaultMarks = exam.defaultMarksPerQuestion ?? 1;
@@ -142,38 +153,42 @@ export async function POST(
 
     const attemptRef = await adminDb.collection('exam_attempts').add(attemptData);
 
-    const lbQuery = await adminDb.collection('leaderboard')
-      .where('user_id', '==', userId)
-      .where('exam_id', '==', examId)
-      .limit(1)
-      .get();
-    
-    if (lbQuery.empty) {
-      await adminDb.collection('leaderboard').add({
-        user_id: userId,
-        user_name: displayName,
-        displayName: displayName,
-        exam_id: examId,
-        score,
-        percentage,
-        attempts: 1,
-        last_attempt: new Date().toISOString(),
-        updated_at: new Date().toISOString()
-      });
-    } else {
-      const lbDoc = lbQuery.docs[0];
-      const existingData = lbDoc.data();
-      const shouldUpdateBest = (existingData.percentage || 0) < percentage;
+    // Use transaction to atomically update/create leaderboard entry
+    await adminDb.runTransaction(async (transaction) => {
+      const lbQuery = await transaction.get(
+        adminDb.collection('leaderboard')
+          .where('user_id', '==', userId)
+          .where('exam_id', '==', examId)
+          .limit(1)
+      );
 
-      await lbDoc.ref.update({
-        user_name: displayName,
-        displayName: displayName,
-        attempts: (existingData.attempts || 0) + 1,
-        last_attempt: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-        ...(shouldUpdateBest ? { score, percentage } : {})
-      });
-    }
+      if (lbQuery.empty) {
+        await transaction.set(adminDb.collection('leaderboard').doc(), {
+          user_id: userId,
+          user_name: displayName,
+          displayName: displayName,
+          exam_id: examId,
+          score,
+          percentage,
+          attempts: 1,
+          last_attempt: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        });
+      } else {
+        const lbDoc = lbQuery.docs[0];
+        const existingData = lbDoc.data();
+        const shouldUpdateBest = (existingData.percentage || 0) < percentage;
+
+        transaction.update(lbDoc.ref, {
+          user_name: displayName,
+          displayName: displayName,
+          attempts: (existingData.attempts || 0) + 1,
+          last_attempt: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+          ...(shouldUpdateBest ? { score, percentage } : {})
+        });
+      }
+    });
 
     return NextResponse.json(
       {
@@ -188,6 +203,6 @@ export async function POST(
     );
   } catch (e: any) {
     console.error("Critical submission failure:", e);
-    return NextResponse.json({ success: false, error: e.message || "Internal server error" }, { status: 500 });
+    return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 });
   }
 }

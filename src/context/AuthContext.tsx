@@ -52,32 +52,24 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           
           // 2. Resolve Role
           let userRole: UserRole = userData?.role || 'student';
-          
-          // Hardcoded override for developer convenience
-          if (firebaseUser.email === "amanmahato321@gmail.com") {
-            userRole = 'admin';
-          }
-          
+
           setRole(userRole);
           setIsAdmin(userRole === 'admin');
           setIsExaminer(['admin', 'org_admin', 'examiner'].includes(userRole as any));
 
           // 3. Resolve Organization Membership
-          if (userRole === 'org_admin' || userRole === 'examiner' || userData?.org_id) {
-            // Check direct org_id first
-            if (userData?.org_id) {
-              setOrgId(userData.org_id);
-            } else {
-              // Fallback to searching org_members collection
-              const memberQ = query(
-                collection(db, "org_members"),
-                where("user_id", "==", firebaseUser.uid),
-                where("status", "==", "active"),
-                limit(1)
-              );
-              const memberSnap = await getDocs(memberQ);
-              setOrgId(!memberSnap.empty ? memberSnap.docs[0].data().org_id : null);
-            }
+          if (userData?.org_id) {
+            setOrgId(userData.org_id);
+          } else if (userRole === 'org_admin' || userRole === 'examiner') {
+            // Only query if role suggests org membership and no direct org_id
+            const memberQ = query(
+              collection(db, "org_members"),
+              where("user_id", "==", firebaseUser.uid),
+              where("status", "==", "active"),
+              limit(1)
+            );
+            const memberSnap = await getDocs(memberQ);
+            setOrgId(!memberSnap.empty ? memberSnap.docs[0].data().org_id : null);
           } else {
             setOrgId(null);
           }

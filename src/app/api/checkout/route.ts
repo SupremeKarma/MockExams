@@ -14,18 +14,22 @@ export async function POST(request: Request) {
     const { priceId, userId, email } = await request.json();
 
     if (!stripe) {
-      // Demo Mode: Mock successful checkout
-      return NextResponse.json({ 
-        sessionId: "demo_session_" + Date.now(), 
-        url: `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/dashboard?session_id=mock_demo` 
-      });
+      return NextResponse.json({ error: 'Payment processing unavailable' }, { status: 503 });
     }
 
     if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const origin = request.headers.get('origin') || process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+    if (!priceId || typeof priceId !== 'string' || !priceId.startsWith('price_')) {
+      return NextResponse.json({ error: 'Invalid price ID' }, { status: 400 });
+    }
+
+    if (!email || typeof email !== 'string' || !email.includes('@')) {
+      return NextResponse.json({ error: 'Invalid email' }, { status: 400 });
+    }
+
+    const origin = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -47,6 +51,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ sessionId: session.id, url: session.url });
   } catch (err: any) {
     console.error('Stripe error:', err);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json({ error: 'Payment processing failed' }, { status: 500 });
   }
 }

@@ -3,15 +3,15 @@ import Stripe from "stripe";
 import { adminDb } from "@/lib/firebase-admin";
 
 export async function POST(request: NextRequest) {
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_placeholder");
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
+  if (!process.env.STRIPE_SECRET_KEY || !process.env.STRIPE_WEBHOOK_SECRET) {
+    console.error("Stripe webhook received but keys missing. Rejecting.");
+    return NextResponse.json({ received: false, error: "Missing config" }, { status: 503 });
+  }
+
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
   const body = await request.text();
   const sig = request.headers.get("stripe-signature")!;
-
-  if (!process.env.STRIPE_SECRET_KEY || !process.env.STRIPE_WEBHOOK_SECRET) {
-    console.warn("Stripe webhook received but keys missing. Skipping handler.");
-    return NextResponse.json({ received: false, error: "Missing config" });
-  }
 
   let event: Stripe.Event;
   try {

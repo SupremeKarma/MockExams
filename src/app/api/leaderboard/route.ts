@@ -63,23 +63,32 @@ export async function GET(request: NextRequest) {
     }
 
     // 1. Fetch data from Firestore
-    let allDocs: any[] = [];
-    let isMock = false;
+    interface LeaderboardDoc {
+      id: string;
+      user_id?: string;
+      user_name?: string;
+      displayName?: string;
+      percentage?: number;
+      score?: number;
+      attempts?: number;
+      last_attempt?: string;
+      exam_id?: string;
+      avatar_url?: string;
+    }
+
+    let allDocs: LeaderboardDoc[] = [];
 
     try {
-      let queryRef: any = adminDb.collection("leaderboard");
+      let queryRef = adminDb.collection("leaderboard");
 
-      if (examId) {
+      if (examId && typeof examId === 'string' && examId.length > 0) {
         queryRef = queryRef.where("exam_id", "==", examId);
       }
 
       const snapshot = await queryRef.get();
 
-      if (snapshot.empty) {
-        allDocs = getMockData(examId);
-        isMock = true;
-      } else {
-        allDocs = snapshot.docs.map((doc: any) => ({ id: doc.id, ...doc.data() as any }));
+      if (!snapshot.empty) {
+        allDocs = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() as LeaderboardDoc }));
         // Sort in-memory to avoid index requirements
         allDocs.sort((a, b) => {
           if ((b.percentage || 0) !== (a.percentage || 0)) {
@@ -89,9 +98,11 @@ export async function GET(request: NextRequest) {
         });
       }
     } catch (error: any) {
-      console.warn("Firestore query failed, performing fallback to mock data:", error.message);
-      allDocs = getMockData(examId);
-      isMock = true;
+      console.error("Leaderboard query failed:", error);
+      return NextResponse.json(
+        { success: false, error: "Failed to fetch leaderboard" },
+        { status: 500 }
+      );
     }
 
     const total = allDocs.length;
@@ -119,7 +130,7 @@ export async function GET(request: NextRequest) {
       const displayName: string = doc.user_name || doc.displayName || "Anonymous";
       const initials = displayName
         .split(" ")
-        .map((w: string) => w[0] ?? "")
+        .map((w) => w[0] ?? "")
         .join("")
         .toUpperCase()
         .slice(0, 2);
