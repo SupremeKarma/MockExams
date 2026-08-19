@@ -42,6 +42,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const authRoutes = ["/login", "/signup"];
 
   useEffect(() => {
+    if (!auth) {
+      console.warn("Firebase Auth not initialized");
+      setLoading(false);
+      return;
+    }
+
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
         setUser(firebaseUser);
