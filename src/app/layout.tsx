@@ -31,14 +31,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-mesh text-slate-200`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-mesh text-slate-200 overflow-x-hidden`}
         suppressHydrationWarning
       >
         <div className="relative min-h-screen flex flex-col">
           <AuthProvider>
             <NotificationProvider>
               <Navbar />
-              <main className="flex-1" style={{ paddingTop: '110px' }}>
+              <main className="flex-1 pt-24">
                 {children}
               </main>
               <Footer />
