@@ -28,23 +28,23 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-bold text-slate-900 mb-6">Study Hub</h4>
+            <h4 className="font-bold text-slate-900 mb-6">Learning Tools</h4>
             <ul className="space-y-3 text-sm">
-              <li><FooterLink href="/notes">BIT Semester Notes</FooterLink></li>
+              <li><FooterLink href="/dashboard">Dashboard</FooterLink></li>
+              <li><FooterLink href="/tutor">AI Tutor</FooterLink></li>
               <li><FooterLink href="/flashcards">FSRS Flashcards</FooterLink></li>
-              <li><FooterLink href="/analytics">Weakness Diagnostics</FooterLink></li>
-              <li><FooterLink href="/projects">Semester Projects</FooterLink></li>
-              <li><FooterLink href="/syllabus">University Syllabus</FooterLink></li>
+              <li><FooterLink href="/study-plan">Study Planner</FooterLink></li>
+              <li><FooterLink href="/notes">Study Materials</FooterLink></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-bold text-slate-900 mb-6">Exams & Rankings</h4>
+            <h4 className="font-bold text-slate-900 mb-6">Exams & Analytics</h4>
             <ul className="space-y-3 text-sm">
-              <li><FooterLink href="/exams">Live Mock Exams</FooterLink></li>
-              <li><FooterLink href="/learn">Entrance Masterclass</FooterLink></li>
-              <li><FooterLink href="/leaderboard">Global Leaderboard</FooterLink></li>
-              <li><FooterLink href="/pricing">Pro Membership</FooterLink></li>
+              <li><FooterLink href="/exams">Adaptive Exams</FooterLink></li>
+              <li><FooterLink href="/analytics">Performance Analytics</FooterLink></li>
+              <li><FooterLink href="/leaderboard">Leaderboard</FooterLink></li>
+              <li><FooterLink href="/projects">Semester Projects</FooterLink></li>
             </ul>
           </div>
 
