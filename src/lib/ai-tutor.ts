@@ -9,6 +9,7 @@ import Anthropic from "@anthropic-ai/sdk";
 export interface TutorContext {
   studentId: string;
   topicId: string;
+  topicText?: string;
   questionText: string;
   studentAttempt: string;
   masteryLevel: number; // 0-100%

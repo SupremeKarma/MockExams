@@ -3,25 +3,19 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Sparkles, 
-  RotateCcw, 
   CheckCircle2, 
   Flame, 
-  Layers, 
   Brain, 
-  HelpCircle, 
   ChevronLeft, 
   ChevronRight, 
   Terminal, 
   BookOpen, 
   GraduationCap, 
-  Volume2, 
-  Shuffle, 
   Maximize2,
   Minimize2,
   Bot
 } from "lucide-react";
 import { useState, useEffect, useMemo, useCallback } from "react";
-import Link from "next/link";
 import { bitNotesData } from "@/data/bitNotesData";
 import { 
   CardReviewState, 
@@ -86,7 +80,6 @@ export default function FlashcardsPage() {
     return list;
   }, []);
 
-  // Filter cards by semester and subject
   const activeDeck = useMemo(() => {
     return allCards.filter(c => {
       const matchSem = c.semester === selectedSemester;
@@ -95,10 +88,8 @@ export default function FlashcardsPage() {
     });
   }, [allCards, selectedSemester, selectedSubject]);
 
-  // Current Card
   const currentCard = activeDeck[currentIndex] || activeDeck[0];
 
-  // Initialize Card State for FSRS
   const currentCardState = useMemo(() => {
     if (!currentCard) return calculateInitialCardState("default");
     return cardStates[currentCard.id] || calculateInitialCardState(currentCard.id);
@@ -108,7 +99,6 @@ export default function FlashcardsPage() {
     return getRatingOptions(currentCardState);
   }, [currentCardState]);
 
-  // Handle FSRS Rating
   const handleRate = useCallback((rating: FSRSRating) => {
     if (!currentCard) return;
 
@@ -122,15 +112,13 @@ export default function FlashcardsPage() {
     setIsFlipped(false);
     setShowAiHint(false);
 
-    // Advance to next card
     if (currentIndex < activeDeck.length - 1) {
       setCurrentIndex(prev => prev + 1);
     } else {
-      setCurrentIndex(0); // Loop back or completed
+      setCurrentIndex(0);
     }
   }, [currentCard, currentCardState, currentIndex, activeDeck.length]);
 
-  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
@@ -173,28 +161,27 @@ export default function FlashcardsPage() {
   }, [selectedSemester]);
 
   return (
-    <div className={`min-h-screen bg-mesh text-slate-100 ${isFullscreen ? "pt-8 pb-8 px-4" : "pt-28 pb-24 px-4 sm:px-6 lg:px-8"}`}>
+    <div className={`min-h-screen bg-mesh text-slate-900 ${isFullscreen ? "pt-8 pb-8 px-4" : "pt-28 pb-24 px-4 sm:px-6 lg:px-8"}`}>
       <div className="max-w-5xl mx-auto space-y-8">
         
-        {/* Header Ribbon (Hidden in Fullscreen) */}
+        {/* Header Ribbon */}
         {!isFullscreen && (
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-3xl bg-slate-900/70 border border-white/10 backdrop-blur-xl shadow-xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-3xl bg-white border border-slate-200 shadow-sm">
             <div className="space-y-1">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-black uppercase tracking-widest">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-black uppercase tracking-widest">
                 <Brain className="w-3.5 h-3.5" />
                 <span>FSRS v6 Spaced Repetition Engine</span>
               </div>
-              <h1 className="text-2xl sm:text-3xl font-black text-white">Active Recall Flashcards</h1>
+              <h1 className="text-2xl sm:text-3xl font-black text-slate-900">Active Recall Flashcards</h1>
             </div>
 
-            {/* Streak & Retention Stats */}
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-black">
-                <Flame className="w-4 h-4 text-amber-400" />
+              <div className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-amber-50 border border-amber-200 text-amber-700 text-xs font-black">
+                <Flame className="w-4 h-4 text-amber-600" />
                 <span>7 Day Streak</span>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-black">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <div className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-black">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                 <span>98% Retention Rate</span>
               </div>
             </div>
@@ -215,8 +202,8 @@ export default function FlashcardsPage() {
                 }}
                 className={`px-4 py-2 rounded-xl text-xs font-black transition-all border ${
                   selectedSemester === sem
-                    ? "bg-indigo-600 text-white border-indigo-400 shadow-lg shadow-indigo-500/30"
-                    : "bg-slate-900/60 text-slate-400 hover:text-white border-white/5"
+                    ? "bg-indigo-600 text-white border-indigo-600 shadow-md"
+                    : "bg-white text-slate-700 hover:bg-slate-50 border-slate-200"
                 }`}
               >
                 Sem {sem}
@@ -232,7 +219,7 @@ export default function FlashcardsPage() {
                 setCurrentIndex(0);
                 setIsFlipped(false);
               }}
-              className="bg-slate-900 border border-white/10 text-xs font-bold text-slate-300 rounded-xl px-3 py-2 focus:outline-none focus:border-indigo-500"
+              className="bg-white border border-slate-200 text-xs font-bold text-slate-700 rounded-xl px-3 py-2 focus:outline-none focus:border-indigo-600"
             >
               {availableSubjectsForSem.map(sub => (
                 <option key={sub} value={sub}>{sub}</option>
@@ -241,23 +228,23 @@ export default function FlashcardsPage() {
 
             <button
               onClick={() => setIsFullscreen(prev => !prev)}
-              className="p-2 rounded-xl bg-slate-900 border border-white/10 text-slate-400 hover:text-white transition-all"
-              title="Toggle Distraction-Free Fullscreen"
+              className="p-2 rounded-xl bg-white border border-slate-200 text-slate-600 hover:text-slate-900 shadow-sm"
+              title="Toggle Fullscreen"
             >
               {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
             </button>
           </div>
         </div>
 
-        {/* Study Progress Bar */}
+        {/* Progress Bar */}
         <div className="space-y-2">
-          <div className="flex justify-between text-xs font-bold text-slate-400">
+          <div className="flex justify-between text-xs font-bold text-slate-500">
             <span>Card {currentIndex + 1} of {activeDeck.length}</span>
             <span>{progressPercent}% Complete • {reviewedTodayCount} Reviewed Today</span>
           </div>
-          <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden border border-white/5">
+          <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden border border-slate-200">
             <motion.div 
-              className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400"
+              className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500"
               style={{ width: `${progressPercent}%` }}
               animate={{ width: `${progressPercent}%` }}
               transition={{ duration: 0.3 }}
@@ -265,67 +252,66 @@ export default function FlashcardsPage() {
           </div>
         </div>
 
-        {/* 3D Interactive Flashcard Area */}
+        {/* 3D Flashcard */}
         {currentCard ? (
           <div className="space-y-6">
             <div className="perspective-1000 w-full min-h-[420px] cursor-pointer" onClick={() => setIsFlipped(prev => !prev)}>
               <motion.div
-                className={`relative w-full min-h-[420px] rounded-3xl border border-white/10 bg-slate-900/90 backdrop-blur-2xl shadow-2xl p-8 sm:p-12 flex flex-col justify-between transition-transform duration-500 transform-style-3d hover:border-indigo-500/40 ${
-                  isFlipped ? "rotate-y-180 bg-gradient-to-br from-slate-900 via-indigo-950/40 to-slate-900" : ""
+                className={`relative w-full min-h-[420px] rounded-3xl border border-slate-200 bg-white shadow-lg p-8 sm:p-12 flex flex-col justify-between transition-transform duration-500 transform-style-3d hover:border-indigo-400 ${
+                  isFlipped ? "rotate-y-180 bg-gradient-to-br from-indigo-50/50 via-white to-indigo-50/30" : ""
                 }`}
               >
-                {/* FRONT OF CARD */}
+                {/* FRONT */}
                 <div className={`space-y-6 ${isFlipped ? "hidden" : "block"}`}>
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 px-3.5 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-bold">
+                    <div className="flex items-center gap-2 px-3.5 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-bold">
                       <GraduationCap className="w-3.5 h-3.5" />
                       <span>{currentCard.subject}</span>
                     </div>
-                    <span className="text-xs font-black uppercase text-slate-500 tracking-wider">
-                      Click anywhere or press Space to Flip
+                    <span className="text-xs font-black uppercase text-slate-400 tracking-wider">
+                      Click or press Space to Flip
                     </span>
                   </div>
 
                   <div className="space-y-4 pt-6 text-center sm:text-left">
-                    <span className="text-xs font-black uppercase tracking-widest text-indigo-400">Prompt / Question</span>
-                    <h2 className="text-2xl sm:text-4xl font-black text-white leading-tight">
+                    <span className="text-xs font-black uppercase tracking-widest text-indigo-600">Prompt / Question</span>
+                    <h2 className="text-2xl sm:text-4xl font-black text-slate-900 leading-tight">
                       {currentCard.frontQuestion}
                     </h2>
                   </div>
                 </div>
 
-                {/* BACK OF CARD */}
+                {/* BACK */}
                 <div className={`space-y-6 rotate-y-180 ${isFlipped ? "block" : "hidden"}`}>
-                  <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                    <span className="text-xs font-black uppercase text-cyan-400 tracking-widest flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+                    <span className="text-xs font-black uppercase text-indigo-600 tracking-widest flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                       Solution & Recall Points
                     </span>
-                    <span className="text-xs text-slate-400 font-bold">Semester {currentCard.semester}</span>
+                    <span className="text-xs text-slate-500 font-bold">Semester {currentCard.semester}</span>
                   </div>
 
-                  <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-medium">
+                  <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-medium">
                     {currentCard.backAnswer}
                   </p>
 
                   {/* Code Snippet if present */}
                   {currentCard.codeSnippet && (
                     <div className="space-y-2">
-                      <span className="text-xs font-mono text-cyan-400 flex items-center gap-1.5">
+                      <span className="text-xs font-mono text-indigo-700 flex items-center gap-1.5">
                         <Terminal className="w-3.5 h-3.5" /> Verified Code
                       </span>
-                      <pre className="p-4 rounded-2xl bg-slate-950 border border-white/5 text-xs font-mono text-cyan-300 max-h-48 overflow-y-auto">
+                      <pre className="p-4 rounded-2xl bg-slate-900 text-cyan-300 text-xs font-mono max-h-48 overflow-y-auto">
                         <code>{currentCard.codeSnippet}</code>
                       </pre>
                     </div>
                   )}
 
-                  {/* Key Points */}
                   {currentCard.keyPoints && currentCard.keyPoints.length > 0 && (
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-300">
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-600">
                       {currentCard.keyPoints.map((kp, kIdx) => (
                         <li key={kIdx} className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-indigo-600" />
                           <span>{kp}</span>
                         </li>
                       ))}
@@ -333,8 +319,8 @@ export default function FlashcardsPage() {
                   )}
                 </div>
 
-                {/* Card Footer Hint */}
-                <div className="pt-6 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
+                {/* Card Footer */}
+                <div className="pt-6 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
                   <div className="flex items-center gap-2">
                     <button
                       type="button"
@@ -342,7 +328,7 @@ export default function FlashcardsPage() {
                         e.stopPropagation();
                         setShowAiHint(prev => !prev);
                       }}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 text-purple-300 font-bold transition-all"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-50 hover:bg-purple-100 border border-purple-200 text-purple-700 font-bold transition-all"
                     >
                       <Bot className="w-3.5 h-3.5" />
                       <span>{showAiHint ? "Hide Socratic Hint" : "AI Socratic Hint"}</span>
@@ -353,17 +339,17 @@ export default function FlashcardsPage() {
               </motion.div>
             </div>
 
-            {/* AI Socratic Hint Box */}
+            {/* AI Socratic Hint */}
             <AnimatePresence>
               {showAiHint && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="p-5 rounded-2xl bg-purple-950/40 border border-purple-500/30 text-xs sm:text-sm text-purple-200 space-y-2"
+                  className="p-5 rounded-2xl bg-purple-50 border border-purple-200 text-xs sm:text-sm text-purple-900 space-y-2"
                 >
-                  <div className="flex items-center gap-2 font-bold text-purple-300">
-                    <Sparkles className="w-4 h-4 text-purple-400" />
+                  <div className="flex items-center gap-2 font-bold text-purple-700">
+                    <Sparkles className="w-4 h-4" />
                     <span>Socratic Tutor Thought:</span>
                   </div>
                   <p className="leading-relaxed">
@@ -373,10 +359,10 @@ export default function FlashcardsPage() {
               )}
             </AnimatePresence>
 
-            {/* FSRS Rating Buttons (Quizlet & Anki Style) */}
+            {/* FSRS Rating Buttons */}
             {isFlipped ? (
               <div className="space-y-3">
-                <div className="text-center text-xs font-black uppercase tracking-wider text-slate-400">
+                <div className="text-center text-xs font-black uppercase tracking-wider text-slate-500">
                   How well did you recall this concept? (FSRS v6 Scheduler)
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -384,21 +370,20 @@ export default function FlashcardsPage() {
                     <button
                       key={opt.rating}
                       onClick={() => handleRate(opt.rating)}
-                      className={`p-4 rounded-2xl border border-white/10 bg-gradient-to-br ${opt.colorClass} transition-all duration-200 hover:scale-105 active:scale-95 shadow-lg flex flex-col items-center justify-center gap-1 group`}
+                      className={`p-4 rounded-2xl border border-slate-200 bg-gradient-to-br ${opt.colorClass} transition-all duration-200 hover:scale-105 active:scale-95 shadow-md flex flex-col items-center justify-center gap-1`}
                     >
                       <div className="flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-black/30 flex items-center justify-center text-xs font-black">
+                        <span className="w-5 h-5 rounded-full bg-black/20 flex items-center justify-center text-xs font-black">
                           {opt.rating}
                         </span>
                         <span className="font-black text-sm">{opt.label}</span>
                       </div>
-                      <span className="text-[11px] opacity-80">{opt.subLabel} • {opt.intervalText}</span>
+                      <span className="text-[11px] opacity-90">{opt.subLabel} • {opt.intervalText}</span>
                     </button>
                   ))}
                 </div>
               </div>
             ) : (
-              /* Navigation Controls when not flipped */
               <div className="flex items-center justify-between">
                 <button
                   onClick={() => {
@@ -408,7 +393,7 @@ export default function FlashcardsPage() {
                     }
                   }}
                   disabled={currentIndex === 0}
-                  className="px-6 py-3 rounded-2xl bg-slate-900 hover:bg-slate-800 disabled:opacity-30 border border-white/10 text-xs font-bold text-slate-300 flex items-center gap-2 transition-all"
+                  className="px-6 py-3 rounded-2xl bg-white hover:bg-slate-50 disabled:opacity-30 border border-slate-200 text-xs font-bold text-slate-700 flex items-center gap-2 transition-all shadow-sm"
                 >
                   <ChevronLeft className="w-4 h-4" />
                   Previous Card
@@ -416,7 +401,7 @@ export default function FlashcardsPage() {
 
                 <button
                   onClick={() => setIsFlipped(true)}
-                  className="px-8 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-black transition-all shadow-lg shadow-indigo-600/30 hover:scale-105"
+                  className="px-8 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-black transition-all shadow-md hover:scale-105"
                 >
                   Flip to Reveal Solution (Space)
                 </button>
@@ -429,7 +414,7 @@ export default function FlashcardsPage() {
                     }
                   }}
                   disabled={currentIndex === activeDeck.length - 1}
-                  className="px-6 py-3 rounded-2xl bg-slate-900 hover:bg-slate-800 disabled:opacity-30 border border-white/10 text-xs font-bold text-slate-300 flex items-center gap-2 transition-all"
+                  className="px-6 py-3 rounded-2xl bg-white hover:bg-slate-50 disabled:opacity-30 border border-slate-200 text-xs font-bold text-slate-700 flex items-center gap-2 transition-all shadow-sm"
                 >
                   Skip to Next
                   <ChevronRight className="w-4 h-4" />
@@ -438,10 +423,10 @@ export default function FlashcardsPage() {
             )}
           </div>
         ) : (
-          <div className="p-12 text-center rounded-3xl bg-slate-900/60 border border-dashed border-white/10 space-y-3">
-            <BookOpen className="w-12 h-12 text-slate-600 mx-auto" />
-            <h3 className="text-lg font-bold text-white">No flashcards found for this semester / subject</h3>
-            <p className="text-sm text-slate-400">Select a different semester or subject above.</p>
+          <div className="p-12 text-center rounded-3xl bg-white border border-dashed border-slate-200 space-y-3">
+            <BookOpen className="w-12 h-12 text-slate-400 mx-auto" />
+            <h3 className="text-lg font-bold text-slate-900">No flashcards found</h3>
+            <p className="text-sm text-slate-500">Select a different semester or subject above.</p>
           </div>
         )}
       </div>

@@ -21,6 +21,8 @@ export interface Topic {
   commonExamQuestions?: string[];
 }
 
+export type CodeTopic = Topic;
+
 export interface SubjectNotes {
   subjectName: string;
   code: string;

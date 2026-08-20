@@ -86,13 +86,13 @@ export class RedisCache {
   async getTopStudents(limit: number = 10): Promise<LeaderboardEntry[]> {
     const key = "leaderboard:global:top100";
 
-    const results = await this.client.zrange(key, 0, limit - 1);
+    const results = await (this.client as any).zrange(key, 0, limit - 1);
 
     if (!results || results.length === 0) {
       return [];
     }
 
-    return results.map((r) => JSON.parse(r));
+    return results.map((r: string) => JSON.parse(r));
   }
 
   /**
@@ -101,7 +101,7 @@ export class RedisCache {
   async getStudentRank(studentId: string): Promise<number | null> {
     const key = "leaderboard:global:top100";
 
-    const entries = await this.client.zrange(key, 0, -1);
+    const entries = await (this.client as any).zrange(key, 0, -1);
 
     for (let i = 0; i < (entries || []).length; i++) {
       const entry = JSON.parse(entries![i]);

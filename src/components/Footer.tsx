@@ -5,21 +5,21 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-black/40 border-t border-white/5 pt-20 pb-10">
+    <footer className="bg-slate-50 border-t border-slate-200 pt-20 pb-10 text-slate-600">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-          <div className="md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-6 group">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+          <div className="md:col-span-1 space-y-4">
+            <Link href="/" className="flex items-center gap-2 group">
+              <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center">
                 <BookOpen className="text-white w-5 h-5" />
               </div>
-              <span className="text-lg font-black tracking-tight">MockExams</span>
+              <span className="text-lg font-black text-slate-900 tracking-tight">MockExams</span>
             </Link>
-            <p className="text-slate-400 text-sm leading-relaxed mb-8">
+            <p className="text-slate-500 text-sm leading-relaxed">
               Empowering students worldwide with guided exam preparation and high-quality mock tests. 
               Join thousands of successful candidates today.
             </p>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 pt-2">
               <SocialIcon icon={<Facebook className="w-4 h-4" />} />
               <SocialIcon icon={<Twitter className="w-4 h-4" />} />
               <SocialIcon icon={<Instagram className="w-4 h-4" />} />
@@ -28,52 +28,51 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-bold mb-6">Platform</h4>
-            <ul className="space-y-4">
-              <li><FooterLink href="/exams">Browse Exams</FooterLink></li>
-              <li><FooterLink href="/leaderboard">Leaderboard</FooterLink></li>
-              <li><FooterLink href="/pricing">Pricing Plans</FooterLink></li>
-              <li><FooterLink href="/about">How it Works</FooterLink></li>
+            <h4 className="font-bold text-slate-900 mb-6">Study Hub</h4>
+            <ul className="space-y-3 text-sm">
+              <li><FooterLink href="/notes">BIT Semester Notes</FooterLink></li>
+              <li><FooterLink href="/flashcards">FSRS Flashcards</FooterLink></li>
+              <li><FooterLink href="/analytics">Weakness Diagnostics</FooterLink></li>
+              <li><FooterLink href="/projects">Semester Projects</FooterLink></li>
+              <li><FooterLink href="/syllabus">University Syllabus</FooterLink></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-bold mb-6">Company</h4>
-            <ul className="space-y-4">
-              <li><FooterLink href="/about">About Us</FooterLink></li>
-              <li><FooterLink href="/privacy">Privacy Policy</FooterLink></li>
-              <li><FooterLink href="/terms">Terms of Service</FooterLink></li>
-              <li><FooterLink href="/contact">Contact Support</FooterLink></li>
+            <h4 className="font-bold text-slate-900 mb-6">Exams & Rankings</h4>
+            <ul className="space-y-3 text-sm">
+              <li><FooterLink href="/exams">Live Mock Exams</FooterLink></li>
+              <li><FooterLink href="/learn">Entrance Masterclass</FooterLink></li>
+              <li><FooterLink href="/leaderboard">Global Leaderboard</FooterLink></li>
+              <li><FooterLink href="/pricing">Pro Membership</FooterLink></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-bold mb-6">Contact</h4>
-            <ul className="space-y-4 text-sm text-slate-400">
+            <h4 className="font-bold text-slate-900 mb-6">Contact & Support</h4>
+            <ul className="space-y-4 text-sm text-slate-500">
               <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 mt-0.5 text-primary" />
-                <span>Kathmandu, Nepal <br /> New Baneshwor, 44600</span>
+                <MapPin className="w-4 h-4 mt-0.5 text-indigo-600" />
+                <span>Kathmandu, Nepal <br /> Tinkune & New Baneshwor</span>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="w-4 h-4 text-primary" />
+                <Mail className="w-4 h-4 text-indigo-600" />
                 <span>support@mockexams.com</span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="w-4 h-4 text-primary" />
-                <span>+977-9876543210</span>
+                <Phone className="w-4 h-4 text-indigo-600" />
+                <span>+977 1-4400000</span>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-medium">
-          <div className="flex flex-col gap-1">
-            <p>© 2026 MockExams. All rights reserved.</p>
-            <p className="text-slate-600">Final Project Submission | Department of Computer Engineering | IOE, Tribhuvan University</p>
-          </div>
-          <div className="flex items-center gap-6">
-            <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
-            <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
+        <div className="pt-8 border-t border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+          <p>© {new Date().getFullYear()} MockExams Platform. All rights reserved.</p>
+          <div className="flex gap-6">
+            <Link href="/privacy" className="hover:text-slate-700">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-slate-700">Terms of Service</Link>
+            <Link href="/cookies" className="hover:text-slate-700">Cookie Settings</Link>
           </div>
         </div>
       </div>
@@ -81,18 +80,18 @@ export default function Footer() {
   );
 }
 
-function SocialIcon({ icon }: { icon: React.ReactNode }) {
+function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <button className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white hover:border-primary transition-all">
-      {icon}
-    </button>
+    <Link href={href} className="text-slate-500 hover:text-indigo-600 transition-colors">
+      {children}
+    </Link>
   );
 }
 
-function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
+function SocialIcon({ icon }: { icon: React.ReactNode }) {
   return (
-    <Link href={href} className="text-sm text-slate-400 hover:text-white transition-colors">
-      {children}
-    </Link>
+    <div className="w-8 h-8 rounded-lg bg-white border border-slate-200 text-slate-600 hover:text-indigo-600 hover:border-indigo-300 flex items-center justify-center cursor-pointer transition-all shadow-2xs">
+      {icon}
+    </div>
   );
 }
