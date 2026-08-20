@@ -246,7 +246,7 @@ export class WeakAreaDetector {
    * Calculate struggle score (0-100)
    * Higher = more struggling
    */
-  calculateStruggleScore(topic: StudentMetrics["topicMetrics"]): number {
+  calculateStruggleScore(topic: StudentMetrics["topicMetrics"][number]): number {
     if (topic.attemptCount === 0) return 0;
 
     const masteryFactor = (100 - topic.masteryPercentage) * 0.4;

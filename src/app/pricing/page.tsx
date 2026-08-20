@@ -39,167 +39,157 @@ export default function PricingPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-20 pb-40">
-      <div className="text-center mb-20">
-        <h1 className="text-4xl md:text-6xl font-bold mb-6">Simple, Transparent <br /> <span className="text-gradient">Pricing for Students</span></h1>
-        <p className="text-slate-400 max-w-2xl mx-auto text-lg">
-          Invest in your future. Choose the plan that fits your preparation goals.
-          No hidden fees, cancel anytime.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-        {/* Basic Plan */}
-        <PricingCard 
-          title="Starter"
-          price="Free"
-          description="Perfect for casual practice and exploring concepts."
-          features={[
-            "5 Mock Exams per month",
-            "Basic performance stats",
-            "Public leaderboard access",
-            "Email support"
-          ]}
-          onClick={() => window.location.href = "/dashboard"}
-        />
-
-        {/* Pro Plan */}
-        <PricingCard 
-          title="Pro"
-          price="NPR 999"
-          period="/month"
-          description="Our most popular plan for serious exam candidates."
-          features={[
-            "Unlimited Mock Exams",
-            "AI-powered analytics",
-            "Personalized study plans",
-            "Priority support",
-            "Dark mode exclusive themes",
-            "Early access to new features"
-          ]}
-          popular={true}
-          loading={loading === "Pro"}
-          onClick={() => handleCheckout("price_PRO_PLAN_ID", "Pro")}
-          cta="Upgrade Now"
-        />
-
-        {/* Institution Plan */}
-        <PricingCard 
-          title="Institution"
-          price="Contact Us"
-          description="Volume licensing for schools and coaching centers."
-          features={[
-            "Bulk student management",
-            "Custom exam creation",
-            "Advanced department analytics",
-            "Dedicated account manager",
-            "API Access",
-            "White-label options"
-          ]}
-          onClick={() => window.location.href = "mailto:sales@examai.com"}
-          cta="Contact Sales"
-        />
-      </div>
-
-      {/* FAQ Preview */}
-      <div className="mt-40 max-w-3xl mx-auto">
-        <div className="flex items-center gap-2 justify-center mb-10">
-          <HelpCircle className="w-6 h-6 text-primary" />
-          <h2 className="text-2xl font-bold">Frequently Asked Questions</h2>
+    <div className="min-h-screen bg-mesh text-slate-900 pt-28 pb-24 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto space-y-12">
+        <div className="text-center max-w-2xl mx-auto space-y-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-black uppercase tracking-widest">
+            <Zap className="w-4 h-4" />
+            <span>Student Membership</span>
+          </div>
+          <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
+            Transparent Pricing <br />
+            <span className="text-gradient">For Every Student</span>
+          </h1>
+          <p className="text-slate-600 text-sm sm:text-base font-medium">
+            Invest in your academic potential. Choose the plan that fits your semester goals.
+          </p>
         </div>
-        
-        <div className="space-y-6">
-          <FAQItem 
-            question="Can I upgrade or downgrade my plan later?"
-            answer="Yes, you can change your plan at any time from your account settings. Pro-rated charges will apply."
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+          {/* Basic Plan */}
+          <PricingCard 
+            title="Starter"
+            price="Free"
+            description="Perfect for casual practice and exploring concepts."
+            features={[
+              "Unlimited standard BIT notes",
+              "10 FSRS flashcards / day",
+              "Public exams access",
+              "Global leaderboard ranking",
+              "Community discord access"
+            ]}
+            buttonText="Get Started"
+            onSelect={() => window.location.href = "/signup"}
           />
-          <FAQItem 
-            question="What payment methods do you accept?"
-            answer="We accept Esewa, Khalti, IME Pay, and all major international credit cards via Stripe."
+
+          {/* Pro Plan */}
+          <PricingCard 
+            title="Pro Scholar"
+            price="NPR 499"
+            period="/month"
+            description="Our most popular plan for engineering & entrance mastery."
+            features={[
+              "Unlimited Mock Exam simulations",
+              "Unlimited FSRS v6 active recall cards",
+              "Full 8-Semester verified code repository",
+              "Deep diagnostic weakness analysis",
+              "24/7 Socratic AI Tutor companion",
+              "Offline question PDF exports"
+            ]}
+            featured={true}
+            buttonText={loading === "Pro Scholar" ? "Redirecting..." : "Upgrade to Pro"}
+            onSelect={() => handleCheckout("price_pro_monthly", "Pro Scholar")}
           />
-          <FAQItem 
-            question="Is there a student discount available?"
-            answer="Our Starter plan is free forever, and the Pro plan is already priced competitively for students."
+
+          {/* Institution Plan */}
+          <PricingCard 
+            title="Campus License"
+            price="NPR 2,999"
+            period="/semester"
+            description="For study cohorts and affiliated university colleges."
+            features={[
+              "All Pro features for 10 students",
+              "Private cohort exam rooms",
+              "Campus-specific leaderboards",
+              "Instructor question bank creator",
+              "Priority support & syllabus sync"
+            ]}
+            buttonText="Contact for Campus"
+            onSelect={() => window.location.href = "mailto:support@mockexams.com"}
           />
+        </div>
+
+        {/* Guarantee Banner */}
+        <div className="p-8 rounded-3xl bg-white border border-slate-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6 max-w-4xl mx-auto text-slate-700">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0">
+              <ShieldCheck className="w-6 h-6" />
+            </div>
+            <div>
+              <h4 className="font-bold text-slate-900">100% Satisfaction Guarantee</h4>
+              <p className="text-xs text-slate-500">Cancel or change your plan at any time without extra fees.</p>
+            </div>
+          </div>
+          <Link href="/exams" className="px-6 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs transition-all">
+            Try Free Mock Exam
+          </Link>
         </div>
       </div>
     </div>
   );
 }
 
-interface PricingCardProps {
-  title: string;
-  price: string;
-  period?: string;
-  description: string;
-  features: string[];
-  popular?: boolean;
-  cta?: string;
-  onClick?: () => void;
-  loading?: boolean;
-}
-
-function PricingCard({ title, price, period, description, features, popular, cta = "Get Started", onClick, loading }: PricingCardProps) {
+function PricingCard({ 
+  title, 
+  price, 
+  period, 
+  description, 
+  features, 
+  featured, 
+  buttonText, 
+  onSelect 
+}: any) {
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      viewport={{ once: true }}
-      className={`relative p-8 rounded-3xl flex flex-col h-full ${
-        popular 
-          ? "glass bg-primary/5 border-primary/50 shadow-2xl shadow-primary/10 scale-105 z-10" 
-          : "glass-card border-white/5 hover:border-white/20"
+    <motion.div
+      whileHover={{ y: -5 }}
+      className={`rounded-3xl p-8 flex flex-col justify-between transition-all bg-white border ${
+        featured 
+          ? "border-indigo-600 shadow-lg ring-2 ring-indigo-600/20 relative" 
+          : "border-slate-200 shadow-sm"
       }`}
     >
-      {popular && (
-        <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-white text-xs font-bold rounded-full uppercase tracking-widest shadow-lg">
-          Recommended
+      {featured && (
+        <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-indigo-600 text-white text-[10px] font-black uppercase tracking-widest shadow-sm">
+          Most Popular
         </div>
       )}
 
-      <div className="mb-8">
-        <h3 className="text-xl font-bold mb-2">{title}</h3>
-        <div className="flex items-baseline gap-1 mb-4">
-          <span className="text-4xl font-extrabold">{price}</span>
-          {period && <span className="text-slate-400">{period}</span>}
+      <div className="space-y-6">
+        <div>
+          <h3 className="text-xl font-bold text-slate-900">{title}</h3>
+          <p className="text-xs text-slate-500 mt-1 leading-relaxed">{description}</p>
         </div>
-        <p className="text-sm text-slate-400 leading-relaxed">{description}</p>
+
+        <div className="flex items-baseline gap-1">
+          <span className="text-4xl font-black text-slate-900">{price}</span>
+          {period && <span className="text-xs font-bold text-slate-400">{period}</span>}
+        </div>
+
+        <div className="space-y-3 pt-4 border-t border-slate-100">
+          <p className="text-[11px] font-black uppercase tracking-wider text-slate-400">Included Features</p>
+          <ul className="space-y-2.5">
+            {features.map((feat: string, idx: number) => (
+              <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-700 font-medium">
+                <Check className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
+                <span>{feat}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
-      <div className="space-y-4 mb-10 flex-1">
-        {features.map((feature, i) => (
-          <div key={i} className="flex items-start gap-3">
-            <div className={`mt-0.5 w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${
-              popular ? "bg-primary/20 text-primary" : "bg-white/5 text-slate-500"
-            }`}>
-              <Check className="w-3 h-3" />
-            </div>
-            <span className="text-sm text-slate-300">{feature}</span>
-          </div>
-        ))}
+      <div className="pt-8">
+        <button
+          onClick={onSelect}
+          className={`w-full py-3.5 rounded-2xl font-bold text-xs transition-all shadow-sm ${
+            featured
+              ? "bg-indigo-600 hover:bg-indigo-700 text-white shadow-indigo-600/20"
+              : "bg-slate-100 hover:bg-slate-200 text-slate-900"
+          }`}
+        >
+          {buttonText}
+        </button>
       </div>
-
-      <button 
-        onClick={onClick}
-        disabled={loading}
-        className={`w-full py-4 rounded-xl font-bold transition-all flex items-center justify-center gap-2 ${
-        popular 
-          ? "bg-primary text-white hover:bg-primary-dark shadow-lg shadow-primary/25" 
-          : "bg-white/5 text-white hover:bg-white/10"
-      } disabled:opacity-50`}>
-        {loading && <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />}
-        {cta}
-      </button>
     </motion.div>
-  );
-}
-
-function FAQItem({ question, answer }: { question: string, answer: string }) {
-  return (
-    <div className="glass-card p-6 rounded-2xl">
-      <h4 className="font-bold mb-3">{question}</h4>
-      <p className="text-slate-400 text-sm leading-relaxed">{answer}</p>
-    </div>
   );
 }

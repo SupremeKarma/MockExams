@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Brain, MoveLeft, User, Mail, Lock, Phone, Loader2, Github, GraduationCap } from "lucide-react";
+import { MoveLeft, User, Mail, Lock, Phone, Loader2, Github, GraduationCap } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { auth, db } from "@/lib/firebase";
@@ -26,7 +26,6 @@ export default function SignupPage() {
     setError(null);
 
     try {
-      // 1. Create user in Firebase Auth
       const userCredential = await createUserWithEmailAndPassword(
         auth, 
         formData.email, 
@@ -34,13 +33,10 @@ export default function SignupPage() {
       );
       const user = userCredential.user;
 
-      // 2. Update profile with display name
       await updateProfile(user, {
         displayName: formData.name
       });
 
-      // 3. Store additional data in Firestore
-      // AUTO-ADMIN for owner
       const initialRole = formData.email.toLowerCase() === "amanmahato321@gmail.com" ? 'admin' : 'student';
 
       await setDoc(doc(db, "users", user.uid), {
@@ -70,7 +66,6 @@ export default function SignupPage() {
       
       const { user } = await signInWithPopup(auth, provider);
       
-      // Sync social user to Firestore if new
       await setDoc(doc(db, "users", user.uid), {
         name: user.displayName,
         displayName: user.displayName,
@@ -87,81 +82,81 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-80px)] flex items-center justify-center p-6 bg-mesh">
+    <div className="min-h-[calc(100vh-80px)] flex items-center justify-center p-6 bg-mesh text-slate-900">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="max-w-md w-full glass-card p-8 md:p-10 rounded-3xl"
+        className="max-w-md w-full bg-white p-8 md:p-10 rounded-3xl border border-slate-200 shadow-lg"
       >
-        <div className="mb-10">
-          <Link href="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm mb-8">
+        <div className="mb-8">
+          <Link href="/" className="inline-flex items-center gap-2 text-slate-500 hover:text-indigo-600 transition-colors text-xs font-bold mb-6">
             <MoveLeft className="w-4 h-4" />
-            Back to home
+            Back to Home
           </Link>
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white">
-              <GraduationCap className="w-6 h-6" />
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-sm">
+              <GraduationCap className="w-5 h-5" />
             </div>
-            <h1 className="text-2xl font-bold">Create Account</h1>
+            <h1 className="text-2xl font-black text-slate-900">Create Account</h1>
           </div>
-          <p className="text-slate-400">Join 10,000+ students preparing for success.</p>
+          <p className="text-slate-500 text-xs font-medium">Join 10,000+ students preparing for academic success.</p>
         </div>
 
-        <form className="space-y-4" onSubmit={handleSignup}>
+        <form className="space-y-3.5" onSubmit={handleSignup}>
           {error && (
-            <div className="p-4 bg-rose-500/10 border border-rose-500/20 rounded-xl text-rose-500 text-sm">
+            <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-rose-700 text-xs font-bold">
               {error}
             </div>
           )}
 
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-300 ml-1">Full Name</label>
-            <div className="relative group">
-              <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-primary transition-colors" />
+          <div className="space-y-1">
+            <label className="text-xs font-bold text-slate-700">Full Name</label>
+            <div className="relative">
+              <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input 
                 type="text" 
-                placeholder="Binod Mahato"
+                placeholder="Aarav Sharma"
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full pl-12 pr-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all font-medium"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-indigo-600"
               />
             </div>
           </div>
 
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-300 ml-1">Email Address</label>
-            <div className="relative group">
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-primary transition-colors" />
+          <div className="space-y-1">
+            <label className="text-xs font-bold text-slate-700">Email Address</label>
+            <div className="relative">
+              <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input 
                 type="email" 
-                placeholder="name@example.com"
+                placeholder="student@example.com"
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full pl-12 pr-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all font-medium"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-indigo-600"
               />
             </div>
           </div>
 
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-300 ml-1">Phone Number</label>
-            <div className="relative group">
-              <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-primary transition-colors" />
+          <div className="space-y-1">
+            <label className="text-xs font-bold text-slate-700">Phone Number (Optional)</label>
+            <div className="relative">
+              <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input 
                 type="tel" 
                 placeholder="+977 98XXXXXXXX"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full pl-12 pr-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all font-medium"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-indigo-600"
               />
             </div>
           </div>
 
-          <div className="space-y-2 pb-2">
-            <label className="text-sm font-medium text-slate-300 ml-1">Password</label>
-            <div className="relative group">
-              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-primary transition-colors" />
+          <div className="space-y-1 pb-1">
+            <label className="text-xs font-bold text-slate-700">Password</label>
+            <div className="relative">
+              <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input 
                 type="password" 
                 placeholder="••••••••"
@@ -169,7 +164,7 @@ export default function SignupPage() {
                 minLength={6}
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                className="w-full pl-12 pr-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all font-medium"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-indigo-600"
               />
             </div>
           </div>
@@ -177,29 +172,29 @@ export default function SignupPage() {
           <button 
             type="submit"
             disabled={loading}
-            className="w-full py-4 bg-primary text-white rounded-2xl font-bold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full py-3.5 bg-indigo-600 text-white rounded-xl font-bold text-xs hover:bg-indigo-700 transition-all shadow-sm active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2 mt-2"
           >
             {loading ? (
               <>
-                <Loader2 className="w-5 h-5 animate-spin" />
+                <Loader2 className="w-4 h-4 animate-spin" />
                 Creating Account...
               </>
             ) : (
-              "Create Account"
+              "Create Free Account"
             )}
           </button>
         </form>
 
-        <div className="mt-8 relative text-center">
-          <div className="absolute top-1/2 left-0 w-full h-px bg-white/5" />
-          <span className="relative z-10 bg-[#030711] px-4 text-xs text-slate-500 font-medium uppercase tracking-widest">or continue with</span>
+        <div className="mt-6 relative text-center">
+          <div className="absolute top-1/2 left-0 w-full h-px bg-slate-200" />
+          <span className="relative z-10 bg-white px-3 text-[10px] text-slate-400 font-bold uppercase tracking-widest">or continue with</span>
         </div>
 
-        <div className="mt-8 grid grid-cols-2 gap-4">
+        <div className="mt-6 grid grid-cols-2 gap-3">
           <button 
             type="button"
             onClick={() => handleSocialLogin('github')}
-            className="flex items-center justify-center gap-2 py-3 glass rounded-xl hover:bg-white/5 transition-colors border-white/5 text-sm font-medium"
+            className="flex items-center justify-center gap-2 py-2.5 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-200 text-xs font-bold text-slate-700 transition-colors"
           >
             <Github className="w-4 h-4" />
             GitHub
@@ -207,7 +202,7 @@ export default function SignupPage() {
           <button 
             type="button"
             onClick={() => handleSocialLogin('google')}
-            className="flex items-center justify-center gap-2 py-3 glass rounded-xl hover:bg-white/5 transition-colors border-white/5 text-sm font-medium"
+            className="flex items-center justify-center gap-2 py-2.5 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-200 text-xs font-bold text-slate-700 transition-colors"
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24">
               <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -219,8 +214,8 @@ export default function SignupPage() {
           </button>
         </div>
 
-        <p className="mt-8 text-center text-sm text-slate-400">
-          Already have an account? <Link href="/login" className="text-primary hover:underline font-bold">Sign in</Link>
+        <p className="mt-8 text-center text-xs text-slate-500 font-medium">
+          Already have an account? <Link href="/login" className="text-indigo-600 hover:underline font-bold">Log in here</Link>
         </p>
       </motion.div>
     </div>

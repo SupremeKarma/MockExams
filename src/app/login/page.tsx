@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Brain, MoveLeft, Github, Mail, Lock, Loader2, GraduationCap } from "lucide-react";
+import { MoveLeft, Github, Mail, Lock, Loader2, GraduationCap } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { auth } from "@/lib/firebase";
@@ -40,7 +40,6 @@ export default function LoginPage() {
       
       const result = await signInWithPopup(auth, provider);
       
-      // Ensure user document exists (for new social logins)
       const { db } = await import("@/lib/firebase");
       const { doc, getDoc, setDoc, serverTimestamp } = await import("firebase/firestore");
       const userRef = doc(db, "users", result.user.uid);
@@ -65,56 +64,56 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-80px)] flex items-center justify-center p-6 bg-mesh">
+    <div className="min-h-[calc(100vh-80px)] flex items-center justify-center p-6 bg-mesh text-slate-900">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="max-w-md w-full glass-card p-8 md:p-10 rounded-3xl"
+        className="max-w-md w-full bg-white p-8 md:p-10 rounded-3xl border border-slate-200 shadow-lg"
       >
-        <div className="mb-10">
-          <Link href="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm mb-8">
+        <div className="mb-8">
+          <Link href="/" className="inline-flex items-center gap-2 text-slate-500 hover:text-indigo-600 transition-colors text-xs font-bold mb-6">
             <MoveLeft className="w-4 h-4" />
-            Back to home
+            Back to Home
           </Link>
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white">
-              <GraduationCap className="w-6 h-6" />
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-sm">
+              <GraduationCap className="w-5 h-5" />
             </div>
-            <h1 className="text-2xl font-bold">Welcome Back</h1>
+            <h1 className="text-2xl font-black text-slate-900">Welcome Back</h1>
           </div>
-          <p className="text-slate-400">Continue your journey towards exam success.</p>
+          <p className="text-slate-500 text-xs font-medium">Log in to access your notes, flashcards, and exam analytics.</p>
         </div>
 
-        <form className="space-y-6" onSubmit={handleLogin}>
+        <form className="space-y-4" onSubmit={handleLogin}>
           {error && (
-            <div className="p-4 bg-rose-500/10 border border-rose-500/20 rounded-xl text-rose-500 text-sm">
+            <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-rose-700 text-xs font-bold">
               {error}
             </div>
           )}
 
-           <div className="space-y-2">
-            <label htmlFor="email" className="text-sm font-medium text-slate-300 ml-1">Email Address</label>
-            <div className="relative group">
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-primary transition-colors" />
+          <div className="space-y-1.5">
+            <label htmlFor="email" className="text-xs font-bold text-slate-700">Email Address</label>
+            <div className="relative">
+              <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input 
                 id="email"
                 type="email" 
-                placeholder="name@example.com"
+                placeholder="student@example.com"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-12 pr-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all font-medium"
+                className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-indigo-600"
               />
             </div>
           </div>
 
-           <div className="space-y-2">
-            <div className="flex items-center justify-between ml-1">
-              <label htmlFor="password" className="text-sm font-medium text-slate-300">Password</label>
-              <Link href="/forgot-password" className="text-xs text-primary hover:underline">Forgot password?</Link>
+          <div className="space-y-1.5">
+            <div className="flex items-center justify-between">
+              <label htmlFor="password" className="text-xs font-bold text-slate-700">Password</label>
+              <Link href="/forgot-password" className="text-[11px] text-indigo-600 hover:underline font-bold">Forgot password?</Link>
             </div>
-            <div className="relative group">
-              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-primary transition-colors" />
+            <div className="relative">
+              <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input 
                 id="password"
                 type="password" 
@@ -122,7 +121,7 @@ export default function LoginPage() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-12 pr-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all font-medium"
+                className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-indigo-600"
               />
             </div>
           </div>
@@ -130,11 +129,11 @@ export default function LoginPage() {
           <button 
             type="submit"
             disabled={loading}
-            className="w-full py-4 bg-white text-black rounded-2xl font-bold hover:bg-slate-200 transition-all shadow-lg active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full py-3.5 bg-indigo-600 text-white rounded-xl font-bold text-xs hover:bg-indigo-700 transition-all shadow-sm active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2 mt-2"
           >
             {loading ? (
               <>
-                <Loader2 className="w-5 h-5 animate-spin" />
+                <Loader2 className="w-4 h-4 animate-spin" />
                 Signing In...
               </>
             ) : (
@@ -143,22 +142,22 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <div className="mt-8 relative text-center">
-          <div className="absolute top-1/2 left-0 w-full h-px bg-white/5" />
-          <span className="relative z-10 bg-[#030711] px-4 text-xs text-slate-500 font-medium uppercase tracking-widest">or continue with</span>
+        <div className="mt-6 relative text-center">
+          <div className="absolute top-1/2 left-0 w-full h-px bg-slate-200" />
+          <span className="relative z-10 bg-white px-3 text-[10px] text-slate-400 font-bold uppercase tracking-widest">or continue with</span>
         </div>
 
-        <div className="mt-8 grid grid-cols-2 gap-4">
+        <div className="mt-6 grid grid-cols-2 gap-3">
           <button 
             onClick={() => handleSocialLogin('github')}
-            className="flex items-center justify-center gap-2 py-3 glass rounded-xl hover:bg-white/5 transition-colors border-white/5 text-sm font-medium"
+            className="flex items-center justify-center gap-2 py-2.5 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-200 text-xs font-bold text-slate-700 transition-colors"
           >
             <Github className="w-4 h-4" />
             GitHub
           </button>
           <button 
             onClick={() => handleSocialLogin('google')}
-            className="flex items-center justify-center gap-2 py-3 glass rounded-xl hover:bg-white/5 transition-colors border-white/5 text-sm font-medium"
+            className="flex items-center justify-center gap-2 py-2.5 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-200 text-xs font-bold text-slate-700 transition-colors"
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24">
               <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -170,8 +169,8 @@ export default function LoginPage() {
           </button>
         </div>
 
-        <p className="mt-10 text-center text-sm text-slate-500">
-          Don't have an account? <Link href="/signup" className="text-primary hover:underline font-bold">Sign up for free</Link>
+        <p className="mt-8 text-center text-xs text-slate-500 font-medium">
+          Don't have an account? <Link href="/signup" className="text-indigo-600 hover:underline font-bold">Sign up for free</Link>
         </p>
       </motion.div>
     </div>
