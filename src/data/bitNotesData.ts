@@ -27,6 +27,8 @@ export interface Subject {
   topics: Topic[];
 }
 
+export type CodeTopic = Topic;
+
 // Semester 1: C Programming Topics
 export const sem1Data = [
   {
@@ -52,6 +54,11 @@ export const sem1Data = [
     ]
   }
 ];
+
+// Combine all semester data
+export const bitNotesData = {
+  1: sem1Data[0]?.subjects || [],
+};
 
 export function getAllTopics() {
   return sem1Data;
