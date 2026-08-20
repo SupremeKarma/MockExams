@@ -103,13 +103,13 @@ export default function StudentDashboard() {
       <div className="max-w-7xl mx-auto space-y-10">
 
         {/* Welcome Section with Enhanced Design */}
-        <div className="relative rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-sm">
+        <div className="relative rounded-lg overflow-hidden border border-slate-200 bg-white shadow-sm">
           {/* Gradient background */}
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-transparent to-purple-50 opacity-50" />
 
           <div className="relative z-10 p-8 sm:p-12 flex flex-col md:flex-row md:items-center justify-between gap-8">
             <div className="space-y-4 flex-1">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 border border-indigo-300 text-indigo-700 text-xs font-black uppercase tracking-widest">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-indigo-100 border border-indigo-300 text-indigo-700 text-xs font-black uppercase tracking-widest">
                 <ShieldCheck className="w-4 h-4" />
                 <span>AI-Powered Learning Hub</span>
               </div>
@@ -130,14 +130,14 @@ export default function StudentDashboard() {
             </div>
 
             <div className="flex flex-col gap-3 w-full md:w-auto">
-              <Link href="/exams" className="px-6 py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl font-bold text-xs hover:shadow-lg transition-all shadow-md flex items-center justify-center gap-2 transform hover:scale-105">
+              <Link href="/exams" className="px-6 py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-bold text-xs hover:shadow-lg transition-all shadow-md flex items-center justify-center gap-2 transform hover:scale-105">
                 <Zap className="w-4 h-4" /> Take Exam
               </Link>
               <div className="grid grid-cols-2 gap-2">
-                <Link href="/flashcards" className="px-4 py-2.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-1.5">
+                <Link href="/flashcards" className="px-4 py-2.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 rounded-lg font-bold text-xs transition-all flex items-center justify-center gap-1.5">
                   <Brain className="w-4 h-4" /> Flashcards
                 </Link>
-                <Link href="/tutor" className="px-4 py-2.5 bg-purple-50 hover:bg-purple-100 border border-purple-200 text-purple-700 rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-1.5">
+                <Link href="/tutor" className="px-4 py-2.5 bg-purple-50 hover:bg-purple-100 border border-purple-200 text-purple-700 rounded-lg font-bold text-xs transition-all flex items-center justify-center gap-1.5">
                   <Sparkles className="w-4 h-4" /> Tutor
                 </Link>
               </div>
@@ -272,7 +272,7 @@ export default function StudentDashboard() {
           
           {/* Skill Distribution */}
           <div className="lg:col-span-1 space-y-4">
-             <div className="p-7 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-6">
+             <div className="p-7 rounded-lg bg-white border border-slate-200 shadow-sm space-y-6">
                 <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2.5">
                   <Brain className="w-5 h-5 text-indigo-600" /> Subject Proficiency
                 </h3>
@@ -304,7 +304,7 @@ export default function StudentDashboard() {
 
           {/* Recent Attempt History */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="p-7 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-6">
+            <div className="p-7 rounded-lg bg-white border border-slate-200 shadow-sm space-y-6">
               <div className="flex items-center justify-between border-b border-slate-100 pb-4">
                 <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                   <Calendar className="w-5 h-5 text-indigo-600" /> Recent Assessment History
@@ -317,7 +317,7 @@ export default function StudentDashboard() {
                   recentAttempts.map((attempt) => (
                     <div
                       key={attempt.id}
-                      className="p-4 rounded-2xl bg-slate-50 hover:bg-slate-100/80 border border-slate-200 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs"
+                      className="p-4 rounded-lg bg-slate-50 hover:bg-slate-100/80 border border-slate-200 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs"
                     >
                       <div>
                         <h4 className="text-sm font-bold text-slate-900">{attempt.exam_title || "Semester Examination"}</h4>
@@ -335,7 +335,7 @@ export default function StudentDashboard() {
                         </div>
                         <Link
                           href={`/exams/${attempt.exam_id || "default"}/take`}
-                          className="px-3.5 py-1.5 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-all"
+                          className="px-3.5 py-1.5 rounded-lg bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-all"
                         >
                           Retake
                         </Link>
@@ -364,13 +364,13 @@ export default function StudentDashboard() {
 
 function StatCard({ icon, label, value, subValue, badgeBg }: any) {
   return (
-    <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-2">
-      <div className="flex items-center justify-between text-slate-400 text-xs font-bold uppercase">
+    <div className="p-6 rounded-lg bg-white border border-slate-200 shadow-sm space-y-2">
+      <div className="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-wider">
         <span>{label}</span>
-        <div className={`p-2 rounded-xl ${badgeBg}`}>{icon}</div>
+        <div className={`p-2 rounded-lg ${badgeBg}`}>{icon}</div>
       </div>
       <div className="text-3xl font-black text-slate-900">{value}</div>
-      <p className="text-xs text-slate-500 font-medium">{subValue}</p>
+      <p className="text-xs text-slate-500 font-bold">{subValue}</p>
     </div>
   );
 }
@@ -382,8 +382,8 @@ function SkillMetric({ label, level, color }: any) {
         <span>{label}</span>
         <span>{level}%</span>
       </div>
-      <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden border border-slate-200">
-        <div className={`h-full rounded-full ${color}`} style={{ width: `${level}%` }} />
+      <div className="w-full h-2 rounded-sm bg-slate-100 overflow-hidden border border-slate-200">
+        <div className={`h-full rounded-sm ${color}`} style={{ width: `${level}%` }} />
       </div>
     </div>
   );
@@ -410,16 +410,16 @@ function AISystemCard({
     <Link href={href}>
       <motion.div
         whileHover={{ scale: 1.05, translateY: -4 }}
-        className={`p-6 rounded-3xl border ${borderColor} bg-gradient-to-br ${bgGradient} cursor-pointer transition-all shadow-sm hover:shadow-md h-full flex flex-col ${
+        className={`p-6 rounded-lg border ${borderColor} bg-gradient-to-br ${bgGradient} cursor-pointer transition-all shadow-sm hover:shadow-md h-full flex flex-col ${
           isActive ? "ring-2 ring-indigo-400" : ""
         }`}
       >
         <div className="flex items-start justify-between mb-4">
-          <div className="p-3 rounded-2xl bg-white/50 border border-white/50 text-indigo-600">{icon}</div>
-          {isActive && <span className="px-2 py-1 rounded-full bg-indigo-600 text-white text-[10px] font-black">ACTIVE</span>}
+          <div className="p-3 rounded-lg bg-white/50 border border-white/50 text-indigo-600">{icon}</div>
+          {isActive && <span className="px-2 py-1 rounded-md bg-indigo-600 text-white text-[10px] font-black">ACTIVE</span>}
         </div>
         <h3 className="font-bold text-slate-900 text-sm mb-1">{title}</h3>
-        <p className="text-xs text-slate-700 leading-relaxed flex-1">{description}</p>
+        <p className="text-xs text-slate-700 leading-relaxed flex-1 font-medium">{description}</p>
         <div className="mt-4 flex items-center text-indigo-600 font-bold text-xs">
           Explore <ChevronRight className="w-3 h-3 ml-1" />
         </div>

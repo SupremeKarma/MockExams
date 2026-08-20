@@ -184,7 +184,7 @@ export default function AITutorPage() {
               className="hidden lg:flex lg:w-80 flex-col gap-6"
             >
               {/* Subject Filter */}
-              <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
+              <div className="p-6 rounded-lg bg-white border border-slate-200 shadow-sm space-y-4">
                 <div className="flex items-center gap-2">
                   <Target className="w-5 h-5 text-indigo-600" />
                   <h3 className="font-bold text-slate-900">Filter by Subject</h3>
@@ -194,7 +194,7 @@ export default function AITutorPage() {
                     <button
                       key={subject}
                       onClick={() => setSelectedSubject(subject)}
-                      className={`w-full px-4 py-2.5 rounded-2xl text-xs font-bold transition-all border text-left ${
+                      className={`w-full px-4 py-2.5 rounded-lg text-xs font-bold transition-all border text-left ${
                         selectedSubject === subject
                           ? "bg-indigo-600 text-white border-indigo-600 shadow-sm"
                           : "bg-white text-slate-700 hover:bg-slate-50 border-slate-200"
@@ -207,7 +207,7 @@ export default function AITutorPage() {
               </div>
 
               {/* Quick Questions */}
-              <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4 flex-1 overflow-y-auto">
+              <div className="p-6 rounded-lg bg-white border border-slate-200 shadow-sm space-y-4 flex-1 overflow-y-auto">
                 <div className="flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-amber-600" />
                   <h3 className="font-bold text-slate-900">Sample Questions</h3>
@@ -217,17 +217,17 @@ export default function AITutorPage() {
                     <button
                       key={q.id}
                       onClick={() => handleQuickQuestion(q.question)}
-                      className="w-full p-3 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-left transition-all group"
+                      className="w-full p-3 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200 text-left transition-all group"
                     >
                       <p className="text-xs font-bold text-slate-900 line-clamp-2 group-hover:text-indigo-600">
                         {q.question}
                       </p>
                       <div className="flex items-center gap-2 mt-2">
-                        <span className="text-[10px] px-2 py-1 rounded-full bg-indigo-50 text-indigo-700 font-bold">
+                        <span className="text-[10px] px-2 py-1 rounded-md bg-indigo-50 text-indigo-700 font-bold">
                           {q.subject}
                         </span>
                         <span
-                          className={`text-[10px] px-2 py-1 rounded-full font-bold ${
+                          className={`text-[10px] px-2 py-1 rounded-md font-bold ${
                             q.difficulty === "Easy"
                               ? "bg-emerald-50 text-emerald-700"
                               : q.difficulty === "Medium"
@@ -244,7 +244,7 @@ export default function AITutorPage() {
               </div>
 
               {/* Stats Card */}
-              <div className="p-6 rounded-3xl bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-200 shadow-sm space-y-4">
+              <div className="p-6 rounded-lg bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-200 shadow-sm space-y-4">
                 <h3 className="font-bold text-slate-900 flex items-center gap-2">
                   <Award className="w-5 h-5 text-indigo-600" />
                   Your Progress
@@ -271,9 +271,9 @@ export default function AITutorPage() {
         {/* Main Chat Area */}
         <div className="flex-1 flex flex-col gap-4 min-h-screen">
           {/* Header */}
-          <div className="sticky top-28 z-30 flex items-center justify-between p-6 rounded-3xl bg-white border border-slate-200 shadow-sm">
+          <div className="sticky top-28 z-30 flex items-center justify-between p-6 rounded-lg bg-white border border-slate-200 shadow-sm">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center shadow-md">
+              <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center shadow-md">
                 <Bot className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -285,14 +285,14 @@ export default function AITutorPage() {
             <div className="flex items-center gap-2">
               <button
                 onClick={handleReset}
-                className="p-2 rounded-xl hover:bg-slate-100 border border-slate-200 text-slate-600 transition-all"
+                className="p-2 rounded-lg hover:bg-slate-100 border border-slate-200 text-slate-600 transition-all"
                 title="Start new conversation"
               >
                 <RotateCcw className="w-5 h-5" />
               </button>
               <button
                 onClick={() => setShowSidebar(!showSidebar)}
-                className="p-2 rounded-xl hover:bg-slate-100 border border-slate-200 text-slate-600 transition-all lg:hidden"
+                className="p-2 rounded-lg hover:bg-slate-100 border border-slate-200 text-slate-600 transition-all lg:hidden"
               >
                 {showSidebar ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
@@ -316,7 +316,7 @@ export default function AITutorPage() {
                 )}
 
                 <div
-                  className={`max-w-md rounded-2xl p-4 ${
+                  className={`max-w-md rounded-lg p-4 ${
                     message.role === "user"
                       ? "bg-indigo-600 text-white rounded-br-none"
                       : "bg-white border border-slate-200 text-slate-900 rounded-bl-none shadow-sm"
@@ -329,7 +329,7 @@ export default function AITutorPage() {
                   {message.role === "assistant" && message.content.includes("```") && (
                     <button
                       onClick={() => handleCopyCode(message.content, message.id)}
-                      className="mt-2 text-xs px-2 py-1 rounded bg-slate-100 text-slate-700 font-bold hover:bg-slate-200 flex items-center gap-1"
+                      className="mt-2 text-xs px-2 py-1 rounded-md bg-slate-100 text-slate-700 font-bold hover:bg-slate-200 flex items-center gap-1"
                     >
                       {copiedId === message.id ? (
                         <>
@@ -362,7 +362,7 @@ export default function AITutorPage() {
                 <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
                   <Bot className="w-4 h-4 text-indigo-600 animate-pulse" />
                 </div>
-                <div className="bg-white border border-slate-200 rounded-2xl rounded-bl-none p-4 shadow-sm">
+                <div className="bg-white border border-slate-200 rounded-lg rounded-bl-none p-4 shadow-sm">
                   <div className="flex gap-1">
                     <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" />
                     <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }} />
@@ -376,7 +376,7 @@ export default function AITutorPage() {
           </div>
 
           {/* Input Area */}
-          <div className="space-y-3 p-6 rounded-3xl bg-white border border-slate-200 shadow-sm">
+          <div className="space-y-3 p-6 rounded-lg bg-white border border-slate-200 shadow-sm">
             <div className="flex gap-3">
               <input
                 type="text"
@@ -389,12 +389,12 @@ export default function AITutorPage() {
                   }
                 }}
                 placeholder="Ask me anything about programming, math, or any subject... (Shift+Enter for new line)"
-                className="flex-1 bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 placeholder:text-slate-400"
+                className="flex-1 bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 placeholder:text-slate-400"
               />
               <button
                 onClick={() => handleSendMessage(inputValue)}
                 disabled={isLoading || !inputValue.trim()}
-                className="px-4 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold transition-all flex items-center gap-2 shadow-md"
+                className="px-4 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold transition-all flex items-center gap-2 shadow-md"
               >
                 <Send className="w-4 h-4" />
               </button>

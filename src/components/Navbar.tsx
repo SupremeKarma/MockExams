@@ -76,11 +76,11 @@ export const Navbar = () => {
           {/* Logo & University / Program Switcher */}
           <div className="flex items-center gap-4 sm:gap-6">
             <Link href="/" className="flex items-center group">
-              <div className="w-10 h-10 bg-indigo-600 rounded-2xl flex items-center justify-center mr-3 shadow-md shadow-indigo-600/20 group-hover:rotate-12 transition-transform duration-300">
+              <div className="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center mr-3 shadow-md shadow-indigo-600/20 group-hover:rotate-12 transition-transform duration-300">
                 <BookOpen className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-black text-slate-900 tracking-tighter">
-                MOCK<span className="text-indigo-600 font-bold">EXAMS</span>
+              <span className="text-xl font-black text-slate-900 tracking-tight">
+                MOCK<span className="text-indigo-600 font-black">EXAMS</span>
               </span>
             </Link>
 
@@ -88,7 +88,7 @@ export const Navbar = () => {
             <div className="relative hidden md:block">
               <button
                 onClick={() => setIsTaxonomyOpen(prev => !prev)}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700 transition-all"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700 transition-all"
               >
                 <Globe2 className="w-3.5 h-3.5 text-indigo-600" />
                 <span className="max-w-[160px] truncate">{currentProgram?.title || "PU • BIT"}</span>
@@ -101,7 +101,7 @@ export const Navbar = () => {
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 5 }}
-                    className="absolute top-full left-0 mt-2 w-72 p-2 rounded-2xl bg-white border border-slate-200 shadow-xl space-y-1 z-50 text-xs"
+                    className="absolute top-full left-0 mt-2 w-72 p-2 rounded-lg bg-white border border-slate-200 shadow-xl space-y-1 z-50 text-xs"
                   >
                     <div className="px-3 py-2 text-[10px] font-black uppercase tracking-wider text-slate-400">
                       Switch University / Board
@@ -118,9 +118,9 @@ export const Navbar = () => {
                           setSelectedProgram(item.id);
                           setIsTaxonomyOpen(false);
                         }}
-                        className={`w-full p-2.5 rounded-xl flex items-center justify-between transition-colors ${
-                          selectedProgram === item.id 
-                            ? "bg-indigo-50 text-indigo-700 font-bold" 
+                        className={`w-full p-2.5 rounded-lg flex items-center justify-between transition-colors ${
+                          selectedProgram === item.id
+                            ? "bg-indigo-50 text-indigo-700 font-bold"
                             : "hover:bg-slate-50 text-slate-700"
                         }`}
                       >
@@ -158,9 +158,9 @@ export const Navbar = () => {
               <div className="relative">
                 <button
                   onClick={() => setIsProfileOpen(prev => !prev)}
-                  className="flex items-center gap-2.5 p-1.5 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200 transition-all"
+                  className="flex items-center gap-2.5 p-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200 transition-all"
                 >
-                  <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-500 flex items-center justify-center text-xs font-black text-white">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-600 to-cyan-500 flex items-center justify-center text-xs font-black text-white">
                     {user.displayName ? user.displayName[0].toUpperCase() : "U"}
                   </div>
                   <ChevronDown className="w-3.5 h-3.5 text-slate-500 mr-1" />
@@ -172,23 +172,23 @@ export const Navbar = () => {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
-                      className="absolute right-0 mt-3 w-56 p-2 rounded-2xl bg-white border border-slate-200 shadow-xl space-y-1 text-xs text-slate-700 z-50"
+                      className="absolute right-0 mt-3 w-56 p-2 rounded-lg bg-white border border-slate-200 shadow-xl space-y-1 text-xs text-slate-700 z-50"
                     >
                       <div className="p-3 border-b border-slate-100">
                         <p className="font-bold text-slate-900 truncate">{user.displayName || "Student"}</p>
                         <p className="text-[11px] text-slate-400 truncate">{user.email}</p>
                       </div>
-                      <Link href="/dashboard" className="p-2.5 rounded-xl hover:bg-slate-50 flex items-center gap-2">
+                      <Link href="/dashboard" className="p-2.5 rounded-lg hover:bg-slate-50 flex items-center gap-2">
                         <LayoutDashboard className="w-4 h-4 text-indigo-600" />
                         Dashboard
                       </Link>
-                      <Link href="/analytics" className="p-2.5 rounded-xl hover:bg-slate-50 flex items-center gap-2">
+                      <Link href="/analytics" className="p-2.5 rounded-lg hover:bg-slate-50 flex items-center gap-2">
                         <BarChart3 className="w-4 h-4 text-cyan-600" />
                         Diagnostics
                       </Link>
                       <button
                         onClick={() => signOut()}
-                        className="w-full p-2.5 rounded-xl hover:bg-rose-50 text-rose-600 flex items-center gap-2 text-left"
+                        className="w-full p-2.5 rounded-lg hover:bg-rose-50 text-rose-600 flex items-center gap-2 text-left"
                       >
                         <LogOut className="w-4 h-4" />
                         Sign Out
@@ -207,7 +207,7 @@ export const Navbar = () => {
                 </Link>
                 <Link
                   href="/signup"
-                  className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-md shadow-indigo-600/20 transition-all hover:scale-105"
+                  className="px-5 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-md shadow-indigo-600/20 transition-all hover:scale-105"
                 >
                   Get Started
                 </Link>
@@ -217,7 +217,7 @@ export const Navbar = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsOpen(prev => !prev)}
-              className="xl:hidden p-2 rounded-xl bg-slate-100 text-slate-600 hover:text-slate-900"
+              className="xl:hidden p-2 rounded-lg bg-slate-100 text-slate-600 hover:text-slate-900"
             >
               {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -238,7 +238,7 @@ export const Navbar = () => {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 text-sm font-bold text-slate-700"
+                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 text-sm font-bold text-slate-700"
                 >
                   <link.icon className="w-4 h-4 text-indigo-600" />
                   {link.name}
