@@ -19,7 +19,8 @@ import {
   BarChart3,
   FolderGit2,
   Globe2,
-  Check
+  Check,
+  GraduationCap
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -42,14 +43,16 @@ export const Navbar = () => {
   const currentProgram = academicTaxonomyData.find(n => n.id === selectedProgram) || academicTaxonomyData.find(n => n.id === "prog-bit");
 
   const navLinks = [
-    { name: "Live Exams", href: "/exams", icon: Zap },
+    { name: "Semesters", href: "/semester", icon: GraduationCap },
     { name: "BIT Notes", href: "/notes", icon: Sparkles },
     { name: "Flashcards", href: "/flashcards", icon: Brain },
     { name: "Analytics", href: "/analytics", icon: BarChart3 },
     { name: "Projects", href: "/projects", icon: FolderGit2 },
     { name: "Syllabus", href: "/syllabus", icon: BookOpen },
+    { name: "Exam Patterns", href: "/exam-patterns", icon: Globe2 },
+    { name: "Exams", href: "/exams", icon: Zap },
     { name: "Entrance", href: "/learn", icon: Crown },
-    { name: "Ranking", href: "/leaderboard", icon: Crown },
+    { name: "Notices", href: "/notices", icon: Bell },
   ];
 
   if (isExaminer) {

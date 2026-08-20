@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Check, Zap, Star, ShieldCheck, HelpCircle } from "lucide-react";
+import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
 

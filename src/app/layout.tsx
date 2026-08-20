@@ -20,6 +20,7 @@ export const metadata: Metadata = {
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import QuickNavRail from "@/components/QuickNavRail";
 import { AuthProvider } from "@/context/AuthContext";
 import { NotificationProvider } from "@/components/NotificationProvider";
 
@@ -38,6 +39,7 @@ export default function RootLayout({
           <AuthProvider>
             <NotificationProvider>
               <Navbar />
+              <QuickNavRail />
               <main className="flex-1 pt-24">
                 {children}
               </main>
