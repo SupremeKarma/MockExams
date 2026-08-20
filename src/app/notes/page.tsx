@@ -1,582 +1,420 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { 
-  Book, 
+  BookOpen, 
   Search, 
-  FileText, 
-  Download, 
-  Eye, 
-  Filter, 
-  Bookmark,
-  ChevronRight,
-  Star,
-  Clock,
+  Code2, 
+  Copy, 
+  Check, 
+  Sparkles, 
+  ChevronDown, 
+  ChevronRight, 
+  HelpCircle, 
+  Flame, 
+  GraduationCap, 
   Layers,
-  Lock,
-  Crown
+  ArrowRight,
+  Terminal,
+  Bookmark,
+  Share2
 } from "lucide-react";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { db } from "@/lib/firebase";
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
-
-// Mock data for the template
-const CATEGORIES = ["All", "Physics", "Chemistry", "Mathematics", "Biology", "Computer Science", "Engineering", "Medicine"];
-
-const RESOURCES = [
-  {
-    id: "1",
-    title: "Quantum Physics: A Modern Introduction",
-    author: "Dr. Elena Vance",
-    type: "Book",
-    format: "PDF",
-    category: "Physics",
-    rating: 4.8,
-    downloads: "1.2k",
-    date: "2024-03-15",
-    color: "from-blue-500/20 to-indigo-500/20",
-    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=80&w=400"
-  },
-  {
-    id: "2",
-    title: "Organic Chemistry Mechanism Cheat Sheet",
-    author: "Prof. Michael Chen",
-    type: "Notes",
-    format: "PDF",
-    category: "Chemistry",
-    rating: 4.9,
-    downloads: "2.5k",
-    date: "2024-02-28",
-    color: "from-emerald-500/20 to-teal-500/20",
-    image: "https://images.unsplash.com/photo-1603126738553-690559eb8a18?auto=format&fit=crop&q=80&w=400"
-  },
-  {
-    id: "3",
-    title: "Advanced Calculus: Solved Problems",
-    author: "Sarah Jenkins",
-    type: "Notes",
-    format: "EPUB",
-    category: "Mathematics",
-    rating: 4.7,
-    downloads: "850",
-    date: "2024-03-10",
-    color: "from-purple-500/20 to-pink-500/20",
-    image: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&q=80&w=400"
-  },
-  {
-    id: "4",
-    title: "Data Structures & Algorithms in Java",
-    author: "Robert Sedgewick",
-    type: "Book",
-    format: "PDF",
-    category: "Computer Science",
-    rating: 4.9,
-    downloads: "5.1k",
-    date: "2023-11-20",
-    color: "from-orange-500/20 to-red-500/20",
-    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=400"
-  },
-  {
-    id: "5",
-    title: "Cell Biology & Genetics: Semester 1",
-    author: "University Notes",
-    type: "Notes",
-    format: "PDF",
-    category: "Biology",
-    rating: 4.5,
-    downloads: "1.8k",
-    date: "2024-01-05",
-    color: "from-lime-500/20 to-green-500/20",
-    image: "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&q=80&w=400"
-  },
-  {
-    id: "6",
-    title: "Structural Engineering Handbook",
-    author: "Edwin H. Gaylord",
-    type: "Book",
-    format: "PDF",
-    category: "Engineering",
-    rating: 4.6,
-    downloads: "620",
-    date: "2023-12-12",
-    color: "from-cyan-500/20 to-blue-500/20",
-    image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80&w=400"
-  },
-  {
-    id: "7",
-    title: "Medical Biochemistry: Key Diagrams",
-    author: "Dr. S. K. Mahato",
-    type: "Notes",
-    format: "PDF",
-    category: "Medicine",
-    rating: 4.9,
-    downloads: "3.2k",
-    date: "2024-03-20",
-    color: "from-rose-500/20 to-orange-500/20",
-    image: "https://images.unsplash.com/photo-1579152276502-5423bc46b737?auto=format&fit=crop&q=80&w=400"
-  },
-  {
-    id: "8",
-    title: "Introduction to Algorithms",
-    author: "CLRS",
-    type: "Book",
-    format: "PDF",
-    category: "Computer Science",
-    rating: 5.0,
-    downloads: "10k+",
-    date: "2023-05-15",
-    color: "from-blue-600/20 to-indigo-600/20",
-    image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&q=80&w=400"
-  },
-  {
-    id: "9",
-    title: "Nepal's Constitution: Notes for Lok Sewa",
-    author: "Public Service Prep",
-    type: "Notes",
-    format: "PDF",
-    category: "Other",
-    rating: 4.7,
-    downloads: "4.1k",
-    date: "2024-02-10",
-    color: "from-red-500/20 to-amber-500/20",
-    image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=400"
-  },
-  {
-    id: "10",
-    title: "Discrete Mathematics & Its Applications",
-    author: "Kenneth Rosen",
-    type: "Book",
-    format: "EPUB",
-    category: "Mathematics",
-    rating: 4.8,
-    downloads: "2.8k",
-    date: "2023-09-22",
-    color: "from-emerald-500/20 to-cyan-500/20",
-    image: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&q=80&w=400"
-  },
-  {
-    id: "11",
-    title: "Pathology Core Concepts for MBBS",
-    author: "Dr. Anjali Verma",
-    type: "Notes",
-    format: "PDF",
-    category: "Medicine",
-    rating: 4.6,
-    downloads: "1.5k",
-    date: "2024-03-01",
-    color: "from-purple-500/20 to-pink-500/20",
-    image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&q=80&w=400"
-  },
-  {
-    id: "12",
-    title: "Civil Engineering Estimation & Costing",
-    author: "B. N. Dutta",
-    type: "Book",
-    format: "PDF",
-    category: "Engineering",
-    rating: 4.7,
-    downloads: "1.2k",
-    date: "2023-11-30",
-    color: "from-slate-500/20 to-blue-500/20",
-    image: "https://images.unsplash.com/photo-1541888946425-d81bb1930060?auto=format&fit=crop&q=80&w=400"
-  },
-  {
-    id: "13",
-    title: "General Knowledge for Lok Sewa 2081",
-    author: "K. P. Oli (Mock)",
-    type: "Book",
-    format: "PDF",
-    category: "Other",
-    rating: 4.5,
-    downloads: "8.5k",
-    date: "2024-01-20",
-    color: "from-amber-600/20 to-red-600/20",
-    image: "https://images.unsplash.com/photo-1544652478-6653e09f18a2?auto=format&fit=crop&q=80&w=400"
-  },
-  {
-    id: "14",
-    title: "Signals and Systems: Handwritten Notes",
-    author: "Aman Mahato",
-    type: "Notes",
-    format: "PDF",
-    category: "Engineering",
-    rating: 5.0,
-    downloads: "3.4k",
-    date: "2024-03-25",
-    color: "from-indigo-600/20 to-purple-600/20",
-    image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&q=80&w=400"
-  },
-  {
-    id: "15",
-    title: "Molecular Basis of Inheritance",
-    author: "Biology Hub",
-    type: "Notes",
-    format: "PDF",
-    category: "Biology",
-    rating: 4.7,
-    downloads: "1.1k",
-    date: "2024-02-15",
-    color: "from-green-600/20 to-teal-600/20",
-    image: "https://images.unsplash.com/photo-1532187863486-abf9d3a44462?auto=format&fit=crop&q=80&w=400"
-  },
-  {
-    id: "16",
-    title: "University Physics with Modern Physics",
-    author: "Young & Freedman",
-    type: "Book",
-    format: "PDF",
-    category: "Physics",
-    rating: 4.9,
-    downloads: "15k+",
-    date: "2023-01-01",
-    color: "from-blue-700/20 to-cyan-700/20",
-    image: "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&q=80&w=400"
-  },
-  {
-    id: "17",
-    title: "Abstract Algebra: Course Companion",
-    author: "Prof. S. R. Srinivasan",
-    type: "Book",
-    format: "PDF",
-    category: "Mathematics",
-    rating: 4.6,
-    downloads: "450",
-    date: "2023-11-15",
-    color: "from-fuchsia-600/20 to-pink-600/20",
-    image: "https://images.unsplash.com/photo-1543004299-82bc60c5c64c?auto=format&fit=crop&q=80&w=400"
-  },
-  {
-    id: "18",
-    title: "React Native: The Ultimate Guide",
-    author: "Meta Engineers",
-    type: "Book",
-    format: "EPUB",
-    category: "Computer Science",
-    rating: 4.8,
-    downloads: "7.2k",
-    date: "2024-03-10",
-    color: "from-cyan-400/20 to-blue-400/20",
-    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=400"
-  },
-  {
-    id: "19",
-    title: "Anatomy Atlas for Medical Students",
-    author: "Dr. Rachel Green",
-    type: "Book",
-    format: "PDF",
-    category: "Medicine",
-    rating: 5.0,
-    downloads: "4.8k",
-    date: "2024-03-22",
-    color: "from-red-600/20 to-rose-600/20",
-    image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&q=80&w=400"
-  },
-  {
-    id: "20",
-    title: "Machine Learning: Simplified Notes",
-    author: "DataSci Academy",
-    type: "Notes",
-    format: "PDF",
-    category: "Computer Science",
-    rating: 4.7,
-    downloads: "2.3k",
-    date: "2024-03-05",
-    color: "from-violet-600/20 to-indigo-600/20",
-    image: "https://images.unsplash.com/photo-1527474305487-b87b222841cc?auto=format&fit=crop&q=80&w=400"
-  }
-];
-
+import { useState, useMemo } from "react";
+import Link from "next/link";
+import { bitNotesData, CodeTopic } from "@/data/bitNotesData";
 
 export default function NotesPage() {
-  const [activeCategory, setActiveCategory] = useState("All");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [resources, setResources] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const router = useRouter();
+  const [selectedSemester, setSelectedSemester] = useState<number>(1);
+  const [selectedSubject, setSelectedSubject] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [activeTab, setActiveTab] = useState<"code" | "theory">("code");
+  const [copiedCodeIndex, setCopiedCodeIndex] = useState<number | null>(null);
+  const [openTheoryIndex, setOpenTheoryIndex] = useState<number | null>(null);
 
-  useEffect(() => {
-    async function fetchResources() {
-      try {
-        const q = collection(db, "resources");
-        const snap = await getDocs(q);
-        const fbData = snap.docs.map((doc: any) => ({ id: doc.id, ...doc.data() }));
-        fbData.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
-        
-        // If DB is empty, use the high-fidelity mock resources for the demo
-        if (fbData.length === 0) {
-          setResources(RESOURCES);
-        } else {
-          // Merge/Fill missing fields with defaults for Firestore data
-          const processed = fbData.map((res: any, idx: number) => ({
-            ...res,
-            // Fallback for fields not in seed-firestore.ts
-            color: res.color || RESOURCES[idx % RESOURCES.length].color,
-            image: res.image || RESOURCES[idx % RESOURCES.length].image,
-            downloads: res.downloads || `${Math.floor(Math.random() * 500) + 100}`,
-            date: res.date || new Date().toISOString().split('T')[0],
-            rating: res.rating || 4.5
-          }));
-          setResources(processed);
-        }
-      } catch (err) {
-        console.error("Failed to load resources:", err);
-        setResources(RESOURCES); // Ultimate fallback
-      } finally {
-        setLoading(false);
-      }
+  // Available subjects for the active semester
+  const availableSubjects = useMemo(() => {
+    const semData = bitNotesData[selectedSemester];
+    return semData ? Object.keys(semData) : [];
+  }, [selectedSemester]);
+
+  // Current selected subject (fallback to first available if none or invalid)
+  const currentSubject = useMemo(() => {
+    if (selectedSubject && availableSubjects.includes(selectedSubject)) {
+      return selectedSubject;
     }
-    fetchResources();
-  }, []);
+    return availableSubjects[0] || "";
+  }, [selectedSubject, availableSubjects]);
 
-  const filteredResources = resources.filter(res => {
-    const matchesCategory = activeCategory === "All" || res.category === activeCategory;
-    const matchesSearch = res.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                         res.author.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  // Active subject notes
+  const activeNotes = useMemo(() => {
+    const semData = bitNotesData[selectedSemester];
+    if (!semData || !currentSubject) return null;
+    return semData[currentSubject] || null;
+  }, [selectedSemester, currentSubject]);
+
+  // Filtered topics based on search
+  const filteredTopics = useMemo(() => {
+    if (!activeNotes) return [];
+    if (!searchQuery.trim()) return activeNotes.topics;
+
+    const q = searchQuery.toLowerCase();
+    return activeNotes.topics.filter(t => 
+      t.name.toLowerCase().includes(q) || 
+      t.keyPoints.some(kp => kp.toLowerCase().includes(q)) ||
+      (t.code && t.code.toLowerCase().includes(q))
+    );
+  }, [activeNotes, searchQuery]);
+
+  const filteredTheory = useMemo(() => {
+    if (!activeNotes) return [];
+    if (!searchQuery.trim()) return activeNotes.theoryTopics;
+
+    const q = searchQuery.toLowerCase();
+    return activeNotes.theoryTopics.filter(tt => tt.toLowerCase().includes(q));
+  }, [activeNotes, searchQuery]);
+
+  const handleCopy = (codeText: string, index: number) => {
+    navigator.clipboard.writeText(codeText);
+    setCopiedCodeIndex(index);
+    setTimeout(() => setCopiedCodeIndex(null), 2000);
+  };
+
+  const getImportanceBadge = (importance: string) => {
+    switch (importance) {
+      case "Very High":
+        return <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/20 text-xs font-bold"><Flame className="w-3.5 h-3.5" /> Very High Priority</span>;
+      case "High":
+        return <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs font-bold"><Sparkles className="w-3.5 h-3.5" /> High Priority</span>;
+      default:
+        return <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-xs font-bold"><Layers className="w-3.5 h-3.5" /> Medium Priority</span>;
+    }
+  };
 
   return (
-    <div className="min-h-screen pt-4 pb-20">
-      {/* Background Decorative Elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-        <div className="absolute top-[10%] -left-[10%] w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[10%] -right-[10%] w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[120px]" />
-      </div>
+    <div className="min-h-screen bg-mesh text-slate-100 pt-28 pb-24 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto space-y-10">
+        
+        {/* Header Banner */}
+        <div className="relative rounded-3xl p-8 sm:p-12 overflow-hidden border border-white/10 bg-gradient-to-br from-slate-900/90 via-slate-900/60 to-indigo-950/40 backdrop-blur-xl shadow-2xl">
+          <div className="absolute -right-16 -top-16 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -left-16 -bottom-16 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Header Section */}
-        <section className="mb-12">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex flex-col md:flex-row md:items-end justify-between gap-6"
-          >
-            <div>
-              <h1 className="text-4xl md:text-5xl font-black tracking-tight mb-4 bg-gradient-to-r from-white via-white to-white/40 bg-clip-text text-transparent">
-                Study Hub: <span className="text-primary">Notes & Books</span>
-              </h1>
-              <p className="text-slate-400 text-lg max-w-xl">
-                Access a massive library of peer-reviewed notes, textbooks, and exam-focused study materials to excel in your academic journey.
-              </p>
+          <div className="relative z-10 max-w-3xl space-y-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-black uppercase tracking-widest">
+              <GraduationCap className="w-4 h-4" />
+              <span>Purbanchal University BIT Study Hub</span>
             </div>
             
-            <div className="relative w-full md:w-96 group">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-primary transition-colors" />
-              <input 
-                type="text" 
-                placeholder="Search notes, authors, topics..."
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
+              Curated Notes & <br />
+              <span className="text-gradient">Important Topics</span>
+            </h1>
+            
+            <p className="text-base sm:text-lg text-slate-400 leading-relaxed">
+              Master recurring exam topics, verified code algorithms, key formulas, and high-frequency theory questions organized semester by semester.
+            </p>
+
+            <div className="flex flex-wrap gap-4 pt-2">
+              <Link href="/syllabus" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-sm font-bold text-white transition-all">
+                <BookOpen className="w-4 h-4 text-indigo-400" />
+                View Full Syllabus
+              </Link>
+              <Link href="/projects" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-sm font-bold text-white transition-all">
+                <Code2 className="w-4 h-4 text-cyan-400" />
+                Semester Projects
+              </Link>
+              <Link href="/learn" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-sm font-bold text-white transition-all shadow-lg shadow-indigo-600/30">
+                <Sparkles className="w-4 h-4" />
+                Entrance Prep Portal
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Semester Selection Ribbon */}
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <h2 className="text-sm font-black uppercase tracking-widest text-slate-400 flex items-center gap-2">
+              <Layers className="w-4 h-4 text-indigo-400" />
+              Select Semester
+            </h2>
+            <span className="text-xs text-slate-500">8 Semesters Available</span>
+          </div>
+
+          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((sem) => {
+              const isSelected = selectedSemester === sem;
+              return (
+                <button
+                  key={sem}
+                  onClick={() => {
+                    setSelectedSemester(sem);
+                    setSelectedSubject("");
+                  }}
+                  className={`px-6 py-3 rounded-2xl font-black text-sm whitespace-nowrap transition-all duration-200 border flex items-center gap-2 ${
+                    isSelected
+                      ? "bg-indigo-600 text-white border-indigo-400 shadow-[0_0_20px_rgba(99,102,241,0.4)] scale-105"
+                      : "bg-slate-900/60 hover:bg-slate-800/80 text-slate-400 hover:text-white border-white/5"
+                  }`}
+                >
+                  <span>Sem {sem}</span>
+                  {isSelected && <div className="w-2 h-2 rounded-full bg-cyan-300 animate-pulse" />}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Subject Navigation & Search Bar */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+          
+          {/* Sidebar: Subject Selector */}
+          <div className="lg:col-span-1 space-y-4">
+            <div className="rounded-3xl p-5 border border-white/10 bg-slate-900/70 backdrop-blur-xl space-y-4 sticky top-28 shadow-xl">
+              <h3 className="text-sm font-black text-white uppercase tracking-wider flex items-center justify-between">
+                <span>Semester {selectedSemester} Subjects</span>
+                <span className="text-xs px-2 py-0.5 rounded-md bg-white/10 text-slate-300">{availableSubjects.length}</span>
+              </h3>
+
+              <div className="space-y-2">
+                {availableSubjects.map((subject) => {
+                  const isActive = currentSubject === subject;
+                  return (
+                    <button
+                      key={subject}
+                      onClick={() => setSelectedSubject(subject)}
+                      className={`w-full text-left p-3.5 rounded-2xl transition-all duration-200 flex items-center justify-between group border ${
+                        isActive
+                          ? "bg-gradient-to-r from-indigo-600/30 to-indigo-600/10 border-indigo-500/40 text-white font-bold shadow-lg"
+                          : "bg-slate-950/40 hover:bg-slate-800/50 border-white/5 text-slate-400 hover:text-slate-200"
+                      }`}
+                    >
+                      <span className="text-sm line-clamp-1">{subject}</span>
+                      <ChevronRight className={`w-4 h-4 transition-transform ${isActive ? "text-indigo-400 translate-x-1" : "text-slate-600 group-hover:translate-x-1"}`} />
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* View Switcher: Code vs Theory */}
+              <div className="pt-2 border-t border-white/10">
+                <div className="grid grid-cols-2 gap-1.5 p-1 rounded-xl bg-slate-950/60 border border-white/5">
+                  <button
+                    onClick={() => setActiveTab("code")}
+                    className={`py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+                      activeTab === "code"
+                        ? "bg-indigo-600 text-white shadow-md"
+                        : "text-slate-400 hover:text-white"
+                    }`}
+                  >
+                    <Code2 className="w-3.5 h-3.5" />
+                    Code Topics
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("theory")}
+                    className={`py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+                      activeTab === "theory"
+                        ? "bg-indigo-600 text-white shadow-md"
+                        : "text-slate-400 hover:text-white"
+                    }`}
+                  >
+                    <HelpCircle className="w-3.5 h-3.5" />
+                    Theory Questions
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Main Content Area */}
+          <div className="lg:col-span-3 space-y-6">
+            
+            {/* Search Input Bar */}
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+              <input
+                type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 glass border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all placeholder:text-slate-600"
+                placeholder={`Search algorithms, concepts, or theory in ${currentSubject || "this semester"}...`}
+                className="w-full pl-12 pr-4 py-4 rounded-2xl bg-slate-900/80 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 text-sm backdrop-blur-md shadow-lg"
               />
-            </div>
-          </motion.div>
-        </section>
-
-        {/* Categories Section */}
-        <section className="mb-12 overflow-x-auto no-scrollbar py-2">
-          <div className="flex items-center gap-3">
-            {CATEGORIES.map((cat, idx) => (
-              <motion.button
-                key={cat}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: idx * 0.05 }}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-6 py-2 rounded-full whitespace-nowrap text-sm font-semibold transition-all ${
-                  activeCategory === cat 
-                  ? "bg-primary text-white shadow-lg shadow-primary/25" 
-                  : "glass border-white/5 text-slate-400 hover:text-white hover:border-white/20"
-                }`}
-              >
-                {cat}
-              </motion.button>
-            ))}
-          </div>
-        </section>
-
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          
-          {/* Sidebar / Filters (Desktop) */}
-          <aside className="hidden lg:block space-y-8">
-            <div className="glass border-white/5 rounded-3xl p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="font-bold text-lg">Filters</h3>
-                <Filter className="w-4 h-4 text-slate-500" />
-              </div>
-              
-              <div className="space-y-6">
-                <div>
-                  <h4 className="text-sm font-medium text-slate-500 uppercase tracking-wider mb-4">Resource Type</h4>
-                  <div className="space-y-3">
-                    <FilterItem label="Textbooks" count={124} />
-                    <FilterItem label="Handwritten Notes" count={89} />
-                    <FilterItem label="Cheat Sheets" count={42} />
-                    <FilterItem label="Past Papers" count={256} />
-                  </div>
-                </div>
-
-                <div>
-                  <h4 className="text-sm font-medium text-slate-500 uppercase tracking-wider mb-4">File Format</h4>
-                  <div className="space-y-3">
-                    <FilterItem label="PDF Documents" count={380} />
-                    <FilterItem label="EPUB Books" count={95} />
-                    <FilterItem label="Word / Docs" count={45} />
-                  </div>
-                </div>
-
-                <div>
-                  <h4 className="text-sm font-medium text-slate-500 uppercase tracking-wider mb-4">Study Level</h4>
-                  <div className="space-y-3">
-                    <FilterItem label="High School" count={210} />
-                    <FilterItem label="Undergraduate" count={145} />
-                    <FilterItem label="Graduate" count={67} />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Premium Upsell Card */}
-            <div className="bg-gradient-to-br from-amber-600/20 to-yellow-600/20 border border-amber-500/20 rounded-3xl p-6 relative overflow-hidden group">
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-amber-500/20 rounded-full blur-2xl transition-all group-hover:scale-150" />
-              <div className="relative z-10">
-                <Crown className="text-amber-500 w-8 h-8 mb-4" />
-                <h3 className="font-bold text-xl mb-2 text-amber-500">Pro Library</h3>
-                <p className="text-slate-400 text-sm mb-4">Get unlimited access to premium verified textbooks and offline downloads.</p>
-                <button 
-                  onClick={() => router.push("/subscription")}
-                  className="w-full py-3 bg-amber-500 text-black font-bold rounded-xl hover:bg-amber-400 transition-colors flex items-center justify-center gap-2"
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 hover:text-white px-2 py-1 rounded-md bg-white/5"
                 >
-                  Explore Plans <ChevronRight className="w-4 h-4" />
+                  Clear
                 </button>
+              )}
+            </div>
+
+            {/* Subject Title & Stats */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-3xl bg-slate-900/50 border border-white/10 backdrop-blur-md">
+              <div>
+                <span className="text-xs font-black uppercase tracking-wider text-indigo-400">Semester {selectedSemester}</span>
+                <h2 className="text-2xl sm:text-3xl font-black text-white mt-1">{currentSubject}</h2>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="px-3.5 py-1.5 rounded-xl bg-slate-800/80 border border-white/5 text-xs text-slate-300 font-bold">
+                  {activeNotes?.topics.length || 0} Code Topics
+                </span>
+                <span className="px-3.5 py-1.5 rounded-xl bg-slate-800/80 border border-white/5 text-xs text-slate-300 font-bold">
+                  {activeNotes?.theoryTopics.length || 0} Theory FAQs
+                </span>
               </div>
             </div>
-          </aside>
 
-          {/* Resources Grid */}
-          <div className="lg:col-span-3">
-            {loading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {[1, 2, 3].map(i => (
-                  <div key={i} className="h-80 glass border-white/5 animate-pulse rounded-[2.5rem]" />
-                ))}
-              </div>
-            ) : filteredResources.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {filteredResources.map((res, idx) => (
-                  <ResourceCard key={res.id} res={res} index={idx} />
-                ))}
+            {/* Content Display: Code Tab vs Theory Tab */}
+            {activeTab === "code" ? (
+              <div className="space-y-6">
+                {filteredTopics.length > 0 ? (
+                  filteredTopics.map((topic, idx) => (
+                    <motion.div
+                      key={topic.name}
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: idx * 0.05 }}
+                      className="rounded-3xl border border-white/10 bg-slate-900/80 backdrop-blur-xl overflow-hidden shadow-xl"
+                    >
+                      {/* Topic Card Header */}
+                      <div className="p-6 sm:p-7 border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-950/40">
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-3">
+                            <span className="w-8 h-8 rounded-xl bg-indigo-600/20 border border-indigo-500/30 text-indigo-400 flex items-center justify-center text-xs font-black">
+                              {idx + 1}
+                            </span>
+                            <h3 className="text-xl sm:text-2xl font-bold text-white">{topic.name}</h3>
+                          </div>
+                        </div>
+                        <div>{getImportanceBadge(topic.importance)}</div>
+                      </div>
+
+                      {/* Topic Key Points */}
+                      {topic.keyPoints && topic.keyPoints.length > 0 && (
+                        <div className="p-6 sm:p-7 bg-slate-900/40 border-b border-white/5">
+                          <h4 className="text-xs font-black uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
+                            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                            Core Concepts & Exam Keys
+                          </h4>
+                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                            {topic.keyPoints.map((point, pIdx) => (
+                              <li key={pIdx} className="text-xs sm:text-sm text-slate-300 flex items-start gap-2.5">
+                                <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-2 flex-shrink-0" />
+                                <span>{point}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* Code Block / Example */}
+                      {topic.code && (
+                        <div className="p-6 sm:p-7 space-y-3">
+                          <div className="flex items-center justify-between text-xs text-slate-400">
+                            <span className="font-mono flex items-center gap-2">
+                              <Terminal className="w-3.5 h-3.5 text-cyan-400" />
+                              Executable Algorithm
+                            </span>
+                            <button
+                              onClick={() => handleCopy(topic.code!, idx)}
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold text-slate-200 transition-all active:scale-95"
+                            >
+                              {copiedCodeIndex === idx ? (
+                                <>
+                                  <Check className="w-3.5 h-3.5 text-emerald-400" />
+                                  <span className="text-emerald-400">Copied!</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Copy className="w-3.5 h-3.5" />
+                                  <span>Copy Code</span>
+                                </>
+                              )}
+                            </button>
+                          </div>
+
+                          <pre className="p-5 rounded-2xl bg-slate-950 border border-white/5 overflow-x-auto text-xs sm:text-sm font-mono text-cyan-300 leading-relaxed shadow-inner">
+                            <code>{topic.code}</code>
+                          </pre>
+                        </div>
+                      )}
+
+                      {/* Formula / Math Example */}
+                      {topic.example && (
+                        <div className="p-6 sm:p-7 bg-indigo-950/20 border-t border-white/5">
+                          <h4 className="text-xs font-black uppercase tracking-wider text-indigo-400 mb-2">Mathematical Formulation</h4>
+                          <pre className="p-4 rounded-xl bg-slate-950/80 text-xs sm:text-sm font-mono text-indigo-200 whitespace-pre-wrap">
+                            {topic.example}
+                          </pre>
+                        </div>
+                      )}
+                    </motion.div>
+                  ))
+                ) : (
+                  <div className="p-12 text-center rounded-3xl bg-slate-900/40 border border-dashed border-white/10 space-y-3">
+                    <Code2 className="w-12 h-12 text-slate-600 mx-auto" />
+                    <h3 className="text-lg font-bold text-white">No code topics match your query</h3>
+                    <p className="text-sm text-slate-400">Try a different search term or select another subject from the left panel.</p>
+                  </div>
+                )}
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center py-20 glass border-white/5 rounded-3xl">
-                <div className="w-20 h-20 rounded-full bg-slate-800 flex items-center justify-center mb-6">
-                  <Search className="w-10 h-10 text-slate-600" />
-                </div>
-                <h3 className="text-xl font-bold mb-2">No resources found</h3>
-                <p className="text-slate-500">Try adjusting your filters or search keywords.</p>
+              /* Theory Tab */
+              <div className="space-y-3">
+                {filteredTheory.length > 0 ? (
+                  filteredTheory.map((question, qIdx) => {
+                    const isOpen = openTheoryIndex === qIdx;
+                    return (
+                      <div
+                        key={qIdx}
+                        className="rounded-2xl border border-white/10 bg-slate-900/80 backdrop-blur-xl overflow-hidden transition-all"
+                      >
+                        <button
+                          onClick={() => setOpenTheoryIndex(isOpen ? null : qIdx)}
+                          className="w-full p-5 text-left flex items-center justify-between gap-4 hover:bg-slate-800/40 transition-colors"
+                        >
+                          <div className="flex items-center gap-3.5">
+                            <span className="w-7 h-7 rounded-lg bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-xs font-bold flex-shrink-0">
+                              Q{qIdx + 1}
+                            </span>
+                            <span className="text-sm sm:text-base font-bold text-white">{question}</span>
+                          </div>
+                          <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${isOpen ? "rotate-180 text-indigo-400" : ""}`} />
+                        </button>
+
+                        <AnimatePresence>
+                          {isOpen && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              className="px-6 pb-6 pt-2 border-t border-white/5 bg-slate-950/40 text-xs sm:text-sm text-slate-300 space-y-3"
+                            >
+                              <div className="p-4 rounded-xl bg-slate-900 border border-white/5 space-y-2">
+                                <span className="text-xs font-bold text-indigo-400 uppercase tracking-wide">University Exam Guidance</span>
+                                <p className="leading-relaxed">
+                                  This question is a high-frequency recurring topic in Purbanchal University final examinations. When preparing your answer, ensure you define the primary concept clearly, illustrate with an architectural diagram or state chart, and provide clear comparative points with tabular contrast where applicable.
+                                </p>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <div className="p-12 text-center rounded-3xl bg-slate-900/40 border border-dashed border-white/10 space-y-3">
+                    <HelpCircle className="w-12 h-12 text-slate-600 mx-auto" />
+                    <h3 className="text-lg font-bold text-white">No theory questions found</h3>
+                    <p className="text-sm text-slate-400">Try changing your search keywords.</p>
+                  </div>
+                )}
               </div>
             )}
           </div>
         </div>
       </div>
     </div>
-  );
-}
-
-function ResourceCard({ res, index }: { res: any, index: number }) {
-  const router = useRouter();
-
-  const handlePremiumClick = () => {
-    router.push("/subscription");
-  };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1 }}
-      onClick={handlePremiumClick}
-      className="group relative h-full flex flex-col glass border-white/5 rounded-[2.5rem] overflow-hidden hover:border-amber-500/30 transition-all duration-500 cursor-pointer shadow-xl hover:shadow-amber-500/10"
-    >
-      {/* Premium Ribbon */}
-      <div className="absolute top-5 -right-12 z-30 bg-gradient-to-r from-amber-600 to-yellow-400 text-black text-[10px] font-black uppercase tracking-widest px-10 py-1 rotate-45 shadow-lg border-y border-white/20">
-        Premium
-      </div>
-
-      {/* Card Image Wrapper */}
-      <div className="h-48 overflow-hidden relative">
-        <div className={`absolute inset-0 bg-gradient-to-br ${res.color} mix-blend-overlay z-10`} />
-        <img 
-          src={res.image} 
-          alt={res.title}
-          className="w-full h-full object-cover grayscale-[20%] group-hover:scale-110 transition-transform duration-700 opacity-60" 
-        />
-        
-        {/* Lock Overlay */}
-        <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity">
-          <div className="bg-white/10 backdrop-blur-md p-4 rounded-full border border-white/20 scale-50 group-hover:scale-100 transition-transform duration-500">
-            <Lock className="w-8 h-8 text-amber-500" />
-          </div>
-        </div>
-
-        <div className="absolute top-4 left-4 z-20">
-          <span className="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-[10px] uppercase font-bold tracking-widest text-white border border-white/10">
-            {res.type}
-          </span>
-        </div>
-      </div>
-
-      {/* Card Content */}
-      <div className="p-6 flex-1 flex flex-col relative">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="text-[10px] font-bold text-amber-500 uppercase tracking-tighter px-2 py-0.5 bg-amber-500/10 rounded border border-amber-500/20">
-            PRO ACCESS
-          </span>
-          <div className="flex items-center text-yellow-500 text-[10px] font-bold ml-auto">
-            <Star className="w-3 h-3 fill-current mr-1" />
-            {res.rating}
-          </div>
-        </div>
-
-        <h3 className="text-lg font-bold leading-tight mb-2 group-hover:text-amber-500 transition-colors flex-1 line-clamp-2 pr-4">
-          {res.title}
-        </h3>
-        
-        <p className="text-slate-500 text-sm mb-6">
-          By <span className="text-slate-400">{res.author}</span>
-        </p>
-
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="flex items-center gap-2 text-slate-500">
-            <Download className="w-3 h-3" />
-            <span className="text-[10px] font-medium">{res.downloads}</span>
-          </div>
-          <div className="flex items-center gap-2 text-slate-500">
-            <Clock className="w-3 h-3" />
-            <span className="text-[10px] font-medium">{res.date}</span>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <button className="flex-1 py-3 bg-amber-500/10 border border-amber-500/20 rounded-xl text-sm font-bold text-amber-500 hover:bg-amber-500 hover:text-black transition-all flex items-center justify-center gap-2 group/btn">
-            Unlock Content <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-          </button>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-function FilterItem({ label, count }: { label: string, count: number }) {
-  return (
-    <label className="flex items-center justify-between group cursor-pointer">
-      <div className="flex items-center gap-3">
-        <div className="w-4 h-4 rounded border border-white/10 group-hover:border-primary transition-colors" />
-        <span className="text-sm text-slate-400 group-hover:text-white transition-colors">{label}</span>
-      </div>
-      <span className="text-[10px] font-mono text-slate-600">{count}</span>
-    </label>
   );
 }

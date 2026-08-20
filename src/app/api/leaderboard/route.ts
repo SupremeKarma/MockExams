@@ -66,12 +66,15 @@ export async function GET(request: NextRequest) {
     interface LeaderboardDoc {
       id: string;
       user_id?: string;
+      userId?: string;
       user_name?: string;
       displayName?: string;
       percentage?: number;
       score?: number;
+      bestScore?: number;
       attempts?: number;
       last_attempt?: string;
+      lastAttemptAt?: string;
       exam_id?: string;
       avatar_url?: string;
     }
@@ -88,7 +91,7 @@ export async function GET(request: NextRequest) {
       const snapshot = await queryRef.get();
 
       if (!snapshot.empty) {
-        allDocs = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() as LeaderboardDoc }));
+        allDocs = snapshot.docs.map((doc: any) => ({ ...doc.data(), id: doc.id } as LeaderboardDoc));
         // Sort in-memory to avoid index requirements
         allDocs.sort((a, b) => {
           if ((b.percentage || 0) !== (a.percentage || 0)) {

@@ -22,7 +22,7 @@ interface QuestionBreakdown {
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id: examId } = await params;
@@ -36,8 +36,18 @@ export async function POST(
     let decodedToken;
     try {
       decodedToken = await adminAuth.verifyIdToken(token);
-    } catch (e) {
-      return NextResponse.json({ success: false, error: "Invalid or expired token" }, { status: 401 });
+      if (!decodedToken) {
+        return NextResponse.json(
+          { success: false, error: "Firebase Admin SDK not initialized. Configure FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, and FIREBASE_PRIVATE_KEY in .env.local" },
+          { status: 500 }
+        );
+      }
+    } catch (e: any) {
+      console.error("Token verification error:", e.message);
+      return NextResponse.json(
+        { success: false, error: "Invalid or expired token. Ensure Firebase Admin credentials are configured." },
+        { status: 401 }
+      );
     }
     const userId = decodedToken.uid;
 
@@ -81,8 +91,8 @@ export async function POST(
     }
 
     const questions = questionsRes.docs
-      .map((doc) => ({ id: doc.id, ...doc.data() }))
-      .sort((a, b) => ((a as any).order_in_exam || 0) - ((b as any).order_in_exam || 0));
+      .map((doc: any) => ({ id: doc.id, ...doc.data() }))
+      .sort((a: any, b: any) => (a.order_in_exam || 0) - (b.order_in_exam || 0));
 
     const negativeMarkingEnabled = exam.negativeMarkingEnabled ?? false;
     const defaultMarks = exam.defaultMarksPerQuestion ?? 1;
@@ -154,7 +164,7 @@ export async function POST(
     const attemptRef = await adminDb.collection('exam_attempts').add(attemptData);
 
     // Use transaction to atomically update/create leaderboard entry
-    await adminDb.runTransaction(async (transaction) => {
+    await adminDb.runTransaction(async (transaction: any) => {
       const lbQuery = await transaction.get(
         adminDb.collection('leaderboard')
           .where('user_id', '==', userId)

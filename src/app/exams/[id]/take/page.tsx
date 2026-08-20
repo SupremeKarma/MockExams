@@ -165,7 +165,11 @@ export default function TakeExamPage() {
       router.push(`/exams/results/${data.attempt_id}`);
     } catch (err: any) {
       console.error("Submission failed:", err);
-      setError(err.message);
+      let errorMsg = err.message || "Submission failed";
+      if (errorMsg.includes("Invalid or expired token") || errorMsg.includes("Firebase Admin")) {
+        errorMsg = "Submission error: Server misconfigured. Admin staff: check FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, and FIREBASE_PRIVATE_KEY in .env.local. See FIREBASE_SETUP.md for details.";
+      }
+      setError(errorMsg);
     } finally {
       setIsSubmitting(false);
     }
