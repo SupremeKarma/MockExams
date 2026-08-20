@@ -1,0 +1,30 @@
+# Firebase App Hosting Configuration
+kind: "AppHostingYaml"
+schemaVersion: "v1alpha"
+
+# Environment variables
+env:
+  - variable: NEXT_PUBLIC_FIREBASE_API_KEY
+    value: "AIzaSyB8wXMj5wjwGXEepq09rvyF-PdWI-Osums"
+  - variable: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+    value: "mock-exams-site.firebaseapp.com"
+  - variable: NEXT_PUBLIC_FIREBASE_DATABASE_URL
+    value: "https://mock-exams-site-default-rtdb.firebaseio.com"
+  - variable: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+    value: "mock-exams-site"
+  - variable: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+    value: "mock-exams-site.firebasestorage.app"
+  - variable: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+    value: "606647444116"
+  - variable: NEXT_PUBLIC_FIREBASE_APP_ID
+    value: "1:606647444116:web:dbd901a1606fd725474a81"
+  - variable: NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+    value: "G-HRBTMZ11T4"
+
+# Compute settings
+runConfig:
+  minInstances: 0
+  maxInstances: 10
+  concurrency: 80
+  cpu: 1
+  memoryMiB: 1024
