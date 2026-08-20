@@ -166,23 +166,30 @@ export default function FlashcardsPage() {
         
         {/* Header Ribbon */}
         {!isFullscreen && (
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-3xl bg-white border border-slate-200 shadow-sm">
-            <div className="space-y-1">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-black uppercase tracking-widest">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-200 shadow-sm">
+            <div className="space-y-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-indigo-200 text-indigo-700 text-xs font-black uppercase tracking-widest shadow-sm">
                 <Brain className="w-3.5 h-3.5" />
-                <span>FSRS v6 Spaced Repetition Engine</span>
+                <span>FSRS v6 Spaced Repetition</span>
               </div>
-              <h1 className="text-2xl sm:text-3xl font-black text-slate-900">Active Recall Flashcards</h1>
+              <h1 className="text-2xl sm:text-3xl font-black text-slate-900">Master Through Active Recall</h1>
+              <p className="text-xs text-slate-600 font-medium">Scientific spacing algorithm for maximum retention</p>
             </div>
 
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-amber-50 border border-amber-200 text-amber-700 text-xs font-black">
+            <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-white border border-amber-200 text-amber-700 text-xs font-black shadow-sm">
                 <Flame className="w-4 h-4 text-amber-600" />
-                <span>7 Day Streak</span>
+                <div>
+                  <div>7 Day Streak</div>
+                  <div className="text-[10px] font-bold opacity-80">Keep it up!</div>
+                </div>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-black">
+              <div className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-white border border-emerald-200 text-emerald-700 text-xs font-black shadow-sm">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <span>98% Retention Rate</span>
+                <div>
+                  <div>98% Retention</div>
+                  <div className="text-[10px] font-bold opacity-80">Excellent</div>
+                </div>
               </div>
             </div>
           </div>

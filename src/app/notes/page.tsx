@@ -91,33 +91,31 @@ export default function NotesPage() {
         
         {/* Header Banner */}
         <div className="relative rounded-3xl p-8 sm:p-12 overflow-hidden border border-slate-200 bg-white shadow-sm">
+          <div className="absolute inset-0 bg-gradient-to-br from-teal-50 via-transparent to-indigo-50 opacity-60" />
+
           <div className="relative z-10 max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-black uppercase tracking-widest">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-100 border border-teal-300 text-teal-700 text-xs font-black uppercase tracking-widest">
               <GraduationCap className="w-4 h-4" />
-              <span>Purbanchal University BIT Study Hub</span>
+              <span>Purbanchal University BIT</span>
             </div>
-            
+
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight">
-              Curated Notes & <br />
+              Study Notes & <br />
               <span className="text-gradient">Important Topics</span>
             </h1>
-            
+
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
-              Master recurring exam topics, verified code algorithms, key formulas, and high-frequency theory questions organized semester by semester.
+              High-frequency exam topics, verified code algorithms, key formulas, and theory questions organized by semester.
             </p>
 
-            <div className="flex flex-wrap gap-4 pt-2">
-              <Link href="/flashcards" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-sm font-bold text-white transition-all shadow-md">
+            <div className="flex flex-wrap gap-3 pt-4">
+              <Link href="/flashcards" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-sm font-bold text-white transition-all shadow-md hover:scale-105">
                 <Brain className="w-4 h-4" />
-                Active Recall Flashcards
-              </Link>
-              <Link href="/syllabus" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-sm font-bold text-slate-700 transition-all">
-                <BookOpen className="w-4 h-4 text-indigo-600" />
-                View Full Syllabus
+                Flashcard Drills
               </Link>
               <Link href="/projects" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-sm font-bold text-slate-700 transition-all">
                 <Code2 className="w-4 h-4 text-cyan-600" />
-                Semester Projects
+                Projects
               </Link>
             </div>
           </div>

@@ -1,0 +1,59 @@
+[debug] [2026-08-20T04:12:12.170Z] ----------------------------------------------------------------------
+[debug] [2026-08-20T04:12:12.173Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\AMANM\AppData\Local\npm-cache\_npx\7750544ccf494d8b\node_modules\firebase-tools\lib\bin\firebase.js deploy --only hosting --project mock-exams-site
+[debug] [2026-08-20T04:12:12.174Z] CLI Version:   15.28.1
+[debug] [2026-08-20T04:12:12.174Z] Platform:      win32
+[debug] [2026-08-20T04:12:12.174Z] Node Version:  v24.18.0
+[debug] [2026-08-20T04:12:12.174Z] Detected Agent: antigravity
+[debug] [2026-08-20T04:12:12.174Z] Time:          Thu Aug 20 2026 09:57:12 GMT+0545 (Nepal Time)
+[debug] [2026-08-20T04:12:12.174Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-08-20T04:12:12.196Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2026-08-20T04:12:16.618Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-08-20T04:12:16.820Z] Running auto auth
+[debug] [2026-08-20T04:12:16.822Z] [iam] checking project mock-exams-site for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-08-20T04:12:16.825Z] No OAuth tokens found
+[debug] [2026-08-20T04:12:16.826Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/mock-exams-site:testIamPermissions [none]
+[debug] [2026-08-20T04:12:16.826Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/mock-exams-site:testIamPermissions  x-goog-user-project=mock-exams-site
+[debug] [2026-08-20T04:12:16.826Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/mock-exams-site:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-08-20T04:12:17.261Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2026-08-20T04:12:17.262Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2026-08-20T04:12:18.346Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/mock-exams-site:testIamPermissions 200
+[debug] [2026-08-20T04:12:18.346Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/mock-exams-site:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-08-20T04:12:18.347Z] No OAuth tokens found
+[debug] [2026-08-20T04:12:18.347Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/mock-exams-site [none]
+[debug] [2026-08-20T04:12:18.805Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/mock-exams-site 200
+[debug] [2026-08-20T04:12:18.805Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/mock-exams-site {"projectId":"mock-exams-site","projectNumber":"606647444116","displayName":"MockExams","name":"projects/mock-exams-site","resources":{"hostingSite":"mock-exams-site","realtimeDatabaseInstance":"mock-exams-site-default-rtdb"},"state":"ACTIVE","etag":"1_bc436407-33d3-436b-a54d-5e95e702b3ea"}
+[debug] [2026-08-20T04:12:22.437Z] No OAuth tokens found
+[debug] [2026-08-20T04:12:22.437Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/mock-exams-site/sites pageToken=&pageSize=10
+[debug] [2026-08-20T04:12:24.146Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/mock-exams-site/sites 200
+[debug] [2026-08-20T04:12:24.146Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/mock-exams-site/sites {"sites":[{"name":"projects/mock-exams-site/sites/mock-exams-site","defaultUrl":"https://mock-exams-site.web.app","appId":"1:606647444116:web:9255b3b705f560f0474a81","type":"DEFAULT_SITE"}]}
+[debug] [2026-08-20T04:12:24.147Z] No OAuth tokens found
+[debug] [2026-08-20T04:12:24.147Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:606647444116:web:9255b3b705f560f0474a81/config [none]
+[debug] [2026-08-20T04:12:25.672Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:606647444116:web:9255b3b705f560f0474a81/config 200
+[debug] [2026-08-20T04:12:25.672Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:606647444116:web:9255b3b705f560f0474a81/config {"projectId":"mock-exams-site","appId":"1:606647444116:web:9255b3b705f560f0474a81","databaseURL":"https://mock-exams-site-default-rtdb.firebaseio.com","storageBucket":"mock-exams-site.firebasestorage.app","apiKey":"AIzaSyB8wXMj5wjwGXEepq09rvyF-PdWI-Osums","authDomain":"mock-exams-site.firebaseapp.com","messagingSenderId":"606647444116","measurementId":"G-3CR7402LQR","projectNumber":"606647444116","version":"2"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+   The integration is known to work with Next.js version 12 - 16.0. You may encounter errors.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2026-08-20T04:12:34.275Z] No OAuth tokens found
+[debug] [2026-08-20T04:12:34.276Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/mock-exams-site/sites/mock-exams-site [none]
+[debug] [2026-08-20T04:12:35.773Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/mock-exams-site/sites/mock-exams-site 200
+[debug] [2026-08-20T04:12:35.773Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/mock-exams-site/sites/mock-exams-site {"name":"projects/mock-exams-site/sites/mock-exams-site","defaultUrl":"https://mock-exams-site.web.app","appId":"1:606647444116:web:9255b3b705f560f0474a81","type":"DEFAULT_SITE"}
+[info] ▲ Next.js 16.1.6 (Turbopack)
+
+[info] - Environments: .env.local
+
+
+[info]   Creating an optimized production build ...
+
+[info] ✓ Compiled successfully in 10.2s
+
+[info]   Running TypeScript ...
+

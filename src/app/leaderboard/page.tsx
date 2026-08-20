@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Trophy, Medal, Target, TrendingUp, Search, ChevronRight } from "lucide-react";
+import { Trophy, Medal, Target, TrendingUp, Search, ChevronRight, Sparkles, Flame, Award, Star } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { useState, useEffect } from "react";
@@ -217,6 +217,7 @@ export default function LeaderboardPage() {
 
           {/* Sidebar */}
           <div className="space-y-6">
+            {/* Personal Standing */}
             <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm text-center space-y-4">
               <div className="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto">
                 <Target className="w-7 h-7" />
@@ -225,7 +226,7 @@ export default function LeaderboardPage() {
               <p className="text-xs text-slate-500">
                 {user ? `Logged in as ${user.displayName || user.email?.split('@')[0] || "Student"}.` : "Sign in to see your ranking."}
               </p>
-              
+
               <div className="space-y-3 text-left pt-2 border-t border-slate-100">
                 <StatLine label="Current Rank" value={currentUserEntry ? `#${currentUserEntry.rank}` : "Unranked"} />
                 <StatLine label="Best Score" value={currentUserEntry ? `${currentUserEntry.bestPercentage}%` : "—"} />
@@ -237,12 +238,63 @@ export default function LeaderboardPage() {
               </Link>
             </div>
 
-            <div className="p-6 rounded-3xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 text-amber-950 space-y-2">
+            {/* Badges & Achievements */}
+            <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
+              <div className="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <Award className="w-5 h-5 text-amber-600" />
+                <span>Your Badges</span>
+              </div>
+
+              <div className="grid grid-cols-3 gap-2">
+                <div className="p-3 rounded-2xl bg-gradient-to-br from-yellow-50 to-amber-50 border border-yellow-200 flex flex-col items-center justify-center text-center hover:shadow-md transition-all">
+                  <span className="text-2xl mb-1">🏅</span>
+                  <span className="text-[10px] font-bold text-amber-900">Top 10%</span>
+                </div>
+                <div className="p-3 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50 border border-purple-200 flex flex-col items-center justify-center text-center hover:shadow-md transition-all">
+                  <span className="text-2xl mb-1">🔥</span>
+                  <span className="text-[10px] font-bold text-purple-900">8 Days</span>
+                </div>
+                <div className="p-3 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200 flex flex-col items-center justify-center text-center hover:shadow-md transition-all">
+                  <span className="text-2xl mb-1">⚡</span>
+                  <span className="text-[10px] font-bold text-blue-900">Speedster</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Monthly Honor Roll */}
+            <div className="p-6 rounded-3xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 text-amber-950 space-y-3">
               <div className="flex items-center gap-2 font-bold text-amber-800 text-sm">
                 <Medal className="w-5 h-5 text-amber-600" />
                 <span>Monthly Honor Roll</span>
               </div>
-              <p className="text-xs text-amber-800 leading-relaxed font-medium">Top performers every month receive featured badges and verified score verification certificates.</p>
+              <p className="text-xs text-amber-800 leading-relaxed font-medium mb-3">
+                Top performers every month receive featured badges and verified certificates.
+              </p>
+              <button className="w-full px-4 py-2 rounded-xl bg-white/50 hover:bg-white text-amber-900 font-bold text-xs transition-all border border-amber-200">
+                View This Month →
+              </button>
+            </div>
+
+            {/* Quick Stats */}
+            <div className="p-4 rounded-2xl bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-200 space-y-3">
+              <div className="flex items-center gap-2 text-xs font-bold text-indigo-700">
+                <Sparkles className="w-4 h-4" />
+                Quick Tips
+              </div>
+              <ul className="space-y-2 text-[11px] text-indigo-900">
+                <li className="flex items-start gap-2">
+                  <span className="mt-0.5">→</span>
+                  <span>Solve 5+ exams weekly to climb rankings</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-0.5">→</span>
+                  <span>Accuracy matters more than speed</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-0.5">→</span>
+                  <span>Consistent practice = higher rank</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>

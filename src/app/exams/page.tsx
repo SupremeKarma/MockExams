@@ -89,20 +89,22 @@ export default function ExamsListingPage() {
     <div className="min-h-screen bg-mesh text-slate-900 pt-28 pb-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-10">
         
-        {/* Header */}
+        {/* Header with Gradient Background */}
         <div className="relative rounded-3xl p-8 sm:p-12 overflow-hidden border border-slate-200 bg-white shadow-sm">
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-transparent to-purple-50 opacity-60" />
+
           <div className="relative z-10 max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-black uppercase tracking-widest">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-100 border border-indigo-300 text-indigo-700 text-xs font-black uppercase tracking-widest">
               <Sparkles className="w-4 h-4" />
-              <span>Verified Test Simulation Engine</span>
+              <span>AI-Adaptive Exam Engine</span>
             </div>
-            
+
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight">
-              Advanced <span className="text-gradient">Exam Matrix</span>
+              Ace Your <span className="text-gradient">Exams</span>
             </h1>
-            
+
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
-              Precision-engineered mock sessions calibrated for the 2026 academic cycle. Select your subject and initiate your timed evaluation.
+              Precision-engineered adaptive tests that adjust difficulty to your skill level. Instant feedback powered by AI diagnostics.
             </p>
           </div>
         </div>
@@ -237,49 +239,56 @@ function ExamCard({ exam, index, viewMode }: any) {
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: index * 0.05 }}
-      className="group flex flex-col justify-between bg-white border border-slate-200 hover:border-indigo-400 rounded-3xl p-7 transition-all shadow-sm hover:shadow-md"
+      whileHover={{ translateY: -8 }}
+      className="group flex flex-col justify-between bg-white border border-slate-200 hover:border-indigo-400 rounded-3xl p-7 transition-all shadow-sm hover:shadow-lg cursor-pointer"
     >
       <div className="space-y-4">
         <div className="flex justify-between items-start">
-          <div className={`p-3.5 rounded-2xl border ${
-            exam.category === 'Medical' ? 'bg-rose-50 border-rose-200 text-rose-700' :
-            exam.category === 'Engineering' ? 'bg-emerald-50 border-emerald-200 text-emerald-700' :
-            'bg-indigo-50 border-indigo-200 text-indigo-700'
-          }`}>
+          <div
+            className={`p-3.5 rounded-2xl border font-bold text-lg group-hover:scale-110 transition-transform ${
+              exam.category === "Medical"
+                ? "bg-rose-50 border-rose-200 text-rose-600"
+                : exam.category === "Engineering"
+                  ? "bg-emerald-50 border-emerald-200 text-emerald-600"
+                  : exam.category === "Mathematics"
+                    ? "bg-purple-50 border-purple-200 text-purple-600"
+                    : "bg-indigo-50 border-indigo-200 text-indigo-600"
+            }`}
+          >
             <Zap className="w-5 h-5" />
           </div>
-          <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold">
+          <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold uppercase">
             {exam.category}
           </span>
         </div>
 
-        <div className="space-y-2">
-          <h3 className="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors leading-snug">
+        <div className="space-y-3">
+          <h3 className="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors leading-snug line-clamp-2">
             {exam.title}
           </h3>
           <p className="text-slate-600 text-xs sm:text-sm font-medium leading-relaxed line-clamp-2">
-            {exam.description || "Synthesizing full-spectrum evaluation metrics for domain mastery."}
+            {exam.description || "Comprehensive test covering key concepts and exam patterns."}
           </p>
         </div>
 
         <div className="grid grid-cols-2 gap-3 pt-2">
-          <div className="p-3 bg-slate-50 rounded-2xl border border-slate-100 text-center">
-            <p className="text-[10px] font-bold text-slate-400 uppercase">Duration</p>
+          <div className="p-3 bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl border border-slate-100 text-center hover:border-slate-200 transition-all">
+            <p className="text-[10px] font-bold text-slate-500 uppercase">Duration</p>
             <p className="text-base font-black text-slate-900">{exam.duration_minutes}m</p>
           </div>
-          <div className="p-3 bg-slate-50 rounded-2xl border border-slate-100 text-center">
-            <p className="text-[10px] font-bold text-slate-400 uppercase">Questions</p>
+          <div className="p-3 bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl border border-slate-100 text-center hover:border-slate-200 transition-all">
+            <p className="text-[10px] font-bold text-slate-500 uppercase">Questions</p>
             <p className="text-base font-black text-slate-900">{exam.questions_count || 10}</p>
           </div>
         </div>
       </div>
 
       <div className="pt-6 border-t border-slate-100 mt-6">
-        <Link 
+        <Link
           href={`/exams/${exam.id}/take`}
-          className="w-full py-3.5 rounded-2xl font-bold text-xs flex items-center justify-center gap-2 transition-all bg-indigo-600 text-white shadow-sm hover:bg-indigo-700"
+          className="w-full py-3.5 rounded-2xl font-bold text-xs flex items-center justify-center gap-2 transition-all bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md hover:shadow-lg hover:scale-105 active:scale-95"
         >
-          <span>Start Assessment</span>
+          <span>Start Exam</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </Link>
       </div>

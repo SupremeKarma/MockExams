@@ -2,15 +2,15 @@
 
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
-import { 
-  LogOut, 
-  Menu, 
-  X, 
-  LayoutDashboard, 
-  BookOpen, 
-  Bell, 
-  User, 
-  Settings, 
+import {
+  LogOut,
+  Menu,
+  X,
+  LayoutDashboard,
+  BookOpen,
+  Bell,
+  User,
+  Settings,
   Crown,
   ChevronDown,
   Sparkles,
@@ -20,7 +20,8 @@ import {
   FolderGit2,
   Globe2,
   Check,
-  GraduationCap
+  GraduationCap,
+  CheckCircle2
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -43,16 +44,14 @@ export const Navbar = () => {
   const currentProgram = academicTaxonomyData.find(n => n.id === selectedProgram) || academicTaxonomyData.find(n => n.id === "prog-bit");
 
   const navLinks = [
-    { name: "Semesters", href: "/semester", icon: GraduationCap },
-    { name: "BIT Notes", href: "/notes", icon: Sparkles },
-    { name: "Flashcards", href: "/flashcards", icon: Brain },
-    { name: "Analytics", href: "/analytics", icon: BarChart3 },
-    { name: "Projects", href: "/projects", icon: FolderGit2 },
-    { name: "Syllabus", href: "/syllabus", icon: BookOpen },
-    { name: "Exam Patterns", href: "/exam-patterns", icon: Globe2 },
+    { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
     { name: "Exams", href: "/exams", icon: Zap },
-    { name: "Entrance", href: "/learn", icon: Crown },
-    { name: "Notices", href: "/notices", icon: Bell },
+    { name: "Flashcards", href: "/flashcards", icon: Brain },
+    { name: "AI Tutor", href: "/tutor", icon: Sparkles },
+    { name: "Study Plan", href: "/study-plan", icon: Check },
+    { name: "Analytics", href: "/analytics", icon: BarChart3 },
+    { name: "BIT Notes", href: "/notes", icon: BookOpen },
+    { name: "Leaderboard", href: "/leaderboard", icon: Crown },
   ];
 
   if (isExaminer) {

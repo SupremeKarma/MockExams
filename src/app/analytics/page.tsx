@@ -98,19 +98,21 @@ export default function AnalyticsPage() {
         
         {/* Hero Banner */}
         <div className="relative rounded-3xl p-8 sm:p-12 overflow-hidden border border-slate-200 bg-white shadow-sm">
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-transparent to-orange-50 opacity-60" />
+
           <div className="relative z-10 max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-black uppercase tracking-widest">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-100 border border-indigo-300 text-indigo-700 text-xs font-black uppercase tracking-widest">
               <BarChart3 className="w-4 h-4" />
-              <span>Real-Time Mastery & Diagnostic Engine</span>
+              <span>AI-Powered Diagnostics</span>
             </div>
-            
+
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight">
-              Learning Analytics & <br />
-              <span className="text-gradient">Weak-Area Diagnosis</span>
+              Your Learning <br />
+              <span className="text-gradient">Analytics Dashboard</span>
             </h1>
-            
+
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
-              Track topic-level competency, benchmark your solving speed against university toppers, and trigger targeted intervention drills on your weakest concepts.
+              Real-time performance tracking, weak area identification, and AI-powered recommendations to accelerate your mastery.
             </p>
           </div>
         </div>
