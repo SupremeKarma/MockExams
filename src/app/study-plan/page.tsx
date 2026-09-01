@@ -1,28 +1,24 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Calendar,
   Clock,
-  Target,
   BookOpen,
-  Zap,
   CheckCircle2,
   AlertTriangle,
   TrendingUp,
   ChevronRight,
-  Edit2,
-  Plus,
   Brain,
   Code2,
   Sparkles,
   Download,
   Share2,
   Bell,
-  BarChart3,
 } from "lucide-react";
 import Link from "next/link";
+import { PageHeader, PrimaryButton, SecondaryButton } from "@/components/UIComponents";
 
 interface StudySession {
   id: string;
@@ -199,7 +195,7 @@ const RECOMMENDATIONS = [
 export default function StudyPlanPage() {
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
   const [viewMode, setViewMode] = useState<"week" | "day">("week");
-  const [showWeeklyBreakdown, setShowWeeklyBreakdown] = useState(false);
+  const [_showWeeklyBreakdown, _setShowWeeklyBreakdown] = useState(false);
 
   const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   const sessionsForSelectedDay = selectedDay
@@ -239,105 +235,87 @@ export default function StudyPlanPage() {
       case "in-progress":
         return "bg-amber-50 border-amber-200 text-amber-700";
       case "pending":
-        return "bg-slate-50 border-slate-200 text-slate-700";
+        return "bg-zinc-50 border-zinc-200 text-zinc-700";
     }
   };
 
   return (
-    <div className="min-h-screen bg-mesh text-slate-900 pt-28 pb-24 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-10">
-        {/* Header */}
-        <div className="rounded-3xl p-8 sm:p-12 overflow-hidden border border-slate-200 bg-white shadow-sm">
-          <div className="space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-black uppercase tracking-widest">
-              <Calendar className="w-4 h-4" />
-              <span>Personalized Study Scheduler</span>
-            </div>
-
-            <div className="space-y-3">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight">
-                Your <span className="text-gradient">Weekly Study Plan</span>
-              </h1>
-              <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
-                AI-generated personalized study schedule optimized for your weak areas, goals, and available time.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-3 pt-4">
-              <button className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition-all flex items-center gap-2 shadow-md">
-                <Download className="w-4 h-4" />
-                Download PDF
-              </button>
-              <button className="px-5 py-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold transition-all flex items-center gap-2">
-                <Share2 className="w-4 h-4" />
-                Share Plan
-              </button>
-            </div>
-          </div>
-        </div>
+    <div className="min-h-screen bg-zinc-50/40 pb-20 px-4 sm:px-6 lg:px-8 pt-8">
+      <div className="max-w-7xl mx-auto space-y-6">
+        <PageHeader
+          badge="Personalized Study Scheduler"
+          title="Your weekly study plan"
+          subtitle="AI-generated schedule optimized for your weak areas, goals, and available time."
+          actions={
+            <>
+              <PrimaryButton icon={<Download className="w-4 h-4" />}>Download PDF</PrimaryButton>
+              <SecondaryButton icon={<Share2 className="w-4 h-4" />}>Share plan</SecondaryButton>
+            </>
+          }
+        />
 
         {/* Weekly Overview Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-2">
-            <div className="flex items-center justify-between text-slate-500 text-xs font-bold uppercase">
-              <span>Progress This Week</span>
-              <TrendingUp className="w-4 h-4 text-indigo-600" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="p-5 rounded-lg bg-white border border-zinc-200 shadow-xs space-y-2">
+            <div className="flex items-center justify-between text-zinc-500 text-[11px] font-semibold uppercase">
+              <span>Progress this week</span>
+              <TrendingUp className="w-4 h-4 text-primary-600" />
             </div>
-            <div className="text-3xl font-black text-slate-900">{SAMPLE_WEEKLY_PLAN.completionRate}%</div>
-            <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden border border-slate-200">
+            <div className="text-2xl font-bold text-zinc-900 tabular-nums">{SAMPLE_WEEKLY_PLAN.completionRate}%</div>
+            <div className="w-full h-1.5 rounded-full bg-zinc-100 overflow-hidden">
               <div
-                className="h-full bg-indigo-600 rounded-full"
+                className="h-full bg-primary-600 rounded-full"
                 style={{ width: `${SAMPLE_WEEKLY_PLAN.completionRate}%` }}
               />
             </div>
           </div>
 
-          <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-2">
-            <div className="flex items-center justify-between text-slate-500 text-xs font-bold uppercase">
-              <span>Study Sessions</span>
+          <div className="p-5 rounded-lg bg-white border border-zinc-200 shadow-xs space-y-2">
+            <div className="flex items-center justify-between text-zinc-500 text-[11px] font-semibold uppercase">
+              <span>Study sessions</span>
               <Calendar className="w-4 h-4 text-emerald-600" />
             </div>
-            <div className="text-3xl font-black text-slate-900">{SAMPLE_WEEKLY_PLAN.sessions.length}</div>
-            <p className="text-xs text-slate-500">8 hours 15 minutes total</p>
+            <div className="text-2xl font-bold text-zinc-900 tabular-nums">{SAMPLE_WEEKLY_PLAN.sessions.length}</div>
+            <p className="text-xs text-zinc-500">8 hours 15 minutes total</p>
           </div>
 
-          <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-2">
-            <div className="flex items-center justify-between text-slate-500 text-xs font-bold uppercase">
-              <span>Weak Areas to Fix</span>
-              <AlertTriangle className="w-4 h-4 text-rose-600" />
+          <div className="p-5 rounded-lg bg-white border border-zinc-200 shadow-xs space-y-2">
+            <div className="flex items-center justify-between text-zinc-500 text-[11px] font-semibold uppercase">
+              <span>Weak areas to fix</span>
+              <AlertTriangle className="w-4 h-4 text-red-600" />
             </div>
-            <div className="text-3xl font-black text-slate-900">{WEAK_AREAS.length}</div>
-            <p className="text-xs text-slate-500">Targeted drills scheduled</p>
+            <div className="text-2xl font-bold text-zinc-900 tabular-nums">{WEAK_AREAS.length}</div>
+            <p className="text-xs text-zinc-500">Targeted drills scheduled</p>
           </div>
 
-          <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-2">
-            <div className="flex items-center justify-between text-slate-500 text-xs font-bold uppercase">
-              <span>Focus Area</span>
-              <Brain className="w-4 h-4 text-purple-600" />
+          <div className="p-5 rounded-lg bg-white border border-zinc-200 shadow-xs space-y-2">
+            <div className="flex items-center justify-between text-zinc-500 text-[11px] font-semibold uppercase">
+              <span>Focus area</span>
+              <Brain className="w-4 h-4 text-violet-600" />
             </div>
-            <div className="text-lg font-black text-slate-900 line-clamp-1">{SAMPLE_WEEKLY_PLAN.focus}</div>
-            <p className="text-xs text-slate-500 line-clamp-1">{SAMPLE_WEEKLY_PLAN.startDate}</p>
+            <div className="text-base font-bold text-zinc-900 line-clamp-1">{SAMPLE_WEEKLY_PLAN.focus}</div>
+            <p className="text-xs text-zinc-500 line-clamp-1">{SAMPLE_WEEKLY_PLAN.startDate}</p>
           </div>
         </div>
 
         {/* View Mode Toggle */}
-        <div className="flex justify-center gap-2 p-2 bg-white border border-slate-200 rounded-2xl w-fit mx-auto shadow-sm">
+        <div className="flex justify-center gap-2 p-2 bg-white border border-zinc-200 rounded-lg w-fit mx-auto shadow-sm">
           <button
             onClick={() => setViewMode("week")}
-            className={`px-6 py-2.5 rounded-xl text-xs font-bold transition-all ${
+            className={`px-6 py-2.5 rounded-lg text-xs font-bold transition-all ${
               viewMode === "week"
-                ? "bg-indigo-600 text-white shadow-md"
-                : "text-slate-700 hover:bg-slate-50"
+                ? "bg-primary-600 text-white shadow-md"
+                : "text-zinc-700 hover:bg-zinc-50"
             }`}
           >
             Weekly Overview
           </button>
           <button
             onClick={() => setViewMode("day")}
-            className={`px-6 py-2.5 rounded-xl text-xs font-bold transition-all ${
+            className={`px-6 py-2.5 rounded-lg text-xs font-bold transition-all ${
               viewMode === "day"
-                ? "bg-indigo-600 text-white shadow-md"
-                : "text-slate-700 hover:bg-slate-50"
+                ? "bg-primary-600 text-white shadow-md"
+                : "text-zinc-700 hover:bg-zinc-50"
             }`}
           >
             Day View
@@ -361,10 +339,10 @@ export default function StudyPlanPage() {
                     }}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-5 rounded-3xl bg-white border border-slate-200 hover:border-indigo-400 text-left transition-all group shadow-sm hover:shadow-md"
+                    className="p-5 rounded-lg bg-white border border-zinc-200 hover:border-primary-400 text-left transition-all group shadow-sm hover:shadow-md"
                   >
                     <div className="flex items-center justify-between mb-3">
-                      <h3 className="font-bold text-slate-900 group-hover:text-indigo-600">{day}</h3>
+                      <h3 className="font-bold text-zinc-900 group-hover:text-primary-600">{day}</h3>
                       {completedSessions > 0 && (
                         <span className="px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold">
                           {completedSessions}/{daySessions.length}
@@ -376,14 +354,14 @@ export default function StudyPlanPage() {
                       {daySessions.slice(0, 2).map((session) => (
                         <div
                           key={session.id}
-                          className={`p-2 rounded-xl border text-xs font-bold flex items-center gap-2 ${getTypeColor(session.type)}`}
+                          className={`p-2 rounded-lg border text-xs font-bold flex items-center gap-2 ${getTypeColor(session.type)}`}
                         >
                           {getTypeIcon(session.type)}
                           <span className="line-clamp-1">{session.topic}</span>
                         </div>
                       ))}
                       {daySessions.length > 2 && (
-                        <p className="text-xs text-slate-500 font-medium">+{daySessions.length - 2} more</p>
+                        <p className="text-xs text-zinc-500 font-medium">+{daySessions.length - 2} more</p>
                       )}
                     </div>
                   </motion.button>
@@ -400,24 +378,24 @@ export default function StudyPlanPage() {
             animate={{ opacity: 1, y: 0 }}
             className="space-y-6"
           >
-            <div className="flex items-center justify-between p-6 rounded-3xl bg-white border border-slate-200 shadow-sm">
+            <div className="flex items-center justify-between p-6 rounded-lg bg-white border border-zinc-200 shadow-sm">
               <div>
                 <button
                   onClick={() => setViewMode("week")}
-                  className="text-xs font-bold text-indigo-600 mb-2 flex items-center gap-1 hover:underline"
+                  className="text-xs font-bold text-primary-600 mb-2 flex items-center gap-1 hover:underline"
                 >
                   ← Back to Weekly
                 </button>
-                <h2 className="text-3xl font-black text-slate-900">{selectedDay}</h2>
+                <h2 className="text-3xl font-bold text-zinc-900">{selectedDay}</h2>
               </div>
               <div className="text-right">
-                <p className="text-xs text-slate-500 font-bold uppercase">
+                <p className="text-xs text-zinc-500 font-bold uppercase">
                   {sessionsForSelectedDay.filter((s) => s.status === "completed").length} of{" "}
                   {sessionsForSelectedDay.length} completed
                 </p>
-                <div className="w-32 h-2 rounded-full bg-slate-100 mt-2 overflow-hidden border border-slate-200">
+                <div className="w-32 h-2 rounded-full bg-zinc-100 mt-2 overflow-hidden border border-zinc-200">
                   <div
-                    className="h-full bg-indigo-600 rounded-full"
+                    className="h-full bg-primary-600 rounded-full"
                     style={{
                       width: `${
                         (sessionsForSelectedDay.filter((s) => s.status === "completed").length /
@@ -436,12 +414,12 @@ export default function StudyPlanPage() {
                   key={session.id}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
-                  className={`p-6 rounded-3xl border transition-all ${getStatusColor(session.status)}`}
+                  className={`p-6 rounded-lg border transition-all ${getStatusColor(session.status)}`}
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <div className={`p-2.5 rounded-xl border ${getTypeColor(session.type)}`}>
+                        <div className={`p-2.5 rounded-lg border ${getTypeColor(session.type)}`}>
                           {getTypeIcon(session.type)}
                         </div>
                         <div>
@@ -461,7 +439,7 @@ export default function StudyPlanPage() {
                               ? "bg-emerald-100 text-emerald-800"
                               : session.difficulty === "Medium"
                                 ? "bg-amber-100 text-amber-800"
-                                : "bg-rose-100 text-rose-800"
+                                : "bg-red-100 text-rose-800"
                           }`}
                         >
                           {session.difficulty}
@@ -470,11 +448,11 @@ export default function StudyPlanPage() {
                     </div>
 
                     {session.status === "completed" ? (
-                      <div className="p-3 rounded-2xl bg-white/50 flex items-center justify-center">
+                      <div className="p-3 rounded-lg bg-white/50 flex items-center justify-center">
                         <CheckCircle2 className="w-6 h-6 text-emerald-600" />
                       </div>
                     ) : (
-                      <button className="px-4 py-2 rounded-xl bg-white/50 hover:bg-white font-bold text-xs transition-all">
+                      <button className="px-4 py-2 rounded-lg bg-white/50 hover:bg-white font-bold text-xs transition-all">
                         Start
                       </button>
                     )}
@@ -489,13 +467,13 @@ export default function StudyPlanPage() {
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 flex items-center gap-2">
-                <AlertTriangle className="w-6 h-6 text-rose-600" />
+              <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900 flex items-center gap-2">
+                <AlertTriangle className="w-6 h-6 text-red-600" />
                 Weak Areas Requiring Attention
               </h2>
-              <p className="text-sm text-slate-600 mt-1">Focus on these topics for maximum improvement</p>
+              <p className="text-sm text-zinc-600 mt-1">Focus on these topics for maximum improvement</p>
             </div>
-            <Link href="/analytics" className="text-xs font-bold text-indigo-600 hover:underline flex items-center gap-1">
+            <Link href="/analytics" className="text-xs font-bold text-primary-600 hover:underline flex items-center gap-1">
               View Full Analytics <ChevronRight className="w-3 h-3" />
             </Link>
           </div>
@@ -507,17 +485,17 @@ export default function StudyPlanPage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
-                className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm hover:border-rose-300 transition-all"
+                className="p-6 rounded-lg bg-white border border-zinc-200 shadow-sm hover:border-red-300 transition-all"
               >
                 <div className="flex items-start justify-between mb-3">
                   <div>
-                    <h3 className="font-bold text-slate-900">{area.subject}</h3>
-                    <p className="text-sm text-slate-600">{area.topic}</p>
+                    <h3 className="font-bold text-zinc-900">{area.subject}</h3>
+                    <p className="text-sm text-zinc-600">{area.topic}</p>
                   </div>
                   <span
-                    className={`text-xs font-black px-3 py-1 rounded-full ${
+                    className={`text-xs font-bold px-3 py-1 rounded-full ${
                       area.priority === "Very High"
-                        ? "bg-rose-100 text-rose-700"
+                        ? "bg-red-100 text-rose-700"
                         : "bg-amber-100 text-amber-700"
                     }`}
                   >
@@ -525,13 +503,13 @@ export default function StudyPlanPage() {
                   </span>
                 </div>
 
-                <p className="text-xs text-slate-600 mb-4">{area.recommendedAction}</p>
+                <p className="text-xs text-zinc-600 mb-4">{area.recommendedAction}</p>
 
                 <div className="flex gap-2">
-                  <Link href="/flashcards" className="flex-1 px-3 py-2 rounded-xl bg-indigo-50 text-indigo-700 text-xs font-bold hover:bg-indigo-100 transition-all text-center">
+                  <Link href="/flashcards" className="flex-1 px-3 py-2 rounded-lg bg-primary-50 text-primary-700 text-xs font-bold hover:bg-primary-100 transition-all text-center">
                     Drill Flashcards
                   </Link>
-                  <button className="flex-1 px-3 py-2 rounded-xl bg-slate-50 text-slate-700 text-xs font-bold hover:bg-slate-100 transition-all">
+                  <button className="flex-1 px-3 py-2 rounded-lg bg-zinc-50 text-zinc-700 text-xs font-bold hover:bg-zinc-100 transition-all">
                     Schedule Now
                   </button>
                 </div>
@@ -544,7 +522,7 @@ export default function StudyPlanPage() {
         <div className="space-y-6">
           <div className="flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-amber-600" />
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900">AI Personalized Recommendations</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900">AI Personalized Recommendations</h2>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -556,18 +534,18 @@ export default function StudyPlanPage() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: idx * 0.1 }}
-                  className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4 hover:border-indigo-400 transition-all"
+                  className="p-6 rounded-lg bg-white border border-zinc-200 shadow-sm space-y-4 hover:border-primary-400 transition-all"
                 >
-                  <div className="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center border border-indigo-100">
-                    <Icon className="w-6 h-6 text-indigo-600" />
+                  <div className="w-12 h-12 rounded-lg bg-primary-50 flex items-center justify-center border border-primary-100">
+                    <Icon className="w-6 h-6 text-primary-600" />
                   </div>
 
                   <div>
-                    <h3 className="font-bold text-slate-900 mb-1">{rec.title}</h3>
-                    <p className="text-xs text-slate-600 leading-relaxed">{rec.description}</p>
+                    <h3 className="font-bold text-zinc-900 mb-1">{rec.title}</h3>
+                    <p className="text-xs text-zinc-600 leading-relaxed">{rec.description}</p>
                   </div>
 
-                  <button className="w-full px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition-all">
+                  <button className="w-full px-4 py-2.5 rounded-lg bg-primary-600 hover:bg-primary-700 text-white text-xs font-bold transition-all">
                     {rec.action}
                   </button>
                 </motion.div>
@@ -577,9 +555,9 @@ export default function StudyPlanPage() {
         </div>
 
         {/* CTA Section */}
-        <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-indigo-600 to-purple-600 text-white border border-indigo-500 space-y-6">
+        <div className="p-8 sm:p-12 rounded-lg bg-gradient-to-br from-primary-600 to-purple-600 text-white border border-primary-500 space-y-6">
           <div className="space-y-3">
-            <h2 className="text-3xl sm:text-4xl font-black">Ready to Ace Your Exams?</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold">Ready to Ace Your Exams?</h2>
             <p className="text-base opacity-90 max-w-2xl">
               This study plan is optimized using AI to help you focus on what matters most. Stick to the schedule and
               watch your scores improve dramatically.
@@ -587,10 +565,10 @@ export default function StudyPlanPage() {
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <Link href="/exams" className="px-6 py-3 rounded-xl bg-white text-indigo-600 font-bold text-sm hover:bg-slate-50 transition-all">
+            <Link href="/exams" className="px-6 py-3 rounded-lg bg-white text-primary-600 font-bold text-sm hover:bg-zinc-50 transition-all">
               Start Taking Exams
             </Link>
-            <Link href="/flashcards" className="px-6 py-3 rounded-xl bg-white/20 hover:bg-white/30 border border-white/30 text-white font-bold text-sm transition-all">
+            <Link href="/flashcards" className="px-6 py-3 rounded-lg bg-white/20 hover:bg-white/30 border border-white/30 text-white font-bold text-sm transition-all">
               Begin Flashcards
             </Link>
           </div>

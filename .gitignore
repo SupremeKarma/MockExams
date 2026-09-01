@@ -42,3 +42,19 @@ plan.zip
 /plans/
 /scratch/
 MockExams_Presentation.pptx
+serviceAccountKey.json
+*serviceAccount*.json
+
+# Firebase emulator artifacts
+firestore-debug.log
+ui-debug.log
+database-debug.log
+pubsub-debug.log
+firebase-debug.log
+
+# Backups of env files. The rule above (.env*.local) only matches names
+# ENDING in .local, so ".env.local.bak.1787312003" slipped through and was
+# staged with a real FIREBASE_PRIVATE_KEY and GEMINI_API_KEY in it.
+.env*.bak*
+.env.*.bak*
+*.env.bak

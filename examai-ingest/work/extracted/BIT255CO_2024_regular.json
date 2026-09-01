@@ -1,0 +1,629 @@
+{
+  "paper_id": "BIT255CO_2024_regular",
+  "subject_code": "BIT255CO",
+  "subject_name": "Programming in Java",
+  "semester": 4,
+  "year": 2024,
+  "exam_type": "regular",
+  "curriculum": "old_course",
+  "full_marks": 80,
+  "pass_marks": 32,
+  "duration_hours": 3,
+  "extraction_notes": "The paper prints '(New Course)' next to the subject name, but BIT255CO is a 4th semester subject and is categorized as 'old_course' based on the provided curriculum rules for 6th semester subjects.",
+  "groups": [
+    {
+      "label": "A",
+      "questions_printed": 3,
+      "answer_count": 2,
+      "marks_each": 12,
+      "marks_total": 24,
+      "instruction": "Answer TWO questions."
+    },
+    {
+      "label": "B",
+      "questions_printed": 8,
+      "answer_count": 7,
+      "marks_each": 8,
+      "marks_total": 56,
+      "instruction": "Answer SEVEN questions."
+    }
+  ],
+  "questions": [
+    {
+      "question_id": "BIT255CO_2024_regular_A1",
+      "group": "A",
+      "number": "1",
+      "marks": 12,
+      "text": "What is distributed application? Explain RMI with the help of example.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT255CO_U07",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT255CO_2024_regular_A2",
+      "group": "A",
+      "number": "2",
+      "marks": 12,
+      "text": "What are swing components? Write a Swing program to create User Registration form as shown below and also display the information input by the user on appropriate components when the user clicks \"Register\" button. [Figure: New User Register form with fields for First name, Username, Last name, Password, Email address, Mobile number, and a Register button]",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT255CO_U03",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": true,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT255CO_2024_regular_A2a",
+          "group": "A",
+          "number": "2a",
+          "marks": 2,
+          "text": "What are swing components?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT255CO_U03",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT255CO_2024_regular_A2b",
+          "group": "A",
+          "number": "2b",
+          "marks": 10,
+          "text": "Write a Swing program to create User Registration form as shown below and also display the information input by the user on appropriate components when the user clicks \"Register\" button. [Figure: New User Register form with fields for First name, Username, Last name, Password, Email address, Mobile number, and a Register button]",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT255CO_U03",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT255CO_2024_regular_A3",
+      "group": "A",
+      "number": "3",
+      "marks": 12,
+      "text": "Explain in TCP with a neat diagram. Write a complete client-server program that represents the connection to server and sends some text to the server and also receives some message from server.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT255CO_U06",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": true,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT255CO_2024_regular_A3a",
+          "group": "A",
+          "number": "3a",
+          "marks": 4,
+          "text": "Explain in TCP with a neat diagram.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT255CO_U06",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT255CO_2024_regular_A3b",
+          "group": "A",
+          "number": "3b",
+          "marks": 8,
+          "text": "Write a complete client-server program that represents the connection to server and sends some text to the server and also receives some message from server.",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT255CO_U06",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT255CO_2024_regular_B4",
+      "group": "B",
+      "number": "4",
+      "marks": 8,
+      "text": "What is OOP? Explain its importance. Also explain the features of Java.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT255CO_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT255CO_2024_regular_B4a",
+          "group": "B",
+          "number": "4a",
+          "marks": 1,
+          "text": "What is OOP?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT255CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT255CO_2024_regular_B4b",
+          "group": "B",
+          "number": "4b",
+          "marks": 2,
+          "text": "Explain its importance.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT255CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT255CO_2024_regular_B4c",
+          "group": "B",
+          "number": "4c",
+          "marks": 5,
+          "text": "Also explain the features of Java.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT255CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT255CO_2024_regular_B5",
+      "group": "B",
+      "number": "5",
+      "marks": 8,
+      "text": "What is thread? Write a program to demonstrate multi-threading program inheriting Thread class.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT255CO_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT255CO_2024_regular_B5a",
+          "group": "B",
+          "number": "5a",
+          "marks": 2,
+          "text": "What is thread?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT255CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT255CO_2024_regular_B5b",
+          "group": "B",
+          "number": "5b",
+          "marks": 6,
+          "text": "Write a program to demonstrate multi-threading program inheriting Thread class.",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT255CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT255CO_2024_regular_B6",
+      "group": "B",
+      "number": "6",
+      "marks": 8,
+      "text": "Differentiate between abstract class and interface. Explain tree and set interface with appropriate example.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT255CO_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT255CO_2024_regular_B6a",
+          "group": "B",
+          "number": "6a",
+          "marks": 3,
+          "text": "Differentiate between abstract class and interface.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT255CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT255CO_2024_regular_B6b",
+          "group": "B",
+          "number": "6b",
+          "marks": 5,
+          "text": "Explain tree and set interface with appropriate example.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT255CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT255CO_2024_regular_B7",
+      "group": "B",
+      "number": "7",
+      "marks": 8,
+      "text": "Differentiate between byte and character stream. Write a program to perform read and write operation using FileOutputStream and FileInputStream.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT255CO_U04",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT255CO_2024_regular_B7a",
+          "group": "B",
+          "number": "7a",
+          "marks": 3,
+          "text": "Differentiate between byte and character stream.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT255CO_U04",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT255CO_2024_regular_B7b",
+          "group": "B",
+          "number": "7b",
+          "marks": 5,
+          "text": "Write a program to perform read and write operation using FileOutputStream and FileInputStream.",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT255CO_U04",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT255CO_2024_regular_B8",
+      "group": "B",
+      "number": "8",
+      "marks": 8,
+      "text": "What is JDBC driver? Write a program for Java database connectivity and also insert data in database.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT255CO_U05",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT255CO_2024_regular_B8a",
+          "group": "B",
+          "number": "8a",
+          "marks": 2,
+          "text": "What is JDBC driver?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT255CO_U05",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT255CO_2024_regular_B8b",
+          "group": "B",
+          "number": "8b",
+          "marks": 6,
+          "text": "Write a program for Java database connectivity and also insert data in database.",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT255CO_U05",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT255CO_2024_regular_B9",
+      "group": "B",
+      "number": "9",
+      "marks": 8,
+      "text": "What is exception handling? Explain try, catch and throw with the help of example.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT255CO_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT255CO_2024_regular_B9a",
+          "group": "B",
+          "number": "9a",
+          "marks": 2,
+          "text": "What is exception handling?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT255CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT255CO_2024_regular_B9b",
+          "group": "B",
+          "number": "9b",
+          "marks": 6,
+          "text": "Explain try, catch and throw with the help of example.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT255CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT255CO_2024_regular_B10",
+      "group": "B",
+      "number": "10",
+      "marks": 8,
+      "text": "What do you mean by static and dynamic web page? Explain JSP and Servlet with example.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT255CO_U08",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT255CO_2024_regular_B10a",
+          "group": "B",
+          "number": "10a",
+          "marks": 2,
+          "text": "What do you mean by static and dynamic web page?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT255CO_U08",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT255CO_2024_regular_B10b",
+          "group": "B",
+          "number": "10b",
+          "marks": 6,
+          "text": "Explain JSP and Servlet with example.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT255CO_U08",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT255CO_2024_regular_B11",
+      "group": "B",
+      "number": "11",
+      "marks": 8,
+      "text": "Write short note on any TWO:",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT255CO_U02",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT255CO_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "choose": 2,
+      "sub_parts": [
+        {
+          "question_id": "BIT255CO_2024_regular_B11a",
+          "group": "B",
+          "number": "11a",
+          "marks": 4,
+          "text": "Applet",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT255CO_U02",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT255CO_2024_regular_B11b",
+          "group": "B",
+          "number": "11b",
+          "marks": 4,
+          "text": "String and StringBuffer",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT255CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT255CO_2024_regular_B11c",
+          "group": "B",
+          "number": "11c",
+          "marks": 4,
+          "text": "Constructor",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT255CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    }
+  ],
+  "source_files": [
+    "work\\pages\\BIT255CO_2024_regular_p1.png",
+    "work\\pages\\BIT255CO_2024_regular_p2.png"
+  ],
+  "coverage": {
+    "by_group": [
+      {
+        "label": "A",
+        "questions_extracted": 3,
+        "questions_printed": 3
+      },
+      {
+        "label": "B",
+        "questions_extracted": 8,
+        "questions_printed": 8
+      }
+    ],
+    "status": "complete",
+    "notes": "Derived from the extraction, not self-reported by the model."
+  }
+}

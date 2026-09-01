@@ -1,0 +1,361 @@
+{
+  "paper_id": "BIT353CO_2026_regular",
+  "subject_code": "BIT353CO",
+  "subject_name": "Data Warehousing and Data Mining",
+  "semester": 6,
+  "year": 2026,
+  "exam_type": "regular",
+  "curriculum": "new_course",
+  "full_marks": 80,
+  "pass_marks": 32,
+  "duration_hours": 3,
+  "extraction_notes": "Semester inferred as 6th from 'Sixth Semester/Final'. Question 8, 'Define a multilayer feedforward neural network. How does it differ from a single-layer perceptron?', appears to be out of the syllabus for Data Warehousing and Mining (BIT353CO) and more aligned with Artificial Intelligence (BIT351CO). Units for this question have been left empty as per instructions for subject code mismatch.",
+  "groups": [
+    {
+      "label": "A",
+      "questions_printed": 3,
+      "answer_count": 2,
+      "marks_each": 12,
+      "marks_total": 24,
+      "instruction": "Answer TWO questions."
+    },
+    {
+      "label": "B",
+      "questions_printed": 8,
+      "answer_count": 7,
+      "marks_each": 8,
+      "marks_total": 56,
+      "instruction": "Answer SEVEN questions."
+    }
+  ],
+  "questions": [
+    {
+      "question_id": "BIT353CO_2026_regular_A1",
+      "group": "A",
+      "number": "1",
+      "marks": 12,
+      "text": "Explain Apriori algorithm with its important properties. Derive Association rule of the following transaction table using Apriori algorithm with minimum support 50% and Confidence 75%. [table with ID and Items]",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT353CO_U03",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": true,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT353CO_2026_regular_A1a",
+          "group": "A",
+          "number": "1a",
+          "marks": 3,
+          "text": "Explain Apriori algorithm with its important properties.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT353CO_U03",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT353CO_2026_regular_A1b",
+          "group": "A",
+          "number": "1b",
+          "marks": 9,
+          "text": "Derive Association rule of the following transaction table using Apriori algorithm with minimum support 50% and Confidence 75%. [table with ID and Items]",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT353CO_U03",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT353CO_2026_regular_A2",
+      "group": "A",
+      "number": "2",
+      "marks": 12,
+      "text": "Explain the concept of Classification with an example. List out various classification algorithms and explain any two of them in detail.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT353CO_U05",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT353CO_2026_regular_A3",
+      "group": "A",
+      "number": "3",
+      "marks": 12,
+      "text": "Define clustering? Cluster the following instance of data with the help of k-means clustering algorithm. Given k=2. [table with Customer No, Age, Amount]",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT353CO_U06",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": true,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT353CO_2026_regular_B4",
+      "group": "B",
+      "number": "4",
+      "marks": 8,
+      "text": "Explain Association Rule Mining and the concept of market basket analysis with example.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT353CO_U03",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT353CO_2026_regular_B5",
+      "group": "B",
+      "number": "5",
+      "marks": 8,
+      "text": "Define OLAP. Explain data preprocessing concept in detail.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT353CO_U02",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT353CO_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT353CO_2026_regular_B6",
+      "group": "B",
+      "number": "6",
+      "marks": 8,
+      "text": "Describe data warehouse. Explain its characteristics in brief.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT353CO_U01",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT353CO_U02",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT353CO_2026_regular_B7",
+      "group": "B",
+      "number": "7",
+      "marks": 8,
+      "text": "Explain Multidimensional Association Rules in brief with an example.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT353CO_U04",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT353CO_2026_regular_B8",
+      "group": "B",
+      "number": "8",
+      "marks": 8,
+      "text": "Define a multilayer feedforward neural network. How does it differ from a single-layer perceptron?",
+      "question_type": "written",
+      "units": [],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "notes": "no syllabus unit tagged"
+    },
+    {
+      "question_id": "BIT353CO_2026_regular_B9",
+      "group": "B",
+      "number": "9",
+      "marks": 8,
+      "text": "Explain the difference between hierarchical and partitioning clustering methods. Give examples of algorithms for each.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT353CO_U06",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT353CO_2026_regular_B10",
+      "group": "B",
+      "number": "10",
+      "marks": 8,
+      "text": "Explain Euclidean distance and Manhattan distance with an example.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT353CO_U05",
+          "confidence": "medium"
+        },
+        {
+          "unit_id": "BIT353CO_U06",
+          "confidence": "medium"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT353CO_2026_regular_B11",
+      "group": "B",
+      "number": "11",
+      "marks": 8,
+      "text": "Write short notes on Any TWO:",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT353CO_U05",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT353CO_U01",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT353CO_U06",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "choose": 2,
+      "sub_parts": [
+        {
+          "question_id": "BIT353CO_2026_regular_B11a",
+          "group": "B",
+          "number": "11a",
+          "marks": 4,
+          "text": "K-nearest neighbor classifiers",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT353CO_U05",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT353CO_2026_regular_B11b",
+          "group": "B",
+          "number": "11b",
+          "marks": 4,
+          "text": "Data mining primitives",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT353CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT353CO_2026_regular_B11c",
+          "group": "B",
+          "number": "11c",
+          "marks": 4,
+          "text": "K-medoid clustering",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT353CO_U06",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    }
+  ],
+  "source_files": [
+    "work\\pages\\BIT353CO_2026_regular_p1.png",
+    "work\\pages\\BIT353CO_2026_regular_p2.png"
+  ],
+  "coverage": {
+    "by_group": [
+      {
+        "label": "A",
+        "questions_extracted": 3,
+        "questions_printed": 3
+      },
+      {
+        "label": "B",
+        "questions_extracted": 8,
+        "questions_printed": 8
+      }
+    ],
+    "status": "complete",
+    "notes": "Derived from the extraction, not self-reported by the model."
+  }
+}

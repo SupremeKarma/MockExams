@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           const userData = userSnap.exists() ? userSnap.data() : null;
           
           // 2. Resolve Role
-          let userRole: UserRole = userData?.role || 'student';
+          const userRole: UserRole = userData?.role || 'student';
 
           setRole(userRole);
           setIsAdmin(userRole === 'admin');

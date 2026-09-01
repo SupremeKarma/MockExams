@@ -308,7 +308,7 @@ export class EngagementTracker {
    */
   generateLeaderboard(
     allStudents: StudentEngagementMetrics[],
-    timeframe: "daily" | "weekly" | "alltime"
+    _timeframe: "daily" | "weekly" | "alltime"
   ): {
     rank: number;
     studentId: string;
@@ -359,10 +359,12 @@ export class EngagementTracker {
 
     const nextMilestones: string[] = [];
     if (metrics.currentStreak < 7) {
-      nextMilestones.push(`${7 - metrics.currentStreak} more days for Week Warrior badge`);
+      const days = 7 - metrics.currentStreak;
+      nextMilestones.push(`${days} more day${days === 1 ? "" : "s"} for the Week Warrior badge`);
     }
     if (metrics.examsCompleted < 5) {
-      nextMilestones.push(`${5 - metrics.examsCompleted} exams for strong foundation`);
+      const exams = 5 - metrics.examsCompleted;
+      nextMilestones.push(`${exams} more exam${exams === 1 ? "" : "s"} for a strong foundation`);
     }
     if (metrics.avgScore < 90 && metrics.examsCompleted >= 5) {
       nextMilestones.push("Aim for 90%+ average for Tutor's Choice badge");

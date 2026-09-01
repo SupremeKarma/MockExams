@@ -4,19 +4,33 @@ import { useState, useEffect, use } from "react";
 import { useRouter } from "next/navigation";
 import { db } from "@/lib/firebase";
 import {
-  doc, getDoc, collection, query, where, orderBy, getDocs,
-  updateDoc, deleteDoc, serverTimestamp, addDoc
+  doc,
+  getDoc,
+  collection,
+  query,
+  where,
+  orderBy,
+  getDocs,
+  updateDoc,
+  deleteDoc,
+  serverTimestamp,
+  addDoc,
 } from "firebase/firestore";
 import {
-  ArrowLeft, Plus, Brain, Edit, Trash2, Loader2,
-  CheckCircle, XCircle, BookOpen, Sparkles
+  ArrowLeft,
+  Plus,
+  Edit,
+  Trash2,
+  Loader2,
+  CheckCircle,
+  BookOpen,
 } from "lucide-react";
 import Link from "next/link";
 
 const DIFFICULTY_COLORS: Record<string, string> = {
-  easy: "text-emerald-400 bg-emerald-400/10",
-  medium: "text-amber-400 bg-amber-400/10",
-  hard: "text-rose-400 bg-rose-400/10",
+  easy: "text-emerald-700 bg-emerald-50",
+  medium: "text-amber-700 bg-amber-50",
+  hard: "text-red-700 bg-red-50",
 };
 
 export default function ExamDetailPage({ params }: { params: any }) {
@@ -131,34 +145,34 @@ export default function ExamDetailPage({ params }: { params: any }) {
       {/* Back link */}
       <Link
         href="/admin/exams"
-        className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm font-medium"
+        className="inline-flex items-center gap-2 text-zinc-500 hover:text-zinc-900 transition-colors text-sm font-medium"
       >
         <ArrowLeft className="w-4 h-4" /> Back to Exams
       </Link>
 
       {/* Exam Settings */}
-      <div className="glass-card p-8 rounded-3xl border border-white/10 space-y-6">
+      <div className="glass-card p-8 rounded-xl border border-zinc-200 space-y-6">
         <h2 className="text-xl font-bold flex items-center gap-2">
           <BookOpen className="w-5 h-5 text-primary" /> Exam Settings
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="md:col-span-2 space-y-2">
-            <label className="text-sm font-medium text-slate-400">Exam Title</label>
+            <label className="text-sm font-medium text-zinc-500">Exam Title</label>
             <input
               type="text"
               value={formData.title}
               onChange={e => setFormData({ ...formData, title: e.target.value })}
-              className="w-full p-4 bg-white/5 border border-white/10 rounded-2xl focus:border-primary/50 outline-none transition-all"
+              className="w-full p-4 bg-zinc-50 border border-zinc-200 rounded-lg focus:border-primary/50 outline-none transition-all"
             />
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-400">Category</label>
+            <label className="text-sm font-medium text-zinc-500">Category</label>
             <select
               value={formData.category}
               onChange={e => setFormData({ ...formData, category: e.target.value })}
-              className="w-full p-4 bg-white/5 border border-white/10 rounded-2xl focus:border-primary/50 outline-none transition-all"
+              className="w-full p-4 bg-zinc-50 border border-zinc-200 rounded-lg focus:border-primary/50 outline-none transition-all"
             >
               {["Science","Mathematics","Engineering","Medical","Arts","Competitive"].map(c => (
                 <option key={c} value={c}>{c}</option>
@@ -167,32 +181,32 @@ export default function ExamDetailPage({ params }: { params: any }) {
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-400">Duration (minutes)</label>
+            <label className="text-sm font-medium text-zinc-500">Duration (minutes)</label>
             <input
               type="number" min="5"
               value={formData.duration_minutes}
               onChange={e => setFormData({ ...formData, duration_minutes: parseInt(e.target.value) })}
-              className="w-full p-4 bg-white/5 border border-white/10 rounded-2xl focus:border-primary/50 outline-none transition-all"
+              className="w-full p-4 bg-zinc-50 border border-zinc-200 rounded-lg focus:border-primary/50 outline-none transition-all"
             />
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-400">Passing Score (%)</label>
+            <label className="text-sm font-medium text-zinc-500">Passing Score (%)</label>
             <input
               type="number" min="0" max="100"
               value={formData.passing_score}
               onChange={e => setFormData({ ...formData, passing_score: parseInt(e.target.value) })}
-              className="w-full p-4 bg-white/5 border border-white/10 rounded-2xl focus:border-primary/50 outline-none transition-all"
+              className="w-full p-4 bg-zinc-50 border border-zinc-200 rounded-lg focus:border-primary/50 outline-none transition-all"
             />
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-400">Marks Per Question</label>
+            <label className="text-sm font-medium text-zinc-500">Marks Per Question</label>
             <input
               type="number" min="0.5" step="0.5"
               value={formData.defaultMarksPerQuestion}
               onChange={e => setFormData({ ...formData, defaultMarksPerQuestion: parseFloat(e.target.value) })}
-              className="w-full p-4 bg-white/5 border border-white/10 rounded-2xl focus:border-primary/50 outline-none transition-all"
+              className="w-full p-4 bg-zinc-50 border border-zinc-200 rounded-lg focus:border-primary/50 outline-none transition-all"
             />
           </div>
 
@@ -200,18 +214,18 @@ export default function ExamDetailPage({ params }: { params: any }) {
             <label className="flex items-center gap-3 cursor-pointer select-none">
               <div
                 onClick={() => setFormData(f => ({ ...f, negativeMarkingEnabled: !f.negativeMarkingEnabled }))}
-                className={`w-12 h-6 rounded-full transition-colors relative ${formData.negativeMarkingEnabled ? "bg-primary" : "bg-white/10"}`}
+                className={`w-12 h-6 rounded-full transition-colors relative ${formData.negativeMarkingEnabled ? "bg-primary" : "bg-zinc-100"}`}
               >
                 <span className={`absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform ${formData.negativeMarkingEnabled ? "translate-x-6" : ""}`} />
               </div>
-              <span className="text-sm font-medium text-slate-300">Negative Marking</span>
+              <span className="text-sm font-medium text-zinc-600">Negative Marking</span>
             </label>
             {formData.negativeMarkingEnabled && (
               <input
                 type="number" min="0" step="0.25"
                 value={formData.defaultNegativeMarks}
                 onChange={e => setFormData({ ...formData, defaultNegativeMarks: parseFloat(e.target.value) })}
-                className="w-24 p-2 bg-white/5 border border-white/10 rounded-xl text-sm outline-none"
+                className="w-24 p-2 bg-zinc-50 border border-zinc-200 rounded-xl text-sm outline-none"
                 title="Marks deducted per wrong answer"
               />
             )}
@@ -221,11 +235,11 @@ export default function ExamDetailPage({ params }: { params: any }) {
             <label className="flex items-center gap-3 cursor-pointer select-none">
               <div
                 onClick={() => setFormData(f => ({ ...f, is_published: !f.is_published }))}
-                className={`w-12 h-6 rounded-full transition-colors relative ${formData.is_published ? "bg-emerald-500" : "bg-white/10"}`}
+                className={`w-12 h-6 rounded-full transition-colors relative ${formData.is_published ? "bg-emerald-500" : "bg-zinc-100"}`}
               >
                 <span className={`absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform ${formData.is_published ? "translate-x-6" : ""}`} />
               </div>
-              <span className="text-sm font-medium text-slate-300">
+              <span className="text-sm font-medium text-zinc-600">
                 {formData.is_published ? "Published" : "Draft"}
               </span>
             </label>
@@ -235,7 +249,7 @@ export default function ExamDetailPage({ params }: { params: any }) {
         <button
           onClick={handleSaveExam}
           disabled={saving}
-          className="flex items-center gap-2 px-8 py-3 bg-primary text-white rounded-2xl font-bold hover:opacity-90 transition-all disabled:opacity-50"
+          className="flex items-center gap-2 px-8 py-3 bg-primary text-white rounded-lg font-bold hover:opacity-90 transition-all disabled:opacity-50"
         >
           {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <CheckCircle className="w-4 h-4" />}
           Save Changes
@@ -247,14 +261,14 @@ export default function ExamDetailPage({ params }: { params: any }) {
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-bold">
             Questions
-            <span className="ml-3 text-sm font-normal text-slate-400">
+            <span className="ml-3 text-sm font-normal text-zinc-500">
               ({questions.length} total)
             </span>
           </h2>
           <div className="flex items-center gap-3">
             <Link
               href={`/admin/exams/${examId}/questions/new`}
-              className="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-2xl font-bold hover:opacity-90 transition-all shadow-lg shadow-primary/20"
+              className="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg font-bold hover:opacity-90 transition-all shadow-lg shadow-primary/20"
             >
               <Plus className="w-5 h-5" /> Add New Question
             </Link>
@@ -262,15 +276,15 @@ export default function ExamDetailPage({ params }: { params: any }) {
         </div>
 
         {questions.length === 0 ? (
-          <div className="glass-card p-16 rounded-3xl border border-white/10 text-center text-slate-500">
+          <div className="glass-card p-16 rounded-xl border border-zinc-200 text-center text-zinc-500">
             <BookOpen className="w-12 h-12 mx-auto mb-4 opacity-30" />
-            <p className="font-medium text-lg text-slate-400">No questions yet.</p>
+            <p className="font-medium text-lg text-zinc-500">No questions yet.</p>
             <p className="text-sm mt-1">Start building your exam by adding questions manually.</p>
           </div>
         ) : (
-          <div className="glass-card rounded-2xl border border-white/10 overflow-hidden">
-            <table className="w-full text-left">
-              <thead className="bg-white/5 text-slate-400 text-xs uppercase tracking-widest">
+          <div className="glass-card rounded-lg border border-zinc-200 overflow-x-auto">
+            <table className="w-full text-left min-w-[560px]">
+              <thead className="bg-zinc-50 text-zinc-500 text-xs uppercase tracking-widest">
                 <tr>
                   <th className="p-5 w-12">#</th>
                   <th className="p-5">Question</th>
@@ -279,28 +293,28 @@ export default function ExamDetailPage({ params }: { params: any }) {
                   <th className="p-5 w-28 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-zinc-100">
                 {questions.map((q, idx) => (
-                  <tr key={q.id} className="hover:bg-white/[0.02] transition-colors">
-                    <td className="p-5 text-slate-500 font-bold">{idx + 1}</td>
+                  <tr key={q.id} className="hover:bg-zinc-100 transition-colors">
+                    <td className="p-5 text-zinc-500 font-bold">{idx + 1}</td>
                     <td className="p-5 max-w-xs">
                       <p className="font-medium truncate">{q.question_text}</p>
                     </td>
                     <td className="p-5">
-                      <span className={`text-xs font-bold px-2 py-1 rounded-lg capitalize ${DIFFICULTY_COLORS[q.difficulty] ?? "text-slate-400 bg-white/5"}`}>
+                      <span className={`text-xs font-bold px-2 py-1 rounded-lg capitalize ${DIFFICULTY_COLORS[q.difficulty] ?? "text-zinc-500 bg-zinc-50"}`}>
                         {q.difficulty ?? "—"}
                       </span>
                     </td>
                     <td className="p-5">
-                      <span className="text-xs font-black uppercase px-3 py-1 bg-emerald-400/10 text-emerald-400 rounded-lg">
+                      <span className="text-xs font-bold uppercase px-3 py-1 bg-emerald-50 text-emerald-700 rounded-lg">
                         {q.correct_option}
                       </span>
                     </td>
                     <td className="p-5 text-right">
-                      <div className="flex items-center justify-end gap-3 text-slate-400">
+                      <div className="flex items-center justify-end gap-3 text-zinc-500">
                         <Link
                           href={`/admin/exams/${examId}/questions/${q.id}/edit`}
-                          className="hover:text-white transition-colors"
+                          className="hover:text-zinc-900 transition-colors"
                           title="Edit"
                         >
                           <Edit className="w-4 h-4" />

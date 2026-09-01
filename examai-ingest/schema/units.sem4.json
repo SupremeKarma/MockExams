@@ -1,0 +1,227 @@
+{
+  "semester": 4,
+  "generated_from": "src/data/bitSyllabusData.ts",
+  "subject_count": 5,
+  "unit_count": 46,
+  "subjects": [
+    {
+      "subject_code": "BIT251HS",
+      "subject_name": "Probability and Statistics",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT251HS_U01",
+          "title": "Nature and scope of statistics"
+        },
+        {
+          "unit_id": "BIT251HS_U02",
+          "title": "Data and its collection"
+        },
+        {
+          "unit_id": "BIT251HS_U03",
+          "title": "Classification and tabulation of data"
+        },
+        {
+          "unit_id": "BIT251HS_U04",
+          "title": "Diagrammatic and graphic presentation"
+        },
+        {
+          "unit_id": "BIT251HS_U05",
+          "title": "Measures of central tendency"
+        },
+        {
+          "unit_id": "BIT251HS_U06",
+          "title": "Measures of dispersion"
+        },
+        {
+          "unit_id": "BIT251HS_U07",
+          "title": "Probability"
+        },
+        {
+          "unit_id": "BIT251HS_U08",
+          "title": "Theoretical distribution (Binomial, Poisson, Normal, Hyper-geometric)"
+        },
+        {
+          "unit_id": "BIT251HS_U09",
+          "title": "Estimation theory and testing of hypothesis"
+        },
+        {
+          "unit_id": "BIT251HS_U10",
+          "title": "Chi-Square distribution"
+        },
+        {
+          "unit_id": "BIT251HS_U11",
+          "title": "Correlation and regression analysis"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT252CO",
+      "subject_name": "Computer Organization and Architecture",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT252CO_U01",
+          "title": "Introduction"
+        },
+        {
+          "unit_id": "BIT252CO_U02",
+          "title": "Computer organization and design"
+        },
+        {
+          "unit_id": "BIT252CO_U03",
+          "title": "Control unit design"
+        },
+        {
+          "unit_id": "BIT252CO_U04",
+          "title": "Central processing unit"
+        },
+        {
+          "unit_id": "BIT252CO_U05",
+          "title": "Pipeline and vector processing"
+        },
+        {
+          "unit_id": "BIT252CO_U06",
+          "title": "Computer arithmetic"
+        },
+        {
+          "unit_id": "BIT252CO_U07",
+          "title": "Input and output organization"
+        },
+        {
+          "unit_id": "BIT252CO_U08",
+          "title": "Memory organization"
+        },
+        {
+          "unit_id": "BIT252CO_U09",
+          "title": "Multiprocessor"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT253CO",
+      "subject_name": "Operating System",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT253CO_U01",
+          "title": "Introduction"
+        },
+        {
+          "unit_id": "BIT253CO_U02",
+          "title": "Processes and Threads"
+        },
+        {
+          "unit_id": "BIT253CO_U03",
+          "title": "Memory Management"
+        },
+        {
+          "unit_id": "BIT253CO_U04",
+          "title": "File Systems"
+        },
+        {
+          "unit_id": "BIT253CO_U05",
+          "title": "Input/Output"
+        },
+        {
+          "unit_id": "BIT253CO_U06",
+          "title": "Deadlocks"
+        },
+        {
+          "unit_id": "BIT253CO_U07",
+          "title": "Real Time System"
+        },
+        {
+          "unit_id": "BIT253CO_U08",
+          "title": "Distributed System"
+        },
+        {
+          "unit_id": "BIT253CO_U09",
+          "title": "Case study (UNIX/LINUX/Windows/Android/iOS)"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT254CO",
+      "subject_name": "Database Management System",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT254CO_U01",
+          "title": "Introduction"
+        },
+        {
+          "unit_id": "BIT254CO_U02",
+          "title": "Database System Concepts and Architecture (E-R model)"
+        },
+        {
+          "unit_id": "BIT254CO_U03",
+          "title": "Relational Model"
+        },
+        {
+          "unit_id": "BIT254CO_U04",
+          "title": "SQL (incl. PL/SQL)"
+        },
+        {
+          "unit_id": "BIT254CO_U05",
+          "title": "Integrity Constraints"
+        },
+        {
+          "unit_id": "BIT254CO_U06",
+          "title": "Normalization (1NF-5NF, BCNF)"
+        },
+        {
+          "unit_id": "BIT254CO_U07",
+          "title": "Database Security"
+        },
+        {
+          "unit_id": "BIT254CO_U08",
+          "title": "Transaction and Query Processing (ACID, concurrency, WAL)"
+        },
+        {
+          "unit_id": "BIT254CO_U09",
+          "title": "Backup and Recovery"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT255CO",
+      "subject_name": "Programming in JAVA",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT255CO_U01",
+          "title": "Introduction to Java"
+        },
+        {
+          "unit_id": "BIT255CO_U02",
+          "title": "Applet Programming"
+        },
+        {
+          "unit_id": "BIT255CO_U03",
+          "title": "GUI Programming (AWT/Swing)"
+        },
+        {
+          "unit_id": "BIT255CO_U04",
+          "title": "Java IO"
+        },
+        {
+          "unit_id": "BIT255CO_U05",
+          "title": "JDBC"
+        },
+        {
+          "unit_id": "BIT255CO_U06",
+          "title": "Socket Programming"
+        },
+        {
+          "unit_id": "BIT255CO_U07",
+          "title": "Distributed Application (RMI)"
+        },
+        {
+          "unit_id": "BIT255CO_U08",
+          "title": "Overview of Servlet and JSP"
+        }
+      ]
+    }
+  ]
+}

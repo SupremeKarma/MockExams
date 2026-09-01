@@ -36,7 +36,7 @@ describe("MockExams Integration Tests", () => {
       const start = Date.now();
 
       // Simulate querying a topic hierarchy
-      const query = `SELECT * FROM academic_nodes WHERE path LIKE 'np.pu.cite.bit.sem5%'`;
+      const _query = `SELECT * FROM academic_nodes WHERE path LIKE 'np.pu.cite.bit.sem5%'`;
 
       const duration = Date.now() - start;
 
@@ -213,7 +213,7 @@ describe("MockExams Integration Tests", () => {
       const student2Id = "student-tenant-2";
 
       // Create cards for different students
-      const card1 = await repo.createCard(
+      const _card1 = await repo.createCard(
         student1Id,
         testNodeId,
         "Q1",

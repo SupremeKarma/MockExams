@@ -188,7 +188,7 @@ export async function GET(request: NextRequest) {
 // Mock Data Generator
 // ---------------------------------------------------------------------------
 
-function getMockData(examId: string | null) {
+function _getMockData(examId: string | null) {
   const names = [
     "Aman Mahato", "Binod Kumar", "Sarah Jenkins", "Michael Chen", 
     "Priya Sharma", "David Smith", "Elena Rodriguez", "Yuki Tanaka",

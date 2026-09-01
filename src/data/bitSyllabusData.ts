@@ -15,243 +15,259 @@ export interface SemesterSyllabus {
 
 export const bitSyllabusData: SemesterSyllabus[] = [
   {
+    // Verified against the official Purbanchal University BIT Semester I
+    // course syllabus (current/new course, codes BIT101CO-106CO) —
+    // see bulk-imports/syllabus-sources/ for the source document.
     semester: 1,
     totalCredits: 17,
     subjects: [
       {
-        code: "BIT101",
-        name: "Programming in C",
+        code: "BIT101CO",
+        name: "Fundamentals of Information Technology",
         credits: 3,
         type: "Core",
-        description: "Fundamental procedural programming concepts, pointers, file structures, and memory management in C.",
-        keyUnits: ["Introduction to C & Data Types", "Control Structures & Loops", "Functions & Storage Classes", "Arrays & String Handling", "Pointers & DMA", "Structures & File I/O"]
+        description: "Computer components and history, hardware and storage, software and databases, networks and the internet, and emerging IT trends.",
+        keyUnits: ["Introduction to Computer", "Basic Computer Organization and Computer Peripherals", "Computer Storage", "Computer Software", "Introduction to Database", "Networks and Internet", "Information Security", "Computer Hardware", "Technological trends in Information Technology"]
       },
       {
-        code: "BIT102",
+        code: "BIT102HS",
         name: "Mathematics-I",
         credits: 3,
         type: "Core",
-        description: "Differential and integral calculus, infinite series, matrix algebra, and analytical geometry.",
-        keyUnits: ["Derivatives & Mean Value Theorems", "Indefinite & Definite Integrals", "Matrices & Determinants", "Vectors & Analytical 3D Geometry", "Taylor & Maclaurin Expansions"]
+        description: "Matrix algebra, coordinate systems and geometry, vectors and solid geometry, and applications of differentiation.",
+        keyUnits: ["Matrix Algebra", "Coordinate Systems", "Elementary Coordinate Geometry", "Vectors and Solid Geometry", "Applications of Differentiation", "Applications of the Definite Integral", "Functions of Several Variables"]
       },
       {
-        code: "BIT103",
+        code: "BIT103HS",
+        name: "Technical Communication",
+        credits: 3,
+        type: "Core",
+        description: "Oral presentation skills, intensive and extensive reading, and professional business/technical writing.",
+        keyUnits: ["Oral Communication", "Reading: Intensive and Extensive", "Writing"]
+      },
+      {
+        code: "BIT104HS",
+        name: "Society and Ethics in IT",
+        credits: 3,
+        type: "Core",
+        description: "Sociology fundamentals, social and cultural change, Nepali society, professional ethics in IT, and emotional intelligence.",
+        keyUnits: ["Introduction", "Social and Cultural Change", "Understanding Development", "Process of Transformation", "Historical Characteristics of Nepali Society and Culture", "Ethical issues in IT", "Introduction to Emotional Intelligence", "Social Management and Responsibility"]
+      },
+      {
+        code: "BIT105CO",
+        name: "Computer Programming in C",
+        credits: 3,
+        type: "Core",
+        description: "Procedural programming fundamentals in C — control flow, arrays, functions, pointers, structures, and file handling.",
+        keyUnits: ["Problem Solving with Computer", "Elements of C", "Input and Output", "Operators and Expression", "Control Statements", "Arrays", "Functions", "Pointers", "Structure and Union", "Files and File Handling in C", "Introduction to Graphics"]
+      },
+      {
+        code: "BIT106CO",
+        name: "Project-I",
+        credits: 2,
+        type: "Project / Practical",
+        description: "Group software project (2-3 students) built in C, covering requirement gathering through implementation and oral defense — 45 lab hours.",
+        keyUnits: ["Information Gathering & Requirements", "Algorithms & Flowcharts", "Coding & Implementation", "Documentation & Final Presentation"]
+      }
+    ]
+  },
+  {
+    // Verified against the official Purbanchal University BIT Semester II
+    // (current/new course) syllabus — codes BIT151HS-156CO — see
+    // bulk-imports/syllabus-sources/ for the source document.
+    semester: 2,
+    totalCredits: 17,
+    subjects: [
+      {
+        code: "BIT151HS",
+        name: "Mathematics-II",
+        credits: 3,
+        type: "Core",
+        description: "Multiple integrals, differential equations, Fourier series, and functions of a complex variable.",
+        keyUnits: ["Multiple Integrals", "Differential Equations of the First Order", "Linear Differential Equations", "Fourier Series and Integrals", "Functions of a Complex Variable", "Complex Series, Residues and Poles"]
+      },
+      {
+        code: "BIT152CO",
         name: "Digital Logic",
         credits: 3,
         type: "Core",
-        description: "Combinational and sequential digital systems, logic gate minimization, and register design.",
-        keyUnits: ["Number Systems & Codes", "Boolean Algebra & K-Maps", "Combinational Circuits (Adders, MUX)", "Sequential Circuits & Flip-Flops", "Registers & Counters Design"]
+        description: "Number systems, Boolean algebra, combinational and sequential circuit design, registers and counters.",
+        keyUnits: ["Number Systems", "Boolean Algebra and Logic Gates", "Simplification of Boolean Functions", "Combinational Logic", "Sequential Logic", "Registers and Counters"]
       },
       {
-        code: "BIT104",
-        name: "Fundamentals of IT",
+        code: "BIT153HS",
+        name: "Discrete Structure",
         credits: 3,
         type: "Core",
-        description: "Computer hardware architecture, operating system basics, internet protocols, and software applications.",
-        keyUnits: ["Computer Generations & Evolution", "CPU & Memory Hierarchy", "I/O Devices & Bus Architecture", "Operating Systems Overview", "Internet & Web Concepts"]
+        description: "Set theory, counting, logic, relations, graphs and trees, order relations, and automata theory.",
+        keyUnits: ["Set Theory and Matrices", "Function and Counting", "Logic", "Relation and Digraphs", "Graph and Tree", "Order Relation and Structure", "Automata, Language and Grammar"]
       },
       {
-        code: "BIT105",
-        name: "Technical Communication (English)",
+        code: "BIT154CO",
+        name: "Object-Oriented Programming in C++",
         credits: 3,
         type: "Core",
-        description: "Professional technical writing, grammar, engineering report formulation, and oral presentations.",
-        keyUnits: ["Grammar & Sentence Mechanics", "Technical Report Writing", "Business Correspondence & Email", "Proposal Formulation", "Oral Presentation & Seminars"]
+        description: "C++ OOP fundamentals — classes, constructors, operator overloading, inheritance, polymorphism, templates, and file handling.",
+        keyUnits: ["Introduction to Object Oriented Programming", "C++ Programming Concept", "Functions Used in C++", "Classes and Objects", "Constructor & Destructor", "Operator Overloading", "Inheritance", "Virtual Functions and Polymorphism", "File Handling", "Templates and Namespaces", "Exception Handling"]
       },
       {
-        code: "BIT106",
-        name: "C Programming Lab",
+        code: "BIT155MS",
+        name: "Financial Management and Accounting",
+        credits: 3,
+        type: "Core",
+        description: "Financial management fundamentals, capital budgeting and structure, and core accounting processes and statements.",
+        keyUnits: ["Nature of Financial Management", "Time Value of Money", "Capital Budgeting", "Working Capital", "Capital Structure", "Dividends", "Nature of Accounting", "Accounting Process", "Financial Statement", "Financial Analysis", "Cash Flow Statement - Direct Method"]
+      },
+      {
+        code: "BIT156CO",
+        name: "Project-II",
         credits: 2,
         type: "Project / Practical",
-        description: "Hands-on terminal programming, algorithm implementation, and debugging in C.",
-        keyUnits: ["Lab Exercises 1-15", "Mini CLI Project", "Viva-voce Examination"]
+        description: "Group software project (2-3 students) built using Object-Oriented Programming in C++ — 45 lab hours.",
+        keyUnits: ["Topic Selection & Information Gathering", "System Requirements & Specifications", "Coding & Implementation", "Documentation & Final Presentation"]
       }
     ]
   },
   {
-    semester: 2,
-    totalCredits: 18,
-    subjects: [
-      {
-        code: "BIT201",
-        name: "Object Oriented Programming in C++",
-        credits: 3,
-        type: "Core",
-        description: "Object-oriented paradigm, encapsulation, inheritance, polymorphism, templates, and STL.",
-        keyUnits: ["Principles of OOP", "Classes & Objects", "Operator Overloading & Type Conversion", "Inheritance & Virtual Functions", "Templates & Exception Handling", "Streams & File I/O"]
-      },
-      {
-        code: "BIT202",
-        name: "Data Structures & Algorithms",
-        credits: 3,
-        type: "Core",
-        description: "Linear and non-linear data structures, trees, graphs, sorting algorithms, and complexity analysis.",
-        keyUnits: ["Arrays, Stacks & Queues", "Linked Lists (Singly/Doubly/Circular)", "Trees & Binary Search Trees (BST)", "Graph Algorithms (BFS, DFS)", "Sorting & Searching Complexities"]
-      },
-      {
-        code: "BIT203",
-        name: "Mathematics-II (Linear Algebra & Discrete Math)",
-        credits: 3,
-        type: "Core",
-        description: "Set theory, relations, graph theory, propositional logic, and combinatorics.",
-        keyUnits: ["Propositional & Predicate Logic", "Sets, Relations & Functions", "Mathematical Induction & Recursion", "Graph Theory & Trees", "Linear Vector Spaces"]
-      },
-      {
-        code: "BIT204",
-        name: "Microprocessor & Assembly Language",
-        credits: 3,
-        type: "Core",
-        description: "8085 / 8086 microprocessor internal architecture, instruction sets, addressing modes, and bus interfacing.",
-        keyUnits: ["8085 Microprocessor Architecture", "Addressing Modes & Instruction Set", "Assembly Language Programming", "Memory & I/O Interfacing", "Interrupt Processing & Controllers"]
-      },
-      {
-        code: "BIT205",
-        name: "Financial Accounting & Management",
-        credits: 3,
-        type: "Core",
-        description: "Accounting principles, journal entries, balance sheets, cash flow analysis, and budget planning.",
-        keyUnits: ["Introduction to Financial Accounting", "Double Entry Bookkeeping", "Trial Balance & Financial Statements", "Cost Accounting & Cost-Volume-Profit", "Financial Ratio Analysis"]
-      },
-      {
-        code: "BIT206",
-        name: "OOP & DSA Practical Lab",
-        credits: 3,
-        type: "Project / Practical",
-        description: "Implementation of complex tree, graph, and object hierarchies in C++.",
-        keyUnits: ["C++ OOP Experiments", "DSA Implementations", "Project Submission & Viva"]
-      }
-    ]
-  },
-  {
+    // Verified against the official Purbanchal University BIT Semester III
+    // (current/new course) syllabus — codes BIT201HS-206CO — see
+    // bulk-imports/syllabus-sources/ for the source document.
     semester: 3,
-    totalCredits: 18,
+    totalCredits: 17,
     subjects: [
       {
-        code: "BIT301",
-        name: "Database Management System (DBMS)",
-        credits: 3,
-        type: "Core",
-        description: "Relational database design, normalization, SQL, transaction management, and indexing.",
-        keyUnits: ["DBMS Concepts & ER Modeling", "Relational Model & Relational Algebra", "SQL Queries & Views", "Normalization (1NF to BCNF)", "Transaction, ACID & Concurrency Control", "Storage, B-Tree & Indexing"]
-      },
-      {
-        code: "BIT302",
-        name: "Computer Networks",
-        credits: 3,
-        type: "Core",
-        description: "OSI and TCP/IP protocol suites, IP addressing, routing algorithms, transport protocols, and DNS.",
-        keyUnits: ["Network Topologies & Reference Models", "Data Link Layer & Error Control", "Network Layer & IPv4/IPv6 Routing", "Transport Layer (TCP/UDP, Flow Control)", "Application Layer (HTTP, DNS, SMTP)"]
-      },
-      {
-        code: "BIT303",
-        name: "Microcontroller & Embedded Systems",
-        credits: 3,
-        type: "Core",
-        description: "8051 and AVR microcontrollers, timer programming, interrupts, serial communication, and peripheral interfacing.",
-        keyUnits: ["8051 Architecture & Pin Configuration", "Assembly & Embedded C Programming", "Timer/Counter & Serial Port (UART)", "Interrupts & External ISR Handling", "Interfacing Sensors, LCD, Motors"]
-      },
-      {
-        code: "BIT304",
-        name: "Probability & Statistics",
-        credits: 3,
-        type: "Core",
-        description: "Probability distributions, hypothesis testing, correlation, regression, and statistical inference.",
-        keyUnits: ["Descriptive Statistics & Probability", "Discrete & Continuous Distributions", "Sampling & Estimation", "Hypothesis Testing (z, t, Chi-square, ANOVA)", "Correlation & Linear Regression"]
-      },
-      {
-        code: "BIT305",
-        name: "System Analysis & Design (SAD)",
-        credits: 3,
-        type: "Core",
-        description: "System development lifecycle, requirement analysis, DFDs, UML diagrams, and software testing.",
-        keyUnits: ["SDLC & Feasibility Analysis", "Requirement Gathering & Fact Finding", "Data Flow Diagrams (DFD) & Dictionaries", "UML Modeling (Use Case, Sequence, Class)", "System Testing & Implementation"]
-      },
-      {
-        code: "BIT306",
-        name: "DBMS & Network Lab",
-        credits: 3,
-        type: "Project / Practical",
-        description: "SQL database programming, network packet analysis with Wireshark, and socket programming.",
-        keyUnits: ["SQL Lab Practical", "Packet Sniffing & Subnetting", "Embedded Systems Lab"]
-      }
-    ]
-  },
-  {
-    semester: 4,
-    totalCredits: 18,
-    subjects: [
-      {
-        code: "BIT401",
-        name: "Operating Systems",
-        credits: 3,
-        type: "Core",
-        description: "Process management, CPU scheduling, deadlocks, memory virtualization, and file systems.",
-        keyUnits: ["OS Structures & System Calls", "Process & Thread Management", "CPU Scheduling Algorithms", "Deadlock Detection & Avoidance", "Memory Paging & Virtual Memory", "File System & Disk Scheduling"]
-      },
-      {
-        code: "BIT402",
-        name: "Java Programming",
-        credits: 3,
-        type: "Core",
-        description: "Core Java, multithreading, collections, JDBC, GUI programming, and exception handling.",
-        keyUnits: ["Java Basics & OOP in Java", "Exception Handling & Packages", "Multithreading & Concurrency", "Java Collections Framework", "GUI Programming (Swing/JavaFX)", "Database Connectivity (JDBC)"]
-      },
-      {
-        code: "BIT403",
+        code: "BIT201HS",
         name: "Numerical Methods",
         credits: 3,
         type: "Core",
-        description: "Numerical root finding, interpolation, numerical integration, and solving ODEs.",
-        keyUnits: ["Roots of Non-Linear Equations", "Interpolation & Curve Fitting", "Numerical Differentiation & Integration", "System of Linear Equations (Gauss-Seidel)", "Numerical Solution of ODEs (Euler, RK-4)"]
+        description: "Numerical solutions to nonlinear equations, interpolation, linear systems, differentiation/integration, and ODEs.",
+        keyUnits: ["Errors in Numerical Computation", "Solution of Nonlinear Equations (Bisection, Newton-Raphson)", "Interpolation & Least Square Methods", "System of Linear Equations (Direct & Indirect Methods)", "Numerical Differentiation & Integration", "Numerical Solution of ODEs (Euler, Runge-Kutta)"]
       },
       {
-        code: "BIT404",
-        name: "Computer Architecture & Organization",
+        code: "BIT202CO",
+        name: "Microcontroller",
         credits: 3,
         type: "Core",
-        description: "CPU datapath, pipelining, control unit design, cache memory, and I/O organization.",
-        keyUnits: ["Register Transfer & Micro-operations", "Basic Computer Organization & Design", "Central Processing Unit & Pipelining", "Computer Arithmetic (Booth's Algorithm)", "Memory Hierarchy & Cache Mapping"]
+        description: "8051 microcontroller architecture, instruction set, I/O and timer programming, interrupts, and peripheral interfacing.",
+        keyUnits: ["Introduction to Microcontroller & 8051 Architecture", "Instruction Set & Addressing Modes", "Stack, I/O Port Interfacing & Programming", "Timers and Serial Port", "Interrupts and Interfacing Applications"]
       },
       {
-        code: "BIT405",
-        name: "Web Technology-I",
+        code: "BIT203CO",
+        name: "Data Structure and Algorithm",
         credits: 3,
         type: "Core",
-        description: "HTML5, CSS3, JavaScript, DOM manipulation, responsive UI, and backend scripting in PHP.",
-        keyUnits: ["HTML5 Semantic Tags & CSS3", "JavaScript & DOM Manipulation", "Client-side Validation & Events", "PHP Syntax & Control Structures", "MySQL Database Integration via PHP"]
+        description: "Core data structures — stacks, queues, lists, trees, graphs — plus sorting, searching, and algorithm efficiency.",
+        keyUnits: ["Introduction & Algorithm Efficiency", "Stack & Queue", "List and Linked List", "Recursion", "Trees (BST, AVL, Huffman)", "Sorting (Quick, Merge, Heap)", "Searching, Hashing & Graphs (DFS, BFS, Dijkstra)"]
       },
       {
-        code: "BIT406",
-        name: "Minor Project-I",
+        code: "BIT204CO",
+        name: "Computer Network and Data Communication",
         credits: 3,
+        type: "Core",
+        description: "Networking fundamentals, the OSI/TCP-IP layered model, data link/network/transport layers, and network security.",
+        keyUnits: ["Introduction to Networking & Data Communication", "Layered Network Architecture (OSI, TCP/IP)", "Data Transmission & Physical Layer", "Data Link Control (Error Detection, HDLC)", "Network Layer (IP Addressing, Subnetting, Routing)", "Transport & Application Layer", "Network Security (Cryptography, SSL/TLS, Firewall)"]
+      },
+      {
+        code: "BIT205CO",
+        name: "System Analysis and Design",
+        credits: 3,
+        type: "Core",
+        description: "SDLC models, process/conceptual modeling with DFDs and ERDs, systems analysis and design, and object-oriented analysis with UML.",
+        keyUnits: ["Overview of Systems Analysis & Design (SDLC Models)", "Process & Conceptual Modeling (DFD, ERD)", "Logic Modeling (Decision Table/Tree)", "Systems Analysis (Requirements, Feasibility)", "Systems Design & Implementation", "Object-Oriented Analysis & Design (UML)"]
+      },
+      {
+        code: "BIT206CO",
+        name: "Project-III",
+        credits: 2,
         type: "Project / Practical",
-        description: "Hands-on software application development with full documentation and presentation.",
-        keyUnits: ["Topic Selection & Proposal", "Software Implementation", "Final Documentation & Defense"]
+        description: "Group project (2-3 students) developing a microcontroller (BIT202CO)-based system — 45 lab hours.",
+        keyUnits: ["Title Identification & Proposal Writing", "Mid-Term Presentation", "Pre-Final Submission & Final Presentation"]
       }
     ]
   },
   {
-    semester: 5,
-    totalCredits: 18,
+    // Verified against the official Purbanchal University BIT Semester IV
+    // (current/new course) syllabus — codes BIT251HS-256CO — see
+    // bulk-imports/syllabus-sources/ for the source document.
+    semester: 4,
+    totalCredits: 17,
     subjects: [
       {
-        code: "BIT501",
-        name: "Computer Graphics",
+        code: "BIT251HS",
+        name: "Probability and Statistics",
         credits: 3,
         type: "Core",
-        description: "Rasterization algorithms, 2D/3D transformations, clipping, illumination, and OpenGL shaders.",
-        keyUnits: ["Display Devices & Raster Graphics", "Line & Circle Drawing Algorithms", "2D Transformations & Clipping", "3D Transformations & Projections", "Visible Surface Detection (Z-Buffer)", "Illumination & Shading Models"]
+        description: "Descriptive statistics, probability theory, theoretical distributions, estimation, hypothesis testing, and correlation/regression.",
+        keyUnits: ["Nature and scope of statistics", "Data and its collection", "Classification and tabulation of data", "Diagrammatic and graphic presentation", "Measures of central tendency", "Measures of dispersion", "Probability", "Theoretical distribution (Binomial, Poisson, Normal, Hyper-geometric)", "Estimation theory and testing of hypothesis", "Chi-Square distribution", "Correlation and regression analysis"]
       },
       {
-        code: "BIT502",
-        name: "Cryptography & Network Security",
+        code: "BIT252CO",
+        name: "Computer Organization and Architecture",
         credits: 3,
         type: "Core",
-        description: "Classical and modern ciphers, public key cryptosystems, digital signatures, hash functions, and TLS.",
-        keyUnits: ["Security Concepts & Attacks", "Classical Encryption Techniques", "Symmetric Ciphers (DES, AES)", "Public Key Cryptography (RSA, ECC)", "Hash Functions & Digital Signatures", "Network Security Protocols (TLS, IPSec)"]
+        description: "Computer instruction sets, control unit design, CPU architecture, pipelining, memory organization, and multiprocessors.",
+        keyUnits: ["Introduction", "Computer organization and design", "Control unit design", "Central processing unit", "Pipeline and vector processing", "Computer arithmetic", "Input and output organization", "Memory organization", "Multiprocessor"]
       },
       {
-        code: "BIT503",
+        code: "BIT253CO",
+        name: "Operating System",
+        credits: 3,
+        type: "Core",
+        description: "Process/thread management, memory management, file systems, I/O, deadlocks, and distributed systems.",
+        keyUnits: ["Introduction", "Processes and Threads", "Memory Management", "File Systems", "Input/Output", "Deadlocks", "Real Time System", "Distributed System", "Case study (UNIX/LINUX/Windows/Android/iOS)"]
+      },
+      {
+        code: "BIT254CO",
+        name: "Database Management System",
+        credits: 3,
+        type: "Core",
+        description: "DBMS architecture, relational model, SQL, normalization, database security, and transaction/query processing.",
+        keyUnits: ["Introduction", "Database System Concepts and Architecture (E-R model)", "Relational Model", "SQL (incl. PL/SQL)", "Integrity Constraints", "Normalization (1NF-5NF, BCNF)", "Database Security", "Transaction and Query Processing (ACID, concurrency, WAL)", "Backup and Recovery"]
+      },
+      {
+        code: "BIT255CO",
+        name: "Programming in JAVA",
+        credits: 3,
+        type: "Core",
+        description: "Core Java OOP, GUI programming, file I/O, JDBC, socket programming, and Servlet/JSP.",
+        keyUnits: ["Introduction to Java", "Applet Programming", "GUI Programming (AWT/Swing)", "Java IO", "JDBC", "Socket Programming", "Distributed Application (RMI)", "Overview of Servlet and JSP"]
+      },
+      {
+        code: "BIT256CO",
+        name: "Project-IV",
+        credits: 2,
+        type: "Project / Practical",
+        description: "Group application software project (up to 3 students) developed in Java, with proposal, mid-term, and final presentation.",
+        keyUnits: ["Title Identification & Proposal Writing", "Mid-Term Presentation", "Pre-Final Submission & Final Presentation"]
+      }
+    ]
+  },
+  {
+
+    // Verified against the official Purbanchal University BIT course cycle
+    // (Year III / Semester I table) in
+    // BIT-1year-I-II-Sem-with-all-course-cycle.pdf — codes BIT301HS-306CO,
+    // 17 credits.
+    //
+    // This block previously held INVENTED codes (BIT501-BIT506) and three
+    // subjects that do not exist in the PU curriculum at all: "Advanced Web
+    // Technology", "Organization Behavior & HR Management", and "Computer
+    // Graphics & Web Lab" — while Internet of Things and Project-V were
+    // missing entirely. Students on semester 5 were reading a syllabus that
+    // does not exist.
+    //
+    // keyUnits: kept only where the subject itself was already correct
+    // (Computer Graphics, Cryptography & Network Security, Research
+    // Methodology). Left EMPTY for BIT304CO, BIT305CO and BIT306CO rather
+    // than guessed — the course-cycle table gives codes, credits and hours
+    // but not unit contents, and inventing units would poison the tagging
+    // vocabulary that examai-ingest maps questions onto. Fill these in from
+    // the official Semester V syllabus PDF when it arrives.
+    semester: 5,
+    totalCredits: 17,
+    subjects: [
+      {
+        code: "BIT301HS",
         name: "Research Methodology",
         credits: 3,
         type: "Core",
@@ -259,150 +275,183 @@ export const bitSyllabusData: SemesterSyllabus[] = [
         keyUnits: ["Foundations of Scientific Research", "Literature Review & Research Gap", "Research Design & Sampling Strategies", "Hypothesis Formulation & Testing", "Data Analysis & Interpretation", "Report Writing & Publication Ethics"]
       },
       {
-        code: "BIT504",
-        name: "Advanced Web Technology",
+        code: "BIT302CO",
+        name: "Computer Graphics",
         credits: 3,
         type: "Core",
-        description: "Modern JavaScript frameworks (React/Next.js), REST APIs, MVC architecture, authentication, and state management.",
-        keyUnits: ["Modern ES6+ JavaScript & TypeScript", "React Framework, Hooks & State", "Next.js App Router & SSR", "RESTful API Design & Express.js", "Authentication (JWT, OAuth) & Security"]
+        description: "Rasterization algorithms, 2D/3D transformations, clipping, illumination, and shading.",
+        keyUnits: ["Display Devices & Raster Graphics", "Line & Circle Drawing Algorithms", "2D Transformations & Clipping", "3D Transformations & Projections", "Visible Surface Detection (Z-Buffer)", "Illumination & Shading Models"]
       },
       {
-        code: "BIT505",
-        name: "Organization Behavior & HR Management",
+        code: "BIT303CO",
+        name: "Cryptography and Network Security",
         credits: 3,
         type: "Core",
-        description: "Workplace psychology, leadership styles, conflict resolution, motivation theories, and corporate culture.",
-        keyUnits: ["Fundamentals of OB", "Individual Behavior & Motivation", "Group Dynamics & Team Building", "Leadership Styles & Power Politics", "Organizational Culture & Change"]
+        description: "Classical and modern ciphers, public key cryptosystems, digital signatures, hash functions, and network security protocols.",
+        keyUnits: ["Security Concepts & Attacks", "Classical Encryption Techniques", "Symmetric Ciphers (DES, AES)", "Public Key Cryptography (RSA, ECC)", "Hash Functions & Digital Signatures", "Network Security Protocols (TLS, IPSec)"]
       },
       {
-        code: "BIT506",
-        name: "Computer Graphics & Web Lab",
+        code: "BIT304CO",
+        name: "Web Technology",
         credits: 3,
+        type: "Core",
+        description: "Web technology fundamentals. Unit contents pending the official Semester V syllabus PDF — the previous entry described a React/Next.js course that is not the PU syllabus.",
+        keyUnits: []
+      },
+      {
+        code: "BIT305CO",
+        name: "Internet of Things",
+        credits: 3,
+        type: "Core",
+        description: "IoT fundamentals. Unit contents pending the official Semester V syllabus PDF; this subject was missing from the data entirely.",
+        keyUnits: []
+      },
+      {
+        code: "BIT306CO",
+        name: "Project-V",
+        credits: 2,
         type: "Project / Practical",
-        description: "OpenGL 2D/3D programming and full-stack web application development.",
-        keyUnits: ["Graphics Algorithms Lab in C/C++", "Fullstack Web App Deployment", "Practical Evaluation"]
+        description: "Group project carrying the semester's practical assessment. Evaluation criteria pending the official Semester V syllabus PDF.",
+        keyUnits: []
       }
     ]
   },
   {
+    // Verified against the official Purbanchal University BIT VI Semester
+    // course syllabus (BIT351CO/352CO/353CO/354CO/355CO/356CO, New Course)
+    // — see bulk-imports/ for the source document and converted papers.
     semester: 6,
     totalCredits: 17,
     subjects: [
       {
-        code: "BIT601",
-        name: "Software Engineering",
-        credits: 3,
-        type: "Core",
-        description: "Agile methodologies, software architecture, design patterns, automated testing, and CI/CD pipelines.",
-        keyUnits: ["Agile, Scrum & SDLC Models", "Requirements Engineering (SRS)", "Software Architectural Patterns", "Object-Oriented Design & Patterns", "Software Quality Assurance & Testing", "DevOps & CI/CD Fundamentals"]
-      },
-      {
-        code: "BIT602",
+        code: "BIT351CO",
         name: "Artificial Intelligence",
         credits: 3,
         type: "Core",
-        description: "State-space search, heuristic algorithms, knowledge representation, logic inference, and neural networks.",
-        keyUnits: ["AI Agents & Problem Formulation", "Informed & Uninformed Search (A*, Minimax)", "Knowledge Representation & Logic", "Inference & Resolution in First-Order Logic", "Introduction to Machine Learning & Neural Nets"]
+        description: "AI foundations from agents and search through knowledge representation, learning, reasoning, expert systems, neural networks, and NLP.",
+        keyUnits: ["Introduction & Applications of AI", "Agents: PEAS, Rationality & Agent Types", "Uninformed & Informed Search (BFS, DFS, A*, Hill Climbing)", "Adversarial Search & Constraint Satisfaction (Minimax, Alpha-Beta, CSP)", "Knowledge Representation (Logic, Semantic Nets, FOPL)", "Learning Systems (Decision Trees, Reinforcement Learning)", "Reasoning (Monotonic, Bayesian, Case-Based)", "Expert Systems (Inference Engine, Forward/Backward Chaining)", "Artificial Neural Networks (Perceptron, Backpropagation)", "Natural Language Processing"]
       },
       {
-        code: "BIT603",
-        name: "Management Information Systems (MIS)",
+        code: "BIT352CO",
+        name: "Management Information System (MIS)",
         credits: 3,
         type: "Core",
-        description: "Enterprise systems, ERP, decision support systems (DSS), and strategic information technology planning.",
-        keyUnits: ["MIS Concepts & Frameworks", "Enterprise Resource Planning (ERP)", "Customer Relationship Management (CRM)", "Decision Support & Business Intelligence", "Ethical & Social Issues in Information Systems"]
+        description: "Information systems in global business, IT infrastructure, decision support and executive systems, and the strategic/security role of MIS.",
+        keyUnits: ["Information Systems in Global Business Today", "Global E-Business & Collaboration", "Information Systems Organization & Strategy (Value Chain)", "IT Infrastructure & Platform Trends", "Business Intelligence Foundations", "Decision Support Systems (DSS) & Executive Information Systems (EIS)", "Business Information Systems (Marketing, Manufacturing, Finance)", "Security of Information Systems", "Enterprise Systems, SCM & CRM", "Strategic Information Systems & SISP"]
       },
       {
-        code: "BIT604",
-        name: "E-Commerce & Digital Marketing",
+        code: "BIT353CO",
+        name: "Data Warehousing and Mining",
         credits: 3,
-        type: "Elective",
-        description: "Online business models, payment gateways, search engine optimization (SEO), and digital ad campaigns.",
-        keyUnits: ["E-Commerce Business Models", "Payment Gateways & Electronic Wallets", "Security & Encryption in E-Commerce", "Digital Marketing Channels & SEO", "Social Media Marketing & Analytics"]
+        type: "Core",
+        description: "Data warehouse architecture and OLAP, plus core data mining techniques — association rule mining, classification, and cluster analysis.",
+        keyUnits: ["Introduction to Data Mining & Data Warehousing", "Data Warehouse & OLAP Technology, KDD", "Mining Association Rules (Apriori, Market Basket Analysis)", "Multidimensional & Multilevel Association Rules", "Classification & Prediction (Decision Trees, Bayesian, k-NN)", "Cluster Analysis (k-Means, k-Medoids, Hierarchical Methods)"]
       },
       {
-        code: "BIT605",
-        name: "Minor Project-II",
-        credits: 5,
+        code: "BIT354CO",
+        name: "Simulation and Modeling",
+        credits: 3,
+        type: "Core",
+        description: "Simulation concepts and system types, the Monte Carlo method, random number generation and randomness testing, and analyzing simulation output.",
+        keyUnits: ["Concepts of Simulation (Types, Advantages, Limitations)", "Monte Carlo Method", "Simulation of Continuous Systems (Queuing, Markov Chains)", "Random Numbers: Generation & Testing (Chi-Square, Poker Test)", "Analysis of Simulation Output & Replication of Runs", "Simulation Languages & Discrete/Continuous Modeling"]
+      },
+      {
+        code: "BIT355CO",
+        name: "Software Engineering",
+        credits: 3,
+        type: "Core",
+        description: "The software engineering lifecycle — process models, project management, requirements, design, testing, and quality metrics.",
+        keyUnits: ["Introduction to Software Engineering", "Process Models (Waterfall, Prototyping, RAD, Spiral, Agile)", "Software Project Management (4Ps, COCOMO, Risk, Scheduling)", "Software Requirements & Specification", "Software Design (Principles, Architecture Types)", "Software Testing (Black-Box, White-Box, V&V)", "Metrics for Process & Product Quality (ISO 9000)", "SE Trends: Agile, XP, Cloud Computing, SOA"]
+      },
+      {
+        code: "BIT356CO",
+        name: "Project-VI",
+        credits: 2,
         type: "Project / Practical",
-        description: "Comprehensive software engineering project with live deployment and university defense.",
-        keyUnits: ["Requirement Gathering & SRS", "System Architecture & Coding", "Automated Testing Suite", "Final Defense & Demonstration"]
+        description: "Group web-based application project (up to 3 students) built with server-side scripting, on a topic related to Artificial Intelligence or Data Mining — 45 lab hours, evaluated across title, mid-term, and pre-final presentations.",
+        keyUnits: ["Title Presentation", "Mid-Term Presentation", "Server-Side Web Application Development", "AI or Data Mining-Related Project Topic", "Pre-Final Submission & Presentation"]
       }
     ]
   },
   {
+    // Verified against the official Purbanchal University BIT Semester VII
+    // (current/new course) syllabus — codes BIT401CO-403CO plus one of three
+    // specialization tracks — see bulk-imports/syllabus-sources/ for source.
     semester: 7,
-    totalCredits: 16,
+    totalCredits: 15,
     subjects: [
       {
-        code: "BIT701",
-        name: "Mobile Application Development",
+        code: "BIT401CO",
+        name: "Network Programming",
         credits: 3,
         type: "Core",
-        description: "Native and cross-platform mobile app development, state management, sensors, and cloud sync.",
-        keyUnits: ["Mobile OS Architecture (Android/iOS)", "UI Design & Layout Components", "Activity Lifecycle & State Management", "Sensors, Camera & Location Services", "REST API Integration & Cloud DBs"]
+        description: "Client-server socket programming — TCP/UDP sockets, I/O multiplexing, broadcast/multicast, and raw sockets in C/Unix.",
+        keyUnits: ["Introduction to Network Programming (Client/Server Model)", "Elementary OS Calls (fork, exec, IPC)", "TCP/UDP Transport Layer Protocols", "Elementary Socket Calls (socket, bind, connect, accept)", "I/O Multiplexing (select, poll)", "Broadcast, Multicast & Raw Sockets"]
       },
       {
-        code: "BIT702",
-        name: "Cloud Computing & Virtualization",
+        code: "BIT402CO",
+        name: "Digital Governance",
         credits: 3,
         type: "Core",
-        description: "Cloud service models (IaaS, PaaS, SaaS), Docker containers, Kubernetes, and AWS/GCP services.",
-        keyUnits: ["Cloud Principles & Virtualization", "Service Models (IaaS, PaaS, SaaS)", "Containerization with Docker", "Kubernetes Orchestration & Pods", "Cloud Security, IAM & Cost Optimization"]
+        description: "e-Government implementation and policy, ICT infrastructure, security, digital democracy, and case studies including Nepal's GIDC.",
+        keyUnits: ["Introduction to e-Government & e-Governance", "Public-Private Partnership Models", "ICT Infrastructure & e-Government Readiness", "Security for e-Government", "Implementing e-Government & Digital Democracy", "Applying AI to e-Government", "Case Studies (Nepal, India & Other Countries)"]
       },
       {
-        code: "BIT703",
-        name: "Data Mining & Data Warehousing",
-        credits: 3,
-        type: "Core",
-        description: "ETL pipelines, star/snowflake schemas, classification algorithms, clustering, and association rule mining.",
-        keyUnits: ["Data Warehouse Architecture & OLAP", "ETL Process & Data Cleaning", "Association Rule Mining (Apriori)", "Classification (Decision Trees, Naive Bayes)", "Clustering Algorithms (k-Means, DBSCAN)"]
-      },
-      {
-        code: "BIT704",
-        name: "Elective-I (Big Data Analytics / Blockchain)",
-        credits: 3,
+        code: "BIT4xxCO",
+        name: "Specialization Track (2 of 4 courses)",
+        credits: 6,
         type: "Elective",
-        description: "Distributed data processing with Hadoop/Spark or smart contract engineering on decentralized ledgers.",
-        keyUnits: ["Distributed Computing Fundamentals", "Hadoop Ecosystem & MapReduce", "Spark DataFrame Transformations", "Decentralized Consensus & Smart Contracts"]
+        description: "Choose one specialization track and take 2 courses in Sem 7, 2 more in Sem 8: (A) Intelligent Systems & Business Analytics — Machine Learning, Business Intelligence & Data Science, Deep Learning; (B) Digital Commerce & Mobile App Development — Digital Commerce, Multimedia & Application; (C) Climate Change Management — GIS, Remote Sensing, Data Center & Disaster Recovery.",
+        keyUnits: ["Track A: Machine Learning (BIT421CO)", "Track A: Business Intelligence & Data Science (BIT422CO)", "Track B: Digital Commerce (BIT428CO)", "Track B: Multimedia and Application (BIT429CO)", "Track C: GIS (BIT435CO)", "Track C: Remote Sensing (BIT436CO)"]
       },
       {
-        code: "BIT705",
-        name: "Internship / Industrial Training",
-        credits: 4,
+        code: "BIT403CO",
+        name: "Internship",
+        credits: 3,
         type: "Project / Practical",
-        description: "Professional industrial internship at an IT organization with supervisor evaluation.",
-        keyUnits: ["Industry Placement", "Work Diary & Weekly Logs", "Final Internship Report", "Viva-voce"]
+        description: "45-hour supervised internship at a partner organization (bank, hospital, software company, telecom, or government IT unit), evaluated via proposal defense, mid-term, and end-term report.",
+        keyUnits: ["Proposal Defense & Organization Placement", "Mid-Term Progress Review", "System Analysis, Design & Implementation", "Final Report (APA Format) & Viva"]
       }
     ]
   },
   {
+    // Verified against the official Purbanchal University BIT Semester VIII
+    // (current/new course) syllabus — codes BIT451MS-453CO plus the second
+    // half of the chosen specialization track — see bulk-imports/syllabus-sources/.
     semester: 8,
-    totalCredits: 16,
+    totalCredits: 15,
     subjects: [
       {
-        code: "BIT801",
-        name: "Network Security & Cyber Law",
+        code: "BIT451MS",
+        name: "Principles of Management and Entrepreneurship in IT",
         credits: 3,
         type: "Core",
-        description: "Penetration testing, digital forensics, incident response, and Nepal Electronic Transactions Act (ETA 2063).",
-        keyUnits: ["Threat Modeling & OWASP Top 10", "Network Penetration Testing", "Digital Forensics & Chain of Custody", "Security Auditing & Compliance", "Nepal ETA 2063 & International Cyber Law"]
+        description: "Management fundamentals, organization design, entrepreneurship, business planning, and IT product marketing/technology transfer.",
+        keyUnits: ["Introduction to Management & Organization Design", "The Foundation of Entrepreneurship", "Feasibility Analysis & Business Plans", "Business Ownership & Franchising", "Marketing Plans & E-Commerce for Entrepreneurs", "Entrepreneurship in IT (Technology Transfer)"]
       },
       {
-        code: "BIT802",
-        name: "Elective-II (Machine Learning / IoT)",
+        code: "BIT452CO",
+        name: "Distributed and Cloud Computing",
         credits: 3,
-        type: "Elective",
-        description: "Supervised and unsupervised statistical machine learning algorithms, deep neural nets, or edge IoT networks.",
-        keyUnits: ["Supervised ML (Regression, SVM)", "Unsupervised Learning & PCA", "Deep Learning Fundamentals (CNN, RNN)", "IoT Protocols (MQTT, CoAP)"]
+        type: "Core",
+        description: "Distributed systems fundamentals and cloud computing service/deployment models, virtualization, and cloud security.",
+        keyUnits: ["Distributed Systems Fundamentals", "Cloud Computing Service Models (IaaS/PaaS/SaaS)", "Virtualization Technologies", "Cloud Deployment Models", "Cloud Security & Management"]
       },
       {
-        code: "BIT803",
-        name: "Major Capstone Project",
-        credits: 10,
+        code: "BIT4xxCO",
+        name: "Specialization Track (2 of 4 courses, continued)",
+        credits: 6,
+        type: "Elective",
+        description: "Second half of the Sem 7 specialization track: (A) Intelligent Systems & Business Analytics — Natural Language Processing, Supply Chain Analytics; (B) Digital Commerce & Mobile App Development — Big Data, Mobile App Development; (C) Climate Change Management — Incident Response, Climate Change Risk Management, Disaster Governance.",
+        keyUnits: ["Track A: Natural Language Processing (BIT471CO)", "Track A: Supply Chain Analytics (BIT472MS)", "Track B: Big Data (BIT478CO)", "Track B: Mobile App Development (BIT479CO)", "Track C: Incident Response & Management (BIT485CO)", "Track C: Climate Change Risk Management (BIT486CO)"]
+      },
+      {
+        code: "BIT453CO",
+        name: "Apprentice Project",
+        credits: 3,
         type: "Project / Practical",
-        description: "Final comprehensive engineering project culminating in a research paper and public defense.",
-        keyUnits: ["Proposal Defense", "Mid-term Progress Review", "Final Product Deployment", "External University Defense"]
+        description: "45-hour capstone project developing a 2-tier/3-tier/n-tier application with client-side and server-side scripting on any RDBMS.",
+        keyUnits: ["Title Identification & Proposal Writing", "Mid-Term Presentation", "Application Development", "Pre-Final Submission, Final Presentation & Viva"]
       }
     ]
   }

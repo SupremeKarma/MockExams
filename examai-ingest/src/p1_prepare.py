@@ -5,6 +5,7 @@ Phase 1: Normalize all input images to PNG, max 2000px on longest edge.
 - Skip any file whose output already exists
 """
 
+import re
 import sys
 from pathlib import Path
 import cv2
@@ -70,7 +71,16 @@ def process_file(file_path):
                     print(f"ERROR: Could not process page {page_num + 1} of {file_path.name}: {e}")
         pdf.close()
     else:
-        output_path = PAGES_DIR / f"{stem}_p1.png"
+        # A loose image is one page. If the filename already carries a page
+        # suffix (BIT351CO_2025_regular_p2.jpg), keep it — appending another
+        # produced "..._p2_p1.png", and p2_extract's grouping regex then read
+        # each page as a SEPARATE one-page paper. Page 2 of a paper has no
+        # header, so it would have been extracted with no subject code, no
+        # marks, and no way to tell it was half of something.
+        if re.search(r"_p\d+$", stem):
+            output_path = PAGES_DIR / f"{stem}.png"
+        else:
+            output_path = PAGES_DIR / f"{stem}_p1.png"
         if output_path.exists():
             print(f"SKIP: {output_path.name}")
             skipped += 1

@@ -50,21 +50,21 @@ export default function ExaminerNewExamPage() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-8">
-      <Link href="/examiner/exams" className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm font-medium">
+      <Link href="/examiner/exams" className="inline-flex items-center gap-2 text-zinc-500 hover:text-zinc-900 transition-colors text-sm font-medium">
         <ArrowLeft className="w-4 h-4" /> Back to My Exams
       </Link>
 
       <div className="flex items-center gap-4">
-        <div className="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center">
+        <div className="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center">
           <BookOpen className="text-primary w-6 h-6" />
         </div>
         <div>
           <h1 className="text-2xl font-bold">Create New Exam</h1>
-          <p className="text-slate-400 text-sm">Set up the exam container, then add questions.</p>
+          <p className="text-zinc-500 text-sm">Set up the exam container, then add questions.</p>
         </div>
       </div>
 
-      <div className="glass-card p-8 rounded-3xl border border-white/10">
+      <div className="glass-card p-8 rounded-xl border border-zinc-200">
         <ExamForm
           data={formData}
           onChange={setFormData}

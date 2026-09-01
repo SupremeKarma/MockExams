@@ -1,0 +1,207 @@
+{
+  "semester": 2,
+  "generated_from": "src/data/bitSyllabusData.ts",
+  "subject_count": 5,
+  "unit_count": 41,
+  "subjects": [
+    {
+      "subject_code": "BIT151HS",
+      "subject_name": "Mathematics-II",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT151HS_U01",
+          "title": "Multiple Integrals"
+        },
+        {
+          "unit_id": "BIT151HS_U02",
+          "title": "Differential Equations of the First Order"
+        },
+        {
+          "unit_id": "BIT151HS_U03",
+          "title": "Linear Differential Equations"
+        },
+        {
+          "unit_id": "BIT151HS_U04",
+          "title": "Fourier Series and Integrals"
+        },
+        {
+          "unit_id": "BIT151HS_U05",
+          "title": "Functions of a Complex Variable"
+        },
+        {
+          "unit_id": "BIT151HS_U06",
+          "title": "Complex Series, Residues and Poles"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT152CO",
+      "subject_name": "Digital Logic",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT152CO_U01",
+          "title": "Number Systems"
+        },
+        {
+          "unit_id": "BIT152CO_U02",
+          "title": "Boolean Algebra and Logic Gates"
+        },
+        {
+          "unit_id": "BIT152CO_U03",
+          "title": "Simplification of Boolean Functions"
+        },
+        {
+          "unit_id": "BIT152CO_U04",
+          "title": "Combinational Logic"
+        },
+        {
+          "unit_id": "BIT152CO_U05",
+          "title": "Sequential Logic"
+        },
+        {
+          "unit_id": "BIT152CO_U06",
+          "title": "Registers and Counters"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT153HS",
+      "subject_name": "Discrete Structure",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT153HS_U01",
+          "title": "Set Theory and Matrices"
+        },
+        {
+          "unit_id": "BIT153HS_U02",
+          "title": "Function and Counting"
+        },
+        {
+          "unit_id": "BIT153HS_U03",
+          "title": "Logic"
+        },
+        {
+          "unit_id": "BIT153HS_U04",
+          "title": "Relation and Digraphs"
+        },
+        {
+          "unit_id": "BIT153HS_U05",
+          "title": "Graph and Tree"
+        },
+        {
+          "unit_id": "BIT153HS_U06",
+          "title": "Order Relation and Structure"
+        },
+        {
+          "unit_id": "BIT153HS_U07",
+          "title": "Automata, Language and Grammar"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT154CO",
+      "subject_name": "Object-Oriented Programming in C++",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT154CO_U01",
+          "title": "Introduction to Object Oriented Programming"
+        },
+        {
+          "unit_id": "BIT154CO_U02",
+          "title": "C++ Programming Concept"
+        },
+        {
+          "unit_id": "BIT154CO_U03",
+          "title": "Functions Used in C++"
+        },
+        {
+          "unit_id": "BIT154CO_U04",
+          "title": "Classes and Objects"
+        },
+        {
+          "unit_id": "BIT154CO_U05",
+          "title": "Constructor & Destructor"
+        },
+        {
+          "unit_id": "BIT154CO_U06",
+          "title": "Operator Overloading"
+        },
+        {
+          "unit_id": "BIT154CO_U07",
+          "title": "Inheritance"
+        },
+        {
+          "unit_id": "BIT154CO_U08",
+          "title": "Virtual Functions and Polymorphism"
+        },
+        {
+          "unit_id": "BIT154CO_U09",
+          "title": "File Handling"
+        },
+        {
+          "unit_id": "BIT154CO_U10",
+          "title": "Templates and Namespaces"
+        },
+        {
+          "unit_id": "BIT154CO_U11",
+          "title": "Exception Handling"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT155MS",
+      "subject_name": "Financial Management and Accounting",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT155MS_U01",
+          "title": "Nature of Financial Management"
+        },
+        {
+          "unit_id": "BIT155MS_U02",
+          "title": "Time Value of Money"
+        },
+        {
+          "unit_id": "BIT155MS_U03",
+          "title": "Capital Budgeting"
+        },
+        {
+          "unit_id": "BIT155MS_U04",
+          "title": "Working Capital"
+        },
+        {
+          "unit_id": "BIT155MS_U05",
+          "title": "Capital Structure"
+        },
+        {
+          "unit_id": "BIT155MS_U06",
+          "title": "Dividends"
+        },
+        {
+          "unit_id": "BIT155MS_U07",
+          "title": "Nature of Accounting"
+        },
+        {
+          "unit_id": "BIT155MS_U08",
+          "title": "Accounting Process"
+        },
+        {
+          "unit_id": "BIT155MS_U09",
+          "title": "Financial Statement"
+        },
+        {
+          "unit_id": "BIT155MS_U10",
+          "title": "Financial Analysis"
+        },
+        {
+          "unit_id": "BIT155MS_U11",
+          "title": "Cash Flow Statement - Direct Method"
+        }
+      ]
+    }
+  ]
+}

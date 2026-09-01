@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { db } from "@/lib/firebase";
-import { collection, query, where, orderBy, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 import { useAuth } from "@/context/AuthContext";
 import { ArrowLeft, TrendingUp, Loader2, ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -31,62 +31,64 @@ export default function HistoryPage() {
     }).catch(console.error).finally(() => setLoading(false));
   }, [user]);
 
-  if (loading) return <div className="min-h-screen flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-primary" /></div>;
+  if (loading) return <div className="min-h-screen flex items-center justify-center bg-white"><Loader2 className="w-8 h-8 animate-spin text-primary-600" /></div>;
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-16 space-y-8">
-      <Link href="/dashboard" className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm font-medium">
-        <ArrowLeft className="w-4 h-4" /> Back to Dashboard
-      </Link>
+    <div className="min-h-screen bg-zinc-50/40 pb-16">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-8 space-y-6">
+        <Link href="/dashboard" className="inline-flex items-center gap-2 text-zinc-500 hover:text-zinc-900 transition-colors text-sm font-semibold">
+          <ArrowLeft className="w-4 h-4" /> Back to dashboard
+        </Link>
 
-      <h1 className="text-2xl font-bold">Exam History</h1>
+        <h1 className="text-xl font-bold text-zinc-900">Exam history</h1>
 
-      {attempts.length === 0 ? (
-        <div className="glass-card p-16 rounded-3xl border border-white/10 text-center text-slate-500">
-          <TrendingUp className="w-12 h-12 mx-auto mb-4 opacity-30" />
-          <p className="font-medium">No attempts yet.</p>
-          <p className="text-sm mt-1">Take your first exam to see your history here.</p>
-          <Link href="/exams" className="mt-6 inline-block px-6 py-3 bg-primary text-white rounded-xl font-bold hover:opacity-90 transition-all">
-            Browse Exams
-          </Link>
-        </div>
-      ) : (
-        <div className="space-y-3">
-          {attempts.map(att => (
-            <Link
-              key={att.id}
-              href={`/exams/results/${att.id}`}
-              className="flex items-center justify-between p-5 glass-card rounded-2xl border border-white/10 hover:border-white/20 transition-all group"
-            >
-              <div className="flex items-center gap-4">
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                  Number(att.percentage) >= 80 ? "bg-emerald-500/20 text-emerald-400" :
-                  Number(att.percentage) >= 50 ? "bg-amber-500/20 text-amber-400" :
-                  "bg-rose-500/20 text-rose-400"
-                }`}>
-                  <TrendingUp className="w-6 h-6" />
-                </div>
-                <div>
-                  <p className="font-semibold group-hover:text-white transition-colors">{att.exam_title || "Exam"}</p>
-                  <p className="text-xs text-slate-500 mt-0.5">
-                    {att.score}/{att.total_marks} marks ·{" "}
-                    {att.attempted_at ? new Date(att.attempted_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "—"}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className={`text-lg font-black ${
-                  Number(att.percentage) >= 80 ? "text-emerald-400" :
-                  Number(att.percentage) >= 50 ? "text-amber-400" : "text-rose-400"
-                }`}>
-                  {Number(att.percentage).toFixed(1)}%
-                </span>
-                <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-white transition-colors" />
-              </div>
+        {attempts.length === 0 ? (
+          <div className="bg-white p-12 rounded-lg border border-zinc-200 text-center text-zinc-500">
+            <TrendingUp className="w-10 h-10 mx-auto mb-3 text-zinc-300" />
+            <p className="text-sm font-medium text-zinc-900">No attempts yet.</p>
+            <p className="text-xs mt-1">Take your first exam to see your history here.</p>
+            <Link href="/exams" className="mt-5 inline-block px-5 py-2.5 bg-primary-600 text-white rounded-md font-semibold text-sm hover:bg-primary-700 transition-colors">
+              Browse exams
             </Link>
-          ))}
-        </div>
-      )}
+          </div>
+        ) : (
+          <div className="space-y-2.5">
+            {attempts.map(att => (
+              <Link
+                key={att.id}
+                href={`/exams/results/${att.id}`}
+                className="flex items-center justify-between p-4 bg-white rounded-lg border border-zinc-200 hover:border-primary-300 transition-colors group shadow-xs"
+              >
+                <div className="flex items-center gap-3.5">
+                  <div className={`w-10 h-10 rounded-md flex items-center justify-center ${
+                    Number(att.percentage) >= 80 ? "bg-emerald-50 text-emerald-600" :
+                    Number(att.percentage) >= 50 ? "bg-amber-50 text-amber-600" :
+                    "bg-red-50 text-red-600"
+                  }`}>
+                    <TrendingUp className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-zinc-900">{att.exam_title || "Exam"}</p>
+                    <p className="text-xs text-zinc-400 mt-0.5">
+                      {att.score}/{att.total_marks} marks ·{" "}
+                      {att.attempted_at ? new Date(att.attempted_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "—"}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <span className={`text-sm font-bold tabular-nums ${
+                    Number(att.percentage) >= 80 ? "text-emerald-600" :
+                    Number(att.percentage) >= 50 ? "text-amber-600" : "text-red-600"
+                  }`}>
+                    {Number(att.percentage).toFixed(1)}%
+                  </span>
+                  <ChevronRight className="w-4 h-4 text-zinc-400 group-hover:text-zinc-900 transition-colors" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

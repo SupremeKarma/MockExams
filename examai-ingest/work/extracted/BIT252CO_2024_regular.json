@@ -1,0 +1,438 @@
+{
+  "paper_id": "BIT252CO_2024_regular",
+  "subject_code": "BIT252CO",
+  "subject_name": "Computer Organization and Architecture",
+  "semester": 4,
+  "year": 2024,
+  "exam_type": "regular",
+  "curriculum": "old_course",
+  "full_marks": 80,
+  "pass_marks": 32,
+  "duration_hours": 3,
+  "extraction_notes": "The paper explicitly states '(New Course)' next to the subject code, but according to the provided curriculum rules, only specific 6th-semester codes (BIT351CO-BIT356CO) are classified as 'new_course'. BIT252CO is a 4th-semester subject and thus categorized as 'old_course' based on the strict rule. Sum of group marks (24+56=80) matches full_marks.",
+  "groups": [
+    {
+      "label": "A",
+      "questions_printed": 3,
+      "answer_count": 2,
+      "marks_each": 12,
+      "marks_total": 24,
+      "instruction": "Answer TWO questions."
+    },
+    {
+      "label": "B",
+      "questions_printed": 8,
+      "answer_count": 7,
+      "marks_each": 8,
+      "marks_total": 56,
+      "instruction": "Answer SEVEN questions."
+    }
+  ],
+  "questions": [
+    {
+      "question_id": "BIT252CO_2024_regular_A1",
+      "group": "A",
+      "number": "1",
+      "marks": 12,
+      "text": "What is meant by instruction cycle? Explain various phases of instruction cycle. Differentiate between SAM (Sequential Access Memory) and RAM (Random Access Memory).",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT252CO_U02",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT252CO_U08",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT252CO_2024_regular_A1a",
+          "group": "A",
+          "number": "1a",
+          "marks": 2,
+          "text": "What is meant by instruction cycle?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT252CO_U02",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT252CO_2024_regular_A1b",
+          "group": "A",
+          "number": "1b",
+          "marks": 6,
+          "text": "Explain various phases of instruction cycle.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT252CO_U02",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT252CO_2024_regular_A1c",
+          "group": "A",
+          "number": "1c",
+          "marks": 4,
+          "text": "Differentiate between SAM (Sequential Access Memory) and RAM (Random Access Memory).",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT252CO_U08",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT252CO_2024_regular_A2",
+      "group": "A",
+      "number": "2",
+      "marks": 12,
+      "text": "Why do we need cache memory? List the three mapping methods of cache memory and explain any two.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT252CO_U08",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT252CO_2024_regular_A2a",
+          "group": "A",
+          "number": "2a",
+          "marks": 3,
+          "text": "Why do we need cache memory?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT252CO_U08",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT252CO_2024_regular_A2b",
+          "group": "A",
+          "number": "2b",
+          "marks": 9,
+          "text": "List the three mapping methods of cache memory and explain any two.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT252CO_U08",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT252CO_2024_regular_A3",
+      "group": "A",
+      "number": "3",
+      "marks": 12,
+      "text": "Compare RISC and CISC computer architecture. List various types of addressing modes and explain any five of them with example.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT252CO_U04",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT252CO_2024_regular_A3a",
+          "group": "A",
+          "number": "3a",
+          "marks": 4,
+          "text": "Compare RISC and CISC computer architecture.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT252CO_U04",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT252CO_2024_regular_A3b",
+          "group": "A",
+          "number": "3b",
+          "marks": 8,
+          "text": "List various types of addressing modes and explain any five of them with example.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT252CO_U04",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT252CO_2024_regular_B4",
+      "group": "B",
+      "number": "4",
+      "marks": 8,
+      "text": "What is input-output processor (IPO)? Explain the responsibility of I/O controller in devices interfacing.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT252CO_U07",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT252CO_2024_regular_B5",
+      "group": "B",
+      "number": "5",
+      "marks": 8,
+      "text": "Explain the difference between hardwired control and microprogrammed control. Is it possible to have a hardwired control associated with a control memory?",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT252CO_U03",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT252CO_2024_regular_B6",
+      "group": "B",
+      "number": "6",
+      "marks": 8,
+      "text": "Perform multiplication using Booth algorithm for Multiplicand A=01110 and Multiplier B=10001.",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT252CO_U06",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT252CO_2024_regular_B7",
+      "group": "B",
+      "number": "7",
+      "marks": 8,
+      "text": "Differentiate between Harvard and Von-Neumann architecture.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT252CO_U02",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT252CO_2024_regular_B8",
+      "group": "B",
+      "number": "8",
+      "marks": 8,
+      "text": "Discuss various interconnection structure available for multiprocessor system.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT252CO_U09",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT252CO_2024_regular_B9",
+      "group": "B",
+      "number": "9",
+      "marks": 8,
+      "text": "Explain 0-address, 1-address, 2-address and 3-address instruction format with examples.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT252CO_U04",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT252CO_2024_regular_B10",
+      "group": "B",
+      "number": "10",
+      "marks": 8,
+      "text": "Differentiate between array and vector processing. Explain working mechanism of arithmetic pipelining.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT252CO_U05",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT252CO_2024_regular_B11",
+      "group": "B",
+      "number": "11",
+      "marks": 8,
+      "text": "Write short notes on any TWO:",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT252CO_U03",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT252CO_U09",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT252CO_U08",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "choose": 2,
+      "sub_parts": [
+        {
+          "question_id": "BIT252CO_2024_regular_B11a",
+          "group": "B",
+          "number": "11a",
+          "marks": 4,
+          "text": "Design of control unit",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT252CO_U03",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT252CO_2024_regular_B11b",
+          "group": "B",
+          "number": "11b",
+          "marks": 4,
+          "text": "Flynn's classification",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT252CO_U09",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT252CO_2024_regular_B11c",
+          "group": "B",
+          "number": "11c",
+          "marks": 4,
+          "text": "Memory hierarchy",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT252CO_U08",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    }
+  ],
+  "source_files": [
+    "work\\pages\\BIT252CO_2024_regular_p1.png"
+  ],
+  "coverage": {
+    "by_group": [
+      {
+        "label": "A",
+        "questions_extracted": 3,
+        "questions_printed": 3
+      },
+      {
+        "label": "B",
+        "questions_extracted": 8,
+        "questions_printed": 8
+      }
+    ],
+    "status": "complete",
+    "notes": "Derived from the extraction, not self-reported by the model."
+  }
+}

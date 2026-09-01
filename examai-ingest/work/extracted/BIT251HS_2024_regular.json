@@ -1,0 +1,276 @@
+{
+  "paper_id": "BIT251HS_2024_regular",
+  "subject_code": "BIT251HS",
+  "subject_name": "Probability and Statistics",
+  "semester": 4,
+  "year": 2024,
+  "exam_type": "regular",
+  "curriculum": "new_course",
+  "full_marks": 80,
+  "pass_marks": 32,
+  "duration_hours": 3,
+  "extraction_notes": "The paper explicitly states '(New Course)' which aligns with the curriculum derivation for BIT251HS.",
+  "groups": [
+    {
+      "label": "A",
+      "questions_printed": 3,
+      "answer_count": 2,
+      "marks_each": 12,
+      "marks_total": 24,
+      "instruction": "Answer TWO questions."
+    },
+    {
+      "label": "B",
+      "questions_printed": 8,
+      "answer_count": 7,
+      "marks_each": 8,
+      "marks_total": 56,
+      "instruction": "Answer SEVEN questions."
+    }
+  ],
+  "questions": [
+    {
+      "question_id": "BIT251HS_2024_regular_A1",
+      "group": "A",
+      "number": "1",
+      "marks": 12,
+      "text": "What do you understand by variability? Distinguish between absolute and relative measures of variability. The following is the frequency distribution of the number of telephone calls received in 245 successive one-minute intervals at an exchange: [table showing 'No. of calls' and 'Frequency']. Find coefficient of variation.",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT251HS_U06",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT251HS_U05",
+          "confidence": "low"
+        }
+      ],
+      "has_diagram": true,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "notes": "low-confidence tag BIT251HS_U05"
+    },
+    {
+      "question_id": "BIT251HS_2024_regular_A2",
+      "group": "A",
+      "number": "2",
+      "marks": 12,
+      "text": "What is correlation? Discuss various properties of correlation coefficients. Calculate Karl Pearson's coefficient of correlation from the following data, taking 100 and 50 as the assumed mean of X and Y respectively. [table showing 'X' and 'Y' values]",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT251HS_U11",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": true,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT251HS_2024_regular_A3",
+      "group": "A",
+      "number": "3",
+      "marks": 12,
+      "text": "What are the procedure of Chi-square test for goodness of fit. A mobile company gives you the following information about age groups and the liking for particular model of mobile which it plans to introduce: [table showing 'Persons who' and 'Age Group (Below 20, 20-39, 40-59, 60 & above)' with counts for 'Liked the mobile' and 'Disliked the mobile']. On the basis of this data, can it be concluded that the model appeal is independent of the age group? Test at 5% level of significance.",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT251HS_U10",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT251HS_U09",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": true,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT251HS_2024_regular_B4",
+      "group": "B",
+      "number": "4",
+      "marks": 8,
+      "text": "Draw histogram and hence the frequency polygon to the following data points: [table showing 'Production in hundred units' and 'No. of days']",
+      "question_type": "diagram",
+      "units": [
+        {
+          "unit_id": "BIT251HS_U04",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": true,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT251HS_2024_regular_B5",
+      "group": "B",
+      "number": "5",
+      "marks": 8,
+      "text": "The probability that a contractor will get a plumbing contract is 2/3 and the probability that he will not get an electric contract is 5/9. If the probability of getting at least one contract is 4/5, what is the probability that he will get both the contracts?",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT251HS_U07",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT251HS_2024_regular_B6",
+      "group": "B",
+      "number": "6",
+      "marks": 8,
+      "text": "A random variable X has the following probability distribution: [table showing 'Value of x' and 'P(x)'] (i) Find the value of k. (ii) Find the expected value and variance of x.",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT251HS_U07",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": true,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT251HS_2024_regular_B7",
+      "group": "B",
+      "number": "7",
+      "marks": 8,
+      "text": "Mention the conditions for fitting a binomial distribution. Discuss main properties of a binomial distribution.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT251HS_U08",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT251HS_2024_regular_B8",
+      "group": "B",
+      "number": "8",
+      "marks": 8,
+      "text": "The life time of a certain kind of battery has a mean of 270 hours and a standard deviation of 32 hours. Assuming that the distribution of life times to be normal, find the percentage of batteries which have life time of more than 300 hours and less than 260 hours.",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT251HS_U08",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT251HS_2024_regular_B9",
+      "group": "B",
+      "number": "9",
+      "marks": 8,
+      "text": "A random sample of 100 items drawn from a large batch of articles contain 5 defective items. Find 95% and 99% confidence limits for the proportion of defective items.",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT251HS_U09",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT251HS_2024_regular_B10",
+      "group": "B",
+      "number": "10",
+      "marks": 8,
+      "text": "A machine is designed to produce insulating washers for electrical devices of average thickness of 0.025 cm. A random sample of 15 washers was found to have an average thickness of 0.024 cm with a standard deviation of 0.002 cm. Test the significance of deviation at 1% level of significance.",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT251HS_U09",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT251HS_2024_regular_B11",
+      "group": "B",
+      "number": "11",
+      "marks": 8,
+      "text": "What is sampling? Describe sampling distribution of mean and the standard error of mean.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT251HS_U02",
+          "confidence": "low"
+        },
+        {
+          "unit_id": "BIT251HS_U09",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "notes": "low-confidence tag BIT251HS_U02"
+    }
+  ],
+  "source_files": [
+    "work\\pages\\BIT251HS_2024_regular_p1.png",
+    "work\\pages\\BIT251HS_2024_regular_p2.png"
+  ],
+  "coverage": {
+    "by_group": [
+      {
+        "label": "A",
+        "questions_extracted": 3,
+        "questions_printed": 3
+      },
+      {
+        "label": "B",
+        "questions_extracted": 8,
+        "questions_printed": 8
+      }
+    ],
+    "status": "complete",
+    "notes": "Derived from the extraction, not self-reported by the model."
+  }
+}

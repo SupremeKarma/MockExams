@@ -1,0 +1,466 @@
+{
+  "paper_id": "BIT254CO_2024_regular",
+  "subject_code": "BIT254CO",
+  "subject_name": "Database Management System",
+  "semester": 4,
+  "year": 2024,
+  "exam_type": "regular",
+  "curriculum": "new_course",
+  "full_marks": 80,
+  "pass_marks": 32,
+  "duration_hours": 3,
+  "extraction_notes": "Question 10 was printed as 9.10, and question 11 was printed as 110. These have been interpreted as consecutive question numbers. The mark split 4+4 for question 12 was derived from 'short notes on Any TWO' and the total marks of 8 for the question.",
+  "groups": [
+    {
+      "label": "A",
+      "questions_printed": 3,
+      "answer_count": 2,
+      "marks_each": 12,
+      "marks_total": 24,
+      "instruction": "Answer TWO questions."
+    },
+    {
+      "label": "B",
+      "questions_printed": 9,
+      "answer_count": 7,
+      "marks_each": 8,
+      "marks_total": 56,
+      "instruction": "Answer SEVEN questions."
+    }
+  ],
+  "questions": [
+    {
+      "question_id": "BIT254CO_2024_regular_A1",
+      "group": "A",
+      "number": "1",
+      "marks": 12,
+      "text": "Explain the concept of functional dependency. Describe 2NF and 3NF with examples.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT254CO_U05",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT254CO_U06",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT254CO_2024_regular_A2",
+      "group": "A",
+      "number": "2",
+      "marks": 12,
+      "text": "What is concurrency control? What are the potential problems of concurrency? Explain concurrency control protocols.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT254CO_U08",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT254CO_2024_regular_A3",
+      "group": "A",
+      "number": "3",
+      "marks": 12,
+      "text": "A bank has many branches and a large number of customers. Bank is identified by its code. Other details like name, address and phone for each bank are also stored. Each branch is identified by its bank. Branch has name, address and phone. A customer can open different kinds of accounts with the branches. An account can belong to more than one customer. Customers are identified by their SSN, name, address and phone number. Age is used as a factor to check whether customer is a major. There are different types of loans, each identified by a loan number. A customer can take more than one type of loan and a loan can be given to more than one customer. Loans have a duration and interest rate. Make suitable assumptions and use them in showing maximum and minimum cardinality relationships. Draw E-R diagram and also convert into Relational Schema of given above scenario.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT254CO_U02",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT254CO_U03",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": true,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT254CO_2024_regular_B4",
+      "group": "B",
+      "number": "4",
+      "marks": 8,
+      "text": "What is relational algebra? Explain the various operations used in relational algebra.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT254CO_U03",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT254CO_2024_regular_B5",
+      "group": "B",
+      "number": "5",
+      "marks": 8,
+      "text": "What is SQL? Differentiate between DDL and DML with proper syntax and examples.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT254CO_U04",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT254CO_2024_regular_B6",
+      "group": "B",
+      "number": "6",
+      "marks": 8,
+      "text": "Explain different types of Integrity Constraints with example.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT254CO_U05",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT254CO_2024_regular_B7",
+      "group": "B",
+      "number": "7",
+      "marks": 8,
+      "text": "What do you mean by query optimization? Briefly explain the steps in query processing.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT254CO_U08",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT254CO_2024_regular_B8",
+      "group": "B",
+      "number": "8",
+      "marks": 8,
+      "text": "The SALARY database of an organization has a table with the following attributes. EMPSALARY (empcode:int, empname:string, dob:date, department:string, salary:real)",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT254CO_U04",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT254CO_2024_regular_B8a",
+          "group": "B",
+          "number": "8a",
+          "marks": 2,
+          "text": "Write SQL query to create the above table.",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT254CO_U04",
+              "confidence": "high"
+            }
+          ],
+          "has_diagram": false,
+          "source_page": 2,
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT254CO_2024_regular_B8b",
+          "group": "B",
+          "number": "8b",
+          "marks": 1,
+          "text": "Write SQL query to enter the three tuples into the table",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT254CO_U04",
+              "confidence": "high"
+            }
+          ],
+          "has_diagram": false,
+          "source_page": 2,
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT254CO_2024_regular_B8c",
+          "group": "B",
+          "number": "8c",
+          "marks": 2,
+          "text": "Write SQL query to display the number of employees working in each department.",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT254CO_U04",
+              "confidence": "high"
+            }
+          ],
+          "has_diagram": false,
+          "source_page": 2,
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT254CO_2024_regular_B8d",
+          "group": "B",
+          "number": "8d",
+          "marks": 1,
+          "text": "Write SQL query to display name of employee whose name started with 's'.",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT254CO_U04",
+              "confidence": "high"
+            }
+          ],
+          "has_diagram": false,
+          "source_page": 2,
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT254CO_2024_regular_B8e",
+          "group": "B",
+          "number": "8e",
+          "marks": 1,
+          "text": "Write SQL query to find the sum and average of the salaries of employees of a particular department.",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT254CO_U04",
+              "confidence": "high"
+            }
+          ],
+          "has_diagram": false,
+          "source_page": 2,
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT254CO_2024_regular_B8f",
+          "group": "B",
+          "number": "8f",
+          "marks": 1,
+          "text": "Write SQL query to find the least and highest salaries that an employee draws.",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT254CO_U04",
+              "confidence": "high"
+            }
+          ],
+          "has_diagram": false,
+          "source_page": 2,
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT254CO_2024_regular_B9",
+      "group": "B",
+      "number": "9",
+      "marks": 8,
+      "text": "What do you mean by authentication and authorization? Explain different levels of database security.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT254CO_U07",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT254CO_2024_regular_B10",
+      "group": "B",
+      "number": "10",
+      "marks": 8,
+      "text": "Check whether the given schedule S is conflict serializable or not. If yes, then determine all the possible serialized schedules. [table with T1, T2, T3, T4 and R(A), W(B) operations]",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT254CO_U08",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": true,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT254CO_2024_regular_B11",
+      "group": "B",
+      "number": "11",
+      "marks": 8,
+      "text": "What do you mean by database recovery? Explain log-based recovery technique.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT254CO_U09",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT254CO_2024_regular_B12",
+      "group": "B",
+      "number": "12",
+      "marks": 8,
+      "text": "Write short notes on any TWO:",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT254CO_U04",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT254CO_U01",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT254CO_U05",
+          "confidence": "medium"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "choose": 2,
+      "sub_parts": [
+        {
+          "question_id": "BIT254CO_2024_regular_B12a",
+          "group": "B",
+          "number": "12a",
+          "marks": 4,
+          "text": "PL/SQL",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT254CO_U04",
+              "confidence": "high"
+            }
+          ],
+          "has_diagram": false,
+          "source_page": 2,
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT254CO_2024_regular_B12b",
+          "group": "B",
+          "number": "12b",
+          "marks": 4,
+          "text": "Types of DBMS",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT254CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "has_diagram": false,
+          "source_page": 2,
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT254CO_2024_regular_B12c",
+          "group": "B",
+          "number": "12c",
+          "marks": 4,
+          "text": "Trigger",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT254CO_U04",
+              "confidence": "high"
+            },
+            {
+              "unit_id": "BIT254CO_U05",
+              "confidence": "medium"
+            }
+          ],
+          "has_diagram": false,
+          "source_page": 2,
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    }
+  ],
+  "source_files": [
+    "work\\pages\\BIT254CO_2024_regular_p1.png",
+    "work\\pages\\BIT254CO_2024_regular_p2.png"
+  ],
+  "coverage": {
+    "by_group": [
+      {
+        "label": "A",
+        "questions_extracted": 3,
+        "questions_printed": 3
+      },
+      {
+        "label": "B",
+        "questions_extracted": 9,
+        "questions_printed": 9
+      }
+    ],
+    "status": "complete",
+    "notes": "Derived from the extraction, not self-reported by the model."
+  }
+}

@@ -27,7 +27,8 @@ export type ReviewRating = 1 | 2 | 3 | 4;
 export function calculateNextReview(
   card: FlashcardState,
   rating: ReviewRating,
-  reviewTimeMs: number
+  reviewTimeMs?: number,
+  now: Date = new Date()
 ): FlashcardState {
   if (rating < 1 || rating > 4) {
     throw new Error("Rating must be between 1 and 4");
@@ -63,7 +64,7 @@ export function calculateNextReview(
   newIntervalDays = Math.min(newIntervalDays, 36500); // ~100 years max
 
   // Calculate next review date
-  const nextReviewDate = new Date();
+  const nextReviewDate = new Date(now);
   nextReviewDate.setDate(nextReviewDate.getDate() + newIntervalDays);
 
   return {
@@ -72,7 +73,7 @@ export function calculateNextReview(
     intervalDays: newIntervalDays,
     repetitions: newRepetitions,
     nextReview: nextReviewDate,
-    lastReviewed: new Date(),
+    lastReviewed: new Date(now),
   };
 }
 

@@ -1,0 +1,581 @@
+{
+  "paper_id": "BIT153HS_2025_regular",
+  "subject_code": "BIT153HS",
+  "subject_name": "Discrete Structure",
+  "semester": 2,
+  "year": 2025,
+  "exam_type": "regular",
+  "curriculum": "new_course",
+  "full_marks": 80,
+  "pass_marks": 32,
+  "duration_hours": 3,
+  "extraction_notes": "",
+  "groups": [
+    {
+      "label": "A",
+      "questions_printed": 3,
+      "answer_count": 2,
+      "marks_each": 12,
+      "marks_total": 24,
+      "instruction": "Answer TWO questions."
+    },
+    {
+      "label": "B",
+      "questions_printed": 8,
+      "answer_count": 7,
+      "marks_each": 8,
+      "marks_total": 56,
+      "instruction": "Answer SEVEN questions."
+    }
+  ],
+  "questions": [
+    {
+      "question_id": "BIT153HS_2025_regular_A1",
+      "group": "A",
+      "number": "1",
+      "marks": 12,
+      "text": "Explain the concept of permutation and combination, providing detailed examples of how to apply them in solving counting problems, particularly those involving recurrence relations.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT153HS_U02",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT153HS_2025_regular_A2",
+      "group": "A",
+      "number": "2",
+      "marks": 12,
+      "text": "2(a) Define finite state automata. Differentiate between deterministic finite automata and non-deterministic finite automata. \n(b) Construct a DFA over ∑ = {0,1} whose language is set of string that ends with 111 and contains odd no of 1's.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT153HS_U07",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT153HS_2025_regular_A2a",
+          "group": "A",
+          "number": "2a",
+          "marks": 6,
+          "text": "Define finite state automata. Differentiate between deterministic finite automata and non-deterministic finite automata.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT153HS_U07",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT153HS_2025_regular_A2b",
+          "group": "A",
+          "number": "2b",
+          "marks": 6,
+          "text": "Construct a DFA over ∑ = {0,1} whose language is set of string that ends with 111 and contains odd no of 1's.",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT153HS_U07",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT153HS_2025_regular_A3",
+      "group": "A",
+      "number": "3",
+      "marks": 12,
+      "text": "3(a) What is transitive relation? Give an example of a relation that is transitive and one that is not. \n(b) Explain the types of matrices: square, diagonal, identity and zero. Find A⁻¹ by adjoint method of A = [[4 3]; [3 2]].",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT153HS_U04",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT153HS_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": true,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT153HS_2025_regular_A3a",
+          "group": "A",
+          "number": "3a",
+          "marks": 6,
+          "text": "What is transitive relation? Give an example of a relation that is transitive and one that is not.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT153HS_U04",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT153HS_2025_regular_A3b",
+          "group": "A",
+          "number": "3b",
+          "marks": 6,
+          "text": "Explain the types of matrices: square, diagonal, identity and zero. Find A⁻¹ by adjoint method of A = [[4 3]; [3 2]].",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT153HS_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": true,
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT153HS_2025_regular_B4",
+      "group": "B",
+      "number": "4",
+      "marks": 8,
+      "text": "Consider the recurrence relation a_n = 4a_n-1 - 4a_n-2. Find the general solution to the recurrence relation (beware the repeated root).\n(i) Find the solution when a_0 = 1 and a_1 = 2.\n(ii) Find the solution when a_0 = 1 and a_1 = 8.",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT153HS_U02",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT153HS_2025_regular_B4i",
+          "group": "B",
+          "number": "4i",
+          "marks": 4,
+          "text": "Find the solution when a_0 = 1 and a_1 = 2.",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT153HS_U02",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT153HS_2025_regular_B4ii",
+          "group": "B",
+          "number": "4ii",
+          "marks": 4,
+          "text": "Find the solution when a_0 = 1 and a_1 = 8.",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT153HS_U02",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT153HS_2025_regular_B5",
+      "group": "B",
+      "number": "5",
+      "marks": 8,
+      "text": "Explain pigeonhole principle and its applications.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT153HS_U02",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT153HS_2025_regular_B6",
+      "group": "B",
+      "number": "6",
+      "marks": 8,
+      "text": "What are the steps we need to follow to prove P(n) is valid using induction? Follow the steps and prove, for n≥1 and a≠1, that 1 + a + a² + ... + aⁿ = (aⁿ⁺¹ - 1) / (a - 1).",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT153HS_U03",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT153HS_2025_regular_B6a",
+          "group": "B",
+          "number": "6a",
+          "marks": 3,
+          "text": "What are the steps we need to follow to prove P(n) is valid using induction?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT153HS_U03",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT153HS_2025_regular_B6b",
+          "group": "B",
+          "number": "6b",
+          "marks": 5,
+          "text": "Follow the steps and prove, for n≥1 and a≠1, that 1 + a + a² + ... + aⁿ = (aⁿ⁺¹ - 1) / (a - 1).",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT153HS_U03",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT153HS_2025_regular_B7",
+      "group": "B",
+      "number": "7",
+      "marks": 8,
+      "text": "Explain tautology, contradiction and contingency with example. Show that implication (P → Q) and contrapositive (¬Q→¬P) are equivalence.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT153HS_U03",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT153HS_2025_regular_B7a",
+          "group": "B",
+          "number": "7a",
+          "marks": 6,
+          "text": "Explain tautology, contradiction and contingency with example.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT153HS_U03",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT153HS_2025_regular_B7b",
+          "group": "B",
+          "number": "7b",
+          "marks": 2,
+          "text": "Show that implication (P → Q) and contrapositive (¬Q→¬P) are equivalence.",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT153HS_U03",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT153HS_2025_regular_B8",
+      "group": "B",
+      "number": "8",
+      "marks": 8,
+      "text": "How many different permutations can be formed from the letters of the word “MISSISSIPPI”?",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT153HS_U02",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT153HS_2025_regular_B9",
+      "group": "B",
+      "number": "9",
+      "marks": 8,
+      "text": "List the types of function. Consider the function f : R→R defined by f(x)=3x+2.\n(i) Show that f is bijective.\n(ii) Find the inverse function f⁻¹ (x)\n(iii) Verify that (f(f⁻¹ (x)) = x and f⁻¹ (f(x)) x.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT153HS_U02",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT153HS_2025_regular_B9a",
+          "group": "B",
+          "number": "9a",
+          "marks": 2,
+          "text": "List the types of function.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT153HS_U02",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT153HS_2025_regular_B9b",
+          "group": "B",
+          "number": "9b",
+          "marks": 6,
+          "text": "Consider the function f : R→R defined by f(x)=3x+2.\n(i) Show that f is bijective.\n(ii) Find the inverse function f⁻¹ (x)\n(iii) Verify that (f(f⁻¹ (x)) = x and f⁻¹ (f(x)) x.",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT153HS_U02",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "sub_parts": [
+            {
+              "question_id": "BIT153HS_2025_regular_B9bi",
+              "group": "B",
+              "number": "9bi",
+              "marks": null,
+              "text": "Show that f is bijective.",
+              "question_type": "numerical",
+              "units": [
+                {
+                  "unit_id": "BIT153HS_U02",
+                  "confidence": "high"
+                }
+              ],
+              "confidence": "high",
+              "has_diagram": false,
+              "needs_review": false
+            },
+            {
+              "question_id": "BIT153HS_2025_regular_B9bii",
+              "group": "B",
+              "number": "9bii",
+              "marks": null,
+              "text": "Find the inverse function f⁻¹ (x)",
+              "question_type": "numerical",
+              "units": [
+                {
+                  "unit_id": "BIT153HS_U02",
+                  "confidence": "high"
+                }
+              ],
+              "confidence": "high",
+              "has_diagram": false,
+              "needs_review": false
+            },
+            {
+              "question_id": "BIT153HS_2025_regular_B9biii",
+              "group": "B",
+              "number": "9biii",
+              "marks": null,
+              "text": "Verify that (f(f⁻¹ (x)) = x and f⁻¹ (f(x)) x.",
+              "question_type": "numerical",
+              "units": [
+                {
+                  "unit_id": "BIT153HS_U02",
+                  "confidence": "high"
+                }
+              ],
+              "confidence": "high",
+              "has_diagram": false,
+              "needs_review": false
+            }
+          ],
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT153HS_2025_regular_B10",
+      "group": "B",
+      "number": "10",
+      "marks": 8,
+      "text": "Define POSET. Show that ≥ is a partial order on the set of integer Z.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT153HS_U06",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT153HS_2025_regular_B11",
+      "group": "B",
+      "number": "11",
+      "marks": 8,
+      "text": "What is a Binary Search Tree (BST)? Explain how elements are inserted into a BST with an example. Construct a BST using the values: 45, 20, 60, 15, 35, 50, 70. Then, perform in-order, pre-order, and post-order traversal on the tree.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT153HS_U05",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT153HS_2025_regular_B11a",
+          "group": "B",
+          "number": "11a",
+          "marks": 2,
+          "text": "What is a Binary Search Tree (BST)?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT153HS_U05",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT153HS_2025_regular_B11b",
+          "group": "B",
+          "number": "11b",
+          "marks": 2,
+          "text": "Explain how elements are inserted into a BST with an example.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT153HS_U05",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT153HS_2025_regular_B11c",
+          "group": "B",
+          "number": "11c",
+          "marks": 4,
+          "text": "Construct a BST using the values: 45, 20, 60, 15, 35, 50, 70. Then, perform in-order, pre-order, and post-order traversal on the tree.",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT153HS_U05",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    }
+  ],
+  "source_files": [
+    "work\\pages\\BIT153HS_2025_regular_p1.png",
+    "work\\pages\\BIT153HS_2025_regular_p2.png"
+  ],
+  "coverage": {
+    "by_group": [
+      {
+        "label": "A",
+        "questions_extracted": 3,
+        "questions_printed": 3
+      },
+      {
+        "label": "B",
+        "questions_extracted": 8,
+        "questions_printed": 8
+      }
+    ],
+    "status": "complete",
+    "notes": "Derived from the extraction, not self-reported by the model."
+  }
+}

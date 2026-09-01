@@ -6,7 +6,6 @@
 
 import {
   FlashcardState,
-  ReviewRating,
   calculateNextReview,
   expectedRetention,
   batchCalculateNextReviews,
@@ -56,7 +55,7 @@ describe("FSRS Algorithm", () => {
         nextReview: today,
       };
 
-      const result = calculateNextReview(testCard, 1, 3000);
+      const result = calculateNextReview(testCard, 1, 3000, today);
       const tomorrow = new Date(today);
       tomorrow.setDate(tomorrow.getDate() + 1);
 
@@ -124,7 +123,7 @@ describe("FSRS Algorithm", () => {
         nextReview: today,
         intervalDays: 10,
       };
-      const result = calculateNextReview(testCard, 3, 2500);
+      const result = calculateNextReview(testCard, 3, 2500, today);
 
       const expectedDate = new Date(today);
       expectedDate.setDate(expectedDate.getDate() + 25); // interval * ease = 10 * 2.5

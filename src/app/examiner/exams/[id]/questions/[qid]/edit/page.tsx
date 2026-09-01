@@ -22,9 +22,11 @@ export default function ExaminerEditQuestionPage({ params }: { params: any }) {
         if (!snap.exists()) { router.push(`/examiner/exams/${examId}`); return; }
         const d = snap.data();
         setForm({
+          type: d.type ?? "mcq",
           question_text: d.question_text ?? "", option_a: d.option_a ?? "",
           option_b: d.option_b ?? "", option_c: d.option_c ?? "", option_d: d.option_d ?? "",
-          correct_option: d.correct_option ?? "a", explanation: d.explanation ?? "",
+          correct_option: d.correct_option ?? "a", model_answer: d.model_answer ?? "", rubric: d.rubric ?? "", topic: d.topic ?? "",
+          explanation: d.explanation ?? "",
           difficulty: d.difficulty ?? "medium", marks: d.marks ?? 1, negativeMarks: d.negativeMarks ?? 0.25,
         });
       } catch (err) { console.error(err); }
@@ -47,16 +49,16 @@ export default function ExaminerEditQuestionPage({ params }: { params: any }) {
 
   return (
     <div className="max-w-3xl mx-auto space-y-8">
-      <Link href={`/examiner/exams/${examId}`} className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm font-medium">
+      <Link href={`/examiner/exams/${examId}`} className="inline-flex items-center gap-2 text-zinc-400 hover:text-zinc-900 transition-colors text-sm font-medium">
         <ArrowLeft className="w-4 h-4" /> Back to Exam
       </Link>
       <div className="flex items-center gap-4">
-        <div className="w-12 h-12 rounded-2xl bg-amber-400/20 flex items-center justify-center">
-          <Save className="text-amber-400 w-6 h-6" />
+        <div className="w-12 h-12 rounded-lg bg-amber-400/20 flex items-center justify-center">
+          <Save className="text-amber-700 w-6 h-6" />
         </div>
         <div>
           <h1 className="text-2xl font-bold">Edit Question</h1>
-          <p className="text-slate-400 text-sm">Update the question, options, or explanation.</p>
+          <p className="text-zinc-400 text-sm">Update the question, options, or explanation.</p>
         </div>
       </div>
       <QuestionForm data={form} onChange={setForm} onSubmit={handleSubmit} saving={saving} mode="edit" />

@@ -1,31 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { 
-  BookOpen, 
-  Award, 
-  Clock, 
-  ChevronRight, 
-  CheckCircle2, 
-  Flame, 
-  Cpu, 
-  Calculator, 
-  Zap, 
-  Rocket, 
+import {
+  BookOpen,
+  Award,
+  Clock,
+  CheckCircle2,
+  Rocket,
   Video,
-  FileCheck2,
   Building2,
-  Laptop,
   GraduationCap,
-  Sparkles,
-  Lock,
-  PlayCircle,
   Folder,
   FolderOpen,
   ChevronDown,
   ShieldCheck,
   MessageCircle,
-  Share2
 } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -52,7 +41,7 @@ interface SubjectSection {
 
 export default function CourseDetailPage() {
   const params = useParams();
-  const slug = params.slug as string;
+  const _slug = params.slug as string;
 
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
     "sec-eng": true,
@@ -376,41 +365,41 @@ export default function CourseDetailPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-mesh text-slate-900 pt-28 pb-24 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-mesh text-zinc-900 pt-8 pb-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-10">
         
         {/* Breadcrumb Strip */}
         <nav aria-label="breadcrumb">
-          <ol className="flex items-center gap-2 text-xs font-bold text-slate-500">
+          <ol className="flex items-center gap-2 text-xs font-bold text-zinc-500">
             <li><Link href="/" className="hover:text-orange-600 transition-colors">Home</Link></li>
             <li><span>/</span></li>
             <li><Link href="/learn" className="hover:text-orange-600 transition-colors">Courses</Link></li>
             <li><span>/</span></li>
-            <li className="text-slate-900 font-black">BIT</li>
+            <li className="text-zinc-900 font-bold">BIT</li>
           </ol>
         </nav>
 
         {/* Hero Section */}
-        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-sm">
+        <div className="bg-white rounded-xl p-8 sm:p-12 border border-zinc-200 shadow-sm">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             {/* Left Col: Info */}
             <div className="lg:col-span-7 space-y-5">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-50 border border-orange-200 text-orange-700 text-xs font-black uppercase tracking-widest">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-50 border border-orange-200 text-orange-700 text-xs font-bold uppercase tracking-widest">
                 <Award className="w-4 h-4 text-orange-600" />
                 <span>Entrance Program</span>
               </div>
 
-              <h1 className="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight leading-tight">
+              <h1 className="text-4xl sm:text-6xl font-bold text-zinc-900 tracking-tight leading-tight">
                 BIT <span className="text-gradient">Entrance Preparation</span>
               </h1>
 
-              <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl">
+              <p className="text-zinc-600 text-base sm:text-lg leading-relaxed max-w-2xl">
                 Complete structured preparation program with top-notch video lectures, high-yield concept summaries, formula handbooks, and live timed test simulators.
               </p>
 
               {/* Stats Strip */}
-              <div className="flex flex-wrap items-center gap-6 pt-2 text-xs sm:text-sm font-bold text-slate-600">
+              <div className="flex flex-wrap items-center gap-6 pt-2 text-xs sm:text-sm font-bold text-zinc-600">
                 <div className="flex items-center gap-2">
                   <BookOpen className="w-4 h-4 text-blue-600" />
                   <span>4 Core Subjects</span>
@@ -433,14 +422,14 @@ export default function CourseDetailPage() {
               <div className="flex flex-wrap gap-4 pt-4">
                 <Link
                   href="/exams"
-                  className="px-8 py-4 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-black text-sm transition-all shadow-md hover:scale-105 active:scale-95 flex items-center gap-2"
+                  className="px-8 py-4 rounded-lg bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold text-sm transition-all shadow-md hover:scale-105 active:scale-95 flex items-center gap-2"
                 >
                   <Rocket className="w-4 h-4" />
                   Attempt Live CBT Mock Test
                 </Link>
                 <Link
                   href="/semester/1"
-                  className="px-8 py-4 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 font-bold text-sm transition-all flex items-center gap-2"
+                  className="px-8 py-4 rounded-lg bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 text-zinc-700 font-bold text-sm transition-all flex items-center gap-2"
                 >
                   <BookOpen className="w-4 h-4 text-teal-600" />
                   Semester 1 Question Bank
@@ -450,15 +439,15 @@ export default function CourseDetailPage() {
 
             {/* Right Col: Course Card */}
             <div className="lg:col-span-5">
-              <div className="rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-md hover:shadow-lg transition-all space-y-5 p-6">
+              <div className="rounded-xl border border-zinc-200 bg-white overflow-hidden shadow-md hover:shadow-lg transition-all space-y-5 p-6">
                 
                 {/* Course Banner Box */}
-                <div className="w-full h-48 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-6 flex flex-col justify-between shadow-inner relative overflow-hidden">
+                <div className="w-full h-48 rounded-lg bg-gradient-to-br from-blue-600 to-primary-700 text-white p-6 flex flex-col justify-between shadow-inner relative overflow-hidden">
                   <div className="space-y-1 relative z-10">
-                    <span className="text-[11px] font-black uppercase tracking-wider bg-white/20 px-2.5 py-0.5 rounded-full">
+                    <span className="text-[11px] font-bold uppercase tracking-wider bg-white/20 px-2.5 py-0.5 rounded-full">
                       Purbanchal & TU Focused
                     </span>
-                    <h3 className="text-2xl font-black">BIT Masterclass</h3>
+                    <h3 className="text-2xl font-bold">BIT Masterclass</h3>
                     <p className="text-xs text-blue-100">Full Video Curriculum & Question Simulator</p>
                   </div>
                   <div className="flex items-center justify-between text-xs font-bold relative z-10 pt-2 border-t border-white/20">
@@ -468,8 +457,8 @@ export default function CourseDetailPage() {
                 </div>
 
                 <div className="space-y-3">
-                  <h4 className="text-sm font-black text-slate-900">What&apos;s Included in this Course:</h4>
-                  <ul className="space-y-2 text-xs text-slate-600">
+                  <h4 className="text-sm font-bold text-zinc-900">What&apos;s Included in this Course:</h4>
+                  <ul className="space-y-2 text-xs text-zinc-600">
                     <li className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                       <span>Full syllabus coverage across English, Math, IT & Logic</span>
@@ -489,12 +478,12 @@ export default function CourseDetailPage() {
                   </ul>
                 </div>
 
-                <div className="pt-2 border-t border-slate-100 flex flex-col gap-2">
+                <div className="pt-2 border-t border-zinc-100 flex flex-col gap-2">
                   <a
                     href="https://wa.me/9779761499683"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-3 rounded-2xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 font-bold text-xs flex items-center justify-center gap-2 transition-colors"
+                    className="w-full py-3 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 font-bold text-xs flex items-center justify-center gap-2 transition-colors"
                   >
                     <MessageCircle className="w-4 h-4 text-emerald-600" />
                     Chat with Counselor on WhatsApp
@@ -511,13 +500,13 @@ export default function CourseDetailPage() {
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <span className="text-xs font-black uppercase tracking-wider text-orange-600">Syllabus Explorer</span>
-              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 flex items-center gap-2.5">
+              <span className="text-xs font-bold uppercase tracking-wider text-orange-600">Syllabus Explorer</span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900 flex items-center gap-2.5">
                 <GraduationCap className="w-7 h-7 text-blue-600" />
                 Course Curriculum Syllabus
               </h2>
             </div>
-            <span className="text-xs text-slate-500 font-bold hidden sm:inline-block">
+            <span className="text-xs text-zinc-500 font-bold hidden sm:inline-block">
               Click any lecture to preview key concepts
             </span>
           </div>
@@ -528,55 +517,55 @@ export default function CourseDetailPage() {
               return (
                 <div 
                   key={sec.id}
-                  className="rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-xs transition-all"
+                  className="rounded-xl border border-zinc-200 bg-white overflow-hidden shadow-xs transition-all"
                 >
                   {/* Accordion Header */}
                   <button
                     onClick={() => toggleSection(sec.id)}
-                    className="w-full p-6 text-left flex items-center justify-between hover:bg-slate-50 transition-colors"
+                    className="w-full p-6 text-left flex items-center justify-between hover:bg-zinc-50 transition-colors"
                   >
                     <div className="flex items-center gap-3.5">
                       <div className="w-10 h-10 rounded-xl bg-orange-50 border border-orange-200 flex items-center justify-center text-orange-600">
                         {isOpen ? <FolderOpen className="w-5 h-5" /> : <Folder className="w-5 h-5" />}
                       </div>
                       <div>
-                        <h3 className="text-lg font-bold text-slate-900">{sec.title}</h3>
-                        <p className="text-xs text-slate-500">{sec.lecturesCount} Structured Modules</p>
+                        <h3 className="text-lg font-bold text-zinc-900">{sec.title}</h3>
+                        <p className="text-xs text-zinc-500">{sec.lecturesCount} Structured Modules</p>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-3">
-                      <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold">
+                      <span className="px-3 py-1 rounded-full bg-zinc-100 text-zinc-700 text-xs font-bold">
                         {sec.lectures.length} Lectures
                       </span>
-                      <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform duration-200 ${isOpen ? "rotate-180 text-orange-600" : ""}`} />
+                      <ChevronDown className={`w-5 h-5 text-zinc-400 transition-transform duration-200 ${isOpen ? "rotate-180 text-orange-600" : ""}`} />
                     </div>
                   </button>
 
                   {/* Accordion Body */}
                   {isOpen && (
-                    <div className="px-6 pb-6 pt-2 border-t border-slate-100 space-y-3 bg-slate-50/50">
+                    <div className="px-6 pb-6 pt-2 border-t border-zinc-100 space-y-3 bg-zinc-50/50">
                       {sec.lectures.map((lec, idx) => (
                         <div
                           key={lec.id}
                           onClick={() => setActiveLecture(lec)}
-                          className="p-4 rounded-2xl bg-white border border-slate-200 hover:border-orange-400 transition-all cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs group"
+                          className="p-4 rounded-lg bg-white border border-zinc-200 hover:border-orange-400 transition-all cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs group"
                         >
                           <div className="flex items-center gap-3.5">
-                            <div className="w-8 h-8 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center text-xs font-bold text-slate-700 group-hover:text-orange-600 transition-colors">
+                            <div className="w-8 h-8 rounded-lg bg-zinc-50 border border-zinc-200 flex items-center justify-center text-xs font-bold text-zinc-700 group-hover:text-orange-600 transition-colors">
                               {idx + 1}
                             </div>
                             <div>
-                              <h4 className="text-sm sm:text-base font-bold text-slate-800 group-hover:text-slate-900 transition-colors flex items-center gap-2">
+                              <h4 className="text-sm sm:text-base font-bold text-zinc-800 group-hover:text-zinc-900 transition-colors flex items-center gap-2">
                                 {lec.title}
                               </h4>
-                              <p className="text-xs text-slate-500 line-clamp-1">{lec.summary}</p>
+                              <p className="text-xs text-zinc-500 line-clamp-1">{lec.summary}</p>
                             </div>
                           </div>
 
-                          <div className="flex items-center gap-3 self-end sm:self-auto text-xs text-slate-500">
+                          <div className="flex items-center gap-3 self-end sm:self-auto text-xs text-zinc-500">
                             <span className="flex items-center gap-1 font-mono">
-                              <Clock className="w-3.5 h-3.5 text-slate-400" />
+                              <Clock className="w-3.5 h-3.5 text-zinc-400" />
                               {lec.duration}
                             </span>
                             <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${
@@ -599,33 +588,33 @@ export default function CourseDetailPage() {
 
         {/* Lecture Concept Review Modal */}
         {activeLecture && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/40 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/40 backdrop-blur-sm">
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="w-full max-w-2xl rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 space-y-6 shadow-2xl text-slate-800"
+              className="w-full max-w-2xl rounded-xl border border-zinc-200 bg-white p-6 sm:p-8 space-y-6 shadow-2xl text-zinc-800"
             >
-              <div className="flex items-start justify-between border-b border-slate-100 pb-4">
+              <div className="flex items-start justify-between border-b border-zinc-100 pb-4">
                 <div>
-                  <span className="text-xs font-black uppercase text-orange-600">Lecture Concept Summary</span>
-                  <h3 className="text-2xl font-bold text-slate-900 mt-1">{activeLecture.title}</h3>
-                  <p className="text-xs text-slate-400 mt-0.5">Estimated Duration: {activeLecture.duration}</p>
+                  <span className="text-xs font-bold uppercase text-orange-600">Lecture Concept Summary</span>
+                  <h3 className="text-2xl font-bold text-zinc-900 mt-1">{activeLecture.title}</h3>
+                  <p className="text-xs text-zinc-400 mt-0.5">Estimated Duration: {activeLecture.duration}</p>
                 </div>
                 <button
                   onClick={() => setActiveLecture(null)}
-                  className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-700 transition-all"
+                  className="px-3 py-1.5 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-xs font-bold text-zinc-700 transition-all"
                 >
                   Close
                 </button>
               </div>
 
-              <p className="text-sm text-slate-600 leading-relaxed">{activeLecture.summary}</p>
+              <p className="text-sm text-zinc-600 leading-relaxed">{activeLecture.summary}</p>
 
               <div className="space-y-3">
-                <h4 className="text-xs font-black uppercase tracking-wider text-slate-500">Core High-Yield Highlights</h4>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-500">Core High-Yield Highlights</h4>
                 <div className="space-y-2">
                   {activeLecture.keyPoints.map((point, pIdx) => (
-                    <div key={pIdx} className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700">
+                    <div key={pIdx} className="flex items-start gap-2.5 p-3 rounded-xl bg-zinc-50 border border-zinc-200 text-xs text-zinc-700">
                       <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
                       <span>{point}</span>
                     </div>
@@ -633,7 +622,7 @@ export default function CourseDetailPage() {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-slate-100 flex justify-between items-center gap-3">
+              <div className="pt-4 border-t border-zinc-100 flex justify-between items-center gap-3">
                 <Link
                   href="/flashcards"
                   className="text-xs font-bold text-teal-700 hover:text-teal-800"

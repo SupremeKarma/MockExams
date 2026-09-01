@@ -2,8 +2,24 @@
 
 import { useState, useEffect } from "react";
 import { db } from "@/lib/firebase";
-import { collection, query, orderBy, getDocs, doc, updateDoc, addDoc, serverTimestamp, getDoc } from "firebase/firestore";
-import { Building2, CheckCircle, XCircle, Clock, Loader2, ChevronRight } from "lucide-react";
+import {
+  collection,
+  query,
+  orderBy,
+  getDocs,
+  doc,
+  updateDoc,
+  addDoc,
+  serverTimestamp,
+} from "firebase/firestore";
+import {
+  Building2,
+  CheckCircle,
+  XCircle,
+  Clock,
+  Loader2,
+  ChevronRight,
+} from "lucide-react";
 import Link from "next/link";
 
 type TabKey = "pending" | "approved" | "rejected";
@@ -114,9 +130,9 @@ export default function AdminOrganizationsPage() {
   };
 
   const TAB_COLORS: Record<TabKey, string> = {
-    pending: "text-amber-400 border-amber-400",
-    approved: "text-emerald-400 border-emerald-400",
-    rejected: "text-rose-400 border-rose-400",
+    pending: "text-amber-700 border-amber-400",
+    approved: "text-emerald-700 border-emerald-400",
+    rejected: "text-red-700 border-rose-400",
   };
 
   if (loading) return <div className="flex justify-center py-20"><Loader2 className="w-8 h-8 animate-spin text-primary" /></div>;
@@ -124,17 +140,17 @@ export default function AdminOrganizationsPage() {
   return (
     <div className="space-y-8">
       <div className="flex items-center gap-4">
-        <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center">
-          <Building2 className="w-6 h-6 text-emerald-400" />
+        <div className="w-12 h-12 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+          <Building2 className="w-6 h-6 text-emerald-700" />
         </div>
         <div>
           <h2 className="text-2xl font-bold">Organization Requests</h2>
-          <p className="text-slate-400 text-sm">Review and approve organization applications</p>
+          <p className="text-zinc-500 text-sm">Review and approve organization applications</p>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 border-b border-white/10 pb-0">
+      <div className="flex gap-2 border-b border-zinc-200 pb-0">
         {(["pending","approved","rejected"] as TabKey[]).map(tab => {
           const count = requests.filter(r => r.status === tab).length;
           return (
@@ -143,12 +159,12 @@ export default function AdminOrganizationsPage() {
               onClick={() => setActiveTab(tab)}
               className={`flex items-center gap-2 px-5 py-3 text-sm font-bold capitalize border-b-2 transition-all -mb-px ${
                 activeTab === tab
-                  ? `${TAB_COLORS[tab]} bg-white/5`
-                  : "text-slate-500 border-transparent hover:text-white"
+                  ? `${TAB_COLORS[tab]} bg-zinc-50`
+                  : "text-zinc-500 border-transparent hover:text-zinc-900"
               }`}
             >
               {TAB_ICONS[tab]} {tab}
-              <span className="text-xs px-1.5 py-0.5 bg-white/10 rounded-md">{count}</span>
+              <span className="text-xs px-1.5 py-0.5 bg-zinc-100 rounded-md">{count}</span>
             </button>
           );
         })}
@@ -156,33 +172,33 @@ export default function AdminOrganizationsPage() {
 
       {/* Request Cards */}
       {filtered.length === 0 ? (
-        <div className="glass-card p-16 rounded-3xl border border-white/10 text-center text-slate-500">
+        <div className="glass-card p-16 rounded-xl border border-zinc-200 text-center text-zinc-500">
           <p>No {activeTab} requests.</p>
         </div>
       ) : (
         <div className="space-y-4">
           {filtered.map(req => (
-            <div key={req.id} className="glass-card p-6 rounded-2xl border border-white/10">
+            <div key={req.id} className="glass-card p-6 rounded-lg border border-zinc-200">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
                     <h3 className="text-lg font-bold">{req.org_name}</h3>
-                    <span className="text-xs font-bold px-2 py-0.5 bg-white/5 text-slate-400 rounded-lg capitalize">{req.org_type}</span>
+                    <span className="text-xs font-bold px-2 py-0.5 bg-zinc-50 text-zinc-500 rounded-lg capitalize">{req.org_type}</span>
                   </div>
-                  <p className="text-sm text-slate-400 mb-1">Contact: <span className="text-slate-300">{req.contact_name}</span> · {req.contact_email}</p>
-                  {req.phone && <p className="text-sm text-slate-400 mb-1">Phone: {req.phone}</p>}
-                  <p className="text-sm text-slate-400 mt-3 leading-relaxed">{req.message}</p>
+                  <p className="text-sm text-zinc-500 mb-1">Contact: <span className="text-zinc-600">{req.contact_name}</span> · {req.contact_email}</p>
+                  {req.phone && <p className="text-sm text-zinc-500 mb-1">Phone: {req.phone}</p>}
+                  <p className="text-sm text-zinc-500 mt-3 leading-relaxed">{req.message}</p>
                   {req.rejection_reason && (
-                    <p className="text-sm text-rose-400 mt-2 italic">Rejection reason: {req.rejection_reason}</p>
+                    <p className="text-sm text-red-700 mt-2 italic">Rejection reason: {req.rejection_reason}</p>
                   )}
-                  <p className="text-xs text-slate-600 mt-3">
+                  <p className="text-xs text-zinc-600 mt-3">
                     Submitted {req.submitted_at?.toDate?.()?.toLocaleDateString() ?? "—"}
                   </p>
                 </div>
 
                 <div className="flex flex-col gap-2 shrink-0">
                   {req.status === "approved" && req.org_id && (
-                    <Link href={`/admin/organizations/${req.org_id}`} className="flex items-center gap-1 px-4 py-2 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-xl text-sm font-bold hover:bg-emerald-500/20 transition-all">
+                    <Link href={`/admin/organizations/${req.org_id}`} className="flex items-center gap-1 px-4 py-2 bg-emerald-500/10 text-emerald-700 border border-emerald-500/20 rounded-xl text-sm font-bold hover:bg-emerald-500/20 transition-all">
                       View Org <ChevronRight className="w-4 h-4" />
                     </Link>
                   )}
@@ -199,7 +215,7 @@ export default function AdminOrganizationsPage() {
                       </button>
                       <button
                         onClick={() => setRejectTarget(req.id)}
-                        className="flex items-center gap-2 px-4 py-2 bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded-xl text-sm font-bold hover:bg-rose-500/20 transition-all"
+                        className="flex items-center gap-2 px-4 py-2 bg-rose-500/10 text-red-700 border border-rose-500/20 rounded-xl text-sm font-bold hover:bg-rose-500/20 transition-all"
                       >
                         <XCircle className="w-4 h-4" /> Reject
                       </button>
@@ -210,14 +226,14 @@ export default function AdminOrganizationsPage() {
 
               {/* Reject reason input */}
               {rejectTarget === req.id && (
-                <div className="mt-4 p-4 bg-rose-500/5 border border-rose-500/20 rounded-2xl space-y-3">
-                  <p className="text-sm font-medium text-rose-400">Rejection reason (will be shown to applicant)</p>
+                <div className="mt-4 p-4 bg-rose-500/5 border border-rose-500/20 rounded-lg space-y-3">
+                  <p className="text-sm font-medium text-red-700">Rejection reason (will be shown to applicant)</p>
                   <textarea
                     rows={2}
                     value={rejectReason}
                     onChange={e => setRejectReason(e.target.value)}
                     placeholder="e.g. Insufficient information provided. Please reapply with more details..."
-                    className="w-full p-3 bg-white/5 border border-white/10 rounded-xl text-sm outline-none resize-none"
+                    className="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-xl text-sm outline-none resize-none"
                   />
                   <div className="flex gap-2">
                     <button
@@ -228,7 +244,7 @@ export default function AdminOrganizationsPage() {
                       {processing === req.id ? <Loader2 className="w-3 h-3 animate-spin" /> : null}
                       Confirm Reject
                     </button>
-                    <button onClick={() => { setRejectTarget(null); setRejectReason(""); }} className="px-4 py-2 bg-white/5 text-slate-400 rounded-xl text-sm font-bold hover:bg-white/10 transition-all">
+                    <button onClick={() => { setRejectTarget(null); setRejectReason(""); }} className="px-4 py-2 bg-zinc-50 text-zinc-500 rounded-xl text-sm font-bold hover:bg-zinc-100 transition-all">
                       Cancel
                     </button>
                   </div>

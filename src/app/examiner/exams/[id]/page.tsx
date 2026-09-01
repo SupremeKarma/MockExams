@@ -3,11 +3,30 @@
 import { useState, useEffect, use } from "react";
 import { useRouter } from "next/navigation";
 import { db } from "@/lib/firebase";
-import { doc, getDoc, collection, query, where, orderBy, getDocs, updateDoc, deleteDoc, serverTimestamp, addDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  collection,
+  query,
+  where,
+  orderBy,
+  getDocs,
+  updateDoc,
+  deleteDoc,
+  serverTimestamp,
+  addDoc,
+} from "firebase/firestore";
 import { useAuth } from "@/context/AuthContext";
 import ExamForm, { ExamFormData } from "@/components/ExamForm";
 import QuestionTable from "@/components/QuestionTable";
-import { ArrowLeft, Plus, Sparkles, BookOpen, BarChart2, Loader2, ShieldAlert } from "lucide-react";
+import {
+  ArrowLeft,
+  Plus,
+  BookOpen,
+  BarChart2,
+  Loader2,
+  ShieldAlert,
+} from "lucide-react";
 import Link from "next/link";
 
 const DEFAULT_FORM: ExamFormData = {
@@ -97,18 +116,18 @@ export default function ExaminerExamDetailPage({ params }: { params: any }) {
     <div className="flex flex-col items-center justify-center py-20 text-center">
       <ShieldAlert className="w-16 h-16 text-rose-500 mb-6" />
       <h2 className="text-2xl font-bold mb-3">Not Your Exam</h2>
-      <p className="text-slate-400 mb-6">You can only edit exams you created.</p>
+      <p className="text-zinc-500 mb-6">You can only edit exams you created.</p>
       <Link href="/examiner/exams" className="px-6 py-3 bg-primary text-white rounded-xl font-bold">Back to My Exams</Link>
     </div>
   );
 
   return (
     <div className="space-y-10 max-w-5xl mx-auto">
-      <Link href="/examiner/exams" className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm font-medium">
+      <Link href="/examiner/exams" className="inline-flex items-center gap-2 text-zinc-500 hover:text-zinc-900 transition-colors text-sm font-medium">
         <ArrowLeft className="w-4 h-4" /> Back to My Exams
       </Link>
 
-      <div className="glass-card p-8 rounded-3xl border border-white/10 space-y-6">
+      <div className="glass-card p-8 rounded-xl border border-zinc-200 space-y-6">
         <h2 className="text-xl font-bold flex items-center gap-2">
           <BookOpen className="w-5 h-5 text-primary" /> Exam Settings
         </h2>
@@ -117,9 +136,9 @@ export default function ExaminerExamDetailPage({ params }: { params: any }) {
 
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-bold">Questions <span className="ml-2 text-sm font-normal text-slate-400">({questions.length})</span></h2>
+          <h2 className="text-xl font-bold">Questions <span className="ml-2 text-sm font-normal text-zinc-500">({questions.length})</span></h2>
           <div className="flex gap-3">
-            <Link href={`/examiner/exams/${examId}/results`} className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 text-slate-300 rounded-xl text-sm font-bold hover:bg-white/10 transition-all">
+            <Link href={`/examiner/exams/${examId}/results`} className="flex items-center gap-2 px-4 py-2 bg-zinc-50 border border-zinc-200 text-zinc-600 rounded-xl text-sm font-bold hover:bg-zinc-100 transition-all">
               <BarChart2 className="w-4 h-4" /> Results
             </Link>
             <Link href={`/examiner/exams/${examId}/questions/new`} className="flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-xl text-sm font-bold hover:opacity-90 transition-all">

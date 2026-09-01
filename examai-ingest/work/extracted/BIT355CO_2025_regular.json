@@ -1,0 +1,334 @@
+{
+  "paper_id": "BIT355CO_2025_regular",
+  "subject_code": "BIT355CO",
+  "subject_name": "Software Engineering",
+  "semester": 6,
+  "year": 2025,
+  "exam_type": "regular",
+  "curriculum": "new_course",
+  "full_marks": 80,
+  "pass_marks": 32,
+  "duration_hours": 3,
+  "extraction_notes": "",
+  "groups": [
+    {
+      "label": "A",
+      "questions_printed": 3,
+      "answer_count": 2,
+      "marks_each": 12,
+      "marks_total": 24,
+      "instruction": "Answer TWO questions."
+    },
+    {
+      "label": "B",
+      "questions_printed": 8,
+      "answer_count": 7,
+      "marks_each": 8,
+      "marks_total": 56,
+      "instruction": "Answer SEVEN questions."
+    }
+  ],
+  "questions": [
+    {
+      "question_id": "BIT355CO_2025_regular_A1",
+      "group": "A",
+      "number": "1",
+      "marks": 12,
+      "text": "What do you mean by incremental iterative approach of software development? Explain RAD model in detail including its phases, characteristics, advantages, and disadvantages. Include necessary diagrams and examples.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT355CO_U02",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": true,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT355CO_2025_regular_A2",
+      "group": "A",
+      "number": "2",
+      "marks": 12,
+      "text": "Differentiate between functional and non-functional requirements in software development. Briefly explain about some commonly used software prototyping techniques.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT355CO_U04",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT355CO_U02",
+          "confidence": "medium"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT355CO_2025_regular_A3",
+      "group": "A",
+      "number": "3",
+      "marks": 12,
+      "text": "Why is testing done? What are the different types of software testing and how do they differ from each other? Explain.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT355CO_U06",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT355CO_2025_regular_B4",
+      "group": "B",
+      "number": "4",
+      "marks": 8,
+      "text": "What is Software Engineering? Explain Software Engineering as a “Layered Technology”.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT355CO_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT355CO_2025_regular_B5",
+      "group": "B",
+      "number": "5",
+      "marks": 8,
+      "text": "Explain differences between waterfall model and agile methodologies in software engineering? Which one do you prefer and why?",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT355CO_U02",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT355CO_U08",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT355CO_2025_regular_B6",
+      "group": "B",
+      "number": "6",
+      "marks": 8,
+      "text": "What is COCOMO model? A development project is estimated to have about 49200 lines of code and is believed to be of medium complexity. Calculate the effort, development time, and the productivity of the project.",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT355CO_U03",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT355CO_2025_regular_B7",
+      "group": "B",
+      "number": "7",
+      "marks": 8,
+      "text": "What are 4 P's in software project management? Explain them in detail.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT355CO_U03",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT355CO_2025_regular_B8",
+      "group": "B",
+      "number": "8",
+      "marks": 8,
+      "text": "What is Object Oriented Software Engineering? Draw a class diagram for an Online Shopping System making necessary assumptions.",
+      "question_type": "diagram",
+      "units": [
+        {
+          "unit_id": "BIT355CO_U05",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": true,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT355CO_2025_regular_B9",
+      "group": "B",
+      "number": "9",
+      "marks": 8,
+      "text": "What are the different activities of project planning? Explain.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT355CO_U03",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT355CO_2025_regular_B10",
+      "group": "B",
+      "number": "10",
+      "marks": 8,
+      "text": "What is a data-flow diagram and why it is used in software development? Give an example of data flow diagram.",
+      "question_type": "diagram",
+      "units": [
+        {
+          "unit_id": "BIT355CO_U04",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT355CO_U05",
+          "confidence": "medium"
+        }
+      ],
+      "has_diagram": true,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT355CO_2025_regular_B11",
+      "group": "B",
+      "number": "11",
+      "marks": 8,
+      "text": "Write short notes on Any TWO:",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT355CO_U07",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT355CO_U01",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT355CO_U05",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "choose": 2,
+      "sub_parts": [
+        {
+          "question_id": "BIT355CO_2025_regular_B11a",
+          "group": "B",
+          "number": "11a",
+          "marks": 4,
+          "text": "ISO 9000 Standard",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT355CO_U07",
+              "confidence": "high"
+            }
+          ],
+          "has_diagram": false,
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT355CO_2025_regular_B11b",
+          "group": "B",
+          "number": "11b",
+          "marks": 4,
+          "text": "Evolving role of software",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT355CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "has_diagram": false,
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT355CO_2025_regular_B11c",
+          "group": "B",
+          "number": "11c",
+          "marks": 4,
+          "text": "OOSE",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT355CO_U05",
+              "confidence": "high"
+            }
+          ],
+          "has_diagram": false,
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    }
+  ],
+  "source_files": [
+    "work\\pages\\BIT355CO_2025_regular_p1.png"
+  ],
+  "coverage": {
+    "by_group": [
+      {
+        "label": "A",
+        "questions_extracted": 3,
+        "questions_printed": 3
+      },
+      {
+        "label": "B",
+        "questions_extracted": 8,
+        "questions_printed": 8
+      }
+    ],
+    "status": "complete",
+    "notes": "Derived from the extraction, not self-reported by the model."
+  }
+}

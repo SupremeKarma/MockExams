@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -16,13 +16,24 @@ export const metadata: Metadata = {
   title: "MockExams | Premier Exam Preparation Platform",
   description: "Empowering students worldwide with guided exam preparation, real-time feedback, and high-quality mock tests. Join thousands of successful candidates.",
   keywords: ["MockExams", "Exam Prep", "IOE Mock Exam", "NEB Preparation", "Competitive Exams"],
+  manifest: "/manifest.webmanifest",
+  appleWebApp: { capable: true, title: "MockExams", statusBarStyle: "default" },
 };
 
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import QuickNavRail from "@/components/QuickNavRail";
+export const viewport: Viewport = {
+  themeColor: "#ffffff",
+  // Never block pinch-zoom: capping it locks out low-vision users.
+  initialScale: 1,
+  width: "device-width",
+  maximumScale: 5,
+  userScalable: true,
+};
+
 import { AuthProvider } from "@/context/AuthContext";
+import { ProgramProvider } from "@/context/ProgramContext";
 import { NotificationProvider } from "@/components/NotificationProvider";
+import AppShell from "@/components/AppShell";
+import ServiceWorkerRegistrar from "@/components/ServiceWorkerRegistrar";
 
 export default function RootLayout({
   children,
@@ -32,19 +43,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-slate-900 overflow-x-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-zinc-900 overflow-x-hidden`}
         suppressHydrationWarning
       >
         <div className="relative min-h-screen flex flex-col">
           <AuthProvider>
-            <NotificationProvider>
-              <Navbar />
-              <QuickNavRail />
-              <main className="flex-1 pt-24">
-                {children}
-              </main>
-              <Footer />
-            </NotificationProvider>
+            <ProgramProvider>
+              <NotificationProvider>
+                <AppShell>{children}</AppShell>
+                <ServiceWorkerRegistrar />
+              </NotificationProvider>
+            </ProgramProvider>
           </AuthProvider>
         </div>
       </body>

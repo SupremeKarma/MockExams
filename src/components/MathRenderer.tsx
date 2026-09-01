@@ -14,7 +14,7 @@ interface MathRendererProps {
  * A robust component that handles mixed text and LaTeX.
  * Supports $[...] for inline math and $$[...] for block math.
  */
-export const MathRenderer: React.FC<MathRendererProps> = ({ content, className, isBlock = false }) => {
+export const MathRenderer: React.FC<MathRendererProps> = ({ content, className, isBlock: _isBlock = false }) => {
   if (!content) return null;
 
   // Simple regex to find LaTeX blocks

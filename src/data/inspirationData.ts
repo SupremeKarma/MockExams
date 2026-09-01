@@ -1,0 +1,230 @@
+export type InspirationCategory =
+  | 'Scientists'
+  | 'Entrepreneurs'
+  | 'Writers & Thinkers'
+  | 'Athletes'
+  | 'Freedom Fighters'
+  | 'Innovators';
+
+export interface Personality {
+  id: string;
+  name: string;
+  initials: string;
+  field: string;
+  category: InspirationCategory;
+  era: string;
+  quote: string;
+  bio: string;
+  tags: string[];
+  color: string; // tailwind gradient classes for avatar
+}
+
+export const inspirationData: Personality[] = [
+  {
+    id: 'einstein',
+    name: 'Albert Einstein',
+    initials: 'AE',
+    field: 'Physicist',
+    category: 'Scientists',
+    era: '1879–1955',
+    quote: 'Education is not the learning of facts, but the training of the mind to think.',
+    bio: 'Developed the theory of relativity, reshaping our understanding of space, time, and energy.',
+    tags: ['physics', 'curiosity', 'growth mindset'],
+    color: 'from-indigo-500 to-blue-500',
+  },
+  {
+    id: 'curie',
+    name: 'Marie Curie',
+    initials: 'MC',
+    field: 'Physicist & Chemist',
+    category: 'Scientists',
+    era: '1867–1934',
+    quote: 'Nothing in life is to be feared, it is only to be understood.',
+    bio: 'First person to win Nobel Prizes in two different sciences; pioneered research on radioactivity.',
+    tags: ['perseverance', 'science', 'resilience'],
+    color: 'from-purple-500 to-pink-500',
+  },
+  {
+    id: 'kalam',
+    name: 'A. P. J. Abdul Kalam',
+    initials: 'AK',
+    field: 'Scientist & President',
+    category: 'Scientists',
+    era: '1931–2015',
+    quote: 'Dream is not that which you see while sleeping, it is something that does not let you sleep.',
+    bio: "India's 'Missile Man' and 11th President, known for inspiring generations of students.",
+    tags: ['ambition', 'exams', 'discipline'],
+    color: 'from-emerald-500 to-teal-500',
+  },
+  {
+    id: 'jobs',
+    name: 'Steve Jobs',
+    initials: 'SJ',
+    field: 'Entrepreneur',
+    category: 'Entrepreneurs',
+    era: '1955–2011',
+    quote: 'Your time is limited, so don’t waste it living someone else’s life.',
+    bio: 'Co-founded Apple and redefined personal computing, music, and mobile phones.',
+    tags: ['focus', 'creativity', 'career'],
+    color: 'from-slate-600 to-slate-800',
+  },
+  {
+    id: 'musk',
+    name: 'Elon Musk',
+    initials: 'EM',
+    field: 'Entrepreneur & Engineer',
+    category: 'Entrepreneurs',
+    era: 'b. 1971',
+    quote: 'When something is important enough, you do it even if the odds are not in your favor.',
+    bio: 'Founder of SpaceX and Tesla, pushing boundaries in space travel and clean energy.',
+    tags: ['risk-taking', 'engineering', 'grit'],
+    color: 'from-red-500 to-orange-500',
+  },
+  {
+    id: 'ambani',
+    name: 'Dhirubhai Ambani',
+    initials: 'DA',
+    field: 'Entrepreneur',
+    category: 'Entrepreneurs',
+    era: '1932–2002',
+    quote: 'Do not be scared of taking major decisions, don’t be afraid of failure.',
+    bio: 'Built Reliance Industries from scratch into one of India’s largest conglomerates.',
+    tags: ['ambition', 'business', 'courage'],
+    color: 'from-amber-500 to-yellow-500',
+  },
+  {
+    id: 'maya-angelou',
+    name: 'Maya Angelou',
+    initials: 'MA',
+    field: 'Poet & Author',
+    category: 'Writers & Thinkers',
+    era: '1928–2014',
+    quote: 'You may not control all the events that happen to you, but you can decide not to be reduced by them.',
+    bio: 'Acclaimed poet and civil rights activist whose memoirs inspired millions.',
+    tags: ['resilience', 'writing', 'self-belief'],
+    color: 'from-fuchsia-500 to-purple-500',
+  },
+  {
+    id: 'rowling',
+    name: 'J. K. Rowling',
+    initials: 'JR',
+    field: 'Author',
+    category: 'Writers & Thinkers',
+    era: 'b. 1965',
+    quote: 'It is impossible to live without failing at something, unless you live so cautiously that you might as well not have lived at all.',
+    bio: 'Wrote the Harry Potter series after facing numerous rejections early in her career.',
+    tags: ['failure', 'persistence', 'creativity'],
+    color: 'from-rose-500 to-red-500',
+  },
+  {
+    id: 'chanakya',
+    name: 'Chanakya',
+    initials: 'CK',
+    field: 'Philosopher & Strategist',
+    category: 'Writers & Thinkers',
+    era: '375–283 BCE',
+    quote: 'Education is the best friend. An educated person is respected everywhere.',
+    bio: 'Ancient Indian teacher, philosopher, and royal advisor whose treatises still guide strategy today.',
+    tags: ['wisdom', 'discipline', 'strategy'],
+    color: 'from-teal-500 to-cyan-500',
+  },
+  {
+    id: 'jordan',
+    name: 'Michael Jordan',
+    initials: 'MJ',
+    field: 'Basketball Player',
+    category: 'Athletes',
+    era: 'b. 1963',
+    quote: 'I’ve failed over and over again in my life. And that is why I succeed.',
+    bio: 'Widely regarded as the greatest basketball player of all time, known for relentless work ethic.',
+    tags: ['practice', 'failure', 'consistency'],
+    color: 'from-red-600 to-rose-600',
+  },
+  {
+    id: 'phelps',
+    name: 'Michael Phelps',
+    initials: 'MP',
+    field: 'Swimmer',
+    category: 'Athletes',
+    era: 'b. 1985',
+    quote: 'You can’t put a limit on anything. The more you dream, the farther you get.',
+    bio: 'Most decorated Olympian in history, with 23 gold medals earned through years of discipline.',
+    tags: ['discipline', 'goals', 'dreams'],
+    color: 'from-sky-500 to-blue-600',
+  },
+  {
+    id: 'mandela',
+    name: 'Nelson Mandela',
+    initials: 'NM',
+    field: 'Statesman',
+    category: 'Freedom Fighters',
+    era: '1918–2013',
+    quote: 'Education is the most powerful weapon which you can use to change the world.',
+    bio: 'Anti-apartheid leader who became South Africa’s first Black president after 27 years in prison.',
+    tags: ['change', 'education', 'leadership'],
+    color: 'from-green-600 to-emerald-600',
+  },
+  {
+    id: 'bhagat-singh',
+    name: 'Bhagat Singh',
+    initials: 'BS',
+    field: 'Revolutionary',
+    category: 'Freedom Fighters',
+    era: '1907–1931',
+    quote: 'Life is lived on its own, on the crutches of others it is only walked.',
+    bio: 'Indian revolutionary whose fearless conviction still inspires young activists and students.',
+    tags: ['courage', 'conviction', 'independence'],
+    color: 'from-orange-600 to-red-600',
+  },
+  {
+    id: 'malala',
+    name: 'Malala Yousafzai',
+    initials: 'MY',
+    field: 'Activist',
+    category: 'Freedom Fighters',
+    era: 'b. 1997',
+    quote: 'One child, one teacher, one book, one pen can change the world.',
+    bio: 'Youngest-ever Nobel laureate, campaigning globally for girls’ right to education.',
+    tags: ['education', 'courage', 'youth'],
+    color: 'from-violet-500 to-purple-600',
+  },
+  {
+    id: 'da-vinci',
+    name: 'Leonardo da Vinci',
+    initials: 'LV',
+    field: 'Polymath',
+    category: 'Innovators',
+    era: '1452–1519',
+    quote: 'Learning never exhausts the mind.',
+    bio: 'Painter, engineer, and scientist whose insatiable curiosity spanned nearly every field of study.',
+    tags: ['curiosity', 'creativity', 'lifelong learning'],
+    color: 'from-yellow-600 to-amber-600',
+  },
+  {
+    id: 'ada-lovelace',
+    name: 'Ada Lovelace',
+    initials: 'AL',
+    field: 'Mathematician',
+    category: 'Innovators',
+    era: '1815–1852',
+    quote: 'That brain of mine is something more than merely mortal, as time will show.',
+    bio: 'Wrote the first algorithm intended for a machine, laying groundwork for computer science.',
+    tags: ['mathematics', 'innovation', 'confidence'],
+    color: 'from-cyan-500 to-teal-600',
+  },
+];
+
+export const categories: InspirationCategory[] = [
+  'Scientists',
+  'Entrepreneurs',
+  'Writers & Thinkers',
+  'Athletes',
+  'Freedom Fighters',
+  'Innovators',
+];
+
+export const dailyMotivationPool = inspirationData.map((p) => ({
+  id: p.id,
+  name: p.name,
+  quote: p.quote,
+}));

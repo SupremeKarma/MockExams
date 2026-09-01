@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 120" fill="none">
+  <!-- eSewa Green Circle Icon -->
+  <g transform="translate(10, 10)">
+    <circle cx="50" cy="50" r="45" fill="#60BB46"/>
+    <!-- Lowercase e -->
+    <path d="M50 32C40.0589 32 32 40.0589 32 50C32 59.9411 40.0589 68 50 68C56.6274 68 62.433 64.4173 65.5786 59H57.5C55.5 61.5 53 62.5 50 62.5C44.5 62.5 40 58.5 39 53H67C67.5 52 68 50 68 48C68 39.1634 59.9411 32 50 32ZM39 47C40 41.5 44.5 37.5 50 37.5C55.5 37.5 60 41.5 61 47H39Z" fill="white"/>
+  </g>
+  
+  <!-- Green Hyphen -->
+  <rect x="118" y="56" width="18" height="8" rx="2" fill="#60BB46"/>
+
+  <!-- Sewa Wordmark in Dark Slate/Navy -->
+  <text x="145" y="78" font-family="Georgia, 'Times New Roman', serif" font-size="64" font-weight="bold" fill="#292B40" letter-spacing="-1">Sewa</text>
+  
+  <!-- TM mark -->
+  <text x="316" y="44" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#292B40">TM</text>
+</svg>

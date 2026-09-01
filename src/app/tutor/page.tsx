@@ -1,28 +1,20 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { auth } from "@/lib/firebase";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Send,
   Sparkles,
-  MessageCircle,
   Bot,
-  Brain,
-  BookOpen,
-  Lightbulb,
   Check,
   Copy,
   RotateCcw,
   Menu,
   X,
-  ChevronDown,
   Target,
   Award,
-  Clock,
-  Zap,
-  Code2,
 } from "lucide-react";
-import Link from "next/link";
 
 interface Message {
   id: string;
@@ -93,6 +85,7 @@ export default function AITutorPage() {
   const [selectedSubject, setSelectedSubject] = useState<string>("All");
   const [showSidebar, setShowSidebar] = useState(true);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const subjects = ["All", "Programming in C", "Data Structures", "Mathematics", "Database", "Microcontroller"];
@@ -110,7 +103,7 @@ export default function AITutorPage() {
     scrollToBottom();
   }, [messages]);
 
-  const handleSendMessage = async (text: string) => {
+  const handleSendMessage = async (text: string): Promise<void> => {
     if (!text.trim()) return;
 
     const userMessage: Message = {
@@ -120,32 +113,58 @@ export default function AITutorPage() {
       timestamp: new Date(),
     };
 
-    setMessages((prev) => [...prev, userMessage]);
+    const history = [...messages, userMessage];
+    setMessages(history);
     setInputValue("");
     setIsLoading(true);
+    setError(null);
 
-    // Simulate AI response with Socratic approach
-    setTimeout(() => {
-      const responses = [
-        "That's a great question! Let me guide you through this step by step. First, can you tell me what you already know about this concept?",
-        "Interesting! Before I explain, let me ask you: what do you think is the key insight here? What would happen if we changed this parameter?",
-        "Excellent inquiry! This touches on a fundamental principle. Let me help you build understanding: What's the underlying mechanism that makes this work?",
-        "I see where you're going with this! Let me break it down:\n\n1. The foundational concept is...\n2. The practical application involves...\n3. Common pitfalls to avoid:\n   - Mistake 1\n   - Mistake 2\n\nDoes this clarify things?",
-        "Great question! Here's a worked example:\n\n```c\n// Example code\nint result = function();\nreturn result;\n```\n\nNotice how this demonstrates the principle? What would change if we modified X?",
-      ];
+    try {
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
+        setError("Please sign in to talk to the tutor.");
+        return;
+      }
+      const idToken = await currentUser.getIdToken();
 
-      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+      const res = await fetch("/api/tutor", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${idToken}`,
+        },
+        body: JSON.stringify({
+          messages: history.map((m) => ({ role: m.role, content: m.content })),
+          topic: selectedSubject !== "All" ? selectedSubject : undefined,
+        }),
+      });
+
+      const data = await res.json();
+
+      // Running out of credits is an expected state, not a failure.
+      if (res.status === 402) {
+        setError(data.message ?? "You are out of tutor credits.");
+        return;
+      }
+
+      if (!res.ok) {
+        throw new Error(data.error ?? "Tutor request failed");
+      }
 
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: randomResponse,
+        content: data.reply,
         timestamp: new Date(),
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
+    } catch (err) {
+      console.error(err);
+      setError("The tutor is unavailable right now. Please try again in a moment.");
+    } finally {
       setIsLoading(false);
-    }, 800);
+    }
   };
 
   const handleQuickQuestion = (question: string) => {
@@ -172,8 +191,8 @@ export default function AITutorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-mesh text-slate-900 pt-28 pb-24">
-      <div className="max-w-7xl mx-auto h-full flex gap-6 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-zinc-50/40 pt-8 pb-20">
+      <div className="max-w-7xl mx-auto h-full flex gap-5 px-4 sm:px-6 lg:px-8">
         {/* Sidebar */}
         <AnimatePresence>
           {showSidebar && (
@@ -184,10 +203,10 @@ export default function AITutorPage() {
               className="hidden lg:flex lg:w-80 flex-col gap-6"
             >
               {/* Subject Filter */}
-              <div className="p-6 rounded-lg bg-white border border-slate-200 shadow-sm space-y-4">
+              <div className="p-6 rounded-lg bg-white border border-zinc-200 shadow-sm space-y-4">
                 <div className="flex items-center gap-2">
-                  <Target className="w-5 h-5 text-indigo-600" />
-                  <h3 className="font-bold text-slate-900">Filter by Subject</h3>
+                  <Target className="w-5 h-5 text-primary-600" />
+                  <h3 className="font-bold text-zinc-900">Filter by Subject</h3>
                 </div>
                 <div className="space-y-2">
                   {subjects.map((subject) => (
@@ -196,8 +215,8 @@ export default function AITutorPage() {
                       onClick={() => setSelectedSubject(subject)}
                       className={`w-full px-4 py-2.5 rounded-lg text-xs font-bold transition-all border text-left ${
                         selectedSubject === subject
-                          ? "bg-indigo-600 text-white border-indigo-600 shadow-sm"
-                          : "bg-white text-slate-700 hover:bg-slate-50 border-slate-200"
+                          ? "bg-primary-600 text-white border-primary-600 shadow-sm"
+                          : "bg-white text-zinc-700 hover:bg-zinc-50 border-zinc-200"
                       }`}
                     >
                       {subject}
@@ -207,23 +226,23 @@ export default function AITutorPage() {
               </div>
 
               {/* Quick Questions */}
-              <div className="p-6 rounded-lg bg-white border border-slate-200 shadow-sm space-y-4 flex-1 overflow-y-auto">
+              <div className="p-6 rounded-lg bg-white border border-zinc-200 shadow-sm space-y-4 flex-1 overflow-y-auto">
                 <div className="flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-amber-600" />
-                  <h3 className="font-bold text-slate-900">Sample Questions</h3>
+                  <h3 className="font-bold text-zinc-900">Sample Questions</h3>
                 </div>
                 <div className="space-y-2">
                   {filteredQuestions.map((q) => (
                     <button
                       key={q.id}
                       onClick={() => handleQuickQuestion(q.question)}
-                      className="w-full p-3 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200 text-left transition-all group"
+                      className="w-full p-3 rounded-lg bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 text-left transition-all group"
                     >
-                      <p className="text-xs font-bold text-slate-900 line-clamp-2 group-hover:text-indigo-600">
+                      <p className="text-xs font-bold text-zinc-900 line-clamp-2 group-hover:text-primary-600">
                         {q.question}
                       </p>
                       <div className="flex items-center gap-2 mt-2">
-                        <span className="text-[10px] px-2 py-1 rounded-md bg-indigo-50 text-indigo-700 font-bold">
+                        <span className="text-[10px] px-2 py-1 rounded-md bg-primary-50 text-primary-700 font-bold">
                           {q.subject}
                         </span>
                         <span
@@ -244,23 +263,23 @@ export default function AITutorPage() {
               </div>
 
               {/* Stats Card */}
-              <div className="p-6 rounded-lg bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-200 shadow-sm space-y-4">
-                <h3 className="font-bold text-slate-900 flex items-center gap-2">
-                  <Award className="w-5 h-5 text-indigo-600" />
-                  Your Progress
+              <div className="p-5 rounded-lg bg-white border border-zinc-200 space-y-3">
+                <h3 className="text-sm font-semibold text-zinc-900 flex items-center gap-2">
+                  <Award className="w-4 h-4 text-primary-600" />
+                  Your progress
                 </h3>
-                <div className="space-y-3 text-sm">
+                <div className="space-y-2.5 text-sm">
                   <div className="flex items-center justify-between">
-                    <span className="text-slate-700 font-medium">Questions Answered</span>
-                    <span className="font-bold text-indigo-600">24</span>
+                    <span className="text-zinc-500 text-xs">Questions answered</span>
+                    <span className="font-semibold text-primary-600 text-xs tabular-nums">24</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-slate-700 font-medium">Topics Mastered</span>
-                    <span className="font-bold text-emerald-600">8</span>
+                    <span className="text-zinc-500 text-xs">Topics mastered</span>
+                    <span className="font-semibold text-emerald-600 text-xs tabular-nums">8</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-slate-700 font-medium">Study Streak</span>
-                    <span className="font-bold text-amber-600">6 days</span>
+                    <span className="text-zinc-500 text-xs">Study streak</span>
+                    <span className="font-semibold text-amber-600 text-xs tabular-nums">6 days</span>
                   </div>
                 </div>
               </div>
@@ -271,28 +290,28 @@ export default function AITutorPage() {
         {/* Main Chat Area */}
         <div className="flex-1 flex flex-col gap-4 min-h-screen">
           {/* Header */}
-          <div className="sticky top-28 z-30 flex items-center justify-between p-6 rounded-lg bg-white border border-slate-200 shadow-sm">
+          <div className="sticky top-20 z-30 flex items-center justify-between p-5 rounded-lg bg-white border border-zinc-200">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center shadow-md">
-                <Bot className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 rounded-md bg-primary-600 flex items-center justify-center">
+                <Bot className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-black text-slate-900">AI Socratic Tutor</h1>
-                <p className="text-xs text-slate-500">Live & Interactive Learning</p>
+                <h1 className="text-xl font-bold text-zinc-900">AI Socratic Tutor</h1>
+                <p className="text-xs text-zinc-500">Live & Interactive Learning</p>
               </div>
             </div>
 
             <div className="flex items-center gap-2">
               <button
                 onClick={handleReset}
-                className="p-2 rounded-lg hover:bg-slate-100 border border-slate-200 text-slate-600 transition-all"
+                className="p-2 rounded-lg hover:bg-zinc-100 border border-zinc-200 text-zinc-600 transition-all"
                 title="Start new conversation"
               >
                 <RotateCcw className="w-5 h-5" />
               </button>
               <button
                 onClick={() => setShowSidebar(!showSidebar)}
-                className="p-2 rounded-lg hover:bg-slate-100 border border-slate-200 text-slate-600 transition-all lg:hidden"
+                className="p-2 rounded-lg hover:bg-zinc-100 border border-zinc-200 text-zinc-600 transition-all lg:hidden"
               >
                 {showSidebar ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
@@ -310,16 +329,16 @@ export default function AITutorPage() {
                 className={`flex gap-3 ${message.role === "user" ? "justify-end" : "justify-start"}`}
               >
                 {message.role === "assistant" && (
-                  <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0 mt-1">
-                    <Bot className="w-4 h-4 text-indigo-600" />
+                  <div className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center flex-shrink-0 mt-1">
+                    <Bot className="w-4 h-4 text-primary-600" />
                   </div>
                 )}
 
                 <div
                   className={`max-w-md rounded-lg p-4 ${
                     message.role === "user"
-                      ? "bg-indigo-600 text-white rounded-br-none"
-                      : "bg-white border border-slate-200 text-slate-900 rounded-bl-none shadow-sm"
+                      ? "bg-primary-600 text-white rounded-br-none"
+                      : "bg-white border border-zinc-200 text-zinc-900 rounded-bl-none shadow-sm"
                   }`}
                 >
                   <div className="text-sm leading-relaxed whitespace-pre-wrap break-words">
@@ -329,7 +348,7 @@ export default function AITutorPage() {
                   {message.role === "assistant" && message.content.includes("```") && (
                     <button
                       onClick={() => handleCopyCode(message.content, message.id)}
-                      className="mt-2 text-xs px-2 py-1 rounded-md bg-slate-100 text-slate-700 font-bold hover:bg-slate-200 flex items-center gap-1"
+                      className="mt-2 text-xs px-2 py-1 rounded-md bg-zinc-100 text-zinc-700 font-bold hover:bg-zinc-200 flex items-center gap-1"
                     >
                       {copiedId === message.id ? (
                         <>
@@ -359,14 +378,14 @@ export default function AITutorPage() {
                 animate={{ opacity: 1, y: 0 }}
                 className="flex gap-3"
               >
-                <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
-                  <Bot className="w-4 h-4 text-indigo-600 animate-pulse" />
+                <div className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center flex-shrink-0">
+                  <Bot className="w-4 h-4 text-primary-600 animate-pulse" />
                 </div>
-                <div className="bg-white border border-slate-200 rounded-lg rounded-bl-none p-4 shadow-sm">
+                <div className="bg-white border border-zinc-200 rounded-lg rounded-bl-none p-4 shadow-sm">
                   <div className="flex gap-1">
-                    <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" />
-                    <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }} />
-                    <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }} />
+                    <div className="w-2 h-2 bg-zinc-400 rounded-full animate-bounce" />
+                    <div className="w-2 h-2 bg-zinc-400 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }} />
+                    <div className="w-2 h-2 bg-zinc-400 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }} />
                   </div>
                 </div>
               </motion.div>
@@ -376,7 +395,12 @@ export default function AITutorPage() {
           </div>
 
           {/* Input Area */}
-          <div className="space-y-3 p-6 rounded-lg bg-white border border-slate-200 shadow-sm">
+          <div className="space-y-3 p-6 rounded-lg bg-white border border-zinc-200 shadow-sm">
+            {error && (
+              <p className="text-xs font-bold text-rose-600 bg-rose-50 border border-rose-200 rounded-lg px-3 py-2">
+                {error}
+              </p>
+            )}
             <div className="flex gap-3">
               <input
                 type="text"
@@ -389,18 +413,18 @@ export default function AITutorPage() {
                   }
                 }}
                 placeholder="Ask me anything about programming, math, or any subject... (Shift+Enter for new line)"
-                className="flex-1 bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 placeholder:text-slate-400"
+                className="flex-1 bg-zinc-50 border border-zinc-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100 placeholder:text-zinc-400"
               />
               <button
                 onClick={() => handleSendMessage(inputValue)}
                 disabled={isLoading || !inputValue.trim()}
-                className="px-4 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold transition-all flex items-center gap-2 shadow-md"
+                className="px-4 py-3 rounded-lg bg-primary-600 hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold transition-all flex items-center gap-2 shadow-md"
               >
                 <Send className="w-4 h-4" />
               </button>
             </div>
 
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-zinc-500">
               💡 Tip: This AI tutor uses Socratic questioning to help you discover answers yourself. Ask follow-up
               questions if you need clarification!
             </p>

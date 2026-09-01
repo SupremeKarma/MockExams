@@ -1,100 +1,237 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    
-    // Helper functions
+
+    // ---------------------------------------------------------------------
+    // Helpers
+    // ---------------------------------------------------------------------
     function isAuthenticated() {
       return request.auth != null;
     }
-    
+
     function isOwner(userId) {
       return isAuthenticated() && request.auth.uid == userId;
     }
-    
-    function isAdmin() {
-      return isAuthenticated() && 
-        (request.auth.token.role == 'admin' || 
-         request.auth.token.email in ['admin@mockexams.com', 'aman@example.com']);
+
+    // Role is read from the user document because that is what the app itself
+    // uses (AuthContext and admin/layout.tsx both read `users/{uid}.role`);
+    // custom claims are honoured too, for when an admin script sets them.
+    // This lookup is only safe because `role` is now immutable from the
+    // client - see the /users rule below.
+    function userRole() {
+      return isAuthenticated()
+        ? get(/databases/$(database)/documents/users/$(request.auth.uid)).data.get('role', 'student')
+        : 'student';
     }
 
-    // Users Collection
+    function isAdmin() {
+      return isAuthenticated() &&
+        (request.auth.token.get('role', '') == 'admin' || userRole() == 'admin');
+    }
+
+    // Examiners and org admins author exams and review written answers.
+    function isStaff() {
+      return isAdmin() || userRole() in ['examiner', 'org_admin'];
+    }
+
+    // Fields a user must never set on themselves: privilege escalation (role)
+    // and paid access (the legacy subscription fields). Entitlements live in
+    // their own server-only collection now, but these stay locked so stale
+    // client code cannot resurrect the old bypass.
+    function touchesProtectedUserFields() {
+      return request.resource.data.diff(resource.data).affectedKeys()
+        .hasAny(['role', 'subscription', 'subscribed_at', 'credits', 'plan', 'entitlement']);
+    }
+
+    // ---------------------------------------------------------------------
+    // Users
+    // ---------------------------------------------------------------------
     match /users/{userId} {
       allow read: if isAuthenticated();
-      allow write: if isOwner(userId) || isAdmin();
-    }
-    
-    // Exams Collection (Publicly readable, admin editable)
-    match /exams/{examId} {
-      allow read: if true;
-      allow write: if isAdmin();
-      
-      match /questions/{questionId} {
-        allow read: if true;
-        allow write: if isAdmin();
-      }
-    }
-    
-    // Questions Collection (Top-level or subcollection)
-    match /questions/{questionId} {
-      allow read: if true;
-      allow write: if isAdmin();
-    }
-    
-    // Exam Attempts
-    match /attempts/{attemptId} {
-      allow read: if isAuthenticated() && (resource.data.user_id == request.auth.uid || isAdmin());
-      allow create: if isAuthenticated() && request.resource.data.user_id == request.auth.uid;
-      allow update: if isAuthenticated() && (resource.data.user_id == request.auth.uid || isAdmin());
+      // A new account may only ever be created as a student, with no plan.
+      allow create: if isOwner(userId)
+        && request.resource.data.get('role', 'student') == 'student'
+        && !request.resource.data.keys().hasAny(['subscription', 'credits', 'plan', 'entitlement']);
+      // Users edit their own profile, but never their role or paid status.
+      allow update: if (isOwner(userId) && !touchesProtectedUserFields()) || isAdmin();
       allow delete: if isAdmin();
     }
-    
-    // Enrollments
-    match /enrollments/{enrollmentId} {
-      allow read: if isAuthenticated() && (resource.data.user_id == request.auth.uid || isAdmin());
-      allow create: if isAuthenticated() && request.resource.data.user_id == request.auth.uid;
-      allow update, delete: if isAuthenticated() && (resource.data.user_id == request.auth.uid || isAdmin());
+
+    // ---------------------------------------------------------------------
+    // Entitlements - plans and credits. Server-only.
+    // The Admin SDK bypasses rules, so src/lib/entitlements.ts still writes.
+    // ---------------------------------------------------------------------
+    match /entitlements/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow write: if false;
     }
-    
-    // Leaderboard (Publicly readable, authenticated create/update)
+
+    // ---------------------------------------------------------------------
+    // Exams and questions
+    // ---------------------------------------------------------------------
+    match /exams/{examId} {
+      allow read: if true;
+      allow write: if isStaff();
+
+      match /questions/{questionId} {
+        // Student reads go through /api/exams/[id]/questions, which strips the
+        // answer key. Direct client reads are denied so correct_option and
+        // model_answer are not readable before (or instead of) sitting the exam.
+        allow read: if isStaff();
+        allow write: if isStaff();
+      }
+    }
+
+    match /questions/{questionId} {
+      allow read: if isStaff();
+      allow write: if isStaff();
+    }
+
+    // ---------------------------------------------------------------------
+    // Exam attempts. The collection is `exam_attempts`; the old rule named
+    // `attempts`, which no code writes, so every attempt fell through to the
+    // permissive catch-all and was readable by any signed-in user.
+    // ---------------------------------------------------------------------
+    match /exam_attempts/{attemptId} {
+      allow read: if isAuthenticated()
+        && (resource.data.user_id == request.auth.uid || isStaff());
+      // Attempts are written by the submit API via the Admin SDK; scores must
+      // never be client-authored.
+      allow create, update, delete: if isStaff();
+    }
+
+    // Certificates. Owner-readable; issued server-side from graded attempts.
+    // Public verification goes through /api/verify/[code], which returns only
+    // the facts printed on the certificate — never the holder's account.
+    match /certificates/{certificateId} {
+      allow read: if isAuthenticated()
+        && (resource.data.user_id == request.auth.uid || isStaff());
+      allow write: if false;
+    }
+
+    // Solved past papers a student uploaded. Private to the uploader: this is
+    // their copy of their own college's paper, and solutions are unreviewed
+    // model output. Staff can read them only to promote a paper deliberately.
+    match /solved_papers/{paperId} {
+      allow read: if isAuthenticated()
+        && (resource.data.user_id == request.auth.uid || isStaff());
+      allow write: if false;
+    }
+
+    // Bookmarks — the student's own revision list. Written through the API so
+    // the question id can be validated, and readable only by its owner.
+    match /bookmarks/{bookmarkId} {
+      allow read: if isAuthenticated()
+        && (resource.data.user_id == request.auth.uid || isStaff());
+      allow write: if false;
+    }
+
+    // Exam sessions hold the per-attempt option shuffle, which is effectively
+    // half the answer key: knowing the map plus one correct display position
+    // would leak the real option. Server-only, both ways.
+    match /exam_sessions/{sessionId} {
+      allow read: if isStaff();
+      allow write: if false;
+    }
+
+    // Adaptive practice sessions. Same shape and same rules as attempts:
+    // written by the practice API via the Admin SDK, never by the client.
+    match /practice_sessions/{sessionId} {
+      allow read: if isAuthenticated()
+        && (resource.data.user_id == request.auth.uid || isStaff());
+      allow create, update, delete: if isStaff();
+    }
+
+    match /enrollments/{enrollmentId} {
+      allow read: if isAuthenticated()
+        && (resource.data.user_id == request.auth.uid || isStaff());
+      allow create: if isAuthenticated()
+        && request.resource.data.user_id == request.auth.uid;
+      allow update, delete: if isAuthenticated()
+        && (resource.data.user_id == request.auth.uid || isAdmin());
+    }
+
+    // ---------------------------------------------------------------------
+    // Leaderboard - public to read, written server-side on submit only.
+    // ---------------------------------------------------------------------
     match /leaderboard/{entry} {
       allow read: if true;
-      allow write: if isAuthenticated();
+      allow write: if isAdmin();
     }
-    
-    // Flashcards & Decks
+
+    // ---------------------------------------------------------------------
+    // Study material
+    // ---------------------------------------------------------------------
     match /flashcards/{cardId} {
-      allow read: if true;
-      allow write: if isAuthenticated();
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated()
+        && request.resource.data.get('user_id', request.auth.uid) == request.auth.uid;
+      allow update, delete: if isAuthenticated()
+        && (resource.data.get('user_id', '') == request.auth.uid || isStaff());
     }
+
     match /decks/{deckId} {
-      allow read: if true;
-      allow write: if isAuthenticated();
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update, delete: if isAuthenticated()
+        && (resource.data.get('user_id', '') == request.auth.uid || isStaff());
     }
-    
-    // Study Plans & Goals
+
     match /study_plans/{planId} {
-      allow read, write: if isAuthenticated() && (resource.data.user_id == request.auth.uid || request.resource.data.user_id == request.auth.uid || isAdmin());
+      allow read, write: if isAuthenticated()
+        && (resource.data.user_id == request.auth.uid
+            || request.resource.data.user_id == request.auth.uid
+            || isAdmin());
     }
-    
-    // Notes & Past Papers
+
+    // Study notes. Drafts are authored by the pipeline and must be reviewed
+    // before a student can see them, so only `approved` documents are publicly
+    // readable — a wrong note costs a student marks.
     match /notes/{noteId} {
-      allow read: if true;
-      allow write: if isAuthenticated();
+      allow read: if resource.data.get('status', 'approved') == 'approved' || isStaff();
+      allow create, update: if isStaff();
+      allow delete: if isAdmin();
     }
+
     match /past_papers/{paperId} {
       allow read: if true;
       allow write: if isAdmin();
     }
-    
+
+    // ---------------------------------------------------------------------
     // Organizations
+    // ---------------------------------------------------------------------
     match /organizations/{orgId} {
       allow read: if true;
-      allow write: if isAuthenticated();
+      allow write: if isStaff();
     }
-    
-    // Default fallback
+
+    match /org_members/{memberId} {
+      allow read: if isAuthenticated();
+      allow write: if isStaff();
+    }
+
+    // Anyone signed in may apply; only staff may approve or reject.
+    match /org_requests/{requestId} {
+      allow read: if isAuthenticated()
+        && (resource.data.get('submitted_by', '') == request.auth.uid || isStaff());
+      allow create: if isAuthenticated()
+        && request.resource.data.get('submitted_by', '') == request.auth.uid;
+      allow update, delete: if isStaff();
+    }
+
+    match /notifications/{notificationId} {
+      allow read: if isAuthenticated();
+      allow create, update, delete: if isStaff();
+    }
+
+    // ---------------------------------------------------------------------
+    // Deny by default. The previous catch-all was
+    // `allow read, write: if isAuthenticated()`, which silently granted every
+    // signed-in user full access to any collection lacking an explicit rule.
+    // ---------------------------------------------------------------------
     match /{document=**} {
-      allow read, write: if isAuthenticated();
+      allow read, write: if false;
     }
   }
 }

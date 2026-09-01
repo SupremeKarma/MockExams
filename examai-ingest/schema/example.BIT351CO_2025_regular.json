@@ -1,0 +1,330 @@
+{
+  "paper_id": "BIT351CO_2025_regular",
+  "subject_code": "BIT351CO",
+  "subject_name": "Artificial Intelligence",
+  "semester": 6,
+  "year": 2025,
+  "exam_type": "regular",
+  "curriculum": "new_course",
+  "full_marks": 80,
+  "pass_marks": 32,
+  "duration_hours": 3,
+  "source_files": ["input/BIT351CO_2025_p1.jpg", "input/BIT351CO_2025_p2.jpg"],
+  "extraction_notes": "Transcribed by hand from the OneDrive scans (VI SEM/2025/AI_1.jpg, AI_2.jpg) as a golden reference for the pipeline. Header reads 'BIT351CO: Artificial Intelligence (New Course)', confirming both the code and the curriculum. Q6 contains a cryptarithmetic puzzle (OUR+AIM=GAME) and Q10 a resolution proof; both are marked question_type 'numerical' because their answers are worked solutions whose specifics do not generalise.",
+  "groups": [
+    {
+      "label": "A",
+      "questions_printed": 3,
+      "answer_count": 2,
+      "marks_each": 12,
+      "marks_total": 24,
+      "instruction": "Answer TWO questions."
+    },
+    {
+      "label": "B",
+      "questions_printed": 8,
+      "answer_count": 7,
+      "marks_each": 8,
+      "marks_total": 56,
+      "instruction": "Answer SEVEN questions."
+    }
+  ],
+  "coverage": {
+    "by_group": [
+      { "label": "A", "questions_extracted": 3, "questions_printed": 3 },
+      { "label": "B", "questions_extracted": 8, "questions_printed": 8 }
+    ],
+    "status": "complete",
+    "notes": "All 11 printed questions captured across 2 pages. Note the arithmetic: the 11 questions carry 100 marks in total, while the paper is worth 80 — because the candidate answers 2 of 3 and 7 of 8. This is why coverage counts questions per group, not summed marks."
+  },
+  "questions": [
+    {
+      "question_id": "BIT351CO_2025_regular_A1",
+      "group": "A",
+      "number": "1",
+      "marks": 12,
+      "text": "Define agent and show the architecture of an agent. Discuss the types of agent with suitable examples.",
+      "question_type": "written",
+      "units": [{ "unit_id": "BIT351CO_U02", "confidence": "high", "tagged_by": "human" }],
+      "has_diagram": true,
+      "source_page": 1,
+      "confidence": "high",
+      "needs_review": false,
+      "reviewed_by": "hand-transcribed from scan",
+      "sub_parts": [
+        {
+          "question_id": "BIT351CO_2025_regular_A1a",
+          "group": "A",
+          "number": "1a",
+          "marks": 4,
+          "text": "Define agent and show the architecture of an agent.",
+          "question_type": "written",
+          "units": [{ "unit_id": "BIT351CO_U02", "confidence": "high", "tagged_by": "human" }],
+          "has_diagram": true,
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT351CO_2025_regular_A1b",
+          "group": "A",
+          "number": "1b",
+          "marks": 8,
+          "text": "Discuss the types of agent with suitable examples.",
+          "question_type": "written",
+          "units": [{ "unit_id": "BIT351CO_U02", "confidence": "high", "tagged_by": "human" }],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ]
+    },
+    {
+      "question_id": "BIT351CO_2025_regular_A2",
+      "group": "A",
+      "number": "2",
+      "marks": 12,
+      "text": "What do you mean by informed and uninformed search? Explain Greedy Best-First search with its algorithm. Why it is known as Greedy search?",
+      "question_type": "written",
+      "units": [{ "unit_id": "BIT351CO_U03", "confidence": "high", "tagged_by": "human" }],
+      "source_page": 1,
+      "confidence": "high",
+      "needs_review": false,
+      "sub_parts": [
+        {
+          "question_id": "BIT351CO_2025_regular_A2a",
+          "group": "A",
+          "number": "2a",
+          "marks": 3,
+          "text": "What do you mean by informed and uninformed search?",
+          "question_type": "written",
+          "units": [{ "unit_id": "BIT351CO_U03", "confidence": "high", "tagged_by": "human" }],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT351CO_2025_regular_A2b",
+          "group": "A",
+          "number": "2b",
+          "marks": 6,
+          "text": "Explain Greedy Best-First search with its algorithm.",
+          "question_type": "written",
+          "units": [{ "unit_id": "BIT351CO_U03", "confidence": "high", "tagged_by": "human" }],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT351CO_2025_regular_A2c",
+          "group": "A",
+          "number": "2c",
+          "marks": 3,
+          "text": "Why it is known as Greedy search?",
+          "question_type": "written",
+          "units": [{ "unit_id": "BIT351CO_U03", "confidence": "high", "tagged_by": "human" }],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ]
+    },
+    {
+      "question_id": "BIT351CO_2025_regular_A3",
+      "group": "A",
+      "number": "3",
+      "marks": 12,
+      "text": "(a) What are the challenges of AI in recent development? Describe the applications of AI. (b) What is uncertainty in reasoning? Write the significance of Bayesian network.",
+      "question_type": "written",
+      "units": [
+        { "unit_id": "BIT351CO_U01", "confidence": "high", "tagged_by": "human" },
+        { "unit_id": "BIT351CO_U07", "confidence": "high", "tagged_by": "human" }
+      ],
+      "source_page": 1,
+      "confidence": "high",
+      "needs_review": false,
+      "sub_parts": [
+        {
+          "question_id": "BIT351CO_2025_regular_A3a",
+          "group": "A",
+          "number": "3a",
+          "marks": 6,
+          "text": "What are the challenges of AI in recent development? Describe the applications of AI.",
+          "question_type": "written",
+          "units": [{ "unit_id": "BIT351CO_U01", "confidence": "high", "tagged_by": "human" }],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT351CO_2025_regular_A3b",
+          "group": "A",
+          "number": "3b",
+          "marks": 6,
+          "text": "What is uncertainty in reasoning? Write the significance of Bayesian network.",
+          "question_type": "written",
+          "units": [{ "unit_id": "BIT351CO_U07", "confidence": "high", "tagged_by": "human" }],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ]
+    },
+    {
+      "question_id": "BIT351CO_2025_regular_B4",
+      "group": "B",
+      "number": "4",
+      "marks": 8,
+      "text": "Discuss Depth-first search, Depth-limited search and Interactive-deepening search with examples.",
+      "question_type": "written",
+      "units": [{ "unit_id": "BIT351CO_U03", "confidence": "high", "tagged_by": "human" }],
+      "source_page": 1,
+      "confidence": "high",
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT351CO_2025_regular_B5",
+      "group": "B",
+      "number": "5",
+      "marks": 8,
+      "text": "What is genetic algorithm and how it works? Give example.",
+      "question_type": "written",
+      "units": [{ "unit_id": "BIT351CO_U03", "confidence": "medium", "tagged_by": "human" }],
+      "source_page": 1,
+      "confidence": "high",
+      "needs_review": true,
+      "reviewed_by": "",
+      "notes": "Unit tag is medium: the syllabus lists genetic algorithms under no unit explicitly; U03 (search/optimisation) is the closest fit. Confirm against the official Sem VI unit PDF when obtained."
+    },
+    {
+      "question_id": "BIT351CO_2025_regular_B6",
+      "group": "B",
+      "number": "6",
+      "marks": 8,
+      "text": "What is adversarial search? Solve the following cryptarithmetic problem. OUR+AIM=GAME",
+      "question_type": "numerical",
+      "units": [{ "unit_id": "BIT351CO_U04", "confidence": "high", "tagged_by": "human" }],
+      "source_page": 1,
+      "confidence": "high",
+      "needs_review": false,
+      "sub_parts": [
+        {
+          "question_id": "BIT351CO_2025_regular_B6a",
+          "group": "B",
+          "number": "6a",
+          "marks": 2,
+          "text": "What is adversarial search?",
+          "question_type": "written",
+          "units": [{ "unit_id": "BIT351CO_U04", "confidence": "high", "tagged_by": "human" }],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT351CO_2025_regular_B6b",
+          "group": "B",
+          "number": "6b",
+          "marks": 6,
+          "text": "Solve the following cryptarithmetic problem. OUR+AIM=GAME",
+          "question_type": "numerical",
+          "units": [{ "unit_id": "BIT351CO_U04", "confidence": "high", "tagged_by": "human" }],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ]
+    },
+    {
+      "question_id": "BIT351CO_2025_regular_B7",
+      "group": "B",
+      "number": "7",
+      "marks": 8,
+      "text": "What is explanation-based learning? Explain supervised learning vs unsupervised learning.",
+      "question_type": "written",
+      "units": [{ "unit_id": "BIT351CO_U06", "confidence": "high", "tagged_by": "human" }],
+      "source_page": 1,
+      "confidence": "high",
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT351CO_2025_regular_B8",
+      "group": "B",
+      "number": "8",
+      "marks": 8,
+      "text": "Define propositional logic with example. Show that P→Q and ¬P∨Q are logically equivalent, using truth table approach.",
+      "question_type": "written",
+      "units": [{ "unit_id": "BIT351CO_U05", "confidence": "high", "tagged_by": "human" }],
+      "source_page": 1,
+      "confidence": "high",
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT351CO_2025_regular_B9",
+      "group": "B",
+      "number": "9",
+      "marks": 8,
+      "text": "Explain the structure of an expert system with its components.",
+      "question_type": "written",
+      "units": [{ "unit_id": "BIT351CO_U08", "confidence": "high", "tagged_by": "human" }],
+      "has_diagram": true,
+      "source_page": 1,
+      "confidence": "high",
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT351CO_2025_regular_B10",
+      "group": "B",
+      "number": "10",
+      "marks": 8,
+      "text": "Convert the following sentences into FOPL: (a) John likes all kinds of food. (b) Apple and vegetable are food. (c) Anything anyone eats and is not killed is food. (d) Anil eats peanuts and still alive. (e) Harry eats everything that Anil eats. Prove by resolution that: John likes peanuts.",
+      "question_type": "numerical",
+      "units": [{ "unit_id": "BIT351CO_U05", "confidence": "high", "tagged_by": "human" }],
+      "source_page": 2,
+      "confidence": "high",
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT351CO_2025_regular_B11",
+      "group": "B",
+      "number": "11",
+      "marks": 8,
+      "text": "Write short notes on Any TWO:",
+      "question_type": "written",
+      "choose": 2,
+      "units": [
+        { "unit_id": "BIT351CO_U10", "confidence": "high", "tagged_by": "human" },
+        { "unit_id": "BIT351CO_U09", "confidence": "high", "tagged_by": "human" },
+        { "unit_id": "BIT351CO_U01", "confidence": "medium", "tagged_by": "human" }
+      ],
+      "source_page": 2,
+      "confidence": "high",
+      "needs_review": false,
+      "sub_parts": [
+        {
+          "question_id": "BIT351CO_2025_regular_B11a",
+          "group": "B",
+          "number": "11a",
+          "marks": 4,
+          "text": "Natural language processing",
+          "question_type": "written",
+          "units": [{ "unit_id": "BIT351CO_U10", "confidence": "high", "tagged_by": "human" }],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT351CO_2025_regular_B11b",
+          "group": "B",
+          "number": "11b",
+          "marks": 4,
+          "text": "Artificial Neural Network",
+          "question_type": "written",
+          "units": [{ "unit_id": "BIT351CO_U09", "confidence": "high", "tagged_by": "human" }],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT351CO_2025_regular_B11c",
+          "group": "B",
+          "number": "11c",
+          "marks": 4,
+          "text": "Artificial Intelligence vs Natural Intelligence",
+          "question_type": "written",
+          "units": [{ "unit_id": "BIT351CO_U01", "confidence": "medium", "tagged_by": "human" }],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,195 @@
+{
+  "semester": 1,
+  "generated_from": "src/data/bitSyllabusData.ts",
+  "subject_count": 5,
+  "unit_count": 38,
+  "subjects": [
+    {
+      "subject_code": "BIT101CO",
+      "subject_name": "Fundamentals of Information Technology",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT101CO_U01",
+          "title": "Introduction to Computer"
+        },
+        {
+          "unit_id": "BIT101CO_U02",
+          "title": "Basic Computer Organization and Computer Peripherals"
+        },
+        {
+          "unit_id": "BIT101CO_U03",
+          "title": "Computer Storage"
+        },
+        {
+          "unit_id": "BIT101CO_U04",
+          "title": "Computer Software"
+        },
+        {
+          "unit_id": "BIT101CO_U05",
+          "title": "Introduction to Database"
+        },
+        {
+          "unit_id": "BIT101CO_U06",
+          "title": "Networks and Internet"
+        },
+        {
+          "unit_id": "BIT101CO_U07",
+          "title": "Information Security"
+        },
+        {
+          "unit_id": "BIT101CO_U08",
+          "title": "Computer Hardware"
+        },
+        {
+          "unit_id": "BIT101CO_U09",
+          "title": "Technological trends in Information Technology"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT102HS",
+      "subject_name": "Mathematics-I",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT102HS_U01",
+          "title": "Matrix Algebra"
+        },
+        {
+          "unit_id": "BIT102HS_U02",
+          "title": "Coordinate Systems"
+        },
+        {
+          "unit_id": "BIT102HS_U03",
+          "title": "Elementary Coordinate Geometry"
+        },
+        {
+          "unit_id": "BIT102HS_U04",
+          "title": "Vectors and Solid Geometry"
+        },
+        {
+          "unit_id": "BIT102HS_U05",
+          "title": "Applications of Differentiation"
+        },
+        {
+          "unit_id": "BIT102HS_U06",
+          "title": "Applications of the Definite Integral"
+        },
+        {
+          "unit_id": "BIT102HS_U07",
+          "title": "Functions of Several Variables"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT103HS",
+      "subject_name": "Technical Communication",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT103HS_U01",
+          "title": "Oral Communication"
+        },
+        {
+          "unit_id": "BIT103HS_U02",
+          "title": "Reading: Intensive and Extensive"
+        },
+        {
+          "unit_id": "BIT103HS_U03",
+          "title": "Writing"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT104HS",
+      "subject_name": "Society and Ethics in IT",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT104HS_U01",
+          "title": "Introduction"
+        },
+        {
+          "unit_id": "BIT104HS_U02",
+          "title": "Social and Cultural Change"
+        },
+        {
+          "unit_id": "BIT104HS_U03",
+          "title": "Understanding Development"
+        },
+        {
+          "unit_id": "BIT104HS_U04",
+          "title": "Process of Transformation"
+        },
+        {
+          "unit_id": "BIT104HS_U05",
+          "title": "Historical Characteristics of Nepali Society and Culture"
+        },
+        {
+          "unit_id": "BIT104HS_U06",
+          "title": "Ethical issues in IT"
+        },
+        {
+          "unit_id": "BIT104HS_U07",
+          "title": "Introduction to Emotional Intelligence"
+        },
+        {
+          "unit_id": "BIT104HS_U08",
+          "title": "Social Management and Responsibility"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT105CO",
+      "subject_name": "Computer Programming in C",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT105CO_U01",
+          "title": "Problem Solving with Computer"
+        },
+        {
+          "unit_id": "BIT105CO_U02",
+          "title": "Elements of C"
+        },
+        {
+          "unit_id": "BIT105CO_U03",
+          "title": "Input and Output"
+        },
+        {
+          "unit_id": "BIT105CO_U04",
+          "title": "Operators and Expression"
+        },
+        {
+          "unit_id": "BIT105CO_U05",
+          "title": "Control Statements"
+        },
+        {
+          "unit_id": "BIT105CO_U06",
+          "title": "Arrays"
+        },
+        {
+          "unit_id": "BIT105CO_U07",
+          "title": "Functions"
+        },
+        {
+          "unit_id": "BIT105CO_U08",
+          "title": "Pointers"
+        },
+        {
+          "unit_id": "BIT105CO_U09",
+          "title": "Structure and Union"
+        },
+        {
+          "unit_id": "BIT105CO_U10",
+          "title": "Files and File Handling in C"
+        },
+        {
+          "unit_id": "BIT105CO_U11",
+          "title": "Introduction to Graphics"
+        }
+      ]
+    }
+  ]
+}

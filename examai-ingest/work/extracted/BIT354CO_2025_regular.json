@@ -1,0 +1,463 @@
+{
+  "paper_id": "BIT354CO_2025_regular",
+  "subject_code": "BIT354CO",
+  "subject_name": "Simulation & Modeling",
+  "semester": 6,
+  "year": 2025,
+  "exam_type": "regular",
+  "curriculum": "new_course",
+  "full_marks": 80,
+  "pass_marks": 32,
+  "duration_hours": 3,
+  "extraction_notes": "",
+  "groups": [
+    {
+      "label": "A",
+      "questions_printed": 3,
+      "answer_count": 2,
+      "marks_each": 12,
+      "marks_total": 24,
+      "instruction": "Answer TWO questions."
+    },
+    {
+      "label": "B",
+      "questions_printed": 8,
+      "answer_count": 7,
+      "marks_each": 8,
+      "marks_total": 56,
+      "instruction": "Answer SEVEN questions."
+    }
+  ],
+  "questions": [
+    {
+      "question_id": "BIT354CO_2025_regular_A1",
+      "group": "A",
+      "number": "1",
+      "marks": 12,
+      "text": "Define simulation. Discuss when it is used and describe the various steps involved in a simulation study.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT354CO_2025_regular_A1a",
+          "group": "A",
+          "number": "1a",
+          "marks": 2,
+          "text": "Define simulation.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT354CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT354CO_2025_regular_A1b",
+          "group": "A",
+          "number": "1b",
+          "marks": 10,
+          "text": "Discuss when it is used and describe the various steps involved in a simulation study.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT354CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT354CO_2025_regular_A2",
+      "group": "A",
+      "number": "2",
+      "marks": 12,
+      "text": "What do you mean by queuing system? Explain the characteristics of queuing system with example. Briefly discuss about balking, reneging and jockeying in queuing theory.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U03",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT354CO_2025_regular_A2a",
+          "group": "A",
+          "number": "2a",
+          "marks": 3,
+          "text": "What do you mean by queuing system?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT354CO_U03",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT354CO_2025_regular_A2b",
+          "group": "A",
+          "number": "2b",
+          "marks": 6,
+          "text": "Explain the characteristics of queuing system with example.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT354CO_U03",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT354CO_2025_regular_A2c",
+          "group": "A",
+          "number": "2c",
+          "marks": 3,
+          "text": "Briefly discuss about balking, reneging and jockeying in queuing theory.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT354CO_U03",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT354CO_2025_regular_A3",
+      "group": "A",
+      "number": "3",
+      "marks": 12,
+      "text": "Define and develop a Poker test for four-digit random numbers. A sequence of 10,000 random numbers, each of four digits has been generated. The analysis of the numbers reveals that in 5120 numbers all four digits are different, 4230 contain exactly one pair of like digits, 560 contain two pairs, 75 have three digits of a kind and 15 contain all like digits. Use Poker test to determine whether these numbers are independent. (Critical value of Chi-square test for α=0.05 and N=4 is 9.49)",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U04",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT354CO_2025_regular_A3a",
+          "group": "A",
+          "number": "3a",
+          "marks": 4,
+          "text": "Define and develop a Poker test for four-digit random numbers.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT354CO_U04",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT354CO_2025_regular_A3b",
+          "group": "A",
+          "number": "3b",
+          "marks": 8,
+          "text": "A sequence of 10,000 random numbers, each of four digits has been generated. The analysis of the numbers reveals that in 5120 numbers all four digits are different, 4230 contain exactly one pair of like digits, 560 contain two pairs, 75 have three digits of a kind and 15 contain all like digits. Use Poker test to determine whether these numbers are independent. (Critical value of Chi-square test for α=0.05 and N=4 is 9.49)",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT354CO_U04",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT354CO_2025_regular_B4",
+      "group": "B",
+      "number": "4",
+      "marks": 8,
+      "text": "Estimate the value of π using Monte Carlo method. Consider the radius of circle as 1 unit.",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U02",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT354CO_2025_regular_B5",
+      "group": "B",
+      "number": "5",
+      "marks": 8,
+      "text": "The sequence of numbers 0.54, 0.73, 0.98, 0.11 and 0.68 has been generated. Use K-S test α<0.05 to determine if the hypothesis that the numbers are uniformly distributed on the interval 0 to 1 can be rejected. (Note that the critical value of D for α=0.05 and N=5 is 0.565)",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U04",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT354CO_2025_regular_B6",
+      "group": "B",
+      "number": "6",
+      "marks": 8,
+      "text": "Describe different methods that can be used to minimize or eliminate internal bias during simulation analysis. How can using large sample sizes help in reducing bias?",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U05",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT354CO_2025_regular_B7",
+      "group": "B",
+      "number": "7",
+      "marks": 8,
+      "text": "What is a Markov Chain? How is the transition matrix in a Markov Chain, and how is it used to determine the behavior of the system over time?",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U03",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT354CO_2025_regular_B8",
+      "group": "B",
+      "number": "8",
+      "marks": 8,
+      "text": "Explain the types of simulation with respect to the output analysis. Give examples.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U01",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT354CO_U05",
+          "confidence": "medium"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT354CO_2025_regular_B9",
+      "group": "B",
+      "number": "9",
+      "marks": 8,
+      "text": "List any five circumstance when the simulation is the appropriate tool and when it is not.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT354CO_2025_regular_B10",
+      "group": "B",
+      "number": "10",
+      "marks": 8,
+      "text": "What is a random number? Given the following parameters for a Mixed Congruential Generator (MCG): m=100, a=37, b=10 and Seed, r0=5 Using the Mixed Congruential Method, generate the first 5 random numbers. Show the steps and the numbers generated.",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U04",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT354CO_2025_regular_B10a",
+          "group": "B",
+          "number": "10a",
+          "marks": 2,
+          "text": "What is a random number?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT354CO_U04",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT354CO_2025_regular_B10b",
+          "group": "B",
+          "number": "10b",
+          "marks": 6,
+          "text": "Given the following parameters for a Mixed Congruential Generator (MCG): m=100, a=37, b=10 and Seed, r0=5 Using the Mixed Congruential Method, generate the first 5 random numbers. Show the steps and the numbers generated.",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT354CO_U04",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT354CO_2025_regular_B11",
+      "group": "B",
+      "number": "11",
+      "marks": 8,
+      "text": "What is continuous system simulation? Define discrete system simulation. What is hybrid simulation? Briefly discuss.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U06",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT354CO_2025_regular_B11a",
+          "group": "B",
+          "number": "11a",
+          "marks": 3,
+          "text": "What is continuous system simulation?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT354CO_U06",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT354CO_2025_regular_B11b",
+          "group": "B",
+          "number": "11b",
+          "marks": 3,
+          "text": "Define discrete system simulation.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT354CO_U06",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT354CO_2025_regular_B11c",
+          "group": "B",
+          "number": "11c",
+          "marks": 2,
+          "text": "What is hybrid simulation? Briefly discuss.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT354CO_U06",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    }
+  ],
+  "source_files": [
+    "work\\pages\\BIT354CO_2025_regular_p1.png",
+    "work\\pages\\BIT354CO_2025_regular_p2.png"
+  ],
+  "coverage": {
+    "by_group": [
+      {
+        "label": "A",
+        "questions_extracted": 3,
+        "questions_printed": 3
+      },
+      {
+        "label": "B",
+        "questions_extracted": 8,
+        "questions_printed": 8
+      }
+    ],
+    "status": "complete",
+    "notes": "Derived from the extraction, not self-reported by the model."
+  }
+}

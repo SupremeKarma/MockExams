@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { examPatternsData } from '@/data/examPatternsData';
 import type { Country, ExamCategory } from '@/data/examPatternsData';
-import { Search, Filter, Calendar, Target, Clock } from 'lucide-react';
+import { Search, Filter, Target, Clock } from 'lucide-react';
 
 export default function ExamPatternsPage() {
   const [selectedCountry, setSelectedCountry] = useState<Country>('India');
@@ -57,46 +57,43 @@ export default function ExamPatternsPage() {
       case 'Very Hard':
         return 'bg-red-100 text-red-800 border-red-300';
       default:
-        return 'bg-slate-100 text-slate-800 border-slate-300';
+        return 'bg-zinc-100 text-zinc-800 border-zinc-300';
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-blue-50 to-white">
+    <div className="min-h-screen bg-zinc-50/40">
       {/* Header */}
-      <div className="relative overflow-hidden pt-20 pb-12 px-4 sm:px-6 lg:px-8">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 blur-3xl" />
-        <div className="relative max-w-6xl mx-auto">
-          <div className="text-center mb-8">
-            <div className="inline-block mb-4">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-700 text-sm font-semibold">
-                <Target className="w-4 h-4" />
-                Complete Exam Database
-              </span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
-              Exam Patterns for India & Nepal
+      <div className="bg-white border-b border-zinc-200 pt-8 pb-8 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-2 space-y-2.5">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[11px] font-bold uppercase tracking-wide">
+              <Target className="w-3.5 h-3.5" />
+              Complete exam database
+            </span>
+            <h1 className="text-2xl sm:text-3xl font-bold text-zinc-900">
+              Exam patterns for India &amp; Nepal
             </h1>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Comprehensive directory of entrance, competitive, and board exams. Start your prep today!
+            <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+              Comprehensive directory of entrance, competitive, and board exams. Start your prep today.
             </p>
           </div>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* Filters Section */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-8 border border-slate-200">
+        <div className="bg-white rounded-lg shadow-xs p-5 mb-6 border border-zinc-200">
           {/* Search Bar */}
-          <div className="mb-6">
+          <div className="mb-5">
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" />
+              <Search className="absolute left-3.5 top-1/2 transform -translate-y-1/2 text-zinc-400 w-4 h-4" />
               <input
                 type="text"
                 placeholder="Search exam by name, keywords..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 font-medium"
+                className="w-full pl-10 pr-4 py-2.5 border border-zinc-200 rounded-md text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-shadow"
               />
             </div>
           </div>
@@ -105,7 +102,7 @@ export default function ExamPatternsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Country Filter */}
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-3">
+              <label className="block text-sm font-semibold text-zinc-700 mb-3">
                 <Filter className="w-4 h-4 inline mr-2" />
                 Select Country
               </label>
@@ -120,7 +117,7 @@ export default function ExamPatternsPage() {
                     className={`px-6 py-2 rounded-lg font-semibold transition-all ${
                       selectedCountry === country
                         ? 'bg-blue-600 text-white shadow-md scale-105'
-                        : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
+                        : 'bg-zinc-200 text-zinc-700 hover:bg-zinc-300'
                     }`}
                   >
                     {country}
@@ -131,14 +128,14 @@ export default function ExamPatternsPage() {
 
             {/* Category Filter */}
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-3">
+              <label className="block text-sm font-semibold text-zinc-700 mb-3">
                 <Filter className="w-4 h-4 inline mr-2" />
                 Filter by Category
               </label>
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value as ExamCategory | 'All')}
-                className="w-full px-4 py-2 border-2 border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 font-medium bg-white cursor-pointer"
+                className="w-full px-4 py-2 border-2 border-zinc-300 rounded-lg focus:outline-none focus:border-blue-500 font-medium bg-white cursor-pointer"
               >
                 <option value="All">All Categories</option>
                 {categories.map((category) => (
@@ -153,7 +150,7 @@ export default function ExamPatternsPage() {
 
         {/* Results Summary */}
         <div className="mb-8 flex items-center justify-between">
-          <p className="text-lg font-semibold text-slate-700">
+          <p className="text-lg font-semibold text-zinc-700">
             Found <span className="text-blue-600 font-bold text-xl">{filteredExams.length}</span> exams
           </p>
           {selectedCategory !== 'All' && (
@@ -171,7 +168,7 @@ export default function ExamPatternsPage() {
           {Object.entries(groupedByCategory).length > 0 ? (
             Object.entries(groupedByCategory).map(([category, exams]) => (
               <div key={category}>
-                <h2 className="text-2xl font-bold text-slate-800 mb-6 pb-3 border-b-4 border-blue-500 flex items-center gap-2">
+                <h2 className="text-2xl font-bold text-zinc-800 mb-6 pb-3 border-b-4 border-blue-500 flex items-center gap-2">
                   {category}
                   <span className="text-sm font-semibold bg-blue-100 text-blue-700 px-3 py-1 rounded-full ml-auto">
                     {exams.length} exams
@@ -188,10 +185,10 @@ export default function ExamPatternsPage() {
                     >
                       <div className="flex items-start justify-between mb-3">
                         <div>
-                          <h3 className="text-lg font-bold text-slate-800 group-hover:text-blue-600 transition">
+                          <h3 className="text-lg font-bold text-zinc-800 group-hover:text-blue-600 transition">
                             {exam.name}
                           </h3>
-                          <p className="text-xs text-slate-600 mt-1 line-clamp-1">
+                          <p className="text-xs text-zinc-600 mt-1 line-clamp-1">
                             {exam.fullName}
                           </p>
                         </div>
@@ -200,45 +197,45 @@ export default function ExamPatternsPage() {
                         </span>
                       </div>
 
-                      <p className="text-slate-700 text-sm mb-4 line-clamp-2 group-hover:line-clamp-none">
+                      <p className="text-zinc-700 text-sm mb-4 line-clamp-2 group-hover:line-clamp-none">
                         {exam.description}
                       </p>
 
                       <div className="grid grid-cols-3 gap-2 mb-4 text-center">
-                        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-3 rounded-lg border border-blue-100">
-                          <p className="text-xs text-slate-600 font-semibold">Marks</p>
+                        <div className="bg-gradient-to-br from-blue-50 to-primary-50 p-3 rounded-lg border border-blue-100">
+                          <p className="text-xs text-zinc-600 font-semibold">Marks</p>
                           <p className="text-lg font-bold text-blue-600">{exam.totalMarks}</p>
                         </div>
                         <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-3 rounded-lg border border-green-100">
-                          <p className="text-xs text-slate-600 font-semibold">Duration</p>
+                          <p className="text-xs text-zinc-600 font-semibold">Duration</p>
                           <p className="text-xs font-bold text-green-600">{exam.duration}</p>
                         </div>
                         <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-3 rounded-lg border border-purple-100">
-                          <p className="text-xs text-slate-600 font-semibold">Since</p>
+                          <p className="text-xs text-zinc-600 font-semibold">Since</p>
                           <p className="text-lg font-bold text-purple-600">{exam.yearStarted}</p>
                         </div>
                       </div>
 
                       <div className="mb-4">
-                        <p className="text-xs text-slate-600 font-semibold mb-2">Sections ({exam.sections.length})</p>
+                        <p className="text-xs text-zinc-600 font-semibold mb-2">Sections ({exam.sections.length})</p>
                         <div className="flex flex-wrap gap-2">
                           {exam.sections.slice(0, 2).map((section, idx) => (
                             <span
                               key={idx}
-                              className="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-medium border border-indigo-200"
+                              className="px-2.5 py-1 bg-primary-50 text-primary-700 rounded-lg text-xs font-medium border border-primary-200"
                             >
                               {section}
                             </span>
                           ))}
                           {exam.sections.length > 2 && (
-                            <span className="px-2.5 py-1 bg-slate-50 text-slate-600 rounded-lg text-xs font-medium border border-slate-200">
+                            <span className="px-2.5 py-1 bg-zinc-50 text-zinc-600 rounded-lg text-xs font-medium border border-zinc-200">
                               +{exam.sections.length - 2} more
                             </span>
                           )}
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between pt-3 border-t border-slate-200">
+                      <div className="flex items-center justify-between pt-3 border-t border-zinc-200">
                         <span
                           className={`px-3 py-1 rounded-full font-semibold text-xs border ${getDifficultyColor(
                             exam.difficulty
@@ -246,7 +243,7 @@ export default function ExamPatternsPage() {
                         >
                           {exam.difficulty}
                         </span>
-                        <span className="text-xs text-slate-500 flex items-center gap-1">
+                        <span className="text-xs text-zinc-500 flex items-center gap-1">
                           <Clock className="w-3 h-3" />
                           {Math.floor(Math.random() * 5) + 1} lac+ students
                         </span>
@@ -254,24 +251,24 @@ export default function ExamPatternsPage() {
 
                       {/* Expandable Section */}
                       {expandedExam === exam.id && (
-                        <div className="mt-4 pt-4 border-t border-slate-200 space-y-3 animate-in fade-in">
+                        <div className="mt-4 pt-4 border-t border-zinc-200 space-y-3 animate-in fade-in">
                           <div>
-                            <p className="text-xs font-semibold text-slate-600 mb-2">Target Students</p>
-                            <p className="text-sm text-slate-700">{exam.targetStudents}</p>
+                            <p className="text-xs font-semibold text-zinc-600 mb-2">Target Students</p>
+                            <p className="text-sm text-zinc-700">{exam.targetStudents}</p>
                           </div>
                           <div>
-                            <p className="text-xs font-semibold text-slate-600 mb-2">Key Topics</p>
+                            <p className="text-xs font-semibold text-zinc-600 mb-2">Key Topics</p>
                             <div className="flex flex-wrap gap-2">
                               {exam.syllabusTopics.slice(0, 4).map((topic, idx) => (
                                 <span
                                   key={idx}
-                                  className="px-2 py-1 bg-slate-100 text-slate-700 rounded text-xs"
+                                  className="px-2 py-1 bg-zinc-100 text-zinc-700 rounded text-xs"
                                 >
                                   {topic}
                                 </span>
                               ))}
                               {exam.syllabusTopics.length > 4 && (
-                                <span className="px-2 py-1 bg-slate-100 text-slate-600 rounded text-xs">
+                                <span className="px-2 py-1 bg-zinc-100 text-zinc-600 rounded text-xs">
                                   +{exam.syllabusTopics.length - 4}
                                 </span>
                               )}
@@ -298,11 +295,11 @@ export default function ExamPatternsPage() {
             ))
           ) : (
             <div className="text-center py-16">
-              <div className="inline-block mb-4 p-4 bg-slate-100 rounded-full">
-                <Search className="w-8 h-8 text-slate-400" />
+              <div className="inline-block mb-4 p-4 bg-zinc-100 rounded-full">
+                <Search className="w-8 h-8 text-zinc-400" />
               </div>
-              <p className="text-slate-600 text-lg font-semibold">No exams found</p>
-              <p className="text-slate-500 text-sm mt-2">
+              <p className="text-zinc-600 text-lg font-semibold">No exams found</p>
+              <p className="text-zinc-500 text-sm mt-2">
                 Try adjusting your search or filter criteria
               </p>
               <button
@@ -319,7 +316,7 @@ export default function ExamPatternsPage() {
         </div>
 
         {/* Stats Footer */}
-        <div className="mt-16 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl p-8 md:p-12">
+        <div className="mt-16 bg-gradient-to-r from-blue-600 to-primary-600 text-white rounded-lg p-8 md:p-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
               <p className="text-4xl md:text-5xl font-bold">{examPatternsData.length}+</p>

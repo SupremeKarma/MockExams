@@ -26,7 +26,7 @@ export default function ExaminerLayout({ children }: { children: React.ReactNode
       <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center">
         <ShieldAlert className="w-16 h-16 text-amber-500 mb-6" />
         <h1 className="text-3xl font-bold mb-4">Examiner Access Required</h1>
-        <p className="text-slate-400 mb-8 max-w-md">
+        <p className="text-zinc-400 mb-8 max-w-md">
           This area is for certified examiners only. Contact an administrator to get examiner privileges.
         </p>
         <button
@@ -44,7 +44,7 @@ export default function ExaminerLayout({ children }: { children: React.ReactNode
       <div className="flex items-center justify-between mb-12">
         <div>
           <h1 className="text-3xl font-bold text-gradient">Examiner Portal</h1>
-          <p className="text-slate-400 text-sm mt-1">Create, manage, and analyze your exams</p>
+          <p className="text-zinc-400 text-sm mt-1">Create, manage, and analyze your exams</p>
         </div>
       </div>
       {children}

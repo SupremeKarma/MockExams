@@ -1,0 +1,341 @@
+{
+  "paper_id": "BIT352CO_2026_regular",
+  "subject_code": "BIT352CO",
+  "subject_name": "Management Information System",
+  "semester": 6,
+  "year": 2026,
+  "exam_type": "regular",
+  "curriculum": "new_course",
+  "full_marks": 80,
+  "pass_marks": 32,
+  "duration_hours": 3,
+  "extraction_notes": "",
+  "groups": [
+    {
+      "label": "A",
+      "questions_printed": 3,
+      "answer_count": 2,
+      "marks_each": 12,
+      "marks_total": 24,
+      "instruction": "Answer TWO questions."
+    },
+    {
+      "label": "B",
+      "questions_printed": 9,
+      "answer_count": 7,
+      "marks_each": 8,
+      "marks_total": 56,
+      "instruction": "Answer SEVEN questions."
+    }
+  ],
+  "questions": [
+    {
+      "question_id": "BIT352CO_2026_regular_A1",
+      "group": "A",
+      "number": "1",
+      "marks": 12,
+      "text": "What is IT infrastructure? Discuss the contemporary hardware and software platform trends.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT352CO_U04",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT352CO_2026_regular_A2",
+      "group": "A",
+      "number": "2",
+      "marks": 12,
+      "text": "What do you mean by executive information system (EIS) and what are its features? How MIS is needed for the current business? Explain the role MIS in business today.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT352CO_U06",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT352CO_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT352CO_2026_regular_A3",
+      "group": "A",
+      "number": "3",
+      "marks": 12,
+      "text": "\"Managers rely on the use of several information systems to make effective decisions.\" Explain the types of information systems that they consider.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT352CO_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT352CO_2026_regular_B4",
+      "group": "B",
+      "number": "4",
+      "marks": 8,
+      "text": "Why does a system become vulnerable? How can a system be safeguarded?",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT352CO_U08",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT352CO_2026_regular_B5",
+      "group": "B",
+      "number": "5",
+      "marks": 8,
+      "text": "Briefly discuss the functions of a DSS with suitable examples.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT352CO_U06",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT352CO_2026_regular_B6",
+      "group": "B",
+      "number": "6",
+      "marks": 8,
+      "text": "What do you mean by strategic information system plan (SISP)? What are the strategies for developing an SIS?",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT352CO_U10",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT352CO_2026_regular_B7",
+      "group": "B",
+      "number": "7",
+      "marks": 8,
+      "text": "What are the different components of DSS? Explain in detail.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT352CO_U06",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT352CO_2026_regular_B8",
+      "group": "B",
+      "number": "8",
+      "marks": 8,
+      "text": "What is supply chain management (SCM)? What are its goals?",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT352CO_U09",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT352CO_2026_regular_B9",
+      "group": "B",
+      "number": "9",
+      "marks": 8,
+      "text": "Define customer relationship management (CRM). Mention its benefits.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT352CO_U09",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT352CO_2026_regular_B10",
+      "group": "B",
+      "number": "10",
+      "marks": 8,
+      "text": "How does a DBMS help improve business performance? Explain.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT352CO_U01",
+          "confidence": "medium"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT352CO_2026_regular_B11",
+      "group": "B",
+      "number": "11",
+      "marks": 8,
+      "text": "What do you mean by value-chain model? How does it help business organizations achieve competitive advantage?",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT352CO_U03",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT352CO_2026_regular_B12",
+      "group": "B",
+      "number": "12",
+      "marks": 8,
+      "text": "Write short notes on (Any TWO):",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT352CO_U02",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT352CO_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "choose": 2,
+      "sub_parts": [
+        {
+          "question_id": "BIT352CO_2026_regular_B12a",
+          "group": "B",
+          "number": "12a",
+          "marks": 4,
+          "text": "Collaboration and teamwork",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT352CO_U02",
+              "confidence": "high"
+            }
+          ],
+          "has_diagram": false,
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT352CO_2026_regular_B12b",
+          "group": "B",
+          "number": "12b",
+          "marks": 4,
+          "text": "Impacts of globalization",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT352CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "has_diagram": false,
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT352CO_2026_regular_B12c",
+          "group": "B",
+          "number": "12c",
+          "marks": 4,
+          "text": "Business information system",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT352CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "has_diagram": false,
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    }
+  ],
+  "source_files": [
+    "work\\pages\\BIT352CO_2026_regular_p1.png"
+  ],
+  "coverage": {
+    "by_group": [
+      {
+        "label": "A",
+        "questions_extracted": 3,
+        "questions_printed": 3
+      },
+      {
+        "label": "B",
+        "questions_extracted": 9,
+        "questions_printed": 9
+      }
+    ],
+    "status": "complete",
+    "notes": "Derived from the extraction, not self-reported by the model."
+  }
+}

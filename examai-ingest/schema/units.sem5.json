@@ -1,0 +1,113 @@
+{
+  "semester": 5,
+  "generated_from": "src/data/bitSyllabusData.ts",
+  "subject_count": 5,
+  "unit_count": 18,
+  "subjects": [
+    {
+      "subject_code": "BIT301HS",
+      "subject_name": "Research Methodology",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT301HS_U01",
+          "title": "Foundations of Scientific Research"
+        },
+        {
+          "unit_id": "BIT301HS_U02",
+          "title": "Literature Review & Research Gap"
+        },
+        {
+          "unit_id": "BIT301HS_U03",
+          "title": "Research Design & Sampling Strategies"
+        },
+        {
+          "unit_id": "BIT301HS_U04",
+          "title": "Hypothesis Formulation & Testing"
+        },
+        {
+          "unit_id": "BIT301HS_U05",
+          "title": "Data Analysis & Interpretation"
+        },
+        {
+          "unit_id": "BIT301HS_U06",
+          "title": "Report Writing & Publication Ethics"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT302CO",
+      "subject_name": "Computer Graphics",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT302CO_U01",
+          "title": "Display Devices & Raster Graphics"
+        },
+        {
+          "unit_id": "BIT302CO_U02",
+          "title": "Line & Circle Drawing Algorithms"
+        },
+        {
+          "unit_id": "BIT302CO_U03",
+          "title": "2D Transformations & Clipping"
+        },
+        {
+          "unit_id": "BIT302CO_U04",
+          "title": "3D Transformations & Projections"
+        },
+        {
+          "unit_id": "BIT302CO_U05",
+          "title": "Visible Surface Detection (Z-Buffer)"
+        },
+        {
+          "unit_id": "BIT302CO_U06",
+          "title": "Illumination & Shading Models"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT303CO",
+      "subject_name": "Cryptography and Network Security",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT303CO_U01",
+          "title": "Security Concepts & Attacks"
+        },
+        {
+          "unit_id": "BIT303CO_U02",
+          "title": "Classical Encryption Techniques"
+        },
+        {
+          "unit_id": "BIT303CO_U03",
+          "title": "Symmetric Ciphers (DES, AES)"
+        },
+        {
+          "unit_id": "BIT303CO_U04",
+          "title": "Public Key Cryptography (RSA, ECC)"
+        },
+        {
+          "unit_id": "BIT303CO_U05",
+          "title": "Hash Functions & Digital Signatures"
+        },
+        {
+          "unit_id": "BIT303CO_U06",
+          "title": "Network Security Protocols (TLS, IPSec)"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT304CO",
+      "subject_name": "Web Technology",
+      "credits": 3,
+      "units": []
+    },
+    {
+      "subject_code": "BIT305CO",
+      "subject_name": "Internet of Things",
+      "credits": 3,
+      "units": []
+    }
+  ]
+}

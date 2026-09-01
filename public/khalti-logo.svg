@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 140" fill="none">
+  <!-- Orange accent tag on the left -->
+  <path d="M12 44L24 40L20 80L8 84Z" fill="#F39C12" rx="3"/>
+
+  <!-- Purple Shield -->
+  <path d="M36 24C78 24 140 20 170 24C165 75 145 106 103 124C61 106 41 75 36 24Z" fill="#5C2D91"/>
+
+  <!-- Bold White K inside shield -->
+  <path d="M68 40V100H82V76L102 100H120L94 70L118 40H101L82 64V40H68Z" fill="white" stroke="white" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+
+  <!-- Outer frame around 'khalti' -->
+  <rect x="175" y="40" width="190" height="66" rx="10" fill="none" stroke="#5C2D91" stroke-width="5"/>
+
+  <!-- Khalti Wordmark text -->
+  <text x="195" y="88" font-family="'Segoe UI', -apple-system, Roboto, Ubuntu, sans-serif" font-size="44" font-weight="bold" fill="#5C2D91" letter-spacing="1">khalti</text>
+</svg>

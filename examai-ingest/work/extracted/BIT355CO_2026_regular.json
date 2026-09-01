@@ -1,0 +1,356 @@
+{
+  "paper_id": "BIT355CO_2026_regular",
+  "subject_code": "BIT355CO",
+  "subject_name": "Software Engineering",
+  "semester": 6,
+  "year": 2026,
+  "exam_type": "regular",
+  "curriculum": "new_course",
+  "full_marks": 80,
+  "pass_marks": 32,
+  "duration_hours": 3,
+  "extraction_notes": "",
+  "groups": [
+    {
+      "label": "A",
+      "questions_printed": 3,
+      "answer_count": 2,
+      "marks_each": 12,
+      "marks_total": 24,
+      "instruction": "Answer TWO questions."
+    },
+    {
+      "label": "B",
+      "questions_printed": 8,
+      "answer_count": 7,
+      "marks_each": 8,
+      "marks_total": 56,
+      "instruction": "Answer SEVEN questions."
+    }
+  ],
+  "questions": [
+    {
+      "question_id": "BIT355CO_2026_regular_A1",
+      "group": "A",
+      "number": "1",
+      "marks": 12,
+      "text": "What do you mean by Linear Sequential approach of software development? Explain Waterfall model in detail including its phases, characteristics, advantages, and disadvantages. Include necessary diagrams and examples.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT355CO_U02",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": true,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT355CO_2026_regular_A2",
+      "group": "A",
+      "number": "2",
+      "marks": 12,
+      "text": "What do you mean by Software Requirement Engineering? Explain the requirement engineering process in context of software engineering in detail.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT355CO_U04",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT355CO_2026_regular_A3",
+      "group": "A",
+      "number": "3",
+      "marks": 12,
+      "text": "What is software Architecture? Why do we need it? Explain Client-Server architecture in detail.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT355CO_U05",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT355CO_2026_regular_B4",
+      "group": "B",
+      "number": "4",
+      "marks": 8,
+      "text": "What is Software Measurement? Why do we need to quantify the software?",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT355CO_U07",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT355CO_2026_regular_B5",
+      "group": "B",
+      "number": "5",
+      "marks": 8,
+      "text": "Explain the several phases of spiral model in detail.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT355CO_U02",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT355CO_2026_regular_B6",
+      "group": "B",
+      "number": "6",
+      "marks": 8,
+      "text": "What is the importance of risk management in software project management? How are risks identified in a software project?",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT355CO_U03",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT355CO_2026_regular_B7",
+      "group": "B",
+      "number": "7",
+      "marks": 8,
+      "text": "Explain CPM project scheduling technique in detail along with the node representation of an activity.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT355CO_U03",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": true,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT355CO_2026_regular_B8",
+      "group": "B",
+      "number": "8",
+      "marks": 8,
+      "text": "Explain software quality assurance in detail.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT355CO_U07",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT355CO_2026_regular_B9",
+      "group": "B",
+      "number": "9",
+      "marks": 8,
+      "text": "Explain the difference between verification and validation. What do you mean by cyclomatic complexity of a software?",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT355CO_U06",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT355CO_U07",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT355CO_2026_regular_B9a",
+          "group": "B",
+          "number": "9a",
+          "marks": 4,
+          "text": "Explain the difference between verification and validation.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT355CO_U06",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT355CO_2026_regular_B9b",
+          "group": "B",
+          "number": "9b",
+          "marks": 4,
+          "text": "What do you mean by cyclomatic complexity of a software?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT355CO_U07",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT355CO_2026_regular_B10",
+      "group": "B",
+      "number": "10",
+      "marks": 8,
+      "text": "What are some common challenges faced by software engineers when developing large-scale software? How can they be addressed?",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT355CO_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT355CO_2026_regular_B11",
+      "group": "B",
+      "number": "11",
+      "marks": 8,
+      "text": "Write Short Notes on (Any TWO):",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT355CO_U05",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT355CO_U08",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT355CO_U04",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "choose": 2,
+      "sub_parts": [
+        {
+          "question_id": "BIT355CO_2026_regular_B11a",
+          "group": "B",
+          "number": "11a",
+          "marks": 4,
+          "text": "Characteristics of good software design",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT355CO_U05",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT355CO_2026_regular_B11b",
+          "group": "B",
+          "number": "11b",
+          "marks": 4,
+          "text": "Extreme programming",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT355CO_U08",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT355CO_2026_regular_B11c",
+          "group": "B",
+          "number": "11c",
+          "marks": 4,
+          "text": "Feasibility study",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT355CO_U04",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    }
+  ],
+  "source_files": [
+    "work\\pages\\BIT355CO_2026_regular_p1.png"
+  ],
+  "coverage": {
+    "by_group": [
+      {
+        "label": "A",
+        "questions_extracted": 3,
+        "questions_printed": 3
+      },
+      {
+        "label": "B",
+        "questions_extracted": 8,
+        "questions_printed": 8
+      }
+    ],
+    "status": "complete",
+    "notes": "Derived from the extraction, not self-reported by the model."
+  }
+}

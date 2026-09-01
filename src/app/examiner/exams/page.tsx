@@ -2,9 +2,26 @@
 
 import { useState, useEffect } from "react";
 import { db } from "@/lib/firebase";
-import { collection, query, where, orderBy, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  orderBy,
+  getDocs,
+  doc,
+  updateDoc,
+  deleteDoc,
+} from "firebase/firestore";
 import { useAuth } from "@/context/AuthContext";
-import { Plus, Trash2, Edit, CheckCircle, XCircle, Loader2, BarChart2 } from "lucide-react";
+import {
+  Plus,
+  Trash2,
+  Edit,
+  CheckCircle,
+  XCircle,
+  Loader2,
+  BarChart2,
+} from "lucide-react";
 import Link from "next/link";
 
 export default function ExaminerExamsPage() {
@@ -64,14 +81,14 @@ export default function ExaminerExamsPage() {
       </div>
 
       {exams.length === 0 ? (
-        <div className="glass-card p-16 rounded-3xl border border-white/10 text-center text-slate-500">
+        <div className="glass-card p-16 rounded-xl border border-zinc-200 text-center text-zinc-500">
           <p className="font-medium">No exams yet.</p>
           <p className="text-sm mt-1">Create your first exam to get started.</p>
         </div>
       ) : (
-        <div className="overflow-x-auto glass-card rounded-2xl border border-white/10">
+        <div className="overflow-x-auto glass-card rounded-lg border border-zinc-200">
           <table className="w-full text-left">
-            <thead className="bg-white/5 text-slate-400 text-xs uppercase tracking-widest">
+            <thead className="bg-zinc-50 text-zinc-500 text-xs uppercase tracking-widest">
               <tr>
                 <th className="p-6">Title</th>
                 <th className="p-6">Category</th>
@@ -80,29 +97,29 @@ export default function ExaminerExamsPage() {
                 <th className="p-6 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5">
+            <tbody className="divide-y divide-zinc-100">
               {exams.map(exam => (
-                <tr key={exam.id} className="hover:bg-white/[0.02] transition-colors">
+                <tr key={exam.id} className="hover:bg-zinc-100 transition-colors">
                   <td className="p-6 font-bold">{exam.title}</td>
-                  <td className="p-6 text-slate-400">{exam.category}</td>
-                  <td className="p-6 text-slate-400">{exam.total_questions ?? 0}</td>
+                  <td className="p-6 text-zinc-500">{exam.category}</td>
+                  <td className="p-6 text-zinc-500">{exam.total_questions ?? 0}</td>
                   <td className="p-6">
                     <button onClick={() => togglePublish(exam.id, exam.is_published)}>
                       {exam.is_published ? (
-                        <span className="flex items-center gap-1.5 text-emerald-400 text-xs font-bold px-2 py-1 bg-emerald-400/10 rounded-lg">
+                        <span className="flex items-center gap-1.5 text-emerald-700 text-xs font-bold px-2 py-1 bg-emerald-50 rounded-lg">
                           <CheckCircle className="w-3 h-3" /> Published
                         </span>
                       ) : (
-                        <span className="flex items-center gap-1.5 text-slate-500 text-xs font-bold px-2 py-1 bg-white/5 rounded-lg">
+                        <span className="flex items-center gap-1.5 text-zinc-500 text-xs font-bold px-2 py-1 bg-zinc-50 rounded-lg">
                           <XCircle className="w-3 h-3" /> Draft
                         </span>
                       )}
                     </button>
                   </td>
                   <td className="p-6 text-right">
-                    <div className="flex items-center justify-end gap-3 text-slate-400">
+                    <div className="flex items-center justify-end gap-3 text-zinc-500">
                       <Link href={`/examiner/exams/${exam.id}/results`} className="hover:text-primary transition-colors" title="Results"><BarChart2 className="w-4 h-4" /></Link>
-                      <Link href={`/examiner/exams/${exam.id}`} className="hover:text-white transition-colors" title="Edit"><Edit className="w-4 h-4" /></Link>
+                      <Link href={`/examiner/exams/${exam.id}`} className="hover:text-zinc-900 transition-colors" title="Edit"><Edit className="w-4 h-4" /></Link>
                       <button onClick={() => deleteExam(exam.id)} className="hover:text-rose-500 transition-colors" title="Delete"><Trash2 className="w-4 h-4" /></button>
                     </div>
                   </td>

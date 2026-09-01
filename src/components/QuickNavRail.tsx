@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { BookOpen, Zap, MessageCircle, ArrowUp, GraduationCap, Sparkles } from "lucide-react";
+import { BookOpen, Zap, MessageCircle, ArrowUp, GraduationCap } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -13,7 +13,7 @@ export default function QuickNavRail() {
   };
 
   return (
-    <div className="fixed right-3.5 top-1/2 -translate-y-1/2 z-40 hidden sm:flex flex-col gap-2 p-2 rounded-2xl bg-white/90 backdrop-blur-xl border border-slate-200 shadow-xl">
+    <div className="fixed right-3.5 top-1/2 -translate-y-1/2 z-40 hidden sm:flex flex-col gap-2 p-2 rounded-lg bg-white/90 backdrop-blur-xl border border-zinc-200 shadow-xl">
       {/* 1. Semester Past Questions Quick Link */}
       <div className="relative group">
         <Link
@@ -31,7 +31,7 @@ export default function QuickNavRail() {
               initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 10 }}
-              className="absolute right-14 top-1/2 -translate-y-1/2 whitespace-nowrap px-3 py-1.5 rounded-xl bg-slate-900 text-white text-xs font-bold shadow-lg pointer-events-none"
+              className="absolute right-14 top-1/2 -translate-y-1/2 whitespace-nowrap px-3 py-1.5 rounded-xl bg-zinc-900 text-white text-xs font-bold shadow-lg pointer-events-none"
             >
               Semester Past Questions (PU BIT)
             </motion.div>
@@ -56,7 +56,7 @@ export default function QuickNavRail() {
               initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 10 }}
-              className="absolute right-14 top-1/2 -translate-y-1/2 whitespace-nowrap px-3 py-1.5 rounded-xl bg-slate-900 text-white text-xs font-bold shadow-lg pointer-events-none"
+              className="absolute right-14 top-1/2 -translate-y-1/2 whitespace-nowrap px-3 py-1.5 rounded-xl bg-zinc-900 text-white text-xs font-bold shadow-lg pointer-events-none"
             >
               Entrance Masterclass (IOE/CEE/CSIT)
             </motion.div>
@@ -70,7 +70,7 @@ export default function QuickNavRail() {
           href="/exams"
           onMouseEnter={() => setHoveredPanel("cbt")}
           onMouseLeave={() => setHoveredPanel(null)}
-          className="w-11 h-11 rounded-xl bg-indigo-50 hover:bg-indigo-600 text-indigo-700 hover:text-white flex items-center justify-center transition-all shadow-2xs group-hover:scale-105"
+          className="w-11 h-11 rounded-xl bg-primary-50 hover:bg-primary-600 text-primary-700 hover:text-white flex items-center justify-center transition-all shadow-2xs group-hover:scale-105"
           aria-label="CBT Mock Tests"
         >
           <Zap className="w-5 h-5" />
@@ -81,7 +81,7 @@ export default function QuickNavRail() {
               initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 10 }}
-              className="absolute right-14 top-1/2 -translate-y-1/2 whitespace-nowrap px-3 py-1.5 rounded-xl bg-slate-900 text-white text-xs font-bold shadow-lg pointer-events-none"
+              className="absolute right-14 top-1/2 -translate-y-1/2 whitespace-nowrap px-3 py-1.5 rounded-xl bg-zinc-900 text-white text-xs font-bold shadow-lg pointer-events-none"
             >
               CBT Live Mock Tests
             </motion.div>
@@ -108,7 +108,7 @@ export default function QuickNavRail() {
               initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 10 }}
-              className="absolute right-14 top-1/2 -translate-y-1/2 whitespace-nowrap px-3 py-1.5 rounded-xl bg-slate-900 text-white text-xs font-bold shadow-lg pointer-events-none"
+              className="absolute right-14 top-1/2 -translate-y-1/2 whitespace-nowrap px-3 py-1.5 rounded-xl bg-zinc-900 text-white text-xs font-bold shadow-lg pointer-events-none"
             >
               Student Support Hotline (+977 9761499683)
             </motion.div>
@@ -119,7 +119,7 @@ export default function QuickNavRail() {
       {/* 5. Scroll to Top */}
       <button
         onClick={scrollToTop}
-        className="w-11 h-11 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-all shadow-2xs mt-2"
+        className="w-11 h-11 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-700 flex items-center justify-center transition-all shadow-2xs mt-2"
         aria-label="Scroll to top"
       >
         <ArrowUp className="w-4 h-4" />

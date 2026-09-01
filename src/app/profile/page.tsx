@@ -5,123 +5,110 @@ import { motion } from "framer-motion";
 import { User, Mail, Calendar, Shield, LogOut, Loader2, Award } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-
+import { SectionCard } from "@/components/UIComponents";
 
 export default function ProfilePage() {
   const { user, loading, signOut, role } = useAuth();
 
   if (loading) return (
-    <div className="min-h-screen flex flex-col items-center justify-center gap-4">
-      <Loader2 className="w-10 h-10 text-primary animate-spin" />
-      <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">Synchronizing Identity...</p>
+    <div className="min-h-screen flex flex-col items-center justify-center gap-3 bg-white">
+      <Loader2 className="w-8 h-8 text-primary-600 animate-spin" />
+      <p className="text-zinc-400 font-semibold uppercase tracking-widest text-[11px]">Loading profile</p>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 selection:bg-indigo-500/30 pb-20 pt-32">
-       {/* 🎨 Background Mesh */}
-       <div className="fixed top-0 left-0 w-full h-full pointer-events-none -z-10 overflow-hidden">
-        <div className="absolute top-[-10%] left-[20%] w-[50%] h-[50%] bg-indigo-500/5 blur-[120px] rounded-full"></div>
-        <div className="absolute bottom-[-10%] right-[10%] w-[40%] h-[40%] bg-rose-500/5 blur-[120px] rounded-full"></div>
-      </div>
-
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="flex flex-col lg:flex-row gap-12 items-start">
+    <div className="min-h-screen bg-zinc-50/40 pb-20 pt-8 px-4 sm:px-6">
+      <div className="max-w-5xl mx-auto">
+        <div className="flex flex-col lg:flex-row gap-6 items-start">
           {/* Profile Sidebar */}
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
+          <motion.div
+            initial={{ opacity: 0, x: -12 }}
             animate={{ opacity: 1, x: 0 }}
-            className="w-full lg:w-80 space-y-6"
+            className="w-full lg:w-80 space-y-4"
           >
-            <div className="glass-card p-10 rounded-[3rem] text-center relative overflow-hidden group">
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-50"></div>
-              
-              <div className="w-32 h-32 rounded-[2rem] bg-indigo-500/10 flex items-center justify-center mx-auto mb-8 relative border border-white/10 group-hover:scale-105 transition-transform duration-500 rotate-3 group-hover:rotate-0">
+            <div className="bg-white p-8 rounded-lg border border-zinc-200 text-center">
+              <div className="w-20 h-20 rounded-lg bg-primary-50 flex items-center justify-center mx-auto mb-5 relative border border-primary-100">
                 {user?.photoURL ? (
-                  <img src={user.photoURL} alt="Avatar" className="w-full h-full rounded-[2rem] object-cover" />
+                  <img src={user.photoURL} alt="Avatar" className="w-full h-full rounded-lg object-cover" />
                 ) : (
-                  <User className="w-14 h-14 text-indigo-400" />
+                  <User className="w-9 h-9 text-primary-600" />
                 )}
-                <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-emerald-500 rounded-2xl border-4 border-[#030711] flex items-center justify-center shadow-lg shadow-emerald-500/20">
-                  <div className="w-2.5 h-2.5 bg-white rounded-full animate-pulse" />
+                <div className="absolute -bottom-1.5 -right-1.5 w-6 h-6 bg-emerald-500 rounded-md border-2 border-white flex items-center justify-center">
+                  <div className="w-1.5 h-1.5 bg-white rounded-full" />
                 </div>
               </div>
 
-              <h2 className="text-2xl font-black mb-1 tracking-tight">{user?.displayName || user?.email?.split('@')[0] || "User"}</h2>
-              <p className="text-xs font-black text-indigo-400 uppercase tracking-[0.2em] mb-8">
-                {role === 'admin' ? 'System Administrator' : role === 'student' ? 'Elite Candidate' : 'Organization Leader'}
+              <h2 className="text-lg font-bold text-zinc-900 mb-1">{user?.displayName || user?.email?.split('@')[0] || "User"}</h2>
+              <p className="text-[11px] font-bold text-primary-600 uppercase tracking-wider mb-6">
+                {role === 'admin' ? 'System Administrator' : role === 'student' ? 'Student' : 'Organization Leader'}
               </p>
-              
-              <button 
+
+              <button
                 onClick={() => signOut()}
-                className="w-full py-4 bg-white/5 hover:bg-rose-500/10 text-slate-400 hover:text-rose-400 rounded-2xl text-xs font-black uppercase tracking-widest flex items-center justify-center gap-3 transition-all border border-white/5 hover:border-rose-500/20"
+                className="w-full py-2.5 bg-zinc-50 hover:bg-red-50 text-zinc-600 hover:text-red-600 rounded-md text-xs font-semibold flex items-center justify-center gap-2 transition-colors border border-zinc-200 hover:border-red-200"
               >
-                <LogOut className="w-4 h-4" /> Terminal Logoff
+                <LogOut className="w-4 h-4" /> Sign out
               </button>
             </div>
 
-            <div className="glass-card p-8 rounded-[2rem] border-white/5">
-              <h3 className="text-[10px] font-black mb-6 uppercase tracking-[0.3em] text-slate-500">Skills & Mastery</h3>
-              <div className="flex flex-wrap gap-2">
+            <SectionCard title="Skills & mastery">
+              <div className="flex flex-wrap gap-1.5">
                 {["IOE Entrance", "Physics", "Mathematics", "Aptitude", "Mock Logic"].map(tag => (
-                  <span key={tag} className="px-3 py-1.5 bg-indigo-500/5 text-indigo-400 text-[10px] font-black uppercase tracking-widest rounded-lg border border-indigo-500/10">
+                  <span key={tag} className="px-2.5 py-1 bg-primary-50 text-primary-700 text-[11px] font-semibold rounded-full border border-primary-100">
                     {tag}
                   </span>
                 ))}
               </div>
-            </div>
+            </SectionCard>
           </motion.div>
 
           {/* Main Content */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="flex-1 space-y-8"
+            transition={{ delay: 0.05 }}
+            className="flex-1 w-full space-y-4"
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <ProfileStat 
-                icon={<Award className="w-6 h-6" />} 
-                label="Global Rank" 
-                value="#1,248" 
-                trend="+85" 
-                color="text-amber-400" 
-                bg="bg-amber-500/10"
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <ProfileStat
+                icon={<Award className="w-5 h-5" />}
+                label="Global Rank"
+                value="#1,248"
+                trend="+85"
+                tint="bg-amber-50 text-amber-600"
               />
-              <ProfileStat 
-                icon={<Shield className="w-6 h-6" />} 
-                label="Reputation" 
-                value="9.8k" 
-                trend="Top 1%" 
-                color="text-emerald-400" 
-                bg="bg-emerald-500/10"
+              <ProfileStat
+                icon={<Shield className="w-5 h-5" />}
+                label="Reputation"
+                value="9.8k"
+                trend="Top 1%"
+                tint="bg-emerald-50 text-emerald-600"
               />
             </div>
 
-            <div className="glass-card p-10 rounded-[3rem] border-white/5">
-              <div className="flex items-center justify-between mb-12">
-                <h3 className="text-xl font-black tracking-tight">Personal Matrix</h3>
-                <Link 
+            <SectionCard
+              title="Personal information"
+              actions={
+                <Link
                   href="/settings"
-                  className="px-6 py-2 bg-white/5 border border-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-indigo-600 transition-all"
+                  className="px-3.5 py-1.5 bg-white border border-zinc-200 rounded-md text-xs font-semibold text-zinc-600 hover:bg-zinc-50 transition-colors"
                 >
-                  Modify Data
+                  Edit
                 </Link>
-              </div>
-
-              <div className="space-y-8">
-                <InfoItem icon={<User className="w-5 h-5" />} label="Display ID" value={user?.displayName || "Access Restricted"} />
-                <InfoItem icon={<Mail className="w-5 h-5" />} label="Neural Email" value={user?.email || "Unknown"} />
-                <InfoItem icon={<Calendar className="w-5 h-5" />} label="Creation Date" value="March 12, 2026" />
-                <InfoItem 
-                   icon={<Shield className="w-5 h-5" />} 
-                   label="Clearance Level" 
-                   value={role === 'admin' ? "Full Root Access" : "Standard Academic"} 
+              }
+            >
+              <div className="space-y-1 -m-5 mt-0">
+                <InfoItem icon={<User className="w-4 h-4" />} label="Display name" value={user?.displayName || "Not set"} />
+                <InfoItem icon={<Mail className="w-4 h-4" />} label="Email" value={user?.email || "Unknown"} />
+                <InfoItem icon={<Calendar className="w-4 h-4" />} label="Member since" value="March 12, 2026" />
+                <InfoItem
+                   icon={<Shield className="w-4 h-4" />}
+                   label="Access level"
+                   value={role === 'admin' ? "Full admin access" : "Standard student"}
                 />
               </div>
-            </div>
-            
-            {/* Upgrade block removed */}
+            </SectionCard>
           </motion.div>
         </div>
       </div>
@@ -129,17 +116,17 @@ export default function ProfilePage() {
   );
 }
 
-function ProfileStat({ icon, label, value, trend, color, bg }: any) {
+function ProfileStat({ icon, label, value, trend, tint }: any) {
   return (
-    <div className="glass-card p-8 rounded-[2.5rem] border-white/5 flex items-center gap-6 group hover:border-white/10 transition-all">
-      <div className={`w-16 h-16 rounded-2xl ${bg} flex items-center justify-center ${color} shadow-inner`}>
+    <div className="bg-white p-5 rounded-lg border border-zinc-200 flex items-center gap-4">
+      <div className={`w-11 h-11 rounded-md ${tint} flex items-center justify-center`}>
         {icon}
       </div>
       <div>
-        <div className="text-[10px] text-slate-500 font-black uppercase tracking-widest mb-1">{label}</div>
-        <div className="text-2xl font-black text-white flex items-center gap-3">
+        <div className="text-[11px] text-zinc-400 font-semibold uppercase tracking-wide mb-0.5">{label}</div>
+        <div className="text-lg font-bold text-zinc-900 flex items-center gap-2">
           {value}
-          <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-lg border border-emerald-500/20">{trend}</span>
+          <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">{trend}</span>
         </div>
       </div>
     </div>
@@ -148,14 +135,14 @@ function ProfileStat({ icon, label, value, trend, color, bg }: any) {
 
 function InfoItem({ icon, label, value }: { icon: React.ReactNode, label: string, value: string }) {
   return (
-    <div className="flex items-center justify-between py-4 group">
-      <div className="flex items-center gap-6">
-        <div className="p-3 bg-white/5 rounded-xl text-slate-500 group-hover:text-indigo-400 group-hover:bg-indigo-500/10 transition-all border border-transparent group-hover:border-indigo-500/20">
+    <div className="flex items-center justify-between py-3 px-5 border-b border-zinc-100 last:border-0">
+      <div className="flex items-center gap-3">
+        <div className="p-2 bg-zinc-50 rounded-md text-zinc-400">
           {icon}
         </div>
-        <span className="text-sm font-bold text-slate-400 transition-colors group-hover:text-slate-300">{label}</span>
+        <span className="text-xs font-medium text-zinc-500">{label}</span>
       </div>
-      <span className="text-sm font-black text-white bg-white/5 px-4 py-1.5 rounded-xl border border-white/5">{value}</span>
+      <span className="text-sm font-semibold text-zinc-900">{value}</span>
     </div>
   );
 }

@@ -2,18 +2,18 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { db } from "@/lib/firebase";
-import { 
-  collection, 
-  query, 
-  orderBy, 
-  limit, 
-  onSnapshot, 
+import {
+  collection,
+  query,
+  orderBy,
+  limit,
+  onSnapshot,
   where,
-  Timestamp 
+  Timestamp,
 } from "firebase/firestore";
 import { useAuth } from "@/context/AuthContext";
 import { motion, AnimatePresence } from "framer-motion";
-import { Bell, X, Info, CheckCircle2, AlertCircle } from "lucide-react";
+import { Bell, X, CheckCircle2, AlertCircle } from "lucide-react";
 import Link from "next/link";
 
 interface Notification {
@@ -97,7 +97,7 @@ export const NotificationProvider = ({ children }: { children: React.ReactNode }
     };
   }, [user]);
 
-  const markAsRead = (id: string) => {
+  const markAsRead = (_id: string) => {
     // Local read state for now, or could be stored in localstorage
   };
 
@@ -116,7 +116,7 @@ export const NotificationProvider = ({ children }: { children: React.ReactNode }
               exit={{ opacity: 0, scale: 0.9 }}
               className="pointer-events-auto"
             >
-              <div className="bg-slate-900/90 backdrop-blur-xl border border-white/10 p-5 rounded-2xl shadow-2xl flex items-start gap-4">
+              <div className="bg-zinc-900/90 backdrop-blur-xl border border-white/10 p-5 rounded-lg shadow-2xl flex items-start gap-4">
                 <div className={`p-2 rounded-xl shrink-0 ${
                   toast.type === "success" ? "bg-emerald-500/10 text-emerald-400" : 
                   toast.type === "warning" ? "bg-amber-500/10 text-amber-400" : 
@@ -128,11 +128,11 @@ export const NotificationProvider = ({ children }: { children: React.ReactNode }
                 </div>
                 <div className="flex-1 min-w-0">
                   <h4 className="text-sm font-bold text-white mb-1">{toast.title}</h4>
-                  <p className="text-xs text-slate-400 leading-relaxed mb-3">{toast.message}</p>
+                  <p className="text-xs text-zinc-400 leading-relaxed mb-3">{toast.message}</p>
                   {toast.link && (
                     <Link 
                       href={toast.link}
-                      className="text-[10px] font-black uppercase tracking-widest text-primary hover:text-white transition-colors"
+                      className="text-[10px] font-bold uppercase tracking-widest text-primary hover:text-white transition-colors"
                       onClick={() => setToasts(prev => prev.filter(t => t.id !== toast.id))}
                     >
                       View Details
@@ -141,7 +141,7 @@ export const NotificationProvider = ({ children }: { children: React.ReactNode }
                 </div>
                 <button 
                   onClick={() => setToasts(prev => prev.filter(t => t.id !== toast.id))}
-                  className="p-1 hover:bg-white/5 rounded-lg transition-colors text-slate-500"
+                  className="p-1 hover:bg-white/5 rounded-lg transition-colors text-zinc-500"
                 >
                   <X className="w-4 h-4" />
                 </button>

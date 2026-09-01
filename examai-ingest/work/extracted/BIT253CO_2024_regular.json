@@ -1,0 +1,585 @@
+{
+  "paper_id": "BIT253CO_2024_regular",
+  "subject_code": "BIT253CO",
+  "subject_name": "Operating System",
+  "semester": 4,
+  "year": 2024,
+  "exam_type": "regular",
+  "curriculum": "old_course",
+  "full_marks": 80,
+  "pass_marks": 32,
+  "duration_hours": 3,
+  "extraction_notes": "The printed subject name includes \"(New Course)\", but based on the subject code BIT253CO (Semester 4), the curriculum is classified as \"old_course\" per the provided rules. Group A instruction states \"Answer TWO questions. 2x12=24\". However, question 2 is explicitly marked for 8 marks. The sum of all printed questions' marks in Group A (12+8+12 = 32) does not equal the group's marks_total (24). It is assumed students select two 12-mark questions as per the instruction.",
+  "groups": [
+    {
+      "label": "Group A",
+      "questions_printed": 3,
+      "answer_count": 2,
+      "marks_each": 12,
+      "marks_total": 24,
+      "instruction": "Answer TWO questions."
+    },
+    {
+      "label": "Group B",
+      "questions_printed": 9,
+      "answer_count": 7,
+      "marks_each": 8,
+      "marks_total": 56,
+      "instruction": "Answer SEVEN questions."
+    }
+  ],
+  "questions": [
+    {
+      "question_id": "BIT253CO_2024_regular_A1",
+      "group": "A",
+      "number": "1",
+      "marks": 12,
+      "text": "What is race condition? How mutual exclusion can be achieved? Discuss Peterson solution in detail.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT253CO_U02",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT253CO_2024_regular_A1a",
+          "group": "A",
+          "number": "1a",
+          "marks": 2,
+          "text": "What is race condition?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT253CO_U02",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": true,
+          "notes": "paper coverage is partial"
+        },
+        {
+          "question_id": "BIT253CO_2024_regular_A1b",
+          "group": "A",
+          "number": "1b",
+          "marks": 4,
+          "text": "How mutual exclusion can be achieved?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT253CO_U02",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": true,
+          "notes": "paper coverage is partial"
+        },
+        {
+          "question_id": "BIT253CO_2024_regular_A1c",
+          "group": "A",
+          "number": "1c",
+          "marks": 6,
+          "text": "Discuss Peterson solution in detail.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT253CO_U02",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": true,
+          "notes": "paper coverage is partial"
+        }
+      ],
+      "needs_review": true,
+      "notes": "paper coverage is partial"
+    },
+    {
+      "question_id": "BIT253CO_2024_regular_A2",
+      "group": "A",
+      "number": "2",
+      "marks": 8,
+      "text": "Consider the following processes and compute average waiting-times and average turn-around times using preemptive SJF and non-preemptive SJF scheduling algorithms. [table showing Processes (A,B,C,D,E), CPU Time (in ms) (7,9,2,5,4), Arrival Time (in ms) (3,0,2,5,6)]",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT253CO_U02",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": true,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "notes": "paper coverage is partial"
+    },
+    {
+      "question_id": "BIT253CO_2024_regular_A3",
+      "group": "A",
+      "number": "3",
+      "marks": 12,
+      "text": "Explain different memory management with swapping. Discuss LRU page replacement algorithm with suitable example.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT253CO_U03",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT253CO_2024_regular_A3a",
+          "group": "A",
+          "number": "3a",
+          "marks": 8,
+          "text": "Explain different memory management with swapping.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT253CO_U03",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": true,
+          "notes": "paper coverage is partial"
+        },
+        {
+          "question_id": "BIT253CO_2024_regular_A3b",
+          "group": "A",
+          "number": "3b",
+          "marks": 4,
+          "text": "Discuss LRU page replacement algorithm with suitable example.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT253CO_U03",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": true,
+          "notes": "paper coverage is partial"
+        }
+      ],
+      "needs_review": true,
+      "notes": "paper coverage is partial"
+    },
+    {
+      "question_id": "BIT253CO_2024_regular_B4",
+      "group": "B",
+      "number": "4",
+      "marks": 8,
+      "text": "How operating system can be explained as resource manager and extended machine?",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT253CO_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "notes": "paper coverage is partial"
+    },
+    {
+      "question_id": "BIT253CO_2024_regular_B5",
+      "group": "B",
+      "number": "5",
+      "marks": 8,
+      "text": "What is the use of DMA? Explain working principles of DMA with illustrations.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT253CO_U05",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT253CO_2024_regular_B5a",
+          "group": "B",
+          "number": "5a",
+          "marks": 2,
+          "text": "What is the use of DMA?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT253CO_U05",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": true,
+          "notes": "paper coverage is partial"
+        },
+        {
+          "question_id": "BIT253CO_2024_regular_B5b",
+          "group": "B",
+          "number": "5b",
+          "marks": 6,
+          "text": "Explain working principles of DMA with illustrations.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT253CO_U05",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": true,
+          "notes": "paper coverage is partial"
+        }
+      ],
+      "needs_review": true,
+      "notes": "paper coverage is partial"
+    },
+    {
+      "question_id": "BIT253CO_2024_regular_B6",
+      "group": "B",
+      "number": "6",
+      "marks": 8,
+      "text": "Discuss the different file implementation techniques with advantages and disadvantages.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT253CO_U04",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "notes": "paper coverage is partial"
+    },
+    {
+      "question_id": "BIT253CO_2024_regular_B7",
+      "group": "B",
+      "number": "7",
+      "marks": 8,
+      "text": "What is distributed system? Explain the advantages of distributed system over personal computer.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT253CO_U08",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT253CO_2024_regular_B7a",
+          "group": "B",
+          "number": "7a",
+          "marks": 2,
+          "text": "What is distributed system?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT253CO_U08",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": true,
+          "notes": "paper coverage is partial"
+        },
+        {
+          "question_id": "BIT253CO_2024_regular_B7b",
+          "group": "B",
+          "number": "7b",
+          "marks": 6,
+          "text": "Explain the advantages of distributed system over personal computer.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT253CO_U08",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": true,
+          "notes": "paper coverage is partial"
+        }
+      ],
+      "needs_review": true,
+      "notes": "paper coverage is partial"
+    },
+    {
+      "question_id": "BIT253CO_2024_regular_B8",
+      "group": "B",
+      "number": "8",
+      "marks": 8,
+      "text": "What is the use of clock in operating system? Explain different types of terminal in brief.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT253CO_U01",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT253CO_U05",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT253CO_2024_regular_B8a",
+          "group": "B",
+          "number": "8a",
+          "marks": 2,
+          "text": "What is the use of clock in operating system?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT253CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": true,
+          "notes": "paper coverage is partial"
+        },
+        {
+          "question_id": "BIT253CO_2024_regular_B8b",
+          "group": "B",
+          "number": "8b",
+          "marks": 6,
+          "text": "Explain different types of terminal in brief.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT253CO_U05",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": true,
+          "notes": "paper coverage is partial"
+        }
+      ],
+      "needs_review": true,
+      "notes": "paper coverage is partial"
+    },
+    {
+      "question_id": "BIT253CO_2024_regular_B9",
+      "group": "B",
+      "number": "9",
+      "marks": 8,
+      "text": "Explain deadlock detection and recovery. What are safe and unsafe states?",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT253CO_U06",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT253CO_2024_regular_B9a",
+          "group": "B",
+          "number": "9a",
+          "marks": 6,
+          "text": "Explain deadlock detection and recovery.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT253CO_U06",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": true,
+          "notes": "paper coverage is partial"
+        },
+        {
+          "question_id": "BIT253CO_2024_regular_B9b",
+          "group": "B",
+          "number": "9b",
+          "marks": 2,
+          "text": "What are safe and unsafe states?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT253CO_U06",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": true,
+          "notes": "paper coverage is partial"
+        }
+      ],
+      "needs_review": true,
+      "notes": "paper coverage is partial"
+    },
+    {
+      "question_id": "BIT253CO_2024_regular_B10",
+      "group": "B",
+      "number": "10",
+      "marks": 8,
+      "text": "Mention the disk scheduling algorithms and explain any one of them with suitable example.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT253CO_U05",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "notes": "paper coverage is partial"
+    },
+    {
+      "question_id": "BIT253CO_2024_regular_B11",
+      "group": "B",
+      "number": "11",
+      "marks": 8,
+      "text": "Briefly explain the types of real time systems.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT253CO_U07",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "notes": "paper coverage is partial"
+    },
+    {
+      "question_id": "BIT253CO_2024_regular_B12",
+      "group": "B",
+      "number": "12",
+      "marks": 8,
+      "text": "Write short notes on any TWO:",
+      "question_type": "written",
+      "choose": 2,
+      "units": [
+        {
+          "unit_id": "BIT253CO_U01",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT253CO_U03",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT253CO_U02",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT253CO_2024_regular_B12a",
+          "group": "B",
+          "number": "12a",
+          "marks": 4,
+          "text": "History of OS",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT253CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": true,
+          "notes": "paper coverage is partial"
+        },
+        {
+          "question_id": "BIT253CO_2024_regular_B12b",
+          "group": "B",
+          "number": "12b",
+          "marks": 4,
+          "text": "Virtual memory",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT253CO_U03",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": true,
+          "notes": "paper coverage is partial"
+        },
+        {
+          "question_id": "BIT253CO_2024_regular_B12c",
+          "group": "B",
+          "number": "12c",
+          "marks": 4,
+          "text": "Process control block",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT253CO_U02",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": true,
+          "notes": "paper coverage is partial"
+        }
+      ],
+      "needs_review": true,
+      "notes": "paper coverage is partial"
+    }
+  ],
+  "source_files": [
+    "work\\pages\\BIT253CO_2024_regular_p1.png",
+    "work\\pages\\BIT253CO_2024_regular_p2.png"
+  ],
+  "coverage": {
+    "by_group": [
+      {
+        "label": "Group A",
+        "questions_extracted": 0,
+        "questions_printed": 3
+      },
+      {
+        "label": "Group B",
+        "questions_extracted": 0,
+        "questions_printed": 9
+      }
+    ],
+    "status": "partial",
+    "notes": "Derived from the extraction, not self-reported by the model. Re-shoot or re-run before anything here is published."
+  }
+}

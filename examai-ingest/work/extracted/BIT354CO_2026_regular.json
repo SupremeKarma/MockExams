@@ -1,0 +1,412 @@
+{
+  "paper_id": "BIT354CO_2026_regular",
+  "subject_code": "BIT354CO",
+  "subject_name": "Simulation & Modeling",
+  "semester": 6,
+  "year": 2026,
+  "exam_type": "regular",
+  "curriculum": "new_course",
+  "full_marks": 80,
+  "pass_marks": 32,
+  "duration_hours": 3,
+  "extraction_notes": "Question numbers in Group B were inconsistent in the original paper, re-numbered sequentially from 4 to 13. The split for Question 2 in Group A was ambiguous, so it is treated as a single part.",
+  "groups": [
+    {
+      "label": "A",
+      "questions_printed": 3,
+      "answer_count": 2,
+      "marks_each": 12,
+      "marks_total": 24,
+      "instruction": "Answer TWO questions."
+    },
+    {
+      "label": "B",
+      "questions_printed": 10,
+      "answer_count": 7,
+      "marks_each": 8,
+      "marks_total": 56,
+      "instruction": "Answer SEVEN questions."
+    }
+  ],
+  "questions": [
+    {
+      "question_id": "BIT354CO_2026_regular_A1",
+      "group": "A",
+      "number": "1",
+      "marks": 12,
+      "text": "Define simulation. Discuss its advantages, drawbacks and areas of application.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT354CO_2026_regular_A1a",
+          "group": "A",
+          "number": "1a",
+          "marks": 2,
+          "text": "Define simulation.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT354CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT354CO_2026_regular_A1b",
+          "group": "A",
+          "number": "1b",
+          "marks": 2,
+          "text": "Discuss its advantages.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT354CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT354CO_2026_regular_A1c",
+          "group": "A",
+          "number": "1c",
+          "marks": 2,
+          "text": "Discuss its drawbacks.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT354CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT354CO_2026_regular_A1d",
+          "group": "A",
+          "number": "1d",
+          "marks": 6,
+          "text": "Discuss areas of application [of simulation].",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT354CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT354CO_2026_regular_A2",
+      "group": "A",
+      "number": "2",
+      "marks": 12,
+      "text": "What is a model? What are different types of models? Give example for each. Also list out intities, attributes, activities, state variables for following system. (a) Traffic system (b) Banking system (c) Super market",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "low",
+      "sub_parts": [],
+      "needs_review": true,
+      "notes": "question confidence is 'low'"
+    },
+    {
+      "question_id": "BIT354CO_2026_regular_A3",
+      "group": "A",
+      "number": "3",
+      "marks": 12,
+      "text": "Define and develop a Poker test for four-digit random numbers. A sequence of 10,000 random numbers, each of four digits has been generated. The analysis of the numbers reveals that in 5120 numbers all four digits are different, 4230 contain exactly one pair of like digits, 560 contain two pairs, 75 have three digits of a kind and 15 contain all like digits. Use Poker test to determine whether these numbers are independent. (Critical value of chisquare test for α=0.05 and N=4 is 9.49).",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U04",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT354CO_2026_regular_B4",
+      "group": "B",
+      "number": "4",
+      "marks": 4,
+      "text": "Explain the concept of Monte Carlo Simulation. How is it different from traditional analytical methods for solving mathematical problems?",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U02",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT354CO_2026_regular_B5",
+      "group": "B",
+      "number": "5",
+      "marks": 4,
+      "text": "Discuss the key advantages and limitations of using Monte Carlo Simulation in complex systems modeling.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U02",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT354CO_U01",
+          "confidence": "medium"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT354CO_2026_regular_B6",
+      "group": "B",
+      "number": "6",
+      "marks": 8,
+      "text": "Discuss about the use of differential and partial differential equation in simulation. Also explain distributed lag model.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U03",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT354CO_2026_regular_B6a",
+          "group": "B",
+          "number": "6a",
+          "marks": 4,
+          "text": "Discuss about the use of differential and partial differential equation in simulation.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT354CO_U03",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT354CO_2026_regular_B6b",
+          "group": "B",
+          "number": "6b",
+          "marks": 4,
+          "text": "Also explain distributed lag model.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT354CO_U03",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT354CO_2026_regular_B7",
+      "group": "B",
+      "number": "7",
+      "marks": 8,
+      "text": "Discuss the concept of Replication of Runs in simulation studies. Why is replication important, and how does it help in improving the reliability and accuracy of the results?",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U05",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT354CO_2026_regular_B8",
+      "group": "B",
+      "number": "8",
+      "marks": 8,
+      "text": "“To simulate is to experiment.” Justify with real time examples in detail.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT354CO_2026_regular_B9",
+      "group": "B",
+      "number": "9",
+      "marks": 4,
+      "text": "What do you understand by interactive and feedback system in simulation? Explain.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U01",
+          "confidence": "medium"
+        },
+        {
+          "unit_id": "BIT354CO_U06",
+          "confidence": "low"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "notes": "low-confidence tag BIT354CO_U06"
+    },
+    {
+      "question_id": "BIT354CO_2026_regular_B10",
+      "group": "B",
+      "number": "10",
+      "marks": 4,
+      "text": "What are the properties of random numbers? Also explain the properties of good random number generators.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U04",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT354CO_2026_regular_B11",
+      "group": "B",
+      "number": "11",
+      "marks": 8,
+      "text": "What does each symbol in the Kendall notation represent? Explain the meanings of the parameters in A/B/C form, where A refers to the arrival process, B refers to the service process, and C refers to the number of servers. Represent the following queuing system using Kendall’s notation:\n*   Customers arrive according to a Poisson process with a rate of 5 customers per hour.\n*   The service times follow an exponential distribution with an average of 10 minutes per customer.\n*   There is a single server.",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U03",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT354CO_2026_regular_B12",
+      "group": "B",
+      "number": "12",
+      "marks": 8,
+      "text": "What is a random number? Given the following parameters for a Mixed Congruential Generator (MCG):\nm=100\na=47\nb=10\nSeed, r0=7\nUsing the Mixed Congruential Method, generate the first eight random numbers. Show the steps and the numbers generated.",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U04",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT354CO_2026_regular_B13",
+      "group": "B",
+      "number": "13",
+      "marks": 8,
+      "text": "What is continuous system simulation? What is hybrid simulation? Briefly discuss.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT354CO_U06",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT354CO_U01",
+          "confidence": "medium"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    }
+  ],
+  "source_files": [
+    "work\\pages\\BIT354CO_2026_regular_p1.png",
+    "work\\pages\\BIT354CO_2026_regular_p2.png"
+  ],
+  "coverage": {
+    "by_group": [
+      {
+        "label": "A",
+        "questions_extracted": 3,
+        "questions_printed": 3
+      },
+      {
+        "label": "B",
+        "questions_extracted": 10,
+        "questions_printed": 10
+      }
+    ],
+    "status": "complete",
+    "notes": "Derived from the extraction, not self-reported by the model."
+  }
+}

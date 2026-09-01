@@ -1,0 +1,383 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mockexams.local/schema/paper.schema.json",
+  "title": "ExamAI extracted past paper",
+  "description": "One past paper, split into individually addressable questions and tagged to syllabus units at import time. Extends the shape already emitted by examai-ingest/src/p2_extract.py; every field that existed there is preserved.",
+  "type": "object",
+  "required": [
+    "paper_id",
+    "subject_code",
+    "subject_name",
+    "semester",
+    "year",
+    "exam_type",
+    "full_marks",
+    "source_files",
+    "coverage",
+    "questions"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "paper_id": {
+      "type": "string",
+      "pattern": "^[A-Z0-9]+_[0-9]{4}_(regular|back|make_up|model)$",
+      "description": "<SUBJECT_CODE>_<YEAR>_<EXAM_TYPE>. Stable primary key.",
+      "examples": [
+        "BIT351CO_2024_regular"
+      ]
+    },
+    "subject_code": {
+      "type": "string",
+      "pattern": "^BIT[0-9]{3}[A-Z]{2}$",
+      "description": "Official Purbanchal University BIT code, and it MUST match a subject_code in units.sem<N>.json. The demo fixtures used invented codes such as 'BIT415AI'; semester 6 Artificial Intelligence is BIT351CO. A code absent from the unit vocabulary is a hard failure, not a warning — it means questions cannot be tagged.",
+      "examples": [
+        "BIT351CO"
+      ]
+    },
+    "subject_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "semester": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 8
+    },
+    "year": {
+      "type": "integer",
+      "minimum": 2000,
+      "maximum": 2100
+    },
+    "exam_type": {
+      "enum": [
+        "regular",
+        "back",
+        "make_up",
+        "model"
+      ]
+    },
+    "full_marks": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Total marks printed on the paper. Must equal the sum of groups[].marks_total."
+    },
+    "pass_marks": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "duration_hours": {
+      "type": "number",
+      "minimum": 0.5
+    },
+    "curriculum": {
+      "enum": [
+        "new_course",
+        "old_course"
+      ],
+      "description": "Which curriculum this paper belongs to. Derive it from the SUBJECT CODE, not from the printed header label: sem-6 BIT351CO-BIT356CO are new_course, and older codes (BIT370CO, BIT371CO, BIT376CO...) are old_course. A printed '(New Course)' is unreliable evidence — 2022 old-curriculum papers print it too, because the label was relative to a still earlier revision. This matters because old and new share subject NAMES: measured against the current BIT353CO units, the 2022 BIT371CO Data Mining paper fits only 62% clearly, and six of those fits land on a single unit. Pooling the two would skew that unit and add nothing elsewhere."
+    },
+    "groups": {
+      "type": "array",
+      "minItems": 1,
+      "description": "The paper's sections and — critically — their choice rules. PU papers are not 'answer everything': a 2025 BIT351CO paper reads 'Group A: Answer TWO questions, 2x12=24' over three printed questions, and 'Group B: Answer SEVEN questions, 7x8=56' over eight. Marks alone cannot express that, which is why coverage is counted in QUESTIONS PER GROUP, not summed marks. A complete extraction of that Group B holds 8 questions worth 64 marks while the group is worth 56 — correct, not over-extracted.",
+      "items": {
+        "type": "object",
+        "required": [
+          "label",
+          "questions_printed",
+          "answer_count",
+          "marks_each",
+          "marks_total"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "type": "string",
+            "examples": [
+              "A",
+              "B"
+            ]
+          },
+          "questions_printed": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "How many questions the paper prints in this group — the number a complete extraction must contain."
+          },
+          "answer_count": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "How many the candidate must answer. Equals questions_printed when there is no choice."
+          },
+          "marks_each": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "marks_total": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "answer_count x marks_each, as printed ('2x12=24')."
+          },
+          "instruction": {
+            "type": "string",
+            "examples": [
+              "Answer TWO questions."
+            ]
+          }
+        }
+      }
+    },
+    "source_files": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      },
+      "description": "Page images this paper was extracted from, in reading order. Kept so the original layout can be shown to the student beside the text."
+    },
+    "extraction_notes": {
+      "type": "string"
+    },
+    "coverage": {
+      "type": "object",
+      "description": "Makes incomplete extraction VISIBLE. Without it, a run that captured a third of a paper looks identical to a complete one — which is exactly what the demo fixtures did: 26 of 80 marks, every question 'high' confidence, extraction_notes empty. Counted in QUESTIONS PER GROUP because choice-based papers make summed marks meaningless as a completeness signal.",
+      "required": [
+        "by_group",
+        "status"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "by_group": {
+          "type": "array",
+          "minItems": 1,
+          "description": "One entry per group in `groups`, in the same order.",
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "questions_extracted",
+              "questions_printed"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "questions_extracted": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "questions_printed": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          }
+        },
+        "status": {
+          "enum": [
+            "complete",
+            "partial",
+            "over_extracted"
+          ],
+          "description": "complete: every group has questions_extracted == questions_printed. partial: at least one group has fewer — pages missed, questions merged, or OCR dropped a section. over_extracted: some group has more, which usually means one question was split into two."
+        },
+        "missing_ranges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Best-effort note of what appears absent, e.g. 'Group B Q7-Q9'.",
+          "default": []
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "questions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/question"
+      }
+    }
+  },
+  "$defs": {
+    "question": {
+      "type": "object",
+      "required": [
+        "question_id",
+        "group",
+        "number",
+        "marks",
+        "text",
+        "question_type",
+        "units",
+        "confidence",
+        "needs_review"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "question_id": {
+          "type": "string",
+          "description": "<paper_id>_<group><number>, with sub-part suffix where applicable.",
+          "examples": [
+            "BIT351CO_2024_regular_B1",
+            "BIT351CO_2024_regular_B1a"
+          ]
+        },
+        "group": {
+          "type": "string",
+          "description": "Section on the paper — A (short), B (medium), C (long) in the PU BIT format."
+        },
+        "number": {
+          "type": "string"
+        },
+        "marks": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "description": "Marks for this question. May be null ONLY on a sub-part whose share is not printed — many papers give a total and leave the split implicit. Inventing a division there would put fabricated numbers into mark-weight analysis; 0 would be worse, because it reads as a real value."
+        },
+        "text": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The printed question text. May be null in exactly two cases: the question is a bare stem whose entire content lives in its sub_parts (a paper's 'Q3 (a)... (b)...' with no sentence of its own), or the text was unreadable — and in that second case confidence must be 'low'. The validator rejects a null text with neither sub_parts nor low confidence, so 'null' can never quietly mean 'we lost it'."
+        },
+        "question_type": {
+          "enum": [
+            "written",
+            "numerical",
+            "mcq",
+            "diagram"
+          ],
+          "description": "Drives everything downstream. 'numerical' is the one that must NOT be served as a stored solution — topics repeat but numbers don't, so numerical questions get variant generation instead. 'diagram' means the answer requires one, which affects both generation and grading."
+        },
+        "units": {
+          "type": "array",
+          "description": "Syllabus units this question tests. Tagged AT IMPORT, never at query time. More than one is normal and allowed — forcing a single unit loses the cross-topic questions that are exactly the ones worth counting.\n\nMay be EMPTY, but only alongside needs_review: true (the validator enforces the pair). An empty list is a real signal, not a failure: BIT353CO 2026 asks about multilayer feedforward networks versus a single-layer perceptron, and none of that subject's six syllabus units covers neural networks. Forcing the closest tag would have put a wrong question into a frequency count and made the syllabus look complete. An untagged, flagged question says the vocabulary needs checking — which is the more useful truth.",
+          "items": {
+            "type": "object",
+            "required": [
+              "unit_id",
+              "confidence"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "unit_id": {
+                "type": "string",
+                "pattern": "^BIT[0-9]{3}[A-Z]{2}_U[0-9]{2}$",
+                "description": "MUST exist in units.sem<N>.json for this subject. Generated by scripts/dump-syllabus-units.ts from the syllabus the app already shows students, so the tagging vocabulary cannot drift from it."
+              },
+              "confidence": {
+                "enum": [
+                  "high",
+                  "medium",
+                  "low"
+                ]
+              },
+              "tagged_by": {
+                "enum": [
+                  "model",
+                  "human"
+                ],
+                "default": "model",
+                "description": "A human tag outranks a model tag and must never be silently overwritten by a re-run."
+              }
+            }
+          }
+        },
+        "marking_scheme": {
+          "type": "array",
+          "description": "The checklist a grader compares against — key points and the marks each carries. Deliberately NOT a model answer: grading becomes 'which points are present, missing, wrong', which is how real examiners work and far more reliable than asking a model to score from feeling. The point marks should sum to the question's marks; where they cannot, say why in `notes`.",
+          "items": {
+            "type": "object",
+            "required": [
+              "point",
+              "marks"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "point": {
+                "type": "string",
+                "minLength": 1
+              },
+              "marks": {
+                "type": "number",
+                "minimum": 0
+              },
+              "required": {
+                "type": "boolean",
+                "default": true,
+                "description": "false for 'any four of the following' style alternatives."
+              },
+              "notes": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "solution_path": {
+          "type": "string",
+          "description": "Relative path to the markdown solution — one source of truth for both the AI's context and what the student reads. Absent until batch generation has run. Never populated for question_type 'numerical'.",
+          "examples": [
+            "solutions/BIT351CO/2024/B1.md"
+          ]
+        },
+        "sub_parts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/question"
+          },
+          "default": [],
+          "description": "Parts (a), (b), (c). A parent carrying sub-parts should record its own marks as the sum of theirs."
+        },
+        "choose": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Set only for WITHIN-question choice, e.g. 'Write short notes on Any TWO:' followed by three options as sub_parts — that question carries choose: 2. Group-level choice ('Answer SEVEN questions') belongs in groups[].answer_count, not here. When `choose` is set, the sub-part marks sum to choose x (marks of one sub-part), not to all of them."
+        },
+        "has_diagram": {
+          "type": "boolean",
+          "default": false
+        },
+        "source_page": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "1-indexed index into source_files, so the original layout can be shown beside the text."
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ],
+          "description": "Extraction confidence for the question TEXT specifically — not for its tagging, which carries its own per-unit confidence."
+        },
+        "needs_review": {
+          "type": "boolean",
+          "description": "True until a human has checked this question. Nothing publishes to students while true. Set it true automatically for: confidence below high, any low-confidence unit tag, a marking_scheme whose marks do not sum, and every question on a paper whose coverage.status is not 'complete'."
+        },
+        "reviewed_by": {
+          "type": "string"
+        },
+        "reviewed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Why this question needs review, or anything a reviewer should know — an ambiguous unit tag, unreadable marks, a question that spans a page break. A needs_review flag with no reason costs the reviewer the time it was meant to save."
+        },
+        "diagram_description": {
+          "type": "string",
+          "description": "One short phrase describing a figure, circuit or table the question depends on. Paired with has_diagram."
+        }
+      }
+    }
+  }
+}

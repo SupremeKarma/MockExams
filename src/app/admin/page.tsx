@@ -1,36 +1,36 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { 
-  Users, 
-  FileText, 
-  CheckCircle, 
-  PlusCircle, 
-  Search, 
-  Filter, 
+import {
+  Users,
+  FileText,
+  PlusCircle,
   ChevronRight,
-  TrendingUp,
-  BarChart3,
   Settings,
   ShieldCheck,
   Brain,
   Zap,
-  LayoutDashboard,
   Database,
   Globe,
-  BookOpen,
-  ArrowRight,
-  Target,
-  X
+  X,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { db } from "@/lib/firebase";
-import { collection, query, getDocs, orderBy, limit, doc, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  query,
+  getDocs,
+  orderBy,
+  limit,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
+import { PageHeader, StatCard, SectionCard, PrimaryButton } from "@/components/UIComponents";
 
 export default function AdminDashboard() {
-  const { user, isAdmin: isAuthAdmin, loading: authLoading } = useAuth();
+  const { user: _user, isAdmin: isAuthAdmin, loading: authLoading } = useAuth();
   const [stats, setStats] = useState({
     totalExams: 0,
     totalAttempts: 0,
@@ -60,8 +60,6 @@ export default function AdminDashboard() {
           totalUsers: usersSnap.size
         });
 
-        // Use standard queries but handle them carefully
-        // If sorting fails due to missing index, we fall back to unsorted
         try {
           const qExams = query(collection(db, "exams"), orderBy("updated_at", "desc"), limit(4));
           const recentExamsSnap = await getDocs(qExams);
@@ -105,220 +103,169 @@ export default function AdminDashboard() {
 
   if (authLoading || loading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center">
-        <div className="w-20 h-20 relative mb-8">
-          <div className="absolute inset-0 rounded-3xl bg-primary/20 animate-ping"></div>
-          <div className="relative z-10 w-full h-full glass rounded-2xl flex items-center justify-center">
-            <ShieldCheck className="w-10 h-10 text-primary animate-pulse" />
-          </div>
+      <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center bg-white">
+        <div className="relative w-10 h-10 mb-4">
+          <div className="absolute inset-0 border-2 border-primary-100 rounded-full" />
+          <div className="absolute inset-0 border-2 border-t-primary-600 rounded-full animate-spin" />
         </div>
-        <h2 className="text-2xl font-black text-white mb-2 tracking-tight">Scanning Security Clearance</h2>
-        <p className="text-slate-500 font-medium">Synchronizing administrative metadata and repository nodes...</p>
+        <h2 className="text-sm font-semibold text-zinc-900 mb-1">Verifying access</h2>
+        <p className="text-zinc-500 text-xs">Synchronizing administrative metadata...</p>
       </div>
     );
   }
 
   if (!isAuthAdmin) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center">
-        <div className="w-24 h-24 bg-rose-500/10 rounded-[2rem] flex items-center justify-center mb-10 border border-rose-500/20">
-          <X className="w-12 h-12 text-rose-500" />
+      <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center bg-white">
+        <div className="w-14 h-14 bg-red-50 rounded-lg flex items-center justify-center mb-6 border border-red-200">
+          <X className="w-7 h-7 text-red-600" />
         </div>
-        <h1 className="text-4xl font-black text-gradient mb-4">Access Denied</h1>
-        <p className="text-slate-500 max-w-md mx-auto font-medium leading-relaxed mb-12">
-          Your current security clearance level is insufficient to access the platform's Command Center. 
-          Please contact the system architect if you believe this is an error.
+        <h1 className="text-xl font-bold text-zinc-900 mb-2">Access denied</h1>
+        <p className="text-zinc-500 max-w-md mx-auto text-sm leading-relaxed mb-6">
+          Your account doesn&apos;t have administrator access. Contact a platform admin if you believe this is an error.
         </p>
-        <Link 
-          href="/dashboard" 
-          className="px-12 py-4 bg-white text-slate-950 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-slate-100 transition-all active:scale-95"
+        <Link
+          href="/dashboard"
+          className="px-5 py-2.5 bg-primary-600 text-white rounded-md font-semibold text-sm hover:bg-primary-700 transition-colors"
         >
-          Return to Dashboard
+          Return to dashboard
         </Link>
       </div>
     );
   }
 
   return (
-    <div className="pb-20">
-      <div className="max-w-7xl mx-auto">
-        
-        {/* Header Section */}
-        <div className="flex flex-col md:flex-row items-center justify-between mb-12 gap-8">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-500 text-xs font-black uppercase tracking-widest mb-4">
-              <ShieldCheck className="w-4 h-4" />
-              <span>System Administrator</span>
-            </div>
-            <h1 className="text-3xl font-black text-white tracking-tight">
-              Command <span className="text-gradient">Center</span>
-            </h1>
-            <p className="text-slate-400 font-medium mt-1">Supervising all platform activities from one central hub.</p>
-          </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="flex items-center gap-3"
-          >
-            <Link 
-              href="/admin/exams/new" 
-              className="px-6 py-3 bg-primary text-white rounded-2xl font-black flex items-center gap-2 hover:bg-primary-dark transition-all shadow-xl shadow-primary/20"
-            >
-              <PlusCircle className="w-5 h-5" />
-              Build New Exam
-            </Link>
-            <button className="p-3 glass border-white/10 text-white rounded-2xl hover:bg-white/5 transition-all">
-              <Settings className="w-6 h-6" />
-            </button>
-          </motion.div>
-        </div>
+    <div className="min-h-screen bg-zinc-50/40 pb-20 px-4 sm:px-6 lg:px-8 pt-8">
+      <div className="max-w-7xl mx-auto space-y-6">
+
+        <PageHeader
+          badge="System Administrator"
+          title="Command center"
+          subtitle="Supervise all platform activity — exams, users, and organizations — from one hub."
+          actions={
+            <>
+              <PrimaryButton href="/admin/exams/new" icon={<PlusCircle className="w-4 h-4" />}>
+                Build new exam
+              </PrimaryButton>
+              <Link href="/admin/organizations" className="p-2.5 rounded-md bg-white border border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50 transition-colors flex items-center justify-center">
+                <Settings className="w-4 h-4" />
+              </Link>
+            </>
+          }
+        />
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          <AdminStatCard icon={<Database />} label="Total Repository" value={stats.totalExams} subValue="Exams Managed" color="text-indigo-400" />
-          <AdminStatCard icon={<Zap />} label="Active Traffic" value={stats.totalAttempts} subValue="Results Processed" color="text-amber-400" />
-          <AdminStatCard icon={<Brain />} label="Knowledge Base" value={stats.totalQuestions} subValue="Questions Stored" color="text-emerald-400" />
-          <AdminStatCard icon={<Users />} label="Member Base" value={stats.totalUsers} subValue="Total Users" color="text-rose-400" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <StatCard icon={<Database className="w-4 h-4" />} label="Total Repository" value={stats.totalExams} subValue="Exams managed" />
+          <StatCard icon={<Zap className="w-4 h-4" />} label="Active Traffic" value={stats.totalAttempts} subValue="Results processed" />
+          <StatCard icon={<Brain className="w-4 h-4" />} label="Knowledge Base" value={stats.totalQuestions} subValue="Questions stored" />
+          <StatCard icon={<Users className="w-4 h-4" />} label="Member Base" value={stats.totalUsers} subValue="Total users" />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Recent Assets & Users */}
-          <div className="lg:col-span-2 space-y-8">
-            <div className="glass-card rounded-[2.5rem] border border-white/10 overflow-hidden">
-              <div className="p-8 border-b border-white/5 flex items-center justify-between">
-                <h2 className="text-xl font-bold flex items-center gap-2 text-white">
-                  <LayoutDashboard className="w-5 h-5 text-primary" />
-                  Recent Infrastructure Updates
-                </h2>
-                <Link href="/admin/exams" className="text-sm font-bold text-primary hover:underline">View Repository</Link>
-              </div>
-              <div className="divide-y divide-white/5">
+          <div className="lg:col-span-2 space-y-4">
+            <SectionCard
+              title="Recent infrastructure updates"
+              actions={<Link href="/admin/exams" className="text-xs font-semibold text-primary-600 hover:underline">View repository</Link>}
+            >
+              <div className="divide-y divide-zinc-100 -m-5">
                 {recentExams.map((exam) => (
-                  <div key={exam.id} className="p-8 flex items-center justify-between hover:bg-white/5 transition-colors group">
-                    <div className="flex items-center gap-6">
-                       <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center font-black text-xs text-slate-500 group-hover:bg-primary/20 group-hover:text-primary transition-all">
+                  <div key={exam.id} className="p-4 flex items-center justify-between hover:bg-zinc-50 transition-colors group">
+                    <div className="flex items-center gap-3.5">
+                       <div className="w-10 h-10 rounded-md bg-zinc-100 flex items-center justify-center font-bold text-xs text-zinc-500 group-hover:bg-primary-50 group-hover:text-primary-600 transition-colors">
                          {exam.category?.substring(0, 2).toUpperCase() || "EX"}
                        </div>
                        <div>
-                         <h4 className="font-bold text-white mb-1">{exam.title}</h4>
-                         <p className="text-xs text-slate-500 font-medium whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px]">
+                         <h4 className="font-semibold text-sm text-zinc-900 mb-0.5">{exam.title}</h4>
+                         <p className="text-xs text-zinc-400 whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px]">
                            ID: {exam.id}
                          </p>
                        </div>
                     </div>
-                    <Link href={`/admin/exams/${exam.id}`} className="p-3 bg-white/5 rounded-2xl text-slate-400 hover:text-white hover:bg-white/10 transition-all">
-                      <ChevronRight className="w-5 h-5" />
+                    <Link href={`/admin/exams/${exam.id}`} className="p-2 rounded-md text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition-colors">
+                      <ChevronRight className="w-4 h-4" />
                     </Link>
                   </div>
                 ))}
+                {recentExams.length === 0 && (
+                  <div className="p-8 text-center text-zinc-400 text-xs">No exams yet.</div>
+                )}
               </div>
-            </div>
-            
-            <div className="glass-card rounded-[2.5rem] border border-white/10 overflow-hidden">
-               <div className="p-8 border-b border-white/5">
-                 <h2 className="text-xl font-bold text-white">Latest Registrations</h2>
-               </div>
-               <div className="divide-y divide-white/5">
+            </SectionCard>
+
+            <SectionCard title="Latest registrations">
+              <div className="divide-y divide-zinc-100 -m-5">
                  {recentUsers.map(u => (
-                    <div key={u.id} className="p-6 flex items-center justify-between hover:bg-white/[0.01]">
-                       <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-white/10 to-transparent flex items-center justify-center font-bold text-xs uppercase">
+                    <div key={u.id} className="p-4 flex items-center justify-between hover:bg-zinc-50 transition-colors">
+                       <div className="flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-md bg-primary-50 text-primary-700 flex items-center justify-center font-bold text-xs uppercase">
                             {u.displayName?.[0] || u.email?.[0] || "U"}
                           </div>
                           <div>
-                            <p className="font-bold text-sm text-white">{u.displayName || "New Member"}</p>
-                            <p className="text-[11px] text-slate-500 font-medium">{u.email}</p>
+                            <p className="font-semibold text-sm text-zinc-900">{u.displayName || "New Member"}</p>
+                            <p className="text-[11px] text-zinc-400">{u.email}</p>
                           </div>
                        </div>
-                       <div className="text-right flex items-center gap-3">
-                          <select
-                            value={u.role || 'student'}
-                            onChange={(e) => changeUserRole(u.id, e.target.value)}
-                            className="bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-lg focus:outline-none focus:border-primary/50 transition-all cursor-pointer"
-                          >
-                            <option value="student" className="bg-slate-900">Student</option>
-                            <option value="examiner" className="bg-slate-900">Examiner</option>
-                            <option value="org_admin" className="bg-slate-900">Org Admin</option>
-                            <option value="admin" className="bg-slate-900">Admin</option>
-                          </select>
-                       </div>
+                       <select
+                          value={u.role || 'student'}
+                          onChange={(e) => changeUserRole(u.id, e.target.value)}
+                          className="bg-zinc-50 border border-zinc-200 text-zinc-700 text-[11px] font-semibold px-2.5 py-1.5 rounded-md focus:outline-none focus:border-primary-500 cursor-pointer"
+                        >
+                          <option value="student">Student</option>
+                          <option value="examiner">Examiner</option>
+                          <option value="org_admin">Org Admin</option>
+                          <option value="admin">Admin</option>
+                        </select>
                     </div>
                  ))}
+                 {recentUsers.length === 0 && (
+                  <div className="p-8 text-center text-zinc-400 text-xs">No users yet.</div>
+                 )}
                </div>
-            </div>
+            </SectionCard>
           </div>
 
           {/* Quick Actions & System Health */}
-          <div className="space-y-8">
-            <div className="glass-card p-8 rounded-[2rem] border border-white/10">
-                <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
-                    <TrendingUp className="w-5 h-5 text-primary" /> System Metrics
-                </h3>
-                <div className="space-y-6">
-                    <HealthBar label="Database Pulse" status="Healthy" progress={98} color="bg-emerald-500" />
-                    <HealthBar label="API Latency" status="Optimal" progress={95} color="bg-primary" />
-                    <HealthBar label="Auth Service" status="Active" progress={100} color="bg-indigo-500" />
+          <div className="space-y-4">
+            <SectionCard title="System metrics">
+                <div className="space-y-4">
+                    <HealthBar label="Database Pulse" status="Healthy" progress={98} color="bg-emerald-600" />
+                    <HealthBar label="API Latency" status="Optimal" progress={95} color="bg-primary-600" />
+                    <HealthBar label="Auth Service" status="Active" progress={100} color="bg-sky-600" />
                 </div>
-            </div>
+            </SectionCard>
 
-            <div className="bg-gradient-to-br from-rose-600 to-rose-900 rounded-[2rem] p-8 text-white relative overflow-hidden shadow-2xl shadow-rose-500/20">
-                <div className="relative z-10">
-                    <h3 className="text-xl font-black mb-1">Global Lockdown</h3>
-                    <p className="text-rose-100/70 text-xs font-medium mb-6 leading-relaxed">
-                        Immediately disable all public exam access and institutional logins across the entire platform.
+            <div className="rounded-lg bg-red-600 p-5 text-white relative overflow-hidden">
+                <div className="relative z-10 space-y-3">
+                    <h3 className="text-sm font-bold">Global lockdown</h3>
+                    <p className="text-red-100 text-xs leading-relaxed">
+                        Immediately disable all public exam access and institutional logins across the platform.
                     </p>
-                    <button className="w-full py-4 bg-white text-rose-600 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-rose-50 transition-all active:scale-95">
-                        Enter Security Mode
+                    <button className="w-full py-2.5 bg-white text-red-700 rounded-md font-semibold text-xs hover:bg-red-50 transition-colors">
+                        Enter security mode
                     </button>
                 </div>
-                <ShieldCheck className="absolute -bottom-8 -right-8 w-32 h-32 opacity-10 -rotate-12" />
+                <ShieldCheck className="absolute -bottom-6 -right-6 w-24 h-24 opacity-10" />
             </div>
 
-             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-               <AdminNavCard 
-                 icon={<Users className="w-8 h-8" />}
-                 title="Manage Users"
-                 desc="Permissions & Accounts"
-                 href="/admin/users"
-                 color="bg-blue-500/10 text-blue-500"
-               />
-               <AdminNavCard 
-                 icon={<FileText className="w-8 h-8" />}
-                 title="Exam Studio"
-                 desc="Content Management"
-                 href="/admin/exams"
-                 color="bg-emerald-500/10 text-emerald-500"
-               />
-               <AdminNavCard 
-                 icon={<Database className="w-8 h-8" />}
-                 title="Organizations"
-                 desc="Entity Control"
-                 href="/admin/organizations"
-                 color="bg-amber-500/10 text-amber-500"
-               />
-               <AdminNavCard 
-                 icon={<Settings className="w-8 h-8" />}
-                 title="Settings"
-                 desc="System Configuration"
-                 href="/admin/settings"
-                 color="bg-purple-500/10 text-purple-500"
-               />
+             <div className="grid grid-cols-2 gap-3">
+               <AdminNavCard icon={<Users className="w-5 h-5" />} title="Users" desc="Permissions" href="/admin/users" tint="bg-sky-50 text-sky-600" />
+               <AdminNavCard icon={<FileText className="w-5 h-5" />} title="Exams" desc="Content" href="/admin/exams" tint="bg-emerald-50 text-emerald-600" />
+               <AdminNavCard icon={<Database className="w-5 h-5" />} title="Orgs" desc="Entities" href="/admin/organizations" tint="bg-amber-50 text-amber-600" />
+               <AdminNavCard icon={<Settings className="w-5 h-5" />} title="Settings" desc="Config" href="/settings" tint="bg-violet-50 text-violet-600" />
              </div>
 
-            <div className="grid grid-cols-1 gap-4">
-                <ManagementTile 
-                    title="User Directory" 
+            <div className="space-y-2">
+                <ManagementTile
+                    title="User Directory"
                     path="/admin/users"
-                    icon={<Users className="w-5 h-5 text-primary" />}
+                    icon={<Users className="w-4 h-4 text-primary-600" />}
                 />
-                <ManagementTile 
-                    title="Organizations" 
+                <ManagementTile
+                    title="Organizations"
                     path="/admin/organizations"
-                    icon={<Globe className="w-5 h-5 text-emerald-400" />}
+                    icon={<Globe className="w-4 h-4 text-emerald-600" />}
                 />
             </div>
           </div>
@@ -329,38 +276,18 @@ export default function AdminDashboard() {
   );
 }
 
-function AdminStatCard({ icon, label, value, subValue, color }: any) {
-    return (
-        <motion.div 
-            whileHover={{ y: -5 }}
-            className="glass-card p-8 rounded-[2rem] border border-white/10 transition-all hover:border-white/20 group"
-        >
-            <div className="flex items-start justify-between mb-6">
-                <div className={`p-4 bg-white/5 rounded-2xl ${color} group-hover:scale-110 transition-transform`}>
-                    {icon}
-                </div>
-                <div className="flex flex-col items-end text-right">
-                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mb-1">{label}</p>
-                    <span className="text-[10px] font-bold text-slate-600 truncate max-w-[100px]">{subValue}</span>
-                </div>
-            </div>
-            <h3 className="text-4xl font-black text-white tracking-tight">{value}</h3>
-        </motion.div>
-    );
-}
-
 function HealthBar({ label, status, progress, color }: any) {
     return (
-        <div className="space-y-2">
+        <div className="space-y-1.5">
             <div className="flex justify-between items-end">
-                <span className="text-xs font-bold text-slate-400">{label}</span>
-                <span className={`text-[10px] font-black uppercase tracking-widest ${status === 'Healthy' || status === 'Active' || status === 'Optimal' ? 'text-emerald-400' : 'text-rose-400'}`}>{status}</span>
+                <span className="text-xs font-medium text-zinc-500">{label}</span>
+                <span className={`text-[10px] font-bold uppercase tracking-wider ${status === 'Healthy' || status === 'Active' || status === 'Optimal' ? 'text-emerald-600' : 'text-red-600'}`}>{status}</span>
             </div>
-            <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
-                <motion.div 
+            <div className="h-1.5 w-full bg-zinc-100 rounded-full overflow-hidden">
+                <motion.div
                    initial={{ width: 0 }}
                    animate={{ width: `${progress}%` }}
-                   className={`h-full ${color}`} 
+                   className={`h-full ${color}`}
                 />
             </div>
         </div>
@@ -369,37 +296,34 @@ function HealthBar({ label, status, progress, color }: any) {
 
 function ManagementTile({ title, path, icon }: any) {
     return (
-        <Link 
-            href={path} 
-            className="glass-card p-6 rounded-2xl border border-white/10 hover:border-primary/30 transition-all group flex items-center justify-between"
+        <Link
+            href={path}
+            className="bg-white p-3.5 rounded-lg border border-zinc-200 hover:border-primary-300 transition-colors group flex items-center justify-between"
         >
-            <div className="flex items-center gap-4">
-               <div className="p-3 bg-white/5 rounded-xl group-hover:bg-primary/10 transition-colors">
+            <div className="flex items-center gap-3">
+               <div className="p-2 bg-zinc-50 rounded-md group-hover:bg-primary-50 transition-colors">
                   {icon}
                </div>
-               <h3 className="font-bold text-white text-sm">{title}</h3>
+               <h3 className="font-semibold text-zinc-900 text-sm">{title}</h3>
             </div>
-            <ChevronRight className="w-5 h-5 text-slate-600 group-hover:text-white transition-all group-hover:translate-x-1" />
+            <ChevronRight className="w-4 h-4 text-zinc-400 group-hover:text-primary-600 transition-all group-hover:translate-x-0.5" />
         </Link>
     );
 }
 
-function AdminNavCard({ icon, title, desc, href, color }: any) {
+function AdminNavCard({ icon, title, desc, href, tint }: any) {
     return (
         <Link href={href}>
-            <motion.div 
-                whileHover={{ scale: 1.02, y: -5 }}
-                whileTap={{ scale: 0.98 }}
-                className="glass-card p-8 rounded-[2rem] border border-white/10 hover:border-white/20 transition-all h-full group"
+            <motion.div
+                whileHover={{ y: -2 }}
+                transition={{ duration: 0.15 }}
+                className="bg-white p-4 rounded-lg border border-zinc-200 hover:border-primary-300 transition-colors h-full"
             >
-                <div className={`w-14 h-14 rounded-2xl ${color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                <div className={`w-9 h-9 rounded-md ${tint} flex items-center justify-center mb-3`}>
                     {icon}
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
-                <p className="text-slate-500 text-xs font-medium leading-relaxed">{desc}</p>
-                <div className="mt-8 flex items-center gap-2 text-white/40 group-hover:text-white transition-colors text-[10px] font-black uppercase tracking-[0.2em]">
-                    Access Tools <ChevronRight className="w-3 h-3" />
-                </div>
+                <h3 className="text-sm font-semibold text-zinc-900 mb-0.5">{title}</h3>
+                <p className="text-zinc-500 text-xs">{desc}</p>
             </motion.div>
         </Link>
     );

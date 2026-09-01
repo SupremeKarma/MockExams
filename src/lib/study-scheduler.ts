@@ -151,7 +151,7 @@ export class StudyScheduler {
   private selectTopicsForSession(
     allocation: ReturnType<typeof this.allocateStudyHours>,
     sessionMinutes: number,
-    focusLevel: number
+    _focusLevel: number
   ): StudySession["topics"] {
     const selectedTopics: StudySession["topics"] = [];
     let remainingMinutes = sessionMinutes;
@@ -247,7 +247,7 @@ export class StudyScheduler {
             .slice(slot.startHour, slot.endHour)
             .reduce((a, b) => a + b, 0) / (slot.endHour - slot.startHour);
 
-        const dayNames = [
+        const _dayNames = [
           "Sunday",
           "Monday",
           "Tuesday",

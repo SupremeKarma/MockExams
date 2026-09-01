@@ -1,315 +1,153 @@
 # MockExams Design System
-**Professional Education Platform UI Framework**
+**Enterprise Education Platform UI Framework**
+
+Source of truth for tokens: [`src/app/globals.css`](app/globals.css) (`@theme` block).
+Source of truth for primitives: [`src/components/UIComponents.tsx`](components/UIComponents.tsx).
 
 ---
 
 ## 🎨 Visual Identity
 
-### Color Palette
+Enterprise SaaS language: one confident primary, a disciplined neutral (zinc)
+scale, real semantic colors, an 8px spacing/radius grid, and low-elevation
+shadows. Depth comes from borders first, shadow second — avoid the
+"gradient + blobby radius + glow shadow" marketing-site look on product
+surfaces.
 
-#### Primary Colors
-- **Blue-600** (`#2563eb`) - Primary action, navigation, focus states
-- **Blue-700** (`#1d4ed8`) - Hover state, darker emphasis
-- **Blue-50** (`#eff6ff`) - Background for selected/highlighted sections
+### Primary — Royal Indigo
+| Token | Hex | Usage |
+|---|---|---|
+| `primary-50` | `#eef2ff` | Soft backgrounds, badges |
+| `primary-100`–`300` | `#e0e7ff`–`#a5b4fc` | Hover backgrounds, borders |
+| `primary-600` | `#4338ca` | **Default primary** — buttons, links, active states |
+| `primary-700` | `#3730a3` | Hover/pressed state |
 
-#### Supporting Colors
-- **Green-600** (`#16a34a`) - Success, positive actions, achievements
-- **Red-600** (`#dc2626`) - Alerts, warnings, errors
-- **Amber-600** (`#d97706`) - Warnings, pending states
-- **Purple-600** (`#9333ea`) - Secondary accent, gamification
+Use `bg-primary-600` / `text-primary-600` / `border-primary-300` etc. (Tailwind
+v4 auto-generates these utilities from the `--color-primary-*` theme tokens.)
 
-#### Neutral Colors
-- **Gray-900** (`#111827`) - Primary text
-- **Gray-700** (`#374151`) - Secondary text
-- **Gray-600** (`#4b5563`) - Tertiary text (muted)
-- **Gray-200** (`#e5e7eb`) - Borders, dividers
-- **Gray-100** (`#f3f4f6`) - Hover states, backgrounds
-- **Gray-50** (`#f9fafb`) - Subtle backgrounds
-- **White** (`#ffffff`) - Main background
+### Semantic
+| Role | Token | Hex |
+|---|---|---|
+| Success | `--color-success` | `#059669` (emerald-600) |
+| Warning | `--color-warning` | `#d97706` (amber-600) |
+| Danger | `--color-danger` | `#dc2626` (red-600) |
+| Info | `--color-info` | `#0284c7` (sky-600) |
+
+Each has a paired `-soft` background token (e.g. `--color-success-soft`) for
+badge/alert fills.
+
+### Neutral — Zinc (not slate)
+`neutral-50` (`#fafafa`) through `neutral-950` (`#09090b`). Zinc reads
+cooler and more "product" than slate; used for all text, borders, and
+surface grays. Body text defaults to `neutral-900` / `zinc-900`, secondary
+text to `zinc-500`, borders to `zinc-200`.
 
 ---
 
 ## 📐 Typography
 
-### Font Family
-- **Primary:** Geist Sans (system fallback: -apple-system, BlinkMacSystemFont, "Segoe UI")
-- **Monospace:** Geist Mono (for code blocks, exam questions)
+- **Sans:** Geist Sans (fallback: -apple-system, BlinkMacSystemFont, system-ui)
+- **Mono:** Geist Mono (code blocks, exam question IDs, tabular numerics)
 
-### Type Scale
+### Type scale & weight
 | Size | Usage | Weight |
-|------|-------|--------|
-| 12px | Labels, badges, helper text | 500-600 |
-| 14px | Body text (default) | 400 |
-| 16px | Subheadings | 500 |
-| 18px | Section titles | 600 |
-| 20px | Large titles | 700 |
-| 24px | Page titles | 700 |
+|---|---|---|
+| 11px | Micro-labels, eyebrow badges | `font-semibold`/`font-bold` |
+| 12–13px | Nav links, meta text, table cells | `font-medium` |
+| 14px | Body (default) | `font-normal`/`font-medium` |
+| 16–18px | Card/section titles | `font-semibold` |
+| 20–24px | Page titles (`PageHeader`) | `font-bold` |
+| 30–48px | Marketing hero only | `font-bold` |
 
-### Line Height
-- Body text: 1.6
-- Headings: 1.2
-- Labels: 1.4
+`font-black` is reserved for nothing — it was overused in the previous
+iteration of this system and has been removed. Enterprise UI tops out at
+`font-bold`. Numeric values (scores, stats, currency) should carry
+`tabular-nums`.
+
+---
+
+## 📏 Spacing & radius
+
+8px grid throughout (Tailwind's default `4`-based scale already aligns:
+`p-2`=8px, `p-4`=16px, `p-5`=20px, `p-6`=24px, `p-8`=32px).
+
+Radius is capped — no more `rounded-3xl` blobs on cards/buttons:
+| Token | Value | Usage |
+|---|---|---|
+| `radius-xs`/`sm` | 4–6px | Badges, chips, checkboxes |
+| `radius-md` | 8px | **Default** — buttons, inputs |
+| `radius-lg`/`xl` | 10–12px | Cards, modals, containers |
+
+## 🌑 Elevation
+
+Flat by default. Use border color + `shadow-xs`/`shadow-sm` at rest,
+`shadow-md` on hover — never stacked glow shadows (`shadow-glow-*` tokens
+are kept as no-op aliases for backward compatibility only; do not use them
+in new code).
 
 ---
 
 ## 🧱 Component Patterns
 
-### Cards
+Prefer the shared primitives in `UIComponents.tsx` over ad hoc markup:
+
+- `BaseCard` / `SectionCard` — generic surfaces; `SectionCard` adds a
+  title/description/actions header row for data-dense pages (tables,
+  settings panels).
+- `StatCard` — KPI tile with icon, value, optional trend.
+- `FeatureCard` — clickable feature/module tile (dashboards, catalogues).
+- `PrimaryButton` / `SecondaryButton` — the only two button treatments;
+  don't invent a third without updating this doc.
+- `StatusBadge` / `DifficultyBadge` — pill badges with semantic color.
+- `ProgressBar` / `CircleProgress` — linear/radial progress.
+- `PageHeader` — route-level header (badge + title + subtitle + actions).
+- `EmptyState` — no-data placeholder with optional CTA.
+- `Alert` — inline info/success/warning/error banner.
+
+### Example
 ```tsx
-<div className="card">
-  {/* Content */}
-</div>
-```
-- White background
-- 1px border (gray-200)
-- 8px rounded corners
-- Shadow on hover
-- Transition: all 200ms ease
-
-### Buttons
-```tsx
-// Primary
-<button className="btn btn-primary">Action</button>
-
-// Secondary
-<button className="btn btn-secondary">Action</button>
-```
-
-**Sizes:**
-- Small: 8px vertical, 12px horizontal
-- Medium: 10px vertical, 16px horizontal (default)
-- Large: 12px vertical, 20px horizontal
-
-### Form Inputs
-```tsx
-<input className="input" placeholder="..." />
-```
-- 1px border (gray-200)
-- Focus: blue border + blue highlight
-- Rounded: 8px
-- Padding: 8px 12px
-- Font: 14px
-
-### Badges
-```tsx
-<span className="badge badge-blue">Status</span>
-```
-- Colors: blue, green, red, amber, purple
-- Size: 12px font with 4px vertical, 12px horizontal padding
-- Rounded: 20px (full rounding)
-
-### Progress Bars
-```tsx
-<div className="progress-bar">
-  <div className="progress-bar-fill" style={{width: '75%'}}></div>
-</div>
-```
-- Height: 8px
-- Rounded: 20px
-- Background: gray-100
-- Fill: blue-600
-
----
-
-## 📱 Layout Patterns
-
-### Navbar
-- Fixed top, white background
-- Height: 64px (16 Tailwind units)
-- Border-bottom: 1px gray-200
-- Shadow: subtle (shadow-sm)
-- Navigation items: left-aligned
-- Actions (Login/Profile): right-aligned
-
-### Dashboard Grid
-- **Desktop:** 4 columns (400px each + gutters)
-- **Tablet:** 2 columns
-- **Mobile:** 1 column full width
-- Gap: 16px (1rem)
-
-### Card Layout
-- **Desktop:** 3 columns max
-- **Tablet:** 2 columns
-- **Mobile:** 1 column
-- Consistent spacing: 24px
-
----
-
-## 🎯 Interactive States
-
-### Hover
-- Card: shadow-md, subtle y-transform (-2px)
-- Button: background color change
-- Link: text color to primary blue
-- Opacity: smooth transition 200ms
-
-### Focus
-- Outline: 3px blue at 10% opacity
-- Border: highlight color
-- Keyboard accessible (`:focus-visible`)
-
-### Active
-- Button: darker shade
-- Scale: 95% (active press)
-- Instant feedback
-
-### Disabled
-- Opacity: 50%
-- Cursor: not-allowed
-- No hover effects
-
----
-
-## 📊 Spacing Scale
-
-```
-4px   - Small gaps (icon spacing)
-8px   - Component padding (buttons, inputs)
-12px  - Medium spacing
-16px  - Default spacing (margins, gaps)
-24px  - Large spacing (section gaps)
-32px  - Extra large spacing (major sections)
+<PageHeader
+  badge="Diagnostics"
+  title="Performance Analytics"
+  subtitle="Weakness heatmaps and time/speed benchmarks vs. toppers."
+  actions={<PrimaryButton href="/exams">Take a Diagnostic</PrimaryButton>}
+/>
 ```
 
 ---
 
-## ✅ Accessibility
+## 🧭 Layout
 
-### Contrast
-- All text meets WCAG AA (4.5:1 minimum)
-- Blue-600 on white: 6.7:1 ✓
-- Gray-600 on white: 5.3:1 ✓
-
-### Focus States
-- Visible focus rings on all interactive elements
-- Minimum 3px width for focus indicator
-- High contrast (blue on white)
-
-### Keyboard Navigation
-- Tab order follows visual flow
-- Escape closes modals/dropdowns
-- Enter triggers primary actions
-
-### Screen Readers
-- Semantic HTML (buttons, links, forms)
-- ARIA labels where needed
-- Icon + text combinations
+- **Marketing surface** (`/`, `/about`, `/pricing`, legal, `/login`,
+  `/signup`): top navbar + footer, generous hero sections, restrained use
+  of `.text-gradient` for hero headlines only.
+- **Product surface** (`/dashboard`, `/exams/*`, `/flashcards`, `/notes`,
+  `/analytics`, `/tutor`, `/study-plan`, `/leaderboard`, `/profile`,
+  `/settings`, `/rewards`, `/examiner/*`, `/organization/*`, `/admin/*`):
+  role-aware sidebar shell (`AppShell` + `Sidebar`, see
+  [`ARCHITECTURE.md`](../ARCHITECTURE.md) §7) — no footer, no marketing
+  nav. Content should read as dense, data-first product UI: `SectionCard`
+  grids, tables, `StatCard` rows — not marketing hero blocks. The exam-taking
+  route (`/exams/[id]/take`) is focus mode: zero shell chrome.
 
 ---
 
-## 🎨 Education-Specific Patterns
+## ♿ Accessibility
 
-### Exam Card
-- Title (bold, gray-900)
-- Metadata (duration, questions count)
-- CTA button (start exam)
-- Status badge (completed, in-progress, locked)
-
-### Topic Progress
-- Topic title
-- Progress bar (visual mastery)
-- Percentage text
-- Last reviewed date (muted text)
-
-### Leaderboard Row
-- Rank (bold)
-- Student name
-- Score/points (right-aligned)
-- Badge if top 3
-- Highlight current user row (light blue background)
-
-### Question Card
-- Question number/type badge
-- Question text (readable font size)
-- Options for MCQ (radio buttons)
-- Text area for essay (monospace)
-- Answer feedback (green/red, styled clearly)
+- Focus ring: 2px `primary-500` outline, 2px offset (`:focus-visible` in
+  `globals.css`) — do not suppress with `outline-none` without a visible
+  replacement.
+- Color is never the only signal — pair `StatusBadge`/`DifficultyBadge`
+  color with text.
+- Respect `prefers-reduced-motion` (already handled globally).
 
 ---
 
-## 📐 Breakpoints
+## 🌗 Dark mode
 
-```
-Mobile:    < 640px   (sm)
-Tablet:    640px+    (md: 768px)
-Desktop:   1024px+   (lg)
-Wide:      1280px+   (xl)
-```
-
----
-
-## 🚀 Component Library
-
-### Ready Components
-- ✅ Navbar
-- ✅ StudentDashboard
-- ✅ Cards (generic)
-- ✅ Buttons (primary, secondary)
-- ✅ Badges (status)
-- ✅ Progress bars
-- ✅ Forms
-
-### Coming Soon
-- Exam taker (question renderer)
-- Leaderboard
-- Report cards
-- Analytics dashboard
-
----
-
-## 💻 Developer Guidelines
-
-### Naming Convention
-- Classes: `class-name` (kebab-case)
-- Components: `ComponentName` (PascalCase)
-- Utilities: `text-primary`, `shadow-lg`, etc.
-
-### Color Usage
-```tsx
-// Primary action
-className="bg-blue-600 text-white hover:bg-blue-700"
-
-// Secondary
-className="bg-gray-100 text-gray-900 hover:bg-gray-200"
-
-// Subtle
-className="text-gray-600 hover:text-gray-900"
-```
-
-### Responsive Classes
-```tsx
-// Mobile first
-className="text-sm md:text-base lg:text-lg"
-className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
-className="hidden md:block"
-```
-
----
-
-## 📚 Inspiration
-
-**Platforms Analyzed:**
-- Vedantu (clean navigation, blue primary)
-- Unacademy (progress tracking, minimal design)
-- Coursera (professional, card-based)
-- Khan Academy (focus on content, white bg)
-
-**Key Principles:**
-- Content-first (minimal distractions)
-- Progressive disclosure (show info on demand)
-- Clear hierarchy (size, color, weight)
-- Consistent spacing (visual rhythm)
-- Accessibility by default
-
----
-
-## 🔄 Maintenance
-
-- Review quarterly for updates
-- Document breaking changes
-- Test new components across browsers
-- Gather student feedback on usability
-- A/B test major changes
-
-**Last Updated:** August 20, 2026  
-**Maintained By:** MockExams Design Team
+Tokens are theme-aware via `:root[data-theme="dark"]` and
+`prefers-color-scheme: dark` (see `globals.css`). When adding new
+components, reference the CSS custom properties (`var(--card-bg)`,
+`var(--card-border)`) rather than hardcoding `bg-white`/`border-zinc-200`
+if the component needs to support dark mode; most current product pages
+are light-mode only and that's an accepted gap, not a regression.

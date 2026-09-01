@@ -1,0 +1,916 @@
+{
+  "paper_id": "BIT351CO_2026_regular",
+  "subject_code": "BIT351CO",
+  "subject_name": "Artificial Intelligence",
+  "semester": 6,
+  "year": 2026,
+  "exam_type": "regular",
+  "curriculum": "new_course",
+  "full_marks": 80,
+  "pass_marks": 24,
+  "duration_hours": 3,
+  "extraction_notes": "Handwritten correction applied for Group B: 'Answer SIX questions. 6x6=36' corrected to 'Answer Seven questions. 7x8=56'.",
+  "groups": [
+    {
+      "label": "A",
+      "questions_printed": 3,
+      "answer_count": 2,
+      "marks_each": 12,
+      "marks_total": 24,
+      "instruction": "Answer TWO questions."
+    },
+    {
+      "label": "B",
+      "questions_printed": 8,
+      "answer_count": 7,
+      "marks_each": 8,
+      "marks_total": 56,
+      "instruction": "Answer Seven questions."
+    }
+  ],
+  "questions": [
+    {
+      "question_id": "BIT351CO_2026_regular_A1",
+      "group": "A",
+      "number": "1",
+      "marks": 12,
+      "text": "Write down the differences between propositional logic and predicate logic with suitable examples. Express the following English sentences into FOPL: (a) Every student passed the exam. (b) Some books are interesting. (c) There exists a fruit that all children like. (d) Not every person is smart.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT351CO_U05",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT351CO_2026_regular_A1a",
+          "group": "A",
+          "number": "1a",
+          "marks": 4,
+          "text": "Write down the differences between propositional logic and predicate logic with suitable examples.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT351CO_U05",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT351CO_2026_regular_A1b",
+          "group": "A",
+          "number": "1b",
+          "marks": 8,
+          "text": "Express the following English sentences into FOPL: (a) Every student passed the exam. (b) Some books are interesting. (c) There exists a fruit that all children like. (d) Not every person is smart.",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT351CO_U05",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": true,
+      "solution_path": "solutions/BIT351CO/2026/BIT351CO_2026_regular_A1.md",
+      "marking_scheme": [
+        {
+          "point": "States PL uses atomic propositions, FOPL uses predicates/terms.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States PL has no variables/quantifiers, FOPL uses them.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States FOPL is more expressive than PL or describes internal structure.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides suitable examples for both PL and FOPL demonstrating differences.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correct FOPL for (a) Every student passed the exam.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Correct FOPL for (b) Some books are interesting.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Correct FOPL for (c) There exists a fruit that all children like.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Correct FOPL for (d) Not every person is smart.",
+          "marks": 2,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT351CO_2026_regular_A2",
+      "group": "A",
+      "number": "2",
+      "marks": 12,
+      "text": "Write the importance of searching in AI. Explain breadth-first search and depth-first search with advantages and disadvantages.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT351CO_U03",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT351CO_2026_regular_A2a",
+          "group": "A",
+          "number": "2a",
+          "marks": 2,
+          "text": "Write the importance of searching in AI.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT351CO_U03",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT351CO_2026_regular_A2b",
+          "group": "A",
+          "number": "2b",
+          "marks": 10,
+          "text": "Explain breadth-first search and depth-first search with advantages and disadvantages.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT351CO_U03",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": true,
+      "solution_path": "solutions/BIT351CO/2026/BIT351CO_2026_regular_A2.md",
+      "marking_scheme": [
+        {
+          "point": "(2a) States search is fundamental for problem-solving/decision-making in AI.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "(2a) Mentions specific applications like pathfinding, game AI, or optimization.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "(2b) Correctly describes BFS mechanism (explores level by level, uses queue).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "(2b) BFS Advantage: Completeness (guaranteed to find solution if one exists).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "(2b) BFS Advantage: Optimality (finds shortest path in unweighted graphs).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "(2b) BFS Disadvantage: High memory consumption (due to storing all nodes at current level).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "(2b) BFS Disadvantage: Time consuming for deep goals or large branching factors.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "(2b) Correctly describes DFS mechanism (explores as deep as possible, uses stack/recursion).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "(2b) DFS Advantage: Memory efficiency (stores only current path).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "(2b) DFS Advantage: Faster for solutions at deep levels or if many solutions exist.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "(2b) DFS Disadvantage: Incompleteness (can get stuck in infinite paths/loops).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "(2b) DFS Disadvantage: Not optimal (may find a longer path first).",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT351CO_2026_regular_A3",
+      "group": "A",
+      "number": "3",
+      "marks": 12,
+      "text": "(a) What is an intelligent agent? Explain agent performance, rationality and types of agent environments. (b) Write down the characteristics and applications of expert system.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT351CO_U02",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT351CO_U08",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT351CO_2026_regular_A3a",
+          "group": "A",
+          "number": "3a",
+          "marks": 8,
+          "text": "What is an intelligent agent? Explain agent performance, rationality and types of agent environments.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT351CO_U02",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT351CO_2026_regular_A3b",
+          "group": "A",
+          "number": "3b",
+          "marks": 4,
+          "text": "Write down the characteristics and applications of expert system.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT351CO_U08",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": true,
+      "solution_path": "solutions/BIT351CO/2026/BIT351CO_2026_regular_A3.md",
+      "marking_scheme": [
+        {
+          "point": "Defines an intelligent agent as an entity that perceives and acts to achieve goals.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains agent performance as how well an agent achieves its goals, measured by a performance measure.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains rationality as choosing actions that maximize the expected performance measure given current percepts and knowledge.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Lists Fully Observable vs. Partially Observable environment type.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Explains Fully Observable vs. Partially Observable.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Lists Deterministic vs. Stochastic environment type.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Explains Deterministic vs. Stochastic.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Lists Episodic vs. Sequential environment type.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Explains Episodic vs. Sequential.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Lists Static vs. Dynamic environment type.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Explains Static vs. Dynamic.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "States at least two characteristics of expert systems (e.g., knowledge-based, symbolic reasoning, inference engine, explanation facility, limited domain).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States at least two additional characteristics of expert systems.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States at least two applications of expert systems (e.g., medical diagnosis, financial advising, configuration, fault diagnosis, process control).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States at least one additional application of expert systems.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT351CO_2026_regular_B4",
+      "group": "B",
+      "number": "4",
+      "marks": 8,
+      "text": "State and explain inference theorems. with examples.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT351CO_U05",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT351CO_U07",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "solution_path": "solutions/BIT351CO/2026/BIT351CO_2026_regular_B4.md",
+      "marking_scheme": [
+        {
+          "point": "Defines inference theorems as rules deriving new true statements from existing true statements.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States Modus Ponens formally ($P \\implies Q, P \\therefore Q$) and explains it.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides a clear example for Modus Ponens.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States Modus Tollens formally ($P \\implies Q, \\neg Q \\therefore \\neg P$) and explains it.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides a clear example for Modus Tollens.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States Hypothetical Syllogism formally ($P \\implies Q, Q \\implies R \\therefore P \\implies R$) and explains it.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides a clear example for Hypothetical Syllogism.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States Disjunctive Syllogism formally ($P \\lor Q, \\neg P \\therefore Q$) and explains it with an example.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT351CO_2026_regular_B5",
+      "group": "B",
+      "number": "5",
+      "marks": 8,
+      "text": "What is explanation-based learning? Explain supervised and unsupervised learning.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT351CO_U06",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "solution_path": "solutions/BIT351CO/2026/BIT351CO_2026_regular_B5.md",
+      "marking_scheme": [
+        {
+          "point": "Defines Explanation-Based Learning (EBL) as generalizing from a single training example.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States EBL uses prior knowledge/domain theory to explain *why* the example is an instance.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Mentions the output is a generalized concept that is provably correct based on the domain theory.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines supervised learning as learning from labeled training data (input-output pairs).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States the goal of supervised learning is to predict output for new unseen inputs.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides an example of supervised learning (e.g., classification or regression).",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Defines unsupervised learning as learning from unlabeled data.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States the goal of unsupervised learning is to discover hidden patterns/structures within the data.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides an example of unsupervised learning (e.g., clustering or dimensionality reduction).",
+          "marks": 0.5,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT351CO_2026_regular_B6",
+      "group": "B",
+      "number": "6",
+      "marks": 8,
+      "text": "Solve the following cryptarithmetic puzzle, showing all the steps as you advance and stating all necessary assumptions that you make: HIS + HER = MINE",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT351CO_U04",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "solution_path": "solutions/BIT351CO/2026/BIT351CO_2026_regular_B6.md",
+      "marking_scheme": [
+        {
+          "point": "States M=1 with correct reasoning (carry from hundreds column).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "States that H != 0, H != 1, and derives the equation 2H + CARRY(I+E) = I + 10.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains why CARRY(I+E)=0 leads to H=5, I=0 (or equivalent deduction for another starting point).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains why CARRY(S+R) must be 1, leading to E+1=N and S+R=E+10.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly solves for the remaining digits (E, N, S, R) and presents the full solution.",
+          "marks": 2,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT351CO_2026_regular_B7",
+      "group": "B",
+      "number": "7",
+      "marks": 8,
+      "text": "Define syntactic and semantic processing in NLP. Construct a parse tree for the following sentence: The great detective solved the complicated case easily. [Diagram of parse tree required]",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT351CO_U10",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": true,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "solution_path": "solutions/BIT351CO/2026/BIT351CO_2026_regular_B7.md",
+      "marking_scheme": [
+        {
+          "point": "Defines syntactic processing, mentioning grammatical structure/rules and output (e.g., parse tree).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Defines semantic processing, mentioning meaning/interpretation and relationship to syntactic output.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Correctly identifies parts of speech for all words in the sentence.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly groups words into phrases (NP, VP, AdvP).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Constructs a correct parse tree (or equivalent hierarchical representation) showing the sentence (S) breaking down into its constituents and their sub-constituents with appropriate labels.",
+          "marks": 2,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT351CO_2026_regular_B8",
+      "group": "B",
+      "number": "8",
+      "marks": 8,
+      "text": "What is mini-max algorithm? Explain how alpha-beta pruning enhances its performance in adversial search.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT351CO_U04",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "solution_path": "solutions/BIT351CO/2026/BIT351CO_2026_regular_B8.md",
+      "marking_scheme": [
+        {
+          "point": "Defines Mini-Max as a recursive algorithm for two-player zero-sum games, identifying MAX and MIN players.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains how Mini-Max evaluates terminal states and propagates values up the tree (MAX player picks highest, MIN player picks lowest).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Defines Alpha ($\\alpha$) as the best (highest) value MAX player can guarantee so far on the path to the root.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines Beta ($\\beta$) as the best (lowest) value MIN player can guarantee so far on the path to the root.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the pruning condition ($\\alpha \\ge \\beta$) and how it avoids exploring branches that will not be chosen by an optimal opponent, thus enhancing performance.",
+          "marks": 2,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT351CO_2026_regular_B9",
+      "group": "B",
+      "number": "9",
+      "marks": 8,
+      "text": "Discuss the role and importance of knowledge acquisition and knowledge elicitation in expert system.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT351CO_U08",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "solution_path": "solutions/BIT351CO/2026/BIT351CO_2026_regular_B9.md",
+      "marking_scheme": [
+        {
+          "point": "Briefly defines expert system.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines Knowledge Acquisition, stating its role in identifying, collecting, structuring, and organizing knowledge from various sources for the knowledge base.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Defines Knowledge Elicitation, distinguishing it as the direct extraction of explicit and tacit knowledge from human experts, often mentioning methods.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains that KA/KE is the foundation or cornerstone for building the knowledge base, critical for system function.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the importance for ensuring accuracy and reliability of the expert system's decisions.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the importance for completeness of knowledge or overcoming the \"knowledge bottleneck\" (making expert knowledge accessible/scalable) or handling tacit knowledge.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT351CO_2026_regular_B10",
+      "group": "B",
+      "number": "10",
+      "marks": 8,
+      "text": "What do you mean by back propagation in neural network? Explain the working of Hopfield network.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT351CO_U09",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "solution_path": "solutions/BIT351CO/2026/BIT351CO_2026_regular_B10.md",
+      "marking_scheme": [
+        {
+          "point": "Defines backpropagation as an algorithm to train neural networks by adjusting weights.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes the forward pass (calculating output) and error calculation.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the backward pass (propagating error) and using gradient descent to update weights based on the error gradient.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines Hopfield network as a recurrent neural network used for associative memory or optimization.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes its structure: single layer, fully connected (no self-loops), binary neurons, symmetric weights.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the *learning/storage phase* where patterns are stored by setting weights using a Hebbian-like rule.",
+          "marks": 1.5,
+          "required": true
+        },
+        {
+          "point": "Explains the *retrieval/recall phase* where an initial state iteratively updates neuron states until it converges to a stable stored pattern (attractor).",
+          "marks": 1.5,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT351CO_2026_regular_B11",
+      "group": "B",
+      "number": "11",
+      "marks": 6,
+      "text": "Write short notes on Any TWO:",
+      "question_type": "written",
+      "choose": 2,
+      "units": [
+        {
+          "unit_id": "BIT351CO_U02",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT351CO_U07",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT351CO_U06",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT351CO_2026_regular_B11a",
+          "group": "B",
+          "number": "11a",
+          "marks": 3,
+          "text": "PEAS",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT351CO_U02",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT351CO_2026_regular_B11b",
+          "group": "B",
+          "number": "11b",
+          "marks": 3,
+          "text": "Case-Based reasoning",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT351CO_U07",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT351CO_2026_regular_B11c",
+          "group": "B",
+          "number": "11c",
+          "marks": 3,
+          "text": "Reinforcement learning",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT351CO_U06",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": true,
+      "solution_path": "solutions/BIT351CO/2026/BIT351CO_2026_regular_B11.md",
+      "marking_scheme": [
+        {
+          "point": "States what PEAS stands for (Performance, Environment, Actuators, Sensors).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Briefly defines the purpose of the PEAS framework.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Gives a simple example applying PEAS to an agent (e.g., self-driving car), correctly identifying elements for at least 2 components.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines Case-Based Reasoning as solving new problems by adapting solutions from similar past problems.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists the four main steps of the CBR cycle: Retrieve, Reuse, Revise, Retain.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Briefly explains at least two of the CBR steps or gives an application example.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines Reinforcement Learning as learning through interaction with an environment to maximize cumulative reward.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Mentions key components like agent, environment, states, actions, and rewards.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the trial-and-error learning process or provides a relevant application.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    }
+  ],
+  "source_files": [
+    "work\\pages\\BIT351CO_2026_regular_p1.png",
+    "work\\pages\\BIT351CO_2026_regular_p2.png"
+  ],
+  "coverage": {
+    "by_group": [
+      {
+        "label": "A",
+        "questions_extracted": 3,
+        "questions_printed": 3
+      },
+      {
+        "label": "B",
+        "questions_extracted": 8,
+        "questions_printed": 8
+      }
+    ],
+    "status": "complete",
+    "notes": "Derived from the extraction, not self-reported by the model."
+  }
+}

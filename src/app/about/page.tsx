@@ -1,81 +1,80 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Brain, Target, Users, Shield, Globe, Zap, Cpu, Sparkles } from "lucide-react";
-import Image from "next/image";
+import { Target, Shield, Globe, Sparkles } from "lucide-react";
+import Link from "next/link";
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-slate-950 text-white selection:bg-primary/30">
+    <div className="min-h-screen bg-white text-zinc-900">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-6 overflow-hidden">
-        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-        <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
-        
-        <div className="max-w-7xl mx-auto text-center relative z-10">
+      <section className="relative bg-mesh border-b border-zinc-200 pt-8 pb-16 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto text-center relative z-10">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-black uppercase tracking-widest mb-8"
+            transition={{ duration: 0.4 }}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary-50 border border-primary-200 text-primary-700 text-xs font-semibold mb-6"
           >
-            <Sparkles className="w-4 h-4" />
-            <span>The Future of Assessment</span>
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>The future of assessment</span>
           </motion.div>
-          
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
+
+          <motion.h1
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.6 }}
-            className="text-5xl md:text-7xl font-black mb-8 tracking-tight leading-tight"
+            transition={{ delay: 0.05, duration: 0.5 }}
+            className="text-3xl md:text-5xl font-bold mb-5 tracking-tight leading-tight"
           >
-            Empowering the <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-400">Next Generation</span> of Global Talent.
+            Empowering the <span className="text-gradient">next generation</span> of global talent.
           </motion.h1>
-          
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
+
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed"
+            transition={{ delay: 0.1, duration: 0.5 }}
+            className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto leading-relaxed"
           >
-            MockExams is a sophisticated examination platform designed to facilitate rigorous academic evaluation. 
-            We provide students with high-fidelity entrance simulations and entrance preparation systems.
+            MockExams is a sophisticated examination platform designed to facilitate rigorous academic evaluation.
+            We provide students with high-fidelity entrance simulations and preparation systems.
           </motion.p>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-slate-900/50 border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
-          <StatItem label="Questions Verified" value="25,000+" />
+      <section className="py-12 bg-zinc-50/60 border-b border-zinc-200">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-2 md:grid-cols-4 gap-6">
+          <StatItem label="Questions verified" value="25,000+" />
           <StatItem label="Categories" value="40+" />
-          <StatItem label="Active Students" value="10k+" />
-          <StatItem label="Accuracy Rate" value="99.9%" />
+          <StatItem label="Active students" value="10k+" />
+          <StatItem label="Accuracy rate" value="99.9%" />
         </div>
       </section>
 
       {/* Core Values */}
-      <section className="py-32 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-24">
-            <h2 className="text-3xl md:text-5xl font-extrabold mb-6">Built on Three Core Pillars</h2>
-            <div className="w-24 h-1 bg-primary mx-auto rounded-full" />
+      <section className="py-20 px-4 sm:px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight">Built on three core pillars</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <ValueCard 
-              icon={<Target className="w-8 h-8 text-primary" />}
-              title="Expert Curation"
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <ValueCard
+              icon={<Target className="w-5 h-5" />}
+              tint="bg-primary-50 text-primary-600"
+              title="Expert curation"
               description="Every question is manually verified by subject matter experts to ensure complete alignment with official curricula."
             />
-            <ValueCard 
-              icon={<Shield className="w-8 h-8 text-cyan-400" />}
-              title="Uncompromising Integrity"
+            <ValueCard
+              icon={<Shield className="w-5 h-5" />}
+              tint="bg-sky-50 text-sky-600"
+              title="Uncompromising integrity"
               description="Secure, proctored environments that ensure the value of your certification remains recognized worldwide."
             />
-            <ValueCard 
-              icon={<Globe className="w-8 h-8 text-emerald-400" />}
-              title="Global Accessibility"
+            <ValueCard
+              icon={<Globe className="w-5 h-5" />}
+              tint="bg-emerald-50 text-emerald-600"
+              title="Global accessibility"
               description="From IOE Entrance in Nepal to SATs in New York, we localize every experience for the global student body."
             />
           </div>
@@ -83,59 +82,56 @@ export default function AboutPage() {
       </section>
 
       {/* Mission Section */}
-      <section className="py-32 bg-gradient-to-b from-transparent to-primary/5">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-20">
+      <section className="py-20 bg-zinc-50/60 border-y border-zinc-200">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center gap-12">
           <div className="w-full md:w-1/2">
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary to-cyan-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200" />
-              <div className="relative bg-slate-950 rounded-3xl overflow-hidden aspect-video border border-white/10">
-                 <img 
-                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=800"
-                    alt="Team Collaborating"
-                    className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
-                 />
-                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
-                 <div className="absolute bottom-6 left-6 right-6">
-                    <p className="text-sm font-bold text-primary mb-2">OUR MISSION</p>
-                    <h3 className="text-2xl font-bold">Bridging the gap in academic evaluation.</h3>
-                 </div>
-              </div>
+            <div className="relative rounded-lg overflow-hidden aspect-video border border-zinc-200 shadow-sm">
+               <img
+                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=800"
+                  alt="Team collaborating"
+                  className="w-full h-full object-cover"
+               />
+               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+               <div className="absolute bottom-5 left-5 right-5">
+                  <p className="text-xs font-bold text-primary-200 mb-1 uppercase tracking-wider">Our mission</p>
+                  <h3 className="text-lg font-bold text-white">Bridging the gap in academic evaluation.</h3>
+               </div>
             </div>
           </div>
-          
-          <div className="w-full md:w-1/2 space-y-8">
-            <h2 className="text-4xl font-black tracking-tight">Why We Do What We Do</h2>
-            <p className="text-slate-400 leading-relaxed text-lg">
-              Education is the single greatest equalizer. Yet, the path to elite universities and high-stakes 
+
+          <div className="w-full md:w-1/2 space-y-5">
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight">Why we do what we do</h2>
+            <p className="text-zinc-500 leading-relaxed text-sm">
+              Education is the single greatest equalizer. Yet, the path to elite universities and high-stakes
               certifications is often gated by expensive coaching and lack of quality resources.
             </p>
-            <p className="text-slate-400 leading-relaxed text-lg">
-              At ExamAI, we believe every student, regardless of their zip code, deserves access to 
-              world-class exam simulations. We are building the infrastructure that will power the 
+            <p className="text-zinc-500 leading-relaxed text-sm">
+              At MockExams, we believe every student, regardless of background, deserves access to
+              world-class exam simulations. We are building the infrastructure that will power the
               future of standardized testing.
             </p>
-            <div className="pt-6">
-               <div className="flex items-center gap-4 text-primary font-bold">
-                  <div className="w-12 h-px bg-primary" />
-                  <span>The ExamAI Leadership Team</span>
+            <div className="pt-2">
+               <div className="flex items-center gap-3 text-primary-600 font-semibold text-sm">
+                  <div className="w-10 h-px bg-primary-300" />
+                  <span>The MockExams Leadership Team</span>
                </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Footer-like About CTA */}
-      <section className="py-32 px-6 text-center">
-        <div className="max-w-3xl mx-auto glass-card p-12 rounded-[3rem] border-white/10">
-          <h2 className="text-3xl font-bold mb-6">Ready to reach your potential?</h2>
-          <p className="text-slate-400 mb-10">Join thousands of students who are already using MockExams to prepare for their future.</p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-             <button className="px-10 py-4 bg-primary text-white rounded-2xl font-bold hover:bg-primary-dark transition-all shadow-xl shadow-primary/20 scale-100 hover:scale-105">
-                Join our Community
-             </button>
-             <button className="px-10 py-4 glass border-white/10 text-white rounded-2xl font-bold hover:bg-white/5 transition-all">
-                Partner with Us
-             </button>
+      {/* CTA */}
+      <section className="py-20 px-4 sm:px-6 text-center">
+        <div className="max-w-2xl mx-auto rounded-lg bg-zinc-900 p-10 text-white">
+          <h2 className="text-2xl font-bold mb-3">Ready to reach your potential?</h2>
+          <p className="text-zinc-400 mb-8 text-sm">Join thousands of students who are already using MockExams to prepare for their future.</p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+             <Link href="/signup" className="px-6 py-3 bg-primary-600 text-white rounded-md font-semibold text-sm hover:bg-primary-700 transition-colors shadow-button">
+                Join our community
+             </Link>
+             <Link href="/organization/apply" className="px-6 py-3 bg-zinc-800 border border-zinc-700 text-white rounded-md font-semibold text-sm hover:bg-zinc-700 transition-colors">
+                Partner with us
+             </Link>
           </div>
         </div>
       </section>
@@ -145,21 +141,21 @@ export default function AboutPage() {
 
 function StatItem({ label, value }: { label: string, value: string }) {
   return (
-    <div className="text-center">
-      <div className="text-3xl md:text-5xl font-black mb-2 text-white">{value}</div>
-      <div className="text-xs text-slate-500 font-bold uppercase tracking-widest">{label}</div>
+    <div className="text-center md:text-left">
+      <div className="text-2xl md:text-3xl font-bold mb-1 text-zinc-900 tabular-nums">{value}</div>
+      <div className="text-xs text-zinc-500 font-medium">{label}</div>
     </div>
   );
 }
 
-function ValueCard({ icon, title, description }: { icon: any, title: string, description: string }) {
+function ValueCard({ icon, title, description, tint }: { icon: any, title: string, description: string, tint: string }) {
   return (
-    <div className="glass-card p-10 rounded-[2.5rem] border-white/5 hover:border-primary/30 transition-all group">
-      <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 group-hover:bg-primary/10 transition-colors">
+    <div className="bg-white p-6 rounded-lg border border-zinc-200 hover:border-primary-300 transition-colors">
+      <div className={`w-10 h-10 rounded-md ${tint} flex items-center justify-center mb-4`}>
         {icon}
       </div>
-      <h3 className="text-2xl font-bold mb-4">{title}</h3>
-      <p className="text-slate-500 leading-relaxed font-medium">{description}</p>
+      <h3 className="text-base font-semibold mb-2 text-zinc-900">{title}</h3>
+      <p className="text-zinc-500 leading-relaxed text-sm">{description}</p>
     </div>
   );
 }

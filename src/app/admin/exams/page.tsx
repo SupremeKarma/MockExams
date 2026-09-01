@@ -2,7 +2,15 @@
 
 import { useState, useEffect } from "react";
 import { db } from "@/lib/firebase";
-import { collection, query, orderBy, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  query,
+  orderBy,
+  getDocs,
+  doc,
+  updateDoc,
+  deleteDoc,
+} from "firebase/firestore";
 import { Plus, Trash2, Edit, CheckCircle, XCircle, Loader2 } from "lucide-react";
 import Link from "next/link";
 
@@ -64,9 +72,9 @@ export default function AdminExamsPage() {
         </Link>
       </div>
 
-      <div className="overflow-x-auto glass-card rounded-2xl border border-white/10">
+      <div className="overflow-x-auto glass-card rounded-lg border border-zinc-200">
         <table className="w-full text-left">
-          <thead className="bg-white/5 text-slate-400 text-xs uppercase tracking-widest">
+          <thead className="bg-zinc-50 text-zinc-500 text-xs uppercase tracking-widest">
             <tr>
               <th className="p-6">Title</th>
               <th className="p-6">Category</th>
@@ -75,28 +83,28 @@ export default function AdminExamsPage() {
               <th className="p-6 text-right">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/5">
+          <tbody className="divide-y divide-zinc-100">
             {exams.map((exam) => (
-              <tr key={exam.id} className="hover:bg-white/[0.02] transition-colors">
+              <tr key={exam.id} className="hover:bg-zinc-100 transition-colors">
                 <td className="p-6 font-bold">{exam.title}</td>
-                <td className="p-6 text-slate-400">{exam.category}</td>
-                <td className="p-6 text-slate-400">{exam.duration_minutes}m</td>
+                <td className="p-6 text-zinc-500">{exam.category}</td>
+                <td className="p-6 text-zinc-500">{exam.duration_minutes}m</td>
                 <td className="p-6">
                   <button onClick={() => togglePublish(exam.id, exam.is_published)} className="flex items-center gap-2">
                     {exam.is_published ? (
-                      <span className="flex items-center gap-1.5 text-emerald-400 text-xs font-bold px-2 py-1 bg-emerald-400/10 rounded-lg">
+                      <span className="flex items-center gap-1.5 text-emerald-700 text-xs font-bold px-2 py-1 bg-emerald-50 rounded-lg">
                         <CheckCircle className="w-3 h-3" /> Published
                       </span>
                     ) : (
-                      <span className="flex items-center gap-1.5 text-slate-500 text-xs font-bold px-2 py-1 bg-white/5 rounded-lg">
+                      <span className="flex items-center gap-1.5 text-zinc-500 text-xs font-bold px-2 py-1 bg-zinc-50 rounded-lg">
                         <XCircle className="w-3 h-3" /> Draft
                       </span>
                     )}
                   </button>
                 </td>
                 <td className="p-6 text-right">
-                  <div className="flex items-center justify-end gap-3 text-slate-400">
-                    <Link href={`/admin/exams/${exam.id}`} className="hover:text-white transition-colors" title="Edit"><Edit className="w-4 h-4" /></Link>
+                  <div className="flex items-center justify-end gap-3 text-zinc-500">
+                    <Link href={`/admin/exams/${exam.id}`} className="hover:text-zinc-900 transition-colors" title="Edit"><Edit className="w-4 h-4" /></Link>
                     <button onClick={() => deleteExam(exam.id)} className="hover:text-rose-500 transition-colors" title="Delete"><Trash2 className="w-4 h-4" /></button>
                   </div>
                 </td>

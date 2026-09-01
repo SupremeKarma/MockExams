@@ -1,0 +1,203 @@
+{
+  "semester": 6,
+  "generated_from": "src/data/bitSyllabusData.ts",
+  "subject_count": 5,
+  "unit_count": 40,
+  "subjects": [
+    {
+      "subject_code": "BIT351CO",
+      "subject_name": "Artificial Intelligence",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT351CO_U01",
+          "title": "Introduction & Applications of AI"
+        },
+        {
+          "unit_id": "BIT351CO_U02",
+          "title": "Agents: PEAS, Rationality & Agent Types"
+        },
+        {
+          "unit_id": "BIT351CO_U03",
+          "title": "Uninformed & Informed Search (BFS, DFS, A*, Hill Climbing)"
+        },
+        {
+          "unit_id": "BIT351CO_U04",
+          "title": "Adversarial Search & Constraint Satisfaction (Minimax, Alpha-Beta, CSP)"
+        },
+        {
+          "unit_id": "BIT351CO_U05",
+          "title": "Knowledge Representation (Logic, Semantic Nets, FOPL)"
+        },
+        {
+          "unit_id": "BIT351CO_U06",
+          "title": "Learning Systems (Decision Trees, Reinforcement Learning)"
+        },
+        {
+          "unit_id": "BIT351CO_U07",
+          "title": "Reasoning (Monotonic, Bayesian, Case-Based)"
+        },
+        {
+          "unit_id": "BIT351CO_U08",
+          "title": "Expert Systems (Inference Engine, Forward/Backward Chaining)"
+        },
+        {
+          "unit_id": "BIT351CO_U09",
+          "title": "Artificial Neural Networks (Perceptron, Backpropagation)"
+        },
+        {
+          "unit_id": "BIT351CO_U10",
+          "title": "Natural Language Processing"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT352CO",
+      "subject_name": "Management Information System (MIS)",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT352CO_U01",
+          "title": "Information Systems in Global Business Today"
+        },
+        {
+          "unit_id": "BIT352CO_U02",
+          "title": "Global E-Business & Collaboration"
+        },
+        {
+          "unit_id": "BIT352CO_U03",
+          "title": "Information Systems Organization & Strategy (Value Chain)"
+        },
+        {
+          "unit_id": "BIT352CO_U04",
+          "title": "IT Infrastructure & Platform Trends"
+        },
+        {
+          "unit_id": "BIT352CO_U05",
+          "title": "Business Intelligence Foundations"
+        },
+        {
+          "unit_id": "BIT352CO_U06",
+          "title": "Decision Support Systems (DSS) & Executive Information Systems (EIS)"
+        },
+        {
+          "unit_id": "BIT352CO_U07",
+          "title": "Business Information Systems (Marketing, Manufacturing, Finance)"
+        },
+        {
+          "unit_id": "BIT352CO_U08",
+          "title": "Security of Information Systems"
+        },
+        {
+          "unit_id": "BIT352CO_U09",
+          "title": "Enterprise Systems, SCM & CRM"
+        },
+        {
+          "unit_id": "BIT352CO_U10",
+          "title": "Strategic Information Systems & SISP"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT353CO",
+      "subject_name": "Data Warehousing and Mining",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT353CO_U01",
+          "title": "Introduction to Data Mining & Data Warehousing"
+        },
+        {
+          "unit_id": "BIT353CO_U02",
+          "title": "Data Warehouse & OLAP Technology, KDD"
+        },
+        {
+          "unit_id": "BIT353CO_U03",
+          "title": "Mining Association Rules (Apriori, Market Basket Analysis)"
+        },
+        {
+          "unit_id": "BIT353CO_U04",
+          "title": "Multidimensional & Multilevel Association Rules"
+        },
+        {
+          "unit_id": "BIT353CO_U05",
+          "title": "Classification & Prediction (Decision Trees, Bayesian, k-NN)"
+        },
+        {
+          "unit_id": "BIT353CO_U06",
+          "title": "Cluster Analysis (k-Means, k-Medoids, Hierarchical Methods)"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT354CO",
+      "subject_name": "Simulation and Modeling",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT354CO_U01",
+          "title": "Concepts of Simulation (Types, Advantages, Limitations)"
+        },
+        {
+          "unit_id": "BIT354CO_U02",
+          "title": "Monte Carlo Method"
+        },
+        {
+          "unit_id": "BIT354CO_U03",
+          "title": "Simulation of Continuous Systems (Queuing, Markov Chains)"
+        },
+        {
+          "unit_id": "BIT354CO_U04",
+          "title": "Random Numbers: Generation & Testing (Chi-Square, Poker Test)"
+        },
+        {
+          "unit_id": "BIT354CO_U05",
+          "title": "Analysis of Simulation Output & Replication of Runs"
+        },
+        {
+          "unit_id": "BIT354CO_U06",
+          "title": "Simulation Languages & Discrete/Continuous Modeling"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT355CO",
+      "subject_name": "Software Engineering",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT355CO_U01",
+          "title": "Introduction to Software Engineering"
+        },
+        {
+          "unit_id": "BIT355CO_U02",
+          "title": "Process Models (Waterfall, Prototyping, RAD, Spiral, Agile)"
+        },
+        {
+          "unit_id": "BIT355CO_U03",
+          "title": "Software Project Management (4Ps, COCOMO, Risk, Scheduling)"
+        },
+        {
+          "unit_id": "BIT355CO_U04",
+          "title": "Software Requirements & Specification"
+        },
+        {
+          "unit_id": "BIT355CO_U05",
+          "title": "Software Design (Principles, Architecture Types)"
+        },
+        {
+          "unit_id": "BIT355CO_U06",
+          "title": "Software Testing (Black-Box, White-Box, V&V)"
+        },
+        {
+          "unit_id": "BIT355CO_U07",
+          "title": "Metrics for Process & Product Quality (ISO 9000)"
+        },
+        {
+          "unit_id": "BIT355CO_U08",
+          "title": "SE Trends: Agile, XP, Cloud Computing, SOA"
+        }
+      ]
+    }
+  ]
+}

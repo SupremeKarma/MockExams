@@ -1,28 +1,29 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Sparkles, 
-  CheckCircle2, 
-  Flame, 
-  Brain, 
-  ChevronLeft, 
-  ChevronRight, 
-  Terminal, 
-  BookOpen, 
-  GraduationCap, 
+import {
+  Sparkles,
+  CheckCircle2,
+  Flame,
+  Brain,
+  ChevronLeft,
+  ChevronRight,
+  Terminal,
+  BookOpen,
+  GraduationCap,
   Maximize2,
   Minimize2,
-  Bot
+  Bot,
 } from "lucide-react";
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { bitNotesData } from "@/data/bitNotesData";
-import { 
-  CardReviewState, 
-  FSRSRating, 
-  calculateInitialCardState, 
-  calculateNextReview, 
-  getRatingOptions 
+import ProgramGate from "@/components/ProgramGate";
+import {
+  CardReviewState,
+  FSRSRating,
+  calculateInitialCardState,
+  calculateNextReview,
+  getRatingOptions,
 } from "@/lib/fsrs";
 
 interface FlashcardItem {
@@ -161,34 +162,35 @@ export default function FlashcardsPage() {
   }, [selectedSemester]);
 
   return (
-    <div className={`min-h-screen bg-mesh text-slate-900 ${isFullscreen ? "pt-8 pb-8 px-4" : "pt-28 pb-24 px-4 sm:px-6 lg:px-8"}`}>
-      <div className="max-w-5xl mx-auto space-y-8">
-        
-        {/* Header Ribbon */}
+    <ProgramGate>
+    <div className={`min-h-screen bg-zinc-50/40 ${isFullscreen ? "pt-8 pb-8 px-4" : "pt-8 pb-20 px-4 sm:px-6 lg:px-8"}`}>
+      <div className="max-w-5xl mx-auto space-y-6">
+
+        {/* Header */}
         {!isFullscreen && (
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-200 shadow-sm">
-            <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-indigo-200 text-indigo-700 text-xs font-black uppercase tracking-widest shadow-sm">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-lg bg-white border border-zinc-200">
+            <div className="space-y-1.5">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary-50 border border-primary-200 text-primary-700 text-[11px] font-bold uppercase tracking-wider">
                 <Brain className="w-3.5 h-3.5" />
                 <span>FSRS v6 Spaced Repetition</span>
               </div>
-              <h1 className="text-2xl sm:text-3xl font-black text-slate-900">Master Through Active Recall</h1>
-              <p className="text-xs text-slate-600 font-medium">Scientific spacing algorithm for maximum retention</p>
+              <h1 className="text-xl sm:text-2xl font-bold text-zinc-900">Master through active recall</h1>
+              <p className="text-xs text-zinc-500">Scientific spacing algorithm for maximum retention</p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3">
-              <div className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-white border border-amber-200 text-amber-700 text-xs font-black shadow-sm">
+            <div className="flex flex-col sm:flex-row gap-2">
+              <div className="flex items-center gap-2 px-3.5 py-2 rounded-md bg-amber-50 border border-amber-200 text-amber-700 text-xs font-semibold">
                 <Flame className="w-4 h-4 text-amber-600" />
                 <div>
-                  <div>7 Day Streak</div>
-                  <div className="text-[10px] font-bold opacity-80">Keep it up!</div>
+                  <div>7 day streak</div>
+                  <div className="text-[10px] opacity-80">Keep it up</div>
                 </div>
               </div>
-              <div className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-white border border-emerald-200 text-emerald-700 text-xs font-black shadow-sm">
+              <div className="flex items-center gap-2 px-3.5 py-2 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                 <div>
-                  <div>98% Retention</div>
-                  <div className="text-[10px] font-bold opacity-80">Excellent</div>
+                  <div>98% retention</div>
+                  <div className="text-[10px] opacity-80">Excellent</div>
                 </div>
               </div>
             </div>
@@ -207,10 +209,10 @@ export default function FlashcardsPage() {
                   setCurrentIndex(0);
                   setIsFlipped(false);
                 }}
-                className={`px-4 py-2 rounded-xl text-xs font-black transition-all border ${
+                className={`px-3.5 py-1.5 rounded-md text-xs font-semibold transition-colors border ${
                   selectedSemester === sem
-                    ? "bg-indigo-600 text-white border-indigo-600 shadow-md"
-                    : "bg-white text-slate-700 hover:bg-slate-50 border-slate-200"
+                    ? "bg-primary-600 text-white border-primary-600"
+                    : "bg-white text-zinc-600 hover:bg-zinc-50 border-zinc-200"
                 }`}
               >
                 Sem {sem}
@@ -226,7 +228,7 @@ export default function FlashcardsPage() {
                 setCurrentIndex(0);
                 setIsFlipped(false);
               }}
-              className="bg-white border border-slate-200 text-xs font-bold text-slate-700 rounded-xl px-3 py-2 focus:outline-none focus:border-indigo-600"
+              className="bg-white border border-zinc-200 text-xs font-semibold text-zinc-700 rounded-md px-3 py-2 focus:outline-none focus:border-primary-500"
             >
               {availableSubjectsForSem.map(sub => (
                 <option key={sub} value={sub}>{sub}</option>
@@ -235,7 +237,7 @@ export default function FlashcardsPage() {
 
             <button
               onClick={() => setIsFullscreen(prev => !prev)}
-              className="p-2 rounded-xl bg-white border border-slate-200 text-slate-600 hover:text-slate-900 shadow-sm"
+              className="p-2 rounded-md bg-white border border-zinc-200 text-zinc-600 hover:text-zinc-900"
               title="Toggle Fullscreen"
             >
               {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
@@ -244,14 +246,14 @@ export default function FlashcardsPage() {
         </div>
 
         {/* Progress Bar */}
-        <div className="space-y-2">
-          <div className="flex justify-between text-xs font-bold text-slate-500">
+        <div className="space-y-1.5">
+          <div className="flex justify-between text-xs font-semibold text-zinc-500">
             <span>Card {currentIndex + 1} of {activeDeck.length}</span>
-            <span>{progressPercent}% Complete • {reviewedTodayCount} Reviewed Today</span>
+            <span>{progressPercent}% complete · {reviewedTodayCount} reviewed today</span>
           </div>
-          <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden border border-slate-200">
-            <motion.div 
-              className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500"
+          <div className="w-full h-1.5 rounded-full bg-zinc-100 overflow-hidden">
+            <motion.div
+              className="h-full bg-primary-600"
               style={{ width: `${progressPercent}%` }}
               animate={{ width: `${progressPercent}%` }}
               transition={{ duration: 0.3 }}
@@ -264,61 +266,61 @@ export default function FlashcardsPage() {
           <div className="space-y-6">
             <div className="perspective-1000 w-full min-h-[420px] cursor-pointer" onClick={() => setIsFlipped(prev => !prev)}>
               <motion.div
-                className={`relative w-full min-h-[420px] rounded-3xl border border-slate-200 bg-white shadow-lg p-8 sm:p-12 flex flex-col justify-between transition-transform duration-500 transform-style-3d hover:border-indigo-400 ${
-                  isFlipped ? "rotate-y-180 bg-gradient-to-br from-indigo-50/50 via-white to-indigo-50/30" : ""
+                className={`relative w-full min-h-[420px] rounded-lg border border-zinc-200 bg-white shadow-sm p-8 sm:p-10 flex flex-col justify-between transition-transform duration-500 transform-style-3d hover:border-primary-300 ${
+                  isFlipped ? "rotate-y-180 bg-primary-50/20" : ""
                 }`}
               >
                 {/* FRONT */}
                 <div className={`space-y-6 ${isFlipped ? "hidden" : "block"}`}>
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 px-3.5 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-bold">
+                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary-50 border border-primary-200 text-primary-700 text-xs font-semibold">
                       <GraduationCap className="w-3.5 h-3.5" />
                       <span>{currentCard.subject}</span>
                     </div>
-                    <span className="text-xs font-black uppercase text-slate-400 tracking-wider">
-                      Click or press Space to Flip
+                    <span className="text-[11px] font-semibold uppercase text-zinc-400 tracking-wider">
+                      Click or press Space to flip
                     </span>
                   </div>
 
-                  <div className="space-y-4 pt-6 text-center sm:text-left">
-                    <span className="text-xs font-black uppercase tracking-widest text-indigo-600">Prompt / Question</span>
-                    <h2 className="text-2xl sm:text-4xl font-black text-slate-900 leading-tight">
+                  <div className="space-y-3 pt-6 text-center sm:text-left">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-primary-600">Prompt / Question</span>
+                    <h2 className="text-xl sm:text-3xl font-bold text-zinc-900 leading-tight">
                       {currentCard.frontQuestion}
                     </h2>
                   </div>
                 </div>
 
                 {/* BACK */}
-                <div className={`space-y-6 rotate-y-180 ${isFlipped ? "block" : "hidden"}`}>
-                  <div className="flex items-center justify-between border-b border-slate-100 pb-4">
-                    <span className="text-xs font-black uppercase text-indigo-600 tracking-widest flex items-center gap-2">
+                <div className={`space-y-5 rotate-y-180 ${isFlipped ? "block" : "hidden"}`}>
+                  <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
+                    <span className="text-[11px] font-bold uppercase text-primary-600 tracking-wider flex items-center gap-1.5">
                       <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                      Solution & Recall Points
+                      Solution & recall points
                     </span>
-                    <span className="text-xs text-slate-500 font-bold">Semester {currentCard.semester}</span>
+                    <span className="text-xs text-zinc-500 font-semibold">Semester {currentCard.semester}</span>
                   </div>
 
-                  <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-medium">
+                  <p className="text-sm sm:text-base text-zinc-700 leading-relaxed">
                     {currentCard.backAnswer}
                   </p>
 
                   {/* Code Snippet if present */}
                   {currentCard.codeSnippet && (
                     <div className="space-y-2">
-                      <span className="text-xs font-mono text-indigo-700 flex items-center gap-1.5">
-                        <Terminal className="w-3.5 h-3.5" /> Verified Code
+                      <span className="text-xs font-mono text-primary-700 flex items-center gap-1.5">
+                        <Terminal className="w-3.5 h-3.5" /> Verified code
                       </span>
-                      <pre className="p-4 rounded-2xl bg-slate-900 text-cyan-300 text-xs font-mono max-h-48 overflow-y-auto">
+                      <pre className="p-4 rounded-md bg-zinc-900 text-sky-300 text-xs font-mono max-h-48 overflow-y-auto">
                         <code>{currentCard.codeSnippet}</code>
                       </pre>
                     </div>
                   )}
 
                   {currentCard.keyPoints && currentCard.keyPoints.length > 0 && (
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-600">
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-zinc-600">
                       {currentCard.keyPoints.map((kp, kIdx) => (
                         <li key={kIdx} className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-indigo-600" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-primary-600" />
                           <span>{kp}</span>
                         </li>
                       ))}
@@ -327,7 +329,7 @@ export default function FlashcardsPage() {
                 </div>
 
                 {/* Card Footer */}
-                <div className="pt-6 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <div className="pt-5 border-t border-zinc-100 flex items-center justify-between text-xs text-zinc-500">
                   <div className="flex items-center gap-2">
                     <button
                       type="button"
@@ -335,13 +337,13 @@ export default function FlashcardsPage() {
                         e.stopPropagation();
                         setShowAiHint(prev => !prev);
                       }}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-50 hover:bg-purple-100 border border-purple-200 text-purple-700 font-bold transition-all"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-violet-50 hover:bg-violet-100 border border-violet-200 text-violet-700 font-semibold transition-colors"
                     >
                       <Bot className="w-3.5 h-3.5" />
-                      <span>{showAiHint ? "Hide Socratic Hint" : "AI Socratic Hint"}</span>
+                      <span>{showAiHint ? "Hide Socratic hint" : "AI Socratic hint"}</span>
                     </button>
                   </div>
-                  <span className="font-mono text-[11px]">Space = Flip • 1-4 = Rate</span>
+                  <span className="font-mono text-[11px]">Space = flip · 1-4 = rate</span>
                 </div>
               </motion.div>
             </div>
@@ -353,11 +355,11 @@ export default function FlashcardsPage() {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="p-5 rounded-2xl bg-purple-50 border border-purple-200 text-xs sm:text-sm text-purple-900 space-y-2"
+                  className="p-4 rounded-lg bg-violet-50 border border-violet-200 text-xs sm:text-sm text-violet-900 space-y-2"
                 >
-                  <div className="flex items-center gap-2 font-bold text-purple-700">
+                  <div className="flex items-center gap-2 font-semibold text-violet-700">
                     <Sparkles className="w-4 h-4" />
-                    <span>Socratic Tutor Thought:</span>
+                    <span>Socratic tutor thought:</span>
                   </div>
                   <p className="leading-relaxed">
                     Think about the base edge cases first! What happens when input is 0 or 1? How does memory allocation differ between static stack frames and dynamic heap pointers in this context?
@@ -369,23 +371,23 @@ export default function FlashcardsPage() {
             {/* FSRS Rating Buttons */}
             {isFlipped ? (
               <div className="space-y-3">
-                <div className="text-center text-xs font-black uppercase tracking-wider text-slate-500">
-                  How well did you recall this concept? (FSRS v6 Scheduler)
+                <div className="text-center text-[11px] font-semibold uppercase tracking-wider text-zinc-500">
+                  How well did you recall this concept? (FSRS v6 scheduler)
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                   {ratingOptions.map((opt) => (
                     <button
                       key={opt.rating}
                       onClick={() => handleRate(opt.rating)}
-                      className={`p-4 rounded-2xl border border-slate-200 bg-gradient-to-br ${opt.colorClass} transition-all duration-200 hover:scale-105 active:scale-95 shadow-md flex flex-col items-center justify-center gap-1`}
+                      className={`p-3.5 rounded-md border border-zinc-200 ${opt.colorClass} transition-transform duration-150 hover:scale-[1.03] active:scale-95 flex flex-col items-center justify-center gap-1`}
                     >
                       <div className="flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-black/20 flex items-center justify-center text-xs font-black">
+                        <span className="w-5 h-5 rounded-full bg-black/15 flex items-center justify-center text-xs font-bold">
                           {opt.rating}
                         </span>
-                        <span className="font-black text-sm">{opt.label}</span>
+                        <span className="font-semibold text-sm">{opt.label}</span>
                       </div>
-                      <span className="text-[11px] opacity-90">{opt.subLabel} • {opt.intervalText}</span>
+                      <span className="text-[11px] opacity-90">{opt.subLabel} · {opt.intervalText}</span>
                     </button>
                   ))}
                 </div>
@@ -400,17 +402,17 @@ export default function FlashcardsPage() {
                     }
                   }}
                   disabled={currentIndex === 0}
-                  className="px-6 py-3 rounded-2xl bg-white hover:bg-slate-50 disabled:opacity-30 border border-slate-200 text-xs font-bold text-slate-700 flex items-center gap-2 transition-all shadow-sm"
+                  className="px-4 py-2.5 rounded-md bg-white hover:bg-zinc-50 disabled:opacity-30 border border-zinc-200 text-xs font-semibold text-zinc-700 flex items-center gap-1.5 transition-colors"
                 >
                   <ChevronLeft className="w-4 h-4" />
-                  Previous Card
+                  Previous
                 </button>
 
                 <button
                   onClick={() => setIsFlipped(true)}
-                  className="px-8 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-black transition-all shadow-md hover:scale-105"
+                  className="px-6 py-2.5 rounded-md bg-primary-600 hover:bg-primary-700 text-white text-xs font-semibold transition-colors shadow-button"
                 >
-                  Flip to Reveal Solution (Space)
+                  Flip to reveal solution (Space)
                 </button>
 
                 <button
@@ -421,22 +423,23 @@ export default function FlashcardsPage() {
                     }
                   }}
                   disabled={currentIndex === activeDeck.length - 1}
-                  className="px-6 py-3 rounded-2xl bg-white hover:bg-slate-50 disabled:opacity-30 border border-slate-200 text-xs font-bold text-slate-700 flex items-center gap-2 transition-all shadow-sm"
+                  className="px-4 py-2.5 rounded-md bg-white hover:bg-zinc-50 disabled:opacity-30 border border-zinc-200 text-xs font-semibold text-zinc-700 flex items-center gap-1.5 transition-colors"
                 >
-                  Skip to Next
+                  Skip
                   <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
             )}
           </div>
         ) : (
-          <div className="p-12 text-center rounded-3xl bg-white border border-dashed border-slate-200 space-y-3">
-            <BookOpen className="w-12 h-12 text-slate-400 mx-auto" />
-            <h3 className="text-lg font-bold text-slate-900">No flashcards found</h3>
-            <p className="text-sm text-slate-500">Select a different semester or subject above.</p>
+          <div className="p-10 text-center rounded-lg bg-white border border-dashed border-zinc-300 space-y-2">
+            <BookOpen className="w-8 h-8 text-zinc-400 mx-auto" />
+            <h3 className="text-sm font-semibold text-zinc-900">No flashcards found</h3>
+            <p className="text-xs text-zinc-500">Select a different semester or subject above.</p>
           </div>
         )}
       </div>
     </div>
+    </ProgramGate>
   );
 }

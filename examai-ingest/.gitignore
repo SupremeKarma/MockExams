@@ -1,7 +1,25 @@
 .env
-input/
-work/
-output/
+.venv/
 __pycache__/
 *.pyc
 .DS_Store
+
+# Source scans: 51MB of photographed papers. They live on OneDrive and are
+# staged here by stage_corpus.py, so the repo does not need a second copy.
+input/
+
+# Normalised page PNGs and clustering scratch — regenerable from input/.
+work/pages/
+work/clusters/
+output/
+
+# ...but NOT the extracted corpus. Per the "git canonical, server indexes
+# later" decision, the extracted question JSON is the knowledge collection and
+# must be versioned and reviewable. `work/` used to be ignored wholesale,
+# which would have left the corpus untracked while the solutions generated
+# from it were committed — solutions referencing questions that existed only
+# on one laptop.
+!work/
+work/*
+!work/extracted/
+!work/extracted/*.json

@@ -1,0 +1,1035 @@
+{
+  "paper_id": "BIT351CO_2025_regular",
+  "subject_code": "BIT351CO",
+  "subject_name": "Artificial Intelligence",
+  "semester": 6,
+  "year": 2025,
+  "exam_type": "regular",
+  "curriculum": "new_course",
+  "full_marks": 80,
+  "pass_marks": 32,
+  "duration_hours": 3,
+  "extraction_notes": "",
+  "groups": [
+    {
+      "label": "A",
+      "questions_printed": 3,
+      "answer_count": 2,
+      "marks_each": 12,
+      "marks_total": 24,
+      "instruction": "Answer TWO questions."
+    },
+    {
+      "label": "B",
+      "questions_printed": 8,
+      "answer_count": 7,
+      "marks_each": 8,
+      "marks_total": 56,
+      "instruction": "Answer SEVEN questions."
+    }
+  ],
+  "questions": [
+    {
+      "question_id": "BIT351CO_2025_regular_A1",
+      "group": "A",
+      "number": "1",
+      "marks": 12,
+      "text": "Define agent and show the architecture of an agent. Discuss the types of agent with suitable examples.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT351CO_U02",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT351CO_2025_regular_A1a",
+          "group": "A",
+          "number": "1a",
+          "marks": 4,
+          "text": "Define agent and show the architecture of an agent.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT351CO_U02",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT351CO_2025_regular_A1b",
+          "group": "A",
+          "number": "1b",
+          "marks": 8,
+          "text": "Discuss the types of agent with suitable examples.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT351CO_U02",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "needs_review": false
+        }
+      ],
+      "needs_review": true,
+      "solution_path": "solutions/BIT351CO/2025/BIT351CO_2025_regular_A1.md",
+      "marking_scheme": [
+        {
+          "point": "Defines agent as an entity that perceives and acts on its environment.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies sensors and effectors as key components.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes the role of the agent program in mapping percepts to actions.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the complete architecture cycle (environment, sensors, program, effectors, actions).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes Simple Reflex Agent and provides a suitable example.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Describes Model-Based Reflex Agent and provides a suitable example.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Describes Goal-Based Agent and provides a suitable example.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Describes Utility-Based Agent and provides a suitable example.",
+          "marks": 2,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT351CO_2025_regular_A2",
+      "group": "A",
+      "number": "2",
+      "marks": 12,
+      "text": "What do you mean by informed and uninformed search? Explain Best-First search with its algorithm. Why it is known as Greedy Best-First search?",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT351CO_U03",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT351CO_2025_regular_A2a",
+          "group": "A",
+          "number": "2a",
+          "marks": 3,
+          "text": "What do you mean by informed and uninformed search?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT351CO_U03",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT351CO_2025_regular_A2b",
+          "group": "A",
+          "number": "2b",
+          "marks": 6,
+          "text": "Explain Best-First search with its algorithm.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT351CO_U03",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT351CO_2025_regular_A2c",
+          "group": "A",
+          "number": "2c",
+          "marks": 3,
+          "text": "Why it is known as Greedy Best-First search?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT351CO_U03",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "needs_review": false
+        }
+      ],
+      "needs_review": true,
+      "solution_path": "solutions/BIT351CO/2025/BIT351CO_2025_regular_A2.md",
+      "marking_scheme": [
+        {
+          "point": "Defines Uninformed Search as operating without domain-specific knowledge/heuristics.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines Informed Search as using problem-specific knowledge/heuristic function to guide search.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies the key distinction: use vs. non-use of heuristic function.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains Best-First Search uses a heuristic function $h(n)$ to estimate cost to goal.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes that it always expands the node with the lowest $h(n)$ value (most promising).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States that it uses an `OPEN` list (priority queue) sorted by $h(n)$ and a `CLOSED` list.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides correct initialisation steps for the algorithm (OPEN list with start node, CLOSED empty).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Details the main loop: extract best node, add to CLOSED, goal test, generate/add successors.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains the 'greedy' aspect as making choices that look best immediately (low $h(n)$).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Clarifies that it ignores the path cost from the start node $g(n)$, focusing only on $h(n)$.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT351CO_2025_regular_A3",
+      "group": "A",
+      "number": "3",
+      "marks": 12,
+      "text": "What are the challenges of AI in recent development? Describe the applications of AI. What is uncertainty in reasouing? Write the significance of Bayesian network.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT351CO_U01",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT351CO_U07",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT351CO_2025_regular_A3a",
+          "group": "A",
+          "number": "3a",
+          "marks": 6,
+          "text": "What are the challenges of AI in recent development? Describe the applications of AI.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT351CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "sub_parts": [
+            {
+              "question_id": "BIT351CO_2025_regular_A3ai",
+              "group": "A",
+              "number": "3ai",
+              "marks": 3,
+              "text": "What are the challenges of AI in recent development?",
+              "question_type": "written",
+              "units": [
+                {
+                  "unit_id": "BIT351CO_U01",
+                  "confidence": "high"
+                }
+              ],
+              "confidence": "high",
+              "has_diagram": false,
+              "needs_review": false
+            },
+            {
+              "question_id": "BIT351CO_2025_regular_A3aii",
+              "group": "A",
+              "number": "3aii",
+              "marks": 3,
+              "text": "Describe the applications of AI.",
+              "question_type": "written",
+              "units": [
+                {
+                  "unit_id": "BIT351CO_U01",
+                  "confidence": "high"
+                }
+              ],
+              "confidence": "high",
+              "has_diagram": false,
+              "needs_review": false
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT351CO_2025_regular_A3b",
+          "group": "A",
+          "number": "3b",
+          "marks": 6,
+          "text": "What is uncertainty in reasouing? Write the significance of Bayesian network.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT351CO_U07",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "sub_parts": [
+            {
+              "question_id": "BIT351CO_2025_regular_A3bi",
+              "group": "A",
+              "number": "3bi",
+              "marks": 2,
+              "text": "What is uncertainty in reasouing?",
+              "question_type": "written",
+              "units": [
+                {
+                  "unit_id": "BIT351CO_U07",
+                  "confidence": "high"
+                }
+              ],
+              "confidence": "high",
+              "has_diagram": false,
+              "needs_review": false
+            },
+            {
+              "question_id": "BIT351CO_2025_regular_A3bii",
+              "group": "A",
+              "number": "3bii",
+              "marks": 4,
+              "text": "Write the significance of Bayesian network.",
+              "question_type": "written",
+              "units": [
+                {
+                  "unit_id": "BIT351CO_U07",
+                  "confidence": "high"
+                }
+              ],
+              "confidence": "high",
+              "has_diagram": false,
+              "needs_review": false
+            }
+          ],
+          "needs_review": false
+        }
+      ],
+      "needs_review": true,
+      "solution_path": "solutions/BIT351CO/2025/BIT351CO_2025_regular_A3.md",
+      "marking_scheme": [
+        {
+          "point": "Lists 2-3 significant challenges of AI development (e.g., bias, explainability, privacy, ethics, computational cost, generalization).",
+          "marks": 3,
+          "required": true
+        },
+        {
+          "point": "Describes 2-3 distinct applications of AI (e.g., healthcare, finance, autonomous systems, NLP, computer vision, recommendation systems).",
+          "marks": 3,
+          "required": true
+        },
+        {
+          "point": "Defines uncertainty in reasoning, explaining it as making decisions with incomplete/ambiguous/unreliable information.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Identifies sources of uncertainty (e.g., incomplete data, noisy data, inherent randomness, vagueness, conflicting evidence).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States that Bayesian networks are probabilistic graphical models representing variables and their conditional dependencies.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains 1-2 significances of Bayesian networks (e.g., modeling uncertainty, causal/diagnostic reasoning, compact representation, efficient inference, knowledge representation/learning, decision making).",
+          "marks": 2,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT351CO_2025_regular_B4",
+      "group": "B",
+      "number": "4",
+      "marks": 8,
+      "text": "Discuss Depth-first search, Depth-limited search and Interactive-deepening search with examples.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT351CO_U03",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "solution_path": "solutions/BIT351CO/2025/BIT351CO_2025_regular_B4.md",
+      "marking_scheme": [
+        {
+          "point": "Explains Depth-First Search (DFS) principle (explores deep, uses stack/LIFO).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States DFS characteristics (e.g., incomplete, not optimal, $O(b^m)$ time, $O(bm)$ space).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides a simple example for DFS.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains Depth-Limited Search (DLS) principle (DFS with a depth limit L).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States DLS characteristics (e.g., incomplete if goal > L, not optimal, $O(b^L)$ time, $O(bL)$ space).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides a simple example for DLS, illustrating the limit.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains Iterative-Deepening Search (IDS) principle (repeated DLS with increasing limits).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States IDS characteristics (e.g., complete, optimal for uniform cost, $O(b^d)$ time, $O(bd)$ space).",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT351CO_2025_regular_B5",
+      "group": "B",
+      "number": "5",
+      "marks": 8,
+      "text": "What is genetic algorithm and how it works? Give example.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT351CO_U06",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "solution_path": "solutions/BIT351CO/2025/BIT351CO_2025_regular_B5.md",
+      "marking_scheme": [
+        {
+          "point": "Defines Genetic Algorithm as an optimization/search heuristic inspired by natural selection/evolution.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains the initialization of a population of candidate solutions.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the role of a fitness function to evaluate solutions.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes the selection process for choosing fitter individuals for reproduction.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains crossover (recombination) for combining genetic material.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains mutation for introducing diversity.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides a clear and illustrative example of GA principles in action.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT351CO_2025_regular_B6",
+      "group": "B",
+      "number": "6",
+      "marks": 8,
+      "text": "What is adversarial search? Solve the following cryptarithmetic problem. OUR+AIM=GAME",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT351CO_U04",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT351CO_2025_regular_B6a",
+          "group": "B",
+          "number": "6a",
+          "marks": 2,
+          "text": "What is adversarial search?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT351CO_U04",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT351CO_2025_regular_B6b",
+          "group": "B",
+          "number": "6b",
+          "marks": 6,
+          "text": "Solve the following cryptarithmetic problem. OUR+AIM=GAME",
+          "question_type": "numerical",
+          "units": [
+            {
+              "unit_id": "BIT351CO_U04",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "needs_review": false
+        }
+      ],
+      "needs_review": true,
+      "solution_path": "solutions/BIT351CO/2025/BIT351CO_2025_regular_B6.md",
+      "marking_scheme": [
+        {
+          "point": "Defines adversarial search as a search problem in a competitive multi-agent environment.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States that agents try to maximize their utility while assuming opponents try to minimize it (e.g., minimax strategy).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies variables (letters) and core constraints (unique digits, leading digits not zero).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly deduces G=1 and C2=1 with supporting reasoning (e.g., from thousands column, G!=0).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly deduces O=9 and C1=1 with supporting reasoning (e.g., from hundreds column, O+C1=10).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Demonstrates systematic assignment and backtracking for the remaining letters (M, U, I, R, E, A), including identifying C0=0 and M!=0 and testing digit combinations for each column equation while maintaining uniqueness.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Presents the final correct assignment of digits to all letters (G=1, A=6, M=2, E=5, O=9, U=4, R=3, I=8).",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT351CO_2025_regular_B7",
+      "group": "B",
+      "number": "7",
+      "marks": 8,
+      "text": "What is explanation-based learning? Explain supervised learning vs unsupervised learning.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT351CO_U06",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "solution_path": "solutions/BIT351CO/2025/BIT351CO_2025_regular_B7.md",
+      "marking_scheme": [
+        {
+          "point": "Defines Explanation-Based Learning (EBL) as learning from a single example by generalizing an explanation.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains the process or key idea of EBL, mentioning the use of domain theory to construct and generalize an explanation.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Defines Supervised Learning, mentioning labeled data and the goal of predicting an output.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines Unsupervised Learning, mentioning unlabeled data and the goal of finding patterns/structures.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Compares Supervised and Unsupervised Learning on at least two distinct points (e.g., data type, objective, feedback, common tasks/algorithms).",
+          "marks": 2,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT351CO_2025_regular_B8",
+      "group": "B",
+      "number": "8",
+      "marks": 8,
+      "text": "Define propositional logic with example. Show that P→Q and ¬P∨Q are logically equivalent, using truth table approach.",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT351CO_U05",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "solution_path": "solutions/BIT351CO/2025/BIT351CO_2025_regular_B8.md",
+      "marking_scheme": [
+        {
+          "point": "Correctly defines propositional logic as statements being true/false, combined by connectives, with truth value determined by components.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Provides a clear and correct example of propositional logic statements and/or their combination.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Sets up the truth table structure with correct initial columns for P and Q (4 rows).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly evaluates the column for ¬P.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly evaluates the column for P→Q.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly evaluates the column for ¬P∨Q.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States the correct conclusion that P→Q and ¬P∨Q are logically equivalent based on identical truth table columns.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT351CO_2025_regular_B9",
+      "group": "B",
+      "number": "9",
+      "marks": 8,
+      "text": "Explain the structure of an expert system with its components.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT351CO_U08",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "solution_path": "solutions/BIT351CO/2025/BIT351CO_2025_regular_B9.md",
+      "marking_scheme": [
+        {
+          "point": "Briefly defines an expert system as a computer program emulating human expert decision-making in a domain.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies the Knowledge Base as the repository of domain-specific facts and rules.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains how knowledge is stored (e.g., facts, rules, heuristics).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies the Inference Engine as the component that processes knowledge to draw conclusions.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains reasoning strategies used by the inference engine (e.g., forward/backward chaining).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies the User Interface as the component for user interaction (input/output).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies the Explanation Facility as the component that justifies reasoning and conclusions.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies the Knowledge Acquisition Module as a tool for transferring expert knowledge into the system.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT351CO_2025_regular_B10",
+      "group": "B",
+      "number": "10",
+      "marks": 8,
+      "text": "Convert the following sentences into FOPL:\n    (a) John likes all kinds of food.\n    (b) Apple and vegetable are food\n    (c) Anything anyone eats and is not killed is food.\n    (d) Anil eats peanuts and still alive.\n    (e) Harry eats everything that Anil eats.\n    Prove by resolution that: John likes peanuts.",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT351CO_U05",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "solution_path": "solutions/BIT351CO/2025/BIT351CO_2025_regular_B10.md",
+      "marking_scheme": [
+        {
+          "point": "FOPL for (a)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "FOPL for (b)",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "FOPL for (c)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "FOPL for (d)",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "FOPL for (e)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly converts all FOPL sentences to CNF clauses and negates the goal",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly performs resolution of C1 and C8 to derive C9 ($\\neg Food(Peanuts)$)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly performs resolution of C4 and C5 to derive C10 ($\\neg Alive(Anil) \\lor Food(Peanuts)$)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly performs subsequent resolution steps (C10, C6 to get C11, then C9, C11) to derive the empty clause",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT351CO_2025_regular_B11",
+      "group": "B",
+      "number": "11",
+      "marks": 8,
+      "text": "Write short notes on Any TWO:",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT351CO_U10",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT351CO_U09",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT351CO_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "choose": 2,
+      "sub_parts": [
+        {
+          "question_id": "BIT351CO_2025_regular_B11a",
+          "group": "B",
+          "number": "11a",
+          "marks": 4,
+          "text": "Natural language processing",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT351CO_U10",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT351CO_2025_regular_B11b",
+          "group": "B",
+          "number": "11b",
+          "marks": 4,
+          "text": "Artificial Neural Network",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT351CO_U09",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT351CO_2025_regular_B11c",
+          "group": "B",
+          "number": "11c",
+          "marks": 4,
+          "text": "Artificial Intelligence vs Natural Intelligence",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT351CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "has_diagram": false,
+          "needs_review": false
+        }
+      ],
+      "needs_review": true,
+      "solution_path": "solutions/BIT351CO/2025/BIT351CO_2025_regular_B11.md",
+      "marking_scheme": [
+        {
+          "point": "Defines Natural Language Processing as an AI branch for understanding/generating human language",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States its goal to bridge human-computer communication gap",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies key components like NLU and/or NLG",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Mentions common NLP tasks or applications (e.g., machine translation, chatbots)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines Artificial Neural Network as a computational model inspired by the biological brain",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes its basic structure (neurons, layers, connections/weights)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains how it learns (training, adjusting weights, activation functions)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Mentions key applications (e.g., image recognition, pattern recognition)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines Artificial Intelligence (AI) as human-made intelligence in machines",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines Natural Intelligence (NI) as inherent intelligence in living beings",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Compares AI and NI on at least two distinct aspects (e.g., origin, learning, speed, adaptability, creativity)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides examples for AI and NI, or further elaborates on a key difference",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    }
+  ],
+  "source_files": [
+    "work\\pages\\BIT351CO_2025_regular_p1.png",
+    "work\\pages\\BIT351CO_2025_regular_p2.png"
+  ],
+  "coverage": {
+    "by_group": [
+      {
+        "label": "A",
+        "questions_extracted": 3,
+        "questions_printed": 3
+      },
+      {
+        "label": "B",
+        "questions_extracted": 8,
+        "questions_printed": 8
+      }
+    ],
+    "status": "complete",
+    "notes": "Derived from the extraction, not self-reported by the model."
+  }
+}

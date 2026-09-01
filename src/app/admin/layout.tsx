@@ -49,7 +49,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center">
         <ShieldAlert className="w-16 h-16 text-rose-500 mb-6" />
         <h1 className="text-3xl font-bold mb-4">Access Denied</h1>
-        <p className="text-slate-400 mb-8 max-w-md">You do not have administrative privileges to access this area.</p>
+        <p className="text-zinc-400 mb-8 max-w-md">You do not have administrative privileges to access this area.</p>
         <button onClick={() => router.push("/dashboard")} className="px-8 py-3 bg-primary text-white rounded-xl font-bold">
           Return to Dashboard
         </button>
@@ -60,7 +60,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
       <div className="flex items-center justify-between mb-12">
-        <h1 className="text-4xl font-black tracking-tighter text-gradient">Admin Settings</h1>
+        <h1 className="text-4xl font-bold tracking-tighter text-gradient">Admin Settings</h1>
       </div>
       {children}
     </div>

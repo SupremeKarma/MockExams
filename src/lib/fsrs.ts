@@ -96,28 +96,28 @@ export function getRatingOptions(currentState: CardReviewState): RatingOption[] 
       label: "Again",
       subLabel: "Forgot",
       intervalText: "10m",
-      colorClass: "from-rose-600 to-rose-700 text-rose-100 hover:border-rose-400"
+      colorClass: "bg-red-600 hover:bg-red-700 text-white hover:border-red-600"
     },
     {
       rating: 2,
       label: "Hard",
       subLabel: "Struggled",
       intervalText: `${Math.max(1, Math.round(currentState.stability * 1.2))}d`,
-      colorClass: "from-amber-600 to-amber-700 text-amber-100 hover:border-amber-400"
+      colorClass: "bg-amber-600 hover:bg-amber-700 text-white hover:border-amber-600"
     },
     {
       rating: 3,
       label: "Good",
       subLabel: "Recalled",
       intervalText: `${Math.max(2, Math.round(currentState.stability * 2.2))}d`,
-      colorClass: "from-emerald-600 to-emerald-700 text-emerald-100 hover:border-emerald-400"
+      colorClass: "bg-emerald-600 hover:bg-emerald-700 text-white hover:border-emerald-600"
     },
     {
       rating: 4,
       label: "Easy",
       subLabel: "Mastered",
       intervalText: `${Math.max(4, Math.round(currentState.stability * 3.4))}d`,
-      colorClass: "from-cyan-600 to-cyan-700 text-cyan-100 hover:border-cyan-400"
+      colorClass: "bg-sky-600 hover:bg-sky-700 text-white hover:border-sky-600"
     }
   ];
 }

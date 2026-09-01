@@ -1,0 +1,448 @@
+{
+  "paper_id": "BIT353CO_2025_regular",
+  "subject_code": "BIT353CO",
+  "subject_name": "Data Warehousing and Mining",
+  "semester": 6,
+  "year": 2025,
+  "exam_type": "regular",
+  "curriculum": "new_course",
+  "full_marks": 80,
+  "pass_marks": 32,
+  "duration_hours": 3,
+  "extraction_notes": "Group B instructions answer_count and marks_total were manually corrected on the paper from \"SIX\" (6x6=36) to \"SEVEN\" (7x8=56). I used the corrected values. Question 7 (\"Explain genetic algorithm...\") is a topic (Genetic Algorithm) more commonly associated with AI/Machine Learning than core Data Warehousing and Mining. It has been tagged to U01 with low confidence as a general data mining algorithm. Question 9, sub-part (a) (\"Define network topology\") is a topic from computer networking and is largely out of scope for Data Warehousing and Mining. It has been tagged to U01 with low confidence as a general IT concept. Question 11, sub-part (b) (\"Back propagation in Multilayer Feed Forward Network\") is a topic from Artificial Neural Networks (AI subject, e.g. BIT351CO). It has been tagged to U05 with low confidence as a learning algorithm.",
+  "groups": [
+    {
+      "label": "A",
+      "questions_printed": 3,
+      "answer_count": 2,
+      "marks_each": 12,
+      "marks_total": 24,
+      "instruction": "Answer TWO questions."
+    },
+    {
+      "label": "B",
+      "questions_printed": 8,
+      "answer_count": 7,
+      "marks_each": 8,
+      "marks_total": 56,
+      "instruction": "Answer SEVEN questions."
+    }
+  ],
+  "questions": [
+    {
+      "question_id": "BIT353CO_2025_regular_A1",
+      "group": "A",
+      "number": "1",
+      "marks": 12,
+      "text": "Define association rule mining with appropriate examples. What are the various issues encountered in data mining? List down the applications of data mining.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT353CO_U03",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT353CO_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT353CO_2025_regular_A1a",
+          "group": "A",
+          "number": "1a",
+          "marks": 4,
+          "text": "Define association rule mining with appropriate examples.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT353CO_U03",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT353CO_2025_regular_A1b",
+          "group": "A",
+          "number": "1b",
+          "marks": 4,
+          "text": "What are the various issues encountered in data mining?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT353CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT353CO_2025_regular_A1c",
+          "group": "A",
+          "number": "1c",
+          "marks": 4,
+          "text": "List down the applications of data mining.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT353CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT353CO_2025_regular_A2",
+      "group": "A",
+      "number": "2",
+      "marks": 12,
+      "text": "If a data analyst had to classify following data using classification by decision tree induction, which attribute would be the root node? Find out the root node. [Table with RID, age, income, student, credit_rating, class:buys_computer]",
+      "question_type": "numerical",
+      "units": [
+        {
+          "unit_id": "BIT353CO_U05",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": true,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT353CO_2025_regular_A3",
+      "group": "A",
+      "number": "3",
+      "marks": 12,
+      "text": "Describe the knowledge discovery process in detail with a neat diagram.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT353CO_U02",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": true,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT353CO_2025_regular_B4",
+      "group": "B",
+      "number": "4",
+      "marks": 8,
+      "text": "Explain the data warehouse architecture.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT353CO_U02",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT353CO_2025_regular_B5",
+      "group": "B",
+      "number": "5",
+      "marks": 8,
+      "text": "Differentiate between OLAP and OLTP.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT353CO_U02",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT353CO_2025_regular_B6",
+      "group": "B",
+      "number": "6",
+      "marks": 8,
+      "text": "Explain various classical partitioning methods.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT353CO_U02",
+          "confidence": "medium"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT353CO_2025_regular_B7",
+      "group": "B",
+      "number": "7",
+      "marks": 8,
+      "text": "Explain genetic algorithm with proper example.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT353CO_U01",
+          "confidence": "low"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "low",
+      "sub_parts": [],
+      "needs_review": true,
+      "notes": "question confidence is 'low'; low-confidence tag BIT353CO_U01"
+    },
+    {
+      "question_id": "BIT353CO_2025_regular_B8",
+      "group": "B",
+      "number": "8",
+      "marks": 8,
+      "text": "What do you mean by metadata? Write down the steps to be followed in data pre-processing?",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT353CO_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT353CO_2025_regular_B8a",
+          "group": "B",
+          "number": "8a",
+          "marks": 4,
+          "text": "What do you mean by metadata?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT353CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT353CO_2025_regular_B8b",
+          "group": "B",
+          "number": "8b",
+          "marks": 4,
+          "text": "Write down the steps to be followed in data pre-processing?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT353CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT353CO_2025_regular_B9",
+      "group": "B",
+      "number": "9",
+      "marks": 8,
+      "text": "Define network topology. Explain Bayes theorem with appropriate example.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT353CO_U01",
+          "confidence": "low"
+        },
+        {
+          "unit_id": "BIT353CO_U05",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "low",
+      "sub_parts": [
+        {
+          "question_id": "BIT353CO_2025_regular_B9a",
+          "group": "B",
+          "number": "9a",
+          "marks": 4,
+          "text": "Define network topology.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT353CO_U01",
+              "confidence": "low"
+            }
+          ],
+          "confidence": "low",
+          "needs_review": true,
+          "notes": "question confidence is 'low'; low-confidence tag BIT353CO_U01"
+        },
+        {
+          "question_id": "BIT353CO_2025_regular_B9b",
+          "group": "B",
+          "number": "9b",
+          "marks": 4,
+          "text": "Explain Bayes theorem with appropriate example.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT353CO_U05",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": true,
+      "notes": "question confidence is 'low'; low-confidence tag BIT353CO_U01"
+    },
+    {
+      "question_id": "BIT353CO_2025_regular_B10",
+      "group": "B",
+      "number": "10",
+      "marks": 8,
+      "text": "“Data warehouse is non-volatile, integrated, time-variant and subject-oriented collection of data for decision-making process.” Explain this statement in detail.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT353CO_U02",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": false
+    },
+    {
+      "question_id": "BIT353CO_2025_regular_B11",
+      "group": "B",
+      "number": "11",
+      "marks": 8,
+      "text": "Write short notes on Any TWO:",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT353CO_U04",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT353CO_U05",
+          "confidence": "low"
+        },
+        {
+          "unit_id": "BIT353CO_U06",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 2,
+      "confidence": "high",
+      "choose": 2,
+      "sub_parts": [
+        {
+          "question_id": "BIT353CO_2025_regular_B11a",
+          "group": "B",
+          "number": "11a",
+          "marks": 4,
+          "text": "Multi-dimensional association rules",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT353CO_U04",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT353CO_2025_regular_B11b",
+          "group": "B",
+          "number": "11b",
+          "marks": 4,
+          "text": "Back propagation in Multilayer Feed Forward Network",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT353CO_U05",
+              "confidence": "low"
+            }
+          ],
+          "confidence": "low",
+          "needs_review": true,
+          "notes": "question confidence is 'low'; low-confidence tag BIT353CO_U05"
+        },
+        {
+          "question_id": "BIT353CO_2025_regular_B11c",
+          "group": "B",
+          "number": "11c",
+          "marks": 4,
+          "text": "Cluster analysis",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT353CO_U06",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": true,
+      "notes": "low-confidence tag BIT353CO_U05"
+    }
+  ],
+  "source_files": [
+    "work\\pages\\BIT353CO_2025_regular_p1.png",
+    "work\\pages\\BIT353CO_2025_regular_p2.png"
+  ],
+  "coverage": {
+    "by_group": [
+      {
+        "label": "A",
+        "questions_extracted": 3,
+        "questions_printed": 3
+      },
+      {
+        "label": "B",
+        "questions_extracted": 8,
+        "questions_printed": 8
+      }
+    ],
+    "status": "complete",
+    "notes": "Derived from the extraction, not self-reported by the model."
+  }
+}

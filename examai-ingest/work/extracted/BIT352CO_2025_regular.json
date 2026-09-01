@@ -1,0 +1,915 @@
+{
+  "paper_id": "BIT352CO_2025_regular",
+  "subject_code": "BIT352CO",
+  "subject_name": "Management Information System",
+  "semester": 6,
+  "year": 2025,
+  "exam_type": "regular",
+  "curriculum": "new_course",
+  "full_marks": 80,
+  "pass_marks": 32,
+  "duration_hours": 3,
+  "extraction_notes": "",
+  "groups": [
+    {
+      "label": "A",
+      "questions_printed": 3,
+      "answer_count": 2,
+      "marks_each": 12,
+      "marks_total": 24,
+      "instruction": "Answer TWO questions."
+    },
+    {
+      "label": "B",
+      "questions_printed": 8,
+      "answer_count": 7,
+      "marks_each": 8,
+      "marks_total": 56,
+      "instruction": "Answer SEVEN questions."
+    }
+  ],
+  "questions": [
+    {
+      "question_id": "BIT352CO_2025_regular_A1",
+      "group": "A",
+      "number": "1",
+      "marks": 12,
+      "text": "Identify the various levels of the organizational hierarchy. Which information system is used in which level and how these information systems are related to each other? Describe.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT352CO_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT352CO_2025_regular_A1a",
+          "group": "A",
+          "number": "1a",
+          "marks": 4,
+          "text": "Identify the various levels of the organizational hierarchy.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT352CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT352CO_2025_regular_A1b",
+          "group": "A",
+          "number": "1b",
+          "marks": 4,
+          "text": "Which information system is used in which level",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT352CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT352CO_2025_regular_A1c",
+          "group": "A",
+          "number": "1c",
+          "marks": 4,
+          "text": "and how these information systems are related to each other? Describe.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT352CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": true,
+      "solution_path": "solutions/BIT352CO/2025/BIT352CO_2025_regular_A1.md",
+      "marking_scheme": [
+        {
+          "point": "Identifies Operational Level and its focus",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies Tactical Level and its focus",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies Strategic Level and its focus",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States a distinguishing characteristic of hierarchy levels (e.g., time horizon, scope)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Names TPS for Operational Level",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains TPS functionality (e.g., routine transaction processing)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Names MIS/DSS for Tactical Level",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains MIS/DSS functionality (e.g., reporting, what-if analysis)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Names EIS/ESS for Strategic Level",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains EIS/ESS functionality (e.g., summarized strategic info, external data)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes the general flow of information (upwards, aggregation)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains how TPS data feeds MIS/DSS which then feed EIS/ESS (hierarchical dependency)",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT352CO_2025_regular_A2",
+      "group": "A",
+      "number": "2",
+      "marks": 12,
+      "text": "How are organizations and information systems related? Explain the major impacts of information systems on organizations.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT352CO_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT352CO_2025_regular_A2a",
+          "group": "A",
+          "number": "2a",
+          "marks": 4,
+          "text": "How are organizations and information systems related?",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT352CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT352CO_2025_regular_A2b",
+          "group": "A",
+          "number": "2b",
+          "marks": 8,
+          "text": "Explain the major impacts of information systems on organizations.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT352CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": true,
+      "solution_path": "solutions/BIT352CO/2025/BIT352CO_2025_regular_A2.md",
+      "marking_scheme": [
+        {
+          "point": "states that organizations and IS are deeply intertwined/interdependent",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "explains how IS serve organizational goals/processes",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "explains how organizations depend on IS",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "explains the reciprocal relationship or how IS also shape organizations (socio-technical view)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "explains impact on Organizational Structure (e.g., flattening hierarchies, decentralization, virtual organizations)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "provides an example or further detail for the structural impact",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "explains impact on Business Processes (e.g., automation, efficiency, reengineering, integration)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "provides an example or further detail for the process impact",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "explains impact on Decision-Making (e.g., data access, analytics, faster response, improved forecasting)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "provides an example or further detail for the decision-making impact",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "explains impact on Strategy and Competition (e.g., competitive advantage, new business models, market reach)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "provides an example or further detail for the strategy/competition impact",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT352CO_2025_regular_A3",
+      "group": "A",
+      "number": "3",
+      "marks": 12,
+      "text": "Define IT and IT infrastructure. Explain the components of IT infrastructure with examples of each component.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT352CO_U04",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [
+        {
+          "question_id": "BIT352CO_2025_regular_A3a",
+          "group": "A",
+          "number": "3a",
+          "marks": 4,
+          "text": "Define IT and IT infrastructure.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT352CO_U04",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT352CO_2025_regular_A3b",
+          "group": "A",
+          "number": "3b",
+          "marks": 8,
+          "text": "Explain the components of IT infrastructure with examples of each component.",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT352CO_U04",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": true,
+      "solution_path": "solutions/BIT352CO/2025/BIT352CO_2025_regular_A3.md",
+      "marking_scheme": [
+        {
+          "point": "Defines Information Technology (IT) with reference to its purpose (process, store, exchange data) and scope (hardware, software, services).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Defines IT Infrastructure as the foundational framework of physical/virtual resources supporting the IT environment.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains Hardware components (physical devices for processing/storage/transmission) with relevant examples (e.g., servers, client devices, storage devices).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains Software components (programs/applications for tasks, management, interaction) with relevant examples (e.g., OS, enterprise apps, DBMS).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains Networking components (connecting resources for communication) with relevant examples (e.g., routers, switches, firewalls, cabling, protocols).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains Data Management components (systems/processes for storing, organizing, protecting data) with relevant examples (e.g., database systems, SAN/NAS, backup/recovery systems).",
+          "marks": 2,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT352CO_2025_regular_B4",
+      "group": "B",
+      "number": "4",
+      "marks": 8,
+      "text": "How are information systems transforming modern business and how do they support globalization?",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT352CO_U01",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT352CO_U02",
+          "confidence": "medium"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "solution_path": "solutions/BIT352CO/2025/BIT352CO_2025_regular_B4.md",
+      "marking_scheme": [
+        {
+          "point": "Explains that IS automate processes and improve efficiency (e.g., ERP).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States that IS enhance decision-making through data analytics/BI.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Discusses how IS improve customer experience/engagement (e.g., CRM, e-commerce).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Mentions how IS enable new business models (e.g., digital platforms, sharing economy).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Highlights the role of IS in improving global communication and coordination.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains how IS expand market reach through e-commerce and digital presence.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes how IS streamline global supply chain management.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Notes that IS facilitate standardization and integration of global operations.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT352CO_2025_regular_B5",
+      "group": "B",
+      "number": "5",
+      "marks": 8,
+      "text": "What is a business process? Briefly explain about examples of business process for functional areas of the business.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT352CO_U01",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT352CO_U07",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "solution_path": "solutions/BIT352CO/2025/BIT352CO_2025_regular_B5.md",
+      "marking_scheme": [
+        {
+          "point": "Defines a business process as a collection of related activities/tasks producing a service/product for a customer/market, achieving a goal, and often crossing departmental boundaries.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Provides an example of a business process for Sales & Marketing (e.g., Order-to-Cash) and briefly explains it.",
+          "marks": 1.5,
+          "required": true
+        },
+        {
+          "point": "Provides an example of a business process for Manufacturing/Production (e.g., Production Planning) and briefly explains it.",
+          "marks": 1.5,
+          "required": true
+        },
+        {
+          "point": "Provides an example of a business process for Finance & Accounting (e.g., Accounts Payable or Payroll Processing) and briefly explains it.",
+          "marks": 1.5,
+          "required": true
+        },
+        {
+          "point": "Provides an example of a business process for Human Resources (e.g., Recruitment & Onboarding) and briefly explains it. (An example from R&D can be accepted here as an optional alternative for a functional area.)",
+          "marks": 1.5,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT352CO_2025_regular_B6",
+      "group": "B",
+      "number": "6",
+      "marks": 8,
+      "text": "Define value chain model and explain the activities associated to the value chain model.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT352CO_U03",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "solution_path": "solutions/BIT352CO/2025/BIT352CO_2025_regular_B6.md",
+      "marking_scheme": [
+        {
+          "point": "Defines Value Chain Model, mentioning Porter and its purpose of identifying competitive advantage.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "States the two main categories of activities: Primary Activities and Support Activities.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the five Primary Activities (Inbound Logistics, Operations, Outbound Logistics, Marketing & Sales, Service), with a brief description for each. (0.6 marks per activity explanation)",
+          "marks": 3,
+          "required": true
+        },
+        {
+          "point": "Explains the four Support Activities (Firm Infrastructure, Human Resource Management, Technology Development, Procurement), with a brief description for each. (0.5 marks per activity explanation)",
+          "marks": 2,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT352CO_2025_regular_B7",
+      "group": "B",
+      "number": "7",
+      "marks": 8,
+      "text": "\"Using a database system helps to improve business performance\". Explain.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT352CO_U01",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT352CO_U07",
+          "confidence": "medium"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "solution_path": "solutions/BIT352CO/2025/BIT352CO_2025_regular_B7.md",
+      "marking_scheme": [
+        {
+          "point": "Explains how databases improve data organization and consistency, reducing redundancy and errors.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains how databases enhance data accessibility, enabling timely and informed decision-making.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains how databases ensure better data integrity and security, protecting information.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains how databases facilitate reporting, analytics, and improve operational efficiency.",
+          "marks": 2,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT352CO_2025_regular_B8",
+      "group": "B",
+      "number": "8",
+      "marks": 8,
+      "text": "Define vulnerability. Briefly write about tools and techniques used for safeguarding organizational information resources.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT352CO_U08",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "solution_path": "solutions/BIT352CO/2025/BIT352CO_2025_regular_B8.md",
+      "marking_scheme": [
+        {
+          "point": "Defines vulnerability as a weakness/flaw that can be exploited by a threat",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "States Access Control Systems as a safeguarding tool and explains its purpose (authentication/authorization)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States Encryption as a safeguarding tool and explains its purpose (data confidentiality for data at rest/in transit)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States Firewalls as a safeguarding tool and explains its purpose (network traffic filtering/barrier)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States Intrusion Detection/Prevention Systems (IDPS) as a safeguarding tool and explains its purpose (monitoring/blocking malicious activity)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States Antivirus and Anti-malware Software as a safeguarding tool and explains its purpose (detecting/removing malicious software)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States Security Policies and Employee Training as a safeguarding technique and explains its purpose (guidelines/education for human factors)",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT352CO_2025_regular_B9",
+      "group": "B",
+      "number": "9",
+      "marks": 8,
+      "text": "Write down the key functions and applications of marketing information system.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT352CO_U07",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "solution_path": "solutions/BIT352CO/2025/BIT352CO_2025_regular_B9.md",
+      "marking_scheme": [
+        {
+          "point": "Explains the concept of a Marketing Information System (MIS)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States Data Collection and Storage as a function",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States Data Processing and Analysis as a function",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States Information Dissemination as a function",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States Identifying Market Opportunities and Problems as an application",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States Developing Marketing Strategies (e.g., 4Ps) as an application",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States Evaluating Marketing Performance as an application",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States Sales Forecasting and Planning / Customer Relationship Management (any one) as an application",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT352CO_2025_regular_B10",
+      "group": "B",
+      "number": "10",
+      "marks": 8,
+      "text": "Explain enterprise software application with examples. Write the roles of enterprise system in an organization.",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT352CO_U09",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "sub_parts": [],
+      "needs_review": true,
+      "solution_path": "solutions/BIT352CO/2025/BIT352CO_2025_regular_B10.md",
+      "marking_scheme": [
+        {
+          "point": "Explains enterprise software application, highlighting its purpose (e.g., large-scale, integrated, supports various business functions, integrates processes/data/resources).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Provides at least one example of enterprise software (e.g., ERP, CRM, SCM).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Briefly describes the chosen example.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States \"Integration of Business Processes\" as a role and explains it.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States \"Improved Efficiency and Productivity\" as a role and explains it.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States \"Centralized Data Management and Enhanced Decision-Making\" as a role and explains it.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States \"Standardization of Business Processes\" or \"Better Customer Service/Supply Chain Optimization\" as a role and explains it.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    },
+    {
+      "question_id": "BIT352CO_2025_regular_B11",
+      "group": "B",
+      "number": "11",
+      "marks": 8,
+      "text": "Write short notes on Any TWO: (a) SISP (b) Components of DSS (c) Quality Information System",
+      "question_type": "written",
+      "units": [
+        {
+          "unit_id": "BIT352CO_U10",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT352CO_U06",
+          "confidence": "high"
+        },
+        {
+          "unit_id": "BIT352CO_U01",
+          "confidence": "high"
+        }
+      ],
+      "has_diagram": false,
+      "source_page": 1,
+      "confidence": "high",
+      "choose": 2,
+      "sub_parts": [
+        {
+          "question_id": "BIT352CO_2025_regular_B11a",
+          "group": "B",
+          "number": "11a",
+          "marks": 4,
+          "text": "SISP",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT352CO_U10",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT352CO_2025_regular_B11b",
+          "group": "B",
+          "number": "11b",
+          "marks": 4,
+          "text": "Components of DSS",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT352CO_U06",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        },
+        {
+          "question_id": "BIT352CO_2025_regular_B11c",
+          "group": "B",
+          "number": "11c",
+          "marks": 4,
+          "text": "Quality Information System",
+          "question_type": "written",
+          "units": [
+            {
+              "unit_id": "BIT352CO_U01",
+              "confidence": "high"
+            }
+          ],
+          "confidence": "high",
+          "needs_review": false
+        }
+      ],
+      "needs_review": true,
+      "solution_path": "solutions/BIT352CO/2025/BIT352CO_2025_regular_B11.md",
+      "marking_scheme": [
+        {
+          "point": "Defines SISP as a process for aligning IS with business strategy.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States its objective: to identify and plan IS that support business goals/competitive advantage.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Mentions it involves analyzing business strategy and current IS capabilities (or similar key step).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States the outcome is an IT plan that guides IS development.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Briefly defines a DSS.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies and describes the Data Management Subsystem (or Data Subsystem).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies and describes the Model Management Subsystem (or Model Subsystem).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies and describes the User Interface Subsystem (or Dialogue System).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines a Quality Information System as one that provides accurate, timely, and relevant information.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the characteristic of Accuracy and/or Timeliness.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the characteristic of Relevance and/or Completeness.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States its importance, e.g., for better decision-making or improved efficiency.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
+    }
+  ],
+  "source_files": [
+    "work\\pages\\BIT352CO_2025_regular_p1.png"
+  ],
+  "coverage": {
+    "by_group": [
+      {
+        "label": "A",
+        "questions_extracted": 3,
+        "questions_printed": 3
+      },
+      {
+        "label": "B",
+        "questions_extracted": 8,
+        "questions_printed": 8
+      }
+    ],
+    "status": "complete",
+    "notes": "Derived from the extraction, not self-reported by the model."
+  }
+}
