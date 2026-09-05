@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { callGemini, GeminiContent } from "@/lib/gemini";
+import { askSupreme, isSupremeAskConfigured, SupremeAskError } from "@/lib/supremeAsk";
 import { adminAuth } from "@/lib/firebase-admin";
 import { spendCredits, CREDIT_COSTS, CREDIT_REWARDS } from "@/lib/entitlements";
 
@@ -59,9 +60,13 @@ export async function POST(request: NextRequest) {
     }
 
     // Checked after auth so an anonymous caller learns nothing about how the
-    // service is configured.
+    // service is configured. The Supreme AI gateway (/ask) is preferred when
+    // configured — it's a thin passthrough, not a replacement decision: the
+    // direct-Gemini path below stays as the fallback for local dev / an
+    // unconfigured gateway, so this cannot regress existing deployments.
+    const useSupreme = isSupremeAskConfigured();
     const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) {
+    if (!useSupreme && !apiKey) {
       return NextResponse.json({ error: "Tutor unavailable" }, { status: 503 });
     }
 
@@ -106,18 +111,40 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const contents: GeminiContent[] = cleaned.map((m) => ({
-      role: m.role === "assistant" ? "model" : "user",
-      parts: [{ text: m.content }],
-    }));
-
     const basePrompt = mode === "socratic" ? SOCRATIC_PROMPT : EXPLAIN_PROMPT;
-    const system = topic
+    const persona = topic
       ? `${basePrompt}\n\nThe student is currently working on:\n"${topic}"\n\nAnchor your reply to this specific work.`
       : basePrompt;
 
-    // Explaining properly needs more room than asking a question does.
-    const reply = await callGemini(apiKey, system, contents, mode === "explain" ? 900 : 400);
+    let reply: string;
+    if (useSupreme) {
+      try {
+        const result = await askSupreme({
+          messages: cleaned,
+          user_id: decoded.uid,
+          persona,
+          session_id: topic,
+        });
+        reply = result.answer;
+      } catch (err) {
+        // Gateway rejected or was unreachable — fall back to direct Gemini
+        // rather than failing a request the student already spent a credit on.
+        console.error("Supreme AI /ask failed, falling back to direct Gemini:", err instanceof SupremeAskError ? err.message : err);
+        if (!apiKey) throw err;
+        const contents: GeminiContent[] = cleaned.map((m) => ({
+          role: m.role === "assistant" ? "model" : "user",
+          parts: [{ text: m.content }],
+        }));
+        reply = await callGemini(apiKey, persona, contents, mode === "explain" ? 900 : 400);
+      }
+    } else {
+      const contents: GeminiContent[] = cleaned.map((m) => ({
+        role: m.role === "assistant" ? "model" : "user",
+        parts: [{ text: m.content }],
+      }));
+      // Explaining properly needs more room than asking a question does.
+      reply = await callGemini(apiKey!, persona, contents, mode === "explain" ? 900 : 400);
+    }
 
     return NextResponse.json({
       reply: reply || "Can you tell me more about your thinking so far?",
