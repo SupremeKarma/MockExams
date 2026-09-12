@@ -15,16 +15,10 @@ import { writeFileSync, mkdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { bitSyllabusData } from "../src/data/bitSyllabusData";
+import { deriveUnitId } from "../src/lib/examai/syllabus-units";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const OUT_DIR = path.join(HERE, "..", "examai-ingest", "schema");
-
-/** Stable, human-readable unit id: <SUBJECT>_U<NN>. Position-derived, so
- *  reordering keyUnits renumbers — treat the syllabus array order as the
- *  contract, and never renumber after questions have been tagged. */
-function unitId(subjectCode: string, index: number): string {
-    return `${subjectCode}_U${String(index + 1).padStart(2, "0")}`;
-}
 
 const wanted = process.argv[2] ? Number(process.argv[2]) : null;
 
@@ -40,7 +34,7 @@ for (const sem of bitSyllabusData) {
             subject_code: s.code,
             subject_name: s.name,
             credits: s.credits,
-            units: s.keyUnits.map((u, i) => ({ unit_id: unitId(s.code, i), title: u })),
+            units: s.keyUnits.map((u, i) => ({ unit_id: deriveUnitId(s.code, i), title: u })),
         }));
 
     const payload = {
