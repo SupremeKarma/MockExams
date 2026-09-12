@@ -15,6 +15,7 @@ import {
   ScanLine,
   LayoutGrid,
   ClipboardList,
+  FileEdit,
   X,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
@@ -257,6 +258,7 @@ export default function AdminDashboard() {
                <AdminNavCard icon={<FileText className="w-5 h-5" />} title="Exams" desc="Content" href="/admin/exams" tint="bg-emerald-50 text-emerald-600" />
                <AdminNavCard icon={<ScanLine className="w-5 h-5" />} title="Past papers" desc="ExamAI" href="/admin/papers" tint="bg-rose-50 text-rose-600" />
                <AdminNavCard icon={<LayoutGrid className="w-5 h-5" />} title="Courses" desc="ExamAI" href="/admin/courses" tint="bg-indigo-50 text-indigo-600" />
+               <AdminNavCard icon={<FileEdit className="w-5 h-5" />} title="Notes" desc="ExamAI" href="/admin/notes" tint="bg-sky-50 text-sky-600" />
                <AdminNavCard icon={<ClipboardList className="w-5 h-5" />} title="Mock exams" desc="ExamAI" href="/admin/mock-exams" tint="bg-teal-50 text-teal-600" />
                <AdminNavCard icon={<Database className="w-5 h-5" />} title="Orgs" desc="Entities" href="/admin/organizations" tint="bg-amber-50 text-amber-600" />
                <AdminNavCard icon={<Settings className="w-5 h-5" />} title="Settings" desc="Config" href="/settings" tint="bg-violet-50 text-violet-600" />
