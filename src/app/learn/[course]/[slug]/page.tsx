@@ -78,11 +78,17 @@ export default async function TopicPage({ params, searchParams }: PageProps) {
   const ancestors = await getAncestors(node.path);
   const coursePath = ancestors.find((a) => a.kind === "course")?.path ?? node.path;
 
+  // Extraction tags questions at unit granularity, not topic — see
+  // src/lib/examai/asked-in.ts — so a unit-level "asked in" question surfaces
+  // on every topic page beneath it via the containing unit's uuid.
+  const unitUuid = ancestors.find((a) => a.kind === "unit")?.uuid;
+  const askedInNodeUuids = unitUuid ? [node.uuid, unitUuid] : [node.uuid];
+
   const [sections, tree, adjacent, askedIn] = await Promise.all([
     getSections(document.version_uuid),
     getCourseTree(coursePath),
     getAdjacentTopics(coursePath, node.path),
-    getAskedIn(node.uuid),
+    getAskedIn(askedInNodeUuids),
   ]);
 
   // Rebuild the body from the stored sections rather than the version's raw

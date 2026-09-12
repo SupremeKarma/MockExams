@@ -14,6 +14,15 @@ import type { ExamType } from "./types";
 // examai-api/migrations/005_question_topics_view.sql — so the real gate
 // ("never show a question from an unpublished paper") is enforced here,
 // against Firestore, not assumed from the Postgres side.
+//
+// Extraction tags questions at UNIT granularity only (the vocabulary in
+// examai-ingest/schema/units.sem*.json has no per-topic ids), while a Reader
+// page is always a single topic. Querying the topic's own uuid alone would
+// therefore never match anything real. The caller passes the topic's uuid
+// plus its containing unit's uuid, and a unit-level tag surfaces on every
+// topic beneath that unit — coarser than "asked about exactly this topic",
+// but an honest reflection of the granularity extraction actually produces
+// today. Narrow this once tagging reaches topic level.
 
 export interface AskedInQuestion {
   paperId: string;
@@ -25,15 +34,10 @@ export interface AskedInQuestion {
   examType: ExamType;
 }
 
-interface QuestionLink {
-  question_ref: string;
-  role: "primary" | "secondary";
-}
-
 /** Groups qIds by paperId. `question_ref` is `"{paperId}/{qId}"` — see tagging.py. */
-function groupByPaper(links: QuestionLink[]): Map<string, string[]> {
+function groupByPaper(refs: string[]): Map<string, string[]> {
   const byPaper = new Map<string, string[]>();
-  for (const { question_ref } of links) {
+  for (const question_ref of refs) {
     const slash = question_ref.indexOf("/");
     if (slash < 0) continue;
     const paperId = question_ref.slice(0, slash);
@@ -45,19 +49,21 @@ function groupByPaper(links: QuestionLink[]): Map<string, string[]> {
   return byPaper;
 }
 
-export async function getAskedIn(nodeUuid: string): Promise<AskedInQuestion[]> {
-  const links = await readQuery<QuestionLink>(
-    `SELECT question_ref, role
+export async function getAskedIn(nodeUuids: string[]): Promise<AskedInQuestion[]> {
+  if (nodeUuids.length === 0) return [];
+
+  const links = await readQuery<{ question_ref: string }>(
+    `SELECT DISTINCT question_ref
        FROM examai.published_question_topics
-      WHERE node_uuid = $1
-      ORDER BY role, question_ref`,
-    [nodeUuid]
+      WHERE node_uuid = ANY($1::uuid[])
+      ORDER BY question_ref`,
+    [nodeUuids]
   );
   if (links.length === 0) return [];
 
   const results: AskedInQuestion[] = [];
 
-  for (const [paperId, qIds] of groupByPaper(links)) {
+  for (const [paperId, qIds] of groupByPaper(links.map((l) => l.question_ref))) {
     const paperSnap = await adminDb.collection("papers").doc(paperId).get();
     if (!paperSnap.exists) continue;
 

@@ -34,6 +34,7 @@ from pydantic import ValidationError  # noqa: E402
 from app.derive import build_documents  # noqa: E402
 from app.paths import original_path  # noqa: E402
 from app.schemas import ExtractedPaper  # noqa: E402
+from app.syllabus import tagging  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 EXTRACTED_DIR = REPO_ROOT / "examai-ingest" / "work" / "extracted"
@@ -164,6 +165,15 @@ def main() -> int:
             question_docs.append(question.to_firestore())
 
         firebase.write_paper_with_questions(paper.to_firestore(), question_docs)
+
+        try:
+            outcome = tagging.sync_paper_topics(paper_id)
+            print(
+                f"     spine links: {outcome['linked']} linked, "
+                f"{outcome['unresolved']} unresolved"
+            )
+        except Exception as exc:  # noqa: BLE001 — a link-sync failure must not fail the import
+            print(f"     spine link sync skipped: {exc}")
 
         if args.upload_scans:
             for index, source in enumerate(source_files):

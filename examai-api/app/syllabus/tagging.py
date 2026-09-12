@@ -20,8 +20,9 @@ would be a silent misattribution — exactly the mistake `docs/spine.md` and
 from __future__ import annotations
 
 import re
-from typing import Any
+from typing import Any, Iterable
 
+from .. import firebase
 from . import repository
 
 _UNIT_ID_RE = re.compile(r"^([A-Za-z0-9]+)_U(\d+)$")
@@ -79,3 +80,31 @@ def sync_question_topics(question_ref: str, unit_tags: list[dict[str, Any]]) -> 
         linked += 1
 
     return {"linked": linked, "unresolved": unresolved}
+
+
+def sync_paper_topics(paper_id: str, removed_ids: Iterable[str] = ()) -> dict[str, int]:
+    """Bring every question_topics link for a paper up to date.
+
+    Reads questions back from Firestore rather than trusting a caller's own
+    copy of them: `write_paper_with_questions` may have kept an approved
+    question as-is or merged in a reviewer's unit tags, and that merged result
+    — not whatever was about to be written — is what the links must describe.
+
+    Shared by the live extraction stage and the examai-ingest import script,
+    so a paper's links describe it the same way regardless of which path
+    wrote it.
+    """
+    for question_ref in removed_ids:
+        repository.unlink_question(f"{paper_id}/{question_ref}")
+
+    linked_total = 0
+    unresolved_total = 0
+    for question in firebase.list_questions(paper_id):
+        q_id = question.get("qId")
+        if not q_id:
+            continue
+        outcome = sync_question_topics(f"{paper_id}/{q_id}", question.get("syllabusUnits") or [])
+        linked_total += outcome["linked"]
+        unresolved_total += outcome["unresolved"]
+
+    return {"linked": linked_total, "unresolved": unresolved_total}
