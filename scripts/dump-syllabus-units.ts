@@ -14,7 +14,7 @@
 import { writeFileSync, mkdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { bitSyllabusData } from "../src/data/bitSyllabusData.ts";
+import { bitSyllabusData } from "../src/data/bitSyllabusData";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const OUT_DIR = path.join(HERE, "..", "examai-ingest", "schema");

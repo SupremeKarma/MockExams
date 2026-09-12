@@ -46,7 +46,66 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT352CO/2026/BIT352CO_2026_regular_A1.md",
+      "marking_scheme": [
+        {
+          "point": "Defines IT infrastructure, mentioning its components (hardware, software, network, services).",
+          "marks": 3,
+          "required": true
+        },
+        {
+          "point": "States that hardware platforms are evolving.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Discusses Cloud Computing as a hardware trend (e.g., on-demand resources, virtualization).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Discusses Mobile Computing as a hardware trend (e.g., smartphones, tablets as primary access).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Discusses Virtualization as a hardware trend (e.g., efficient resource use, multiple OS on one server).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Discusses Edge Computing and/or IoT devices as hardware trends (e.g., processing closer to data source).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States that software platforms are evolving.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Discusses Open Source Software as a software trend (e.g., cost savings, flexibility).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Discusses Cloud-based Software/SaaS as a software trend (e.g., subscription model, accessibility).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Discusses Containerization (Docker, Kubernetes) as a software trend (e.g., portability, consistency).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Discusses AI/ML Software as a software trend (e.g., data analysis, automation).",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT352CO_2026_regular_A2",
@@ -69,7 +128,76 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT352CO/2026/BIT352CO_2026_regular_A2.md",
+      "marking_scheme": [
+        {
+          "point": "Defines Executive Information System (EIS) as a DSS for top management, focused on strategic decision-making and critical success factors.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "States EIS is tailored to individual executives/customizable dashboards.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States EIS has drill-down capability.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States EIS uses a Graphical User Interface (GUI).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States EIS integrates internal and external data.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States EIS uses exception reporting/alerting.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States EIS provides status access and/or trend analysis.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains MIS is needed to deal with data overload and transform it into meaningful information.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains MIS is needed for faster and better decision-making.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains MIS is needed for improved efficiency and productivity.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains MIS's role in facilitating decision-making for all management levels.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains MIS's role in performance monitoring and control (KPIs).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains MIS's role in resource management/optimization OR identifying problems/opportunities OR achieving competitive advantage.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT352CO_2026_regular_A3",
@@ -88,7 +216,46 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT352CO/2026/BIT352CO_2026_regular_A3.md",
+      "marking_scheme": [
+        {
+          "point": "Introduction: States that managers rely on IS for effective decision-making.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains Transaction Processing Systems (TPS), its purpose, and how it supports operational decision-making.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains Management Information Systems (MIS), its purpose, and how it supports structured decision-making.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains Decision Support Systems (DSS), its purpose, and how it supports semi-structured/unstructured decision-making.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains Executive Information Systems (EIS/ESS), its purpose, and how it supports strategic decision-making.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains two additional types of information systems (e.g., ERP, CRM, SCM, KWS) and how they support managerial decisions.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Conclusion: Summarizes the overall importance and interconnectedness of these systems for managers.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT352CO_2026_regular_B4",
@@ -107,7 +274,61 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT352CO/2026/BIT352CO_2026_regular_B4.md",
+      "marking_scheme": [
+        {
+          "point": "Identifies software bugs/flaws as a reason for vulnerability",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies misconfigurations as a reason for vulnerability",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies human error/lack of awareness as a reason for vulnerability",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies outdated software/lack of patches as a reason for vulnerability",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains access control mechanisms as a safeguarding measure",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains security software/hardware (e.g., firewall, antivirus) as a safeguarding measure",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains regular updates/patch management as a safeguarding measure",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains employee training/awareness as a safeguarding measure",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains data encryption as a safeguarding measure",
+          "marks": 1,
+          "required": false
+        },
+        {
+          "point": "Explains backup and disaster recovery as a safeguarding measure",
+          "marks": 1,
+          "required": false
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT352CO_2026_regular_B5",
@@ -126,7 +347,41 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT352CO/2026/BIT352CO_2026_regular_B5.md",
+      "marking_scheme": [
+        {
+          "point": "Provides a brief definition/purpose of a DSS.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Discusses the Data Management function with a suitable example.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Discusses the Model Management function with a suitable example.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Discusses the User Interface / Dialog Management function.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Discusses the Reporting and Presentation function with a suitable example.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Discusses What-if and Goal-seeking Analysis with a suitable example.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT352CO_2026_regular_B6",
@@ -145,7 +400,51 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT352CO/2026/BIT352CO_2026_regular_B6.md",
+      "marking_scheme": [
+        {
+          "point": "Defines SISP as a long-term plan that aligns IT with business objectives",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States its purpose is to gain competitive advantage or achieve business goals",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Mentions it acts as a roadmap for IT development/deployment",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the Business-Driven Approach (Alignment Strategy)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the Competitive Advantage Strategy",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the Customer-Centric Strategy",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the Process Innovation and Efficiency Strategy",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the Growth and Market Expansion Strategy",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT352CO_2026_regular_B7",
@@ -164,7 +463,36 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT352CO/2026/BIT352CO_2026_regular_B7.md",
+      "marking_scheme": [
+        {
+          "point": "Defines DSS and lists its three main components (Data, Model, User Interface).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the Data Subsystem, including its purpose, sources of data (internal/external), and functions (e.g., extraction, querying).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains the Model Subsystem, including its purpose, types of models (e.g., statistical, optimization, simulation), and functions (e.g., creation, execution).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains the User Interface Subsystem, including its purpose, input mechanisms, and output presentation methods (e.g., reports, charts).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Briefly describes the interrelationship or how these components work together.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT352CO_2026_regular_B8",
@@ -183,7 +511,41 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT352CO/2026/BIT352CO_2026_regular_B8.md",
+      "marking_scheme": [
+        {
+          "point": "Defines Supply Chain Management (SCM) covering flow of goods/information/finances from origin to consumption, and integration of processes/entities.",
+          "marks": 3,
+          "required": true
+        },
+        {
+          "point": "States \"Improve Customer Satisfaction\" as a goal and explains it.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States \"Reduce Operating Costs\" as a goal and explains it.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States \"Enhance Efficiency and Productivity\" as a goal and explains it.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States \"Improve Quality\" as a goal and explains it.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States \"Foster Collaboration/Relationships\" or \"Manage Risk/Build Resilience\" as a goal and explains it.",
+          "marks": 1,
+          "required": false
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT352CO_2026_regular_B9",
@@ -202,7 +564,46 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT352CO/2026/BIT352CO_2026_regular_B9.md",
+      "marking_scheme": [
+        {
+          "point": "Defines CRM as a strategy/system for managing customer interactions and data",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "States its purpose is to improve relationships, retention, and sales growth",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies Improved Customer Satisfaction/Loyalty as a benefit",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies Enhanced Customer Retention as a benefit",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies Increased Sales and Revenue as a benefit",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies Better Data Organization/Accessibility as a benefit",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies Streamlined Business Processes as a benefit",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT352CO_2026_regular_B10",
@@ -221,7 +622,36 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT352CO/2026/BIT352CO_2026_regular_B10.md",
+      "marking_scheme": [
+        {
+          "point": "Explains how improved data accessibility and sharing enhances business performance (e.g., collaboration, faster response, operational efficiency).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains how enhanced data integrity and consistency improves business performance (e.g., reliable data, reduced errors, trustworthy decisions).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains how better decision-making capabilities (via data analysis) lead to improved business performance (e.g., strategic choices, competitive advantage).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains how increased data security contributes to improved business performance (e.g., protects assets, maintains trust, ensures compliance, prevents damage).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains how reduced data redundancy and improved efficiency helps business performance (e.g., cost savings, faster processing, optimized resource use).",
+          "marks": 2,
+          "required": false
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT352CO_2026_regular_B11",
@@ -240,7 +670,46 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT352CO/2026/BIT352CO_2026_regular_B11.md",
+      "marking_scheme": [
+        {
+          "point": "Defines the value chain model as a framework to disaggregate a firm's activities.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States its purpose: to understand cost drivers and potential for differentiation.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists and briefly explains the five primary activities (Inbound Logistics, Operations, Outbound Logistics, Marketing & Sales, Service).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Lists and briefly explains the four support activities (Firm Infrastructure, HR Management, Technology Development, Procurement).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains how it helps achieve cost advantage (identifying cost drivers, streamlining processes, reducing costs).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains how it helps achieve differentiation advantage (creating unique value, superior features, service, brand).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains how it helps through analyzing linkages/synergies or strategic decision making/benchmarking.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT352CO_2026_regular_B12",
@@ -316,7 +785,71 @@
           "needs_review": false
         }
       ],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT352CO/2026/BIT352CO_2026_regular_B12.md",
+      "marking_scheme": [
+        {
+          "point": "Defines collaboration (working together to achieve shared goals/create something new).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines teamwork (coordinated effort by a group with specific roles towards a common objective).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States two benefits of collaboration and teamwork (e.g., enhanced problem solving, increased efficiency, improved decision making, greater employee engagement).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Briefly explains how these benefits are achieved.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines globalization (interconnectedness of economies/societies through cross-border flows).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists two economic impacts (e.g., increased competition, access to new markets/resources, global supply chains, outsourcing/offshoring).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists one technological impact (e.g., rapid technological diffusion, global R&D).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists one cultural/social impact (e.g., cultural exchange, homogenization, migration).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines Business Information System (combination of hardware, software, data, people, processes).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States its primary purpose (collect, process, store, disseminate information for operations/decision-making).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists two types of BIS (e.g., TPS, MIS, DSS, ESS, CRM, SCM).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Briefly explains a key benefit of using BIS (e.g., improved efficiency, better decision-making, competitive advantage).",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     }
   ],
   "source_files": [

@@ -29,19 +29,38 @@ export const viewport: Viewport = {
   userScalable: true,
 };
 
+import { cookies } from "next/headers";
+import { fontVariables } from "./fonts";
+import {
+  COOKIE_NAME,
+  parseReadingCookie,
+  readingAttributes,
+} from "@/lib/examai/reading-settings";
 import { AuthProvider } from "@/context/AuthContext";
 import { ProgramProvider } from "@/context/ProgramContext";
 import { NotificationProvider } from "@/components/NotificationProvider";
 import AppShell from "@/components/AppShell";
 import ServiceWorkerRegistrar from "@/components/ServiceWorkerRegistrar";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Reading preferences are resolved on the SERVER so the first paint is
+  // already in the right theme. Reading them on the client would paint the
+  // default first and repaint — a white flash in a dark room, which is exactly
+  // the situation the Night theme exists for.
+  const store = await cookies();
+  const settings = parseReadingCookie(store.get(COOKIE_NAME)?.value);
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      {...readingAttributes(settings)}
+      className={fontVariables}
+    >
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-zinc-900 overflow-x-hidden`}
         suppressHydrationWarning

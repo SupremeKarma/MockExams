@@ -111,7 +111,91 @@
           "needs_review": false
         }
       ],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT354CO/2026/BIT354CO_2026_regular_A1.md",
+      "marking_scheme": [
+        {
+          "point": "Defines simulation as a model of a system to understand its behavior/evaluate strategies, typically computer-based and over time.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Lists risk-free experimentation as an advantage.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Lists insight into complex systems/what-if analysis as an advantage.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Lists time compression/expansion as an advantage.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Lists a further advantage (e.g., cost reduction, training).",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Lists cost/time as a drawback.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Lists model accuracy/validity as a drawback.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Lists interpretation of results/statistical knowledge required as a drawback.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Lists simulation not being an optimization tool/requiring multiple runs as a drawback.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Names Manufacturing/Production as an application area.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the benefit/specific use of simulation in Manufacturing/Production.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Names Logistics/Supply Chain Management as an application area.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the benefit/specific use of simulation in Logistics/Supply Chain Management.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Names Healthcare as an application area.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the benefit/specific use of simulation in Healthcare.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Names a further application area (e.g., Finance, Defense, Environmental) and explains its benefit/specific use.",
+          "marks": 1,
+          "required": false
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT354CO_2026_regular_A2",
@@ -131,7 +215,95 @@
       "confidence": "low",
       "sub_parts": [],
       "needs_review": true,
-      "notes": "question confidence is 'low'"
+      "notes": "question confidence is 'low' | solution generated, not yet reviewed",
+      "solution_path": "solutions/BIT354CO/2026/BIT354CO_2026_regular_A2.md",
+      "marking_scheme": [
+        {
+          "point": "Defines a model as a simplified representation of a system for understanding, analysis, or prediction.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Describes Physical Models and provides an example (e.g., wind tunnel model).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes Mathematical Models and provides an example (e.g., equations of motion).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes Static Models and provides an example (e.g., balance sheet).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes Dynamic Models and provides an example (e.g., weather forecasting model).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies correct Entities for Traffic system.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Identifies correct Attributes for Traffic system.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Identifies correct Activities for Traffic system.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Identifies correct State Variables for Traffic system.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Identifies correct Entities for Banking system.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Identifies correct Attributes for Banking system.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Identifies correct Activities for Banking system.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Identifies correct State Variables for Banking system.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Identifies correct Entities for Supermarket system.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Identifies correct Attributes for Supermarket system.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Identifies correct Activities for Supermarket system.",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Identifies correct State Variables for Supermarket system.",
+          "marks": 0.5,
+          "required": true
+        }
+      ]
     },
     {
       "question_id": "BIT354CO_2026_regular_A3",
@@ -150,7 +322,46 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT354CO/2026/BIT354CO_2026_regular_A3.md",
+      "marking_scheme": [
+        {
+          "point": "Defines Poker test and states its purpose for assessing independence of digits.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "States the null ($H_0$) and alternative ($H_1$) hypotheses correctly.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly identifies all 5 poker hand categories and derives their theoretical probabilities (e.g., $P(\\text{ABCD}) = \\frac{10 \\times 9 \\times 8 \\times 7}{10^4}$).",
+          "marks": 3,
+          "required": true
+        },
+        {
+          "point": "Calculates all 5 expected frequencies ($E_i = N \\times P_i$).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Calculates the Chi-square statistic using the formula $\\sum \\frac{(O_i - E_i)^2}{E_i}$ and performs all individual calculations correctly.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "States the degrees of freedom ($k-1$) and correctly compares the calculated $\\chi^2$ with the given critical value.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Draws a correct conclusion based on the comparison, interpreting it in the context of random number independence.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT354CO_2026_regular_B4",
@@ -169,7 +380,31 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT354CO/2026/BIT354CO_2026_regular_B4.md",
+      "marking_scheme": [
+        {
+          "point": "Explains Monte Carlo simulation as a method using repeated random sampling.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States its purpose: to estimate outcomes or solve complex problems where analytical solutions are difficult.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies that traditional analytical methods seek exact/deterministic solutions using mathematical formulas.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains a key difference: MC provides approximate/probabilistic solutions for complex problems, whereas analytical methods provide exact solutions for well-defined problems (or similar contrast).",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT354CO_2026_regular_B5",
@@ -192,7 +427,31 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT354CO/2026/BIT354CO_2026_regular_B5.md",
+      "marking_scheme": [
+        {
+          "point": "States an advantage: Handles complexity, uncertainty, or probabilistic nature.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States an advantage: Provides probabilistic outcomes (distributions) rather than single values.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States a limitation: High computational cost/time due to many iterations.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States a limitation: Dependency on quality of input distributions/random numbers (\"garbage in, garbage out\").",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT354CO_2026_regular_B6",
@@ -244,7 +503,51 @@
           "needs_review": false
         }
       ],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT354CO/2026/BIT354CO_2026_regular_B6.md",
+      "marking_scheme": [
+        {
+          "point": "Explains that ODEs model systems changing with respect to a single independent variable (e.g., time).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides an example of ODE use in simulation (e.g., population growth, chemical reactions).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains that PDEs model systems changing with respect to multiple independent variables (e.g., time and space).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides an example of PDE use in simulation (e.g., heat diffusion, fluid dynamics).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines the core concept of a distributed lag model (effect of independent variable is spread over past periods).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides the general mathematical form of the distributed lag model ($Y_t = \\alpha + \\beta_0 X_t + ... + \\beta_k X_{t-k} + \\epsilon_t$).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the interpretation of the coefficients ($\\beta_i$ as impact from $i$ periods ago) and the total long-run effect ($\\sum \\beta_i$).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States the purpose/use of DLMs (e.g., modeling delayed responses in econometrics, marketing).",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT354CO_2026_regular_B7",
@@ -263,7 +566,31 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT354CO/2026/BIT354CO_2026_regular_B7.md",
+      "marking_scheme": [
+        {
+          "point": "Defines a \"run\" and explains replication as conducting multiple independent executions using different random number streams.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains that simulation results are random variables, and a single run provides only one sample observation, making replication necessary to get a representative estimate.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Discusses how averaging results across replications reduces sampling error, providing a more accurate and stable estimate of the true expected system performance (Law of Large Numbers).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains how replications enable the construction of confidence intervals, quantifying uncertainty and improving the reliability and precision of conclusions about system performance.",
+          "marks": 2,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT354CO_2026_regular_B8",
@@ -282,7 +609,36 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT354CO/2026/BIT354CO_2026_regular_B8.md",
+      "marking_scheme": [
+        {
+          "point": "Defines simulation as modeling a system to observe behavior.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains why simulation is experimentation (manipulating variables, observing outcomes, testing hypotheses, drawing conclusions).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Provides the first real-time example (e.g., Automotive Crash Testing) with details on variables manipulated and observations.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Provides the second real-time example (e.g., Supply Chain Optimization) with details on variables manipulated and observations.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Concludes by summarizing the benefits or analogy of simulation as experimentation.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT354CO_2026_regular_B9",
@@ -306,7 +662,30 @@
       "confidence": "high",
       "sub_parts": [],
       "needs_review": true,
-      "notes": "low-confidence tag BIT354CO_U06"
+      "notes": "low-confidence tag BIT354CO_U06 | solution generated, not yet reviewed",
+      "solution_path": "solutions/BIT354CO/2026/BIT354CO_2026_regular_B9.md",
+      "marking_scheme": [
+        {
+          "point": "Defines an interactive system as one where a human can intervene or change parameters during the run.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the purpose of interactive systems (e.g., \"what-if\" analysis, training, real-time decision testing).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines a feedback system as one where output/state influences input/behavior later.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the importance or function of feedback systems (e.g., captures dynamic behavior, self-regulation, causality, realistic modeling).",
+          "marks": 1,
+          "required": true
+        }
+      ]
     },
     {
       "question_id": "BIT354CO_2026_regular_B10",
@@ -325,7 +704,31 @@
       "source_page": 2,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT354CO/2026/BIT354CO_2026_regular_B10.md",
+      "marking_scheme": [
+        {
+          "point": "States and briefly explains uniformity as a property of random numbers",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States and briefly explains independence as a property of random numbers",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States and briefly explains \"Long Period\" as a property of good RNGs",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States and briefly explains one other property of good RNGs (Reproducibility, Good Statistical Properties, or Efficiency)",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT354CO_2026_regular_B11",
@@ -344,7 +747,51 @@
       "source_page": 2,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT354CO/2026/BIT354CO_2026_regular_B11.md",
+      "marking_scheme": [
+        {
+          "point": "States that Kendall notation uses a series of symbols/letters, typically A/B/C/D/E/F.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains what A represents (arrival process distribution).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains what B represents (service time distribution).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains what C represents (number of servers).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Briefly explains D, E, and F (system capacity, population size, and service discipline).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly identifies 'M' for Poisson arrival process based on the problem description.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly identifies 'M' for exponential service time distribution based on the problem description.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly identifies '1' for the single server and presents the final notation M/M/1.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT354CO_2026_regular_B12",
@@ -363,7 +810,66 @@
       "source_page": 2,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT354CO/2026/BIT354CO_2026_regular_B12.md",
+      "marking_scheme": [
+        {
+          "point": "Provides a correct definition of a random number",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "States the Mixed Congruential Generator formula $r_i = (a \\cdot r_{i-1} + b) \\pmod m$",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correct calculation of $r_1$",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Correct calculation of $r_2$",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Correct calculation of $r_3$",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Correct calculation of $r_4$",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Correct calculation of $r_5$",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Correct calculation of $r_6$",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Correct calculation of $r_7$",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Correct calculation of $r_8$",
+          "marks": 0.5,
+          "required": true
+        },
+        {
+          "point": "Lists the final sequence of eight random numbers correctly",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT354CO_2026_regular_B13",
@@ -386,7 +892,31 @@
       "source_page": 2,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT354CO/2026/BIT354CO_2026_regular_B13.md",
+      "marking_scheme": [
+        {
+          "point": "Defines continuous system simulation (state variables change continuously over time, described by differential equations).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Discusses characteristics/examples of continuous simulation (smooth evolution, suitable for physical processes like fluid flow, temperature, control systems).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Defines hybrid simulation (combines discrete event and continuous simulation).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Discusses characteristics/interaction of hybrid simulation (discrete events trigger continuous changes, continuous changes trigger discrete events, use cases like process industries or power grids).",
+          "marks": 2,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     }
   ],
   "source_files": [

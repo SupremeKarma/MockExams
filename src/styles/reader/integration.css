@@ -1,0 +1,102 @@
+/* ==========================================================================
+   Reader integration layer
+   --------------------------------------------------------------------------
+   Kept SEPARATE from tokens.css and reader.css so those two stay byte-identical
+   to the design system and can be replaced wholesale when it is revised. Only
+   put things here that exist because of how this app is assembled, never
+   design decisions — those belong upstream in reader.css.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Restore list markers that Tailwind's preflight removes.
+
+   globals.css imports Tailwind, whose preflight sets `list-style: none` on
+   every ul and ol. The design system's demo is a standalone HTML file that
+   never loads Tailwind, so it renders markers and this app did not — the
+   numbered steps of the detection algorithm came out as unnumbered lines,
+   which for a method a student follows in order is a real loss of meaning,
+   not a cosmetic one.
+   -------------------------------------------------------------------------- */
+
+.prose ul { list-style: disc; }
+.prose ol { list-style: decimal; }
+.prose ul ul { list-style: circle; }
+.prose ol ol { list-style: lower-alpha; }
+
+/* The method block's steps are numbered and must stay numbered. */
+.block--working ol { list-style: decimal; padding-inline-start: 1.4em; }
+.block--working ul { list-style: disc; padding-inline-start: 1.4em; }
+.block ul { list-style: disc; padding-inline-start: 1.4em; }
+.block ol { list-style: decimal; padding-inline-start: 1.4em; }
+
+/* --------------------------------------------------------------------------
+   2. Topics with no note yet.
+
+   The design system styles `.tree a` as a flex row, which is what separates a
+   topic's code from its title. Topics we have not written yet are not links —
+   there is nowhere to go — so they fall outside that rule and their code ran
+   into the title ("6.aIntroduction").
+
+   They are shown rather than hidden on purpose: the gaps in coverage are
+   information a student revising needs.
+   -------------------------------------------------------------------------- */
+
+.tree .rail-note {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-block-size: var(--tap);
+  padding: 0.35rem 0.5rem 0.35rem 1.45rem;
+  color: var(--ink-3);
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.tree .rail-note .code {
+  flex: none;
+  min-inline-size: 2.1em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------------------
+   3. Point the design system's type stacks at the self-hosted faces.
+
+   tokens.css names the families by string ("Literata", "Atkinson Hyperlegible
+   Next"). next/font emits its own generated family names and exposes them as
+   CSS variables, so without this the files would be downloaded and never used —
+   every page would silently render in the fallback.
+
+   DESIGN.md §10 specifies exactly this wiring.
+   -------------------------------------------------------------------------- */
+
+:root {
+  --font-book: var(--nf-book), "Noto Serif Devanagari", "Iowan Old Style", "Charter", Georgia, serif;
+  --font-clear: var(--nf-clear), "Noto Sans Devanagari", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--nf-mono), ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+/* --------------------------------------------------------------------------
+   4. KaTeX inside a themed page.
+
+   KaTeX ships its own colour assumptions; inheriting keeps formulas legible
+   in Blackboard and Night, where its default dark-on-transparent would
+   otherwise be invisible.
+   -------------------------------------------------------------------------- */
+
+.prose .katex,
+.block .katex {
+  color: inherit;
+}
+
+/* --------------------------------------------------------------------------
+   5. The app's own <body> background must not show through.
+
+   layout.tsx paints `bg-white` on body for the rest of the product. Without
+   this, the Blackboard and Night themes render a dark page inside a white
+   frame wherever the Reader's own background does not reach.
+   -------------------------------------------------------------------------- */
+
+body:has(.app-header) {
+  background: var(--bg);
+  color: var(--ink);
+}

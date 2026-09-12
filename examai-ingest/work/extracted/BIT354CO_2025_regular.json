@@ -79,7 +79,66 @@
           "needs_review": false
         }
       ],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT354CO/2025/BIT354CO_2025_regular_A1.md",
+      "marking_scheme": [
+        {
+          "point": "Defines simulation as the imitation of a real-world process/system over time using a model to study its behaviour.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "States that simulation is used when analytical solutions are too complex or not feasible.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains that simulation is used when experimenting with the real system is too costly, risky, or disruptive.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Mentions that simulation allows for time compression or expansion.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Notes that simulation is used for testing new policies, designs, or procedures without real-world disruption.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Identifies Problem Formulation and System Definition as initial steps.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes Conceptual Model Formulation and Data Collection as key steps.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains Model Implementation (Computer Model Development).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Covers Verification and Validation as distinct essential steps.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Includes Experimental Design and Simulation Experimentation (Runs).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States Output Analysis and Interpretation, and Documentation/Reporting.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT354CO_2025_regular_A2",
@@ -147,7 +206,66 @@
           "needs_review": false
         }
       ],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT354CO/2025/BIT354CO_2025_regular_A2.md",
+      "marking_scheme": [
+        {
+          "point": "defines a queuing system as customers arriving, waiting, being served, and departing",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "mentions its purpose or identifies key components (customers, queue, servers)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "explains Arrival Pattern",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "explains Service Pattern",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "explains Number of Servers",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "explains Queue Discipline/Capacity",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "explains Calling Population",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "provides a relevant example that maps to the characteristics",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "defines Balking",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "defines Reneging",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "defines Jockeying",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT354CO_2025_regular_A3",
@@ -199,7 +317,51 @@
           "needs_review": false
         }
       ],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT354CO/2025/BIT354CO_2025_regular_A3.md",
+      "marking_scheme": [
+        {
+          "point": "Defines Poker test as a statistical test for independence of digits within numbers.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists the 5 patterns for four-digit numbers (All different, One pair, Two pairs, Three of a kind, Four of a kind).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Calculates the expected probabilities for the 5 patterns, showing combinatorial logic or correct final probabilities (e.g., $P(DDDD) = 0.5040$, $P(PPAD) = 0.4320$, etc.).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "States the null and alternative hypotheses.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Calculates the expected frequencies for all 5 categories by multiplying N by their respective probabilities.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Calculates the Chi-square ($\\chi^2$) test statistic, showing the sum of $\\frac{(O_i - E_i)^2}{E_i}$ for each category and the final sum.",
+          "marks": 3,
+          "required": true
+        },
+        {
+          "point": "States the degrees of freedom (df=4) and compares the calculated $\\chi^2$ with the given critical value.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Draws a correct conclusion (reject $H_0$, numbers are not independent) based on the comparison.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT354CO_2025_regular_B4",
@@ -218,7 +380,36 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT354CO/2025/BIT354CO_2025_regular_B4.md",
+      "marking_scheme": [
+        {
+          "point": "Describes the geometric setup: a square of side R=1 enclosing a quarter circle of radius R=1, stating their respective areas.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains the Monte Carlo method: generating random points within the square and relating the ratio of points ($N_{in}/N$) to the ratio of areas ($A_{QC}/A_S$).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "States the condition for a point $(x,y)$ to be inside the circle: $x^2 + y^2 \\le R^2$ (or $x^2 + y^2 \\le 1$).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Derives the formula for estimating $\\pi$: $\\pi \\approx 4 \\times (N_{in}/N)$.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides a clear step-by-step numerical procedure, including how to generate points, check conditions, count, and apply the formula with hypothetical values for N and N_in.",
+          "marks": 2,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT354CO_2025_regular_B5",
@@ -237,7 +428,36 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT354CO/2025/BIT354CO_2025_regular_B5.md",
+      "marking_scheme": [
+        {
+          "point": "States the null and alternative hypotheses correctly.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Sorts the given sequence of numbers.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Calculates the $i/N$ and $(i-1)/N$ values for all $N$ data points.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Calculates all $D_i^+$ and $D_i^-$ differences and correctly determines the maximum test statistic D.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Compares the calculated D statistic with the critical value and states the decision (fail to reject $H_0$).",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT354CO_2025_regular_B6",
@@ -256,7 +476,46 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT354CO/2025/BIT354CO_2025_regular_B6.md",
+      "marking_scheme": [
+        {
+          "point": "Defines internal bias or states its nature.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes Warm-up Period (Truncation) as a method to reduce bias.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Describes Replication as a method to reduce bias.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes Batch Means as a method to reduce bias.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes Proper Random Number Stream Management (or similar, e.g., proper RNG selection) as a method to reduce bias.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains how large sample sizes dilute initialization bias or reduce sampling error.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains how large sample sizes lead to more precise estimates, reducing the perception of bias from high variance.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT354CO_2025_regular_B7",
@@ -275,7 +534,46 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT354CO/2025/BIT354CO_2025_regular_B7.md",
+      "marking_scheme": [
+        {
+          "point": "Defines Markov Chain as a stochastic process where future state depends only on the current state.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "States the Markov property (memoryless property) explicitly.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines transition matrix as a square matrix representing state transition probabilities.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Specifies that $P_{ij}$ is the probability of transitioning from state $i$ to state $j$.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists properties of the transition matrix (elements $P_{ij} \\ge 0$ and row sums = 1).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains how to determine future state probabilities using matrix multiplication (e.g., $\\pi_{t+1} = \\pi_t P$ or $P^k$).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the concept of steady-state distribution and how it's found ($\\pi_{ss} = \\pi_{ss} P$).",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT354CO_2025_regular_B8",
@@ -298,7 +596,41 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT354CO/2025/BIT354CO_2025_regular_B8.md",
+      "marking_scheme": [
+        {
+          "point": "Defines terminating simulations, including characteristics like natural start/end points and focus on transient behavior.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains the output analysis approach for terminating simulations (e.g., multiple independent replications, averaging results).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides a suitable example for terminating simulations.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines non-terminating (steady-state) simulations, including characteristics like continuous operation, no natural end, and focus on long-run/equilibrium behavior.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains the output analysis approach for non-terminating simulations (e.g., initial transient removal, batch means, long replications).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides a suitable example for non-terminating simulations.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT354CO_2025_regular_B9",
@@ -317,7 +649,61 @@
       "source_page": 2,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT354CO/2025/BIT354CO_2025_regular_B9.md",
+      "marking_scheme": [
+        {
+          "point": "States a valid circumstance when simulation is appropriate (e.g., system complexity, high cost/risk, time compression, what-if analysis, gaining insight)",
+          "marks": 0.8,
+          "required": true
+        },
+        {
+          "point": "States a second valid circumstance when simulation is appropriate",
+          "marks": 0.8,
+          "required": true
+        },
+        {
+          "point": "States a third valid circumstance when simulation is appropriate",
+          "marks": 0.8,
+          "required": true
+        },
+        {
+          "point": "States a fourth valid circumstance when simulation is appropriate",
+          "marks": 0.8,
+          "required": true
+        },
+        {
+          "point": "States a fifth valid circumstance when simulation is appropriate",
+          "marks": 0.8,
+          "required": true
+        },
+        {
+          "point": "States a valid circumstance when simulation is not appropriate (e.g., analytical solution exists, insufficient data, trivial problem, excessive cost/time, subjective factors)",
+          "marks": 0.8,
+          "required": true
+        },
+        {
+          "point": "States a second valid circumstance when simulation is not appropriate",
+          "marks": 0.8,
+          "required": true
+        },
+        {
+          "point": "States a third valid circumstance when simulation is not appropriate",
+          "marks": 0.8,
+          "required": true
+        },
+        {
+          "point": "States a fourth valid circumstance when simulation is not appropriate",
+          "marks": 0.8,
+          "required": true
+        },
+        {
+          "point": "States a fifth valid circumstance when simulation is not appropriate",
+          "marks": 0.8,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT354CO_2025_regular_B10",
@@ -369,7 +755,51 @@
           "needs_review": false
         }
       ],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT354CO/2025/BIT354CO_2025_regular_B10.md",
+      "marking_scheme": [
+        {
+          "point": "Defines a random number as having equal probability of selection",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines a random number as unpredictable/independent of other numbers",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States the correct formula for Mixed Congruential Generator ($r_{i+1} = (a \\cdot r_i + b) \\pmod m$)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly calculates $r_1 = 95$",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly calculates $r_2 = 25$",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly calculates $r_3 = 35$",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly calculates $r_4 = 5$",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly calculates $r_5 = 95$",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT354CO_2025_regular_B11",
@@ -437,7 +867,51 @@
           "needs_review": false
         }
       ],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT354CO/2025/BIT354CO_2025_regular_B11.md",
+      "marking_scheme": [
+        {
+          "point": "Defines continuous system simulation as state variables changing continuously over time.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Mentions that it's typically described/solved by differential equations.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides a relevant example of continuous simulation.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines discrete system simulation as state variables changing only at specific, distinct points in time.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Mentions that it's event-driven.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides a relevant example of discrete simulation.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines hybrid simulation as combining continuous and discrete simulation.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Briefly discusses its purpose/application (e.g., for systems with both continuous processes and discrete events).",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     }
   ],
   "source_files": [

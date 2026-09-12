@@ -226,6 +226,72 @@ service cloud.firestore {
     }
 
     // ---------------------------------------------------------------------
+    // ExamAI — past papers, their questions, and the ingestion jobs.
+    //
+    // The shape is documented in /docs/schema.md. Three rules matter here:
+    //
+    //  1. Students see a paper only once it is `published`. Every other status
+    //     is work in progress: `extracted` holds raw OCR nobody has checked,
+    //     and `review` holds solutions whose numericals may not verify. A
+    //     student revising from an unverified answer loses the marks twice —
+    //     once for the wrong method, once for having practised it.
+    //
+    //  2. Writes are server-only. The FastAPI worker and the admin API routes
+    //     use the Admin SDK, which bypasses rules. Nothing about a paper is
+    //     client-authored, so there is no client write path to get wrong.
+    //
+    //  3. Course and program metadata is public to read. It is the syllabus
+    //     the app already shows students — no reason to gate it.
+    // ---------------------------------------------------------------------
+
+    match /programs/{programId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /courses/{courseId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /papers/{paperId} {
+      allow read: if resource.data.get('status', '') == 'published' || isStaff();
+      allow write: if false;
+
+      match /questions/{questionId} {
+        // A question's readability follows its parent paper's status, so this
+        // has to `get()` the paper — there is no denormalised copy to check.
+        // The read costs a document lookup per question read; student-facing
+        // paper views go through the API and fetch the whole set server-side,
+        // so this path is hit by admin tooling and one-off reads, not by the
+        // student hot path.
+        //
+        // `resource.data` is not usable for the status check: the status lives
+        // on the parent, and a question carrying its own copy would go stale
+        // the moment a paper was unpublished.
+        allow read: if isStaff()
+          || get(/databases/$(database)/documents/papers/$(paperId))
+               .data.get('status', '') == 'published';
+        allow write: if false;
+      }
+    }
+
+    // Ingestion progress. Staff-only: a job's `logs` carry model errors and
+    // partial extraction output, which is internal detail, and the admin
+    // screen that subscribes to them is staff-gated anyway.
+    match /jobs/{jobId} {
+      allow read: if isStaff();
+      allow write: if false;
+    }
+
+    // Question frequency per course — the input to the "likely topics" page.
+    // Derived entirely from published papers, so it is public to read.
+    match /topicStats/{courseId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // ---------------------------------------------------------------------
     // Deny by default. The previous catch-all was
     // `allow read, write: if isAuthenticated()`, which silently granted every
     // signed-in user full access to any collection lacking an explicit rule.

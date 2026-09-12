@@ -1,15 +1,47 @@
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
+
+    // Answer attachments a student uploads while sitting an exam — diagrams,
+    // scans, screenshots. Unchanged: this is the only client-side write in the
+    // app (src/components/AnswerEditor.tsx).
     match /answers/{examId}/{questionId}/{fileName} {
       allow read: if true;
       allow write: if request.auth != null
         && request.resource.size < 10 * 1024 * 1024
         && request.resource.contentType.matches('image/.*');
     }
+
+    // ---------------------------------------------------------------------
+    // ExamAI past papers — no client access, in either direction.
+    //
+    // Storage rules cannot read Firestore, so there is no way to express
+    // "readable once the paper is published" here. Granting read to signed-in
+    // users instead would publish every unreviewed solution and every
+    // unverified numerical answer to anyone who could guess a path — and the
+    // paths are guessable by design (papers/BIT351CO_2025_regular/solutions/qB1.md).
+    //
+    // So reads go through the API, which checks paper.status == 'published'
+    // against Firestore and returns a short-lived signed URL. Writes come from
+    // the FastAPI worker via the Admin SDK, which bypasses rules entirely.
+    // Denying both here costs nothing and closes the hole completely.
+    // ---------------------------------------------------------------------
+    match /papers/{allPaperPaths=**} {
+      allow read, write: if false;
+    }
+
+    // ---------------------------------------------------------------------
+    // Deny by default.
+    //
+    // This was `allow read: if true; allow write: if request.auth != null`,
+    // which made the whole bucket world-readable and writable by any signed-in
+    // account — including paths no rule had been written for yet. Nothing in
+    // the app relied on it: the only client write is the answers/ path above.
+    // A deny-by-default catch-all means a new feature that forgets its rule
+    // fails loudly during development instead of shipping open.
+    // ---------------------------------------------------------------------
     match /{allPaths=**} {
-      allow read: if true;
-      allow write: if request.auth != null;
+      allow read, write: if false;
     }
   }
 }

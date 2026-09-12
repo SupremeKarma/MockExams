@@ -1,0 +1,167 @@
+{
+  "semester": 3,
+  "generated_from": "src/data/bitSyllabusData.ts",
+  "subject_count": 5,
+  "unit_count": 31,
+  "subjects": [
+    {
+      "subject_code": "BIT201HS",
+      "subject_name": "Numerical Methods",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT201HS_U01",
+          "title": "Errors in Numerical Computation"
+        },
+        {
+          "unit_id": "BIT201HS_U02",
+          "title": "Solution of Nonlinear Equations (Bisection, Newton-Raphson)"
+        },
+        {
+          "unit_id": "BIT201HS_U03",
+          "title": "Interpolation & Least Square Methods"
+        },
+        {
+          "unit_id": "BIT201HS_U04",
+          "title": "System of Linear Equations (Direct & Indirect Methods)"
+        },
+        {
+          "unit_id": "BIT201HS_U05",
+          "title": "Numerical Differentiation & Integration"
+        },
+        {
+          "unit_id": "BIT201HS_U06",
+          "title": "Numerical Solution of ODEs (Euler, Runge-Kutta)"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT202CO",
+      "subject_name": "Microcontroller",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT202CO_U01",
+          "title": "Introduction to Microcontroller & 8051 Architecture"
+        },
+        {
+          "unit_id": "BIT202CO_U02",
+          "title": "Instruction Set & Addressing Modes"
+        },
+        {
+          "unit_id": "BIT202CO_U03",
+          "title": "Stack, I/O Port Interfacing & Programming"
+        },
+        {
+          "unit_id": "BIT202CO_U04",
+          "title": "Timers and Serial Port"
+        },
+        {
+          "unit_id": "BIT202CO_U05",
+          "title": "Interrupts and Interfacing Applications"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT203CO",
+      "subject_name": "Data Structure and Algorithm",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT203CO_U01",
+          "title": "Introduction & Algorithm Efficiency"
+        },
+        {
+          "unit_id": "BIT203CO_U02",
+          "title": "Stack & Queue"
+        },
+        {
+          "unit_id": "BIT203CO_U03",
+          "title": "List and Linked List"
+        },
+        {
+          "unit_id": "BIT203CO_U04",
+          "title": "Recursion"
+        },
+        {
+          "unit_id": "BIT203CO_U05",
+          "title": "Trees (BST, AVL, Huffman)"
+        },
+        {
+          "unit_id": "BIT203CO_U06",
+          "title": "Sorting (Quick, Merge, Heap)"
+        },
+        {
+          "unit_id": "BIT203CO_U07",
+          "title": "Searching, Hashing & Graphs (DFS, BFS, Dijkstra)"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT204CO",
+      "subject_name": "Computer Network and Data Communication",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT204CO_U01",
+          "title": "Introduction to Networking & Data Communication"
+        },
+        {
+          "unit_id": "BIT204CO_U02",
+          "title": "Layered Network Architecture (OSI, TCP/IP)"
+        },
+        {
+          "unit_id": "BIT204CO_U03",
+          "title": "Data Transmission & Physical Layer"
+        },
+        {
+          "unit_id": "BIT204CO_U04",
+          "title": "Data Link Control (Error Detection, HDLC)"
+        },
+        {
+          "unit_id": "BIT204CO_U05",
+          "title": "Network Layer (IP Addressing, Subnetting, Routing)"
+        },
+        {
+          "unit_id": "BIT204CO_U06",
+          "title": "Transport & Application Layer"
+        },
+        {
+          "unit_id": "BIT204CO_U07",
+          "title": "Network Security (Cryptography, SSL/TLS, Firewall)"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT205CO",
+      "subject_name": "System Analysis and Design",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT205CO_U01",
+          "title": "Overview of Systems Analysis & Design (SDLC Models)"
+        },
+        {
+          "unit_id": "BIT205CO_U02",
+          "title": "Process & Conceptual Modeling (DFD, ERD)"
+        },
+        {
+          "unit_id": "BIT205CO_U03",
+          "title": "Logic Modeling (Decision Table/Tree)"
+        },
+        {
+          "unit_id": "BIT205CO_U04",
+          "title": "Systems Analysis (Requirements, Feasibility)"
+        },
+        {
+          "unit_id": "BIT205CO_U05",
+          "title": "Systems Design & Implementation"
+        },
+        {
+          "unit_id": "BIT205CO_U06",
+          "title": "Object-Oriented Analysis & Design (UML)"
+        }
+      ]
+    }
+  ]
+}

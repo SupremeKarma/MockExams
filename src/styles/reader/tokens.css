@@ -1,0 +1,250 @@
+/* ==========================================================================
+   ExamAI Study Design System: tokens.css
+   Four reading themes, type, spacing, and user reading preferences.
+   All text colors verified: body text >= 7:1, secondary text >= 4.5:1,
+   control borders >= 3:1 against their backgrounds (see DESIGN.md).
+   Colors are plain hex on purpose: old Smart TV browsers ignore oklch().
+   ========================================================================== */
+
+:root {
+  /* ---------- Type families ---------- */
+  --font-book: "Literata", "Noto Serif Devanagari", "Iowan Old Style", "Charter",
+    "Georgia", serif;
+  --font-clear: "Atkinson Hyperlegible Next", "Noto Sans Devanagari", system-ui,
+    -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Atkinson Hyperlegible Mono", ui-monospace, "SFMono-Regular",
+    Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* ---------- Reading preferences (changed via data-* on <html>) ---------- */
+  --user-scale: 1;
+  --measure: 66ch;
+  --reading-font: var(--font-book);
+  --reading-leading: 1.7;
+  --para-space: 1em;
+  --word-space: normal;
+
+  /* Fluid body size: 17px on phones up to 19px on desktops, times user scale */
+  --text-base: calc(clamp(1.0625rem, 1rem + 0.2vw, 1.1875rem) * var(--user-scale));
+
+  /* Modular scale, minor third (1.2), in em of the article text */
+  --step--1: 0.833em;
+  --step-0: 1em;
+  --step-1: 1.2em;
+  --step-2: 1.44em;
+  --step-3: 1.728em;
+  --step-4: 2.074em;
+
+  /* ---------- Space, shape, layout ---------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  --radius-s: 4px;
+  --radius-m: 8px;
+  --radius-l: 14px;
+
+  --header-h: 3.5rem;
+  --rail-w: 17.5rem;
+  --toc-w: 15rem;
+  --gutter: clamp(1.125rem, 4vw, 3rem);
+
+  --tap: 2.5rem;            /* 40px; becomes 44px on touch screens */
+  --focus-w: 3px;
+
+  /* ---------- Motion ---------- */
+  --dur-fast: 120ms;
+  --dur: 200ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@media (pointer: coarse) {
+  :root { --tap: 2.75rem; }
+}
+
+@media (min-width: 1920px) {
+  :root {
+    --rail-w: 20rem;
+    --toc-w: 17rem;
+  }
+}
+
+/* ==========================================================================
+   THEMES
+   paper       default light: copy paper, ballpoint ink, red margin pen
+   warm        evening light: lamp-lit notebook, lower blue
+   blackboard  dark: classroom slate with chalk
+   night       true black for OLED phones and dark rooms, dimmed chalk
+   ========================================================================== */
+
+:root,
+:root[data-theme="paper"] {
+  color-scheme: light;
+  --bg: #FBFBF8;
+  --bg-rail: #F3F4F1;
+  --surface: #FFFFFF;
+  --ink: #1A2230;
+  --ink-2: #3F4957;
+  --ink-3: #5F6875;
+  --rule: #E5E7E3;
+  --rule-strong: #838A93;
+  --accent: #2446B8;
+  --accent-soft: #E8EDFB;
+  --pen: #C0392F;
+  --pen-line: #EBA9A4;
+  --highlight: #FFF1A8;
+  --grid-bg: #FDFDFB;
+  --grid-line: #ECEFF3;
+  --warn-ink: #8A5200;
+  --warn-bg: #FFF5E0;
+  --warn-line: #E0A64A;
+  --ok: #1E7A4C;
+  --focus: #2446B8;
+  --elevation: 0 12px 40px rgb(26 34 48 / 0.16);
+}
+
+:root[data-theme="warm"] {
+  color-scheme: light;
+  --bg: #EFE6D2;
+  --bg-rail: #E8DDC6;
+  --surface: #F6EFE0;
+  --ink: #2B241B;
+  --ink-2: #4F4538;
+  --ink-3: #655A4B;
+  --rule: #DCCFB6;
+  --rule-strong: #857761;
+  --accent: #1E45A0;
+  --accent-soft: #E2DDD8;
+  --pen: #A8352A;
+  --pen-line: #D9A08F;
+  --highlight: #F3DA7E;
+  --grid-bg: #F1E9D7;
+  --grid-line: #E4D9C2;
+  --warn-ink: #7A4A00;
+  --warn-bg: #F5E3BD;
+  --warn-line: #C9923D;
+  --ok: #2D6B3F;
+  --focus: #1E45A0;
+  --elevation: 0 12px 40px rgb(43 36 27 / 0.18);
+}
+
+:root[data-theme="blackboard"] {
+  color-scheme: dark;
+  --bg: #1B2320;
+  --bg-rail: #161D1B;
+  --surface: #232C29;
+  --ink: #E7E5DD;
+  --ink-2: #BDC2B9;
+  --ink-3: #9CA39A;
+  --rule: #2C3632;
+  --rule-strong: #6E7A74;
+  --accent: #A9C1FF;
+  --accent-soft: #26324A;
+  --pen: #F08C84;
+  --pen-line: #6E3F3B;
+  --highlight: #34331C;
+  --grid-bg: #1E2623;
+  --grid-line: #26302C;
+  --warn-ink: #F2C27B;
+  --warn-bg: #3A2E1A;
+  --warn-line: #8C6A33;
+  --ok: #7FD1A3;
+  --focus: #A9C1FF;
+  --elevation: 0 12px 40px rgb(0 0 0 / 0.5);
+}
+
+:root[data-theme="night"] {
+  color-scheme: dark;
+  --bg: #000000;
+  --bg-rail: #000000;
+  --surface: #141414;
+  --ink: #C9C4B8;
+  --ink-2: #A39E93;
+  --ink-3: #8C877D;
+  --rule: #1E1E1E;
+  --rule-strong: #66625A;
+  --accent: #8FA6E8;
+  --accent-soft: #141A2B;
+  --pen: #D98079;
+  --pen-line: #4A2B28;
+  --highlight: #1F1D0E;
+  --grid-bg: #070707;
+  --grid-line: #121212;
+  --warn-ink: #D9A864;
+  --warn-bg: #1E170C;
+  --warn-line: #6B5226;
+  --ok: #79C298;
+  --focus: #8FA6E8;
+  --elevation: 0 12px 40px rgb(0 0 0 / 0.7);
+}
+
+/* No saved choice yet: follow the device setting */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --bg: #1B2320;
+    --bg-rail: #161D1B;
+    --surface: #232C29;
+    --ink: #E7E5DD;
+    --ink-2: #BDC2B9;
+    --ink-3: #9CA39A;
+    --rule: #2C3632;
+    --rule-strong: #6E7A74;
+    --accent: #A9C1FF;
+    --accent-soft: #26324A;
+    --pen: #F08C84;
+    --pen-line: #6E3F3B;
+    --highlight: #34331C;
+    --grid-bg: #1E2623;
+    --grid-line: #26302C;
+    --warn-ink: #F2C27B;
+    --warn-bg: #3A2E1A;
+    --warn-line: #8C6A33;
+    --ok: #7FD1A3;
+    --focus: #A9C1FF;
+    --elevation: 0 12px 40px rgb(0 0 0 / 0.5);
+  }
+}
+
+/* ==========================================================================
+   READING PREFERENCES
+   ========================================================================== */
+
+:root[data-size="s"]   { --user-scale: 0.9; }
+:root[data-size="m"]   { --user-scale: 1; }
+:root[data-size="l"]   { --user-scale: 1.12; }
+:root[data-size="xl"]  { --user-scale: 1.25; }
+:root[data-size="xxl"] { --user-scale: 1.4; }
+
+:root[data-font="book"]  { --reading-font: var(--font-book);  --reading-leading: 1.7; }
+:root[data-font="clear"] { --reading-font: var(--font-clear); --reading-leading: 1.6; }
+
+:root[data-width="narrow"] { --measure: 58ch; }
+:root[data-width="normal"] { --measure: 66ch; }
+:root[data-width="wide"]   { --measure: 76ch; }
+
+:root[data-spacing="relaxed"] {
+  --reading-leading: 1.9;
+  --para-space: 1.35em;
+  --word-space: 0.05em;
+}
+
+/* Devanagari needs more vertical room for matras */
+:lang(ne), :lang(hi), :lang(mai) {
+  --reading-leading: 1.9;
+}
+
+/* Stronger contrast when the device asks for it */
+@media (prefers-contrast: more) {
+  :root,
+  :root[data-theme] {
+    --ink-2: var(--ink);
+    --ink-3: var(--ink-2);
+    --rule: var(--rule-strong);
+    --focus-w: 4px;
+  }
+}

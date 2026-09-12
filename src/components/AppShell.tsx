@@ -31,6 +31,14 @@ const SIDEBAR_PREFIXES = [
 const SIDEBAR_EXCLUDED_EXACT_OR_PREFIX = ["/organization/apply"];
 const FOCUS_MODE_PATTERN = /^\/exams\/[^/]+\/take$/;
 
+// The Reader owns its whole viewport: a three-pane layout with two sticky
+// navigation panes of its own, plus a sticky header the deep-link
+// scroll-margin is calibrated against. Nesting that inside the marketing
+// navbar and footer would give it two headers and break the sticky offsets.
+// Only the Reader's own course pages — NOT the existing /learn hub, which is a
+// marketing page that expects the navbar and footer.
+const READER_PATTERN = /^\/learn\/[^/]+/;
+
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() || "/";
 
@@ -45,8 +53,9 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     !isExcluded &&
     SIDEBAR_PREFIXES.some((p) => pathname === p || pathname.startsWith(p + "/"));
 
-  if (isFocusMode) {
-    // Exam-taking has its own sticky header/HUD — no chrome at all.
+  if (isFocusMode || READER_PATTERN.test(pathname)) {
+    // Exam-taking and the Reader both supply their own sticky header — no
+    // chrome at all.
     return <>{children}</>;
   }
 

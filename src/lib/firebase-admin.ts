@@ -72,3 +72,41 @@ export const adminDb = new Proxy({} as any, {
     return typeof val === "function" ? val.bind(db) : val;
   }
 });
+
+/**
+ * Cloud Storage through the Admin SDK.
+ *
+ * Needed because Storage rules deny all client access to `papers/**` — there is
+ * no way to express "readable once the paper is published" in Storage rules,
+ * since they cannot read Firestore. Uploads and reads for paper scans therefore
+ * go through API routes that check the status first (see
+ * src/lib/examai/admin-auth.ts).
+ */
+export const adminStorage = new Proxy({} as any, {
+  get(target, prop) {
+    initFirebase();
+    if (!admin.apps.length) return undefined;
+    const storage = admin.storage();
+    const val = (storage as any)[prop];
+    return typeof val === "function" ? val.bind(storage) : val;
+  }
+});
+
+/**
+ * The bucket paper scans live in.
+ *
+ * Explicit rather than relying on the SDK default: `admin.storage().bucket()`
+ * with no argument throws only at call time, and the message ("Bucket name not
+ * specified") does not say which env var is missing.
+ */
+export function paperBucket() {
+  const name =
+    process.env.FIREBASE_STORAGE_BUCKET ??
+    (process.env.FIREBASE_PROJECT_ID ? `${process.env.FIREBASE_PROJECT_ID}.appspot.com` : undefined);
+  if (!name) {
+    throw new Error(
+      "FIREBASE_STORAGE_BUCKET is not set (and FIREBASE_PROJECT_ID is missing, so it cannot be derived)."
+    );
+  }
+  return adminStorage.bucket(name);
+}

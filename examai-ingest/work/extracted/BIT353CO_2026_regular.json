@@ -79,7 +79,61 @@
           "needs_review": false
         }
       ],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT353CO/2026/BIT353CO_2026_regular_A1.md",
+      "marking_scheme": [
+        {
+          "point": "Explains Apriori as an algorithm for finding frequent itemsets and association rules.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes the iterative process (candidate generation, pruning) for Apriori.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States the Apriori property (anti-monotonicity of support) and its use in pruning.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Calculates the minimum support count (3 transactions) and states minimum confidence (75%).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly identifies C1 (candidate 1-itemsets) and L1 (frequent 1-itemsets) by counting support and pruning {Egg}.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists the C2 candidates generated from L1.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly prunes C2 candidates based on the Apriori property or support count, and accurately identifies L2 ({{Milk, Bread}: 3, {Bread, Diaper}: 3}).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Attempts to generate C3/L3, showing the candidate {Milk, Bread, Diaper}, and correctly concludes it is pruned due to {Milk, Diaper} not being in L2, leading to an empty L3.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists all final frequent itemsets (L1, L2).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Derives all strong association rules from L2, showing confidence calculation for each and comparing with minimum confidence (1 mark for rules from {Milk, Bread}, 1 mark for rules from {Bread, Diaper}).",
+          "marks": 2,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT353CO_2026_regular_A2",
@@ -98,7 +152,56 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT353CO/2026/BIT353CO_2026_regular_A2.md",
+      "marking_scheme": [
+        {
+          "point": "Defines classification as predicting a categorical class label from features, mentioning supervised learning.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Provides a clear and relevant example of classification (e.g., spam detection, credit risk).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Lists at least four distinct classification algorithms.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains the core concept of Decision Trees (tree structure, nodes for attributes, leaves for classes).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains how Decision Trees work (recursive splitting, using metrics like Gini/Information Gain, traversal for prediction).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "States at least one advantage and one disadvantage of Decision Trees.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the core concept of Naive Bayes (probabilistic, based on Bayes' Theorem, naive independence assumption).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains how Naive Bayes works (calculates probabilities from training data, uses formula $P(Class|Features)$, predicts class with highest posterior probability).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "States at least one advantage and one disadvantage of Naive Bayes.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT353CO_2026_regular_A3",
@@ -117,7 +220,66 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT353CO/2026/BIT353CO_2026_regular_A3.md",
+      "marking_scheme": [
+        {
+          "point": "Defines clustering, highlighting key characteristics (unsupervised, grouping similar data, max intra-similarity, min inter-similarity).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "States $k=2$ and selects initial centroids clearly (e.g., $P_1$ and $P_2$).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides the formula for Euclidean distance.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Calculates distances for all data points to the first initial centroid ($C_1$).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Calculates distances for all data points to the second initial centroid ($C_2$).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly assigns all data points to clusters based on the initial centroids (Iteration 1).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Calculates the new centroid $C_1$ based on its assigned points.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Calculates the new centroid $C_2$ based on its assigned points.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Calculates distances for all data points to the first updated centroid ($C_1$).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Calculates distances for all data points to the second updated centroid ($C_2$).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Correctly assigns all data points to clusters based on the updated centroids and states convergence.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT353CO_2026_regular_B4",
@@ -136,7 +298,46 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT353CO/2026/BIT353CO_2026_regular_B4.md",
+      "marking_scheme": [
+        {
+          "point": "Defines Association Rule Mining (ARM) and its purpose (finding relationships/patterns).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Defines Market Basket Analysis (MBA) as an application of ARM.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the goal of MBA (understanding purchasing behavior, identifying co-occurring items).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides a simple example transaction dataset.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Illustrates the concept of a frequent itemset or rule derivation using the example.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines and calculates Support for an example rule.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines and calculates Confidence for an example rule.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT353CO_2026_regular_B5",
@@ -159,7 +360,41 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT353CO/2026/BIT353CO_2026_regular_B5.md",
+      "marking_scheme": [
+        {
+          "point": "Defines OLAP as Online Analytical Processing for multi-dimensional analysis, stating its purpose for business intelligence and/or distinguishing it from OLTP.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Defines data preprocessing as transforming raw data into high-quality format for mining, stating its necessity due to dirty/noisy data.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains Data Cleaning, including methods for handling missing values (e.g., mean/mode imputation) AND/OR noisy data (e.g., binning, regression).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains Data Integration, including challenges like schema integration, redundancy resolution, or data value conflicts.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains Data Transformation, including examples like normalization (min-max, z-score), aggregation, or attribute construction.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains Data Reduction, mentioning its goal of reducing data volume while maintaining integrity, and describing at least two techniques from dimensionality reduction (e.g., PCA, attribute selection) OR numerosity reduction (e.g., sampling, clustering).",
+          "marks": 2,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT353CO_2026_regular_B6",
@@ -182,7 +417,36 @@
       "source_page": 2,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT353CO/2026/BIT353CO_2026_regular_B6.md",
+      "marking_scheme": [
+        {
+          "point": "Defines a data warehouse as a centralized repository of integrated, historical data for analytical processing/decision support",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains Subject-Oriented characteristic (focus on subjects, not applications)",
+          "marks": 1.5,
+          "required": true
+        },
+        {
+          "point": "Explains Integrated characteristic (data from disparate sources, cleaned, transformed, unified)",
+          "marks": 1.5,
+          "required": true
+        },
+        {
+          "point": "Explains Time-Variant characteristic (historical data, time element, analysis over periods)",
+          "marks": 1.5,
+          "required": true
+        },
+        {
+          "point": "Explains Non-Volatile characteristic (data stable, not updated/deleted, new data added)",
+          "marks": 1.5,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT353CO_2026_regular_B7",
@@ -201,7 +465,31 @@
       "source_page": 2,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT353CO/2026/BIT353CO_2026_regular_B7.md",
+      "marking_scheme": [
+        {
+          "point": "Defines multidimensional association rules as involving predicates from multiple dimensions/attributes.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains inter-dimensional association rules with an example.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains hybrid-dimensional association rules with an example.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Provides a clear, comprehensive example of a multidimensional association rule using different attributes.",
+          "marks": 2,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT353CO_2026_regular_B8",
@@ -216,7 +504,30 @@
       "confidence": "high",
       "sub_parts": [],
       "needs_review": true,
-      "notes": "no syllabus unit tagged"
+      "notes": "no syllabus unit tagged | solution generated, not yet reviewed",
+      "solution_path": "solutions/BIT353CO/2026/BIT353CO_2026_regular_B8.md",
+      "marking_scheme": [
+        {
+          "point": "Defines a multilayer feedforward neural network, mentioning its input, hidden, and output layers and the feedforward nature.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains the role of non-linear activation functions in hidden layers for learning complex patterns.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "States the key structural difference: presence of hidden layers in MFFNN vs. direct input-output in a single-layer perceptron.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains the difference in learning capacity: MFFNN can solve non-linearly separable problems (e.g., XOR), while a single-layer perceptron can only solve linearly separable problems.",
+          "marks": 2,
+          "required": true
+        }
+      ]
     },
     {
       "question_id": "BIT353CO_2026_regular_B9",
@@ -235,7 +546,41 @@
       "source_page": 2,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT353CO/2026/BIT353CO_2026_regular_B9.md",
+      "marking_scheme": [
+        {
+          "point": "Explains hierarchical clustering (builds a hierarchy/dendrogram, no pre-defined k).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Gives an example algorithm for hierarchical clustering (e.g., AGNES, DIANA).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains partitioning clustering (divides into k pre-defined non-overlapping clusters).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Gives an example algorithm for partitioning clustering (e.g., K-Means, K-Medoids).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States the difference regarding the need for a pre-specified number of clusters (k).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States the difference regarding the output (hierarchy/dendrogram vs. flat partitions).",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT353CO_2026_regular_B10",
@@ -258,7 +603,41 @@
       "source_page": 2,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT353CO/2026/BIT353CO_2026_regular_B10.md",
+      "marking_scheme": [
+        {
+          "point": "Defines Euclidean distance as straight-line distance",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States the correct formula for Euclidean distance (for 2D or nD)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides a correct example calculation for Euclidean distance, showing steps",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Defines Manhattan distance as sum of absolute differences / city block distance",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States the correct formula for Manhattan distance (for 2D or nD)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides a correct example calculation for Manhattan distance, showing steps",
+          "marks": 2,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT353CO_2026_regular_B11",
@@ -335,7 +714,71 @@
           "needs_review": false
         }
       ],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT353CO/2026/BIT353CO_2026_regular_B11.md",
+      "marking_scheme": [
+        {
+          "point": "Defines K-NN as a non-parametric, lazy learning algorithm.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains that it classifies a new data point based on the majority class of its 'K' nearest neighbors.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Mentions the use of a distance metric (e.g., Euclidean) and that it memorizes the training data.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Notes characteristics like computational cost during prediction or sensitivity to feature scaling/noise.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines data mining primitives as a set of components specifying a data mining task/query.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists and briefly explains Task-Relevant Data and Kind of Knowledge to be Mined.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists and briefly explains Background Knowledge.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists and briefly explains Interestingness Measures and/or Pattern Evaluation Criteria.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines K-medoids as a partitioning clustering algorithm using medoids as cluster representatives, similar to K-means.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains what a medoid is (an actual data point minimizing dissimilarity within its cluster).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Briefly describes the iterative process (assigning points to closest medoid, swapping to reduce cost).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Mentions its robustness to outliers or ability to use arbitrary distance metrics.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     }
   ],
   "source_files": [

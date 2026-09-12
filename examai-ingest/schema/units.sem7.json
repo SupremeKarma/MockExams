@@ -1,0 +1,105 @@
+{
+  "semester": 7,
+  "generated_from": "src/data/bitSyllabusData.ts",
+  "subject_count": 3,
+  "unit_count": 19,
+  "subjects": [
+    {
+      "subject_code": "BIT401CO",
+      "subject_name": "Network Programming",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT401CO_U01",
+          "title": "Introduction to Network Programming (Client/Server Model)"
+        },
+        {
+          "unit_id": "BIT401CO_U02",
+          "title": "Elementary OS Calls (fork, exec, IPC)"
+        },
+        {
+          "unit_id": "BIT401CO_U03",
+          "title": "TCP/UDP Transport Layer Protocols"
+        },
+        {
+          "unit_id": "BIT401CO_U04",
+          "title": "Elementary Socket Calls (socket, bind, connect, accept)"
+        },
+        {
+          "unit_id": "BIT401CO_U05",
+          "title": "I/O Multiplexing (select, poll)"
+        },
+        {
+          "unit_id": "BIT401CO_U06",
+          "title": "Broadcast, Multicast & Raw Sockets"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT402CO",
+      "subject_name": "Digital Governance",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT402CO_U01",
+          "title": "Introduction to e-Government & e-Governance"
+        },
+        {
+          "unit_id": "BIT402CO_U02",
+          "title": "Public-Private Partnership Models"
+        },
+        {
+          "unit_id": "BIT402CO_U03",
+          "title": "ICT Infrastructure & e-Government Readiness"
+        },
+        {
+          "unit_id": "BIT402CO_U04",
+          "title": "Security for e-Government"
+        },
+        {
+          "unit_id": "BIT402CO_U05",
+          "title": "Implementing e-Government & Digital Democracy"
+        },
+        {
+          "unit_id": "BIT402CO_U06",
+          "title": "Applying AI to e-Government"
+        },
+        {
+          "unit_id": "BIT402CO_U07",
+          "title": "Case Studies (Nepal, India & Other Countries)"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT4xxCO",
+      "subject_name": "Specialization Track (2 of 4 courses)",
+      "credits": 6,
+      "units": [
+        {
+          "unit_id": "BIT4xxCO_U01",
+          "title": "Track A: Machine Learning (BIT421CO)"
+        },
+        {
+          "unit_id": "BIT4xxCO_U02",
+          "title": "Track A: Business Intelligence & Data Science (BIT422CO)"
+        },
+        {
+          "unit_id": "BIT4xxCO_U03",
+          "title": "Track B: Digital Commerce (BIT428CO)"
+        },
+        {
+          "unit_id": "BIT4xxCO_U04",
+          "title": "Track B: Multimedia and Application (BIT429CO)"
+        },
+        {
+          "unit_id": "BIT4xxCO_U05",
+          "title": "Track C: GIS (BIT435CO)"
+        },
+        {
+          "unit_id": "BIT4xxCO_U06",
+          "title": "Track C: Remote Sensing (BIT436CO)"
+        }
+      ]
+    }
+  ]
+}

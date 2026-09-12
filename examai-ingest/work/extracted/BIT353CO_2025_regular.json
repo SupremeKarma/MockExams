@@ -99,7 +99,86 @@
           "needs_review": false
         }
       ],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT353CO/2025/BIT353CO_2025_regular_A1.md",
+      "marking_scheme": [
+        {
+          "point": "Defines association rule mining as discovering relationships/patterns among items",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Mentions the form $A \\Rightarrow B$ and its common use (e.g., market basket analysis)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines Support",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines Confidence",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides a clear example for ARM",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Calculates Support for the example rule",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Calculates Confidence for the example rule",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists Data Quality (incomplete, noisy, inconsistent) as an issue",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists Scalability and Performance as an issue",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists Privacy and Security as an issue",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists Interpretability of Results OR Handling Diverse Data Types OR Selection of Appropriate Algorithms OR Overfitting as an issue",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists Retail/Marketing as an application",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists Banking/Finance as an application",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists Healthcare as an application",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists Telecommunications OR Education OR Web Mining OR Manufacturing as an application",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT353CO_2025_regular_A2",
@@ -118,7 +197,56 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT353CO/2025/BIT353CO_2025_regular_A2.md",
+      "marking_scheme": [
+        {
+          "point": "States the goal is to find the attribute with the highest Information Gain.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States the formula for Entropy.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States the formula for Information Gain.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Calculates the initial entropy of the dataset.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Calculates the entropy for each value of 'age' and its Information Gain.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Calculates the entropy for each value of 'student' and its Information Gain.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Calculates Information Gain for 'income'.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Calculates Information Gain for 'credit_rating'.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Compares all Information Gains and identifies the attribute with the highest value.",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT353CO_2025_regular_A3",
@@ -137,7 +265,56 @@
       "source_page": 1,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT353CO/2025/BIT353CO_2025_regular_A3.md",
+      "marking_scheme": [
+        {
+          "point": "Defines KDD, distinguishing it as a process broader than data mining.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Presents a clear, neat diagram illustrating the KDD process steps and their flow.",
+          "marks": 3,
+          "required": true
+        },
+        {
+          "point": "Describes Data Cleaning (e.g., removing noise, handling missing values).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes Data Integration (e.g., combining data from multiple sources).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes Data Selection (e.g., retrieving relevant data for analysis).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes Data Transformation (e.g., normalizing, aggregating, generalizing data).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes Data Mining (e.g., applying algorithms like classification, clustering).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes Pattern Evaluation (e.g., identifying truly interesting patterns).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes Knowledge Presentation/Deployment (e.g., visualizing, reporting, using discovered knowledge).",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT353CO_2025_regular_B4",
@@ -156,7 +333,31 @@
       "source_page": 2,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT353CO/2025/BIT353CO_2025_regular_B4.md",
+      "marking_scheme": [
+        {
+          "point": "Identifies data sources and explains the role of the ETL (Extraction, Transformation, Loading) process.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains the central Data Warehouse layer as a repository for integrated, historical, subject-oriented data, mentioning its analytical design (e.g., dimensional modeling) and metadata.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Describes Data Marts as optional, subject-oriented subsets of the data warehouse designed for specific departments.",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Details the Presentation/Access layer, including examples of user tools like OLAP, reporting tools, and data mining tools.",
+          "marks": 2,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT353CO_2025_regular_B5",
@@ -175,7 +376,51 @@
       "source_page": 2,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT353CO/2025/BIT353CO_2025_regular_B5.md",
+      "marking_scheme": [
+        {
+          "point": "States purpose of OLTP (transaction processing)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States purpose of OLAP (analytical processing)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Differentiates based on Data Model (normalized vs. denormalized/multidimensional)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Differentiates based on Data Content (current/detailed vs. historical/summarized/aggregated)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Differentiates based on Typical Operations (CRUD/simple queries vs. complex queries/aggregations/drill-down)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Differentiates based on Performance Goal (transaction throughput vs. query speed/analysis)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Differentiates based on User Base (operational staff vs. analysts/managers)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Differentiates based on Data Updates (frequent/real-time vs. infrequent/batch ETL)",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT353CO_2025_regular_B6",
@@ -194,7 +439,41 @@
       "source_page": 2,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT353CO/2025/BIT353CO_2025_regular_B6.md",
+      "marking_scheme": [
+        {
+          "point": "Defines partitioning and its general benefits (performance, manageability, availability)",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains Horizontal Partitioning (Sharding) with description and benefit/example",
+          "marks": 1.5,
+          "required": true
+        },
+        {
+          "point": "Explains Vertical Partitioning with description and benefit/example",
+          "marks": 1.5,
+          "required": true
+        },
+        {
+          "point": "Explains Range Partitioning with description and benefit/example",
+          "marks": 1.5,
+          "required": true
+        },
+        {
+          "point": "Explains Hash Partitioning with description and benefit/example",
+          "marks": 1.5,
+          "required": true
+        },
+        {
+          "point": "Explains List Partitioning with description and benefit/example",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT353CO_2025_regular_B7",
@@ -214,7 +493,50 @@
       "confidence": "low",
       "sub_parts": [],
       "needs_review": true,
-      "notes": "question confidence is 'low'; low-confidence tag BIT353CO_U01"
+      "notes": "question confidence is 'low'; low-confidence tag BIT353CO_U01 | solution generated, not yet reviewed",
+      "solution_path": "solutions/BIT353CO/2025/BIT353CO_2025_regular_B7.md",
+      "marking_scheme": [
+        {
+          "point": "Defines Genetic Algorithm as an optimization technique inspired by natural selection/evolution.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the concept of Initialization (random population).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the role of the Fitness Function (evaluates solution quality).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains Selection (choosing fitter individuals as parents).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains Crossover (combining genetic material from parents).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains Mutation (random alteration of genes to maintain diversity).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the Termination condition (e.g., max generations, optimal solution found).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides a clear, simple example illustrating the GA steps (e.g., finding a target string, function optimization).",
+          "marks": 1,
+          "required": true
+        }
+      ]
     },
     {
       "question_id": "BIT353CO_2025_regular_B8",
@@ -266,7 +588,46 @@
           "needs_review": false
         }
       ],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT353CO/2025/BIT353CO_2025_regular_B8.md",
+      "marking_scheme": [
+        {
+          "point": "Defines metadata as \"data about data\" or similar.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains its purpose (e.g., understanding, managing, using other data).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides at least two distinct types or examples of metadata relevant to data warehousing (e.g., operational, business, technical, process).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Lists Data Cleaning and briefly explains its purpose (e.g., handling missing values, noise, inconsistencies).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists Data Integration and briefly explains its purpose (e.g., combining data from multiple sources, resolving conflicts).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists Data Transformation and briefly explains its purpose (e.g., normalization, aggregation, attribute construction).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Lists Data Reduction and briefly explains its purpose (e.g., dimensionality reduction, numerosity reduction).",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT353CO_2025_regular_B9",
@@ -324,7 +685,45 @@
         }
       ],
       "needs_review": true,
-      "notes": "question confidence is 'low'; low-confidence tag BIT353CO_U01"
+      "notes": "question confidence is 'low'; low-confidence tag BIT353CO_U01 | solution generated, not yet reviewed",
+      "solution_path": "solutions/BIT353CO/2025/BIT353CO_2025_regular_B9.md",
+      "marking_scheme": [
+        {
+          "point": "Defines network topology as the arrangement of elements in a network and how devices are interconnected.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Distinguishes between physical and logical topology.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes at least two common network topologies (e.g., Star, Bus, Ring, Mesh, Tree, Hybrid). (1 mark each)",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "States Bayes' Theorem formula: $P(A|B) = \\frac{P(B|A) \\cdot P(A)}{P(B)}$.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains what each term in the formula represents (posterior, likelihood, prior, marginal probability).",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides an appropriate example scenario with given probabilities.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Shows the application of the formula to the example, including calculation of $P(B)$, and calculates the posterior probability.",
+          "marks": 1,
+          "required": true
+        }
+      ]
     },
     {
       "question_id": "BIT353CO_2025_regular_B10",
@@ -343,7 +742,36 @@
       "source_page": 2,
       "confidence": "high",
       "sub_parts": [],
-      "needs_review": false
+      "needs_review": true,
+      "solution_path": "solutions/BIT353CO/2025/BIT353CO_2025_regular_B10.md",
+      "marking_scheme": [
+        {
+          "point": "Introduces Inmon's definition and states the purpose of a data warehouse.",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains \"Non-volatile\" by stating data is stable/append-only, contrasting with OLTP, and giving its purpose (historical analysis, consistency).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains \"Integrated\" by describing consolidation from disparate sources, mentioning ETL processes (cleansing, standardization, reconciliation), and stating its purpose (unified view, consistency).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains \"Time-variant\" by stating data includes historical points in time, contrasting with current state data, and giving its purpose (trend analysis, forecasting).",
+          "marks": 2,
+          "required": true
+        },
+        {
+          "point": "Explains \"Subject-oriented\" by describing organization around core business entities (e.g., customer, product) and stating its purpose (simplified analysis for decision-making).",
+          "marks": 1,
+          "required": true
+        }
+      ],
+      "notes": "solution generated, not yet reviewed"
     },
     {
       "question_id": "BIT353CO_2025_regular_B11",
@@ -422,7 +850,70 @@
         }
       ],
       "needs_review": true,
-      "notes": "low-confidence tag BIT353CO_U05"
+      "notes": "low-confidence tag BIT353CO_U05 | solution generated, not yet reviewed",
+      "solution_path": "solutions/BIT353CO/2025/BIT353CO_2025_regular_B11.md",
+      "marking_scheme": [
+        {
+          "point": "Defines multi-dimensional association rules as involving predicates from multiple dimensions/relations",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Distinguishes from single-dimensional rules or explains inter-dimensional vs. intra-dimensional",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides a clear example of a multi-dimensional rule",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Mentions the challenge of numerical attributes and/or the need for discretization",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines back propagation as an algorithm to train neural networks by minimizing error or adjusting weights/biases",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the forward pass: input to output, calculating prediction and initial error",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Explains the backward pass: propagating error backwards through layers",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Describes weight adjustment using gradient descent based on the calculated error gradients",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Defines cluster analysis as an unsupervised learning technique for grouping data points",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "States the goal: maximizing intra-cluster similarity and minimizing inter-cluster similarity",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Mentions that it relies on similarity or distance measures",
+          "marks": 1,
+          "required": true
+        },
+        {
+          "point": "Provides at least one example of application (e.g., market segmentation, image processing) or names different types of algorithms",
+          "marks": 1,
+          "required": true
+        }
+      ]
     }
   ],
   "source_files": [

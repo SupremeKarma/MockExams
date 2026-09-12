@@ -1,0 +1,97 @@
+{
+  "semester": 8,
+  "generated_from": "src/data/bitSyllabusData.ts",
+  "subject_count": 3,
+  "unit_count": 17,
+  "subjects": [
+    {
+      "subject_code": "BIT451MS",
+      "subject_name": "Principles of Management and Entrepreneurship in IT",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT451MS_U01",
+          "title": "Introduction to Management & Organization Design"
+        },
+        {
+          "unit_id": "BIT451MS_U02",
+          "title": "The Foundation of Entrepreneurship"
+        },
+        {
+          "unit_id": "BIT451MS_U03",
+          "title": "Feasibility Analysis & Business Plans"
+        },
+        {
+          "unit_id": "BIT451MS_U04",
+          "title": "Business Ownership & Franchising"
+        },
+        {
+          "unit_id": "BIT451MS_U05",
+          "title": "Marketing Plans & E-Commerce for Entrepreneurs"
+        },
+        {
+          "unit_id": "BIT451MS_U06",
+          "title": "Entrepreneurship in IT (Technology Transfer)"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT452CO",
+      "subject_name": "Distributed and Cloud Computing",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT452CO_U01",
+          "title": "Distributed Systems Fundamentals"
+        },
+        {
+          "unit_id": "BIT452CO_U02",
+          "title": "Cloud Computing Service Models (IaaS/PaaS/SaaS)"
+        },
+        {
+          "unit_id": "BIT452CO_U03",
+          "title": "Virtualization Technologies"
+        },
+        {
+          "unit_id": "BIT452CO_U04",
+          "title": "Cloud Deployment Models"
+        },
+        {
+          "unit_id": "BIT452CO_U05",
+          "title": "Cloud Security & Management"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT4xxCO",
+      "subject_name": "Specialization Track (2 of 4 courses, continued)",
+      "credits": 6,
+      "units": [
+        {
+          "unit_id": "BIT4xxCO_U01",
+          "title": "Track A: Natural Language Processing (BIT471CO)"
+        },
+        {
+          "unit_id": "BIT4xxCO_U02",
+          "title": "Track A: Supply Chain Analytics (BIT472MS)"
+        },
+        {
+          "unit_id": "BIT4xxCO_U03",
+          "title": "Track B: Big Data (BIT478CO)"
+        },
+        {
+          "unit_id": "BIT4xxCO_U04",
+          "title": "Track B: Mobile App Development (BIT479CO)"
+        },
+        {
+          "unit_id": "BIT4xxCO_U05",
+          "title": "Track C: Incident Response & Management (BIT485CO)"
+        },
+        {
+          "unit_id": "BIT4xxCO_U06",
+          "title": "Track C: Climate Change Risk Management (BIT486CO)"
+        }
+      ]
+    }
+  ]
+}

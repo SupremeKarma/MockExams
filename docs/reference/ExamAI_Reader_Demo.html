@@ -1,0 +1,1719 @@
+<!doctype html>
+<html lang="en" data-theme="paper" data-size="m" data-font="book" data-width="normal" data-spacing="normal">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Deadlock detection and recovery | Operating System | ExamAI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;500&display=swap">
+<style>
+/* ==========================================================================
+   ExamAI Study Design System: tokens.css
+   Four reading themes, type, spacing, and user reading preferences.
+   All text colors verified: body text >= 7:1, secondary text >= 4.5:1,
+   control borders >= 3:1 against their backgrounds (see DESIGN.md).
+   Colors are plain hex on purpose: old Smart TV browsers ignore oklch().
+   ========================================================================== */
+
+:root {
+  /* ---------- Type families ---------- */
+  --font-book: "Literata", "Noto Serif Devanagari", "Iowan Old Style", "Charter",
+    "Georgia", serif;
+  --font-clear: "Atkinson Hyperlegible Next", "Noto Sans Devanagari", system-ui,
+    -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Atkinson Hyperlegible Mono", ui-monospace, "SFMono-Regular",
+    Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* ---------- Reading preferences (changed via data-* on <html>) ---------- */
+  --user-scale: 1;
+  --measure: 66ch;
+  --reading-font: var(--font-book);
+  --reading-leading: 1.7;
+  --para-space: 1em;
+  --word-space: normal;
+
+  /* Fluid body size: 17px on phones up to 19px on desktops, times user scale */
+  --text-base: calc(clamp(1.0625rem, 1rem + 0.2vw, 1.1875rem) * var(--user-scale));
+
+  /* Modular scale, minor third (1.2), in em of the article text */
+  --step--1: 0.833em;
+  --step-0: 1em;
+  --step-1: 1.2em;
+  --step-2: 1.44em;
+  --step-3: 1.728em;
+  --step-4: 2.074em;
+
+  /* ---------- Space, shape, layout ---------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  --radius-s: 4px;
+  --radius-m: 8px;
+  --radius-l: 14px;
+
+  --header-h: 3.5rem;
+  --rail-w: 17.5rem;
+  --toc-w: 15rem;
+  --gutter: clamp(1.125rem, 4vw, 3rem);
+
+  --tap: 2.5rem;            /* 40px; becomes 44px on touch screens */
+  --focus-w: 3px;
+
+  /* ---------- Motion ---------- */
+  --dur-fast: 120ms;
+  --dur: 200ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@media (pointer: coarse) {
+  :root { --tap: 2.75rem; }
+}
+
+@media (min-width: 1920px) {
+  :root {
+    --rail-w: 20rem;
+    --toc-w: 17rem;
+  }
+}
+
+/* ==========================================================================
+   THEMES
+   paper       default light: copy paper, ballpoint ink, red margin pen
+   warm        evening light: lamp-lit notebook, lower blue
+   blackboard  dark: classroom slate with chalk
+   night       true black for OLED phones and dark rooms, dimmed chalk
+   ========================================================================== */
+
+:root,
+:root[data-theme="paper"] {
+  color-scheme: light;
+  --bg: #FBFBF8;
+  --bg-rail: #F3F4F1;
+  --surface: #FFFFFF;
+  --ink: #1A2230;
+  --ink-2: #3F4957;
+  --ink-3: #5F6875;
+  --rule: #E5E7E3;
+  --rule-strong: #838A93;
+  --accent: #2446B8;
+  --accent-soft: #E8EDFB;
+  --pen: #C0392F;
+  --pen-line: #EBA9A4;
+  --highlight: #FFF1A8;
+  --grid-bg: #FDFDFB;
+  --grid-line: #ECEFF3;
+  --warn-ink: #8A5200;
+  --warn-bg: #FFF5E0;
+  --warn-line: #E0A64A;
+  --ok: #1E7A4C;
+  --focus: #2446B8;
+  --elevation: 0 12px 40px rgb(26 34 48 / 0.16);
+}
+
+:root[data-theme="warm"] {
+  color-scheme: light;
+  --bg: #EFE6D2;
+  --bg-rail: #E8DDC6;
+  --surface: #F6EFE0;
+  --ink: #2B241B;
+  --ink-2: #4F4538;
+  --ink-3: #655A4B;
+  --rule: #DCCFB6;
+  --rule-strong: #857761;
+  --accent: #1E45A0;
+  --accent-soft: #E2DDD8;
+  --pen: #A8352A;
+  --pen-line: #D9A08F;
+  --highlight: #F3DA7E;
+  --grid-bg: #F1E9D7;
+  --grid-line: #E4D9C2;
+  --warn-ink: #7A4A00;
+  --warn-bg: #F5E3BD;
+  --warn-line: #C9923D;
+  --ok: #2D6B3F;
+  --focus: #1E45A0;
+  --elevation: 0 12px 40px rgb(43 36 27 / 0.18);
+}
+
+:root[data-theme="blackboard"] {
+  color-scheme: dark;
+  --bg: #1B2320;
+  --bg-rail: #161D1B;
+  --surface: #232C29;
+  --ink: #E7E5DD;
+  --ink-2: #BDC2B9;
+  --ink-3: #9CA39A;
+  --rule: #2C3632;
+  --rule-strong: #6E7A74;
+  --accent: #A9C1FF;
+  --accent-soft: #26324A;
+  --pen: #F08C84;
+  --pen-line: #6E3F3B;
+  --highlight: #34331C;
+  --grid-bg: #1E2623;
+  --grid-line: #26302C;
+  --warn-ink: #F2C27B;
+  --warn-bg: #3A2E1A;
+  --warn-line: #8C6A33;
+  --ok: #7FD1A3;
+  --focus: #A9C1FF;
+  --elevation: 0 12px 40px rgb(0 0 0 / 0.5);
+}
+
+:root[data-theme="night"] {
+  color-scheme: dark;
+  --bg: #000000;
+  --bg-rail: #000000;
+  --surface: #141414;
+  --ink: #C9C4B8;
+  --ink-2: #A39E93;
+  --ink-3: #8C877D;
+  --rule: #1E1E1E;
+  --rule-strong: #66625A;
+  --accent: #8FA6E8;
+  --accent-soft: #141A2B;
+  --pen: #D98079;
+  --pen-line: #4A2B28;
+  --highlight: #1F1D0E;
+  --grid-bg: #070707;
+  --grid-line: #121212;
+  --warn-ink: #D9A864;
+  --warn-bg: #1E170C;
+  --warn-line: #6B5226;
+  --ok: #79C298;
+  --focus: #8FA6E8;
+  --elevation: 0 12px 40px rgb(0 0 0 / 0.7);
+}
+
+/* No saved choice yet: follow the device setting */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --bg: #1B2320;
+    --bg-rail: #161D1B;
+    --surface: #232C29;
+    --ink: #E7E5DD;
+    --ink-2: #BDC2B9;
+    --ink-3: #9CA39A;
+    --rule: #2C3632;
+    --rule-strong: #6E7A74;
+    --accent: #A9C1FF;
+    --accent-soft: #26324A;
+    --pen: #F08C84;
+    --pen-line: #6E3F3B;
+    --highlight: #34331C;
+    --grid-bg: #1E2623;
+    --grid-line: #26302C;
+    --warn-ink: #F2C27B;
+    --warn-bg: #3A2E1A;
+    --warn-line: #8C6A33;
+    --ok: #7FD1A3;
+    --focus: #A9C1FF;
+    --elevation: 0 12px 40px rgb(0 0 0 / 0.5);
+  }
+}
+
+/* ==========================================================================
+   READING PREFERENCES
+   ========================================================================== */
+
+:root[data-size="s"]   { --user-scale: 0.9; }
+:root[data-size="m"]   { --user-scale: 1; }
+:root[data-size="l"]   { --user-scale: 1.12; }
+:root[data-size="xl"]  { --user-scale: 1.25; }
+:root[data-size="xxl"] { --user-scale: 1.4; }
+
+:root[data-font="book"]  { --reading-font: var(--font-book);  --reading-leading: 1.7; }
+:root[data-font="clear"] { --reading-font: var(--font-clear); --reading-leading: 1.6; }
+
+:root[data-width="narrow"] { --measure: 58ch; }
+:root[data-width="normal"] { --measure: 66ch; }
+:root[data-width="wide"]   { --measure: 76ch; }
+
+:root[data-spacing="relaxed"] {
+  --reading-leading: 1.9;
+  --para-space: 1.35em;
+  --word-space: 0.05em;
+}
+
+/* Devanagari needs more vertical room for matras */
+:lang(ne), :lang(hi), :lang(mai) {
+  --reading-leading: 1.9;
+}
+
+/* Stronger contrast when the device asks for it */
+@media (prefers-contrast: more) {
+  :root,
+  :root[data-theme] {
+    --ink-2: var(--ink);
+    --ink-3: var(--ink-2);
+    --rule: var(--rule-strong);
+    --focus-w: 4px;
+  }
+}
+
+/* ==========================================================================
+   ExamAI Study Design System: reader.css
+   Requires tokens.css. Mobile-first. Works without :has() and without JS
+   for reading; JS only adds dialogs, scroll-spy, progress, reminders.
+   ========================================================================== */
+
+/* ---------- Base ---------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background: var(--bg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-clear);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Light text on dark backgrounds looks heavier; thin it slightly on macOS */
+:root[data-theme="blackboard"] body,
+:root[data-theme="night"] body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, svg, video { max-inline-size: 100%; block-size: auto; }
+
+::selection { background: var(--highlight); color: var(--ink); }
+
+:focus-visible {
+  outline: var(--focus-w) solid var(--focus);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute !important;
+  inline-size: 1px; block-size: 1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; margin: -1px; padding: 0; border: 0;
+}
+
+.skip {
+  position: absolute;
+  inset-inline-start: 1rem;
+  inset-block-start: -10rem;
+  z-index: 60;
+  padding: 0.6rem 1rem;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-m);
+  font-weight: 700;
+  text-decoration: none;
+}
+.skip:focus { inset-block-start: 0.75rem; }
+
+.icon {
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: none;
+}
+
+/* ---------- Buttons ---------- */
+
+.icon-btn,
+.btn {
+  font-family: var(--font-clear);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  inline-size: var(--tap);
+  block-size: var(--tap);
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--radius-m);
+  background: transparent;
+  color: var(--ink-2);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-block-size: var(--tap);
+  padding: 0 1rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.btn--primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+
+.btn--quiet {
+  border-color: transparent;
+  background: transparent;
+  color: var(--ink-2);
+}
+
+@media (hover: hover) {
+  .icon-btn:hover { background: var(--bg-rail); color: var(--ink); }
+  .btn:hover { border-color: var(--ink-2); }
+  .btn--primary:hover { filter: brightness(1.08); }
+}
+
+.only-tv { display: none; }
+
+/* ---------- Reading progress ---------- */
+
+.progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  block-size: 3px;
+  z-index: 30;
+  pointer-events: none;
+}
+.progress span {
+  display: block;
+  block-size: 100%;
+  background: var(--accent);
+  transform-origin: 0 50%;
+  transform: scaleX(var(--progress, 0));
+}
+
+/* ---------- Header ---------- */
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--bg);
+  border-block-end: 1px solid var(--rule);
+}
+
+.app-header__inner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  block-size: var(--header-h);
+  padding-inline: var(--gutter);
+  padding-inline: max(var(--gutter), env(safe-area-inset-left)) max(var(--gutter), env(safe-area-inset-right));
+}
+
+.wordmark {
+  font-family: var(--font-book);
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-decoration: none;
+  margin-inline-end: 0.5rem;
+  white-space: nowrap;
+}
+
+.crumbs { min-inline-size: 0; flex: 1; }
+.crumbs ol {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9rem;
+  color: var(--ink-3);
+  min-inline-size: 0;
+}
+.crumbs li {
+  min-inline-size: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.crumbs li + li::before { content: "\203A"; margin-inline-end: 0.4rem; color: var(--ink-3); }
+.crumbs a { color: var(--ink-2); text-decoration: none; }
+@media (hover: hover) { .crumbs a:hover { color: var(--ink); text-decoration: underline; } }
+@media (max-width: 599px) { .crumbs li:first-child { display: none; } .crumbs li + li::before { content: none; } }
+
+.header-actions { display: flex; align-items: center; gap: 0.25rem; margin-inline-start: auto; }
+
+/* ---------- Shell: 1, 2 or 3 panes ---------- */
+
+.shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+}
+
+.rail, .toc { display: none; }
+
+@media (min-width: 1000px) {
+  .shell { grid-template-columns: minmax(0, 1fr) var(--toc-w); }
+  .toc { display: block; }
+  .toolbar { display: none !important; }
+}
+
+@media (max-width: 999px) {
+  .only-drawer, .hide-small { display: none !important; }
+}
+
+@media (min-width: 1280px) {
+  .shell { grid-template-columns: var(--rail-w) minmax(0, 1fr) var(--toc-w); }
+  .rail { display: block; }
+  .only-drawer { display: none; }
+}
+
+.rail,
+.toc {
+  position: sticky;
+  top: var(--header-h);
+  block-size: calc(100vh - var(--header-h));
+  block-size: calc(100dvh - var(--header-h));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  font-family: var(--font-clear);
+}
+
+:root[data-focus="on"] .shell { grid-template-columns: minmax(0, 1fr); }
+:root[data-focus="on"] .rail,
+:root[data-focus="on"] .toc { display: none; }
+
+/* ---------- The sheet (article column) ---------- */
+
+.sheet {
+  padding: var(--space-6) var(--gutter) var(--space-8);
+  padding-inline: max(var(--gutter), env(safe-area-inset-left)) max(var(--gutter), env(safe-area-inset-right));
+  min-inline-size: 0;
+}
+
+.prose {
+  position: relative;
+  max-inline-size: var(--measure);
+  margin-inline: auto;
+  font-family: var(--reading-font);
+  font-size: var(--text-base);
+  line-height: var(--reading-leading);
+  word-spacing: var(--word-space);
+  color: var(--ink);
+  font-optical-sizing: auto;
+}
+
+/* The red margin line: the one bold element, borrowed from exam notebooks */
+@media (min-width: 700px) {
+  .prose::before {
+    content: "";
+    position: absolute;
+    inset-block: -2rem -4rem;
+    inset-inline-start: -1.6rem;
+    inline-size: 2px;
+    background: var(--pen-line);
+    pointer-events: none;
+  }
+}
+
+.prose h1,
+.prose h2,
+.prose h3 {
+  font-family: var(--font-clear);
+  color: var(--ink);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  scroll-margin-top: calc(var(--header-h) + 1.25rem);
+}
+.prose h1 { font-size: clamp(1.7em, 1.3em + 1.6vw, 2.074em); font-weight: 700; margin: 0.2em 0 0.45em; }
+.prose h2 { font-size: var(--step-2); font-weight: 700; margin: 2.2em 0 0.6em; }
+.prose h3 { font-size: var(--step-1); font-weight: 600; margin: 1.8em 0 0.5em; }
+
+.prose p { margin: 0 0 var(--para-space); text-wrap: pretty; }
+.prose ul, .prose ol { margin: 0 0 var(--para-space); padding-inline-start: 1.4em; }
+.prose li { margin-block: 0.35em; }
+.prose li::marker { color: var(--ink-3); font-family: var(--font-clear); }
+.prose strong { font-weight: 600; }
+.prose hr { border: 0; border-block-start: 1px solid var(--rule); margin: 2.5em 0; }
+
+.prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.2em;
+}
+@media (hover: hover) { .prose a:hover { text-decoration-thickness: 0.14em; } }
+
+@media (max-width: 480px) {
+  .prose p, .prose li { -webkit-hyphens: auto; hyphens: auto; }
+}
+
+/* Lesson meta row under the title */
+.lesson-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin: 0 0 1.75em;
+  font-family: var(--font-clear);
+  font-size: 0.85em;
+  line-height: 1.4;
+  color: var(--ink-3);
+}
+
+.trust {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  padding: 0.15em 0.65em;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  color: var(--ink-2);
+  font-weight: 600;
+}
+.trust::before {
+  content: "";
+  inline-size: 0.55em;
+  block-size: 0.55em;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+}
+.trust[data-level="code-verified"],
+.trust[data-level="teacher-verified"] { border-color: currentColor; }
+.trust[data-level="code-verified"] { color: var(--ok); }
+.trust[data-level="teacher-verified"] { color: var(--accent); }
+.trust[data-level="code-verified"]::before,
+.trust[data-level="teacher-verified"]::before { background: currentColor; }
+
+.asked {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  color: var(--pen);
+  font-weight: 600;
+}
+
+/* ---------- Code, tables, figures ---------- */
+
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding: 0.1em 0.35em;
+  background: var(--bg-rail);
+  border-radius: var(--radius-s);
+}
+
+.prose pre {
+  margin: 1.2em 0;
+  padding: 0.9em 1.1em;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.84em;
+  line-height: 1.6;
+  tab-size: 4;
+  background: var(--bg-rail);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-m);
+}
+.prose pre code { padding: 0; background: none; font-size: inherit; }
+
+.table-wrap {
+  margin: 1.2em 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.prose table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-clear);
+  font-size: 0.88em;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums lining-nums;
+  background: var(--surface);
+}
+.prose caption {
+  caption-side: top;
+  text-align: start;
+  padding-block-end: 0.5em;
+  color: var(--ink-3);
+  font-size: 0.95em;
+}
+.prose th,
+.prose td {
+  padding: 0.45em 0.75em;
+  border: 1px solid var(--rule);
+  text-align: start;
+  vertical-align: top;
+  white-space: nowrap;
+}
+.prose thead th { background: var(--bg-rail); font-weight: 700; white-space: normal; min-inline-size: 5.5em; }
+
+/* Wide tables (Gantt charts, matrices): fade the cut edge so it reads as scrollable */
+.table-wrap.is-scrollable:not(.at-end) {
+  -webkit-mask-image: linear-gradient(90deg, #000 82%, transparent);
+  mask-image: linear-gradient(90deg, #000 82%, transparent);
+}
+.table-hint { display: none; margin: -0.6em 0 1.2em; font-family: var(--font-clear); font-size: 0.8em; color: var(--ink-3); }
+.table-wrap.is-scrollable + .table-hint { display: block; }
+.prose td.num, .prose th.num { text-align: end; }
+
+.prose figure { margin: 1.8em 0; }
+.prose figcaption {
+  margin-block-start: 0.7em;
+  font-family: var(--font-clear);
+  font-size: 0.85em;
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+.diagram-svg { display: block; inline-size: 100%; max-inline-size: 32rem; margin-inline: auto; }
+.diagram-svg text { fill: var(--ink); font-family: var(--font-clear); font-size: 15px; font-weight: 600; }
+.diagram-svg .cap { fill: var(--ink-3); font-size: 13px; font-weight: 400; }
+.diagram-svg .p { fill: var(--surface); stroke: var(--ink-2); stroke-width: 1.5; }
+.diagram-svg .r { fill: var(--bg-rail); stroke: var(--ink-2); stroke-width: 1.5; }
+.diagram-svg .e { fill: none; stroke: var(--ink-2); stroke-width: 1.5; }
+.diagram-svg .e--cycle { stroke: var(--pen); stroke-width: 2; }
+.diagram-svg .head { fill: var(--ink-2); }
+.diagram-svg .head--cycle { fill: var(--pen); }
+
+/* ---------- Study blocks (the allowed markdown directives) ---------- */
+
+.block {
+  margin: 1.6em 0;
+  padding: 1em 1.2em;
+  border-radius: var(--radius-m);
+  break-inside: avoid;
+}
+.block > :last-child { margin-bottom: 0; }
+
+.block__label {
+  display: flex;
+  align-items: center;
+  gap: 0.45em;
+  margin: 0 0 0.45em;
+  font-family: var(--font-clear);
+  font-size: 0.85em;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--ink-2);
+}
+.block__label .icon { inline-size: 1.15em; block-size: 1.15em; }
+
+/* idea: a highlighter stroke across the page */
+.block--idea {
+  background: var(--highlight);
+  border-radius: 3px 12px 4px 14px / 12px 4px 14px 3px;
+}
+
+/* example: squared maths paper */
+.block--example {
+  background-color: var(--grid-bg);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 1.25rem 1.25rem;
+  background-position: -1px -1px;
+  border: 1px solid var(--rule);
+}
+
+/* working: numbered method steps */
+.block--working { border: 1px solid var(--rule); background: var(--bg); }
+.block--working ol { padding-inline-start: 1.6em; }
+.block--working li::marker { color: var(--ink-2); font-weight: 700; }
+
+/* answer-box: the boxed final answer from exam scripts */
+.block--answer {
+  padding: 0.8em 1.1em;
+  border: 3px double var(--accent);
+  border-radius: var(--radius-s);
+  font-family: var(--font-clear);
+}
+.block--answer .block__label { color: var(--accent); }
+
+/* exam-tip: the teacher's red pen */
+.block--tip {
+  padding: 0.15em 0 0.15em 1.1em;
+  border-radius: 0;
+  border-inline-start: 2px solid var(--pen);
+}
+.block--tip .block__label { color: var(--pen); }
+
+/* warning: common mistakes */
+.block--warning {
+  background: var(--warn-bg);
+  border-inline-start: 4px solid var(--warn-line);
+  border-radius: 0 var(--radius-m) var(--radius-m) 0;
+}
+.block--warning .block__label { color: var(--warn-ink); }
+
+/* formula: set apart, scrolls sideways instead of squashing */
+.block--formula {
+  padding: 0.9em 0.5em;
+  overflow-x: auto;
+  border-radius: 0;
+  border-block: 1px solid var(--rule);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+}
+
+/* ---------- Syllabus rail ---------- */
+
+.rail {
+  padding: var(--space-5) var(--space-3) var(--space-7);
+  background: var(--bg-rail);
+  border-inline-end: 1px solid var(--rule);
+  font-size: 0.95rem;
+}
+
+.course-title { margin: 0 0.5rem 0.2rem; font-size: 1rem; line-height: 1.3; color: var(--ink); }
+.course-meta { margin: 0 0.5rem 1rem; font-size: 0.85rem; color: var(--ink-3); }
+
+.tree, .tree ul { list-style: none; margin: 0; padding: 0; }
+
+.tree summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-block-size: var(--tap);
+  padding: 0.3rem 0.5rem;
+  border-radius: var(--radius-m);
+  list-style: none;
+  cursor: pointer;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+}
+.tree summary::-webkit-details-marker { display: none; }
+.tree summary::before {
+  content: "";
+  flex: none;
+  inline-size: 0.45rem;
+  block-size: 0.45rem;
+  border-inline-end: 2px solid var(--ink-3);
+  border-block-end: 2px solid var(--ink-3);
+  transform: rotate(-45deg);
+  transition: transform var(--dur-fast) var(--ease);
+}
+.tree details[open] > summary::before { transform: rotate(45deg); }
+
+.tree a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-block-size: var(--tap);
+  padding: 0.35rem 0.5rem 0.35rem 1.45rem;
+  border-radius: var(--radius-m);
+  color: var(--ink-2);
+  text-decoration: none;
+  line-height: 1.35;
+}
+.tree a[aria-current="page"] { background: var(--accent-soft); color: var(--ink); font-weight: 600; }
+.tree .code { flex: none; min-inline-size: 2.1em; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+
+@media (hover: hover) {
+  .tree summary:hover,
+  .tree a:hover { background: var(--accent-soft); color: var(--ink); }
+}
+
+/* Progress dots use shape, not only color */
+.dot {
+  flex: none;
+  inline-size: 0.75rem;
+  block-size: 0.75rem;
+  margin-inline-start: auto;
+  border-radius: 50%;
+  border: 1.5px solid var(--rule-strong);
+}
+.dot[data-state="progress"] {
+  border-color: var(--accent);
+  background: linear-gradient(90deg, var(--accent) 50%, transparent 50%);
+}
+.dot[data-state="learned"] { border-color: var(--ok); background: var(--ok); }
+
+.rail-note { margin: 1.25rem 0.5rem 0; font-size: 0.8rem; color: var(--ink-3); }
+
+/* ---------- On this page ---------- */
+
+.toc {
+  padding: var(--space-6) var(--space-4) var(--space-7);
+  border-inline-start: 1px solid var(--rule);
+  font-size: 0.9rem;
+}
+.toc h2 { margin: 0 0 0.75rem; font-size: 0.95rem; color: var(--ink); }
+
+.toc-list {
+  list-style: none;
+  margin: 0 0 1.75rem;
+  padding: 0;
+  border-inline-start: 2px solid var(--rule);
+}
+.toc-list a {
+  display: block;
+  margin-inline-start: -2px;
+  padding: 0.3rem 0.75rem;
+  border-inline-start: 2px solid transparent;
+  color: var(--ink-3);
+  text-decoration: none;
+  line-height: 1.4;
+}
+.toc-list .lvl-3 a { padding-inline-start: 1.5rem; font-size: 0.95em; }
+.toc-list a[aria-current="location"] { color: var(--accent); border-inline-start-color: var(--accent); font-weight: 600; }
+@media (hover: hover) { .toc-list a:hover { color: var(--ink); } }
+
+.toc-section { margin: 0 0 1.5rem; }
+.toc-section p { margin: 0.25rem 0; color: var(--ink-2); line-height: 1.45; }
+.toc .btn { inline-size: 100%; }
+
+/* ---------- End of lesson ---------- */
+
+.lesson-end {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-block-start: 2.5em;
+  padding-block-start: 1.5em;
+  border-block-start: 1px solid var(--rule);
+  font-family: var(--font-clear);
+  font-size: 1rem;
+}
+
+.pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-block-start: 1.5rem;
+  font-family: var(--font-clear);
+  font-size: 1rem;
+}
+.pager a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-m);
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.pager a small { color: var(--ink-3); font-weight: 400; font-size: 0.85rem; }
+.pager a[rel="next"] { text-align: end; }
+@media (hover: hover) { .pager a:hover { border-color: var(--accent); } }
+
+/* ---------- Phone toolbar ---------- */
+
+.toolbar {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: var(--bg);
+  border-block-start: 1px solid var(--rule);
+  padding-block-end: env(safe-area-inset-bottom);
+}
+.toolbar button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  min-block-size: 3.5rem;
+  border: 0;
+  background: none;
+  color: var(--ink-2);
+  font: 600 0.75rem/1.1 var(--font-clear);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.toolbar button[aria-pressed="true"] { color: var(--ok); }
+
+/* ---------- Dialogs: drawer, bottom sheet, panel ---------- */
+
+dialog {
+  padding: 0;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  box-shadow: var(--elevation);
+  font-family: var(--font-clear);
+}
+dialog::backdrop { background: rgb(0 0 0 / 0.45); }
+
+.dialog__head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  background: var(--surface);
+  border-block-end: 1px solid var(--rule);
+}
+.dialog__head h2 { margin: 0; font-size: 1rem; }
+.dialog__body { padding: 1rem; }
+
+.drawer {
+  margin: 0;
+  inline-size: min(22rem, 88vw);
+  max-inline-size: none;
+  block-size: 100vh;
+  block-size: 100dvh;
+  max-block-size: none;
+  border-width: 0 1px 0 0;
+  border-radius: 0;
+  overflow-y: auto;
+}
+.drawer .dialog__body { padding: 0.75rem; background: var(--bg-rail); min-block-size: calc(100% - 3.5rem); }
+
+.bottom-sheet {
+  margin: auto 0 0;
+  inline-size: 100%;
+  max-inline-size: 100%;
+  max-block-size: 80vh;
+  max-block-size: 80dvh;
+  border-width: 1px 0 0;
+  border-radius: var(--radius-l) var(--radius-l) 0 0;
+  padding-block-end: env(safe-area-inset-bottom);
+  overflow-y: auto;
+}
+
+.panel {
+  inline-size: min(26rem, 92vw);
+  max-block-size: 90vh;
+  max-block-size: 90dvh;
+  border-radius: var(--radius-l);
+  overflow-y: auto;
+}
+@media (max-width: 599px) {
+  .panel {
+    margin: auto 0 0;
+    inline-size: 100%;
+    max-inline-size: 100%;
+    border-radius: var(--radius-l) var(--radius-l) 0 0;
+    padding-block-end: env(safe-area-inset-bottom);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .drawer[open] { animation: drawer-in var(--dur) var(--ease); }
+  .bottom-sheet[open],
+  .panel[open] { animation: rise-in var(--dur) var(--ease); }
+}
+@keyframes drawer-in { from { transform: translateX(-100%); } }
+@keyframes rise-in { from { transform: translateY(1.5rem); opacity: 0; } }
+
+/* ---------- Reading settings controls ---------- */
+
+.setting { margin: 0 0 1.35rem; padding: 0; border: 0; min-inline-size: 0; }
+.setting legend,
+.setting .legend { display: block; margin: 0 0 0.5rem; padding: 0; font-size: 0.9rem; font-weight: 700; color: var(--ink); }
+
+.segmented {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  background: var(--bg-rail);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-m);
+}
+.segmented label {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-block-size: var(--tap);
+  padding: 0 0.4rem;
+  border-radius: calc(var(--radius-m) - 2px);
+  color: var(--ink-2);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+}
+.segmented input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
+.segmented label.is-checked,
+.segmented label:has(input:checked) { background: var(--surface); color: var(--ink); box-shadow: 0 0 0 1px var(--rule-strong); }
+.segmented label:has(input:focus-visible) { outline: var(--focus-w) solid var(--focus); outline-offset: 1px; }
+
+.swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+.swatch { position: relative; display: grid; gap: 0.35rem; justify-items: center; font-size: 0.8rem; font-weight: 600; color: var(--ink-2); cursor: pointer; }
+.swatch input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
+.swatch__chip {
+  display: grid;
+  place-items: center;
+  inline-size: 100%;
+  block-size: 2.9rem;
+  border-radius: var(--radius-m);
+  border: 1px solid var(--rule-strong);
+  font-family: var(--font-book);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.swatch.is-checked .swatch__chip,
+.swatch:has(input:checked) .swatch__chip { outline: 3px solid var(--accent); outline-offset: 2px; }
+.swatch:has(input:focus-visible) .swatch__chip { outline: var(--focus-w) solid var(--focus); outline-offset: 4px; }
+
+.stepper { display: flex; align-items: center; gap: 0.5rem; }
+.stepper output { flex: 1; text-align: center; font-weight: 600; color: var(--ink-2); }
+
+.switch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-block-size: var(--tap);
+  margin: 0 0 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.switch small { display: block; margin-top: 0.1rem; font-size: 0.82rem; font-weight: 400; color: var(--ink-3); line-height: 1.35; }
+.switch input {
+  position: relative;
+  flex: none;
+  inline-size: 2.75rem;
+  block-size: 1.6rem;
+  margin: 0;
+  border-radius: 999px;
+  background: var(--rule-strong);
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease);
+}
+.switch input::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 0.2rem;
+  inset-inline-start: 0.2rem;
+  inline-size: 1.2rem;
+  block-size: 1.2rem;
+  border-radius: 50%;
+  background: var(--surface);
+  transition: transform var(--dur-fast) var(--ease);
+}
+.switch input:checked { background: var(--accent); }
+.switch input:checked::before { transform: translateX(1.15rem); }
+
+.status-line { min-block-size: 1.2em; margin: 0; font-size: 0.85rem; color: var(--ink-3); }
+
+/* ---------- Break reminder ---------- */
+
+.break-toast {
+  position: fixed;
+  inset-inline: 1rem;
+  inset-block-end: calc(4.5rem + env(safe-area-inset-bottom));
+  z-index: 40;
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  max-inline-size: 28rem;
+  margin-inline: auto;
+  padding: 0.9rem 1rem;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-l);
+  box-shadow: var(--elevation);
+  font-family: var(--font-clear);
+}
+.break-toast[hidden] { display: none; }
+.break-toast p { margin: 0.15rem 0 0.6rem; color: var(--ink-2); line-height: 1.45; font-size: 0.92rem; }
+.break-toast strong { font-size: 1rem; }
+.break-toast .actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+@media (min-width: 1000px) {
+  .break-toast { inset-inline: auto 1.5rem; inset-block-end: 1.5rem; }
+}
+
+/* ==========================================================================
+   TV AND PROJECTOR VIEW
+   Text is sized from screen width so it reads from across a room.
+   Safe area follows TV overscan guidance (5% total margin).
+   ========================================================================== */
+
+:root[data-viewing="tv"] {
+  font-size: max(1.5vw, 18px);
+  --text-base: calc(1rem * var(--user-scale));
+  --measure: 60ch;
+  --reading-font: var(--font-clear);
+  --reading-leading: 1.55;
+  --tap: 3rem;
+  --focus-w: 0.2rem;
+  --header-h: 4.5rem;
+}
+:root[data-viewing="tv"] .app-header { position: static; }
+:root[data-viewing="tv"] .app-header__inner,
+:root[data-viewing="tv"] .sheet { padding-inline: 5vw; }
+:root[data-viewing="tv"] .sheet { padding-block: 3vh 6vh; }
+:root[data-viewing="tv"] .shell { grid-template-columns: minmax(0, 1fr); }
+:root[data-viewing="tv"] .rail,
+:root[data-viewing="tv"] .toc,
+:root[data-viewing="tv"] .toolbar,
+:root[data-viewing="tv"] .only-drawer,
+:root[data-viewing="tv"] .crumbs { display: none; }
+:root[data-viewing="tv"] .only-tv { display: inline-flex; }
+:root[data-viewing="tv"] .progress { block-size: 0.3rem; }
+:root[data-viewing="tv"] :focus-visible {
+  outline: 0.2rem solid var(--focus);
+  outline-offset: 0.25rem;
+  box-shadow: 0 0 0 0.55rem var(--bg);
+}
+:root[data-viewing="tv"] .prose::before { inset-inline-start: -2rem; }
+
+/* ==========================================================================
+   SYSTEM SETTINGS
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .block,
+  .trust,
+  .pager a,
+  .segmented { border: 1px solid CanvasText; }
+  .block--idea, .block--example, .block--warning { background: Canvas; }
+  .prose::before { display: none; }
+  .toc-list a[aria-current="location"],
+  .tree a[aria-current="page"] { outline: 2px solid Highlight; }
+  .dot { forced-color-adjust: none; }
+  .progress span { background: Highlight; }
+}
+
+@media print {
+  :root, :root[data-theme] {
+    --bg: #FFFFFF; --bg-rail: #F2F2F2; --surface: #FFFFFF;
+    --ink: #000000; --ink-2: #222222; --ink-3: #444444;
+    --rule: #BBBBBB; --accent: #000000; --pen: #000000; --highlight: #EEEEEE;
+    --grid-bg: #FFFFFF; --grid-line: #E6E6E6; --warn-bg: #FFFFFF; --warn-line: #000000;
+  }
+  .app-header, .rail, .toc, .toolbar, .progress, dialog, .break-toast, .skip,
+  .lesson-end, .pager { display: none !important; }
+  .shell { display: block; }
+  .sheet { padding: 0; }
+  .prose { max-inline-size: none; font-size: 11.5pt; }
+  .prose::before { display: none; }
+  .block, figure, .table-wrap, pre { break-inside: avoid; }
+  .prose h2, .prose h3 { break-after: avoid; }
+  .prose a { color: inherit; text-decoration: none; }
+  @page { margin: 16mm 15mm; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to lesson</a>
+<div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01"/></symbol>
+  <symbol id="i-tree" viewBox="0 0 24 24"><path d="M5 4v16M5 8h6M5 14h6M13 8h6M13 14h6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="m8.5 12.2 2.3 2.3 4.7-4.9"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3Z"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M4 16h16M10 4v16M16 4v16"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="m14.5 5.5 4 4L9 19H5v-4l9.5-9.5Z"/><path d="m13 7 4 4"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4 3 20h18L12 4Z"/><path d="M12 10v4M12 17h.01"/></symbol>
+  <symbol id="i-steps" viewBox="0 0 24 24"><path d="M4 18h4v-4h4v-4h4V6h4"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="1.5"/><rect x="6" y="8" width="12" height="8" rx="1"/></symbol>
+  <symbol id="i-tick" viewBox="0 0 24 24"><path d="m5 12.5 4.2 4.2L19 7"/></symbol>
+</svg>
+
+<header class="app-header">
+  <div class="app-header__inner">
+    <button class="icon-btn only-drawer" type="button" data-open="rail-dialog" aria-label="Open syllabus">
+      <svg class="icon"><use href="#i-menu"/></svg>
+    </button>
+    <a class="wordmark" href="#main">ExamAI</a>
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="#main">Operating System</a></li>
+        <li><a href="#main" aria-current="page">Deadlocks</a></li>
+      </ol>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" type="button" aria-label="Search this course">
+        <svg class="icon"><use href="#i-search"/></svg>
+      </button>
+      <button class="btn only-tv" type="button" data-open="toc-dialog">Contents</button>
+      <button class="icon-btn" type="button" data-open="settings-dialog" aria-label="Reading settings">Aa</button>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Syllabus">
+    <div id="rail-content">
+      <h2 class="course-title">Operating System</h2>
+      <p class="course-meta">BIT253CO, semester 4, 45 teaching hours</p>
+      <ul class="tree">
+        <li><details><summary>Unit 2</summary><ul><li><a href="#main"><span class="code">2.f</span> SRTF scheduling<span class="dot" data-state="new"><span class="sr-only">Not started</span></span></a></li></ul></details></li>
+        <li><details><summary>Unit 5</summary><ul><li><a href="#main"><span class="code">5.c</span> Disk scheduling<span class="dot" data-state="new"><span class="sr-only">Not started</span></span></a></li></ul></details></li>
+        <li>
+          <details open>
+            <summary>Unit 6 Deadlocks</summary>
+            <ul>
+              <li><a href="#main"><span class="code">6.a</span> Introduction<span class="dot" data-state="learned"><span class="sr-only">Learned</span></span></a></li>
+              <li><a href="#main" aria-current="page"><span class="code">6.d</span> Deadlock detection and recovery<span class="dot" data-state="progress" data-current-dot><span class="sr-only">In progress</span></span></a></li>
+              <li><a href="#main"><span class="code">6.f</span> Banker's Algorithm (single and multiple resources)<span class="dot" data-state="new"><span class="sr-only">Not started</span></span></a></li>
+            </ul>
+          </details>
+        </li>
+        <li><details><summary>Unit 7 Real Time System</summary><ul><li><a href="#main"><span class="code">7</span> Real time systems<span class="dot" data-state="new"><span class="sr-only">Not started</span></span></a></li></ul></details></li>
+      </ul>
+      <p class="rail-note">Demo tree shows a few official topics. The real tree comes from the imported syllabus.</p>
+    </div>
+  </aside>
+
+  <main id="main" class="sheet" tabindex="-1">
+    <article class="prose" lang="en">
+      <h1 id="top">Deadlock detection and recovery</h1>
+      <div class="lesson-meta">
+        <span class="trust" data-level="ai-draft">AI draft</span>
+        <span>Topic 6.d in Unit 6, Deadlocks</span>
+        <span class="asked"><svg class="icon" aria-hidden="true"><use href="#i-tick"/></svg>Asked in 2026, question 7 (8 marks)</span>
+        <span>About 12 minutes</span>
+      </div>
+
+      <div class="block block--idea">
+        <p class="block__label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg>Idea in plain words</p>
+        <p>Deadlock means some processes are stuck forever, each waiting for something another one is holding. With detection, the operating system lets that happen, checks for it now and then, and breaks it when it finds it.</p>
+      </div>
+
+      <h2 id="what-detection-means">What detection means</h2>
+      <p>Prevention and avoidance try to stop a deadlock before it forms. Detection takes the opposite bet: allocate resources freely, because deadlocks are rare, and pay the cost only when one actually happens.</p>
+      <p>That makes detection a two-part job. First the system must notice that a set of processes can never continue. Then it must recover, by ending processes or taking resources back.</p>
+
+      <h2 id="wait-for-graph">Detecting with a wait-for graph</h2>
+      <p>When every resource type has exactly one instance, the operating system can draw a <strong>wait-for graph</strong>. Start from the resource allocation graph and remove the resource boxes. An arrow from P1 to P2 now means P1 is waiting for something P2 holds.</p>
+      <p><strong>If the wait-for graph contains a cycle, the processes in that cycle are deadlocked.</strong></p>
+
+      <figure>
+        <svg class="diagram-svg" viewBox="0 0 520 180" role="img" aria-labelledby="fig1-title">
+          <title id="fig1-title">A resource graph with a cycle through P1, R1, P2 and R2, reduced to a wait-for graph where P1 and P2 wait for each other</title>
+          <defs>
+            <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="head" d="M0 0 10 5 0 10z"/></marker>
+            <marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="head--cycle" d="M0 0 10 5 0 10z"/></marker>
+          </defs>
+          <line class="e" x1="70" y1="50" x2="126" y2="50" marker-end="url(#ah)"/>
+          <line class="e" x1="166" y1="50" x2="190" y2="50" marker-end="url(#ah)"/>
+          <line class="e" x1="200" y1="66" x2="168" y2="120" marker-end="url(#ah)"/>
+          <line class="e" x1="126" y1="128" x2="62" y2="66" marker-end="url(#ah)"/>
+          <circle class="p" cx="52" cy="50" r="18"/><text x="52" y="55" text-anchor="middle">P1</text>
+          <rect class="r" x="128" y="32" width="36" height="36" rx="3"/><text x="146" y="55" text-anchor="middle">R1</text>
+          <circle class="p" cx="210" cy="50" r="18"/><text x="210" y="55" text-anchor="middle">P2</text>
+          <rect class="r" x="128" y="112" width="36" height="36" rx="3"/><text x="146" y="135" text-anchor="middle">R2</text>
+          <text class="cap" x="131" y="174" text-anchor="middle">Resource graph</text>
+          <path class="e e--cycle" d="M358 72 Q400 38 440 72" marker-end="url(#ahc)"/>
+          <path class="e e--cycle" d="M442 90 Q400 124 360 90" marker-end="url(#ahc)"/>
+          <circle class="p" cx="340" cy="80" r="18"/><text x="340" y="85" text-anchor="middle">P1</text>
+          <circle class="p" cx="460" cy="80" r="18"/><text x="460" y="85" text-anchor="middle">P2</text>
+          <text class="cap" x="400" y="174" text-anchor="middle">Wait-for graph</text>
+        </svg>
+        <figcaption>Removing the resource boxes leaves P1 waiting for P2 and P2 waiting for P1. That loop is the deadlock.</figcaption>
+      </figure>
+
+      <h2 id="detection-algorithm">Detecting with the detection algorithm</h2>
+      <p>When a resource type has several instances, a cycle is not enough proof. The system uses an algorithm that looks like the Banker's safety check, but with the <strong>current requests</strong> instead of maximum needs.</p>
+
+      <h3 id="the-steps">The steps</h3>
+      <div class="block block--working">
+        <p class="block__label"><svg class="icon" aria-hidden="true"><use href="#i-steps"/></svg>Method</p>
+        <ol>
+          <li>Set <code>Work = Available</code>. Mark <code>Finish[i] = true</code> for every process holding nothing, otherwise false.</li>
+          <li>Find a process with <code>Finish[i] = false</code> and <code>Request[i] ≤ Work</code>. If none exists, go to step 4.</li>
+          <li>Pretend it finishes and returns what it holds, then go back to step 2.</li>
+          <li>Every process still marked <code>false</code> is deadlocked.</li>
+        </ol>
+      </div>
+      <div class="block block--formula" aria-label="Update rule">Work = Work + Allocation[i]</div>
+
+      <h3 id="worked-example">Worked example</h3>
+      <div class="block block--example">
+        <p class="block__label"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg>Example with resources A, B and C, Available = (0, 0, 0)</p>
+        <div class="table-wrap">
+          <table>
+            <caption>Current allocation and requests</caption>
+            <thead><tr><th>Process</th><th class="num">Allocation A B C</th><th class="num">Request A B C</th></tr></thead>
+            <tbody>
+              <tr><td>P0</td><td class="num">0 1 0</td><td class="num">0 0 0</td></tr>
+              <tr><td>P1</td><td class="num">2 0 0</td><td class="num">2 0 2</td></tr>
+              <tr><td>P2</td><td class="num">3 0 3</td><td class="num">0 0 0</td></tr>
+              <tr><td>P3</td><td class="num">2 1 1</td><td class="num">1 0 0</td></tr>
+              <tr><td>P4</td><td class="num">0 0 2</td><td class="num">0 0 2</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-hint">Swipe the table sideways to see every column.</p>
+        <p>Work grows as each process can finish: (0, 0, 0), then P0 gives (0, 1, 0), P2 gives (3, 1, 3), P3 gives (5, 2, 4), P1 gives (7, 2, 4), and P4 gives (7, 2, 6).</p>
+      </div>
+      <div class="block block--answer">
+        <p class="block__label"><svg class="icon" aria-hidden="true"><use href="#i-box"/></svg>Answer</p>
+        <p>All processes finish in the order P0, P2, P3, P1, P4, so there is no deadlock.</p>
+      </div>
+
+      <h2 id="when-to-run">When to run detection</h2>
+      <ul>
+        <li>Every time a request cannot be granted straight away. This catches deadlocks early but costs the most.</li>
+        <li>At fixed intervals, for example once an hour.</li>
+        <li>When CPU utilisation suddenly drops, which is a common sign that processes are stuck.</li>
+      </ul>
+
+      <h2 id="recovery">Recovering from deadlock</h2>
+      <h3 id="process-termination">Process termination</h3>
+      <p>Abort every deadlocked process, which is quick but throws away all their work. Or abort them one at a time until the cycle breaks, choosing by priority, work already done, and resources held.</p>
+      <h3 id="resource-preemption">Resource preemption</h3>
+      <p>Take resources away from some processes and give them to others. This needs three decisions: which victim to choose, how to <strong>roll back</strong> the victim to a safe earlier state, and how to prevent <strong>starvation</strong> so the same process is not picked every time.</p>
+
+      <div class="block block--tip">
+        <p class="block__label"><svg class="icon" aria-hidden="true"><use href="#i-pen"/></svg>Exam tip</p>
+        <p>For 8 marks, write the definition, both detection methods with a small example, then both recovery methods. Examiners look for rollback and starvation under preemption.</p>
+      </div>
+
+      <div class="block block--warning">
+        <p class="block__label"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Common mistake</p>
+        <p>Writing the Banker's safety algorithm as the detection algorithm. Banker's uses <code>Need = Max − Allocation</code> to avoid deadlock before it happens. Detection uses the current <code>Request</code> matrix after it may have happened.</p>
+      </div>
+
+      <div class="lesson-end">
+        <button class="btn btn--primary" type="button" data-learned aria-pressed="false">
+          <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Mark as learned</span>
+        </button>
+        <button class="btn btn--quiet" type="button">Report a mistake</button>
+      </div>
+
+      <nav class="pager" aria-label="Topics">
+        <a href="#main" rel="prev"><small>Previous topic</small>In Unit 6</a>
+        <a href="#main" rel="next"><small>Next topic</small>In Unit 6</a>
+      </nav>
+    </article>
+  </main>
+
+  <aside class="toc" aria-label="On this page">
+    <div id="toc-content">
+      <h2>On this page</h2>
+      <ol class="toc-list">
+        <li><a href="#what-detection-means">What detection means</a></li>
+        <li><a href="#wait-for-graph">Detecting with a wait-for graph</a></li>
+        <li><a href="#detection-algorithm">Detecting with the detection algorithm</a></li>
+        <li class="lvl-3"><a href="#the-steps">The steps</a></li>
+        <li class="lvl-3"><a href="#worked-example">Worked example</a></li>
+        <li><a href="#when-to-run">When to run detection</a></li>
+        <li><a href="#recovery">Recovering from deadlock</a></li>
+        <li class="lvl-3"><a href="#process-termination">Process termination</a></li>
+        <li class="lvl-3"><a href="#resource-preemption">Resource preemption</a></li>
+      </ol>
+      <div class="toc-section">
+        <h2>Asked in exams</h2>
+        <p>2026, question 7 (8 marks)</p>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<nav class="toolbar" aria-label="Lesson tools">
+  <button type="button" data-open="rail-dialog"><svg class="icon" aria-hidden="true"><use href="#i-tree"/></svg>Syllabus</button>
+  <button type="button" data-open="toc-dialog"><svg class="icon" aria-hidden="true"><use href="#i-list"/></svg>Contents</button>
+  <button type="button" data-open="settings-dialog"><span aria-hidden="true" style="font:700 1.05rem/1.2rem var(--font-book)">Aa</span>Reading</button>
+  <button type="button" data-learned aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Learned</span></button>
+</nav>
+
+<dialog id="rail-dialog" class="drawer" aria-labelledby="rail-dialog-title">
+  <div class="dialog__head"><h2 id="rail-dialog-title">Syllabus</h2><button class="icon-btn" type="button" data-close aria-label="Close syllabus"><svg class="icon"><use href="#i-close"/></svg></button></div>
+  <div class="dialog__body" data-clone="rail-content"></div>
+</dialog>
+
+<dialog id="toc-dialog" class="bottom-sheet" aria-labelledby="toc-dialog-title">
+  <div class="dialog__head"><h2 id="toc-dialog-title">Contents</h2><button class="icon-btn" type="button" data-close aria-label="Close contents"><svg class="icon"><use href="#i-close"/></svg></button></div>
+  <div class="dialog__body toc" style="display:block;position:static;max-block-size:none;border:0;padding-top:1rem" data-clone="toc-content"></div>
+</dialog>
+
+<dialog id="settings-dialog" class="panel" aria-labelledby="settings-title">
+  <div class="dialog__head"><h2 id="settings-title">Reading settings</h2><button class="icon-btn" type="button" data-close aria-label="Close reading settings"><svg class="icon"><use href="#i-close"/></svg></button></div>
+  <div class="dialog__body">
+    <fieldset class="setting">
+      <legend>Theme</legend>
+      <div class="swatches">
+        <label class="swatch"><input type="radio" name="theme" value="paper"><span class="swatch__chip" style="background:#FBFBF8;color:#1A2230">Aa</span>Paper</label>
+        <label class="swatch"><input type="radio" name="theme" value="warm"><span class="swatch__chip" style="background:#EFE6D2;color:#2B241B">Aa</span>Warm</label>
+        <label class="swatch"><input type="radio" name="theme" value="blackboard"><span class="swatch__chip" style="background:#1B2320;color:#E7E5DD">Aa</span>Blackboard</label>
+        <label class="swatch"><input type="radio" name="theme" value="night"><span class="swatch__chip" style="background:#000000;color:#C9C4B8">Aa</span>Night</label>
+      </div>
+    </fieldset>
+
+    <div class="setting">
+      <span class="legend" id="size-label">Text size</span>
+      <div class="stepper" role="group" aria-labelledby="size-label">
+        <button class="btn" type="button" data-size-step="-1" aria-label="Smaller text">A−</button>
+        <output id="size-output" aria-live="polite">Default</output>
+        <button class="btn" type="button" data-size-step="1" aria-label="Larger text">A+</button>
+      </div>
+    </div>
+
+    <fieldset class="setting">
+      <legend>Font</legend>
+      <div class="segmented">
+        <label><input type="radio" name="font" value="book">Book</label>
+        <label><input type="radio" name="font" value="clear">Clear</label>
+      </div>
+    </fieldset>
+
+    <fieldset class="setting">
+      <legend>Line width</legend>
+      <div class="segmented">
+        <label><input type="radio" name="width" value="narrow">Narrow</label>
+        <label><input type="radio" name="width" value="normal">Normal</label>
+        <label><input type="radio" name="width" value="wide">Wide</label>
+      </div>
+    </fieldset>
+
+    <fieldset class="setting">
+      <legend>Line spacing</legend>
+      <div class="segmented">
+        <label><input type="radio" name="spacing" value="normal">Normal</label>
+        <label><input type="radio" name="spacing" value="relaxed">Relaxed</label>
+      </div>
+    </fieldset>
+
+    <label class="switch hide-small"><span>Focus mode<small>Hide the syllabus and contents panels</small></span><input type="checkbox" data-toggle="focus"></label>
+    <label class="switch"><span>TV and projector view<small>Large text for reading across a room</small></span><input type="checkbox" data-toggle="viewing"></label>
+    <label class="switch"><span>Eye break reminder<small>Every 20 minutes, a quiet reminder to look away</small></span><input type="checkbox" data-toggle="breaks" checked></label>
+    <p class="status-line" id="settings-status" aria-live="polite"></p>
+    <button class="btn" type="button" id="preview-break">Preview the reminder</button>
+  </div>
+</dialog>
+
+<div class="break-toast" id="break-toast" role="status" hidden>
+  <svg class="icon" aria-hidden="true" style="margin-top:.15rem"><use href="#i-bulb"/></svg>
+  <div>
+    <strong>Time for an eye break</strong>
+    <p>Look at something about 6 metres away for 20 seconds, then carry on from here.</p>
+    <div class="actions">
+      <button class="btn btn--primary" type="button" id="break-done">Done</button>
+      <button class="btn btn--quiet" type="button" id="break-off">Turn off reminders</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var sizes = ["s", "m", "l", "xl", "xxl"];
+  var sizeNames = { s: "Smaller", m: "Default", l: "Large", xl: "Larger", xxl: "Largest" };
+  var statusLine = document.getElementById("settings-status");
+
+  /* Build drawer and bottom sheet from the same markup as the panes */
+  document.querySelectorAll("[data-clone]").forEach(function (slot) {
+    var source = document.getElementById(slot.getAttribute("data-clone"));
+    if (source) slot.appendChild(source.cloneNode(true)).removeAttribute("id");
+  });
+
+  /* Reading preferences */
+  function syncControls() {
+    ["theme", "font", "width", "spacing"].forEach(function (name) {
+      document.querySelectorAll('input[name="' + name + '"]').forEach(function (input) {
+        input.checked = root.getAttribute("data-" + name) === input.value;
+        input.closest("label").classList.toggle("is-checked", input.checked);
+      });
+    });
+    document.getElementById("size-output").textContent = sizeNames[root.getAttribute("data-size")];
+    document.querySelector('[data-toggle="focus"]').checked = root.getAttribute("data-focus") === "on";
+    document.querySelector('[data-toggle="viewing"]').checked = root.getAttribute("data-viewing") === "tv";
+  }
+
+  document.querySelectorAll('.setting input[type="radio"]').forEach(function (input) {
+    input.addEventListener("change", function () {
+      root.setAttribute("data-" + input.name, input.value);
+      syncControls();
+    });
+  });
+
+  document.querySelectorAll("[data-size-step]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      var i = sizes.indexOf(root.getAttribute("data-size"));
+      var next = Math.min(sizes.length - 1, Math.max(0, i + Number(button.getAttribute("data-size-step"))));
+      root.setAttribute("data-size", sizes[next]);
+      syncControls();
+    });
+  });
+
+  document.querySelector('[data-toggle="focus"]').addEventListener("change", function (e) {
+    if (e.target.checked) root.setAttribute("data-focus", "on"); else root.removeAttribute("data-focus");
+  });
+
+  document.querySelector('[data-toggle="viewing"]').addEventListener("change", function (e) {
+    if (e.target.checked) {
+      root.setAttribute("data-viewing", "tv");
+      if (root.getAttribute("data-theme") === "paper") {
+        root.setAttribute("data-theme", "blackboard");
+        statusLine.textContent = "Switched to Blackboard, which reads better on TVs. You can change it back above.";
+      }
+    } else {
+      root.removeAttribute("data-viewing");
+      statusLine.textContent = "";
+    }
+    syncControls();
+  });
+
+  /* Dialogs */
+  var opener = null;
+  document.querySelectorAll("[data-open]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      var dialog = document.getElementById(button.getAttribute("data-open"));
+      if (!dialog || typeof dialog.showModal !== "function") return;
+      opener = button;
+      dialog.showModal();
+    });
+  });
+  document.querySelectorAll("dialog").forEach(function (dialog) {
+    dialog.addEventListener("click", function (e) {
+      if (e.target === dialog) dialog.close();
+      if (e.target.closest("[data-close]")) dialog.close();
+      if (e.target.closest("a[href^='#']") && dialog.id !== "settings-dialog") dialog.close();
+    });
+    dialog.addEventListener("close", function () { if (opener) opener.focus(); });
+  });
+
+  /* Reading progress + "On this page" scroll-spy (position based, so fast scrolls and deep links work) */
+  var article = document.querySelector(".prose");
+  var bar = document.getElementById("progress-bar");
+  var headings = Array.prototype.slice.call(document.querySelectorAll(".prose h2[id], .prose h3[id]"));
+  var currentId = null;
+  var ticking = false;
+  function setCurrent(id) {
+    if (id === currentId) return;
+    currentId = id;
+    document.querySelectorAll(".toc-list a").forEach(function (a) {
+      if (id && a.getAttribute("href") === "#" + id) a.setAttribute("aria-current", "location");
+      else a.removeAttribute("aria-current");
+    });
+  }
+  function update() {
+    var rect = article.getBoundingClientRect();
+    var total = rect.height - window.innerHeight;
+    var done = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 1;
+    bar.style.setProperty("--progress", done.toFixed(3));
+    var line = window.innerHeight * 0.3;
+    var id = null;
+    for (var i = 0; i < headings.length; i++) {
+      if (headings[i].getBoundingClientRect().top <= line) id = headings[i].id; else break;
+    }
+    setCurrent(id);
+    ticking = false;
+  }
+  function requestUpdate() {
+    if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+  }
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+
+  /* Tables: mark the ones that scroll sideways */
+  function checkTables() {
+    document.querySelectorAll(".table-wrap").forEach(function (wrap) {
+      var scrollable = wrap.scrollWidth > wrap.clientWidth + 1;
+      wrap.classList.toggle("is-scrollable", scrollable);
+      wrap.classList.toggle("at-end", !scrollable || wrap.scrollLeft + wrap.clientWidth >= wrap.scrollWidth - 1);
+    });
+  }
+  document.querySelectorAll(".table-wrap").forEach(function (wrap) {
+    wrap.addEventListener("scroll", checkTables, { passive: true });
+  });
+  window.addEventListener("resize", checkTables);
+  new MutationObserver(checkTables).observe(document.documentElement, { attributes: true });
+  checkTables();
+
+  /* Mark as learned */
+  document.querySelectorAll("[data-learned]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      var learned = button.getAttribute("aria-pressed") !== "true";
+      document.querySelectorAll("[data-learned]").forEach(function (b) {
+        b.setAttribute("aria-pressed", String(learned));
+        var label = b.querySelector("span");
+        if (label) label.textContent = b.closest(".toolbar") ? "Learned" : (learned ? "Learned" : "Mark as learned");
+      });
+      document.querySelectorAll("[data-current-dot]").forEach(function (dot) {
+        dot.setAttribute("data-state", learned ? "learned" : "progress");
+        dot.firstElementChild.textContent = learned ? "Learned" : "In progress";
+      });
+    });
+  });
+
+  /* Eye break reminder (20-20-20) */
+  var toast = document.getElementById("break-toast");
+  var breaksToggle = document.querySelector('[data-toggle="breaks"]');
+  var timer = null;
+  var TWENTY_MINUTES = 20 * 60 * 1000;
+  function schedule() {
+    window.clearTimeout(timer);
+    if (breaksToggle.checked) timer = window.setTimeout(showToast, TWENTY_MINUTES);
+  }
+  function showToast() { toast.hidden = false; }
+  function hideToast() { toast.hidden = true; }
+  document.getElementById("preview-break").addEventListener("click", function () {
+    var dialog = document.getElementById("settings-dialog");
+    opener = null;
+    if (dialog.open) dialog.close();
+    showToast();
+    document.getElementById("break-done").focus();
+  });
+  document.getElementById("break-done").addEventListener("click", function () { hideToast(); schedule(); });
+  document.getElementById("break-off").addEventListener("click", function () {
+    breaksToggle.checked = false; hideToast(); schedule();
+  });
+  breaksToggle.addEventListener("change", schedule);
+  schedule();
+
+  syncControls();
+})();
+</script>
+</body>
+</html>
