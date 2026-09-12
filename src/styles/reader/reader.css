@@ -468,6 +468,28 @@ img, svg, video { max-inline-size: 100%; block-size: auto; }
 }
 .block__label .icon { inline-size: 1.15em; block-size: 1.15em; }
 
+/* Revision mode renders idea/example as <details>, so `.block__label` is a
+   <summary> there instead of a <p> — collapsing with no JavaScript, which is
+   what keeps it working with JS disabled and in print. See render.ts. */
+summary.block__label {
+  align-items: center;
+  cursor: pointer;
+  list-style: none;
+}
+summary.block__label::-webkit-details-marker { display: none; }
+summary.block__label::after {
+  content: "";
+  flex: none;
+  inline-size: 0.4rem;
+  block-size: 0.4rem;
+  margin-inline-start: auto;
+  border-inline-end: 2px solid currentColor;
+  border-block-end: 2px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform var(--dur-fast) var(--ease);
+}
+details[open] > summary.block__label::after { transform: rotate(45deg); }
+
 /* idea: a highlighter stroke across the page */
 .block--idea {
   background: var(--highlight);

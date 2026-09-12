@@ -1,12 +1,14 @@
 "use client";
 
 import { useCallback, useState } from "react";
+import { useRouter } from "next/navigation";
 
 import {
   COOKIE_NAME,
   DEFAULT_SETTINGS,
   serialiseReadingCookie,
   type FontChoice,
+  type ReadingMode,
   type ReadingSettings as Settings,
   type Size,
   type Spacing,
@@ -74,6 +76,7 @@ interface Props {
 export function ReadingSettingsDialog({ open, onClose, settings, onChange }: Props) {
   const { ref, handleClose, handleClick } = useDialog(open, onClose);
   const [status, setStatus] = useState("");
+  const router = useRouter();
 
   const update = useCallback(
     (patch: Partial<Settings>, announce?: string) => {
@@ -100,6 +103,24 @@ export function ReadingSettingsDialog({ open, onClose, settings, onChange }: Pro
       )}; path=/; max-age=31536000; SameSite=Lax`;
     },
     [settings, onChange]
+  );
+
+  const changeMode = useCallback(
+    (mode: ReadingMode) => {
+      update(
+        { mode },
+        mode === "revision"
+          ? "Revision mode on. Ideas and examples are collapsed."
+          : "Beginner mode on. Ideas and examples are expanded."
+      );
+      // Every other control here applies by writing a `data-*` attribute on
+      // <html> — mode instead changes the article's SERVER-RENDERED HTML
+      // (collapsed <details> vs plain <div>, see render.ts), so the cookie
+      // alone is not enough: the page has to re-render on the server to
+      // reflect it.
+      router.refresh();
+    },
+    [update, router]
   );
 
   const sizeIndex = SIZE_ORDER.indexOf(settings.size);
@@ -145,6 +166,17 @@ export function ReadingSettingsDialog({ open, onClose, settings, onChange }: Pro
             })}
           </div>
         </fieldset>
+
+        <Segmented
+          name="mode"
+          label="Reading mode"
+          value={settings.mode}
+          options={[
+            ["beginner", "Beginner"],
+            ["revision", "Revision"],
+          ]}
+          onChange={(mode) => changeMode(mode as ReadingMode)}
+        />
 
         <div className="setting">
           <span className="legend" id="size-label">

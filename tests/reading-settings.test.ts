@@ -10,6 +10,7 @@ import { describe, expect, it } from "vitest";
 import {
   DEFAULT_SETTINGS,
   FONTS,
+  MODES,
   parseReadingCookie,
   readingAttributes,
   serialiseReadingCookie,
@@ -30,6 +31,7 @@ const FULL: ReadingSettings = {
   viewing: "tv",
   focus: true,
   eyeBreaks: false,
+  mode: "revision",
 };
 
 describe("reading cookie", () => {
@@ -50,6 +52,7 @@ describe("reading cookie", () => {
     for (const viewing of VIEWINGS) expect(round({ viewing }).viewing).toBe(viewing);
     for (const focus of [true, false]) expect(round({ focus }).focus).toBe(focus);
     for (const eyeBreaks of [true, false]) expect(round({ eyeBreaks }).eyeBreaks).toBe(eyeBreaks);
+    for (const mode of MODES) expect(round({ mode }).mode).toBe(mode);
   });
 
   it("keeps the default serialisation short", () => {

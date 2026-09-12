@@ -91,24 +91,6 @@ export default async function TopicPage({ params, searchParams }: PageProps) {
     getAskedIn(askedInNodeUuids),
   ]);
 
-  // Rebuild the body from the stored sections rather than the version's raw
-  // markdown. The sections are what was derived at publish time, so rendering
-  // from them guarantees the page matches the outline and the anchors exactly.
-  //
-  // The H1's heading is dropped: the page header already renders the title, and
-  // emitting it again here would print it twice. Its BODY is kept, because the
-  // `idea` block sits under the H1 and is the first thing a student reads.
-  const body = sections
-    .map((s) =>
-      s.level === 1 ? s.body_md : `${"#".repeat(s.level)} ${s.heading}\n\n${s.body_md}`
-    )
-    .join("\n\n");
-
-  const { html } = renderDocument(
-    body,
-    sections.map((s) => ({ heading: s.heading, anchor: s.anchor }))
-  );
-
   const [cookieStore, headerList, query] = await Promise.all([
     cookies(),
     headers(),
@@ -128,6 +110,25 @@ export default async function TopicPage({ params, searchParams }: PageProps) {
           theme: stored.theme === null || stored.theme === "paper" ? ("blackboard" as const) : stored.theme,
         }
       : stored;
+
+  // Rebuild the body from the stored sections rather than the version's raw
+  // markdown. The sections are what was derived at publish time, so rendering
+  // from them guarantees the page matches the outline and the anchors exactly.
+  //
+  // The H1's heading is dropped: the page header already renders the title, and
+  // emitting it again here would print it twice. Its BODY is kept, because the
+  // `idea` block sits under the H1 and is the first thing a student reads.
+  const body = sections
+    .map((s) =>
+      s.level === 1 ? s.body_md : `${"#".repeat(s.level)} ${s.heading}\n\n${s.body_md}`
+    )
+    .join("\n\n");
+
+  const { html } = renderDocument(
+    body,
+    sections.map((s) => ({ heading: s.heading, anchor: s.anchor })),
+    { mode: settings.mode }
+  );
 
   // Reading time from the stored section text. 200 wpm is the usual estimate
   // for prose; these notes are denser than prose, so it rounds up rather than

@@ -14,6 +14,7 @@ export const FONTS = ["book", "clear"] as const;
 export const WIDTHS = ["narrow", "normal", "wide"] as const;
 export const SPACINGS = ["normal", "relaxed"] as const;
 export const VIEWINGS = ["page", "tv"] as const;
+export const MODES = ["beginner", "revision"] as const;
 
 export type Theme = (typeof THEMES)[number];
 export type Size = (typeof SIZES)[number];
@@ -21,6 +22,7 @@ export type FontChoice = (typeof FONTS)[number];
 export type Width = (typeof WIDTHS)[number];
 export type Spacing = (typeof SPACINGS)[number];
 export type Viewing = (typeof VIEWINGS)[number];
+export type ReadingMode = (typeof MODES)[number];
 
 export interface ReadingSettings {
   /**
@@ -45,6 +47,18 @@ export interface ReadingSettings {
    */
   focus: boolean;
   eyeBreaks: boolean;
+  /**
+   * Beginner shows every `idea`/`example` block expanded; Revision collapses
+   * them to `<details>`, leaving method and key points.
+   *
+   * Unlike every other setting here, this changes the SERVER-RENDERED HTML
+   * itself (packages/content/src/render.ts), not a CSS token — collapsing with
+   * `<details>` rather than JavaScript is what keeps it working with no JS and
+   * in print. So switching it needs a server round trip (see
+   * ReadingSettingsDialog's mode handler), where every other control here
+   * applies instantly by writing a `data-*` attribute on the client.
+   */
+  mode: ReadingMode;
 }
 
 export const COOKIE_NAME = "examai_reader";
@@ -58,6 +72,7 @@ export const DEFAULT_SETTINGS: ReadingSettings = {
   viewing: "page",
   focus: false,
   eyeBreaks: true,
+  mode: "beginner",
 };
 
 function pick<T extends readonly string[]>(
@@ -88,6 +103,7 @@ export function parseReadingCookie(raw: string | undefined): ReadingSettings {
     viewing: pick(VIEWINGS, values.get("viewing"), "page"),
     focus: values.get("focus") === "on",
     eyeBreaks: values.get("eye") !== "off",
+    mode: pick(MODES, values.get("mode"), "beginner"),
   };
 }
 
@@ -101,6 +117,7 @@ export function serialiseReadingCookie(settings: ReadingSettings): string {
     settings.viewing === "tv" ? "viewing:tv" : null,
     settings.focus ? "focus:on" : null,
     settings.eyeBreaks ? null : "eye:off",
+    settings.mode === "revision" ? "mode:revision" : null,
   ].filter(Boolean);
   return parts.join(",");
 }
