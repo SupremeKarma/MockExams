@@ -6,7 +6,8 @@ import { useAuth } from "@/context/AuthContext";
 import { db } from "@/lib/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { Alert, PageHeader, PrimaryButton } from "@/components/UIComponents";
-import { WorkspaceRail } from "@/components/admin/WorkspaceRail";
+import { WorkspaceRail } from "@/components/workspace/WorkspaceRail";
+import { ADMIN_WORKSPACE_ITEMS } from "@/components/workspace/rail-items";
 import type { Course } from "@/lib/examai/types";
 
 interface AssembledQuestion {
@@ -92,7 +93,7 @@ export default function MockExamsWorkspace() {
       {error && <Alert type="error" title={error} icon={<AlertTriangle className="w-4 h-4" />} />}
 
       <div className="flex rounded-lg border border-zinc-200 bg-white overflow-hidden" style={{ minHeight: 560 }}>
-        <WorkspaceRail />
+        <WorkspaceRail items={ADMIN_WORKSPACE_ITEMS} ariaLabel="Admin workspace tools" />
 
         <main className="flex-1 min-w-0 overflow-y-auto p-6">
           <div className="grid gap-4 sm:grid-cols-3 mb-6">

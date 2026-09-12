@@ -1,17 +1,19 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useState, type ComponentType, type ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ClipboardList, LayoutGrid, PanelLeftClose, PanelLeftOpen, ScanLine } from "lucide-react";
+import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 
-const ITEMS = [
-  { href: "/admin/courses", label: "Courses", icon: LayoutGrid },
-  { href: "/admin/papers", label: "Past papers", icon: ScanLine },
-  { href: "/admin/mock-exams", label: "Mock exams", icon: ClipboardList },
-] as const;
+export interface RailItem {
+  href: string;
+  label: string;
+  icon: ComponentType<{ className?: string }>;
+}
 
 interface Props {
+  items: readonly RailItem[];
+  ariaLabel: string;
   /**
    * Extra content shown under the tool switcher once the rail is expanded —
    * a workspace's own quick-navigation (Courses passes a semester list).
@@ -24,21 +26,20 @@ interface Props {
 }
 
 /**
- * The persistent left rail for ExamAI's admin content workspaces.
+ * The persistent left rail for a workspace-shell portal.
  *
- * One shared component rather than each workspace drawing its own icon
- * strip, so switching between Courses, Papers, and whatever joins them later
- * (Notes, Exams) stays one click from any of them. Expand/collapse state is
- * per-tab (not persisted) — reopening the admin fresh each time in the
- * compact icon-only state is the safer default on a phone-width viewport.
+ * Shared between the admin content workspaces (Courses, Papers, Mock
+ * exams) and the examiner portal, so both switch tools the same way rather
+ * than each area drawing its own icon strip. `items` and `ariaLabel` are the
+ * only thing that differs between them.
  */
-export function WorkspaceRail({ children }: Props) {
+export function WorkspaceRail({ items, ariaLabel, children }: Props) {
   const pathname = usePathname();
   const [expanded, setExpanded] = useState(false);
 
   return (
     <nav
-      aria-label="Admin workspace tools"
+      aria-label={ariaLabel}
       className={`flex flex-col shrink-0 border-r border-zinc-200 bg-white py-3 transition-[width] ${
         expanded ? "w-56" : "w-14 items-center"
       }`}
@@ -55,7 +56,7 @@ export function WorkspaceRail({ children }: Props) {
       </button>
 
       <div className={expanded ? "px-2 space-y-0.5" : "flex flex-col items-center gap-1"}>
-        {ITEMS.map(({ href, label, icon: Icon }) => {
+        {items.map(({ href, label, icon: Icon }) => {
           const active = pathname?.startsWith(href) ?? false;
           return (
             <Link

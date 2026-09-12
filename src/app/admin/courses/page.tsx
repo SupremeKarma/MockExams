@@ -4,7 +4,8 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { AlertTriangle, ArrowDown, ArrowUp, Loader2, Plus, Save, Trash2, X } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { Alert, PageHeader, PrimaryButton, SecondaryButton } from "@/components/UIComponents";
-import { WorkspaceRail } from "@/components/admin/WorkspaceRail";
+import { WorkspaceRail } from "@/components/workspace/WorkspaceRail";
+import { ADMIN_WORKSPACE_ITEMS } from "@/components/workspace/rail-items";
 import { deriveUnitId } from "@/lib/examai/syllabus-units";
 import type { Course, Curriculum } from "@/lib/examai/types";
 
@@ -221,7 +222,7 @@ export default function CoursesWorkspace() {
       {notice && <Alert type="success" title={notice} />}
 
       <div className="flex rounded-lg border border-zinc-200 bg-white overflow-hidden" style={{ minHeight: 560 }}>
-        <WorkspaceRail>
+        <WorkspaceRail items={ADMIN_WORKSPACE_ITEMS} ariaLabel="Admin workspace tools">
           {grouped.length > 0 && (
             <>
               <h3 className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider px-1 mb-1.5">
