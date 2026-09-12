@@ -1,10 +1,11 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { User, onAuthStateChanged, signOut as firebaseSignOut } from "firebase/auth";
+import { User, onAuthStateChanged, onIdTokenChanged, signOut as firebaseSignOut } from "firebase/auth";
 import { auth, db } from "@/lib/firebase";
 import { doc, getDoc, collection, query, where, getDocs, limit } from "firebase/firestore";
 import { useRouter, usePathname } from "next/navigation";
+import { READER_AUTH_COOKIE } from "@/lib/examai/reader-auth-cookie";
 
 type UserRole = 'admin' | 'org_admin' | 'examiner' | 'student' | null;
 
@@ -94,6 +95,32 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setOrgId(null);
       }
       setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // Keeps a cookie in sync with the current ID token, so Server Components —
+  // the ExamAI Reader in particular — can tell a signed-in visitor from an
+  // anonymous one before rendering anything. onIdTokenChanged (not
+  // onAuthStateChanged, above) is the one that also fires on the SDK's own
+  // background token refresh, which is what keeps the cookie from going
+  // stale partway through an hour-long reading session.
+  useEffect(() => {
+    if (!auth) return;
+
+    const unsubscribe = onIdTokenChanged(auth, async (firebaseUser) => {
+      if (firebaseUser) {
+        const token = await firebaseUser.getIdToken();
+        // max-age well under the ID token's own ~1hr lifetime: a cookie that
+        // outlived the token it carries would let a stale tab read gated
+        // pages right up until verifyIdToken caught it server-side anyway, so
+        // there is no protection lost by expiring it sooner — only one fewer
+        // case for the server check to have to catch.
+        document.cookie = `${READER_AUTH_COOKIE}=${token}; path=/; max-age=3000; SameSite=Lax`;
+      } else {
+        document.cookie = `${READER_AUTH_COOKIE}=; path=/; max-age=0`;
+      }
     });
 
     return () => unsubscribe();

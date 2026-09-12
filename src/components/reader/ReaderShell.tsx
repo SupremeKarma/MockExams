@@ -15,6 +15,7 @@ import type { ReadingSettings } from "@/lib/examai/reading-settings";
 
 import { AskedIn } from "./AskedIn";
 import { EyeBreak } from "./EyeBreak";
+import { ReadMoreGate } from "./ReadMoreGate";
 import { Icon, IconSprite } from "./IconSprite";
 import { OnThisPage } from "./OnThisPage";
 import { ReadingSettingsDialog } from "./ReadingSettings";
@@ -34,6 +35,8 @@ interface Props {
   adjacent: { previous: AdjacentTopic | null; next: AdjacentTopic | null };
   articleHtml: string;
   askedIn: AskedInQuestion[];
+  gated: boolean;
+  signInHref: string;
   settings: ReadingSettings;
   /** True when the user agent looks like a TV — suggests, never switches. */
   tvSuggested: boolean;
@@ -96,6 +99,8 @@ export function ReaderShell({
   adjacent,
   articleHtml,
   askedIn,
+  gated,
+  signInHref,
   settings: initialSettings,
   tvSuggested,
   readingMinutes,
@@ -275,6 +280,8 @@ export function ReaderShell({
               // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{ __html: articleHtml }}
             />
+
+            {gated && <ReadMoreGate signInHref={signInHref} />}
 
             <div className="lesson-end">
               <button

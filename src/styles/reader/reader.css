@@ -676,6 +676,28 @@ details[open] > summary.block__label::after { transform: rotate(45deg); }
 .asked-in-number { display: block; color: var(--ink-3); font-size: 0.85em; }
 .toc .btn { inline-size: 100%; }
 
+/* ---------- Sign-in gate ---------- */
+
+.gate {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.6em 0;
+  padding: 1.2em 1.4em;
+  background: var(--bg-rail);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-m);
+}
+.gate .icon { flex: none; inline-size: 1.75rem; block-size: 1.75rem; color: var(--ink-3); }
+.gate__title { margin: 0 0 0.25em; font-family: var(--font-clear); font-weight: 700; color: var(--ink); }
+.gate__body { margin: 0; color: var(--ink-2); font-size: 0.95em; }
+.gate .btn { margin-inline-start: auto; }
+@media (max-width: 479px) {
+  .gate { flex-direction: column; align-items: flex-start; }
+  .gate .btn { margin-inline-start: 0; inline-size: 100%; text-align: center; }
+}
+
 /* ---------- End of lesson ---------- */
 
 .lesson-end {

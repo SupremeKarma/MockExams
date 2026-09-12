@@ -11,10 +11,16 @@ import {
   GithubAuthProvider,
   GoogleAuthProvider,
 } from "firebase/auth";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  // Only an internal path is honoured — an open redirect through `next` would
+  // let a phishing link send a signed-in student anywhere after they trust
+  // this page enough to type a password into it.
+  const rawNext = searchParams.get("next");
+  const next = rawNext && rawNext.startsWith("/") && !rawNext.startsWith("//") ? rawNext : "/dashboard";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -27,7 +33,7 @@ export default function LoginPage() {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      router.push("/dashboard");
+      router.push(next);
     } catch (err: any) {
       setError(err.message || "Invalid email or password");
     } finally {
@@ -61,7 +67,7 @@ export default function LoginPage() {
         });
       }
 
-      router.push("/dashboard");
+      router.push(next);
     } catch (err: any) {
       setError(err.message || `Failed to sign in with ${providerName}`);
       setLoading(false);
@@ -175,7 +181,13 @@ export default function LoginPage() {
         </div>
 
         <p className="mt-8 text-center text-xs text-zinc-500 font-medium">
-          Don&apos;t have an account? <Link href="/signup" className="text-primary-600 hover:underline font-bold">Sign up for free</Link>
+          Don&apos;t have an account?{" "}
+          <Link
+            href={next === "/dashboard" ? "/signup" : `/signup?next=${encodeURIComponent(next)}`}
+            className="text-primary-600 hover:underline font-bold"
+          >
+            Sign up for free
+          </Link>
         </p>
       </motion.div>
     </div>

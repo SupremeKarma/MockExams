@@ -13,6 +13,7 @@ import {
   slugify,
 } from "@/lib/examai/reader";
 import { getAskedIn } from "@/lib/examai/asked-in";
+import { getReaderUser } from "@/lib/examai/reader-auth";
 import { ReaderShell } from "@/components/reader/ReaderShell";
 import {
   COOKIE_NAME,
@@ -21,8 +22,12 @@ import {
 } from "@/lib/examai/reading-settings";
 
 // Server-rendered on purpose: the article text must be in the HTML with no
-// JavaScript, both because these pages are meant to rank and because a student
-// on a slow connection should see the note before the bundle arrives.
+// JavaScript, both because the free preview is meant to rank and because a
+// student on a slow connection should see it before the bundle arrives. Only
+// the level-1 section (the `idea` block and anything else written directly
+// under the H1) renders this way for a signed-out request — see the gating
+// below, and docs/blueprint.md §13 for why that split is exactly the
+// free/paid line the product draws.
 export const dynamic = "force-dynamic";
 
 interface PageProps {
@@ -84,12 +89,22 @@ export default async function TopicPage({ params, searchParams }: PageProps) {
   const unitUuid = ancestors.find((a) => a.kind === "unit")?.uuid;
   const askedInNodeUuids = unitUuid ? [node.uuid, unitUuid] : [node.uuid];
 
-  const [sections, tree, adjacent, askedIn] = await Promise.all([
+  const [sections, tree, adjacent, askedIn, reader] = await Promise.all([
     getSections(document.version_uuid),
     getCourseTree(coursePath),
     getAdjacentTopics(coursePath, node.path),
     getAskedIn(askedInNodeUuids),
+    getReaderUser(),
   ]);
+
+  // The free preview is the level-1 section: whatever sits directly under the
+  // H1, before the first H2 — which by the authoring convention (see
+  // packages/content/src/types.ts's ALLOWED_BLOCKS and docs/DESIGN.md §5) is
+  // exactly the `idea` block. Everything past the first H2 is gated. This
+  // needs no new metadata: the split the business model wants already exists
+  // in how documents are structured for the outline.
+  const gated = reader === null;
+  const visibleSections = gated ? sections.filter((s) => s.level === 1) : sections;
 
   const [cookieStore, headerList, query] = await Promise.all([
     cookies(),
@@ -118,7 +133,7 @@ export default async function TopicPage({ params, searchParams }: PageProps) {
   // The H1's heading is dropped: the page header already renders the title, and
   // emitting it again here would print it twice. Its BODY is kept, because the
   // `idea` block sits under the H1 and is the first thing a student reads.
-  const body = sections
+  const body = visibleSections
     .map((s) =>
       s.level === 1 ? s.body_md : `${"#".repeat(s.level)} ${s.heading}\n\n${s.body_md}`
     )
@@ -126,15 +141,19 @@ export default async function TopicPage({ params, searchParams }: PageProps) {
 
   const { html } = renderDocument(
     body,
+    // The full section list, not just visibleSections: an anchor id it does
+    // not find a heading for is simply unused, and this keeps the map correct
+    // if a signed-in reader's later request renders the same html generator.
     sections.map((s) => ({ heading: s.heading, anchor: s.anchor })),
     { mode: settings.mode }
   );
 
-  // Reading time from the stored section text. 200 wpm is the usual estimate
-  // for prose; these notes are denser than prose, so it rounds up rather than
-  // promising a student a page is shorter than it is.
-  const words = sections.reduce((n, s) => n + s.body_md.split(/\s+/).length, 0);
+  // Reading time from what is actually shown — a signed-out visitor's "About
+  // 1 minute" should describe the preview they can see, not the full note.
+  const words = visibleSections.reduce((n, s) => n + s.body_md.split(/\s+/).length, 0);
   const readingMinutes = Math.max(1, Math.round(words / 200));
+
+  const canonicalPath = `/learn/${course}/${canonicalSlug}-${parts.shortId}`;
 
   return (
     <ReaderShell
@@ -150,6 +169,8 @@ export default async function TopicPage({ params, searchParams }: PageProps) {
       settings={settings}
       tvSuggested={looksLikeTv(headerList.get("user-agent"))}
       readingMinutes={readingMinutes}
+      gated={gated}
+      signInHref={`/login?next=${encodeURIComponent(canonicalPath)}`}
     />
   );
 }

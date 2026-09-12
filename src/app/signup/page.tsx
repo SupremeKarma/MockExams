@@ -22,10 +22,15 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function SignupPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  // See login/page.tsx: only an internal path is honoured, to close off an
+  // open-redirect through this param.
+  const rawNext = searchParams.get("next");
+  const next = rawNext && rawNext.startsWith("/") && !rawNext.startsWith("//") ? rawNext : "/dashboard";
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -63,7 +68,7 @@ export default function SignupPage() {
         createdAt: serverTimestamp()
       });
 
-      router.push("/dashboard");
+      router.push(next);
     } catch (err: any) {
       setError(err.message || "An error occurred during signup");
     } finally {
@@ -89,7 +94,7 @@ export default function SignupPage() {
         updatedAt: serverTimestamp()
       }, { merge: true });
 
-      router.push("/dashboard");
+      router.push(next);
     } catch (err: any) {
       setError(err.message || `Failed to sign in with ${providerName}`);
       setLoading(false);
@@ -230,7 +235,13 @@ export default function SignupPage() {
         </div>
 
         <p className="mt-8 text-center text-xs text-zinc-500 font-medium">
-          Already have an account? <Link href="/login" className="text-primary-600 hover:underline font-bold">Log in here</Link>
+          Already have an account?{" "}
+          <Link
+            href={next === "/dashboard" ? "/login" : `/login?next=${encodeURIComponent(next)}`}
+            className="text-primary-600 hover:underline font-bold"
+          >
+            Log in here
+          </Link>
         </p>
       </motion.div>
     </div>
