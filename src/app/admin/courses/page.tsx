@@ -221,7 +221,28 @@ export default function CoursesWorkspace() {
       {notice && <Alert type="success" title={notice} />}
 
       <div className="flex rounded-lg border border-zinc-200 bg-white overflow-hidden" style={{ minHeight: 560 }}>
-        <WorkspaceRail />
+        <WorkspaceRail>
+          {grouped.length > 0 && (
+            <>
+              <h3 className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider px-1 mb-1.5">
+                Jump to semester
+              </h3>
+              <ul className="space-y-0.5">
+                {grouped.map(([semester, list]) => (
+                  <li key={semester}>
+                    <a
+                      href={`#semester-${semester}`}
+                      className="flex items-center justify-between px-2 py-1.5 rounded text-xs text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900"
+                    >
+                      <span>Semester {semester}</span>
+                      <span className="text-zinc-400">{list.length}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </WorkspaceRail>
 
         <main className="flex-1 min-w-0 overflow-y-auto">
           {loading ? (
@@ -237,7 +258,7 @@ export default function CoursesWorkspace() {
           ) : (
             <div className="divide-y divide-zinc-100">
               {grouped.map(([semester, list]) => (
-                <div key={semester} className="p-4">
+                <div key={semester} id={`semester-${semester}`} className="p-4 scroll-mt-4">
                   <h3 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2">
                     Semester {semester}
                   </h3>
