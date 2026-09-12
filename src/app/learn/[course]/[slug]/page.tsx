@@ -12,6 +12,7 @@ import {
   getSections,
   slugify,
 } from "@/lib/examai/reader";
+import { getAskedIn } from "@/lib/examai/asked-in";
 import { ReaderShell } from "@/components/reader/ReaderShell";
 import {
   COOKIE_NAME,
@@ -77,10 +78,11 @@ export default async function TopicPage({ params, searchParams }: PageProps) {
   const ancestors = await getAncestors(node.path);
   const coursePath = ancestors.find((a) => a.kind === "course")?.path ?? node.path;
 
-  const [sections, tree, adjacent] = await Promise.all([
+  const [sections, tree, adjacent, askedIn] = await Promise.all([
     getSections(document.version_uuid),
     getCourseTree(coursePath),
     getAdjacentTopics(coursePath, node.path),
+    getAskedIn(node.uuid),
   ]);
 
   // Rebuild the body from the stored sections rather than the version's raw
@@ -137,6 +139,7 @@ export default async function TopicPage({ params, searchParams }: PageProps) {
       tree={tree}
       adjacent={adjacent}
       articleHtml={html}
+      askedIn={askedIn}
       settings={settings}
       tvSuggested={looksLikeTv(headerList.get("user-agent"))}
       readingMinutes={readingMinutes}

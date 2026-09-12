@@ -10,8 +10,10 @@ import type {
   SpineNode,
   TreeNode,
 } from "@/lib/examai/reader";
+import type { AskedInQuestion } from "@/lib/examai/asked-in";
 import type { ReadingSettings } from "@/lib/examai/reading-settings";
 
+import { AskedIn } from "./AskedIn";
 import { EyeBreak } from "./EyeBreak";
 import { Icon, IconSprite } from "./IconSprite";
 import { OnThisPage } from "./OnThisPage";
@@ -31,6 +33,7 @@ interface Props {
   tree: TreeNode | null;
   adjacent: { previous: AdjacentTopic | null; next: AdjacentTopic | null };
   articleHtml: string;
+  askedIn: AskedInQuestion[];
   settings: ReadingSettings;
   /** True when the user agent looks like a TV — suggests, never switches. */
   tvSuggested: boolean;
@@ -92,6 +95,7 @@ export function ReaderShell({
   tree,
   adjacent,
   articleHtml,
+  askedIn,
   settings: initialSettings,
   tvSuggested,
   readingMinutes,
@@ -261,9 +265,6 @@ export function ReaderShell({
               <span>
                 Topic {node.code} in Unit {unit?.code}, {unit?.title}
               </span>
-              {/* "Asked in" is absent rather than empty: an empty slot reads as
-                  "no past questions on this topic", a claim we cannot make
-                  until Phase 2 links questions to the spine. */}
               <span>About {readingMinutes} minutes</span>
             </div>
 
@@ -309,6 +310,7 @@ export function ReaderShell({
         <aside className="toc" aria-label="On this page">
           <div className="toc-content">
             <OnThisPage sections={headings} activeAnchor={activeAnchor} />
+            <AskedIn questions={askedIn} />
           </div>
         </aside>
       </div>
@@ -382,6 +384,7 @@ export function ReaderShell({
             showTitle={false}
             onNavigate={() => setTocOpen(false)}
           />
+          <AskedIn questions={askedIn} />
         </div>
       </dialog>
 
