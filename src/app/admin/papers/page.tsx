@@ -7,6 +7,8 @@ import { useAuth } from "@/context/AuthContext";
 import { db } from "@/lib/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { PageHeader, SectionCard, PrimaryButton, EmptyState, Alert } from "@/components/UIComponents";
+import { WorkspaceRail } from "@/components/workspace/WorkspaceRail";
+import { ADMIN_WORKSPACE_ITEMS } from "@/components/workspace/rail-items";
 import { EXAM_TYPES, type Course, type ExamType, type Paper } from "@/lib/examai/types";
 
 const STATUS_STYLES: Record<Paper["status"], string> = {
@@ -191,6 +193,10 @@ export default function AdminPapersPage() {
       {error && <Alert type="error" title={error} icon={<AlertTriangle className="w-4 h-4" />} />}
       {notice && <Alert type="success" title={notice} />}
 
+      <div className="flex rounded-lg border border-zinc-200 bg-white overflow-hidden" style={{ minHeight: 560 }}>
+        <WorkspaceRail items={ADMIN_WORKSPACE_ITEMS} ariaLabel="Admin workspace tools" />
+
+        <main className="flex-1 min-w-0 overflow-y-auto p-6 space-y-6">
       <SectionCard
         title="Upload a paper"
         description="One image per page, attached in reading order. Split PDFs into pages first."
@@ -325,6 +331,8 @@ export default function AdminPapersPage() {
           </div>
         )}
       </SectionCard>
+        </main>
+      </div>
     </div>
   );
 }
