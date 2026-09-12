@@ -3,11 +3,12 @@
 import { useState, type ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutGrid, PanelLeftClose, PanelLeftOpen, ScanLine } from "lucide-react";
+import { ClipboardList, LayoutGrid, PanelLeftClose, PanelLeftOpen, ScanLine } from "lucide-react";
 
 const ITEMS = [
   { href: "/admin/courses", label: "Courses", icon: LayoutGrid },
   { href: "/admin/papers", label: "Past papers", icon: ScanLine },
+  { href: "/admin/mock-exams", label: "Mock exams", icon: ClipboardList },
 ] as const;
 
 interface Props {
