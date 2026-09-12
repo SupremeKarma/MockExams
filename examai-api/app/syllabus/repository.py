@@ -241,6 +241,19 @@ def courses(semester: int | None = None, program: str = "bit") -> list[dict[str,
     return descendants(root, kind="course")
 
 
+def find_unit_by_number(course_code: str, unit_number: int) -> dict[str, Any] | None:
+    """The unit node printed as number `unit_number` in `course_code`'s syllabus.
+
+    Builds the path directly (`{course_path}.u{N}`) rather than searching by
+    `code`, because path IS the unit number by construction — see
+    `syllabus_nodes_require_parent` and `app/syllabus/spine.py`.
+    """
+    course = find_course(course_code)
+    if course is None:
+        return None
+    return get_node(f"{course['path']}.u{unit_number}")
+
+
 def leaf_topics(course_path: str) -> list[dict[str, Any]]:
     """The deepest OFFICIAL node under each unit — what content attaches to.
 
@@ -351,6 +364,37 @@ def link_question(
             """,
             (question_ref, node_uuid, role, weight, tagged_by),
         )
+
+
+def unlink_model_tags(question_ref: str) -> int:
+    """Drop this question's model-tagged links, keeping any human ones.
+
+    Called before re-inserting from a fresh extraction, so a unit tag the model
+    no longer produces does not linger. Human links are untouched — a
+    reviewer's tag outranks a re-extraction the same way `syllabusUnits`'s
+    `taggedBy` does in Firestore.
+    """
+    with connect() as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                "DELETE FROM examai.question_topics WHERE question_ref = %s AND tagged_by = 'model'",
+                (question_ref,),
+            )
+            return cur.rowcount
+
+
+def unlink_question(question_ref: str) -> int:
+    """Drop every link for a question, model and human alike.
+
+    Used when the question itself is gone — a re-extraction that no longer
+    produces it — where a stale link (rather than a stale tag) is the problem.
+    """
+    with connect() as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                "DELETE FROM examai.question_topics WHERE question_ref = %s", (question_ref,)
+            )
+            return cur.rowcount
 
 
 def questions_for_node(path: str, include_descendants: bool = True) -> list[dict[str, Any]]:

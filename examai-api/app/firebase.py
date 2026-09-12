@@ -184,7 +184,7 @@ def write_paper_with_questions(
     # Questions that no longer exist in the new extraction. Deleted, because a
     # stale question from a previous run would otherwise sit in the paper
     # forever with no way for a reviewer to tell it apart.
-    removed = 0
+    removed_ids: list[str] = []
     for stale_id in set(existing) - incoming_ids:
         if existing[stale_id].get("reviewStatus") == "approved":
             # Never silently delete approved human work. Flag it instead.
@@ -203,10 +203,26 @@ def write_paper_with_questions(
             writes += 1
             continue
         batch.delete(questions_ref.document(stale_id))
-        removed += 1
+        removed_ids.append(stale_id)
         writes += 1
 
     batch.commit()
     paper_ref.set(paper, merge=True)
 
-    return {"written": len(questions) - kept, "kept_approved": kept, "removed": removed}
+    return {
+        "written": len(questions) - kept,
+        "kept_approved": kept,
+        "removed": len(removed_ids),
+        "removedIds": removed_ids,
+    }
+
+
+def list_questions(paper_id: str) -> list[dict[str, Any]]:
+    """A paper's questions as currently stored, post-merge.
+
+    Used after `write_paper_with_questions` to read back what actually landed
+    — the merge it performs (approved questions kept, human unit tags carried
+    forward) means the caller's input list is not what was written.
+    """
+    docs = db().collection("papers").document(paper_id).collection("questions").stream()
+    return [doc.to_dict() or {} for doc in docs]

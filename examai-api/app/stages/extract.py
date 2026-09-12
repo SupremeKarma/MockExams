@@ -20,6 +20,8 @@ from ..jobs import JobHandle
 from ..llm import ImagePart, ProviderError, VisionRequest, get_provider
 from ..prompts import known_unit_ids, render_extraction_prompt
 from ..schemas import ExtractedPaper, ExtractRequest, now_iso
+from ..syllabus import repository as syllabus_repo
+from ..syllabus import tagging
 
 # One question showing every field. Kept deliberately small: a full paper here
 # would cost tokens on every call and invite copying rather than extracting.
@@ -124,6 +126,41 @@ def _parse(raw: str) -> ExtractedPaper:
     return ExtractedPaper.model_validate(json.loads(_strip_fences(raw)))
 
 
+def _sync_topic_links(paper_id: str, removed_ids: list[str], job: JobHandle) -> None:
+    """Keep `examai.question_topics` in step with what was just written.
+
+    Reads the questions back from Firestore rather than using the model's
+    output directly: `write_paper_with_questions` may have kept an approved
+    question as-is or merged in a reviewer's unit tags, and that merged result
+    — not the model's raw output — is what the links must describe. A worker
+    without Postgres reachable (a laptop with no Docker running) should not
+    fail extraction over this, so a connection error is logged and swallowed;
+    the paper still extracts, just without spine links until the DB is back.
+    """
+    try:
+        for question_ref in removed_ids:
+            syllabus_repo.unlink_question(f"{paper_id}/{question_ref}")
+
+        linked_total = 0
+        unresolved_total = 0
+        for question in firebase.list_questions(paper_id):
+            q_id = question.get("qId")
+            if not q_id:
+                continue
+            outcome = tagging.sync_question_topics(
+                f"{paper_id}/{q_id}", question.get("syllabusUnits") or []
+            )
+            linked_total += outcome["linked"]
+            unresolved_total += outcome["unresolved"]
+
+        job.log(
+            f"Spine links: {linked_total} linked, {unresolved_total} unresolved "
+            "(course/unit not yet in the imported spine)"
+        )
+    except Exception as exc:  # noqa: BLE001 — a link-sync failure must not fail extraction
+        job.log(f"Skipped spine link sync: {exc}", level="warn")
+
+
 def run(request: ExtractRequest, job: JobHandle) -> dict[str, Any]:
     """Extract one paper. Returns a summary for the API response."""
     paths.require_safe(request.paper_id, "paperId")
@@ -214,6 +251,8 @@ def run(request: ExtractRequest, job: JobHandle) -> dict[str, Any]:
 
     result = firebase.write_paper_with_questions(paper.to_firestore(), question_docs)
     job.progress(3, 3)
+
+    _sync_topic_links(request.paper_id, result["removedIds"], job)
 
     flagged = sum(1 for q in questions if q.unclear)
     job.log(
