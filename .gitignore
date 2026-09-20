@@ -48,6 +48,9 @@ next-env.d.ts
 plan.zip
 /plans/
 /scratch/
+/tmp/
+.claude/
+diff_output.txt
 MockExams_Presentation.pptx
 serviceAccountKey.json
 *serviceAccount*.json
