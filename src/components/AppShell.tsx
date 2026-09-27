@@ -1,11 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Sarthi from "@/components/Sarthi";
 import Footer from "@/components/Footer";
 import QuickNavRail from "@/components/QuickNavRail";
-// Sidebar hidden for now, per request — re-import and render it to bring it back.
+import Sidebar from "@/components/Sidebar";
 
 // Routes that get the role-aware sidebar app shell instead of the
 // marketing top-nav + footer treatment. See ARCHITECTURE.md.
@@ -47,8 +48,16 @@ const SYLLABUS_PATTERN = /^\/syllabus(\/|$)/;
 const SOLUTION_PATTERN = /^\/solution(\/|$)/;
 const PAST_PAPERS_PATTERN = /^\/past-papers(\/|$)/;
 
+// Only a solved paper's own detail page (/papers/{id}) — the /papers upload
+// form above it stays on the marketing layout, since it's a form, not a
+// document to read.
+const SOLVED_PAPER_PATTERN = /^\/papers\/[^/]+$/;
+
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() || "/";
+  // Hidden by default per an earlier request; the header's 3-line button
+  // brings it back on demand instead of it always taking up width.
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const isFocusMode = FOCUS_MODE_PATTERN.test(pathname);
 
@@ -67,10 +76,12 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     NOTES_PATTERN.test(pathname) ||
     SYLLABUS_PATTERN.test(pathname) ||
     SOLUTION_PATTERN.test(pathname) ||
-    PAST_PAPERS_PATTERN.test(pathname)
+    PAST_PAPERS_PATTERN.test(pathname) ||
+    SOLVED_PAPER_PATTERN.test(pathname)
   ) {
-    // Exam-taking, the Reader, Notes, Syllabus, Solution, and Past Papers all
-    // supply their own sticky header — no chrome at all.
+    // Exam-taking, the Reader, Notes, Syllabus, Solution, Past Papers, and a
+    // solved paper's own page all supply their own sticky header — no chrome
+    // at all.
     return <>{children}</>;
   }
 
@@ -83,9 +94,9 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         >
           Skip to main content
         </a>
-        <Navbar />
+        <Navbar onToggleSidebar={() => setSidebarOpen((v) => !v)} />
         <div className="flex flex-1 pt-14">
-          {/* Hidden for now, per request — re-add <Sidebar /> to bring it back. */}
+          {sidebarOpen && <Sidebar />}
           <main id="main-content" className="flex-1 min-w-0">{children}</main>
         </div>
         {/* Mounted once at the shell so a conversation survives navigation. */}

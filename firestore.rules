@@ -312,14 +312,22 @@ service cloud.firestore {
       allow write: if isStaff();
     }
 
+    // Both collections are read by a deterministic doc id (`{uid}_{courseId}`)
+    // before the student has ever enrolled, so `resource` is null on that
+    // first read. `resource.data.userId` on a null resource is a rule
+    // evaluation error, and Firestore denies the whole request on error rather
+    // than returning "not found" — hence the `resource == null` guard. A
+    // not-yet-existing enrollment reveals nothing, so it's safe to let through.
     match /studentCourseEnrollments/{enrollmentId} {
-      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isStaff());
+      allow read: if isAuthenticated()
+        && (resource == null || resource.data.userId == request.auth.uid || isStaff());
       allow create, update: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
       allow delete: if isStaff();
     }
 
     match /studentPathEnrollments/{enrollmentId} {
-      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isStaff());
+      allow read: if isAuthenticated()
+        && (resource == null || resource.data.userId == request.auth.uid || isStaff());
       allow create, update: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
       allow delete: if isStaff();
     }

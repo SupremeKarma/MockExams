@@ -150,7 +150,12 @@ export function ExamPaperView({ meta, questions, mode, fallbackTitle }: ExamPape
 
             <ol className="space-y-5">
               {group.questions.map((q) => (
-                <li key={q.number} className="print:break-inside-avoid">
+                <li
+                  key={q.number}
+                  id={`q-${q.number}`}
+                  className="print:break-inside-avoid"
+                  style={{ scrollMarginTop: "calc(var(--header-h, 0px) + 1rem)" }}
+                >
                   <div className="flex items-start justify-between gap-4">
                     <p className="text-sm text-zinc-900 leading-relaxed">
                       <span className="font-bold mr-2 tabular-nums">{q.number}.</span>
