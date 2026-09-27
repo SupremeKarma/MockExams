@@ -21,7 +21,7 @@ import {
   GoogleAuthProvider,
   updateProfile,
 } from "firebase/auth";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export default function SignupPage() {
@@ -60,13 +60,16 @@ export default function SignupPage() {
       const initialRole = formData.email.toLowerCase() === "amanmahato321@gmail.com" ? 'admin' : 'student';
 
       await setDoc(doc(db, "users", user.uid), {
+        id: user.uid,
         name: formData.name,
         displayName: formData.name,
         email: formData.email,
-        phone: formData.phone,
+        phone: formData.phone || "",
+        photoURL: user.photoURL || "",
         role: initialRole,
-        createdAt: serverTimestamp()
-      });
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      }, { merge: true });
 
       router.push(next);
     } catch (err: any) {
@@ -85,14 +88,31 @@ export default function SignupPage() {
         : new GithubAuthProvider();
       
       const { user } = await signInWithPopup(auth, provider);
-      
-      await setDoc(doc(db, "users", user.uid), {
-        name: user.displayName,
-        displayName: user.displayName,
-        email: user.email,
-        role: 'student',
-        updatedAt: serverTimestamp()
-      }, { merge: true });
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+      const name = user.displayName || user.email?.split("@")[0] || "Student";
+      const initialRole = user.email?.toLowerCase() === "amanmahato321@gmail.com" ? 'admin' : 'student';
+
+      if (!userSnap.exists()) {
+        await setDoc(userRef, {
+          id: user.uid,
+          name,
+          displayName: user.displayName || name,
+          email: user.email || "",
+          photoURL: user.photoURL || "",
+          phone: user.phoneNumber || "",
+          role: initialRole,
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp()
+        });
+      } else {
+        await setDoc(userRef, {
+          name: userSnap.data()?.name || name,
+          displayName: user.displayName || userSnap.data()?.displayName || name,
+          photoURL: user.photoURL || userSnap.data()?.photoURL || "",
+          updatedAt: serverTimestamp()
+        }, { merge: true });
+      }
 
       router.push(next);
     } catch (err: any) {

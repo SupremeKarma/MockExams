@@ -20,11 +20,15 @@ import {
   ClipboardList,
   Building2,
   ShieldCheck,
+  GraduationCap,
+  Compass,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const CORE_LINKS = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { name: "Courses", href: "/dashboard/courses", icon: GraduationCap },
+  { name: "Learning Paths", href: "/learning-paths", icon: Compass },
   { name: "Exams", href: "/exams", icon: Zap },
   { name: "Flashcards", href: "/flashcards", icon: Brain },
   { name: "Notes", href: "/notes", icon: BookOpen },

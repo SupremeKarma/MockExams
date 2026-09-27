@@ -14,6 +14,8 @@ import {
   AlertTriangle,
   BarChart3,
   Sparkles,
+  GraduationCap,
+  ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -33,6 +35,7 @@ export default function StudentDashboard() {
   const { user, loading: authLoading } = useAuth();
   const [recentAttempts, setRecentAttempts] = useState<any[]>([]);
   const [allAttempts, setAllAttempts] = useState<any[]>([]);
+  const [activeEnrollments, setActiveEnrollments] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [engagement, setEngagement] = useState<any>(null);
   const [daily, setDaily] = useState<{ completed: boolean } | null>(null);
@@ -70,7 +73,14 @@ export default function StudentDashboard() {
           collection(db, "exam_attempts"),
           where("user_id", "==", userId)
         );
-        const allSnap = await getDocs(qAll);
+        const qEnroll = query(
+          collection(db, "studentCourseEnrollments"),
+          where("userId", "==", userId)
+        );
+        const [allSnap, enrollSnap] = await Promise.all([
+          getDocs(qAll),
+          getDocs(qEnroll),
+        ]);
         const allData = allSnap.docs
           .map(doc => ({ id: doc.id, ...doc.data() }))
           .sort((a: any, b: any) => {
@@ -81,6 +91,7 @@ export default function StudentDashboard() {
 
         setAllAttempts(allData);
         setRecentAttempts(allData.slice(0, 4));
+        setActiveEnrollments(enrollSnap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
       } catch (err) {
         console.error("Dashboard: Error fetching data", err);
       } finally {
@@ -207,6 +218,69 @@ export default function StudentDashboard() {
             <PrimaryButton href="/practice?daily=1" icon={<Zap className="w-4 h-4" />}>
               Start today&apos;s set
             </PrimaryButton>
+          )}
+        </div>
+
+        {/* Active Enrolled Courses */}
+        <div className="p-6 rounded-xl bg-white border border-zinc-200 space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-zinc-100 pb-4">
+            <div>
+              <h3 className="text-base font-bold text-zinc-900 flex items-center gap-2">
+                <GraduationCap className="w-5 h-5 text-primary-600" />
+                Active Degree Courses
+              </h3>
+              <p className="text-xs text-zinc-500 mt-0.5">
+                Track syllabus progression and certificate eligibility
+              </p>
+            </div>
+            <Link
+              href="/dashboard/courses"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-primary-600 hover:text-primary-700"
+            >
+              Browse All Courses <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+
+          {activeEnrollments.length === 0 ? (
+            <div className="p-6 text-center bg-zinc-50/50 rounded-xl border border-dashed border-zinc-200">
+              <p className="text-xs text-zinc-500 mb-3">You have not enrolled in any degree modules yet.</p>
+              <Link
+                href="/dashboard/courses"
+                className="px-4 py-2 bg-primary-600 text-white rounded-lg text-xs font-bold hover:bg-primary-700 transition-colors inline-block"
+              >
+                Enroll in Your First Course
+              </Link>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {activeEnrollments.map((enrollment: any) => (
+                <Link
+                  key={enrollment.courseId}
+                  href={`/courses/${enrollment.courseId}`}
+                  className="p-4 rounded-xl border border-zinc-200 hover:border-primary-500 transition-all bg-zinc-50/30 flex flex-col justify-between group"
+                >
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="px-2 py-0.5 rounded bg-primary-50 text-primary-700 font-bold text-[11px]">
+                        {enrollment.courseId}
+                      </span>
+                      <span className="text-xs font-bold text-zinc-600">
+                        {enrollment.completionPercentage || 0}%
+                      </span>
+                    </div>
+                    <h4 className="text-sm font-bold text-zinc-900 group-hover:text-primary-600 transition-colors">
+                      {enrollment.courseId}
+                    </h4>
+                  </div>
+                  <div className="w-full h-1.5 bg-zinc-200 rounded-full overflow-hidden mt-3">
+                    <div
+                      className="h-full bg-primary-600 rounded-full transition-all"
+                      style={{ width: `${enrollment.completionPercentage || 0}%` }}
+                    />
+                  </div>
+                </Link>
+              ))}
+            </div>
           )}
         </div>
 

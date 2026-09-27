@@ -16,10 +16,12 @@ import {
   Terminal,
   Brain,
 } from "lucide-react";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
-import { bitNotesData } from "@/data/bitNotesData";
+import { bitNotesData, type SubjectNotes, type Topic } from "@/data/bitNotesData";
 import ProgramGate from "@/components/ProgramGate";
+import { db } from "@/lib/firebase";
+import { collection, query, where, onSnapshot } from "firebase/firestore";
 
 export default function NotesPage() {
   const [selectedSemester, setSelectedSemester] = useState<number>(1);
@@ -29,10 +31,51 @@ export default function NotesPage() {
   const [copiedCodeIndex, setCopiedCodeIndex] = useState<number | null>(null);
   const [openTheoryIndex, setOpenTheoryIndex] = useState<number | null>(null);
 
+  const [firestoreCourses, setFirestoreCourses] = useState<Record<string, { code: string; name: string; creditHours: number; theoryTopics: string[] }>>({});
+  const [firestoreTopics, setFirestoreTopics] = useState<Record<string, Topic[]>>({});
+  const [isFirestoreLoaded, setIsFirestoreLoaded] = useState(false);
+
+  // 1. Listen to courses in studentNotes for the selected semester
+  useEffect(() => {
+    try {
+      const q = query(
+        collection(db, "studentNotes"),
+        where("semester", "==", selectedSemester)
+      );
+      const unsubscribe = onSnapshot(q, (snapshot) => {
+        if (!snapshot.empty) {
+          const coursesMap: Record<string, { code: string; name: string; creditHours: number; theoryTopics: string[] }> = {};
+          snapshot.forEach((docSnap) => {
+            const data = docSnap.data();
+            const subjectKey = data.subjectKey || data.name || docSnap.id;
+            coursesMap[subjectKey] = {
+              code: data.code || docSnap.id,
+              name: data.name || subjectKey,
+              creditHours: data.creditHours || 3,
+              theoryTopics: data.theoryTopics || []
+            };
+          });
+          setFirestoreCourses(coursesMap);
+          setIsFirestoreLoaded(true);
+        }
+      }, (err) => {
+        console.warn("Firestore studentNotes listener error, falling back to static data:", err);
+      });
+
+      return () => unsubscribe();
+    } catch (err) {
+      console.warn("Failed to attach studentNotes listener:", err);
+    }
+  }, [selectedSemester]);
+
+  // Available subjects: prefer Firestore courses if loaded, else fallback to bitNotesData
   const availableSubjects = useMemo(() => {
+    if (isFirestoreLoaded && Object.keys(firestoreCourses).length > 0) {
+      return Object.keys(firestoreCourses);
+    }
     const semData = bitNotesData[selectedSemester];
     return semData ? Object.keys(semData) : [];
-  }, [selectedSemester]);
+  }, [selectedSemester, isFirestoreLoaded, firestoreCourses]);
 
   const currentSubject = useMemo(() => {
     if (selectedSubject && availableSubjects.includes(selectedSubject)) {
@@ -41,11 +84,68 @@ export default function NotesPage() {
     return availableSubjects[0] || "";
   }, [selectedSubject, availableSubjects]);
 
-  const activeNotes = useMemo(() => {
+  // Determine current course code
+  const currentCourseCode = useMemo(() => {
+    if (firestoreCourses[currentSubject]) {
+      return firestoreCourses[currentSubject].code;
+    }
+    const semData = bitNotesData[selectedSemester];
+    return semData?.[currentSubject]?.code || currentSubject;
+  }, [currentSubject, firestoreCourses, selectedSemester]);
+
+  // 2. Listen to topics for current course code from Firestore
+  useEffect(() => {
+    if (!currentCourseCode) return;
+    try {
+      const topicsRef = collection(db, "studentNotes", currentCourseCode, "topics");
+      const unsubscribe = onSnapshot(topicsRef, (snapshot) => {
+        if (!snapshot.empty) {
+          const topicsList: Topic[] = [];
+          snapshot.forEach((docSnap) => {
+            const data = docSnap.data();
+            topicsList.push({
+              id: data.topicId || docSnap.id,
+              name: data.name || "",
+              importance: data.importance || "Medium",
+              keyPoints: data.keyPoints || [],
+              theory: data.theory || "",
+              code: data.code || undefined,
+              example: data.example || undefined,
+              commonExamQuestions: data.commonExamQuestions || []
+            });
+          });
+          setFirestoreTopics((prev) => ({
+            ...prev,
+            [currentSubject]: topicsList
+          }));
+        }
+      }, (err) => {
+        console.warn("Firestore topics listener error, using fallback:", err);
+      });
+
+      return () => unsubscribe();
+    } catch (err) {
+      console.warn("Failed to attach topics listener:", err);
+    }
+  }, [currentCourseCode, currentSubject]);
+
+  const activeNotes = useMemo((): SubjectNotes | null => {
+    // If Firestore has loaded topics and course details for currentSubject
+    if (firestoreCourses[currentSubject] && firestoreTopics[currentSubject]) {
+      const c = firestoreCourses[currentSubject];
+      return {
+        subjectName: c.name,
+        code: c.code,
+        creditHours: c.creditHours,
+        theoryTopics: c.theoryTopics,
+        topics: firestoreTopics[currentSubject]
+      };
+    }
+    // Zero-downtime fallback to hardcoded bitNotesData
     const semData = bitNotesData[selectedSemester];
     if (!semData || !currentSubject) return null;
     return semData[currentSubject] || null;
-  }, [selectedSemester, currentSubject]);
+  }, [selectedSemester, currentSubject, firestoreCourses, firestoreTopics]);
 
   const filteredTopics = useMemo(() => {
     if (!activeNotes) return [];
@@ -333,6 +433,26 @@ export default function NotesPage() {
                           <pre className="p-4 rounded-xl bg-white border border-primary-100 text-xs sm:text-sm font-mono text-primary-900 whitespace-pre-wrap">
                             {topic.example}
                           </pre>
+                        </div>
+                      )}
+
+                      {/* Asked in Exams Section */}
+                      {topic.commonExamQuestions && topic.commonExamQuestions.length > 0 && (
+                        <div className="p-6 sm:p-7 bg-amber-50/40 border-t border-amber-100">
+                          <h4 className="text-xs font-bold uppercase tracking-wider text-amber-800 mb-3 flex items-center gap-2">
+                            <GraduationCap className="w-4 h-4 text-amber-600" />
+                            Asked in Past University Exams
+                          </h4>
+                          <ul className="space-y-2">
+                            {topic.commonExamQuestions.map((qText, qIdx) => (
+                              <li key={qIdx} className="text-xs sm:text-sm text-zinc-800 flex items-start gap-2.5 bg-white p-3 rounded-lg border border-amber-200/60 shadow-xs">
+                                <span className="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold text-[10px] shrink-0 mt-0.5">
+                                  Q{qIdx + 1}
+                                </span>
+                                <span className="font-medium">{qText}</span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
                       )}
                     </motion.div>

@@ -32,7 +32,31 @@ export default function LoginPage() {
     setError(null);
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Ensure Firestore user doc exists on email login
+      const { db } = await import("@/lib/firebase");
+      const { doc, getDoc, setDoc, serverTimestamp } = await import("firebase/firestore");
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+
+      if (!userSnap.exists()) {
+        const name = user.displayName || user.email?.split("@")[0] || "Student";
+        const initialRole = user.email?.toLowerCase() === "amanmahato321@gmail.com" ? 'admin' : 'student';
+        await setDoc(userRef, {
+          id: user.uid,
+          email: user.email || email,
+          name,
+          displayName: user.displayName || name,
+          photoURL: user.photoURL || "",
+          phone: user.phoneNumber || "",
+          role: initialRole,
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp()
+        });
+      }
+
       router.push(next);
     } catch (err: any) {
       setError(err.message || "Invalid email or password");
@@ -50,21 +74,34 @@ export default function LoginPage() {
         : new GithubAuthProvider();
       
       const result = await signInWithPopup(auth, provider);
+      const user = result.user;
       
       const { db } = await import("@/lib/firebase");
       const { doc, getDoc, setDoc, serverTimestamp } = await import("firebase/firestore");
-      const userRef = doc(db, "users", result.user.uid);
+      const userRef = doc(db, "users", user.uid);
       const userSnap = await getDoc(userRef);
+      const name = user.displayName || user.email?.split("@")[0] || "Student";
+      const initialRole = user.email?.toLowerCase() === "amanmahato321@gmail.com" ? 'admin' : 'student';
 
       if (!userSnap.exists()) {
         await setDoc(userRef, {
-          email: result.user.email,
-          displayName: result.user.displayName,
-          photoURL: result.user.photoURL,
-          role: "student",
+          id: user.uid,
+          email: user.email || "",
+          name,
+          displayName: user.displayName || name,
+          photoURL: user.photoURL || "",
+          phone: user.phoneNumber || "",
+          role: initialRole,
           createdAt: serverTimestamp(),
           updatedAt: serverTimestamp()
         });
+      } else {
+        await setDoc(userRef, {
+          name: userSnap.data()?.name || name,
+          displayName: user.displayName || userSnap.data()?.displayName || name,
+          photoURL: user.photoURL || userSnap.data()?.photoURL || "",
+          updatedAt: serverTimestamp()
+        }, { merge: true });
       }
 
       router.push(next);

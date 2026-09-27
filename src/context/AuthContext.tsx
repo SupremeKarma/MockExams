@@ -54,8 +54,33 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUser(firebaseUser);
         try {
           // 1. Fetch User Profile
-          const userSnap = await getDoc(doc(db, "users", firebaseUser.uid));
-          const userData = userSnap.exists() ? userSnap.data() : null;
+          const userRef = doc(db, "users", firebaseUser.uid);
+          const userSnap = await getDoc(userRef);
+          let userData = userSnap.exists() ? userSnap.data() : null;
+
+          if (!userData) {
+            // Canonical User document fallback (Phase 0)
+            const fallbackName = firebaseUser.displayName || firebaseUser.email?.split("@")[0] || "Student";
+            const initialRole = firebaseUser.email?.toLowerCase() === "amanmahato321@gmail.com" ? 'admin' : 'student';
+            const { serverTimestamp, setDoc } = await import("firebase/firestore");
+            const newDoc = {
+              id: firebaseUser.uid,
+              email: firebaseUser.email || "",
+              name: fallbackName,
+              displayName: firebaseUser.displayName || fallbackName,
+              photoURL: firebaseUser.photoURL || "",
+              phone: firebaseUser.phoneNumber || "",
+              role: initialRole,
+              createdAt: serverTimestamp(),
+              updatedAt: serverTimestamp()
+            };
+            try {
+              await setDoc(userRef, newDoc, { merge: true });
+              userData = newDoc;
+            } catch (createErr) {
+              console.warn("AuthContext: Could not create fallback user document", createErr);
+            }
+          }
           
           // 2. Resolve Role
           const userRole: UserRole = userData?.role || 'student';
@@ -65,10 +90,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           setIsExaminer(['admin', 'org_admin', 'examiner'].includes(userRole as any));
 
           // 3. Resolve Organization Membership
-          if (userData?.org_id) {
-            setOrgId(userData.org_id);
+          if (userData?.orgId || userData?.org_id) {
+            setOrgId(userData.orgId || userData.org_id);
           } else if (userRole === 'org_admin' || userRole === 'examiner') {
-            // Only query if role suggests org membership and no direct org_id
+            // Only query if role suggests org membership and no direct org_id/orgId
             const memberQ = query(
               collection(db, "org_members"),
               where("user_id", "==", firebaseUser.uid),
@@ -76,7 +101,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
               limit(1)
             );
             const memberSnap = await getDocs(memberQ);
-            setOrgId(!memberSnap.empty ? memberSnap.docs[0].data().org_id : null);
+            setOrgId(!memberSnap.empty ? (memberSnap.docs[0].data().org_id || memberSnap.docs[0].data().orgId) : null);
           } else {
             setOrgId(null);
           }

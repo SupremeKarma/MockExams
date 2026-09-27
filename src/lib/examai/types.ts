@@ -9,6 +9,28 @@
 // the older MockExams collections are snake_case. See /docs/schema.md for why
 // that split exists and why it is not worth unifying.
 
+import type { Timestamp, FieldValue } from "firebase/firestore";
+
+// ---------------------------------------------------------------------------
+// Canonical User Schema (Phase 0)
+// ---------------------------------------------------------------------------
+
+export type UserRole = "student" | "examiner" | "org_admin" | "admin";
+
+export interface User {
+  id: string;                    // Firebase UID (doc ID)
+  email: string;
+  name: string;
+  displayName?: string;
+  photoURL?: string;
+  phone?: string;
+  role: UserRole;
+  orgId?: string;
+  org_id?: string;               // Legacy compatibility
+  createdAt: Timestamp | FieldValue | Date | any;
+  updatedAt: Timestamp | FieldValue | Date | any;
+}
+
 export type ExamType = "regular" | "back" | "make_up" | "model";
 export type Curriculum = "new_course" | "old_course";
 export type Confidence = "high" | "medium" | "low";
@@ -68,6 +90,7 @@ export interface SyllabusUnit {
 
 export interface Course {
   code: string;
+  courseId?: string;
   name: string;
   semester: number;
   programId: string;
@@ -75,6 +98,67 @@ export interface Course {
   curriculum: Curriculum;
   /** The tagging vocabulary. Generated from bitSyllabusData so it cannot drift. */
   syllabusUnits: SyllabusUnit[];
+  description?: string;
+  learningOutcomes?: string[];
+  prerequisites?: string[];
+  difficulty?: 'Beginner' | 'Intermediate' | 'Advanced';
+}
+
+// ---------------------------------------------------------------------------
+// Student Notes (Phase 1)
+// ---------------------------------------------------------------------------
+
+export interface StudentNotesTopic {
+  topicId: string;
+  courseId: string;           // e.g. "BIT351CO"
+  name: string;
+  keyPoints: string[];
+  code?: string;              // Unit code or code snippet
+  importance: 'Very High' | 'High' | 'Medium';
+  theoryTopics: string[];
+  createdAt?: Timestamp | FieldValue | Date | any;
+  updatedAt?: Timestamp | FieldValue | Date | any;
+}
+
+// ---------------------------------------------------------------------------
+// Learning Paths & Student Progress (Phase 3)
+// ---------------------------------------------------------------------------
+
+export interface LearningPath {
+  pathId: string;
+  name: string;              // "First Semester Foundations"
+  description: string;
+  programId: string;
+  courseIds: string[];       // ordered
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced' | string;
+  estimatedHours: number;
+  tags: string[];
+  createdBy: string;         // admin UID
+  createdAt?: Timestamp | FieldValue | Date | any;
+  updatedAt?: Timestamp | FieldValue | Date | any;
+}
+
+export interface StudentCourseEnrollment {
+  userId: string;
+  courseId: string;
+  enrolledAt: Timestamp | FieldValue | Date | any;
+  completionPercentage: number;
+  status: 'active' | 'completed' | 'paused' | 'dropped';
+  lastAccessedAt: Timestamp | FieldValue | Date | any;
+  topicsCompleted: string[];
+  topicsInProgress: string[];
+  questionsAttempted: number;
+  certificateIssuedAt?: Timestamp | FieldValue | Date | any;
+}
+
+export interface StudentPathEnrollment {
+  userId: string;
+  pathId: string;
+  enrolledAt: Timestamp | FieldValue | Date | any;
+  completedCourses: string[];
+  currentCourseId: string;
+  completionPercentage: number;
+  certificateIssuedAt?: Timestamp | FieldValue | Date | any;
 }
 
 // ---------------------------------------------------------------------------

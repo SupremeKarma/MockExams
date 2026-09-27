@@ -3,7 +3,7 @@
 import { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
 import { db } from "@/lib/firebase";
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot, collection, getDocs } from "firebase/firestore";
 import { useAuth } from "@/context/AuthContext";
 import { motion } from "framer-motion";
 import {
@@ -14,6 +14,9 @@ import {
   Calendar,
   Clock,
   ShieldAlert,
+  Compass,
+  Sparkles,
+  ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
 import { ExamReview } from "@/components/ExamReview";
@@ -24,6 +27,7 @@ export default function ExamResultsPage({ params }: { params: any }) {
   const { user, loading: authLoading, isAdmin } = useAuth();
 
   const [attempt, setAttempt] = useState<any>(null);
+  const [recommendedPaths, setRecommendedPaths] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [unauthorized, setUnauthorized] = useState(false);
@@ -56,6 +60,17 @@ export default function ExamResultsPage({ params }: { params: any }) {
 
         setAttempt(data);
         setLoading(false);
+
+        // Fetch recommended learning paths
+        getDocs(collection(db, "learningPaths"))
+          .then((pathsSnap) => {
+            const list = pathsSnap.docs.map((d) => ({
+              id: d.id,
+              ...d.data(),
+            }));
+            setRecommendedPaths(list.slice(0, 2));
+          })
+          .catch((e) => console.warn("Could not load recommended paths:", e));
       },
       (err) => {
         console.error("Error watching results:", err);
@@ -184,6 +199,62 @@ export default function ExamResultsPage({ params }: { params: any }) {
               Browse more exams
             </Link>
           </div>
+
+          {/* Recommended Learning Path based on attempt performance */}
+          {recommendedPaths.length > 0 && (
+            <div className="mb-10 p-6 rounded-2xl bg-gradient-to-br from-indigo-50/80 via-primary-50/50 to-white border border-primary-200/80 shadow-xs space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="space-y-1">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary-100 text-primary-800 text-[10px] font-bold uppercase tracking-wider">
+                    <Sparkles className="w-3 h-3 text-primary-600" />
+                    Adaptive Recommendation
+                  </div>
+                  <h3 className="text-base font-bold text-zinc-900">
+                    Target Weak Topics with Structured Learning
+                  </h3>
+                  <p className="text-xs text-zinc-600">
+                    Strengthen concepts tested in this exam by progressing through accredited university course sequences.
+                  </p>
+                </div>
+                <Link
+                  href="/learning-paths"
+                  className="inline-flex items-center gap-1 text-xs font-bold text-primary-700 hover:text-primary-800 shrink-0"
+                >
+                  View All Paths <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                {recommendedPaths.map((path) => (
+                  <Link
+                    key={path.id}
+                    href={`/learning-paths/${path.id}`}
+                    className="p-4 rounded-xl bg-white border border-zinc-200 hover:border-primary-500 transition-all flex flex-col justify-between group shadow-xs hover:shadow-sm"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between text-xs mb-1.5">
+                        <span className="font-bold text-indigo-600 flex items-center gap-1">
+                          <Compass className="w-3.5 h-3.5" />
+                          {path.difficulty || "Intermediate"}
+                        </span>
+                        <span className="text-zinc-400 font-medium">{path.estimatedHours || 50}h sequence</span>
+                      </div>
+                      <h4 className="text-sm font-bold text-zinc-900 group-hover:text-primary-600 transition-colors">
+                        {path.name}
+                      </h4>
+                      <p className="text-xs text-zinc-500 mt-1 line-clamp-2 leading-relaxed">
+                        {path.description}
+                      </p>
+                    </div>
+                    <div className="mt-3 pt-2.5 border-t border-zinc-100 flex items-center justify-between text-xs font-bold text-primary-600">
+                      <span>Begin Sequence</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="space-y-4">
             <div className="flex items-center gap-3">

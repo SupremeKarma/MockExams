@@ -12,6 +12,7 @@ import {
   Timer,
   Sparkles,
   ShieldCheck,
+  GraduationCap,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { auth } from "@/lib/firebase";
@@ -238,6 +239,12 @@ export default function TakeExamPage() {
             <div className="w-12 h-12 rounded-xl bg-primary-50 border border-primary-200 text-primary-600 flex items-center justify-center mx-auto">
               <ShieldCheck className="w-5 h-5" />
             </div>
+            {(exam?.course_id || exam?.courseId) && (
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-50 text-primary-700 text-xs font-bold border border-primary-100 mx-auto">
+                <GraduationCap className="w-3.5 h-3.5" />
+                <span>This is part of {exam.course_id || exam.courseId}</span>
+              </div>
+            )}
             <h1 className="text-xl font-bold text-zinc-900">Ready to begin?</h1>
             <p className="text-sm text-zinc-500 leading-relaxed">
               The clock starts when you begin and is kept by the server, so closing
@@ -323,9 +330,17 @@ export default function TakeExamPage() {
                 <ChevronLeft className="w-5 h-5" />
               </Link>
               <div>
-                <h1 className="text-sm sm:text-base font-semibold text-zinc-900 truncate max-w-[200px] sm:max-w-md leading-tight">
-                  {exam?.title || "Mock Exam Simulation"}
-                </h1>
+                <div className="flex items-center gap-2">
+                  <h1 className="text-sm sm:text-base font-semibold text-zinc-900 truncate max-w-[200px] sm:max-w-md leading-tight">
+                    {exam?.title || "Mock Exam Simulation"}
+                  </h1>
+                  {(exam?.course_id || exam?.courseId) && (
+                    <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded bg-primary-50 text-primary-700 text-[10px] font-bold border border-primary-100">
+                      <GraduationCap className="w-3 h-3" />
+                      Part of {exam.course_id || exam.courseId}
+                    </span>
+                  )}
+                </div>
                 <div className="flex items-center gap-2 text-xs text-zinc-500">
                   <span>Question {currentQuestionIndex + 1} of {questions.length}</span>
                 </div>
