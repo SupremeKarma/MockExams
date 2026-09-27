@@ -73,6 +73,8 @@ export default function CourseSlugPage() {
         teachingHours: u.teachingHours,
         subtopics: u.subtopics,
       })),
+      labWork: course.labWork,
+      referenceBooks: course.referenceBooks,
     });
   }, [course]);
 
@@ -148,13 +150,22 @@ export default function CourseSlugPage() {
                 programId: "BIT",
                 credits: sub.credits,
                 curriculum: "new_course",
-                syllabusUnits: sub.keyUnits.map((u, idx) => ({
-                  unitId: `${sub.code}_U${idx + 1}`,
-                  title: u,
-                  teachingHours: 5,
-                  subtopics: [u],
-                })),
+                syllabusUnits: sub.syllabusUnits && sub.syllabusUnits.length > 0
+                  ? sub.syllabusUnits.map((u, idx) => ({
+                      unitId: `${sub.code}_U${idx + 1}`,
+                      title: u.title,
+                      teachingHours: u.teachingHours,
+                      subtopics: u.subtopics,
+                    }))
+                  : sub.keyUnits.map((u, idx) => ({
+                      unitId: `${sub.code}_U${idx + 1}`,
+                      title: u,
+                      teachingHours: 5,
+                      subtopics: [u],
+                    })),
                 description: sub.description,
+                labWork: sub.labWork,
+                referenceBooks: sub.referenceBooks,
                 learningOutcomes: [
                   `Master core theoretical principles and problem solving for ${sub.name}.`,
                   `Analyze and solve past university examination questions according to Purbanchal University curriculum.`

@@ -104,6 +104,8 @@ export interface Course {
   learningOutcomes?: string[];
   prerequisites?: string[];
   difficulty?: 'Beginner' | 'Intermediate' | 'Advanced';
+  labWork?: string[];
+  referenceBooks?: string[];
 }
 
 // ---------------------------------------------------------------------------

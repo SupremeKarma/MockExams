@@ -106,6 +106,8 @@ export function generateCourseMarkdown(course: {
     subtopics?: string[];
   }>;
   keyUnits?: string[];
+  labWork?: string[];
+  referenceBooks?: string[];
 }): string {
   const scheme = getCourseExaminationScheme(course.code, course.credits);
   const units =
@@ -169,7 +171,20 @@ export function generateCourseMarkdown(course: {
     lines.push("");
   });
 
-  if (scheme.practicalHours > 0) {
+  if (course.labWork && course.labWork.length > 0) {
+    lines.push("---");
+    lines.push("");
+    lines.push("## 4. Laboratory & Practical Guidelines");
+    lines.push("");
+    course.labWork.forEach((item, lIdx) => {
+      if (/^\d+\./.test(item.trim())) {
+        lines.push(item);
+      } else {
+        lines.push(`${lIdx + 1}. ${item}`);
+      }
+    });
+    lines.push("");
+  } else if (scheme.practicalHours > 0) {
     lines.push("---");
     lines.push("");
     lines.push("## 4. Laboratory & Practical Guidelines");
@@ -186,9 +201,19 @@ export function generateCourseMarkdown(course: {
   lines.push("");
   lines.push("## 5. Reference Textbooks & Materials");
   lines.push("");
-  lines.push("1. Prescribed University Syllabus Textbooks and Academic Reference Manuals.");
-  lines.push("2. Official Standard Specifications and Industry Standard Guidelines.");
-  lines.push("3. Relevant Research Papers, Technical Documentation, and Laboratory Manuals.");
+  if (course.referenceBooks && course.referenceBooks.length > 0) {
+    course.referenceBooks.forEach((book, bIdx) => {
+      if (/^\d+\./.test(book.trim())) {
+        lines.push(book);
+      } else {
+        lines.push(`${bIdx + 1}. ${book}`);
+      }
+    });
+  } else {
+    lines.push("1. Prescribed University Syllabus Textbooks and Academic Reference Manuals.");
+    lines.push("2. Official Standard Specifications and Industry Standard Guidelines.");
+    lines.push("3. Relevant Research Papers, Technical Documentation, and Laboratory Manuals.");
+  }
   lines.push("");
 
   return lines.join("\n");
@@ -239,13 +264,15 @@ export function generateSemesterMarkdown(programId: string, semesterNum: number)
           credits: sub.credits,
           description: sub.description,
           keyUnits: sub.keyUnits,
+          syllabusUnits: sub.syllabusUnits,
+          labWork: sub.labWork,
+          referenceBooks: sub.referenceBooks,
         })
       );
       lines.push("");
       lines.push("---");
       lines.push("");
     });
-
     return lines.join("\n");
   }
 
