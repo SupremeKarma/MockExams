@@ -47,6 +47,100 @@ interface QuestionBreakdown {
   teacherFeedback?: string | null;
 }
 
+/**
+ * Builds fluent spoken text for exam review including the question text,
+ * student's submitted response, correct answer, rubric criteria/feedback,
+ * and model answer.
+ */
+export function buildQuestionSpeechText(item: QuestionBreakdown, questionNumber: number): string {
+  const parts: string[] = [];
+
+  parts.push(`Question ${questionNumber}. ${item.question_text}`);
+
+  if (item.type === "written") {
+    // Written Answer speech
+    if (item.writtenAnswer && item.writtenAnswer.trim()) {
+      parts.push(`Your answer was: ${item.writtenAnswer}.`);
+    } else {
+      parts.push(`Your answer was left blank.`);
+    }
+
+    if (item.grading_status === "pending") {
+      parts.push("Grading is currently in progress for this question.");
+    } else {
+      parts.push(`Marks awarded: ${item.marksAwarded} of ${item.fullMarks ?? item.marksAwarded}.`);
+      if (item.strengths?.length) {
+        parts.push(`What you did well: ${item.strengths.join(". ")}.`);
+      }
+      if (item.gaps?.length) {
+        parts.push(`Where you can improve: ${item.gaps.join(". ")}.`);
+      }
+      if (item.nextStep) {
+        parts.push(`Do this next: ${item.nextStep}.`);
+      }
+      if (!item.strengths?.length && !item.gaps?.length && item.aiFeedback) {
+        parts.push(`Feedback: ${item.aiFeedback}.`);
+      }
+    }
+
+    if (item.teacherReviewed && item.teacherFeedback) {
+      parts.push(`Teacher feedback: ${item.teacherFeedback}.`);
+    }
+
+    if (item.modelAnswer) {
+      parts.push(`Model answer: ${item.modelAnswer}.`);
+    }
+  } else {
+    // MCQ Question speech
+    const optionsText: string[] = [];
+    (["a", "b", "c", "d"] as const).forEach((opt) => {
+      const optVal = item[`option_${opt}` as keyof QuestionBreakdown];
+      if (optVal) {
+        optionsText.push(`Option ${opt.toUpperCase()}: ${optVal}`);
+      }
+    });
+    if (optionsText.length > 0) {
+      parts.push(`The options were: ${optionsText.join(". ")}.`);
+    }
+
+    if (item.selectedAnswer) {
+      const selectedKey = `option_${item.selectedAnswer.toLowerCase()}` as keyof QuestionBreakdown;
+      const selectedOptionText = item[selectedKey] || "";
+      if (item.isCorrect) {
+        parts.push(
+          `Your answer was Option ${item.selectedAnswer.toUpperCase()}${
+            selectedOptionText ? `: ${selectedOptionText}` : ""
+          }. That is correct!`
+        );
+      } else {
+        parts.push(
+          `Your answer was Option ${item.selectedAnswer.toUpperCase()}${
+            selectedOptionText ? `: ${selectedOptionText}` : ""
+          }. That is incorrect.`
+        );
+      }
+    } else {
+      parts.push("You left this question unanswered.");
+    }
+
+    if (!item.isCorrect) {
+      const correctKey = `option_${item.correctAnswer.toLowerCase()}` as keyof QuestionBreakdown;
+      const correctOptionText = item[correctKey] || "";
+      parts.push(
+        `The correct answer is Option ${item.correctAnswer.toUpperCase()}${
+          correctOptionText ? `: ${correctOptionText}` : ""
+        }.`
+      );
+    }
+
+    if (item.explanation) {
+      parts.push(`Explanation: ${item.explanation}.`);
+    }
+  }
+
+  return parts.filter(Boolean).join(" ");
+}
+
 interface ExamReviewProps {
   breakdown: QuestionBreakdown[];
 }
@@ -125,9 +219,17 @@ export function ExamReview({ breakdown }: ExamReviewProps) {
                 {item.isCorrect ? "Correct" : "Incorrect"}
               </span>
               <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wide">Question {globalIdx + 1}</span>
-              <span className="ml-auto text-xs font-semibold text-zinc-500">
-                {item.marksAwarded > 0 ? `+${item.marksAwarded}` : item.marksAwarded} marks
-              </span>
+              <div className="ml-auto flex items-center gap-2">
+                <ReadAloud
+                  text={buildQuestionSpeechText(item, globalIdx + 1)}
+                  label={`Question ${globalIdx + 1} and answers`}
+                  buttonText="Listen"
+                  title="Listen to question, answers, and feedback in female voice"
+                />
+                <span className="text-xs font-semibold text-zinc-500">
+                  {item.marksAwarded > 0 ? `+${item.marksAwarded}` : item.marksAwarded} marks
+                </span>
+              </div>
             </div>
 
             <h3 className="text-sm font-semibold mb-4 leading-relaxed text-zinc-900">
@@ -276,15 +378,10 @@ Feedback said I missed: ${item.gaps.join("; ")}` : "")
                     </button>
                     <BookmarkButton questionId={item.questionId} />
                     <ReadAloud
-                      text={[
-                        item.question_text,
-                        item.strengths?.length ? `What you did well: ${item.strengths.join(". ")}` : "",
-                        item.gaps?.length ? `Where you can improve: ${item.gaps.join(". ")}` : "",
-                        item.nextStep ? `Do this next: ${item.nextStep}` : "",
-                      ]
-                        .filter(Boolean)
-                        .join(". ")}
-                      label="question and feedback"
+                      text={buildQuestionSpeechText(item, globalIdx + 1)}
+                      label={`Question ${globalIdx + 1}, your answer, and feedback`}
+                      buttonText="Listen to feedback & answer"
+                      title="Listen to question, your written answer, feedback, and model answer"
                     />
                     </div>
                   </>
@@ -370,6 +467,28 @@ Feedback said I missed: ${item.gaps.join("; ")}` : "")
                     </p>
                   </div>
                 )}
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <button
+                    onClick={() =>
+                      setTutorContext(
+                        `${item.question_text}\n\nThe options were:\nA: ${item.option_a}\nB: ${item.option_b}\nC: ${item.option_c}\nD: ${item.option_d}\n\nMy answer was: Option ${item.selectedAnswer ? item.selectedAnswer.toUpperCase() : "(blank)"}.\nThe correct answer is Option ${item.correctAnswer.toUpperCase()}.` +
+                          (item.explanation ? `\n\nExplanation: ${item.explanation}` : "")
+                      )
+                    }
+                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-md bg-white border border-zinc-200 hover:border-primary-300 hover:bg-primary-50/40 text-xs font-semibold text-zinc-700 transition-colors"
+                  >
+                    <MessageCircleQuestion className="w-3.5 h-3.5 text-primary-600" />
+                    Ask the tutor why
+                  </button>
+                  <BookmarkButton questionId={item.questionId} />
+                  <ReadAloud
+                    text={buildQuestionSpeechText(item, globalIdx + 1)}
+                    label={`Question ${globalIdx + 1}, options, and answer`}
+                    buttonText="Listen to question & answer"
+                    title="Listen to question, options, chosen answer, and explanation"
+                  />
+                </div>
               </>
             )}
 

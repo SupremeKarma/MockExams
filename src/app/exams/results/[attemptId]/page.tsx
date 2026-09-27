@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { ExamReview } from "@/components/ExamReview";
+import { ReadAloud } from "@/components/ReadAloud";
 import { parseStoredRubric } from "@/lib/rubric-authoring";
 
 export default function ExamResultsPage({ params }: { params: any }) {
@@ -269,7 +270,19 @@ export default function ExamResultsPage({ params }: { params: any }) {
               <div className="h-px flex-1 bg-zinc-100" />
             </div>
 
-            <div className="flex flex-wrap justify-end gap-2 print:hidden">
+            <div className="flex flex-wrap justify-end items-center gap-2 print:hidden">
+              <ReadAloud
+                text={`Exam performance summary for ${attempt.exam_title}. Final score: ${attempt.score} out of ${
+                  attempt.total_questions || attempt.total_marks || ""
+                }. Accuracy: ${Number(attempt.percentage || 0).toFixed(1)} percent. Total time spent: ${formatDuration(
+                  attempt.time_spent_seconds || 0
+                )}. You got ${breakdown.filter((b: any) => b.isCorrect).length} questions correct, and ${
+                  breakdown.filter((b: any) => !b.isCorrect).length
+                } incorrect.`}
+                label="exam result summary"
+                buttonText="Listen to summary"
+                title="Listen to overall exam performance summary in female voice"
+              />
               <button
                 type="button"
                 onClick={() => downloadResult(attempt.exam_title, resultMarkdown)}

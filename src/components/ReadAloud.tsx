@@ -21,38 +21,104 @@ interface ReadAloudProps {
   /** Shown to screen readers so the control says what it will read. */
   label?: string;
   className?: string;
+  buttonText?: string;
+  title?: string;
 }
 
 // Common female voice names across the platforms Web Speech API actually
 // ships on, in preference order. Ava first (Edge's "Microsoft Ava Online
-// (Natural)", macOS/iOS's Siri voice); the rest are the next-best female
-// voice so a machine without Ava still doesn't default to a male voice
-// (Windows SAPI5's own default is "David", which is male).
-const FEMALE_VOICE_NAMES = [
+// (Natural)", macOS/iOS's Siri voice, Windows 11 Natural voice); followed by
+// high-fidelity neural/natural female voices across Windows, Edge, Chrome, Safari,
+// and mobile platforms.
+export const FEMALE_VOICE_NAMES = [
   "ava",
+  "jenny",
+  "aria",
   "zira",
+  "michelle",
+  "ana",
+  "emma",
+  "sonia",
+  "libby",
+  "hazel",
+  "catherine",
   "samantha",
+  "victoria",
   "susan",
   "karen",
   "moira",
   "tessa",
+  "serena",
+  "fiona",
   "allison",
-  "jenny",
-  "aria",
-  "michelle",
   "joanna",
   "salli",
+  "ivy",
+  "kendra",
+  "kimberly",
+  "heera",
+  "neerja",
+  "google us english",
+  "google uk english female",
   "female",
 ];
 
-/** Finds the best available female-sounding voice, preferring Ava. */
-function findPreferredVoice(): SpeechSynthesisVoice | null {
-  const voices = window.speechSynthesis.getVoices();
+export const KNOWN_MALE_VOICE_NAMES = [
+  "david",
+  "mark",
+  "george",
+  "steffan",
+  "james",
+  "guy",
+  "christopher",
+  "eric",
+  "brian",
+  "daniel",
+  "oliver",
+  "fred",
+  "alex",
+  "male",
+];
+
+/**
+ * Finds the best available female voice across installed browser and system voices.
+ * Guaranteed to prioritize natural female voices and avoid male defaults (like Windows David).
+ */
+export function findPreferredVoice(availableVoices?: SpeechSynthesisVoice[]): SpeechSynthesisVoice | null {
+  const voices =
+    availableVoices && availableVoices.length > 0
+      ? availableVoices
+      : typeof window !== "undefined" && "speechSynthesis" in window
+      ? window.speechSynthesis.getVoices()
+      : [];
+
+  if (!voices || voices.length === 0) return null;
+
+  // 1. Direct match on curated female voice names in priority order
   for (const name of FEMALE_VOICE_NAMES) {
     const match = voices.find((v) => v.name.toLowerCase().includes(name));
     if (match) return match;
   }
-  return null;
+
+  // 2. Any voice with 'female' in its name or metadata
+  const explicitFemale = voices.find(
+    (v) =>
+      v.name.toLowerCase().includes("female") ||
+      (v as any).gender === "female"
+  );
+  if (explicitFemale) return explicitFemale;
+
+  // 3. Fallback: English voice that is not a known male voice
+  const englishNonMale = voices.find((v) => {
+    const lower = v.name.toLowerCase();
+    const isEnglish = (v.lang || "").toLowerCase().startsWith("en");
+    const isMale = KNOWN_MALE_VOICE_NAMES.some((m) => lower.includes(m));
+    return isEnglish && !isMale;
+  });
+  if (englishNonMale) return englishNonMale;
+
+  // 4. Fallback to first English or first available voice
+  return voices.find((v) => (v.lang || "").toLowerCase().startsWith("en")) || voices[0] || null;
 }
 
 /**
@@ -65,7 +131,7 @@ function findPreferredVoice(): SpeechSynthesisVoice | null {
  * Renders nothing when the browser has no speech support, rather than showing
  * a button that does nothing.
  */
-export function ReadAloud({ text, label, className = "" }: ReadAloudProps) {
+export function ReadAloud({ text, label, className = "", buttonText, title }: ReadAloudProps) {
   const [supported, setSupported] = useState(false);
   const [speaking, setSpeaking] = useState(false);
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
@@ -96,6 +162,7 @@ export function ReadAloud({ text, label, className = "" }: ReadAloudProps) {
 
     const utterance = new SpeechSynthesisUtterance(sanitizeForSpeech(text));
     utterance.rate = 0.95;
+    utterance.pitch = 1.0;
     const preferred = findPreferredVoice();
     if (preferred) {
       utterance.voice = preferred;
@@ -137,7 +204,7 @@ export function ReadAloud({ text, label, className = "" }: ReadAloudProps) {
       onClick={speak}
       aria-label={speaking ? "Stop reading aloud" : `Read aloud${label ? `: ${label}` : ""}`}
       aria-pressed={speaking}
-      title={speaking ? "Stop" : "Read aloud"}
+      title={title || (speaking ? "Stop" : label ? `Read aloud: ${label}` : "Read aloud")}
       className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md border text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-1 ${
         speaking
           ? "bg-primary-50 border-primary-300 text-primary-700"
@@ -145,7 +212,7 @@ export function ReadAloud({ text, label, className = "" }: ReadAloudProps) {
       } ${className}`}
     >
       {speaking ? <Square className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
-      <span className="sr-only sm:not-sr-only">{speaking ? "Stop" : "Listen"}</span>
+      <span className="sr-only sm:not-sr-only">{speaking ? "Stop" : buttonText || "Listen"}</span>
     </button>
   );
 }
