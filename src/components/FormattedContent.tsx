@@ -52,10 +52,23 @@ function CodeCopyButton({ text }: { text: string }) {
 }
 
 /**
+ * Strips em-dashes (—), en-dashes (–), and extraneous separator dashes
+ * so they are never displayed in the UI.
+ */
+function hideEmDashes(text: string): string {
+  if (!text) return "";
+  return text.replace(/\s*[—–]\s*/g, " ").replace(/[—–]/g, "");
+}
+
+/**
  * Formats inline markdown (math, bold, italic, code, links).
+ * Strictly hides any em-dash (—) or en-dash (–) characters.
  */
 export function renderInlineMarkdown(text: string, keyPrefix: string = "inline"): React.ReactNode[] {
   if (!text) return [];
+
+  // Strip all em-dashes / en-dashes per user requirement
+  const cleanText = hideEmDashes(text);
 
   // Match:
   // 1) Inline math: $...$
@@ -64,7 +77,7 @@ export function renderInlineMarkdown(text: string, keyPrefix: string = "inline")
   // 4) Italic: *...*
   // 5) Link: [label](url)
   const tokenRegex = /(\$[^$\n]+?\$|`[^`\n]+?`|\*\*[^*]+?\*\*|\*[^*]+?\*|\[[^\]]+\]\([^)]+\))/g;
-  const parts = text.split(tokenRegex);
+  const parts = cleanText.split(tokenRegex);
 
   return parts.map((part, idx) => {
     const key = `${keyPrefix}-${idx}`;
@@ -140,6 +153,12 @@ export function renderInlineMarkdown(text: string, keyPrefix: string = "inline")
   });
 }
 
+export interface ListItemData {
+  marker?: string;
+  title?: string;
+  text: string;
+}
+
 interface BlockItem {
   type:
     | "code"
@@ -151,28 +170,144 @@ interface BlockItem {
     | "table"
     | "hr"
     | "callout"
+    | "section-lead"
     | "paragraph";
   raw: string;
   level?: number;
   language?: string;
-  items?: { marker?: string; text: string }[];
+  items?: ListItemData[];
   headers?: string[];
   rows?: string[][];
   title?: string;
 }
 
 /**
- * Parses raw text into semantic Markdown and LMS presentation blocks.
+ * Normalizes run-on academic / technical answers into structured, readable sections.
+ * Detects inline enumerations like:
+ * "...SQL. Four key advantages over traditional file-based systems: (1) Reduced redundancy — description (2) Data integrity..."
+ * and transforms them into distinct paragraphs, section headings, and structured cards while
+ * hiding all em-dashes (—).
+ */
+export function normalizeAcademicAnswerText(content: string): string {
+  if (!content) return "";
+
+  // Normalize CRLF
+  let text = content.replace(/\r\n/g, "\n");
+
+  const lines = text.split("\n");
+  const processedLines: string[] = [];
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) {
+      processedLines.push("");
+      continue;
+    }
+
+    // Check if line contains inline parenthesized numbers "(1) ... (2) ..." or dotted numbers " 1. ... 2. ..."
+    const hasParenEnum = /\((?:1|a|i)\)\s+.+?\((?:2|b|ii)\)\s+/i.test(trimmed);
+    const hasDottedEnum = /(?:^|\s)1[\.\)]\s+.+?(?:\s)2[\.\)]\s+/i.test(trimmed);
+
+    if (hasParenEnum || hasDottedEnum) {
+      let expanded = trimmed;
+
+      // 1. Separate introductory sentence from lead-in phrase (e.g. "...SQL. Four key advantages...:")
+      expanded = expanded.replace(
+        /([.!?])\s+((?:[A-Z0-9][^.!?:]*?[:]))\s*(?=\((?:1|a|i)\)|(?:1|a|i)[\.\)])/g,
+        "$1\n\n$2\n"
+      );
+
+      // Ensure newline after any colon immediately preceding the first enumerated item
+      expanded = expanded.replace(
+        /(:)\s*(?=\((?:1|a|i)\)|(?:1|a|i)[\.\)])/g,
+        ":\n"
+      );
+
+      // 2. Break each enumerated item onto its own line
+      if (hasParenEnum) {
+        // Break on parenthesized item markers like (1), (2) or (a), (b)
+        expanded = expanded.replace(
+          /\s*(?:^|(?<=\s|:))\(([0-9]{1,2}|[a-hA-H]|[ivx]{1,4})\)\s+/g,
+          (match, marker, offset) => {
+            return offset === 0 ? `(${marker}) ` : `\n(${marker}) `;
+          }
+        );
+      } else if (hasDottedEnum) {
+        // Break on dotted item markers like 1., 2. or 1), 2)
+        expanded = expanded.replace(
+          /\s*(?:^|(?<=\s|:))([0-9]{1,2})[\.\)]\s+/g,
+          (match, num, offset) => {
+            return offset === 0 ? `${num}. ` : `\n${num}. `;
+          }
+        );
+      }
+
+      processedLines.push(expanded);
+    } else {
+      processedLines.push(line);
+    }
+  }
+
+  return processedLines.join("\n");
+}
+
+/**
+ * Parses an item line (e.g. "(1) Title — description" or "- Title: description")
+ * into title and body text, strictly stripping em-dashes.
+ */
+function parseListItemLine(marker: string, fullText: string): ListItemData {
+  let cleanText = fullText.trim();
+
+  // Pattern 1: Title followed by em-dash (—), en-dash (–), colon (:), or hyphen (-)
+  // e.g. "Reduced data redundancy and inconsistency — a DBMS centralizes data..."
+  const sepMatch = /^([A-Z0-9][a-zA-Z0-9\s/,'"-]{2,80}?)\s*(?:[—–]|\s-\s|:)\s+(.+)$/i.exec(cleanText);
+  if (sepMatch) {
+    const title = hideEmDashes(sepMatch[1].trim().replace(/^\*\*|\*\*$/g, ""));
+    // Capitalize first letter of description if it starts lowercase after the dash
+    let desc = hideEmDashes(sepMatch[2].trim());
+    if (desc.length > 0 && /^[a-z]/.test(desc)) {
+      desc = desc[0].toUpperCase() + desc.slice(1);
+    }
+    return {
+      marker,
+      title,
+      text: desc,
+    };
+  }
+
+  // Pattern 2: Bold title at start **Title** Description
+  const boldMatch = /^\*\*([^*]+?)\*\*\s*(?:[—–]|\s-\s|:)?\s*(.*)$/.exec(cleanText);
+  if (boldMatch) {
+    const title = hideEmDashes(boldMatch[1].trim());
+    let desc = hideEmDashes(boldMatch[2].trim());
+    if (desc.length > 0 && /^[a-z]/.test(desc)) {
+      desc = desc[0].toUpperCase() + desc.slice(1);
+    }
+    return {
+      marker,
+      title,
+      text: desc,
+    };
+  }
+
+  return {
+    marker,
+    text: hideEmDashes(cleanText),
+  };
+}
+
+/**
+ * Parses raw text into semantic presentation blocks.
  */
 function parseContentBlocks(content: string): BlockItem[] {
-  // Normalize newlines
-  const text = content.replace(/\r\n/g, "\n");
+  // First normalize run-on academic answer structures
+  const normalized = normalizeAcademicAnswerText(content);
 
   // Step 1: Extract multiline code blocks and display math blocks with placeholders
   const placeholderMap = new Map<string, BlockItem>();
   let placeholderCounter = 0;
 
-  let processed = text.replace(/(```[\s\S]*?```|\$\$[\s\S]*?\$\$)/g, (match) => {
+  const processed = normalized.replace(/(```[\s\S]*?```|\$\$[\s\S]*?\$\$)/g, (match) => {
     const key = `@@BLOCK_PLACEHOLDER_${placeholderCounter++}@@`;
 
     if (match.startsWith("```") && match.endsWith("```")) {
@@ -239,7 +374,19 @@ function parseContentBlocks(content: string): BlockItem[] {
       blocks.push({
         type: "heading",
         level: headingMatch[1].length,
-        raw: headingMatch[2].trim(),
+        raw: hideEmDashes(headingMatch[2].trim()),
+      });
+      i++;
+      continue;
+    }
+
+    // Section lead / list introduction header ending in a colon
+    // e.g. "Four key advantages over traditional file-based systems:"
+    const leadMatch = /^(\*\*[^*]+?\*\*|[A-Z0-9][a-zA-Z0-9\s/,'"-]{3,70}?):$/.exec(trimmed);
+    if (leadMatch) {
+      blocks.push({
+        type: "section-lead",
+        raw: hideEmDashes(leadMatch[1].replace(/^\*\*|\*\*$/g, "").trim()),
       });
       i++;
       continue;
@@ -254,7 +401,7 @@ function parseContentBlocks(content: string): BlockItem[] {
       }
       blocks.push({
         type: "blockquote",
-        raw: quoteLines.join("\n"),
+        raw: hideEmDashes(quoteLines.join("\n")),
       });
       continue;
     }
@@ -272,10 +419,9 @@ function parseContentBlocks(content: string): BlockItem[] {
           rowStr
             .slice(1, -1)
             .split("|")
-            .map((c) => c.trim());
+            .map((c) => hideEmDashes(c.trim()));
 
         const headers = splitRow(tableLines[0]);
-        // Row 1 might be separator like |---|---|
         let dataStartIdx = 1;
         if (
           tableLines.length > 1 &&
@@ -300,17 +446,14 @@ function parseContentBlocks(content: string): BlockItem[] {
     }
 
     // Numbered / Ordered List: e.g. "1. ", "1) ", "(1) ", "a. ", "a) ", "(a) ", "i. "
-    const orderedListRegex = /^(\(?\b(?:\d+|[a-zA-Z]|[ivxlcdmIVXLCDM]+)[\.\)]\s+)(.+)$/;
+    const orderedListRegex = /^(\(?\b(?:\d{1,2}|[a-hA-H]|[ivx]{1,4})[\.\)]\s+)(.+)$/;
     if (orderedListRegex.test(trimmed)) {
-      const listItems: { marker?: string; text: string }[] = [];
+      const listItems: ListItemData[] = [];
       while (i < lines.length) {
         const curTrim = lines[i].trim();
         const curMatch = orderedListRegex.exec(curTrim);
         if (!curMatch) break;
-        listItems.push({
-          marker: curMatch[1].trim(),
-          text: curMatch[2].trim(),
-        });
+        listItems.push(parseListItemLine(curMatch[1].trim(), curMatch[2].trim()));
         i++;
       }
       blocks.push({
@@ -324,14 +467,12 @@ function parseContentBlocks(content: string): BlockItem[] {
     // Unordered List: e.g. "- ", "* ", "• "
     const unorderedListRegex = /^([-*•]\s+)(.+)$/;
     if (unorderedListRegex.test(trimmed)) {
-      const listItems: { marker?: string; text: string }[] = [];
+      const listItems: ListItemData[] = [];
       while (i < lines.length) {
         const curTrim = lines[i].trim();
         const curMatch = unorderedListRegex.exec(curTrim);
         if (!curMatch) break;
-        listItems.push({
-          text: curMatch[2].trim(),
-        });
+        listItems.push(parseListItemLine("", curMatch[2].trim()));
         i++;
       }
       blocks.push({
@@ -350,8 +491,8 @@ function parseContentBlocks(content: string): BlockItem[] {
     if (calloutMatch && calloutMatch[2].trim().length > 0) {
       blocks.push({
         type: "callout",
-        title: calloutMatch[1].replace(/\*\*/g, "").trim(),
-        raw: calloutMatch[2].trim(),
+        title: hideEmDashes(calloutMatch[1].replace(/\*\*/g, "").trim()),
+        raw: hideEmDashes(calloutMatch[2].trim()),
       });
       i++;
       continue;
@@ -367,6 +508,7 @@ function parseContentBlocks(content: string): BlockItem[] {
       if (placeholderMap.has(nextTrim)) break;
       if (/^(?:---+|\*\*\*+|___+)\s*$/.test(nextTrim)) break;
       if (/^(#{1,4})\s+(.+)$/.test(nextTrim)) break;
+      if (/^(\*\*[^*]+?\*\*|[A-Z0-9][a-zA-Z0-9\s/,'"-]{3,70}?):$/.test(nextTrim)) break;
       if (nextTrim.startsWith(">")) break;
       if (nextTrim.startsWith("|") && nextTrim.endsWith("|")) break;
       if (orderedListRegex.test(nextTrim)) break;
@@ -385,7 +527,7 @@ function parseContentBlocks(content: string): BlockItem[] {
 
     blocks.push({
       type: "paragraph",
-      raw: paraLines.join("\n").trim(),
+      raw: hideEmDashes(paraLines.join("\n").trim()),
     });
   }
 
@@ -513,41 +655,90 @@ export function FormattedContent({
           );
         }
 
-        // 4. Ordered List
+        // 4. Section Lead-in (e.g. "Four key advantages over traditional file-based systems:")
+        if (block.type === "section-lead") {
+          return (
+            <div
+              key={key}
+              className="text-sm sm:text-base font-bold text-zinc-900 mt-3 mb-1 flex items-center gap-2"
+            >
+              <span className="w-1.5 h-4 bg-primary-600 rounded-full inline-block shrink-0" />
+              <span>{block.raw}:</span>
+            </div>
+          );
+        }
+
+        // 5. Ordered List (Rendered as structured cards with title and explanation)
         if (block.type === "ordered-list" && block.items) {
           return (
-            <ol key={key} className={`my-2 space-y-2 pl-0.5 ${typography.list}`}>
-              {block.items.map((item, itemIdx) => (
-                <li key={itemIdx} className="flex items-start gap-2.5">
-                  <span className="font-bold text-primary-700 tabular-nums shrink-0 select-none">
-                    {item.marker}
-                  </span>
-                  <div className="flex-1">
-                    {renderInlineMarkdown(item.text, `${key}-${itemIdx}`)}
+            <div key={key} className="my-3 space-y-2.5">
+              {block.items.map((item, itemIdx) => {
+                const markerLabel = item.marker?.replace(/[\(\)\.]/g, "") || itemIdx + 1;
+
+                return (
+                  <div
+                    key={itemIdx}
+                    className="p-3.5 rounded-lg bg-white/95 border border-zinc-200/90 shadow-2xs flex items-start gap-3 hover:border-primary-300 transition-colors"
+                  >
+                    <span className="px-2 py-0.5 rounded-md font-bold text-xs bg-primary-100 text-primary-800 border border-primary-200/80 shrink-0 select-none mt-0.5">
+                      {markerLabel}
+                    </span>
+                    <div className="flex-1">
+                      {item.title ? (
+                        <>
+                          <div className="font-semibold text-zinc-900 text-sm sm:text-[15px] mb-1">
+                            {renderInlineMarkdown(item.title, `${key}-${itemIdx}-title`)}
+                          </div>
+                          <div className="text-zinc-700 text-xs sm:text-sm leading-relaxed">
+                            {renderInlineMarkdown(item.text, `${key}-${itemIdx}-text`)}
+                          </div>
+                        </>
+                      ) : (
+                        <div className="text-zinc-800 text-sm sm:text-[15px] leading-relaxed">
+                          {renderInlineMarkdown(item.text, `${key}-${itemIdx}-text`)}
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </li>
-              ))}
-            </ol>
+                );
+              })}
+            </div>
           );
         }
 
-        // 5. Unordered List
+        // 6. Unordered List
         if (block.type === "unordered-list" && block.items) {
           return (
-            <ul key={key} className={`my-2 space-y-2 pl-0.5 ${typography.list}`}>
+            <div key={key} className="my-2.5 space-y-2">
               {block.items.map((item, itemIdx) => (
-                <li key={itemIdx} className="flex items-start gap-2.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary-600 mt-2.5 shrink-0 select-none" />
+                <div
+                  key={itemIdx}
+                  className="p-3 rounded-lg bg-white/80 border border-zinc-200/80 shadow-2xs flex items-start gap-2.5"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary-600 mt-2 shrink-0 select-none" />
                   <div className="flex-1">
-                    {renderInlineMarkdown(item.text, `${key}-${itemIdx}`)}
+                    {item.title ? (
+                      <>
+                        <div className="font-semibold text-zinc-900 text-sm sm:text-[15px] mb-0.5">
+                          {renderInlineMarkdown(item.title, `${key}-${itemIdx}-title`)}
+                        </div>
+                        <div className="text-zinc-700 text-xs sm:text-sm leading-relaxed">
+                          {renderInlineMarkdown(item.text, `${key}-${itemIdx}-text`)}
+                        </div>
+                      </>
+                    ) : (
+                      <div className="text-zinc-800 text-sm sm:text-[15px] leading-relaxed">
+                        {renderInlineMarkdown(item.text, `${key}-${itemIdx}-text`)}
+                      </div>
+                    )}
                   </div>
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
           );
         }
 
-        // 6. Blockquote
+        // 7. Blockquote
         if (block.type === "blockquote") {
           return (
             <blockquote
@@ -563,7 +754,7 @@ export function FormattedContent({
           );
         }
 
-        // 7. Markdown Table
+        // 8. Markdown Table
         if (block.type === "table" && block.headers && block.rows) {
           return (
             <div
@@ -605,12 +796,12 @@ export function FormattedContent({
           );
         }
 
-        // 8. Horizontal Rule
+        // 9. Horizontal Rule
         if (block.type === "hr") {
           return <hr key={key} className="my-3.5 border-zinc-200" />;
         }
 
-        // 9. Callout / Key Point
+        // 10. Callout / Key Point
         if (block.type === "callout") {
           return (
             <div
@@ -627,7 +818,7 @@ export function FormattedContent({
           );
         }
 
-        // 10. Ordinary Paragraph with soft line breaks
+        // 11. Ordinary Paragraph with soft line breaks
         const lines = block.raw.split("\n");
         return (
           <p key={key} className="leading-relaxed">

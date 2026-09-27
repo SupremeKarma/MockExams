@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { FormattedContent, renderInlineMarkdown } from "@/components/FormattedContent";
+import { FormattedContent, renderInlineMarkdown, normalizeAcademicAnswerText } from "@/components/FormattedContent";
 
 describe("FormattedContent component", () => {
   it("returns null for empty or whitespace content", () => {
@@ -45,17 +45,15 @@ describe("FormattedContent component", () => {
   it("renders numbered and ordered lists with correct markers", () => {
     const content = "1. First key reason\n2. Second key reason\n3. Third key reason";
     const html = renderToStaticMarkup(React.createElement(FormattedContent, { content }));
-    expect(html).toContain("<ol");
-    expect(html).toContain("1.");
+    expect(html).toContain("1");
     expect(html).toContain("First key reason");
-    expect(html).toContain("2.");
+    expect(html).toContain("2");
     expect(html).toContain("Second key reason");
   });
 
   it("renders unordered bullet lists with custom bullet styling", () => {
     const content = "- High branching factor\n- Shallow search depth\n- Balanced tree guarantees";
     const html = renderToStaticMarkup(React.createElement(FormattedContent, { content }));
-    expect(html).toContain("<ul");
     expect(html).toContain("High branching factor");
     expect(html).toContain("Shallow search depth");
   });
@@ -108,5 +106,40 @@ describe("FormattedContent component", () => {
     expect(html).toContain("strict balance");
     expect(html).toContain("<a href=\"https://example.com\"");
     expect(html).toContain("Docs");
+  });
+
+  it("strictly hides all em-dashes (—) and en-dashes (–) from rendered text", () => {
+    const content = "Key Title — This description should have no em-dash — at all – anywhere.";
+    const html = renderToStaticMarkup(React.createElement(FormattedContent, { content }));
+    expect(html).not.toContain("—");
+    expect(html).not.toContain("–");
+  });
+
+  it("normalizes and renders the exact run-on DBMS model answer into structured cards without em-dashes", () => {
+    const rawAnswer =
+      "A Database Management System (DBMS) is software that creates, organizes, stores, retrieves, and manages data in a structured way, sitting between the physical data and the applications/users that need it, and enforcing rules that keep that data consistent, secure, and accessible through a query language such as SQL. Four key advantages over traditional file-based systems: (1) Reduced data redundancy and inconsistency — a DBMS centralizes data so the same fact isn't duplicated across many files, which also prevents the update anomalies that occur when only some copies get changed. (2) Data integrity and enforced constraints — primary keys, foreign keys, and check constraints stop invalid or contradictory data from ever being stored, something file systems cannot enforce automatically. (3) Concurrent access control — a DBMS uses locking and transaction protocols so multiple users can safely read and write data at the same time without corrupting it, whereas flat files have no built-in mechanism for this. (4) Better security and backup/recovery — a DBMS provides authentication, user-level access privileges, and structured backup/recovery (e.g. via transaction logs), giving far stronger protection than access control on raw files in an operating system.";
+
+    const html = renderToStaticMarkup(React.createElement(FormattedContent, { content: rawAnswer }));
+
+    // 1. Intro definition paragraph preserved
+    expect(html).toContain("A Database Management System (DBMS) is software");
+    expect(html).toContain("query language such as SQL.");
+
+    // 2. Section lead-in separated cleanly
+    expect(html).toContain("Four key advantages over traditional file-based systems:");
+
+    // 3. Four structured point cards with badges 1, 2, 3, 4
+    expect(html).toContain(">1<");
+    expect(html).toContain("Reduced data redundancy and inconsistency");
+    expect(html).toContain(">2<");
+    expect(html).toContain("Data integrity and enforced constraints");
+    expect(html).toContain(">3<");
+    expect(html).toContain("Concurrent access control");
+    expect(html).toContain(">4<");
+    expect(html).toContain("Better security and backup/recovery");
+
+    // 4. Em-dashes (—) and en-dashes (–) strictly hidden/not rendered
+    expect(html).not.toContain("—");
+    expect(html).not.toContain("–");
   });
 });

@@ -156,7 +156,7 @@ function parseBlock(block: string): ParsedBlockResult {
 
   const question_text = questionLines.join(" ").trim();
   const explanation = explanationLines.join(" ").trim();
-  const model_answer = modelAnswerLines.join(" ").trim();
+  const model_answer = modelAnswerLines.join("\n").trim();
 
   if (!question_text) errors.push("Missing question text (start a line with \"Q:\")");
 
