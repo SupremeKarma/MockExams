@@ -218,13 +218,19 @@ img, svg, video { max-inline-size: 100%; block-size: auto; }
 
 .rail, .toc { display: none; }
 
-@media (min-width: 1000px) {
+/*
+ * 768px, not 1000px: a tablet in portrait (iPad is 768px) was falling
+ * through to the phone layout below and getting the bottom toolbar instead
+ * of the Contents column it has the width for. Only phones should see the
+ * single-column, bottom-nav mode now.
+ */
+@media (min-width: 768px) {
   .shell { grid-template-columns: minmax(0, 1fr) var(--toc-w); }
   .toc { display: block; }
   .toolbar { display: none !important; }
 }
 
-@media (max-width: 999px) {
+@media (max-width: 767px) {
   .only-drawer, .hide-small { display: none !important; }
 }
 
@@ -1042,4 +1048,42 @@ dialog::backdrop { background: rgb(0 0 0 / 0.45); }
   .prose h2, .prose h3 { break-after: avoid; }
   .prose a { color: inherit; text-decoration: none; }
   @page { margin: 16mm 15mm; }
+}
+
+/*
+ * Per-reader watermark (see Watermark.tsx).
+ *
+ * Tiled and rotated so no single crop removes it, at 6% opacity so normal
+ * reading is unaffected but a screenshot or a printed page still carries it.
+ * `inset: 0` over `.sheet` (which is `position: relative`) covers exactly the
+ * lesson content, not the surrounding chrome. `mix-blend-mode: difference`
+ * keeps the mark visible against every theme (Paper, Warm, Blackboard,
+ * Night) without hand-tuning a colour per theme.
+ */
+.reader-watermark {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+  gap: 8vh 4vw;
+  padding: 4vh 2vw;
+  mix-blend-mode: difference;
+}
+
+.reader-watermark span {
+  flex: 0 0 auto;
+  transform: rotate(-24deg);
+  font: 600 0.75rem/1 var(--font-book, sans-serif);
+  color: #ffffff;
+  opacity: 0.06;
+  white-space: nowrap;
+}
+
+@media print {
+  .reader-watermark { opacity: 1; }
 }

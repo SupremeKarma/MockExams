@@ -171,6 +171,7 @@ export default async function TopicPage({ params, searchParams }: PageProps) {
       readingMinutes={readingMinutes}
       gated={gated}
       signInHref={`/login?next=${encodeURIComponent(canonicalPath)}`}
+      watermarkLabel={reader?.email ?? null}
     />
   );
 }

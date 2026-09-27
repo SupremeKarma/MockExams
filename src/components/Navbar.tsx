@@ -35,6 +35,7 @@ export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isTaxonomyOpen, setIsTaxonomyOpen] = useState(false);
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -68,6 +69,13 @@ export const Navbar = () => {
   if (isAdmin) {
     navLinks.push({ name: "Admin", href: "/admin", icon: Settings });
   }
+
+  // Only the first few sit directly in the bar — the rest go under "More", or
+  // this row overflows the instant a signed-in user picks up an Examiner,
+  // Organization, or Admin role on top of the base student links.
+  const PRIMARY_COUNT = 5;
+  const primaryLinks = navLinks.slice(0, PRIMARY_COUNT);
+  const moreLinks = navLinks.slice(PRIMARY_COUNT);
 
   // Account links: reachable from the mobile drawer (no sidebar there) and
   // the desktop profile dropdown — not in the main nav list itself.
@@ -157,7 +165,7 @@ export const Navbar = () => {
 
           {/* Desktop Navigation Links */}
           <div className="hidden xl:flex items-center gap-4">
-            {navLinks.map((link) => (
+            {primaryLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
@@ -167,6 +175,43 @@ export const Navbar = () => {
                 {link.name}
               </Link>
             ))}
+
+            {moreLinks.length > 0 && (
+              <div className="relative">
+                <button
+                  onClick={() => setIsMoreOpen((prev) => !prev)}
+                  aria-label="More navigation links"
+                  aria-expanded={isMoreOpen}
+                  className="flex items-center gap-1 text-[13px] font-medium text-zinc-600 hover:text-primary-600 transition-colors"
+                >
+                  More
+                  <ChevronDown className="w-3.5 h-3.5 text-zinc-400" />
+                </button>
+
+                <AnimatePresence>
+                  {isMoreOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 5 }}
+                      className="absolute top-full right-0 mt-2 w-52 p-1.5 rounded-lg bg-white border border-zinc-200 shadow-lg space-y-0.5 z-50"
+                    >
+                      {moreLinks.map((link) => (
+                        <Link
+                          key={link.name}
+                          href={link.href}
+                          onClick={() => setIsMoreOpen(false)}
+                          className="p-2 rounded-md hover:bg-zinc-50 flex items-center gap-2 text-[13px] font-medium text-zinc-700"
+                        >
+                          <link.icon className="w-4 h-4 text-zinc-400" />
+                          {link.name}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            )}
           </div>
 
           {/* Right Action Icons & User Profile */}

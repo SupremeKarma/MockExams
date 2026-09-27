@@ -482,13 +482,13 @@ img, svg, video { max-inline-size: 100%; block-size: auto; }
 
 .rail, .toc { display: none; }
 
-@media (min-width: 1000px) {
+@media (min-width: 768px) {
   .shell { grid-template-columns: minmax(0, 1fr) var(--toc-w); }
   .toc { display: block; }
   .toolbar { display: none !important; }
 }
 
-@media (max-width: 999px) {
+@media (max-width: 767px) {
   .only-drawer, .hide-small { display: none !important; }
 }
 

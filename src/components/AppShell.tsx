@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Sarthi from "@/components/Sarthi";
 import Footer from "@/components/Footer";
 import QuickNavRail from "@/components/QuickNavRail";
-import Sidebar from "@/components/Sidebar";
+// Sidebar hidden for now, per request — re-import and render it to bring it back.
 
 // Routes that get the role-aware sidebar app shell instead of the
 // marketing top-nav + footer treatment. See ARCHITECTURE.md.
@@ -15,7 +15,6 @@ const SIDEBAR_PREFIXES = [
   "/syllabus",
   "/exams",
   "/flashcards",
-  "/notes",
   "/analytics",
   "/tutor",
   "/study-plan",
@@ -41,6 +40,10 @@ const FOCUS_MODE_PATTERN = /^\/exams\/[^/]+\/take$/;
 // marketing page that expects the navbar and footer.
 const READER_PATTERN = /^\/learn\/[^/]+/;
 
+// /notes is built from the same reader.css design system (see
+// src/app/notes/layout.tsx) and supplies its own header the same way.
+const NOTES_PATTERN = /^\/notes(\/|$)/;
+
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() || "/";
 
@@ -55,9 +58,9 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     !isExcluded &&
     SIDEBAR_PREFIXES.some((p) => pathname === p || pathname.startsWith(p + "/"));
 
-  if (isFocusMode || READER_PATTERN.test(pathname)) {
-    // Exam-taking and the Reader both supply their own sticky header — no
-    // chrome at all.
+  if (isFocusMode || READER_PATTERN.test(pathname) || NOTES_PATTERN.test(pathname)) {
+    // Exam-taking, the Reader, and Notes all supply their own sticky header —
+    // no chrome at all.
     return <>{children}</>;
   }
 
@@ -72,7 +75,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         </a>
         <Navbar />
         <div className="flex flex-1 pt-14">
-          <Sidebar />
+          {/* Hidden for now, per request — re-add <Sidebar /> to bring it back. */}
           <main id="main-content" className="flex-1 min-w-0">{children}</main>
         </div>
         {/* Mounted once at the shell so a conversation survives navigation. */}

@@ -8,6 +8,8 @@ export { READER_AUTH_COOKIE };
 
 export interface ReaderUser {
   uid: string;
+  /** From the ID token's own claim — no extra Admin SDK lookup needed. */
+  email: string | null;
 }
 
 /**
@@ -29,7 +31,7 @@ export async function getReaderUser(): Promise<ReaderUser | null> {
 
   try {
     const decoded = await adminAuth.verifyIdToken(token);
-    return decoded ? { uid: decoded.uid } : null;
+    return decoded ? { uid: decoded.uid, email: decoded.email ?? null } : null;
   } catch {
     // Expired, malformed, or Admin SDK not configured on this deploy — all
     // three mean "cannot prove this reader is signed in," which is exactly

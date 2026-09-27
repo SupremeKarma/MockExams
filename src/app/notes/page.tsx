@@ -1,603 +1,607 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  Search,
-  Code2,
-  Copy,
-  Check,
-  Sparkles,
-  ChevronDown,
-  ChevronRight,
-  HelpCircle,
-  Flame,
-  GraduationCap,
-  Layers,
-  Terminal,
-  Brain,
-} from "lucide-react";
-import { useState, useMemo, useEffect } from "react";
-import Link from "next/link";
-import { bitNotesData, type SubjectNotes, type Topic } from "@/data/bitNotesData";
-import ProgramGate from "@/components/ProgramGate";
-import MarkdownViewer from "@/components/MarkdownViewer";
-import { db } from "@/lib/firebase";
-import { collection, query, where, onSnapshot } from "firebase/firestore";
-import { FileText, Download } from "lucide-react";
+import { useEffect } from "react";
 
-export default function NotesPage() {
-  const [selectedSemester, setSelectedSemester] = useState<number>(1);
-  const [selectedSubject, setSelectedSubject] = useState<string>("");
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const [activeTab, setActiveTab] = useState<"code" | "theory" | "markdown">("code");
-  const [copiedCodeIndex, setCopiedCodeIndex] = useState<number | null>(null);
-  const [openTheoryIndex, setOpenTheoryIndex] = useState<number | null>(null);
+// Verbatim body content from docs/reference/ExamAI_Reader_Demo.html — pasted
+// directly, not reinterpreted. tokens.css/reader.css/integration.css are
+// already loaded by this route's layout.tsx, so no <style> block is needed
+// here. Real note data gets wired back into this markup as a follow-up once
+// this matches the demo exactly.
+const BODY_HTML = `
+<a class="skip" href="#main">Skip to lesson</a>
+<div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
 
-  const [firestoreCourses, setFirestoreCourses] = useState<Record<string, { code: string; name: string; creditHours: number; theoryTopics: string[] }>>({});
-  const [firestoreTopics, setFirestoreTopics] = useState<Record<string, Topic[]>>({});
-  const [isFirestoreLoaded, setIsFirestoreLoaded] = useState(false);
+<style>
+  /* Resting: points right, like the crumb's own ">" separator. Native
+     <select> has no reliable cross-browser "open" state to hook, so :focus
+     (the select stays focused while its option list is showing) stands in
+     for it — rotate to point down only while that's true. Only the semester
+     select gets this: the subject select sits inside .crumbs, where
+     reader.css's own "li + li::before" rule already draws a ">" after it —
+     a second chevron there doubled up the separator. */
+  #semester-select + svg {
+    transform: rotate(-90deg);
+    transition: transform var(--dur-fast) var(--ease);
+  }
+  #semester-select:focus + svg {
+    transform: rotate(0deg);
+  }
 
-  // 1. Listen to courses in studentNotes for the selected semester
-  useEffect(() => {
-    try {
-      const q = query(
-        collection(db, "studentNotes"),
-        where("semester", "==", selectedSemester)
-      );
-      const unsubscribe = onSnapshot(q, (snapshot) => {
-        if (!snapshot.empty) {
-          const coursesMap: Record<string, { code: string; name: string; creditHours: number; theoryTopics: string[] }> = {};
-          snapshot.forEach((docSnap) => {
-            const data = docSnap.data();
-            const subjectKey = data.subjectKey || data.name || docSnap.id;
-            coursesMap[subjectKey] = {
-              code: data.code || docSnap.id,
-              name: data.name || subjectKey,
-              creditHours: data.creditHours || 3,
-              theoryTopics: data.theoryTopics || []
-            };
-          });
-          setFirestoreCourses(coursesMap);
-          setIsFirestoreLoaded(true);
-        }
-      }, (err) => {
-        console.warn("Firestore studentNotes listener error, falling back to static data:", err);
-      });
+  /* Desktop rail/toc toggles. ".only-drawer" (the existing hamburger) is
+     hidden at 1280px+ because the rail already shows inline there — these are
+     always-visible buttons that collapse the inline rail/toc instead of
+     opening the mobile drawer/sheet. Which of the two side panels are visible
+     combines with the reader.css breakpoints (768px, 1280px) in four ways, so
+     .shell's grid-template-columns is computed in JS (see updateShellColumns
+     in the script below) rather than fought over in CSS here — this stylesheet
+     only owns hiding the panel itself. */
+  .rail-toggle { display: none; }
+  @media (min-width: 1280px) {
+    .rail-toggle { display: inline-grid; }
+  }
+  .toc-toggle { display: none; }
+  @media (min-width: 768px) {
+    .toc-toggle { display: inline-grid; }
+  }
+  :root[data-rail-hidden] .rail { display: none; }
+  :root[data-toc-hidden] .toc { display: none; }
+</style>
 
-      return () => unsubscribe();
-    } catch (err) {
-      console.warn("Failed to attach studentNotes listener:", err);
-    }
-  }, [selectedSemester]);
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01"/></symbol>
+  <symbol id="i-tree" viewBox="0 0 24 24"><path d="M5 4v16M5 8h6M5 14h6M13 8h6M13 14h6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="m8.5 12.2 2.3 2.3 4.7-4.9"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3Z"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M4 16h16M10 4v16M16 4v16"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="m14.5 5.5 4 4L9 19H5v-4l9.5-9.5Z"/><path d="m13 7 4 4"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4 3 20h18L12 4Z"/><path d="M12 10v4M12 17h.01"/></symbol>
+  <symbol id="i-steps" viewBox="0 0 24 24"><path d="M4 18h4v-4h4v-4h4V6h4"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="1.5"/><rect x="6" y="8" width="12" height="8" rx="1"/></symbol>
+  <symbol id="i-tick" viewBox="0 0 24 24"><path d="m5 12.5 4.2 4.2L19 7"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M14 6 8 12l6 6"/></symbol>
+  <symbol id="i-forward" viewBox="0 0 24 24"><path d="m10 6 6 6-6 6"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3"/><path d="M18 3v4h-4M6 21v-4h4"/></symbol>
+</svg>
 
-  // Available subjects: prefer Firestore courses if loaded, else fallback to bitNotesData
-  const availableSubjects = useMemo(() => {
-    if (isFirestoreLoaded && Object.keys(firestoreCourses).length > 0) {
-      return Object.keys(firestoreCourses);
-    }
-    const semData = bitNotesData[selectedSemester];
-    return semData ? Object.keys(semData) : [];
-  }, [selectedSemester, isFirestoreLoaded, firestoreCourses]);
+<header class="app-header">
+  <div class="app-header__inner">
+    <div style="display:flex;align-items:center;gap:0.15rem;margin-inline-end:0.35rem">
+      <button class="icon-btn" type="button" onclick="history.back()" aria-label="Back">
+        <svg class="icon"><use href="#i-back"/></svg>
+      </button>
+      <button class="icon-btn" type="button" onclick="history.forward()" aria-label="Forward">
+        <svg class="icon"><use href="#i-forward"/></svg>
+      </button>
+      <button class="icon-btn" type="button" onclick="location.reload()" aria-label="Refresh">
+        <svg class="icon"><use href="#i-refresh"/></svg>
+      </button>
+    </div>
+    <button class="icon-btn only-drawer" type="button" data-open="rail-dialog" aria-label="Open syllabus">
+      <svg class="icon"><use href="#i-menu"/></svg>
+    </button>
+    <button class="icon-btn rail-toggle" type="button" onclick="document.documentElement.toggleAttribute('data-rail-hidden')" aria-label="Show or hide the syllabus panel">
+      <svg class="icon"><use href="#i-menu"/></svg>
+    </button>
+    <span style="position:relative;display:inline-flex;align-items:center;margin-inline-end:0.5rem">
+      <span class="wordmark" aria-hidden="true" style="padding-inline-end:1.15rem;white-space:nowrap">Semester 4</span>
+      <select id="semester-select" aria-label="Semester" onchange="this.previousElementSibling.textContent=this.selectedOptions[0].textContent" style="position:absolute;inset:0;opacity:0;cursor:pointer;font-size:1rem">
+        <option value="1">Semester 1</option>
+        <option value="2">Semester 2</option>
+        <option value="3">Semester 3</option>
+        <option value="4" selected>Semester 4</option>
+        <option value="5">Semester 5</option>
+        <option value="6">Semester 6</option>
+        <option value="7">Semester 7</option>
+        <option value="8">Semester 8</option>
+      </select>
+      <svg class="icon" aria-hidden="true" viewBox="0 0 24 24" style="position:absolute;inset-inline-end:0;width:0.85rem;height:0.85rem;color:var(--ink-3);pointer-events:none"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li style="position:relative;display:inline-flex;align-items:center">
+          <span aria-hidden="true" style="white-space:nowrap">Operating System</span>
+          <select id="subject-select" aria-label="Subject" onchange="this.previousElementSibling.textContent=this.selectedOptions[0].textContent" style="position:absolute;inset:0;opacity:0;cursor:pointer;font-size:1rem">
+            <option selected>Operating System</option>
+            <option>Database Management System</option>
+          </select>
+        </li>
+        <li><a href="#main" aria-current="page">Deadlocks</a></li>
+      </ol>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" type="button" aria-label="Search this course">
+        <svg class="icon"><use href="#i-search"/></svg>
+      </button>
+      <button class="btn only-tv" type="button" data-open="toc-dialog">Contents</button>
+      <button class="icon-btn toc-toggle" type="button" onclick="document.documentElement.toggleAttribute('data-toc-hidden')" aria-label="Show or hide the on-this-page panel">
+        <svg class="icon"><use href="#i-menu"/></svg>
+      </button>
+      <button class="icon-btn" type="button" data-open="settings-dialog" aria-label="Reading settings">Aa</button>
+    </div>
+  </div>
+</header>
 
-  const currentSubject = useMemo(() => {
-    if (selectedSubject && availableSubjects.includes(selectedSubject)) {
-      return selectedSubject;
-    }
-    return availableSubjects[0] || "";
-  }, [selectedSubject, availableSubjects]);
+<div class="shell">
+  <aside class="rail" aria-label="Syllabus">
+    <div id="rail-content">
+      <h2 class="course-title">Operating System</h2>
+      <p class="course-meta">BIT253CO, semester 4, 45 teaching hours</p>
+      <ul class="tree">
+        <li><details><summary>Unit 2</summary><ul><li><a href="#main"><span class="code">2.f</span> SRTF scheduling<span class="dot" data-state="new"><span class="sr-only">Not started</span></span></a></li></ul></details></li>
+        <li><details><summary>Unit 5</summary><ul><li><a href="#main"><span class="code">5.c</span> Disk scheduling<span class="dot" data-state="new"><span class="sr-only">Not started</span></span></a></li></ul></details></li>
+        <li>
+          <details open>
+            <summary>Unit 6 Deadlocks</summary>
+            <ul>
+              <li><a href="#main"><span class="code">6.a</span> Introduction<span class="dot" data-state="learned"><span class="sr-only">Learned</span></span></a></li>
+              <li><a href="#main" aria-current="page"><span class="code">6.d</span> Deadlock detection and recovery<span class="dot" data-state="progress" data-current-dot><span class="sr-only">In progress</span></span></a></li>
+              <li><a href="#main"><span class="code">6.f</span> Banker's Algorithm (single and multiple resources)<span class="dot" data-state="new"><span class="sr-only">Not started</span></span></a></li>
+            </ul>
+          </details>
+        </li>
+        <li><details><summary>Unit 7 Real Time System</summary><ul><li><a href="#main"><span class="code">7</span> Real time systems<span class="dot" data-state="new"><span class="sr-only">Not started</span></span></a></li></ul></details></li>
+      </ul>
+      <p class="rail-note">Demo tree shows a few official topics. The real tree comes from the imported syllabus.</p>
+    </div>
+  </aside>
 
-  // Determine current course code
-  const currentCourseCode = useMemo(() => {
-    if (firestoreCourses[currentSubject]) {
-      return firestoreCourses[currentSubject].code;
-    }
-    const semData = bitNotesData[selectedSemester];
-    return semData?.[currentSubject]?.code || currentSubject;
-  }, [currentSubject, firestoreCourses, selectedSemester]);
+  <main id="main" class="sheet" tabindex="-1">
+    <article class="prose" lang="en">
+      <h1 id="top">Deadlock detection and recovery</h1>
+      <div class="lesson-meta">
+        <span class="trust" data-level="ai-draft">AI draft</span>
+        <span>Topic 6.d in Unit 6, Deadlocks</span>
+        <span class="asked"><svg class="icon" aria-hidden="true"><use href="#i-tick"/></svg>Asked in 2026, question 7 (8 marks)</span>
+        <span>About 12 minutes</span>
+      </div>
 
-  // 2. Listen to topics for current course code from Firestore
-  useEffect(() => {
-    if (!currentCourseCode) return;
-    try {
-      const topicsRef = collection(db, "studentNotes", currentCourseCode, "topics");
-      const unsubscribe = onSnapshot(topicsRef, (snapshot) => {
-        if (!snapshot.empty) {
-          const topicsList: Topic[] = [];
-          snapshot.forEach((docSnap) => {
-            const data = docSnap.data();
-            topicsList.push({
-              id: data.topicId || docSnap.id,
-              name: data.name || "",
-              importance: data.importance || "Medium",
-              keyPoints: data.keyPoints || [],
-              theory: data.theory || "",
-              code: data.code || undefined,
-              example: data.example || undefined,
-              commonExamQuestions: data.commonExamQuestions || []
-            });
-          });
-          setFirestoreTopics((prev) => ({
-            ...prev,
-            [currentSubject]: topicsList
-          }));
-        }
-      }, (err) => {
-        console.warn("Firestore topics listener error, using fallback:", err);
-      });
+      <div class="block block--idea">
+        <p class="block__label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg>Idea in plain words</p>
+        <p>Deadlock means some processes are stuck forever, each waiting for something another one is holding. With detection, the operating system lets that happen, checks for it now and then, and breaks it when it finds it.</p>
+      </div>
 
-      return () => unsubscribe();
-    } catch (err) {
-      console.warn("Failed to attach topics listener:", err);
-    }
-  }, [currentCourseCode, currentSubject]);
+      <h2 id="what-detection-means">What detection means</h2>
+      <p>Prevention and avoidance try to stop a deadlock before it forms. Detection takes the opposite bet: allocate resources freely, because deadlocks are rare, and pay the cost only when one actually happens.</p>
+      <p>That makes detection a two-part job. First the system must notice that a set of processes can never continue. Then it must recover, by ending processes or taking resources back.</p>
 
-  const activeNotes = useMemo((): SubjectNotes | null => {
-    // If Firestore has loaded topics and course details for currentSubject
-    if (firestoreCourses[currentSubject] && firestoreTopics[currentSubject]) {
-      const c = firestoreCourses[currentSubject];
-      return {
-        subjectName: c.name,
-        code: c.code,
-        creditHours: c.creditHours,
-        theoryTopics: c.theoryTopics,
-        topics: firestoreTopics[currentSubject]
-      };
-    }
-    // Zero-downtime fallback to hardcoded bitNotesData
-    const semData = bitNotesData[selectedSemester];
-    if (!semData || !currentSubject) return null;
-    return semData[currentSubject] || null;
-  }, [selectedSemester, currentSubject, firestoreCourses, firestoreTopics]);
+      <h2 id="wait-for-graph">Detecting with a wait-for graph</h2>
+      <p>When every resource type has exactly one instance, the operating system can draw a <strong>wait-for graph</strong>. Start from the resource allocation graph and remove the resource boxes. An arrow from P1 to P2 now means P1 is waiting for something P2 holds.</p>
+      <p><strong>If the wait-for graph contains a cycle, the processes in that cycle are deadlocked.</strong></p>
 
-  const filteredTopics = useMemo(() => {
-    if (!activeNotes) return [];
-    if (!searchQuery.trim()) return activeNotes.topics;
+      <figure>
+        <svg class="diagram-svg" viewBox="0 0 520 180" role="img" aria-labelledby="fig1-title">
+          <title id="fig1-title">A resource graph with a cycle through P1, R1, P2 and R2, reduced to a wait-for graph where P1 and P2 wait for each other</title>
+          <defs>
+            <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="head" d="M0 0 10 5 0 10z"/></marker>
+            <marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="head--cycle" d="M0 0 10 5 0 10z"/></marker>
+          </defs>
+          <line class="e" x1="70" y1="50" x2="126" y2="50" marker-end="url(#ah)"/>
+          <line class="e" x1="166" y1="50" x2="190" y2="50" marker-end="url(#ah)"/>
+          <line class="e" x1="200" y1="66" x2="168" y2="120" marker-end="url(#ah)"/>
+          <line class="e" x1="126" y1="128" x2="62" y2="66" marker-end="url(#ah)"/>
+          <circle class="p" cx="52" cy="50" r="18"/><text x="52" y="55" text-anchor="middle">P1</text>
+          <rect class="r" x="128" y="32" width="36" height="36" rx="3"/><text x="146" y="55" text-anchor="middle">R1</text>
+          <circle class="p" cx="210" cy="50" r="18"/><text x="210" y="55" text-anchor="middle">P2</text>
+          <rect class="r" x="128" y="112" width="36" height="36" rx="3"/><text x="146" y="135" text-anchor="middle">R2</text>
+          <text class="cap" x="131" y="174" text-anchor="middle">Resource graph</text>
+          <path class="e e--cycle" d="M358 72 Q400 38 440 72" marker-end="url(#ahc)"/>
+          <path class="e e--cycle" d="M442 90 Q400 124 360 90" marker-end="url(#ahc)"/>
+          <circle class="p" cx="340" cy="80" r="18"/><text x="340" y="85" text-anchor="middle">P1</text>
+          <circle class="p" cx="460" cy="80" r="18"/><text x="460" y="85" text-anchor="middle">P2</text>
+          <text class="cap" x="400" y="174" text-anchor="middle">Wait-for graph</text>
+        </svg>
+        <figcaption>Removing the resource boxes leaves P1 waiting for P2 and P2 waiting for P1. That loop is the deadlock.</figcaption>
+      </figure>
 
-    const q = searchQuery.toLowerCase();
-    return activeNotes.topics.filter(t => 
-      t.name.toLowerCase().includes(q) || 
-      t.keyPoints.some(kp => kp.toLowerCase().includes(q)) ||
-      (t.code && t.code.toLowerCase().includes(q))
-    );
-  }, [activeNotes, searchQuery]);
+      <h2 id="detection-algorithm">Detecting with the detection algorithm</h2>
+      <p>When a resource type has several instances, a cycle is not enough proof. The system uses an algorithm that looks like the Banker's safety check, but with the <strong>current requests</strong> instead of maximum needs.</p>
 
-  const filteredTheory = useMemo(() => {
-    if (!activeNotes) return [];
-    if (!searchQuery.trim()) return activeNotes.theoryTopics;
+      <h3 id="the-steps">The steps</h3>
+      <div class="block block--working">
+        <p class="block__label"><svg class="icon" aria-hidden="true"><use href="#i-steps"/></svg>Method</p>
+        <ol>
+          <li>Set <code>Work = Available</code>. Mark <code>Finish[i] = true</code> for every process holding nothing, otherwise false.</li>
+          <li>Find a process with <code>Finish[i] = false</code> and <code>Request[i] &le; Work</code>. If none exists, go to step 4.</li>
+          <li>Pretend it finishes and returns what it holds, then go back to step 2.</li>
+          <li>Every process still marked <code>false</code> is deadlocked.</li>
+        </ol>
+      </div>
+      <div class="block block--formula" aria-label="Update rule">Work = Work + Allocation[i]</div>
 
-    const q = searchQuery.toLowerCase();
-    return activeNotes.theoryTopics.filter(tt => tt.toLowerCase().includes(q));
-  }, [activeNotes, searchQuery]);
-
-  const notesMarkdown = useMemo(() => {
-    if (!activeNotes) return "";
-    const lines: string[] = [];
-    lines.push(`# ${currentSubject} (${currentCourseCode})`);
-    lines.push(`**Semester**: ${selectedSemester} | **Credits**: ${activeNotes.creditHours || 3}`);
-    lines.push("");
-    lines.push("---");
-    lines.push("");
-    lines.push("## 1. Core Code Algorithms & Practical Implementations");
-    lines.push("");
-
-    activeNotes.topics.forEach((t, i) => {
-      lines.push(`### 1.${i + 1} ${t.name} [Priority: ${t.importance}]`);
-      if (t.keyPoints && t.keyPoints.length > 0) {
-        lines.push("**Key Concepts & Exam Notes:**");
-        t.keyPoints.forEach((kp) => lines.push(`- ${kp}`));
-        lines.push("");
-      }
-      if (t.code) {
-        const lang = t.codeExamples?.[0]?.language || "cpp";
-        lines.push("```" + lang);
-        lines.push(t.code);
-        lines.push("```");
-        lines.push("");
-      }
-      lines.push("---");
-      lines.push("");
-    });
-
-    if (activeNotes.theoryTopics && activeNotes.theoryTopics.length > 0) {
-      lines.push("## 2. High-Frequency Theory Questions & University Solutions");
-      lines.push("");
-      activeNotes.theoryTopics.forEach((tt, i) => {
-        lines.push(`### Q${i + 1}: ${tt}`);
-        lines.push(`> **University Exam Solution Guide**: High-frequency recurring topic for Purbanchal University assessments. Structure your answer with clear definitions, architecture diagram/state flow, and key points.`);
-        lines.push("");
-      });
-    }
-
-    return lines.join("\n");
-  }, [activeNotes, currentSubject, currentCourseCode, selectedSemester]);
-
-  const handleCopy = (codeText: string, index: number) => {
-    navigator.clipboard.writeText(codeText);
-    setCopiedCodeIndex(index);
-    setTimeout(() => setCopiedCodeIndex(null), 2000);
-  };
-
-  const getImportanceBadge = (importance: string) => {
-    switch (importance) {
-      case "Very High":
-        return <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200 text-xs font-bold"><Flame className="w-3.5 h-3.5 text-rose-600" /> Very High Priority</span>;
-      case "High":
-        return <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200 text-xs font-bold"><Sparkles className="w-3.5 h-3.5 text-amber-600" /> High Priority</span>;
-      default:
-        return <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary-50 text-primary-700 border border-primary-200 text-xs font-bold"><Layers className="w-3.5 h-3.5 text-primary-600" /> Medium Priority</span>;
-    }
-  };
-
-  return (
-    <ProgramGate>
-    <div className="min-h-screen bg-zinc-50/40 pb-20 px-4 sm:px-6 lg:px-8 pt-8">
-      <div className="max-w-7xl mx-auto space-y-6">
-
-        {/* Header Banner */}
-        <div className="relative rounded-lg p-6 sm:p-8 overflow-hidden border border-zinc-200 bg-white">
-          <div className="relative z-10 max-w-3xl space-y-3">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary-50 border border-primary-200 text-primary-700 text-[11px] font-bold uppercase tracking-wider">
-              <GraduationCap className="w-3.5 h-3.5" />
-              <span>Purbanchal University BIT</span>
-            </div>
-
-            <h1 className="text-2xl sm:text-3xl font-bold text-zinc-900 tracking-tight leading-tight">
-              Study notes &amp; important topics
-            </h1>
-
-            <p className="text-sm text-zinc-500 leading-relaxed">
-              High-frequency exam topics, verified code algorithms, key formulas, and theory questions organized by semester.
-            </p>
-
-            <div className="flex flex-wrap gap-2 pt-2">
-              <Link href="/flashcards" className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary-600 hover:bg-primary-700 text-sm font-semibold text-white transition-colors shadow-button">
-                <Brain className="w-4 h-4" />
-                Flashcard drills
-              </Link>
-              <Link href="/projects" className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-white hover:bg-zinc-50 border border-zinc-200 text-sm font-semibold text-zinc-700 transition-colors">
-                <Code2 className="w-4 h-4 text-sky-600" />
-                Projects
-              </Link>
-            </div>
-          </div>
+      <h3 id="worked-example">Worked example</h3>
+      <div class="block block--example">
+        <p class="block__label"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg>Example with resources A, B and C, Available = (0, 0, 0)</p>
+        <div class="table-wrap">
+          <table>
+            <caption>Current allocation and requests</caption>
+            <thead><tr><th>Process</th><th class="num">Allocation A B C</th><th class="num">Request A B C</th></tr></thead>
+            <tbody>
+              <tr><td>P0</td><td class="num">0 1 0</td><td class="num">0 0 0</td></tr>
+              <tr><td>P1</td><td class="num">2 0 0</td><td class="num">2 0 2</td></tr>
+              <tr><td>P2</td><td class="num">3 0 3</td><td class="num">0 0 0</td></tr>
+              <tr><td>P3</td><td class="num">2 1 1</td><td class="num">1 0 0</td></tr>
+              <tr><td>P4</td><td class="num">0 0 2</td><td class="num">0 0 2</td></tr>
+            </tbody>
+          </table>
         </div>
+        <p class="table-hint">Swipe the table sideways to see every column.</p>
+        <p>Work grows as each process can finish: (0, 0, 0), then P0 gives (0, 1, 0), P2 gives (3, 1, 3), P3 gives (5, 2, 4), P1 gives (7, 2, 4), and P4 gives (7, 2, 6).</p>
+      </div>
+      <div class="block block--answer">
+        <p class="block__label"><svg class="icon" aria-hidden="true"><use href="#i-box"/></svg>Answer</p>
+        <p>All processes finish in the order P0, P2, P3, P1, P4, so there is no deadlock.</p>
+      </div>
 
-        {/* Semester Selection Ribbon */}
-        <div className="space-y-2.5">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-500 flex items-center gap-1.5">
-              <Layers className="w-3.5 h-3.5 text-primary-600" />
-              Select semester
-            </h2>
-            <span className="text-xs text-zinc-500 font-medium">8 semesters available</span>
-          </div>
+      <h2 id="when-to-run">When to run detection</h2>
+      <ul>
+        <li>Every time a request cannot be granted straight away. This catches deadlocks early but costs the most.</li>
+        <li>At fixed intervals, for example once an hour.</li>
+        <li>When CPU utilisation suddenly drops, which is a common sign that processes are stuck.</li>
+      </ul>
 
-          <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((sem) => {
-              const isSelected = selectedSemester === sem;
-              return (
-                <button
-                  key={sem}
-                  onClick={() => {
-                    setSelectedSemester(sem);
-                    setSelectedSubject("");
-                  }}
-                  className={`px-4 py-2 rounded-md font-semibold text-xs whitespace-nowrap transition-colors border flex items-center gap-1.5 ${
-                    isSelected
-                      ? "bg-primary-600 text-white border-primary-600"
-                      : "bg-white hover:bg-zinc-50 text-zinc-600 border-zinc-200"
-                  }`}
-                >
-                  <span>Sem {sem}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
+      <h2 id="recovery">Recovering from deadlock</h2>
+      <h3 id="process-termination">Process termination</h3>
+      <p>Abort every deadlocked process, which is quick but throws away all their work. Or abort them one at a time until the cycle breaks, choosing by priority, work already done, and resources held.</p>
+      <h3 id="resource-preemption">Resource preemption</h3>
+      <p>Take resources away from some processes and give them to others. This needs three decisions: which victim to choose, how to <strong>roll back</strong> the victim to a safe earlier state, and how to prevent <strong>starvation</strong> so the same process is not picked every time.</p>
 
-        {/* Subject Navigation & Search Bar */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 items-start">
+      <div class="block block--tip">
+        <p class="block__label"><svg class="icon" aria-hidden="true"><use href="#i-pen"/></svg>Exam tip</p>
+        <p>For 8 marks, write the definition, both detection methods with a small example, then both recovery methods. Examiners look for rollback and starvation under preemption.</p>
+      </div>
 
-          {/* Sidebar: Subject Selector */}
-          <div className="lg:col-span-1 space-y-4">
-            <div className="rounded-lg p-4 border border-zinc-200 bg-white space-y-4 sticky top-20 shadow-xs">
-              <h3 className="text-sm font-bold text-zinc-900 uppercase tracking-wider flex items-center justify-between">
-                <span>Semester {selectedSemester} Subjects</span>
-                <span className="text-xs px-2 py-0.5 rounded-md bg-zinc-100 text-zinc-700 font-bold">{availableSubjects.length}</span>
-              </h3>
+      <div class="block block--warning">
+        <p class="block__label"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Common mistake</p>
+        <p>Writing the Banker's safety algorithm as the detection algorithm. Banker's uses <code>Need = Max &minus; Allocation</code> to avoid deadlock before it happens. Detection uses the current <code>Request</code> matrix after it may have happened.</p>
+      </div>
 
-              <div className="space-y-2">
-                {availableSubjects.map((subject) => {
-                  const isActive = currentSubject === subject;
-                  return (
-                    <button
-                      key={subject}
-                      onClick={() => setSelectedSubject(subject)}
-                      className={`w-full text-left p-3.5 rounded-lg transition-all duration-200 flex items-center justify-between group border ${
-                        isActive
-                          ? "bg-primary-50 border-primary-200 text-primary-700 font-bold shadow-sm"
-                          : "bg-white hover:bg-zinc-50 border-zinc-100 text-zinc-700"
-                      }`}
-                    >
-                      <span className="text-sm line-clamp-1">{subject}</span>
-                      <ChevronRight className={`w-4 h-4 transition-transform ${isActive ? "text-primary-600 translate-x-1" : "text-zinc-400 group-hover:translate-x-1"}`} />
-                    </button>
-                  );
-                })}
-              </div>
+      <div class="lesson-end">
+        <button class="btn btn--primary" type="button" data-learned aria-pressed="false">
+          <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Mark as learned</span>
+        </button>
+        <button class="btn btn--quiet" type="button">Report a mistake</button>
+      </div>
 
-              {/* View Switcher: Code vs Theory vs Markdown */}
-              <div className="pt-2 border-t border-zinc-100">
-                <div className="grid grid-cols-1 gap-1.5 p-1 rounded-xl bg-zinc-100 border border-zinc-200">
-                  <button
-                    onClick={() => setActiveTab("code")}
-                    className={`py-2 px-3 text-xs font-bold rounded-lg transition-all flex items-center justify-start gap-2 ${
-                      activeTab === "code"
-                        ? "bg-white text-primary-700 shadow-sm"
-                        : "text-zinc-600 hover:text-zinc-900"
-                    }`}
-                  >
-                    <Code2 className="w-3.5 h-3.5 text-primary-600" />
-                    <span>Code Topics</span>
-                  </button>
-                  <button
-                    onClick={() => setActiveTab("theory")}
-                    className={`py-2 px-3 text-xs font-bold rounded-lg transition-all flex items-center justify-start gap-2 ${
-                      activeTab === "theory"
-                        ? "bg-white text-primary-700 shadow-sm"
-                        : "text-zinc-600 hover:text-zinc-900"
-                    }`}
-                  >
-                    <HelpCircle className="w-3.5 h-3.5 text-primary-600" />
-                    <span>Theory FAQs</span>
-                  </button>
-                  <button
-                    onClick={() => setActiveTab("markdown")}
-                    className={`py-2 px-3 text-xs font-bold rounded-lg transition-all flex items-center justify-start gap-2 ${
-                      activeTab === "markdown"
-                        ? "bg-white text-primary-700 shadow-sm"
-                        : "text-zinc-600 hover:text-zinc-900"
-                    }`}
-                  >
-                    <FileText className="w-3.5 h-3.5 text-primary-600" />
-                    <span>Official .md Notes</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+      <nav class="pager" aria-label="Topics">
+        <a href="#main" rel="prev"><small>Previous topic</small>In Unit 6</a>
+        <a href="#main" rel="next"><small>Next topic</small>In Unit 6</a>
+      </nav>
+    </article>
+  </main>
 
-          {/* Main Content Area */}
-          <div className="lg:col-span-3 space-y-6">
-            
-            {/* Search Input Bar */}
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={`Search algorithms, concepts, or theory in ${currentSubject || "this semester"}...`}
-                className="w-full pl-12 pr-4 py-4 rounded-lg bg-white border border-zinc-200 text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-600/10 text-sm shadow-sm"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-zinc-500 hover:text-zinc-900 px-2 py-1 rounded-md bg-zinc-100"
-                >
-                  Clear
-                </button>
-              )}
-            </div>
-
-            {/* Subject Title & Stats */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-xl bg-white border border-zinc-200 shadow-sm">
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-primary-600">Semester {selectedSemester}</span>
-                <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900 mt-1">{currentSubject}</h2>
-              </div>
-              <div className="flex flex-wrap items-center gap-3">
-                <span className="px-3.5 py-1.5 rounded-xl bg-zinc-50 border border-zinc-200 text-xs text-zinc-700 font-bold">
-                  {activeNotes?.topics.length || 0} Code Topics
-                </span>
-                <span className="px-3.5 py-1.5 rounded-xl bg-zinc-50 border border-zinc-200 text-xs text-zinc-700 font-bold">
-                  {activeNotes?.theoryTopics.length || 0} Theory FAQs
-                </span>
-                <button
-                  type="button"
-                  onClick={() => setActiveTab(activeTab === "markdown" ? "code" : "markdown")}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all border flex items-center gap-1.5 ${
-                    activeTab === "markdown"
-                      ? "bg-primary-600 text-white border-primary-600 shadow-xs"
-                      : "bg-primary-50 text-primary-700 border-primary-200 hover:bg-primary-100"
-                  }`}
-                >
-                  <FileText className="w-3.5 h-3.5" />
-                  <span>{activeTab === "markdown" ? "Interactive Mode" : "Official .md Notes"}</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Content Display: Markdown Document vs Code Tab vs Theory Tab */}
-            {activeTab === "markdown" ? (
-              <div className="space-y-4">
-                <MarkdownViewer
-                  content={notesMarkdown}
-                  title={`${currentSubject} (${currentCourseCode}) Study Notes`}
-                  downloadFilename={`${currentCourseCode || currentSubject}_Notes.md`}
-                  showActions={true}
-                />
-              </div>
-            ) : activeTab === "code" ? (
-              <div className="space-y-6">
-                {filteredTopics.length > 0 ? (
-                  filteredTopics.map((topic, idx) => (
-                    <motion.div
-                      key={topic.name}
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: idx * 0.05 }}
-                      className="rounded-xl border border-zinc-200 bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-                    >
-                      {/* Topic Card Header */}
-                      <div className="p-6 sm:p-7 border-b border-zinc-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-zinc-50/50">
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-3">
-                            <span className="w-8 h-8 rounded-xl bg-primary-50 border border-primary-200 text-primary-600 flex items-center justify-center text-xs font-bold">
-                              {idx + 1}
-                            </span>
-                            <h3 className="text-xl sm:text-2xl font-bold text-zinc-900">{topic.name}</h3>
-                          </div>
-                        </div>
-                        <div>{getImportanceBadge(topic.importance)}</div>
-                      </div>
-
-                      {/* Topic Key Points */}
-                      {topic.keyPoints && topic.keyPoints.length > 0 && (
-                        <div className="p-6 sm:p-7 bg-white border-b border-zinc-100">
-                          <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-3 flex items-center gap-2">
-                            <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                            Core Concepts & Exam Keys
-                          </h4>
-                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                            {topic.keyPoints.map((point, pIdx) => (
-                              <li key={pIdx} className="text-xs sm:text-sm text-zinc-700 flex items-start gap-2.5">
-                                <span className="w-1.5 h-1.5 rounded-full bg-primary-600 mt-2 flex-shrink-0" />
-                                <span>{point}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-
-                      {/* Code Block / Example */}
-                      {topic.code && (
-                        <div className="p-6 sm:p-7 space-y-3 bg-zinc-900 text-zinc-100 rounded-b-xl">
-                          <div className="flex items-center justify-between text-xs text-zinc-400">
-                            <span className="font-mono flex items-center gap-2">
-                              <Terminal className="w-3.5 h-3.5 text-cyan-400" />
-                              Executable Algorithm
-                            </span>
-                            <button
-                              onClick={() => handleCopy(topic.code!, idx)}
-                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 border border-white/10 text-xs font-bold text-zinc-200 transition-all active:scale-95"
-                            >
-                              {copiedCodeIndex === idx ? (
-                                <>
-                                  <Check className="w-3.5 h-3.5 text-emerald-400" />
-                                  <span className="text-emerald-400">Copied!</span>
-                                </>
-                              ) : (
-                                <>
-                                  <Copy className="w-3.5 h-3.5" />
-                                  <span>Copy Code</span>
-                                </>
-                              )}
-                            </button>
-                          </div>
-
-                          <pre className="p-4 rounded-xl bg-zinc-950 border border-white/5 overflow-x-auto text-xs sm:text-sm font-mono text-cyan-300 leading-relaxed shadow-inner">
-                            <code>{topic.code}</code>
-                          </pre>
-                        </div>
-                      )}
-
-                      {/* Formula / Math Example */}
-                      {topic.example && (
-                        <div className="p-6 sm:p-7 bg-primary-50/50 border-t border-zinc-100">
-                          <h4 className="text-xs font-bold uppercase tracking-wider text-primary-700 mb-2">Mathematical Formulation</h4>
-                          <pre className="p-4 rounded-xl bg-white border border-primary-100 text-xs sm:text-sm font-mono text-primary-900 whitespace-pre-wrap">
-                            {topic.example}
-                          </pre>
-                        </div>
-                      )}
-
-                      {/* Asked in Exams Section */}
-                      {topic.commonExamQuestions && topic.commonExamQuestions.length > 0 && (
-                        <div className="p-6 sm:p-7 bg-amber-50/40 border-t border-amber-100">
-                          <h4 className="text-xs font-bold uppercase tracking-wider text-amber-800 mb-3 flex items-center gap-2">
-                            <GraduationCap className="w-4 h-4 text-amber-600" />
-                            Asked in Past University Exams
-                          </h4>
-                          <ul className="space-y-2">
-                            {topic.commonExamQuestions.map((qText, qIdx) => (
-                              <li key={qIdx} className="text-xs sm:text-sm text-zinc-800 flex items-start gap-2.5 bg-white p-3 rounded-lg border border-amber-200/60 shadow-xs">
-                                <span className="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold text-[10px] shrink-0 mt-0.5">
-                                  Q{qIdx + 1}
-                                </span>
-                                <span className="font-medium">{qText}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </motion.div>
-                  ))
-                ) : (
-                  <div className="p-12 text-center rounded-xl bg-white border border-dashed border-zinc-200 space-y-3">
-                    <Code2 className="w-12 h-12 text-zinc-400 mx-auto" />
-                    <h3 className="text-lg font-bold text-zinc-900">No code topics match your query</h3>
-                    <p className="text-sm text-zinc-500">Try a different search term or select another subject from the left panel.</p>
-                  </div>
-                )}
-              </div>
-            ) : (
-              /* Theory Tab */
-              <div className="space-y-3">
-                {filteredTheory.length > 0 ? (
-                  filteredTheory.map((question, qIdx) => {
-                    const isOpen = openTheoryIndex === qIdx;
-                    return (
-                      <div
-                        key={qIdx}
-                        className="rounded-lg border border-zinc-200 bg-white overflow-hidden transition-all shadow-sm"
-                      >
-                        <button
-                          onClick={() => setOpenTheoryIndex(isOpen ? null : qIdx)}
-                          className="w-full p-5 text-left flex items-center justify-between gap-4 hover:bg-zinc-50 transition-colors"
-                        >
-                          <div className="flex items-center gap-3.5">
-                            <span className="w-7 h-7 rounded-lg bg-primary-50 text-primary-700 flex items-center justify-center text-xs font-bold flex-shrink-0">
-                              Q{qIdx + 1}
-                            </span>
-                            <span className="text-sm sm:text-base font-bold text-zinc-900">{question}</span>
-                          </div>
-                          <ChevronDown className={`w-5 h-5 text-zinc-400 transition-transform ${isOpen ? "rotate-180 text-primary-600" : ""}`} />
-                        </button>
-
-                        <AnimatePresence>
-                          {isOpen && (
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              className="px-6 pb-6 pt-2 border-t border-zinc-100 bg-zinc-50/50 text-xs sm:text-sm text-zinc-700 space-y-3"
-                            >
-                              <div className="p-4 rounded-xl bg-white border border-zinc-200 space-y-2">
-                                <span className="text-xs font-bold text-primary-700 uppercase tracking-wide">University Exam Guidance</span>
-                                <p className="leading-relaxed text-zinc-600">
-                                  This question is a high-frequency recurring topic in Purbanchal University final examinations. When preparing your answer, ensure you define the primary concept clearly, illustrate with an architectural diagram or state chart, and provide clear comparative points with tabular contrast where applicable.
-                                </p>
-                              </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    );
-                  })
-                ) : (
-                  <div className="p-12 text-center rounded-xl bg-white border border-dashed border-zinc-200 space-y-3">
-                    <HelpCircle className="w-12 h-12 text-zinc-400 mx-auto" />
-                    <h3 className="text-lg font-bold text-zinc-900">No theory questions found</h3>
-                    <p className="text-sm text-zinc-500">Try changing your search keywords.</p>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        </div>
+  <aside class="toc" aria-label="On this page">
+    <div id="toc-content">
+      <h2>On this page</h2>
+      <ol class="toc-list">
+        <li><a href="#what-detection-means">What detection means</a></li>
+        <li><a href="#wait-for-graph">Detecting with a wait-for graph</a></li>
+        <li><a href="#detection-algorithm">Detecting with the detection algorithm</a></li>
+        <li class="lvl-3"><a href="#the-steps">The steps</a></li>
+        <li class="lvl-3"><a href="#worked-example">Worked example</a></li>
+        <li><a href="#when-to-run">When to run detection</a></li>
+        <li><a href="#recovery">Recovering from deadlock</a></li>
+        <li class="lvl-3"><a href="#process-termination">Process termination</a></li>
+        <li class="lvl-3"><a href="#resource-preemption">Resource preemption</a></li>
+      </ol>
+      <div class="toc-section">
+        <h2>Asked in exams</h2>
+        <p>2026, question 7 (8 marks)</p>
       </div>
     </div>
-    </ProgramGate>
-  );
+  </aside>
+</div>
+
+<nav class="toolbar" aria-label="Lesson tools">
+  <button type="button" data-open="rail-dialog"><svg class="icon" aria-hidden="true"><use href="#i-tree"/></svg>Syllabus</button>
+  <button type="button" data-open="toc-dialog"><svg class="icon" aria-hidden="true"><use href="#i-list"/></svg>Contents</button>
+  <button type="button" data-open="settings-dialog"><span aria-hidden="true" style="font:700 1.05rem/1.2rem var(--font-book)">Aa</span>Reading</button>
+  <button type="button" data-learned aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Learned</span></button>
+</nav>
+
+<dialog id="rail-dialog" class="drawer" aria-labelledby="rail-dialog-title">
+  <div class="dialog__head"><h2 id="rail-dialog-title">Syllabus</h2><button class="icon-btn" type="button" data-close aria-label="Close syllabus"><svg class="icon"><use href="#i-close"/></svg></button></div>
+  <div class="dialog__body" data-clone="rail-content"></div>
+</dialog>
+
+<dialog id="toc-dialog" class="bottom-sheet" aria-labelledby="toc-dialog-title">
+  <div class="dialog__head"><h2 id="toc-dialog-title">Contents</h2><button class="icon-btn" type="button" data-close aria-label="Close contents"><svg class="icon"><use href="#i-close"/></svg></button></div>
+  <div class="dialog__body toc" style="display:block;position:static;max-block-size:none;border:0;padding-top:1rem" data-clone="toc-content"></div>
+</dialog>
+
+<dialog id="settings-dialog" class="panel" aria-labelledby="settings-title">
+  <div class="dialog__head"><h2 id="settings-title">Reading settings</h2><button class="icon-btn" type="button" data-close aria-label="Close reading settings"><svg class="icon"><use href="#i-close"/></svg></button></div>
+  <div class="dialog__body">
+    <fieldset class="setting">
+      <legend>Theme</legend>
+      <div class="swatches">
+        <label class="swatch"><input type="radio" name="theme" value="paper"><span class="swatch__chip" style="background:#FBFBF8;color:#1A2230">Aa</span>Paper</label>
+        <label class="swatch"><input type="radio" name="theme" value="warm"><span class="swatch__chip" style="background:#EFE6D2;color:#2B241B">Aa</span>Warm</label>
+        <label class="swatch"><input type="radio" name="theme" value="blackboard"><span class="swatch__chip" style="background:#1B2320;color:#E7E5DD">Aa</span>Blackboard</label>
+        <label class="swatch"><input type="radio" name="theme" value="night"><span class="swatch__chip" style="background:#000000;color:#C9C4B8">Aa</span>Night</label>
+      </div>
+    </fieldset>
+
+    <div class="setting">
+      <span class="legend" id="size-label">Text size</span>
+      <div class="stepper" role="group" aria-labelledby="size-label">
+        <button class="btn" type="button" data-size-step="-1" aria-label="Smaller text">A&minus;</button>
+        <output id="size-output" aria-live="polite">Default</output>
+        <button class="btn" type="button" data-size-step="1" aria-label="Larger text">A+</button>
+      </div>
+    </div>
+
+    <fieldset class="setting">
+      <legend>Font</legend>
+      <div class="segmented">
+        <label><input type="radio" name="font" value="book">Book</label>
+        <label><input type="radio" name="font" value="clear">Clear</label>
+      </div>
+    </fieldset>
+
+    <fieldset class="setting">
+      <legend>Line width</legend>
+      <div class="segmented">
+        <label><input type="radio" name="width" value="narrow">Narrow</label>
+        <label><input type="radio" name="width" value="normal">Normal</label>
+        <label><input type="radio" name="width" value="wide">Wide</label>
+      </div>
+    </fieldset>
+
+    <fieldset class="setting">
+      <legend>Line spacing</legend>
+      <div class="segmented">
+        <label><input type="radio" name="spacing" value="normal">Normal</label>
+        <label><input type="radio" name="spacing" value="relaxed">Relaxed</label>
+      </div>
+    </fieldset>
+
+    <label class="switch hide-small"><span>Focus mode<small>Hide the syllabus and contents panels</small></span><input type="checkbox" data-toggle="focus"></label>
+    <label class="switch"><span>TV and projector view<small>Large text for reading across a room</small></span><input type="checkbox" data-toggle="viewing"></label>
+    <label class="switch"><span>Eye break reminder<small>Every 20 minutes, a quiet reminder to look away</small></span><input type="checkbox" data-toggle="breaks" checked></label>
+    <p class="status-line" id="settings-status" aria-live="polite"></p>
+    <button class="btn" type="button" id="preview-break">Preview the reminder</button>
+  </div>
+</dialog>
+
+<div class="break-toast" id="break-toast" role="status" hidden>
+  <svg class="icon" aria-hidden="true" style="margin-top:.15rem"><use href="#i-bulb"/></svg>
+  <div>
+    <strong>Time for an eye break</strong>
+    <p>Look at something about 6 metres away for 20 seconds, then carry on from here.</p>
+    <div class="actions">
+      <button class="btn btn--primary" type="button" id="break-done">Done</button>
+      <button class="btn btn--quiet" type="button" id="break-off">Turn off reminders</button>
+    </div>
+  </div>
+</div>
+`;
+
+export default function NotesPage() {
+  useEffect(() => {
+    // Verbatim IIFE from the demo's <script> block — dangerouslySetInnerHTML
+    // never executes <script> tags, so this runs the identical logic through
+    // useEffect instead, once, after BODY_HTML is in the DOM.
+    var root = document.documentElement;
+    var sizes = ["s", "m", "l", "xl", "xxl"];
+    var sizeNames: Record<string, string> = { s: "Smaller", m: "Default", l: "Large", xl: "Larger", xxl: "Largest" };
+    var statusLine = document.getElementById("settings-status");
+
+    document.querySelectorAll("[data-clone]").forEach(function (slot) {
+      var source = document.getElementById(slot.getAttribute("data-clone")!);
+      if (source) (slot.appendChild(source.cloneNode(true)) as Element).removeAttribute("id");
+    });
+
+    // The rail and toc toggles each just hide their own panel (see the
+    // <style> block); which columns .shell should actually have is the
+    // product of that with the reader.css breakpoints (768px, 1280px), which
+    // is four combinations — simpler to compute directly than to fight the
+    // cascade with more attribute selectors.
+    function updateShellColumns() {
+      const shell = document.querySelector(".shell") as HTMLElement | null;
+      if (!shell) return;
+      const showRail = window.innerWidth >= 1280 && !root.hasAttribute("data-rail-hidden");
+      const showToc = window.innerWidth >= 768 && !root.hasAttribute("data-toc-hidden");
+      shell.style.gridTemplateColumns = [
+        showRail ? "var(--rail-w)" : null,
+        "minmax(0, 1fr)",
+        showToc ? "var(--toc-w)" : null,
+      ].filter(Boolean).join(" ");
+    }
+    document.querySelector('[aria-label="Show or hide the syllabus panel"]')?.addEventListener("click", () => updateShellColumns());
+    document.querySelector('[aria-label="Show or hide the on-this-page panel"]')?.addEventListener("click", () => updateShellColumns());
+    window.addEventListener("resize", updateShellColumns);
+    updateShellColumns();
+
+    function syncControls() {
+      ["theme", "font", "width", "spacing"].forEach(function (name) {
+        document.querySelectorAll('input[name="' + name + '"]').forEach(function (input) {
+          (input as HTMLInputElement).checked = root.getAttribute("data-" + name) === (input as HTMLInputElement).value;
+          input.closest("label")?.classList.toggle("is-checked", (input as HTMLInputElement).checked);
+        });
+      });
+      const sizeOutput = document.getElementById("size-output");
+      if (sizeOutput) sizeOutput.textContent = sizeNames[root.getAttribute("data-size") || "m"];
+      const focusToggle = document.querySelector('[data-toggle="focus"]') as HTMLInputElement | null;
+      if (focusToggle) focusToggle.checked = root.getAttribute("data-focus") === "on";
+      const viewingToggle = document.querySelector('[data-toggle="viewing"]') as HTMLInputElement | null;
+      if (viewingToggle) viewingToggle.checked = root.getAttribute("data-viewing") === "tv";
+    }
+
+    function onRadioChange(this: HTMLInputElement) {
+      root.setAttribute("data-" + this.name, this.value);
+      syncControls();
+    }
+    document.querySelectorAll('.setting input[type="radio"]').forEach((input) => {
+      input.addEventListener("change", onRadioChange as EventListener);
+    });
+
+    function onSizeStep(this: HTMLElement) {
+      var i = sizes.indexOf(root.getAttribute("data-size") || "m");
+      var next = Math.min(sizes.length - 1, Math.max(0, i + Number(this.getAttribute("data-size-step"))));
+      root.setAttribute("data-size", sizes[next]);
+      syncControls();
+    }
+    document.querySelectorAll("[data-size-step]").forEach((button) => {
+      button.addEventListener("click", onSizeStep as EventListener);
+    });
+
+    function onViewingToggle(e: Event) {
+      const target = e.target as HTMLInputElement;
+      if (target.checked) {
+        root.setAttribute("data-viewing", "tv");
+        if (root.getAttribute("data-theme") === "paper" && statusLine) {
+          root.setAttribute("data-theme", "blackboard");
+          statusLine.textContent = "Switched to Blackboard, which reads better on TVs. You can change it back above.";
+        }
+      } else {
+        root.removeAttribute("data-viewing");
+        if (statusLine) statusLine.textContent = "";
+      }
+      syncControls();
+    }
+    document.querySelector('[data-toggle="focus"]')?.addEventListener("change", (e) => {
+      if ((e.target as HTMLInputElement).checked) root.setAttribute("data-focus", "on");
+      else root.removeAttribute("data-focus");
+    });
+    document.querySelector('[data-toggle="viewing"]')?.addEventListener("change", onViewingToggle);
+
+    var opener: HTMLElement | null = null;
+    document.querySelectorAll("[data-open]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const dialog = document.getElementById(button.getAttribute("data-open")!) as HTMLDialogElement | null;
+        if (!dialog || typeof dialog.showModal !== "function") return;
+        opener = button as HTMLElement;
+        dialog.showModal();
+      });
+    });
+    document.querySelectorAll("dialog").forEach((dialog) => {
+      dialog.addEventListener("click", (e) => {
+        const target = e.target as HTMLElement;
+        if (target === dialog) (dialog as HTMLDialogElement).close();
+        if (target.closest("[data-close]")) (dialog as HTMLDialogElement).close();
+        if (target.closest("a[href^='#']") && dialog.id !== "settings-dialog") (dialog as HTMLDialogElement).close();
+      });
+      dialog.addEventListener("close", () => opener?.focus());
+    });
+
+    var article = document.querySelector(".prose");
+    var bar = document.getElementById("progress-bar");
+    var headings = Array.prototype.slice.call(document.querySelectorAll(".prose h2[id], .prose h3[id]")) as HTMLElement[];
+    var currentId: string | null = null;
+    var ticking = false;
+    function setCurrent(id: string | null) {
+      if (id === currentId) return;
+      currentId = id;
+      document.querySelectorAll(".toc-list a").forEach((a) => {
+        if (id && a.getAttribute("href") === "#" + id) a.setAttribute("aria-current", "location");
+        else a.removeAttribute("aria-current");
+      });
+    }
+    function update() {
+      if (!article || !bar) return;
+      var rect = article.getBoundingClientRect();
+      var total = rect.height - window.innerHeight;
+      var done = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 1;
+      bar.style.setProperty("--progress", done.toFixed(3));
+      var line = window.innerHeight * 0.3;
+      var id: string | null = null;
+      for (var i = 0; i < headings.length; i++) {
+        if (headings[i].getBoundingClientRect().top <= line) id = headings[i].id;
+        else break;
+      }
+      setCurrent(id);
+      ticking = false;
+    }
+    function requestUpdate() {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(update);
+      }
+    }
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    window.addEventListener("hashchange", requestUpdate);
+    update();
+
+    function checkTables() {
+      document.querySelectorAll(".table-wrap").forEach((wrap) => {
+        var scrollable = wrap.scrollWidth > wrap.clientWidth + 1;
+        wrap.classList.toggle("is-scrollable", scrollable);
+        wrap.classList.toggle("at-end", !scrollable || wrap.scrollLeft + wrap.clientWidth >= wrap.scrollWidth - 1);
+      });
+    }
+    document.querySelectorAll(".table-wrap").forEach((wrap) => {
+      wrap.addEventListener("scroll", checkTables, { passive: true });
+    });
+    window.addEventListener("resize", checkTables);
+    const mo = new MutationObserver(checkTables);
+    mo.observe(document.documentElement, { attributes: true });
+    checkTables();
+
+    function onLearnedClick(this: HTMLElement) {
+      var learned = this.getAttribute("aria-pressed") !== "true";
+      document.querySelectorAll("[data-learned]").forEach((b) => {
+        b.setAttribute("aria-pressed", String(learned));
+        var label = b.querySelector("span");
+        if (label) label.textContent = b.closest(".toolbar") ? "Learned" : learned ? "Learned" : "Mark as learned";
+      });
+      document.querySelectorAll("[data-current-dot]").forEach((dot) => {
+        dot.setAttribute("data-state", learned ? "learned" : "progress");
+        if (dot.firstElementChild) dot.firstElementChild.textContent = learned ? "Learned" : "In progress";
+      });
+    }
+    document.querySelectorAll("[data-learned]").forEach((button) => {
+      button.addEventListener("click", onLearnedClick as EventListener);
+    });
+
+    const toast = document.getElementById("break-toast");
+    const breaksToggle = document.querySelector('[data-toggle="breaks"]') as HTMLInputElement | null;
+    let timer: number | undefined;
+    const TWENTY_MINUTES = 20 * 60 * 1000;
+    function schedule() {
+      window.clearTimeout(timer);
+      if (breaksToggle?.checked) timer = window.setTimeout(showToast, TWENTY_MINUTES);
+    }
+    function showToast() {
+      if (toast) toast.hidden = false;
+    }
+    function hideToast() {
+      if (toast) toast.hidden = true;
+    }
+    document.getElementById("preview-break")?.addEventListener("click", () => {
+      const dialog = document.getElementById("settings-dialog") as HTMLDialogElement | null;
+      opener = null;
+      if (dialog?.open) dialog.close();
+      showToast();
+      document.getElementById("break-done")?.focus();
+    });
+    document.getElementById("break-done")?.addEventListener("click", () => {
+      hideToast();
+      schedule();
+    });
+    document.getElementById("break-off")?.addEventListener("click", () => {
+      if (breaksToggle) breaksToggle.checked = false;
+      hideToast();
+      schedule();
+    });
+    breaksToggle?.addEventListener("change", schedule);
+    schedule();
+
+    syncControls();
+
+    return () => {
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+      window.removeEventListener("hashchange", requestUpdate);
+      window.removeEventListener("resize", checkTables);
+      window.removeEventListener("resize", updateShellColumns);
+      mo.disconnect();
+      window.clearTimeout(timer);
+    };
+  }, []);
+
+  return <div dangerouslySetInnerHTML={{ __html: BODY_HTML }} />;
 }

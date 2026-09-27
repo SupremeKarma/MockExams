@@ -48,7 +48,7 @@ function toForm(course: Course): FormState {
     programId: course.programId,
     credits: course.credits,
     curriculum: course.curriculum,
-    units: course.syllabusUnits.map((u) => ({ title: u.title })),
+    units: (course.syllabusUnits ?? []).map((u) => ({ title: u.title })),
   };
 }
 
@@ -281,7 +281,7 @@ export default function CoursesWorkspace() {
                             <span className="text-sm text-zinc-500 truncate">{course.name}</span>
                           </div>
                           <p className="text-xs text-zinc-400 mt-0.5">
-                            {course.syllabusUnits.length} unit{course.syllabusUnits.length === 1 ? "" : "s"} ·{" "}
+                            {(course.syllabusUnits ?? []).length} unit{(course.syllabusUnits ?? []).length === 1 ? "" : "s"} ·{" "}
                             {course.credits} credits · {course.curriculum === "old_course" ? "old course" : "new course"}
                           </p>
                         </div>

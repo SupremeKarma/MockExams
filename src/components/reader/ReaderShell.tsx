@@ -20,6 +20,7 @@ import { Icon, IconSprite } from "./IconSprite";
 import { OnThisPage } from "./OnThisPage";
 import { ReadingSettingsDialog } from "./ReadingSettings";
 import { SyllabusTree } from "./SyllabusTree";
+import { Watermark } from "./Watermark";
 import { useDialog } from "./useDialog";
 import { useHashLanding } from "./useHashLanding";
 import { useScrollSpy } from "./useScrollSpy";
@@ -41,6 +42,8 @@ interface Props {
   /** True when the user agent looks like a TV — suggests, never switches. */
   tvSuggested: boolean;
   readingMinutes: number;
+  /** The signed-in reader's email, tiled faintly across the lesson; null when signed out (nothing to trace, and the preview is already public). */
+  watermarkLabel: string | null;
 }
 
 /**
@@ -104,6 +107,7 @@ export function ReaderShell({
   settings: initialSettings,
   tvSuggested,
   readingMinutes,
+  watermarkLabel,
 }: Props) {
   const [settings, setSettings] = useState(initialSettings);
   const [railOpen, setRailOpen] = useState(false);
@@ -260,6 +264,7 @@ export function ReaderShell({
         </aside>
 
         <main className="main sheet" id="main">
+          {watermarkLabel && <Watermark label={watermarkLabel} />}
           <article className="prose">
             <h1>{doc.title}</h1>
 
