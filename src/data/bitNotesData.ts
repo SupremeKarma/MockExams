@@ -2,6 +2,8 @@
  * Comprehensive Purbanchal University BIT Semester 1-8 Notes Database
  */
 
+import { semester7NotesData } from "./semester7NotesData";
+
 export interface CodeExample {
   language: string;
   title: string;
@@ -456,35 +458,7 @@ int selectVictimProcess(const vector<int>& cpuTimeSpent, const vector<int>& prio
     }
   },
   7: {
-    "Artificial Intelligence": {
-      subjectName: "Artificial Intelligence",
-      code: "BIT701",
-      creditHours: 3,
-      topics: [
-        {
-          id: "ai-astar",
-          name: "A* Informed Heuristic Graph Search",
-          importance: "Very High",
-          keyPoints: [
-            "Evaluation function: f(n) = g(n) + h(n)",
-            "g(n) = exact cost from start node to n",
-            "h(n) = heuristic estimated cost from n to goal",
-            "Admissibility condition: h(n) <= h*(n) (never overestimates true cost)"
-          ],
-          theory: "Optimal best-first search algorithm combining Dijkstra's cost and Greedy best-first heuristics.",
-          code: `// A* Search Evaluation:\n// Node selected = min(f(n)) from Open Priority Queue\n// Guaranteed optimal if h(n) is admissible and consistent.`,
-          example: "h(n) straight line distance in 8-puzzle or GPS routing navigation.",
-          commonExamQuestions: [
-            "Trace A* algorithm on given graph with node coordinates and heuristic table.",
-            "Explain Minimax algorithm with Alpha-Beta Pruning on game decision trees."
-          ]
-        }
-      ],
-      theoryTopics: [
-        "Describe knowledge representation using First-Order Predicate Logic (FOPL) and Resolution refutation.",
-        "Explain Backpropagation in Artificial Neural Networks."
-      ]
-    }
+    ...semester7NotesData,
   },
   8: {
     "Network Security & Cryptography": {
@@ -537,10 +511,21 @@ export function getSubjectNotes(codeOrName: string, semester?: number): SubjectN
     BIT501: "BIT253CO",
     BIT501CO: "BIT253CO",
     BIT301CO: "BIT301",
-    BIT401CO: "BIT401",
-    BIT254CO: "BIT401",
+    BIT401CO: "BIT401CO",
+    BIT402CO: "BIT402CO",
+    BIT421CO: "BIT421CO",
+    BIT422CO: "BIT422CO",
+    BIT423CO: "BIT423CO",
+    BIT428CO: "BIT428CO",
+    BIT429CO: "BIT429CO",
+    BIT435CO: "BIT435CO",
+    BIT436CO: "BIT436CO",
+    BIT437CO: "BIT437CO",
+    BIT403CO: "BIT403CO",
+    BIT487CO: "BIT487CO",
     BIT601CO: "BIT601",
     BIT701CO: "BIT701",
+    BIT701: "BIT701",
     BIT801CO: "BIT801",
   };
 

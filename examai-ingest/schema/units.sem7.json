@@ -1,8 +1,8 @@
 {
   "semester": 7,
   "generated_from": "src/data/bitSyllabusData.ts",
-  "subject_count": 3,
-  "unit_count": 19,
+  "subject_count": 10,
+  "unit_count": 83,
   "subjects": [
     {
       "subject_code": "BIT401CO",
@@ -15,7 +15,7 @@
         },
         {
           "unit_id": "BIT401CO_U02",
-          "title": "Elementary OS Calls (fork, exec, IPC)"
+          "title": "Elementary Operating System Calls (fork, exec, wait, IPC)"
         },
         {
           "unit_id": "BIT401CO_U03",
@@ -27,11 +27,35 @@
         },
         {
           "unit_id": "BIT401CO_U05",
-          "title": "I/O Multiplexing (select, poll)"
+          "title": "Elementary TCP-UDP Socket Calls (sendto, recvfrom)"
         },
         {
           "unit_id": "BIT401CO_U06",
-          "title": "Broadcast, Multicast & Raw Sockets"
+          "title": "I/O Multiplexing (select, poll, shutdown)"
+        },
+        {
+          "unit_id": "BIT401CO_U07",
+          "title": "Socket Options (getsockopt, setsockopt, SO_REUSEADDR)"
+        },
+        {
+          "unit_id": "BIT401CO_U08",
+          "title": "Name and Address Conversion (DNS, gethostbyname, getaddrinfo)"
+        },
+        {
+          "unit_id": "BIT401CO_U09",
+          "title": "Unix Domain Protocols (socketpair, stream/datagram)"
+        },
+        {
+          "unit_id": "BIT401CO_U10",
+          "title": "Daemon Processes and inetd Superserver"
+        },
+        {
+          "unit_id": "BIT401CO_U11",
+          "title": "Broadcast and Multicast"
+        },
+        {
+          "unit_id": "BIT401CO_U12",
+          "title": "IP Layers and Raw Sockets (ping implementation)"
         }
       ]
     },
@@ -42,62 +66,343 @@
       "units": [
         {
           "unit_id": "BIT402CO_U01",
-          "title": "Introduction to e-Government & e-Governance"
+          "title": "Introduction to e-Government and e-Governance"
         },
         {
           "unit_id": "BIT402CO_U02",
-          "title": "Public-Private Partnership Models"
+          "title": "Public-Private Partnership for e-Government (PPP Models)"
         },
         {
           "unit_id": "BIT402CO_U03",
-          "title": "ICT Infrastructure & e-Government Readiness"
+          "title": "ICT Infrastructure for e-Government (GIDC & Cloud)"
         },
         {
           "unit_id": "BIT402CO_U04",
-          "title": "Security for e-Government"
+          "title": "e-Government Readiness Framework"
         },
         {
           "unit_id": "BIT402CO_U05",
-          "title": "Implementing e-Government & Digital Democracy"
+          "title": "Security for e-Government (Security Standards)"
         },
         {
           "unit_id": "BIT402CO_U06",
-          "title": "Applying AI to e-Government"
+          "title": "Implementing e-Government (System Life Cycle)"
         },
         {
           "unit_id": "BIT402CO_U07",
-          "title": "Case Studies (Nepal, India & Other Countries)"
+          "title": "From Representative to Digital Democracy"
+        },
+        {
+          "unit_id": "BIT402CO_U08",
+          "title": "Citizen-Centric Remote Online Digital Governance (CRM)"
+        },
+        {
+          "unit_id": "BIT402CO_U09",
+          "title": "Applying Artificial Intelligence to Improve Performance"
+        },
+        {
+          "unit_id": "BIT402CO_U10",
+          "title": "Case Studies: Nepal (GIDC, Cyber Law), India, and Global Systems"
         }
       ]
     },
     {
-      "subject_code": "BIT4xxCO",
-      "subject_name": "Specialization Track (2 of 4 courses)",
-      "credits": 6,
+      "subject_code": "BIT421CO",
+      "subject_name": "Machine Learning (Track A)",
+      "credits": 3,
       "units": [
         {
-          "unit_id": "BIT4xxCO_U01",
-          "title": "Track A: Machine Learning (BIT421CO)"
+          "unit_id": "BIT421CO_U01",
+          "title": "Introduction to Machine Learning (Components & Frameworks)"
         },
         {
-          "unit_id": "BIT4xxCO_U02",
-          "title": "Track A: Business Intelligence & Data Science (BIT422CO)"
+          "unit_id": "BIT421CO_U02",
+          "title": "Supervised Learning: Regression, Classification, Decision Trees"
         },
         {
-          "unit_id": "BIT4xxCO_U03",
-          "title": "Track B: Digital Commerce (BIT428CO)"
+          "unit_id": "BIT421CO_U03",
+          "title": "Unsupervised Learning (k-means, k-modes)"
         },
         {
-          "unit_id": "BIT4xxCO_U04",
-          "title": "Track B: Multimedia and Application (BIT429CO)"
+          "unit_id": "BIT421CO_U04",
+          "title": "Model Diagnosis and Tuning (Bias/Variance, Cross-Validation)"
         },
         {
-          "unit_id": "BIT4xxCO_U05",
-          "title": "Track C: GIS (BIT435CO)"
+          "unit_id": "BIT421CO_U05",
+          "title": "Text Mining (Preprocessing, TF-IDF, Exploration)"
         },
         {
-          "unit_id": "BIT4xxCO_U06",
-          "title": "Track C: Remote Sensing (BIT436CO)"
+          "unit_id": "BIT421CO_U06",
+          "title": "Deep Learning (Feedforward, CNNs, RNNs)"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT422CO",
+      "subject_name": "Business Intelligence and Data Science (Track A)",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT422CO_U01",
+          "title": "Overview of Business Intelligence & Decision Support"
+        },
+        {
+          "unit_id": "BIT422CO_U02",
+          "title": "Data Warehousing (Architectures, ETL Processes, Real-Time DW)"
+        },
+        {
+          "unit_id": "BIT422CO_U03",
+          "title": "Business Reporting & Visual Analytics (Tableau, Power BI)"
+        },
+        {
+          "unit_id": "BIT422CO_U04",
+          "title": "Data Mining Concepts & Applications (WEKA)"
+        },
+        {
+          "unit_id": "BIT422CO_U05",
+          "title": "Text and Web Analytics (NLP, Sentiment Analysis)"
+        },
+        {
+          "unit_id": "BIT422CO_U06",
+          "title": "Big Data Analytics & Stream Processing"
+        },
+        {
+          "unit_id": "BIT422CO_U07",
+          "title": "Business Analytics Emerging Trends and Ethics"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT423CO",
+      "subject_name": "Deep Learning (Track A)",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT423CO_U01",
+          "title": "Basics of Artificial Neural Networks (ANN Models)"
+        },
+        {
+          "unit_id": "BIT423CO_U02",
+          "title": "Feedforward Neural Networks & Backpropagation Learning"
+        },
+        {
+          "unit_id": "BIT423CO_U03",
+          "title": "Deep Neural Networks (Optimization: Adam, Regularization)"
+        },
+        {
+          "unit_id": "BIT423CO_U04",
+          "title": "Convolutional Neural Networks (LeNet, AlexNet, VGG)"
+        },
+        {
+          "unit_id": "BIT423CO_U05",
+          "title": "Recurrent Neural Networks (LSTM, GRU, Sequence Modeling)"
+        },
+        {
+          "unit_id": "BIT423CO_U06",
+          "title": "Generative Models (RBMs, Deep Belief Nets)"
+        },
+        {
+          "unit_id": "BIT423CO_U07",
+          "title": "Applications in Vision, Speech and NLP"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT428CO",
+      "subject_name": "Digital Commerce (Track B)",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT428CO_U01",
+          "title": "E-Commerce Foundations (Business Models, Security, Payments)"
+        },
+        {
+          "unit_id": "BIT428CO_U02",
+          "title": "Electronic Retailing (Consumer Mercantile Models)"
+        },
+        {
+          "unit_id": "BIT428CO_U03",
+          "title": "Introduction to Digital Commerce Trends"
+        },
+        {
+          "unit_id": "BIT428CO_U04",
+          "title": "Fundamentals of Mobile Commerce (M-Commerce, GSM/GPRS)"
+        },
+        {
+          "unit_id": "BIT428CO_U05",
+          "title": "Digital Marketing (SEO, Google Ads, Social Media)"
+        },
+        {
+          "unit_id": "BIT428CO_U06",
+          "title": "Web Content Management Systems (WordPress Development)"
+        },
+        {
+          "unit_id": "BIT428CO_U07",
+          "title": "Application of Artificial Intelligence in Commerce"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT429CO",
+      "subject_name": "Multimedia and Application (Track B)",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT429CO_U01",
+          "title": "Multimedia Systems (Aspects, Elements, Data Streams)"
+        },
+        {
+          "unit_id": "BIT429CO_U02",
+          "title": "Sound and Audio (Sampling, MIDI, Speech Synthesis)"
+        },
+        {
+          "unit_id": "BIT429CO_U03",
+          "title": "Images and Graphics (Formats, Image Processing)"
+        },
+        {
+          "unit_id": "BIT429CO_U04",
+          "title": "Video and Animation (Signal Representation, Formats)"
+        },
+        {
+          "unit_id": "BIT429CO_U05",
+          "title": "Data Compression (Huffman, JPEG, MPEG, H.261)"
+        },
+        {
+          "unit_id": "BIT429CO_U06",
+          "title": "Optical Storage Media (CD, DVD, Blu-Ray)"
+        },
+        {
+          "unit_id": "BIT429CO_U07",
+          "title": "Multimedia Operating Systems (Real-Time Scheduling: EDF, RM)"
+        },
+        {
+          "unit_id": "BIT429CO_U08",
+          "title": "Multimedia Communication Systems (QoS, Streaming)"
+        },
+        {
+          "unit_id": "BIT429CO_U09",
+          "title": "Documentation, Hypertext and MHEG"
+        },
+        {
+          "unit_id": "BIT429CO_U10",
+          "title": "Synchronization (Reference Models & Specifications)"
+        },
+        {
+          "unit_id": "BIT429CO_U11",
+          "title": "Abstraction of Programming & Toolkits"
+        },
+        {
+          "unit_id": "BIT429CO_U12",
+          "title": "Multimedia Applications (VOD, Video Conferencing)"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT435CO",
+      "subject_name": "GIS (Track C)",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT435CO_U01",
+          "title": "Basic Concepts & Components of GIS"
+        },
+        {
+          "unit_id": "BIT435CO_U02",
+          "title": "GIS Data & Databases (Raster & Vector Structures)"
+        },
+        {
+          "unit_id": "BIT435CO_U03",
+          "title": "GIS Data Input (Digitization, GPS & Remote Sensing)"
+        },
+        {
+          "unit_id": "BIT435CO_U04",
+          "title": "GIS Mapping & Map Projections (UTM)"
+        },
+        {
+          "unit_id": "BIT435CO_U05",
+          "title": "Data Editing in GIS (Error Correction, Rubber Sheeting)"
+        },
+        {
+          "unit_id": "BIT435CO_U06",
+          "title": "Spatial Analysis (Buffering, Overlay, Network Connectivity)"
+        },
+        {
+          "unit_id": "BIT435CO_U07",
+          "title": "Spatial Data Infrastructure (SDI & NSDI Standards)"
+        },
+        {
+          "unit_id": "BIT435CO_U08",
+          "title": "GIS in Nepal (Current Situation & Major Activities)"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT436CO",
+      "subject_name": "Remote Sensing (Track C)",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT436CO_U01",
+          "title": "Concept and Scope of Remote Sensing Systems"
+        },
+        {
+          "unit_id": "BIT436CO_U02",
+          "title": "Electromagnetic Radiation (EMR Spectrum & Signatures)"
+        },
+        {
+          "unit_id": "BIT436CO_U03",
+          "title": "Sensor Characteristics (Whiskbroom, Pushbroom, Resolutions)"
+        },
+        {
+          "unit_id": "BIT436CO_U04",
+          "title": "Remote Sensor Platforms and Satellite Orbits (Sun-Synchronous)"
+        },
+        {
+          "unit_id": "BIT436CO_U05",
+          "title": "Space Imaging Satellites (IRS, Landsat, SPOT, High-Res)"
+        },
+        {
+          "unit_id": "BIT436CO_U06",
+          "title": "Integration of GIS and Remote Sensing"
+        },
+        {
+          "unit_id": "BIT436CO_U07",
+          "title": "Applications of Remote Sensing"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT437CO",
+      "subject_name": "Data Center and Disaster Recovery Centers (Track C)",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT437CO_U01",
+          "title": "Introduction to Data Center Types and Architecture"
+        },
+        {
+          "unit_id": "BIT437CO_U02",
+          "title": "The Role and Objectives of Data Centers (Standards & Tiers)"
+        },
+        {
+          "unit_id": "BIT437CO_U03",
+          "title": "Design Overview (Cooling, Power Redundancy, Cabling)"
+        },
+        {
+          "unit_id": "BIT437CO_U04",
+          "title": "Managing the Data Center (Processes, Decommissioning, Security)"
+        },
+        {
+          "unit_id": "BIT437CO_U05",
+          "title": "Data Center Industry Market and Trends"
+        },
+        {
+          "unit_id": "BIT437CO_U06",
+          "title": "Cloud Data Centers"
+        },
+        {
+          "unit_id": "BIT437CO_U07",
+          "title": "Disaster Recovery Center Formulation and DR Plans"
         }
       ]
     }

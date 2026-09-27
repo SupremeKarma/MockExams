@@ -1,8 +1,8 @@
 {
   "semester": 8,
   "generated_from": "src/data/bitSyllabusData.ts",
-  "subject_count": 3,
-  "unit_count": 17,
+  "subject_count": 9,
+  "unit_count": 67,
   "subjects": [
     {
       "subject_code": "BIT451MS",
@@ -11,27 +11,39 @@
       "units": [
         {
           "unit_id": "BIT451MS_U01",
-          "title": "Introduction to Management & Organization Design"
+          "title": "Introduction to Management Principles and Functions"
         },
         {
           "unit_id": "BIT451MS_U02",
-          "title": "The Foundation of Entrepreneurship"
+          "title": "Organization Design and Decentralization"
         },
         {
           "unit_id": "BIT451MS_U03",
-          "title": "Feasibility Analysis & Business Plans"
+          "title": "The Foundation of Entrepreneurship"
         },
         {
           "unit_id": "BIT451MS_U04",
-          "title": "Business Ownership & Franchising"
+          "title": "Feasibility Analysis and Crafting Winning Business Plans"
         },
         {
           "unit_id": "BIT451MS_U05",
-          "title": "Marketing Plans & E-Commerce for Entrepreneurs"
+          "title": "Forms of Business Ownership and Franchising"
         },
         {
           "unit_id": "BIT451MS_U06",
-          "title": "Entrepreneurship in IT (Technology Transfer)"
+          "title": "Building a Powerful Marketing Plan (Guerrilla Marketing)"
+        },
+        {
+          "unit_id": "BIT451MS_U07",
+          "title": "Location Selection and Layout Optimization"
+        },
+        {
+          "unit_id": "BIT451MS_U08",
+          "title": "E-Commerce and the Entrepreneur"
+        },
+        {
+          "unit_id": "BIT451MS_U09",
+          "title": "Entrepreneur of IT (Technology Transfer & Innovation)"
         }
       ]
     },
@@ -42,54 +54,284 @@
       "units": [
         {
           "unit_id": "BIT452CO_U01",
-          "title": "Distributed Systems Fundamentals"
+          "title": "Distributed Systems Fundamentals (RPC, RMI, Consistency)"
         },
         {
           "unit_id": "BIT452CO_U02",
-          "title": "Cloud Computing Service Models (IaaS/PaaS/SaaS)"
+          "title": "Cloud Computing Service Models (IaaS, PaaS, SaaS, Serverless)"
         },
         {
           "unit_id": "BIT452CO_U03",
-          "title": "Virtualization Technologies"
+          "title": "Virtualization Technologies (Hypervisors, Containers, K8s)"
         },
         {
           "unit_id": "BIT452CO_U04",
-          "title": "Cloud Deployment Models"
+          "title": "Cloud Storage and Big Data Architectures"
         },
         {
           "unit_id": "BIT452CO_U05",
-          "title": "Cloud Security & Management"
+          "title": "Cloud Security, IAM and Shared Responsibility"
         }
       ]
     },
     {
-      "subject_code": "BIT4xxCO",
-      "subject_name": "Specialization Track (2 of 4 courses, continued)",
-      "credits": 6,
+      "subject_code": "BIT471CO",
+      "subject_name": "Natural Language Processing (Track A)",
+      "credits": 3,
       "units": [
         {
-          "unit_id": "BIT4xxCO_U01",
-          "title": "Track A: Natural Language Processing (BIT471CO)"
+          "unit_id": "BIT471CO_U01",
+          "title": "Introduction to NLP (Linguistic Organization, CFG Parsing)"
         },
         {
-          "unit_id": "BIT4xxCO_U02",
-          "title": "Track A: Supply Chain Analytics (BIT472MS)"
+          "unit_id": "BIT471CO_U02",
+          "title": "Morphology & Phonology (Parsing with FSTs, Phonological Rules)"
         },
         {
-          "unit_id": "BIT4xxCO_U03",
-          "title": "Track B: Big Data (BIT478CO)"
+          "unit_id": "BIT471CO_U03",
+          "title": "Pronunciation, Spelling and N-grams (Smoothing, Language Models)"
         },
         {
-          "unit_id": "BIT4xxCO_U04",
-          "title": "Track B: Mobile App Development (BIT479CO)"
+          "unit_id": "BIT471CO_U04",
+          "title": "Syntax: POS Tagging (HMM Tagger, Transformation-based)"
         },
         {
-          "unit_id": "BIT4xxCO_U05",
-          "title": "Track C: Incident Response & Management (BIT485CO)"
+          "unit_id": "BIT471CO_U05",
+          "title": "Sentence Level Construction & Unification Semantics"
         },
         {
-          "unit_id": "BIT4xxCO_U06",
-          "title": "Track C: Climate Change Risk Management (BIT486CO)"
+          "unit_id": "BIT471CO_U06",
+          "title": "Lexical Semantics (WordNet, Homonymy, WSD)"
+        },
+        {
+          "unit_id": "BIT471CO_U07",
+          "title": "Pragmatics and Discourse Structure"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT472MS",
+      "subject_name": "Supply Chain Analytics (Track A)",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT472MS_U01",
+          "title": "Introduction to Supply Chain Analytics & SMART Goals"
+        },
+        {
+          "unit_id": "BIT472MS_U02",
+          "title": "Data-Driven Supply Chains (Python Setup)"
+        },
+        {
+          "unit_id": "BIT472MS_U03",
+          "title": "Data Manipulation & Indexing in Python"
+        },
+        {
+          "unit_id": "BIT472MS_U04",
+          "title": "Data Visualization (Seaborn, Geospatial Mapping)"
+        },
+        {
+          "unit_id": "BIT472MS_U05",
+          "title": "Customer Management (Cohort & RFM Analysis, Clustering)"
+        },
+        {
+          "unit_id": "BIT472MS_U06",
+          "title": "Supply Management & Supplier Risk Regression"
+        },
+        {
+          "unit_id": "BIT472MS_U07",
+          "title": "Warehouse and Inventory Optimization"
+        },
+        {
+          "unit_id": "BIT472MS_U08",
+          "title": "Demand Forecasting (Time Series Methods)"
+        },
+        {
+          "unit_id": "BIT472MS_U09",
+          "title": "Logistics Management & Route Optimization"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT478CO",
+      "subject_name": "Big Data (Track B)",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT478CO_U01",
+          "title": "Introduction to Big Data (Distributed Systems, Trends)"
+        },
+        {
+          "unit_id": "BIT478CO_U02",
+          "title": "MapReduce Applications (Workflows, Optimization, Locality)"
+        },
+        {
+          "unit_id": "BIT478CO_U03",
+          "title": "Data Management & Taxonomy of NoSQL Implementations"
+        },
+        {
+          "unit_id": "BIT478CO_U04",
+          "title": "Fundamentals of Hadoop (HDFS, Streaming, Pipes, I/O)"
+        },
+        {
+          "unit_id": "BIT478CO_U05",
+          "title": "Hadoop Tools: HBase, Cassandra, Pig Latin, Hive & HiveQL"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT479CO",
+      "subject_name": "Mobile App Development (Track B)",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT479CO_U01",
+          "title": "Introduction to Mobile Devices & Architectures"
+        },
+        {
+          "unit_id": "BIT479CO_U02",
+          "title": "Mobile Platforms & Wireless Communication Constraints"
+        },
+        {
+          "unit_id": "BIT479CO_U03",
+          "title": "Introduction to Android Platform (ART, Tools, Manifest)"
+        },
+        {
+          "unit_id": "BIT479CO_U04",
+          "title": "Android Application Design Essentials (Layouts, Recycler View)"
+        },
+        {
+          "unit_id": "BIT479CO_U05",
+          "title": "Writing Basic Applications (Context, Activities, Intents)"
+        },
+        {
+          "unit_id": "BIT479CO_U06",
+          "title": "Data Handling in Android (SQLite, Preferences, Content Providers)"
+        },
+        {
+          "unit_id": "BIT479CO_U07",
+          "title": "Developing Real-Time Applications (Telephony, RESTful APIs)"
+        },
+        {
+          "unit_id": "BIT479CO_U08",
+          "title": "Debugging, Testing & Deployment (Play Store Distribution)"
+        },
+        {
+          "unit_id": "BIT479CO_U09",
+          "title": "Recent Concepts: App Monetization, Location Kit, ML Kit"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT485CO",
+      "subject_name": "Incident Response and Management System (Track C)",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT485CO_U01",
+          "title": "Introduction to Incident Response Systems (NEOC/DEOC)"
+        },
+        {
+          "unit_id": "BIT485CO_U02",
+          "title": "Functioning of IRS (Chain of Command, Unified Command)"
+        },
+        {
+          "unit_id": "BIT485CO_U03",
+          "title": "Resources and Infrastructure Management (Incident Action Plan)"
+        },
+        {
+          "unit_id": "BIT485CO_U04",
+          "title": "Incident Decision System and Reporting (Early Warning, Media)"
+        },
+        {
+          "unit_id": "BIT485CO_U05",
+          "title": "Disaster Recovery Portals (DRR Portals, Real-Time Data)"
+        },
+        {
+          "unit_id": "BIT485CO_U06",
+          "title": "Phases of Disaster Management (Mitigation, Response, Recovery)"
+        },
+        {
+          "unit_id": "BIT485CO_U07",
+          "title": "Cyber Threats and Disaster Management (DR Sites, Fake News)"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT486CO",
+      "subject_name": "Climate Change Risk Management (Track C)",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT486CO_U01",
+          "title": "Overview of Climate Change Science"
+        },
+        {
+          "unit_id": "BIT486CO_U02",
+          "title": "Causes of Climate Change (Greenhouse Effect, Earth Radiative Budget)"
+        },
+        {
+          "unit_id": "BIT486CO_U03",
+          "title": "Future of Climate Change (GHG Projections, Ocean Acidification)"
+        },
+        {
+          "unit_id": "BIT486CO_U04",
+          "title": "Climate Change Impacts (Nepal Sectoral Impacts)"
+        },
+        {
+          "unit_id": "BIT486CO_U05",
+          "title": "Climate Change Indicators (Glacial Lake Outbursts, Phenology)"
+        },
+        {
+          "unit_id": "BIT486CO_U06",
+          "title": "Climate Change and Extreme Weather Adaptation"
+        },
+        {
+          "unit_id": "BIT486CO_U07",
+          "title": "ICT for Climate Change and Green Growth"
+        },
+        {
+          "unit_id": "BIT486CO_U08",
+          "title": "Climate Change Impacts and Risk Analysis (CIRA Framework)"
+        }
+      ]
+    },
+    {
+      "subject_code": "BIT487CO",
+      "subject_name": "Disaster Governance (Track C)",
+      "credits": 3,
+      "units": [
+        {
+          "unit_id": "BIT487CO_U01",
+          "title": "Overview of Digital Governance in Disaster Management"
+        },
+        {
+          "unit_id": "BIT487CO_U02",
+          "title": "Knowledge Management in Digital Governance"
+        },
+        {
+          "unit_id": "BIT487CO_U03",
+          "title": "Overview of Disasters & Sendai Framework"
+        },
+        {
+          "unit_id": "BIT487CO_U04",
+          "title": "Disaster Governance Effectiveness and SDGs"
+        },
+        {
+          "unit_id": "BIT487CO_U05",
+          "title": "Governance in Disaster Mitigation (Infrastructure Planning)"
+        },
+        {
+          "unit_id": "BIT487CO_U06",
+          "title": "Governance in Disaster Preparedness (NSDRM Nepal, Evacuation)"
+        },
+        {
+          "unit_id": "BIT487CO_U07",
+          "title": "Governance in Disaster Response (Resource Deployment)"
+        },
+        {
+          "unit_id": "BIT487CO_U08",
+          "title": "Governance in Disaster Recovery (Critical Infrastructure Restoration)"
         }
       ]
     }

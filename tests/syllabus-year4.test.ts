@@ -114,4 +114,63 @@ describe("Year IV BIT Syllabus Data & Markdown Rendering", () => {
     expect(sem8Md).toContain("BIT471CO");
     expect(sem8Md).toContain("BIT479CO");
   });
+
+  it("verifies BIT403CO (Internship) has 4 official syllabus units totaling 45 hours and evaluation criteria", () => {
+    const internship = sem7?.subjects.find((s) => s.code === "BIT403CO");
+    expect(internship).toBeDefined();
+    expect(internship?.syllabusUnits).toBeDefined();
+    expect(internship?.syllabusUnits).toHaveLength(4);
+    expect(internship?.syllabusUnits?.[0].title).toContain("Proposal Defense");
+    expect(internship?.syllabusUnits?.[1].title).toContain("Mid-Term Progress Review");
+    expect(internship?.syllabusUnits?.[3].title).toContain("Final Internship Report");
+  });
+
+  it("verifies bitNotesData[7] contains real notes for all Semester 7 subjects", async () => {
+    const { bitNotesData, getSubjectNotes } = await import("../src/data/bitNotesData");
+    const sem7Notes = bitNotesData[7];
+    expect(sem7Notes).toBeDefined();
+
+    const expectedSubjects = [
+      "Network Programming",
+      "Digital Governance",
+      "Machine Learning (Track A)",
+      "Business Intelligence and Data Science (Track A)",
+      "Deep Learning (Track A)",
+      "Digital Commerce (Track B)",
+      "Multimedia and Application (Track B)",
+      "GIS (Track C)",
+      "Remote Sensing (Track C)",
+      "Data Center and Disaster Recovery Centers (Track C)",
+      "Internship",
+      "Disaster Governance (Track C)",
+    ];
+
+    for (const subjName of expectedSubjects) {
+      const subj = sem7Notes[subjName];
+      expect(subj, `Expected ${subjName} to exist in bitNotesData[7]`).toBeDefined();
+      expect(subj.topics.length, `${subjName} should have topics`).toBeGreaterThan(0);
+      expect(subj.theoryTopics.length, `${subjName} should have theory topics`).toBeGreaterThan(0);
+
+      // Verify each topic has real content
+      subj.topics.forEach((t) => {
+        expect(t.name.length).toBeGreaterThan(5);
+        expect(t.keyPoints.length).toBeGreaterThanOrEqual(3);
+        expect(t.theory.length).toBeGreaterThan(50);
+        expect(t.commonExamQuestions?.length).toBeGreaterThanOrEqual(2);
+      });
+    }
+
+    // Verify lookup by course codes
+    const npNotes = getSubjectNotes("BIT401CO", 7);
+    expect(npNotes).toBeDefined();
+    expect(npNotes?.subjectName).toBe("Network Programming");
+
+    const dgNotes = getSubjectNotes("BIT402CO", 7);
+    expect(dgNotes).toBeDefined();
+    expect(dgNotes?.subjectName).toBe("Digital Governance");
+
+    const mlNotes = getSubjectNotes("BIT421CO", 7);
+    expect(mlNotes).toBeDefined();
+    expect(mlNotes?.subjectName).toBe("Machine Learning (Track A)");
+  });
 });
