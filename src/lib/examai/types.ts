@@ -86,6 +86,8 @@ export interface Program {
 export interface SyllabusUnit {
   unitId: string;
   title: string;
+  teachingHours?: number;
+  subtopics?: string[];
 }
 
 export interface Course {

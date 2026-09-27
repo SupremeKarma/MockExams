@@ -245,9 +245,26 @@ async function main() {
   initFirebase();
   const db = admin.firestore();
 
+  // Load global syllabus data if available
+  const globalSyllabusPath = join(process.cwd(), "src", "data", "globalSyllabus.json");
+  let globalPrograms = [];
+  let globalCourses = [];
+  if (existsSync(globalSyllabusPath)) {
+    try {
+      const raw = await readFile(globalSyllabusPath, "utf-8");
+      const parsed = JSON.parse(raw);
+      globalPrograms = parsed.programs || [];
+      globalCourses = parsed.courses || [];
+      console.log(`📖 Loaded ${globalPrograms.length} global programs and ${globalCourses.length} international courses from globalSyllabus.json`);
+    } catch (e) {
+      console.warn("Could not parse globalSyllabus.json:", e);
+    }
+  }
+
   // --- 1. Seed Programs ---
-  console.log(`[1/4] Seeding ${PROGRAMS.length} Degree & Entrance Programs...`);
-  for (const prog of PROGRAMS) {
+  const allPrograms = [...PROGRAMS, ...globalPrograms];
+  console.log(`[1/4] Seeding ${allPrograms.length} Degree, Entrance & Global Programs...`);
+  for (const prog of allPrograms) {
     if (!DRY_RUN) {
       await db.collection("programs").doc(prog.id).set(
         {
@@ -275,8 +292,8 @@ async function main() {
     console.log(`  ✓ Learning Path: [${path.pathId}] ${path.name} (${path.estimatedHours}h, ${path.difficulty})`);
   }
 
-  // --- 3. Seed & Verify University Courses ---
-  console.log("\n[3/4] Ensuring University Courses Schema...");
+  // --- 3. Seed & Verify University & Global Courses ---
+  console.log("\n[3/4] Ensuring University & Global Syllabus Courses...");
   const sampleCourses = [
     { code: "BIT101CO", name: "Fundamentals of Information Technology", semester: 1, programId: "BIT", credits: 3 },
     { code: "BIT102HS", name: "Mathematics-I", semester: 1, programId: "BIT", credits: 3 },
@@ -290,19 +307,38 @@ async function main() {
     { code: "IOE_MATH_101", name: "Advanced Calculus & Coordinate Geometry", semester: 1, programId: "IOE_ENTRANCE", credits: 4 },
   ];
 
-  for (const c of sampleCourses) {
+  const allCourses = [...sampleCourses];
+  for (const gc of globalCourses) {
+    if (!allCourses.some((c) => c.code === gc.code)) {
+      allCourses.push({
+        code: gc.code,
+        name: gc.name,
+        semester: gc.semester,
+        programId: gc.programId,
+        credits: gc.credits,
+        curriculum: "new_course",
+        difficulty: gc.difficulty,
+        description: gc.description,
+        learningOutcomes: gc.learningOutcomes,
+        prerequisites: gc.prerequisites,
+        syllabusUnits: gc.syllabusUnits,
+      });
+    }
+  }
+
+  for (const c of allCourses) {
     if (!DRY_RUN) {
       await db.collection("courses").doc(c.code).set(
         {
           ...c,
-          curriculum: "new_course",
-          difficulty: "Intermediate",
+          curriculum: c.curriculum || "new_course",
+          difficulty: c.difficulty || "Intermediate",
           updatedAt: admin.firestore.FieldValue.serverTimestamp(),
         },
         { merge: true }
       );
     }
-    console.log(`  ✓ Course Registered: [${c.code}] ${c.name}`);
+    console.log(`  ✓ Course Registered: [${c.code}] ${c.name} (${c.syllabusUnits?.length || 0} units)`);
   }
 
   // --- 4. Parse Bulk Import Markdown Papers & Ingest Questions ---

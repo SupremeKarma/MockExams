@@ -1,0 +1,318 @@
+{
+  "programs": [
+    {
+      "id": "TU_CSIT",
+      "name": "B.Sc. Computer Science and Information Technology",
+      "university": "Tribhuvan University (IOST)",
+      "country": "Nepal",
+      "flag": "🇳🇵",
+      "semesters": 8,
+      "faculty": "Institute of Science and Technology",
+      "degreeLevel": "Undergraduate",
+      "description": "Flagship 4-year CS program in Nepal blending computing theory, algorithms, and systems engineering."
+    },
+    {
+      "id": "CAMBRIDGE_A_LEVELS",
+      "name": "Cambridge International AS & A Level",
+      "university": "Cambridge Assessment International Education (CAIE)",
+      "country": "International (UK / Global)",
+      "flag": "🇬🇧",
+      "semesters": 4,
+      "faculty": "International Pre-University",
+      "degreeLevel": "Advanced Secondary / Pre-University",
+      "description": "Gold standard international pre-university STEM qualification recognized worldwide."
+    },
+    {
+      "id": "ACM_CS2023",
+      "name": "ACM / IEEE-CS Global Standard Computer Science",
+      "university": "Association for Computing Machinery & IEEE Computer Society",
+      "country": "Global Standard",
+      "flag": "🌍",
+      "semesters": 8,
+      "faculty": "Computing Curricula",
+      "degreeLevel": "Undergraduate Core Curricula",
+      "description": "The global benchmark defining the core foundational competencies of software engineers worldwide."
+    },
+    {
+      "id": "US_AP",
+      "name": "College Board Advanced Placement (AP STEM)",
+      "university": "The College Board (USA)",
+      "country": "United States / Global",
+      "flag": "🇺🇸",
+      "semesters": 2,
+      "faculty": "Advanced Placement",
+      "degreeLevel": "College Equivalent",
+      "description": "Rigorous college-level curricula and examinations allowing students to earn university placement."
+    },
+    {
+      "id": "GATE_CS",
+      "name": "GATE Computer Science & Information Technology",
+      "university": "Indian Institute of Science (IISc) & IITs",
+      "country": "India",
+      "flag": "🇮🇳",
+      "semesters": 4,
+      "faculty": "Engineering",
+      "degreeLevel": "Graduate / Competitive",
+      "description": "High-rigor competitive examination testing foundational computer science and engineering aptitude."
+    }
+  ],
+  "courses": [
+    {
+      "code": "CSC110",
+      "name": "Introduction to Information Technology",
+      "programId": "TU_CSIT",
+      "semester": 1,
+      "credits": 3,
+      "difficulty": "Beginner",
+      "description": "Computer hardware architecture, system software, networking protocols, databases, and digital information systems.",
+      "learningOutcomes": [
+        "Understand computer internal hardware architecture and bus structures.",
+        "Comprehend base numbering systems, 2's complement, and logic gate conversions.",
+        "Explain operating system fundamentals and memory management models."
+      ],
+      "prerequisites": ["None (Foundational)"],
+      "syllabusUnits": [
+        { "unitId": "CSC110_U1", "title": "Computer Fundamentals & Architecture", "teachingHours": 6, "subtopics": ["Von Neumann Architecture", "CPU, ALU, Registers & Bus Structures", "Storage Technologies"] },
+        { "unitId": "CSC110_U2", "title": "Number Systems & Digital Logic", "teachingHours": 6, "subtopics": ["Binary, Hexadecimal Arithmetic", "2's Complement", "Boolean Logic Gates"] },
+        { "unitId": "CSC110_U3", "title": "System & Application Software", "teachingHours": 8, "subtopics": ["Operating Systems", "Compilers vs Interpreters", "Process Scheduling"] },
+        { "unitId": "CSC110_U4", "title": "Networking & Internet Protocols", "teachingHours": 8, "subtopics": ["OSI vs TCP/IP Models", "Network Topologies", "DNS & HTTP/HTTPS Protocols"] },
+        { "unitId": "CSC110_U5", "title": "Information Security & Cloud", "teachingHours": 7, "subtopics": ["Malware Types", "Basic Cryptography", "Cloud & IoT Fundamentals"] }
+      ]
+    },
+    {
+      "code": "CSC111",
+      "name": "C Programming",
+      "programId": "TU_CSIT",
+      "semester": 1,
+      "credits": 3,
+      "difficulty": "Beginner",
+      "description": "Structured procedural programming in C covering data types, control flow, functions, arrays, pointers, dynamic memory allocation, and file I/O.",
+      "learningOutcomes": [
+        "Design structured procedural algorithms in C.",
+        "Master pointer arithmetic and heap memory management (malloc, free).",
+        "Work with file handling and complex user-defined structures."
+      ],
+      "prerequisites": ["CSC110 Introduction to Information Technology"],
+      "syllabusUnits": [
+        { "unitId": "CSC111_U1", "title": "Elements of C & Control Flow", "teachingHours": 8, "subtopics": ["Variables & Data Types", "Operator Precedence", "if-else & switch-case", "Loops (for, while)"] },
+        { "unitId": "CSC111_U2", "title": "Functions & Storage Classes", "teachingHours": 6, "subtopics": ["Prototypes & Call by Reference", "Recursion & Stack Frames", "Storage Classes (static, extern)"] },
+        { "unitId": "CSC111_U3", "title": "Arrays & Strings", "teachingHours": 7, "subtopics": ["Multi-dimensional Arrays", "Matrix Operations", "String Manipulation Without Library"] },
+        { "unitId": "CSC111_U4", "title": "Pointers & Dynamic Memory", "teachingHours": 9, "subtopics": ["Pointer Dereferencing", "Pointers to Pointers", "malloc(), calloc(), free()"] },
+        { "unitId": "CSC111_U5", "title": "Structures & File I/O", "teachingHours": 8, "subtopics": ["Nested Structures", "Unions", "File Reading and Writing (fopen, fread, fwrite)"] }
+      ]
+    },
+    {
+      "code": "CSC211",
+      "name": "Data Structures and Algorithms",
+      "programId": "TU_CSIT",
+      "semester": 3,
+      "credits": 3,
+      "difficulty": "Intermediate",
+      "description": "Comprehensive study of abstract data types, linear/non-linear structures, asymptotic complexity, and graph/sorting algorithms.",
+      "learningOutcomes": [
+        "Analyze algorithm runtime and space efficiency using asymptotic notations.",
+        "Implement stacks, queues, linked lists, trees, and graphs from scratch.",
+        "Apply greedy, divide-and-conquer, and dynamic programming algorithms."
+      ],
+      "prerequisites": ["CSC111 C Programming"],
+      "syllabusUnits": [
+        { "unitId": "CSC211_U1", "title": "Algorithm Analysis & ADTs", "teachingHours": 5, "subtopics": ["Big-O, Omega, Theta", "Recurrence Relations", "Master Theorem"] },
+        { "unitId": "CSC211_U2", "title": "Stacks, Queues & Linked Lists", "teachingHours": 10, "subtopics": ["Infix to Postfix Conversion", "Circular Queues", "Singly & Doubly Linked Lists"] },
+        { "unitId": "CSC211_U3", "title": "Trees, Heaps & AVL Trees", "teachingHours": 12, "subtopics": ["Binary Search Trees", "AVL Balancing Rotations", "Priority Queues & Heap Sort"] },
+        { "unitId": "CSC211_U4", "title": "Graphs & Network Algorithms", "teachingHours": 9, "subtopics": ["BFS & DFS Traversals", "Prim's & Kruskal's MST", "Dijkstra's Shortest Path"] },
+        { "unitId": "CSC211_U5", "title": "Sorting, Searching & Hashing", "teachingHours": 9, "subtopics": ["Quick Sort & Merge Sort", "Hash Tables", "Collision Resolution (Chaining vs Probing)"] }
+      ]
+    },
+    {
+      "code": "CSC260",
+      "name": "Database Management Systems",
+      "programId": "TU_CSIT",
+      "semester": 4,
+      "credits": 3,
+      "difficulty": "Intermediate",
+      "description": "Three-schema database architecture, ER modeling, relational algebra, advanced SQL, normalization up to BCNF, and ACID transaction recovery.",
+      "learningOutcomes": [
+        "Model business applications using Entity-Relationship (ER) diagrams.",
+        "Write advanced SQL queries, joins, views, and triggers.",
+        "Decompose relational schemas into 3NF and BCNF without data loss."
+      ],
+      "prerequisites": ["CSC211 Data Structures and Algorithms"],
+      "syllabusUnits": [
+        { "unitId": "CSC260_U1", "title": "Database Architecture & ER Modeling", "teachingHours": 6, "subtopics": ["Three-Schema Framework", "Physical vs Logical Independence", "ER & EER Modeling"] },
+        { "unitId": "CSC260_U2", "title": "Relational Model & Relational Algebra", "teachingHours": 7, "subtopics": ["Integrity Constraints", "Select, Project, Join Operations", "Relational Calculus"] },
+        { "unitId": "CSC260_U3", "title": "SQL Query Processing & Triggers", "teachingHours": 10, "subtopics": ["Complex Queries & Subqueries", "Views & Triggers", "Query Execution Plans"] },
+        { "unitId": "CSC260_U4", "title": "Functional Dependencies & Normalization", "teachingHours": 9, "subtopics": ["Armstrong's Axioms", "1NF, 2NF, 3NF", "BCNF & Lossless Join Decompositions"] },
+        { "unitId": "CSC260_U5", "title": "ACID Transactions & Concurrency", "teachingHours": 8, "subtopics": ["Serializability Schedules", "Two-Phase Locking (2PL)", "Write-Ahead Logging (WAL)"] }
+      ]
+    },
+    {
+      "code": "CSC261",
+      "name": "Operating Systems",
+      "programId": "TU_CSIT",
+      "semester": 4,
+      "credits": 3,
+      "difficulty": "Intermediate",
+      "description": "Kernel architecture, process synchronization, CPU scheduling, virtual memory paging, page replacement algorithms, and file systems.",
+      "learningOutcomes": [
+        "Understand process control blocks, context switches, and thread models.",
+        "Prevent race conditions using mutex locks and counting semaphores.",
+        "Analyze virtual memory performance and page replacement strategies."
+      ],
+      "prerequisites": ["CSC110 Introduction to Information Technology"],
+      "syllabusUnits": [
+        { "unitId": "CSC261_U1", "title": "OS Architecture & Process Model", "teachingHours": 6, "subtopics": ["Dual-Mode Operation", "Process Control Blocks (PCB)", "User vs Kernel Threads"] },
+        { "unitId": "CSC261_U2", "title": "CPU Scheduling & Synchronization", "teachingHours": 10, "subtopics": ["Round Robin & Multilevel Queues", "Critical Section Problem", "Semaphores & Mutexes"] },
+        { "unitId": "CSC261_U3", "title": "Deadlocks & Resource Allocation", "teachingHours": 6, "subtopics": ["Coffman Conditions", "Banker's Algorithm", "Deadlock Detection & Recovery"] },
+        { "unitId": "CSC261_U4", "title": "Memory Management & Paging", "teachingHours": 10, "subtopics": ["Paging & TLB Translation", "Demand Paging & Page Faults", "FIFO, LRU, Optimal Replacement"] },
+        { "unitId": "CSC261_U5", "title": "File Systems & Disk Scheduling", "teachingHours": 8, "subtopics": ["Inodes & Allocation Methods", "SCAN, C-SCAN Disk Scheduling", "RAID Configurations"] }
+      ]
+    },
+    {
+      "code": "CSC315",
+      "name": "Artificial Intelligence",
+      "programId": "TU_CSIT",
+      "semester": 5,
+      "credits": 3,
+      "difficulty": "Advanced",
+      "description": "State-space heuristic search, adversarial game playing, logical inference, Bayesian reasoning, and artificial neural networks.",
+      "learningOutcomes": [
+        "Formulate engineering problems as state-space graph search.",
+        "Implement A* heuristic search and Minimax with Alpha-Beta pruning.",
+        "Apply Bayesian probability and backpropagation neural networks."
+      ],
+      "prerequisites": ["CSC211 Data Structures and Algorithms"],
+      "syllabusUnits": [
+        { "unitId": "CSC315_U1", "title": "Intelligent Agents & PEAS", "teachingHours": 5, "subtopics": ["Turing Test", "Rational Agents & PEAS Model", "Agent Architectures"] },
+        { "unitId": "CSC315_U2", "title": "Heuristic Search & Games", "teachingHours": 10, "subtopics": ["A* Search & Admissibility", "Greedy Best-First Search", "Minimax & Alpha-Beta Pruning"] },
+        { "unitId": "CSC315_U3", "title": "Knowledge & Logic Systems", "teachingHours": 10, "subtopics": ["Propositional Logic", "First-Order Predicate Logic", "Resolution Refutation Proofs"] },
+        { "unitId": "CSC315_U4", "title": "Probabilistic Reasoning", "teachingHours": 8, "subtopics": ["Bayes' Rule", "Bayesian Belief Networks", "Markov Decision Processes"] },
+        { "unitId": "CSC315_U5", "title": "Machine Learning & Neural Nets", "teachingHours": 7, "subtopics": ["Decision Trees", "Multi-Layer Perceptron", "Backpropagation Algorithm"] }
+      ]
+    },
+    {
+      "code": "CIE_9618",
+      "name": "Cambridge A-Level Computer Science (9618)",
+      "programId": "CAMBRIDGE_A_LEVELS",
+      "semester": 1,
+      "credits": 4,
+      "difficulty": "Advanced",
+      "description": "Comprehensive international qualification covering information representation, architecture, software, OOP, databases, and algorithms.",
+      "learningOutcomes": [
+        "Master two's complement and normalized floating-point representation.",
+        "Construct and trace recursive and object-oriented algorithms in code.",
+        "Synthesize processor fetch-decode-execute pipelining and logic circuits."
+      ],
+      "prerequisites": ["IGCSE Computer Science or O-Level equivalent"],
+      "syllabusUnits": [
+        { "unitId": "CIE_9618_P1", "title": "Theory Fundamentals", "teachingHours": 35, "subtopics": ["Floating Point & Two's Complement", "Processors & Assembly Language", "Operating Systems"] },
+        { "unitId": "CIE_9618_P2", "title": "Problem-Solving & Programming", "teachingHours": 35, "subtopics": ["Algorithm Design in Pseudocode", "Linear/Binary Search, Bubble/Insertion Sort", "Modular Functions"] },
+        { "unitId": "CIE_9618_P3", "title": "Advanced Computer Science Theory", "teachingHours": 35, "subtopics": ["Karnaugh Maps & Flip-Flops", "RISC vs CISC Pipelining", "Database Normalization up to 3NF"] },
+        { "unitId": "CIE_9618_P4", "title": "Practical Programming Skills", "teachingHours": 35, "subtopics": ["Object-Oriented Programming (OOP)", "Stacks, Queues, Linked Lists, Trees", "Recursion & Defensive Coding"] }
+      ]
+    },
+    {
+      "code": "CIE_9709",
+      "name": "Cambridge A-Level Mathematics (9709)",
+      "programId": "CAMBRIDGE_A_LEVELS",
+      "semester": 1,
+      "credits": 4,
+      "difficulty": "Advanced",
+      "description": "Pure Mathematics (Calculus, Trigonometry, Vectors, Complex Numbers) and Newtonian Mechanics.",
+      "learningOutcomes": [
+        "Differentiate and integrate algebraic, exponential, and trigonometric functions.",
+        "Solve first-order differential equations and mechanical trajectory problems.",
+        "Apply Newton's laws of motion, momentum conservation, and work-energy."
+      ],
+      "prerequisites": ["IGCSE Additional Mathematics"],
+      "syllabusUnits": [
+        { "unitId": "CIE_9709_P1", "title": "Pure Mathematics 1", "teachingHours": 30, "subtopics": ["Quadratics & Coordinate Geometry", "Trigonometric Identities", "Basic Calculus"] },
+        { "unitId": "CIE_9709_P3", "title": "Pure Mathematics 3", "teachingHours": 40, "subtopics": ["Partial Fractions & Polynomials", "Advanced Integration & Differential Equations", "Complex Numbers & 3D Vectors"] },
+        { "unitId": "CIE_9709_M1", "title": "Mechanics", "teachingHours": 30, "subtopics": ["Acceleration Models & Resolving Forces", "Newton's Laws for Connected Particles", "Conservation of Work & Energy"] }
+      ]
+    },
+    {
+      "code": "ACM_CS_ALGO",
+      "name": "Algorithms, Complexity & Computability",
+      "programId": "ACM_CS2023",
+      "semester": 3,
+      "credits": 4,
+      "difficulty": "Advanced",
+      "description": "ACM/IEEE-CS international standard knowledge area covering advanced algorithmic paradigms, complexity classes (P, NP, NP-Complete), and graph analytics.",
+      "learningOutcomes": [
+        "Apply rigorous mathematical proof techniques (induction, invariants, reductions).",
+        "Design polynomial-time approximation and randomized algorithms.",
+        "Prove NP-completeness through polynomial-time reductions from 3-SAT."
+      ],
+      "prerequisites": ["Data Structures", "Discrete Mathematics"],
+      "syllabusUnits": [
+        { "unitId": "ACM_ALGO_U1", "title": "Algorithmic Paradigms & Optimization", "teachingHours": 12, "subtopics": ["Dynamic Programming & Memoization", "Greedy Choice & Matroid Theory", "Amortized Analysis"] },
+        { "unitId": "ACM_ALGO_U2", "title": "Advanced Graph Analytics", "teachingHours": 12, "subtopics": ["Max-Flow Min-Cut (Ford-Fulkerson)", "Bipartite Matching", "All-Pairs Shortest Paths (Floyd-Warshall)"] },
+        { "unitId": "ACM_ALGO_U3", "title": "Tractable vs Intractable Problems (P vs NP)", "teachingHours": 10, "subtopics": ["Turing Machines & Decidability", "Complexity Classes P, NP, co-NP", "NP-Completeness & 3-SAT Reductions"] },
+        { "unitId": "ACM_ALGO_U4", "title": "Approximation & Randomized Algorithms", "teachingHours": 8, "subtopics": ["Approximation Ratios & Vertex Cover", "Monte Carlo vs Las Vegas Algorithms", "Universal Hashing & Bloom Filters"] }
+      ]
+    },
+    {
+      "code": "ACM_CS_AI",
+      "name": "Artificial Intelligence & Modern Machine Learning",
+      "programId": "ACM_CS2023",
+      "semester": 4,
+      "credits": 4,
+      "difficulty": "Advanced",
+      "description": "CS2023 updated core covering foundational machine learning, deep neural network architectures, attention mechanisms, reinforcement learning, and AI ethics.",
+      "learningOutcomes": [
+        "Train and evaluate deep convolutional and recurrent neural networks.",
+        "Implement multi-head self-attention mechanisms and transformer blocks.",
+        "Formulate sequential decision-making using Q-learning."
+      ],
+      "prerequisites": ["Linear Algebra", "Calculus", "Probability & Statistics"],
+      "syllabusUnits": [
+        { "unitId": "ACM_AI_U1", "title": "Machine Learning Foundations", "teachingHours": 10, "subtopics": ["Linear/Logistic Regression & Gradient Descent", "Regularization (L1/L2)", "Ensembles (Random Forests, XGBoost)"] },
+        { "unitId": "ACM_AI_U2", "title": "Deep Learning & Neural Architectures", "teachingHours": 14, "subtopics": ["Multi-Layer Perceptrons & Backpropagation", "CNNs for Computer Vision", "LSTMs & Sequence Modeling"] },
+        { "unitId": "ACM_AI_U3", "title": "Transformers & Foundation Models", "teachingHours": 12, "subtopics": ["Multi-Head Self-Attention", "Transformer Encoders & Decoders", "Retrieval-Augmented Generation (RAG)"] },
+        { "unitId": "ACM_AI_U4", "title": "Reinforcement Learning & AI Ethics", "teachingHours": 8, "subtopics": ["Markov Decision Processes & Bellman Equations", "Q-Learning", "Model Interpretability (SHAP) & Safety"] }
+      ]
+    },
+    {
+      "code": "AP_CSA",
+      "name": "AP Computer Science A",
+      "programId": "US_AP",
+      "semester": 1,
+      "credits": 3,
+      "difficulty": "Intermediate",
+      "description": "College Board certified curriculum covering object-oriented Java programming, control statements, arrays, ArrayLists, inheritance, and recursion.",
+      "learningOutcomes": [
+        "Author robust object-oriented programs adhering to AP Java subsets.",
+        "Manipulate 1D and 2D arrays and dynamic ArrayList collections.",
+        "Trace and construct recursive algorithms and object class hierarchies."
+      ],
+      "prerequisites": ["Algebra I"],
+      "syllabusUnits": [
+        { "unitId": "AP_CSA_U1", "title": "Primitive Types & Using Objects", "teachingHours": 15, "subtopics": ["Variables & Expressions", "Calling Methods & Constructors", "String Manipulation Methods"] },
+        { "unitId": "AP_CSA_U2", "title": "Boolean Expressions & Iteration", "teachingHours": 18, "subtopics": ["De Morgan's Laws", "if-else Statements", "while & for Loops"] },
+        { "unitId": "AP_CSA_U3", "title": "Class Writing & Array Collections", "teachingHours": 25, "subtopics": ["Encapsulation & Access Modifiers", "1D Arrays Traversal", "ArrayList Dynamic Resizing"] },
+        { "unitId": "AP_CSA_U4", "title": "2D Arrays, Inheritance & Recursion", "teachingHours": 22, "subtopics": ["Row-Major & Column-Major Traversal", "Polymorphism & Subclassing", "Recursive Tracing & Binary Search"] }
+      ]
+    },
+    {
+      "code": "GATE_TOC_COMP",
+      "name": "Theory of Computation & Compiler Design",
+      "programId": "GATE_CS",
+      "semester": 2,
+      "credits": 4,
+      "difficulty": "Advanced",
+      "description": "Automata theory, regular and context-free languages, Turing decidability, lexical analysis, LL/LR parsing, and code optimization.",
+      "learningOutcomes": [
+        "Construct minimal DFAs, regular expressions, and context-free grammars.",
+        "Design LL(1), SLR(1), and LR(1) parsing tables and detect grammar conflicts.",
+        "Generate intermediate three-address code and perform basic block optimizations."
+      ],
+      "prerequisites": ["Discrete Mathematics", "Data Structures"],
+      "syllabusUnits": [
+        { "unitId": "GATE_TOC_U1", "title": "Finite Automata & Regular Languages", "teachingHours": 12, "subtopics": ["DFA & NFA Minimization", "Regular Expressions & Arden's Theorem", "Pumping Lemma for Regular Languages"] },
+        { "unitId": "GATE_TOC_U2", "title": "Context-Free Languages & Pushdown Automata", "teachingHours": 12, "subtopics": ["CFG & Parse Trees", "Chomsky Normal Form (CNF)", "Deterministic & Non-Deterministic PDA"] },
+        { "unitId": "GATE_TOC_U3", "title": "Turing Machines & Undecidability", "teachingHours": 10, "subtopics": ["Turing Machine Models", "Halting Problem & Post Correspondence Problem", "Rice's Theorem"] },
+        { "unitId": "GATE_TOC_U4", "title": "Compiler Design: Parsing & Optimization", "teachingHours": 14, "subtopics": ["Lexical Analysis (Lex)", "LL(1) Grammars & First/Follow Sets", "LR Parsers & Intermediate Code Generation"] }
+      ]
+    }
+  ]
+}

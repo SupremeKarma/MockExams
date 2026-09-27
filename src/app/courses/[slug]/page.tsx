@@ -33,6 +33,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 import type { Course, StudentCourseEnrollment, Paper } from "@/lib/examai/types";
+import { GLOBAL_COURSES, type GlobalCourse, type GlobalCourseUnit } from "@/data/globalSyllabusData";
 
 export default function CourseSlugPage() {
   const params = useParams();
@@ -63,10 +64,11 @@ export default function CourseSlugPage() {
         courseSnap = await getDoc(doc(db, "courses", slug));
       }
 
+      let loadedCourse: Course | null = null;
+
       if (courseSnap.exists()) {
-        setIsAcademic(true);
         const d = courseSnap.data();
-        const loadedCourse: Course = {
+        loadedCourse = {
           code: courseSnap.id,
           courseId: courseSnap.id,
           name: d.name || courseSnap.id,
@@ -80,6 +82,35 @@ export default function CourseSlugPage() {
           prerequisites: d.prerequisites || [],
           difficulty: d.difficulty || "Intermediate",
         };
+      } else {
+        const globalMatch = GLOBAL_COURSES.find(
+          (c: GlobalCourse) => c.code.toUpperCase() === normalizedCode || c.code.toLowerCase() === slug.toLowerCase()
+        );
+        if (globalMatch) {
+          loadedCourse = {
+            code: globalMatch.code,
+            courseId: globalMatch.code,
+            name: globalMatch.name,
+            semester: globalMatch.semester || 1,
+            programId: globalMatch.programId,
+            credits: globalMatch.credits,
+            curriculum: "new_course",
+            syllabusUnits: globalMatch.syllabusUnits.map((u: GlobalCourseUnit) => ({
+              unitId: u.unitId,
+              title: u.title,
+              teachingHours: u.teachingHours,
+              subtopics: u.subtopics,
+            })),
+            description: globalMatch.description,
+            learningOutcomes: globalMatch.learningOutcomes,
+            prerequisites: globalMatch.prerequisites,
+            difficulty: globalMatch.difficulty,
+          };
+        }
+      }
+
+      if (loadedCourse) {
+        setIsAcademic(true);
         setCourse(loadedCourse);
 
         // 2. Fetch enrollment if user is logged in

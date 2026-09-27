@@ -23,11 +23,13 @@ import {
   GraduationCap,
   Compass,
   Users,
+  Layers,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const CORE_LINKS = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { name: "Syllabus", href: "/syllabus", icon: Layers },
   { name: "Courses", href: "/dashboard/courses", icon: GraduationCap },
   { name: "Learning Paths", href: "/learning-paths", icon: Compass },
   { name: "Exams", href: "/exams", icon: Zap },
