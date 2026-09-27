@@ -39,10 +39,13 @@ const FOCUS_MODE_PATTERN = /^\/exams\/[^/]+\/take$/;
 // marketing page that expects the navbar and footer.
 const READER_PATTERN = /^\/learn\/[^/]+/;
 
-// /notes and /syllabus are built from the same reader.css design system (see
-// their layout.tsx files) and supply their own header the same way.
+// /notes, /syllabus, /solution, and /past-papers are built from the same
+// reader.css design system (see their layout.tsx files) and supply their own
+// header the same way.
 const NOTES_PATTERN = /^\/notes(\/|$)/;
 const SYLLABUS_PATTERN = /^\/syllabus(\/|$)/;
+const SOLUTION_PATTERN = /^\/solution(\/|$)/;
+const PAST_PAPERS_PATTERN = /^\/past-papers(\/|$)/;
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() || "/";
@@ -62,10 +65,12 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     isFocusMode ||
     READER_PATTERN.test(pathname) ||
     NOTES_PATTERN.test(pathname) ||
-    SYLLABUS_PATTERN.test(pathname)
+    SYLLABUS_PATTERN.test(pathname) ||
+    SOLUTION_PATTERN.test(pathname) ||
+    PAST_PAPERS_PATTERN.test(pathname)
   ) {
-    // Exam-taking, the Reader, Notes, and Syllabus all supply their own
-    // sticky header — no chrome at all.
+    // Exam-taking, the Reader, Notes, Syllabus, Solution, and Past Papers all
+    // supply their own sticky header — no chrome at all.
     return <>{children}</>;
   }
 
