@@ -668,36 +668,32 @@ export function FormattedContent({
           );
         }
 
-        // 5. Ordered List (Rendered as structured cards with title and explanation)
+        // 5. Ordered List (Rendered point-wise with title and explanation)
         if (block.type === "ordered-list" && block.items) {
           return (
-            <div key={key} className="my-3 space-y-2.5">
+            <div key={key} className="my-3.5 space-y-3">
               {block.items.map((item, itemIdx) => {
-                const markerLabel = item.marker?.replace(/[\(\)\.]/g, "") || itemIdx + 1;
+                const rawMarker = item.marker?.replace(/[\(\)\.]/g, "").trim() || String(itemIdx + 1);
+                const isStep = /^step/i.test(rawMarker);
+                const pointBadge = isStep ? rawMarker : `Point ${rawMarker.toUpperCase()}`;
 
                 return (
                   <div
                     key={itemIdx}
-                    className="p-3.5 rounded-lg bg-white/95 border border-zinc-200/90 shadow-2xs flex items-start gap-3 hover:border-primary-300 transition-colors"
+                    className="rounded-xl border border-zinc-200/90 bg-white shadow-xs overflow-hidden transition-all hover:border-primary-300"
                   >
-                    <span className="px-2 py-0.5 rounded-md font-bold text-xs bg-primary-100 text-primary-800 border border-primary-200/80 shrink-0 select-none mt-0.5">
-                      {markerLabel}
-                    </span>
-                    <div className="flex-1">
-                      {item.title ? (
-                        <>
-                          <div className="font-semibold text-zinc-900 text-sm sm:text-[15px] mb-1">
-                            {renderInlineMarkdown(item.title, `${key}-${itemIdx}-title`)}
-                          </div>
-                          <div className="text-zinc-700 text-xs sm:text-sm leading-relaxed">
-                            {renderInlineMarkdown(item.text, `${key}-${itemIdx}-text`)}
-                          </div>
-                        </>
-                      ) : (
-                        <div className="text-zinc-800 text-sm sm:text-[15px] leading-relaxed">
-                          {renderInlineMarkdown(item.text, `${key}-${itemIdx}-text`)}
-                        </div>
+                    <div className="px-4 py-2.5 bg-gradient-to-r from-zinc-50 to-white border-b border-zinc-100 flex items-center gap-2.5 flex-wrap">
+                      <span className="px-2.5 py-0.5 rounded-full font-bold text-xs uppercase tracking-wider bg-primary-100 text-primary-800 border border-primary-200/70 shrink-0 select-none">
+                        {pointBadge}
+                      </span>
+                      {item.title && (
+                        <span className="font-bold text-zinc-900 text-sm sm:text-[15px]">
+                          {renderInlineMarkdown(item.title, `${key}-${itemIdx}-title`)}
+                        </span>
                       )}
+                    </div>
+                    <div className="p-4 text-zinc-700 text-sm sm:text-[15px] leading-relaxed">
+                      {renderInlineMarkdown(item.text, `${key}-${itemIdx}-text`)}
                     </div>
                   </div>
                 );
@@ -706,31 +702,27 @@ export function FormattedContent({
           );
         }
 
-        // 6. Unordered List
+        // 6. Unordered List (Rendered point-wise)
         if (block.type === "unordered-list" && block.items) {
           return (
-            <div key={key} className="my-2.5 space-y-2">
+            <div key={key} className="my-3.5 space-y-3">
               {block.items.map((item, itemIdx) => (
                 <div
                   key={itemIdx}
-                  className="p-3 rounded-lg bg-white/80 border border-zinc-200/80 shadow-2xs flex items-start gap-2.5"
+                  className="rounded-xl border border-zinc-200/90 bg-white shadow-xs overflow-hidden transition-all hover:border-primary-300"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary-600 mt-2 shrink-0 select-none" />
-                  <div className="flex-1">
-                    {item.title ? (
-                      <>
-                        <div className="font-semibold text-zinc-900 text-sm sm:text-[15px] mb-0.5">
-                          {renderInlineMarkdown(item.title, `${key}-${itemIdx}-title`)}
-                        </div>
-                        <div className="text-zinc-700 text-xs sm:text-sm leading-relaxed">
-                          {renderInlineMarkdown(item.text, `${key}-${itemIdx}-text`)}
-                        </div>
-                      </>
-                    ) : (
-                      <div className="text-zinc-800 text-sm sm:text-[15px] leading-relaxed">
-                        {renderInlineMarkdown(item.text, `${key}-${itemIdx}-text`)}
-                      </div>
+                  <div className="px-4 py-2.5 bg-gradient-to-r from-zinc-50 to-white border-b border-zinc-100 flex items-center gap-2.5 flex-wrap">
+                    <span className="px-2.5 py-0.5 rounded-full font-bold text-xs uppercase tracking-wider bg-primary-100 text-primary-800 border border-primary-200/70 shrink-0 select-none">
+                      Point {itemIdx + 1}
+                    </span>
+                    {item.title && (
+                      <span className="font-bold text-zinc-900 text-sm sm:text-[15px]">
+                        {renderInlineMarkdown(item.title, `${key}-${itemIdx}-title`)}
+                      </span>
                     )}
+                  </div>
+                  <div className="p-4 text-zinc-700 text-sm sm:text-[15px] leading-relaxed">
+                    {renderInlineMarkdown(item.text, `${key}-${itemIdx}-text`)}
                   </div>
                 </div>
               ))}
@@ -820,6 +812,34 @@ export function FormattedContent({
 
         // 11. Ordinary Paragraph with soft line breaks
         const lines = block.raw.split("\n");
+
+        // Opening definition/concept paragraph preceding point-wise lists
+        if (
+          idx === 0 &&
+          blocks.length > 1 &&
+          (blocks[1].type === "section-lead" || blocks[1].type === "ordered-list")
+        ) {
+          return (
+            <div
+              key={key}
+              className="p-4 rounded-xl bg-primary-50/40 border border-primary-200/70 shadow-2xs"
+            >
+              <div className="flex items-center gap-2 text-primary-900 font-bold text-xs uppercase tracking-wider mb-2">
+                <span className="w-2 h-2 rounded-full bg-primary-600 inline-block" />
+                <span>Definition & Core Concept</span>
+              </div>
+              <p className="text-zinc-800 text-sm sm:text-[15px] leading-relaxed">
+                {lines.map((line, lineIdx) => (
+                  <React.Fragment key={lineIdx}>
+                    {renderInlineMarkdown(line, `${key}-line-${lineIdx}`)}
+                    {lineIdx < lines.length - 1 && <br />}
+                  </React.Fragment>
+                ))}
+              </p>
+            </div>
+          );
+        }
+
         return (
           <p key={key} className="leading-relaxed">
             {lines.map((line, lineIdx) => (

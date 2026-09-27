@@ -121,21 +121,22 @@ describe("FormattedContent component", () => {
 
     const html = renderToStaticMarkup(React.createElement(FormattedContent, { content: rawAnswer }));
 
-    // 1. Intro definition paragraph preserved
+    // 1. Intro definition card preserved
+    expect(html).toContain("Definition &amp; Core Concept");
     expect(html).toContain("A Database Management System (DBMS) is software");
     expect(html).toContain("query language such as SQL.");
 
     // 2. Section lead-in separated cleanly
     expect(html).toContain("Four key advantages over traditional file-based systems:");
 
-    // 3. Four structured point cards with badges 1, 2, 3, 4
-    expect(html).toContain(">1<");
+    // 3. Four structured point cards with badges Point 1, Point 2, Point 3, Point 4
+    expect(html).toContain("Point 1");
     expect(html).toContain("Reduced data redundancy and inconsistency");
-    expect(html).toContain(">2<");
+    expect(html).toContain("Point 2");
     expect(html).toContain("Data integrity and enforced constraints");
-    expect(html).toContain(">3<");
+    expect(html).toContain("Point 3");
     expect(html).toContain("Concurrent access control");
-    expect(html).toContain(">4<");
+    expect(html).toContain("Point 4");
     expect(html).toContain("Better security and backup/recovery");
 
     // 4. Em-dashes (—) and en-dashes (–) strictly hidden/not rendered
