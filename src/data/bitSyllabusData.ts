@@ -386,7 +386,20 @@ export const bitSyllabusData: SemesterSyllabus[] = [
         credits: 3,
         type: "Core",
         description: "Client-server socket programming — TCP/UDP sockets, I/O multiplexing, broadcast/multicast, and raw sockets in C/Unix.",
-        keyUnits: ["Introduction to Network Programming (Client/Server Model)", "Elementary OS Calls (fork, exec, IPC)", "TCP/UDP Transport Layer Protocols", "Elementary Socket Calls (socket, bind, connect, accept)", "I/O Multiplexing (select, poll)", "Broadcast, Multicast & Raw Sockets"]
+        keyUnits: [
+          "Introduction to Network Programming (Client/Server Model)",
+          "Elementary Operating System Calls (fork, exec, wait, IPC)",
+          "TCP/UDP Transport Layer Protocols",
+          "Elementary Socket Calls (socket, bind, connect, accept)",
+          "Elementary TCP-UDP Socket Calls (sendto, recvfrom)",
+          "I/O Multiplexing (select, poll, shutdown)",
+          "Socket Options (getsockopt, setsockopt, SO_REUSEADDR)",
+          "Name and Address Conversion (DNS, gethostbyname, getaddrinfo)",
+          "Unix Domain Protocols (socketpair, stream/datagram)",
+          "Daemon Processes and inetd Superserver",
+          "Broadcast and Multicast",
+          "IP Layers and Raw Sockets (ping implementation)"
+        ]
       },
       {
         code: "BIT402CO",
@@ -394,15 +407,151 @@ export const bitSyllabusData: SemesterSyllabus[] = [
         credits: 3,
         type: "Core",
         description: "e-Government implementation and policy, ICT infrastructure, security, digital democracy, and case studies including Nepal's GIDC.",
-        keyUnits: ["Introduction to e-Government & e-Governance", "Public-Private Partnership Models", "ICT Infrastructure & e-Government Readiness", "Security for e-Government", "Implementing e-Government & Digital Democracy", "Applying AI to e-Government", "Case Studies (Nepal, India & Other Countries)"]
+        keyUnits: [
+          "Introduction to e-Government and e-Governance",
+          "Public-Private Partnership for e-Government (PPP Models)",
+          "ICT Infrastructure for e-Government (GIDC & Cloud)",
+          "e-Government Readiness Framework",
+          "Security for e-Government (Security Standards)",
+          "Implementing e-Government (System Life Cycle)",
+          "From Representative to Digital Democracy",
+          "Citizen-Centric Remote Online Digital Governance (CRM)",
+          "Applying Artificial Intelligence to Improve Performance",
+          "Case Studies: Nepal (GIDC, Cyber Law), India, and Global Systems"
+        ]
       },
       {
-        code: "BIT4xxCO",
-        name: "Specialization Track (2 of 4 courses)",
-        credits: 6,
+        code: "BIT421CO",
+        name: "Machine Learning (Track A)",
+        credits: 3,
         type: "Elective",
-        description: "Choose one specialization track and take 2 courses in Sem 7, 2 more in Sem 8: (A) Intelligent Systems & Business Analytics — Machine Learning, Business Intelligence & Data Science, Deep Learning; (B) Digital Commerce & Mobile App Development — Digital Commerce, Multimedia & Application; (C) Climate Change Management — GIS, Remote Sensing, Data Center & Disaster Recovery.",
-        keyUnits: ["Track A: Machine Learning (BIT421CO)", "Track A: Business Intelligence & Data Science (BIT422CO)", "Track B: Digital Commerce (BIT428CO)", "Track B: Multimedia and Application (BIT429CO)", "Track C: GIS (BIT435CO)", "Track C: Remote Sensing (BIT436CO)"]
+        description: "Theoretical concepts and practical implementations of supervised regression/classification, decision trees, model tuning, text mining, and deep neural networks in Python.",
+        keyUnits: [
+          "Introduction to Machine Learning (Components & Frameworks)",
+          "Supervised Learning: Regression, Classification, Decision Trees",
+          "Unsupervised Learning (k-means, k-modes)",
+          "Model Diagnosis and Tuning (Bias/Variance, Cross-Validation)",
+          "Text Mining (Preprocessing, TF-IDF, Exploration)",
+          "Deep Learning (Feedforward, CNNs, RNNs)"
+        ]
+      },
+      {
+        code: "BIT422CO",
+        name: "Business Intelligence and Data Science (Track A)",
+        credits: 3,
+        type: "Elective",
+        description: "Foundations of business intelligence, data warehousing, visual analytics with Tableau/Power BI, WEKA data mining, text/web analytics, and big data architectures.",
+        keyUnits: [
+          "Overview of Business Intelligence & Decision Support",
+          "Data Warehousing (Architectures, ETL Processes, Real-Time DW)",
+          "Business Reporting & Visual Analytics (Tableau, Power BI)",
+          "Data Mining Concepts & Applications (WEKA)",
+          "Text and Web Analytics (NLP, Sentiment Analysis)",
+          "Big Data Analytics & Stream Processing",
+          "Business Analytics Emerging Trends and Ethics"
+        ]
+      },
+      {
+        code: "BIT423CO",
+        name: "Deep Learning (Track A)",
+        credits: 3,
+        type: "Elective",
+        description: "Neural network architectures — multilayer perceptrons, deep CNNs, RNNs, LSTMs, generative belief nets, and TensorFlow vision/speech applications.",
+        keyUnits: [
+          "Basics of Artificial Neural Networks (ANN Models)",
+          "Feedforward Neural Networks & Backpropagation Learning",
+          "Deep Neural Networks (Optimization: Adam, Regularization)",
+          "Convolutional Neural Networks (LeNet, AlexNet, VGG)",
+          "Recurrent Neural Networks (LSTM, GRU, Sequence Modeling)",
+          "Generative Models (RBMs, Deep Belief Nets)",
+          "Applications in Vision, Speech and NLP"
+        ]
+      },
+      {
+        code: "BIT428CO",
+        name: "Digital Commerce (Track B)",
+        credits: 3,
+        type: "Elective",
+        description: "Electronic commerce architectures, mercantile retailing models, mobile commerce (3G/4G), digital marketing SEO, WordPress CMS, and AI chatbots.",
+        keyUnits: [
+          "E-Commerce Foundations (Business Models, Security, Payments)",
+          "Electronic Retailing (Consumer Mercantile Models)",
+          "Introduction to Digital Commerce Trends",
+          "Fundamentals of Mobile Commerce (M-Commerce, GSM/GPRS)",
+          "Digital Marketing (SEO, Google Ads, Social Media)",
+          "Web Content Management Systems (WordPress Development)",
+          "Application of Artificial Intelligence in Commerce"
+        ]
+      },
+      {
+        code: "BIT429CO",
+        name: "Multimedia and Application (Track B)",
+        credits: 3,
+        type: "Elective",
+        description: "Multimedia data representations — audio/MIDI, image processing, video encoding, compression (JPEG/MPEG), real-time OS scheduling, and network streaming.",
+        keyUnits: [
+          "Multimedia Systems (Aspects, Elements, Data Streams)",
+          "Sound and Audio (Sampling, MIDI, Speech Synthesis)",
+          "Images and Graphics (Formats, Image Processing)",
+          "Video and Animation (Signal Representation, Formats)",
+          "Data Compression (Huffman, JPEG, MPEG, H.261)",
+          "Optical Storage Media (CD, DVD, Blu-Ray)",
+          "Multimedia Operating Systems (Real-Time Scheduling: EDF, RM)",
+          "Multimedia Communication Systems (QoS, Streaming)",
+          "Documentation, Hypertext and MHEG",
+          "Synchronization (Reference Models & Specifications)",
+          "Abstraction of Programming & Toolkits",
+          "Multimedia Applications (VOD, Video Conferencing)"
+        ]
+      },
+      {
+        code: "BIT435CO",
+        name: "GIS (Track C)",
+        credits: 3,
+        type: "Elective",
+        description: "Geographic Information Systems — spatial/attribute data, raster vs vector structures, map projections (UTM), spatial querying, and Nepal GIS applications.",
+        keyUnits: [
+          "Basic Concepts & Components of GIS",
+          "GIS Data & Databases (Raster & Vector Structures)",
+          "GIS Data Input (Digitization, GPS & Remote Sensing)",
+          "GIS Mapping & Map Projections (UTM)",
+          "Data Editing in GIS (Error Correction, Rubber Sheeting)",
+          "Spatial Analysis (Buffering, Overlay, Network Connectivity)",
+          "Spatial Data Infrastructure (SDI & NSDI Standards)",
+          "GIS in Nepal (Current Situation & Major Activities)"
+        ]
+      },
+      {
+        code: "BIT436CO",
+        name: "Remote Sensing (Track C)",
+        credits: 3,
+        type: "Elective",
+        description: "Electromagnetic radiation spectrum, sensor platforms and satellite orbits, Landsat/Sentinel imagery, digital image processing, and GIS-RS integration.",
+        keyUnits: [
+          "Concept and Scope of Remote Sensing Systems",
+          "Electromagnetic Radiation (EMR Spectrum & Signatures)",
+          "Sensor Characteristics (Whiskbroom, Pushbroom, Resolutions)",
+          "Remote Sensor Platforms and Satellite Orbits (Sun-Synchronous)",
+          "Space Imaging Satellites (IRS, Landsat, SPOT, High-Res)",
+          "Integration of GIS and Remote Sensing",
+          "Applications of Remote Sensing"
+        ]
+      },
+      {
+        code: "BIT437CO",
+        name: "Data Center and Disaster Recovery Centers (Track C)",
+        credits: 3,
+        type: "Elective",
+        description: "Modern data center design, power redundancy, fire protection, cooling optimization, cloud data centers, and enterprise disaster recovery planning.",
+        keyUnits: [
+          "Introduction to Data Center Types and Architecture",
+          "The Role and Objectives of Data Centers (Standards & Tiers)",
+          "Design Overview (Cooling, Power Redundancy, Cabling)",
+          "Managing the Data Center (Processes, Decommissioning, Security)",
+          "Data Center Industry Market and Trends",
+          "Cloud Data Centers",
+          "Disaster Recovery Center Formulation and DR Plans"
+        ]
       },
       {
         code: "BIT403CO",
@@ -410,14 +559,18 @@ export const bitSyllabusData: SemesterSyllabus[] = [
         credits: 3,
         type: "Project / Practical",
         description: "45-hour supervised internship at a partner organization (bank, hospital, software company, telecom, or government IT unit), evaluated via proposal defense, mid-term, and end-term report.",
-        keyUnits: ["Proposal Defense & Organization Placement", "Mid-Term Progress Review", "System Analysis, Design & Implementation", "Final Report (APA Format) & Viva"]
+        keyUnits: [
+          "Proposal Defense & Organization Placement (10%)",
+          "Mid-Term Progress Review & System Design (30%)",
+          "System Analysis, Implementation & Testing",
+          "Final Internship Report (APA Format) & Viva (60%)"
+        ]
       }
     ]
   },
   {
     // Verified against the official Purbanchal University BIT Semester VIII
-    // (current/new course) syllabus — codes BIT451MS-453CO plus the second
-    // half of the chosen specialization track — see bulk-imports/syllabus-sources/.
+    // (current/new course) syllabus — codes BIT451MS-453CO plus specialization tracks.
     semester: 8,
     totalCredits: 15,
     subjects: [
@@ -427,7 +580,17 @@ export const bitSyllabusData: SemesterSyllabus[] = [
         credits: 3,
         type: "Core",
         description: "Management fundamentals, organization design, entrepreneurship, business planning, and IT product marketing/technology transfer.",
-        keyUnits: ["Introduction to Management & Organization Design", "The Foundation of Entrepreneurship", "Feasibility Analysis & Business Plans", "Business Ownership & Franchising", "Marketing Plans & E-Commerce for Entrepreneurs", "Entrepreneurship in IT (Technology Transfer)"]
+        keyUnits: [
+          "Introduction to Management Principles and Functions",
+          "Organization Design and Decentralization",
+          "The Foundation of Entrepreneurship",
+          "Feasibility Analysis and Crafting Winning Business Plans",
+          "Forms of Business Ownership and Franchising",
+          "Building a Powerful Marketing Plan (Guerrilla Marketing)",
+          "Location Selection and Layout Optimization",
+          "E-Commerce and the Entrepreneur",
+          "Entrepreneur of IT (Technology Transfer & Innovation)"
+        ]
       },
       {
         code: "BIT452CO",
@@ -435,15 +598,129 @@ export const bitSyllabusData: SemesterSyllabus[] = [
         credits: 3,
         type: "Core",
         description: "Distributed systems fundamentals and cloud computing service/deployment models, virtualization, and cloud security.",
-        keyUnits: ["Distributed Systems Fundamentals", "Cloud Computing Service Models (IaaS/PaaS/SaaS)", "Virtualization Technologies", "Cloud Deployment Models", "Cloud Security & Management"]
+        keyUnits: [
+          "Distributed Systems Fundamentals (RPC, RMI, Consistency)",
+          "Cloud Computing Service Models (IaaS, PaaS, SaaS, Serverless)",
+          "Virtualization Technologies (Hypervisors, Containers, K8s)",
+          "Cloud Storage and Big Data Architectures",
+          "Cloud Security, IAM and Shared Responsibility"
+        ]
       },
       {
-        code: "BIT4xxCO",
-        name: "Specialization Track (2 of 4 courses, continued)",
-        credits: 6,
+        code: "BIT471CO",
+        name: "Natural Language Processing (Track A)",
+        credits: 3,
         type: "Elective",
-        description: "Second half of the Sem 7 specialization track: (A) Intelligent Systems & Business Analytics — Natural Language Processing, Supply Chain Analytics; (B) Digital Commerce & Mobile App Development — Big Data, Mobile App Development; (C) Climate Change Management — Incident Response, Climate Change Risk Management, Disaster Governance.",
-        keyUnits: ["Track A: Natural Language Processing (BIT471CO)", "Track A: Supply Chain Analytics (BIT472MS)", "Track B: Big Data (BIT478CO)", "Track B: Mobile App Development (BIT479CO)", "Track C: Incident Response & Management (BIT485CO)", "Track C: Climate Change Risk Management (BIT486CO)"]
+        description: "Speech and language processing, morphological parsing with FSTs, N-grams, HMM POS tagging, feature unification, WordNet lexical semantics, and discourse pragmatics.",
+        keyUnits: [
+          "Introduction to NLP (Linguistic Organization, CFG Parsing)",
+          "Morphology & Phonology (Parsing with FSTs, Phonological Rules)",
+          "Pronunciation, Spelling and N-grams (Smoothing, Language Models)",
+          "Syntax: POS Tagging (HMM Tagger, Transformation-based)",
+          "Sentence Level Construction & Unification Semantics",
+          "Lexical Semantics (WordNet, Homonymy, WSD)",
+          "Pragmatics and Discourse Structure"
+        ]
+      },
+      {
+        code: "BIT472MS",
+        name: "Supply Chain Analytics (Track A)",
+        credits: 3,
+        type: "Elective",
+        description: "Data analytics and machine learning applied to supply chain management — data preparation in Python, Seaborn visualization, customer RFM segmentation, supplier risk, and demand forecasting.",
+        keyUnits: [
+          "Introduction to Supply Chain Analytics & SMART Goals",
+          "Data-Driven Supply Chains (Python Setup)",
+          "Data Manipulation & Indexing in Python",
+          "Data Visualization (Seaborn, Geospatial Mapping)",
+          "Customer Management (Cohort & RFM Analysis, Clustering)",
+          "Supply Management & Supplier Risk Regression",
+          "Warehouse and Inventory Optimization",
+          "Demand Forecasting (Time Series Methods)",
+          "Logistics Management & Route Optimization"
+        ]
+      },
+      {
+        code: "BIT478CO",
+        name: "Big Data (Track B)",
+        credits: 3,
+        type: "Elective",
+        description: "Big data paradigms in business intelligence — MapReduce workflow anatomy, NoSQL databases (HBase, Cassandra, MongoDB), HDFS storage, and Hadoop HiveQL tools.",
+        keyUnits: [
+          "Introduction to Big Data (Distributed Systems, Trends)",
+          "MapReduce Applications (Workflows, Optimization, Locality)",
+          "Data Management & Taxonomy of NoSQL Implementations",
+          "Fundamentals of Hadoop (HDFS, Streaming, Pipes, I/O)",
+          "Hadoop Tools: HBase, Cassandra, Pig Latin, Hive & HiveQL"
+        ]
+      },
+      {
+        code: "BIT479CO",
+        name: "Mobile App Development (Track B)",
+        credits: 3,
+        type: "Elective",
+        description: "Mobile application development on Android — UI layouts, activity lifecycles, intents, SQLite databases, REST API consumption, location services, and Google Play Store deployment.",
+        keyUnits: [
+          "Introduction to Mobile Devices & Architectures",
+          "Mobile Platforms & Wireless Communication Constraints",
+          "Introduction to Android Platform (ART, Tools, Manifest)",
+          "Android Application Design Essentials (Layouts, Recycler View)",
+          "Writing Basic Applications (Context, Activities, Intents)",
+          "Data Handling in Android (SQLite, Preferences, Content Providers)",
+          "Developing Real-Time Applications (Telephony, RESTful APIs)",
+          "Debugging, Testing & Deployment (Play Store Distribution)",
+          "Recent Concepts: App Monetization, Location Kit, ML Kit"
+        ]
+      },
+      {
+        code: "BIT485CO",
+        name: "Incident Response and Management System (Track C)",
+        credits: 3,
+        type: "Elective",
+        description: "Incident command systems (NEOC/DEOC), early warning alert systems, multi-agency response, disaster recovery portals, and cyber threats to critical infrastructure.",
+        keyUnits: [
+          "Introduction to Incident Response Systems (NEOC/DEOC)",
+          "Functioning of IRS (Chain of Command, Unified Command)",
+          "Resources and Infrastructure Management (Incident Action Plan)",
+          "Incident Decision System and Reporting (Early Warning, Media)",
+          "Disaster Recovery Portals (DRR Portals, Real-Time Data)",
+          "Phases of Disaster Management (Mitigation, Response, Recovery)",
+          "Cyber Threats and Disaster Management (DR Sites, Fake News)"
+        ]
+      },
+      {
+        code: "BIT486CO",
+        name: "Climate Change Risk Management (Track C)",
+        credits: 3,
+        type: "Elective",
+        description: "Climate change science, greenhouse warming physics, climate impacts in Nepal, indicators, extreme weather adaptation, ICT for green growth, and CIRA risk analysis.",
+        keyUnits: [
+          "Overview of Climate Change Science",
+          "Causes of Climate Change (Greenhouse Effect, Earth Radiative Budget)",
+          "Future of Climate Change (GHG Projections, Ocean Acidification)",
+          "Climate Change Impacts (Nepal Sectoral Impacts)",
+          "Climate Change Indicators (Glacial Lake Outbursts, Phenology)",
+          "Climate Change and Extreme Weather Adaptation",
+          "ICT for Climate Change and Green Growth",
+          "Climate Change Impacts and Risk Analysis (CIRA Framework)"
+        ]
+      },
+      {
+        code: "BIT487CO",
+        name: "Disaster Governance (Track C)",
+        credits: 3,
+        type: "Elective",
+        description: "Digital governance models for disaster risk reduction — knowledge repositories, Sendai Framework, disaster mitigation planning, and emergency response mobilization.",
+        keyUnits: [
+          "Overview of Digital Governance in Disaster Management",
+          "Knowledge Management in Digital Governance",
+          "Overview of Disasters & Sendai Framework",
+          "Disaster Governance Effectiveness and SDGs",
+          "Governance in Disaster Mitigation (Infrastructure Planning)",
+          "Governance in Disaster Preparedness (NSDRM Nepal, Evacuation)",
+          "Governance in Disaster Response (Resource Deployment)",
+          "Governance in Disaster Recovery (Critical Infrastructure Restoration)"
+        ]
       },
       {
         code: "BIT453CO",
@@ -451,7 +728,12 @@ export const bitSyllabusData: SemesterSyllabus[] = [
         credits: 3,
         type: "Project / Practical",
         description: "45-hour capstone project developing a 2-tier/3-tier/n-tier application with client-side and server-side scripting on any RDBMS.",
-        keyUnits: ["Title Identification & Proposal Writing", "Mid-Term Presentation", "Application Development", "Pre-Final Submission, Final Presentation & Viva"]
+        keyUnits: [
+          "Title Identification & Proposal Writing (10 Marks)",
+          "Mid-Term Architecture & DB Design Presentation (20 Marks)",
+          "Pre-Final Application Submission & Demo (30 Marks)",
+          "Final Documentation (APA Format: 20 Marks), Presentation (10) & Viva (10)"
+        ]
       }
     ]
   }

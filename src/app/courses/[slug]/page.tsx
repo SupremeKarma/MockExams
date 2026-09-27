@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { db } from "@/lib/firebase";
@@ -17,6 +17,8 @@ import {
 import { useAuth } from "@/context/AuthContext";
 import ProgramGate from "@/components/ProgramGate";
 import EntranceCourseDetailPage from "@/app/course/[slug]/page";
+import MarkdownViewer from "@/components/MarkdownViewer";
+import { generateCourseMarkdown } from "@/lib/syllabusMarkdown";
 import {
   GraduationCap,
   BookOpen,
@@ -31,6 +33,8 @@ import {
   Loader2,
   FileText,
   AlertCircle,
+  Download,
+  ListTodo,
 } from "lucide-react";
 import type { Course, StudentCourseEnrollment, Paper } from "@/lib/examai/types";
 import { GLOBAL_COURSES, type GlobalCourse, type GlobalCourseUnit } from "@/data/globalSyllabusData";
@@ -51,6 +55,26 @@ export default function CourseSlugPage() {
   const [isAcademic, setIsAcademic] = useState<boolean | null>(null);
   const [updatingTopic, setUpdatingTopic] = useState<string | null>(null);
   const [enrolling, setEnrolling] = useState(false);
+  const [curriculumTab, setCurriculumTab] = useState<"topics" | "markdown">("topics");
+
+  const courseMarkdown = useMemo(() => {
+    if (!course) return "";
+    return generateCourseMarkdown({
+      code: course.code,
+      name: course.name,
+      programName: course.programId,
+      semester: course.semester,
+      credits: course.credits,
+      description: course.description || "",
+      learningOutcomes: course.learningOutcomes,
+      prerequisites: course.prerequisites,
+      syllabusUnits: course.syllabusUnits?.map((u) => ({
+        title: u.title,
+        teachingHours: u.teachingHours,
+        subtopics: u.subtopics,
+      })),
+    });
+  }, [course]);
 
   useEffect(() => {
     fetchCourseData();
@@ -428,19 +452,53 @@ export default function CourseSlugPage() {
             {/* Left 2 Cols: Syllabus Topics Checklist */}
             <div className="lg:col-span-2 space-y-6">
               <div className="p-6 bg-white border border-zinc-200 rounded-2xl shadow-sm space-y-4">
-                <div className="flex items-center justify-between border-b border-zinc-100 pb-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-100 pb-4">
                   <div>
-                    <h3 className="text-lg font-bold text-zinc-900">Curriculum &amp; Topics</h3>
+                    <h3 className="text-lg font-bold text-zinc-900">Curriculum &amp; Syllabus</h3>
                     <p className="text-xs text-zinc-500 mt-0.5">
-                      Check off topics as you study to update your course completion status.
+                      Explore the official .md syllabus outline, ESE schemes, and track your topic mastery.
                     </p>
                   </div>
-                  <span className="text-xs font-bold text-primary-600 bg-primary-50 px-2.5 py-1 rounded-md">
-                    {topics.length} Units
-                  </span>
+
+                  {/* Tab Selector */}
+                  <div className="bg-zinc-100 p-0.5 rounded-xl flex items-center shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => setCurriculumTab("topics")}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all ${
+                        curriculumTab === "topics"
+                          ? "bg-white text-zinc-900 shadow-xs"
+                          : "text-zinc-600 hover:text-zinc-900"
+                      }`}
+                    >
+                      <ListTodo className="w-3.5 h-3.5 text-primary-600" />
+                      <span>Checklist ({topics.length})</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setCurriculumTab("markdown")}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all ${
+                        curriculumTab === "markdown"
+                          ? "bg-white text-zinc-900 shadow-xs"
+                          : "text-zinc-600 hover:text-zinc-900"
+                      }`}
+                    >
+                      <FileText className="w-3.5 h-3.5 text-primary-600" />
+                      <span>Official .md Syllabus</span>
+                    </button>
+                  </div>
                 </div>
 
-                {topics.length === 0 ? (
+                {curriculumTab === "markdown" ? (
+                  <div className="pt-1">
+                    <MarkdownViewer
+                      content={courseMarkdown}
+                      title={`${course.name} (${course.code})`}
+                      downloadFilename={`${course.code}_Syllabus.md`}
+                      showActions={true}
+                    />
+                  </div>
+                ) : topics.length === 0 ? (
                   <p className="text-xs text-zinc-400 py-4">No topics published for this course yet.</p>
                 ) : (
                   <div className="space-y-2.5">

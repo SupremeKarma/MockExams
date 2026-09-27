@@ -18,14 +18,25 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import { bitSyllabusData } from "@/data/bitSyllabusData";
 import { globalPrograms, globalSyllabusCourses, GlobalCourse } from "@/data/globalSyllabusData";
+import MarkdownViewer from "@/components/MarkdownViewer";
+import SyllabusMarkdownModal from "@/components/SyllabusMarkdownModal";
+import {
+  generateCourseMarkdown,
+  generateSemesterMarkdown,
+  generateProgramMarkdown,
+} from "@/lib/syllabusMarkdown";
+import { FileText, Download, Copy, Eye, LayoutGrid } from "lucide-react";
 
 type ProgramTab = "PU_BIT" | "TU_CSIT" | "CAMBRIDGE_A_LEVELS" | "ACM_CS2023" | "US_AP" | "GATE_CS";
+type ViewMode = "cards" | "markdown";
 
 export default function SyllabusPage() {
   const [selectedProgram, setSelectedProgram] = useState<ProgramTab>("PU_BIT");
   const [selectedSemester, setSelectedSemester] = useState<number>(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedSubject, setExpandedSubject] = useState<string | null>(null);
+  const [viewMode, setViewMode] = useState<ViewMode>("cards");
+  const [activeModalCourse, setActiveModalCourse] = useState<GlobalCourse | null>(null);
 
   // Derive courses for current program
   const coursesForProgram = useMemo(() => {
@@ -192,7 +203,7 @@ export default function SyllabusPage() {
         </div>
 
         {/* Semester Filter (For PU BIT only) & Search Filter */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-1">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pt-1">
           {selectedProgram === "PU_BIT" ? (
             <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
               <span className="text-xs font-bold text-zinc-500 mr-2 flex items-center gap-1">
@@ -222,155 +233,219 @@ export default function SyllabusPage() {
             </div>
           )}
 
-          {/* Search Box */}
-          <div className="relative w-full sm:w-80">
-            <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search subject, course code, unit..."
-              className="w-full pl-9 pr-4 py-2 bg-white rounded-xl border border-zinc-300 text-xs focus:outline-none focus:ring-2 focus:ring-primary-500"
-            />
+          {/* Right Action Controls: Search & View Mode Switcher */}
+          <div className="flex items-center gap-2.5 flex-wrap sm:flex-nowrap">
+            {/* View Mode Toggle */}
+            <div className="bg-zinc-200/80 p-0.5 rounded-xl flex items-center shadow-2xs">
+              <button
+                type="button"
+                onClick={() => setViewMode("cards")}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all ${
+                  viewMode === "cards"
+                    ? "bg-white text-zinc-900 shadow-xs"
+                    : "text-zinc-600 hover:text-zinc-900"
+                }`}
+              >
+                <LayoutGrid className="w-3.5 h-3.5 text-primary-600" />
+                <span>Cards</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setViewMode("markdown")}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all ${
+                  viewMode === "markdown"
+                    ? "bg-white text-zinc-900 shadow-xs"
+                    : "text-zinc-600 hover:text-zinc-900"
+                }`}
+              >
+                <FileText className="w-3.5 h-3.5 text-primary-600" />
+                <span>Official .md View</span>
+              </button>
+            </div>
+
+            {/* Search Box */}
+            <div className="relative w-full sm:w-64">
+              <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search subject, code..."
+                className="w-full pl-9 pr-4 py-2 bg-white rounded-xl border border-zinc-300 text-xs focus:outline-none focus:ring-2 focus:ring-primary-500"
+              />
+            </div>
           </div>
         </div>
 
-        {/* Subjects & Units List */}
-        <div className="space-y-4">
-          {filteredCourses.length === 0 ? (
-            <div className="p-8 text-center bg-white rounded-2xl border border-dashed border-zinc-200">
-              <p className="text-sm font-bold text-zinc-700">No syllabus matches found for &quot;{searchQuery}&quot;</p>
-              <button
-                onClick={() => setSearchQuery("")}
-                className="mt-2 text-xs font-bold text-primary-600 hover:underline"
-              >
-                Clear Search Filter
-              </button>
-            </div>
-          ) : (
-            filteredCourses.map((sub, idx) => {
-              const isExpanded = expandedSubject === sub.code;
-              return (
-                <motion.div
-                  key={sub.code}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: Math.min(idx * 0.04, 0.3) }}
-                  className="rounded-2xl border border-zinc-200 bg-white overflow-hidden shadow-xs hover:border-primary-400 transition-all"
+        {/* Content View: Either Rendered Markdown Document OR Interactive Cards */}
+        {viewMode === "markdown" ? (
+          <div className="space-y-4">
+            <MarkdownViewer
+              content={generateSemesterMarkdown(selectedProgram, selectedSemester)}
+              title={`${activeProgramMeta.name} — ${selectedProgram === "PU_BIT" ? `Semester ${selectedSemester}` : "Full Syllabus"}`}
+              downloadFilename={`${selectedProgram}_${selectedProgram === "PU_BIT" ? `Semester_${selectedSemester}` : "Curriculum"}.md`}
+              showActions={true}
+            />
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {filteredCourses.length === 0 ? (
+              <div className="p-8 text-center bg-white rounded-2xl border border-dashed border-zinc-200">
+                <p className="text-sm font-bold text-zinc-700">No syllabus matches found for &quot;{searchQuery}&quot;</p>
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="mt-2 text-xs font-bold text-primary-600 hover:underline"
                 >
-                  <button
-                    onClick={() => setExpandedSubject(isExpanded ? null : sub.code)}
-                    className="w-full p-6 text-left flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-zinc-50/50 transition-colors"
+                  Clear Search Filter
+                </button>
+              </div>
+            ) : (
+              filteredCourses.map((sub, idx) => {
+                const isExpanded = expandedSubject === sub.code;
+                return (
+                  <motion.div
+                    key={sub.code}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: Math.min(idx * 0.04, 0.3) }}
+                    className="rounded-2xl border border-zinc-200 bg-white overflow-hidden shadow-xs hover:border-primary-400 transition-all"
                   >
-                    <div className="flex items-start sm:items-center gap-3.5">
-                      <span className="px-3 py-1.5 rounded-xl bg-primary-50 border border-primary-200 text-primary-700 font-mono font-bold text-xs">
-                        {sub.code}
-                      </span>
-                      <div>
-                        <h3 className="text-base font-bold text-zinc-900">{sub.name}</h3>
-                        <p className="text-xs text-zinc-500 line-clamp-1 mt-0.5">{sub.description}</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-3 self-end sm:self-auto flex-shrink-0">
-                      <span className="px-2.5 py-1 rounded-lg bg-zinc-100 text-[11px] font-bold text-zinc-700">
-                        {sub.credits} Credits
-                      </span>
-                      <span className="px-2.5 py-1 rounded-lg bg-zinc-100 text-[11px] font-bold text-zinc-700">
-                        {sub.syllabusUnits.length} Units
-                      </span>
-                      <ChevronDown
-                        className={`w-5 h-5 text-zinc-400 transition-transform ${
-                          isExpanded ? "rotate-180 text-primary-600" : ""
-                        }`}
-                      />
-                    </div>
-                  </button>
-
-                  {isExpanded && (
-                    <div className="px-6 pb-6 pt-2 border-t border-zinc-100 bg-zinc-50/40 space-y-4">
-                      <div className="space-y-2">
-                        <p className="text-xs text-zinc-700 leading-relaxed">{sub.description}</p>
-                        {sub.learningOutcomes && sub.learningOutcomes.length > 0 && (
-                          <div className="pt-2">
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">
-                              Core Learning Outcomes:
-                            </span>
-                            <ul className="mt-1 space-y-1">
-                              {sub.learningOutcomes.map((lo, i) => (
-                                <li key={i} className="text-xs text-zinc-600 flex items-start gap-1.5">
-                                  <CheckCircle className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0 mt-0.5" />
-                                  <span>{lo}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Detailed Syllabus Units */}
-                      <div>
-                        <h4 className="text-xs font-bold uppercase tracking-wider text-primary-700 mb-3 flex items-center gap-2">
-                          <Sparkles className="w-3.5 h-3.5" />
-                          Detailed Syllabus Chapters &amp; Teaching Units
-                        </h4>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                          {sub.syllabusUnits.map((unit, uIdx) => (
-                            <div
-                              key={unit.unitId || uIdx}
-                              className="p-3.5 rounded-xl bg-white border border-zinc-200 text-xs text-zinc-800 space-y-2 shadow-2xs"
-                            >
-                              <div className="flex items-center justify-between">
-                                <span className="font-bold text-zinc-900 flex items-center gap-2">
-                                  <span className="w-5 h-5 rounded-md bg-primary-100 text-primary-700 flex items-center justify-center font-bold text-[10px]">
-                                    {uIdx + 1}
-                                  </span>
-                                  {unit.title}
-                                </span>
-                                {unit.teachingHours && (
-                                  <span className="text-[10px] text-zinc-400 font-medium flex items-center gap-1">
-                                    <Clock className="w-3 h-3" />
-                                    {unit.teachingHours}h
-                                  </span>
-                                )}
-                              </div>
-                              {unit.subtopics && unit.subtopics.length > 0 && (
-                                <div className="flex flex-wrap gap-1 pt-1">
-                                  {unit.subtopics.map((st, sIdx) => (
-                                    <span
-                                      key={sIdx}
-                                      className="px-2 py-0.5 rounded bg-zinc-50 border border-zinc-100 text-[10px] text-zinc-600"
-                                    >
-                                      {st}
-                                    </span>
-                                  ))}
-                                </div>
-                              )}
-                            </div>
-                          ))}
+                    <button
+                      onClick={() => setExpandedSubject(isExpanded ? null : sub.code)}
+                      className="w-full p-6 text-left flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-zinc-50/50 transition-colors"
+                    >
+                      <div className="flex items-start sm:items-center gap-3.5">
+                        <span className="px-3 py-1.5 rounded-xl bg-primary-50 border border-primary-200 text-primary-700 font-mono font-bold text-xs">
+                          {sub.code}
+                        </span>
+                        <div>
+                          <h3 className="text-base font-bold text-zinc-900">{sub.name}</h3>
+                          <p className="text-xs text-zinc-500 line-clamp-1 mt-0.5">{sub.description}</p>
                         </div>
                       </div>
 
-                      {/* Course Action Link */}
-                      <div className="pt-3 border-t border-zinc-200 flex items-center justify-between">
-                        <span className="text-xs text-zinc-500">
-                          Prerequisites: {sub.prerequisites?.join(", ") || "None"}
+                      <div className="flex items-center gap-3 self-end sm:self-auto flex-shrink-0">
+                        <span className="px-2.5 py-1 rounded-lg bg-zinc-100 text-[11px] font-bold text-zinc-700">
+                          {sub.credits} Credits
                         </span>
-                        <Link
-                          href={`/courses/${sub.code}`}
-                          className="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1.5"
-                        >
-                          <span>Explore Full Course Details</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
-                        </Link>
+                        <span className="px-2.5 py-1 rounded-lg bg-zinc-100 text-[11px] font-bold text-zinc-700">
+                          {sub.syllabusUnits.length} Units
+                        </span>
+                        <ChevronDown
+                          className={`w-5 h-5 text-zinc-400 transition-transform ${
+                            isExpanded ? "rotate-180 text-primary-600" : ""
+                          }`}
+                        />
                       </div>
-                    </div>
-                  )}
-                </motion.div>
-              );
-            })
-          )}
-        </div>
+                    </button>
+
+                    {isExpanded && (
+                      <div className="px-6 pb-6 pt-2 border-t border-zinc-100 bg-zinc-50/40 space-y-4">
+                        <div className="space-y-2">
+                          <p className="text-xs text-zinc-700 leading-relaxed">{sub.description}</p>
+                          {sub.learningOutcomes && sub.learningOutcomes.length > 0 && (
+                            <div className="pt-2">
+                              <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">
+                                Core Learning Outcomes:
+                              </span>
+                              <ul className="mt-1 space-y-1">
+                                {sub.learningOutcomes.map((lo, i) => (
+                                  <li key={i} className="text-xs text-zinc-600 flex items-start gap-1.5">
+                                    <CheckCircle className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                                    <span>{lo}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Detailed Syllabus Units */}
+                        <div>
+                          <h4 className="text-xs font-bold uppercase tracking-wider text-primary-700 mb-3 flex items-center gap-2">
+                            <Sparkles className="w-3.5 h-3.5" />
+                            Detailed Syllabus Chapters &amp; Teaching Units
+                          </h4>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            {sub.syllabusUnits.map((unit, uIdx) => (
+                              <div
+                                key={unit.unitId || uIdx}
+                                className="p-3.5 rounded-xl bg-white border border-zinc-200 text-xs text-zinc-800 space-y-2 shadow-2xs"
+                              >
+                                <div className="flex items-center justify-between">
+                                  <span className="font-bold text-zinc-900 flex items-center gap-2">
+                                    <span className="w-5 h-5 rounded-md bg-primary-100 text-primary-700 flex items-center justify-center font-bold text-[10px]">
+                                      {uIdx + 1}
+                                    </span>
+                                    {unit.title}
+                                  </span>
+                                  {unit.teachingHours && (
+                                    <span className="text-[10px] text-zinc-400 font-medium flex items-center gap-1">
+                                      <Clock className="w-3 h-3" />
+                                      {unit.teachingHours}h
+                                    </span>
+                                  )}
+                                </div>
+                                {unit.subtopics && unit.subtopics.length > 0 && (
+                                  <div className="flex flex-wrap gap-1 pt-1">
+                                    {unit.subtopics.map((st, sIdx) => (
+                                      <span
+                                        key={sIdx}
+                                        className="px-2 py-0.5 rounded bg-zinc-50 border border-zinc-100 text-[10px] text-zinc-600"
+                                      >
+                                        {st}
+                                      </span>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Action Buttons: View .md Syllabus & Explore Course */}
+                        <div className="pt-3 border-t border-zinc-200 flex flex-wrap items-center justify-between gap-3">
+                          <button
+                            type="button"
+                            onClick={() => setActiveModalCourse(sub)}
+                            className="px-3.5 py-2 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-200 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5"
+                          >
+                            <FileText className="w-3.5 h-3.5 text-primary-600" />
+                            <span>View Official .md Syllabus &amp; ESE</span>
+                          </button>
+
+                          <div className="flex items-center gap-3">
+                            <span className="text-xs text-zinc-500 hidden sm:inline">
+                              Prerequisites: {sub.prerequisites?.join(", ") || "None"}
+                            </span>
+                            <Link
+                              href={`/courses/${sub.code}`}
+                              className="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1.5"
+                            >
+                              <span>Explore Full Course</span>
+                              <ArrowRight className="w-3.5 h-3.5" />
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </motion.div>
+                );
+              })
+            )}
+          </div>
+        )}
+
+        {/* Modal for Subject Markdown Syllabus */}
+        {activeModalCourse && (
+          <SyllabusMarkdownModal
+            isOpen={!!activeModalCourse}
+            onClose={() => setActiveModalCourse(null)}
+            title={`${activeModalCourse.name} (${activeModalCourse.code})`}
+            downloadFilename={`${activeModalCourse.code}_Syllabus.md`}
+            markdownContent={generateCourseMarkdown(activeModalCourse)}
+          />
+        )}
       </div>
     </div>
   );
