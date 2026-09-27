@@ -23,6 +23,38 @@ interface ReadAloudProps {
   className?: string;
 }
 
+// Common female voice names across the platforms Web Speech API actually
+// ships on, in preference order. Ava first (Edge's "Microsoft Ava Online
+// (Natural)", macOS/iOS's Siri voice); the rest are the next-best female
+// voice so a machine without Ava still doesn't default to a male voice
+// (Windows SAPI5's own default is "David", which is male).
+const FEMALE_VOICE_NAMES = [
+  "ava",
+  "zira",
+  "samantha",
+  "susan",
+  "karen",
+  "moira",
+  "tessa",
+  "allison",
+  "jenny",
+  "aria",
+  "michelle",
+  "joanna",
+  "salli",
+  "female",
+];
+
+/** Finds the best available female-sounding voice, preferring Ava. */
+function findPreferredVoice(): SpeechSynthesisVoice | null {
+  const voices = window.speechSynthesis.getVoices();
+  for (const name of FEMALE_VOICE_NAMES) {
+    const match = voices.find((v) => v.name.toLowerCase().includes(name));
+    if (match) return match;
+  }
+  return null;
+}
+
 /**
  * Reads text aloud using the browser's built-in speech synthesis.
  *
@@ -58,23 +90,45 @@ export function ReadAloud({ text, label, className = "" }: ReadAloudProps) {
     setSpeaking(false);
   };
 
-  const speak = () => {
-    if (speaking) {
-      stop();
-      return;
-    }
-
+  const startSpeaking = () => {
     // Cancel anything already queued so two questions cannot overlap.
     window.speechSynthesis.cancel();
 
     const utterance = new SpeechSynthesisUtterance(sanitizeForSpeech(text));
     utterance.rate = 0.95;
+    const preferred = findPreferredVoice();
+    if (preferred) {
+      utterance.voice = preferred;
+      utterance.lang = preferred.lang;
+    }
     utterance.onend = () => setSpeaking(false);
     utterance.onerror = () => setSpeaking(false);
 
     utteranceRef.current = utterance;
     setSpeaking(true);
     window.speechSynthesis.speak(utterance);
+  };
+
+  const speak = () => {
+    if (speaking) {
+      stop();
+      return;
+    }
+
+    // Chrome loads voices asynchronously — getVoices() can return [] on the
+    // very first call. Wait for the one voiceschanged event rather than
+    // speaking immediately, or Ava never gets picked even when installed.
+    if (window.speechSynthesis.getVoices().length === 0) {
+      const onVoicesChanged = () => {
+        window.speechSynthesis.removeEventListener("voiceschanged", onVoicesChanged);
+        startSpeaking();
+      };
+      window.speechSynthesis.addEventListener("voiceschanged", onVoicesChanged);
+      // Nudges some browsers into firing voiceschanged if they haven't yet.
+      window.speechSynthesis.getVoices();
+    } else {
+      startSpeaking();
+    }
   };
 
   return (

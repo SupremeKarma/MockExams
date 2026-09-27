@@ -36,7 +36,12 @@ export default function TakeExamPage() {
   const router = useRouter();
   const [exam, setExam] = useState<any>(null);
   const [questions, setQuestions] = useState<Question[]>([]);
-  const [loading, setLoading] = useState(false);
+  // Starts true, not false: `started` flips to true synchronously on click,
+  // but fetchExamData (which sets this) only runs in the useEffect that fires
+  // AFTER that render commits. In the gap, questions is still [] and
+  // currentQuestion is undefined — starting loading true routes that one
+  // frame to the spinner below instead of crashing on `.option_a`.
+  const [loading, setLoading] = useState(true);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [attachments, setAttachments] = useState<Record<string, string[]>>({});
@@ -435,7 +440,7 @@ export default function TakeExamPage() {
                 )}
               </div>
 
-              {currentQuestion?.type === "written" ? (
+              {!currentQuestion ? null : currentQuestion.type === "written" ? (
                 <div className="space-y-2">
                   <AnswerEditor
                     value={answers[currentQuestion.id] || ""}
