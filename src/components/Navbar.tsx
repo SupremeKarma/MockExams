@@ -29,7 +29,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useProgram, CONTENT_AVAILABLE_PROGRAM_IDS } from "@/context/ProgramContext";
 
 export const Navbar = () => {
-  const { user, signOut, isAdmin, isExaminer, orgId } = useAuth();
+  const { user, signOut, isAdmin, isExaminer, orgId, openAuthModal } = useAuth();
   const { activeProgram, setActiveProgramId, allPrograms } = useProgram();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -227,18 +227,20 @@ export const Navbar = () => {
               </div>
             ) : (
               <div className="flex items-center gap-2">
-                <Link
-                  href="/login"
-                  className="px-3 py-2 text-[13px] font-semibold text-zinc-700 hover:text-primary-600 transition-colors"
+                <button
+                  type="button"
+                  onClick={() => openAuthModal("login")}
+                  className="px-3 py-2 text-[13px] font-semibold text-zinc-700 hover:text-primary-600 transition-colors cursor-pointer"
                 >
                   Log In
-                </Link>
-                <Link
-                  href="/signup"
-                  className="px-3.5 py-2 rounded-md bg-primary-600 hover:bg-primary-700 text-white text-[13px] font-semibold shadow-button transition-colors"
+                </button>
+                <button
+                  type="button"
+                  onClick={() => openAuthModal("signup")}
+                  className="px-3.5 py-2 rounded-md bg-primary-600 hover:bg-primary-700 text-white text-[13px] font-semibold shadow-button transition-colors cursor-pointer"
                 >
                   Get Started
-                </Link>
+                </button>
               </div>
             )}
 
@@ -275,7 +277,7 @@ export const Navbar = () => {
                 </Link>
               ))}
 
-              {user && (
+              {user ? (
                 <>
                   <div className="h-px bg-zinc-100 my-1.5" />
                   {accountLinks.map((link) => (
@@ -297,6 +299,29 @@ export const Navbar = () => {
                     Sign Out
                   </button>
                 </>
+              ) : (
+                <div className="pt-2 border-t border-zinc-100 flex flex-col gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsOpen(false);
+                      openAuthModal("login");
+                    }}
+                    className="w-full py-2.5 text-center text-sm font-semibold text-zinc-700 bg-zinc-100 hover:bg-zinc-200 rounded-lg transition-colors"
+                  >
+                    Log In
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsOpen(false);
+                      openAuthModal("signup");
+                    }}
+                    className="w-full py-2.5 text-center text-sm font-semibold text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-colors shadow-button"
+                  >
+                    Get Started Free
+                  </button>
+                </div>
               )}
             </motion.div>
           )}

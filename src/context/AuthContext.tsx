@@ -6,6 +6,7 @@ import { auth, db } from "@/lib/firebase";
 import { doc, getDoc, collection, query, where, getDocs, limit } from "firebase/firestore";
 import { useRouter, usePathname } from "next/navigation";
 import { READER_AUTH_COOKIE } from "@/lib/examai/reader-auth-cookie";
+import { AuthModal } from "@/components/auth/AuthModal";
 
 type UserRole = 'admin' | 'org_admin' | 'examiner' | 'student' | null;
 
@@ -17,6 +18,10 @@ interface AuthContextType {
   isExaminer: boolean;   // true for admin | org_admin | examiner
   orgId: string | null;  // the org this user belongs to (if any)
   signOut: () => Promise<void>;
+  isAuthModalOpen: boolean;
+  authModalMode: 'login' | 'signup';
+  openAuthModal: (mode?: 'login' | 'signup') => void;
+  closeAuthModal: () => void;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -27,6 +32,10 @@ const AuthContext = createContext<AuthContextType>({
   isExaminer: false,
   orgId: null,
   signOut: async () => {},
+  isAuthModalOpen: false,
+  authModalMode: 'login',
+  openAuthModal: () => {},
+  closeAuthModal: () => {},
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
@@ -36,8 +45,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isExaminer, setIsExaminer] = useState(false);
   const [orgId, setOrgId] = useState<string | null>(null);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authModalMode, setAuthModalMode] = useState<'login' | 'signup'>('login');
   const router = useRouter();
   const pathname = usePathname();
+
+  const openAuthModal = (mode: 'login' | 'signup' = 'login') => {
+    setAuthModalMode(mode);
+    setIsAuthModalOpen(true);
+  };
+
+  const closeAuthModal = () => {
+    setIsAuthModalOpen(false);
+  };
 
   const protectedRoutes = ["/dashboard", "/leaderboard", "/admin", "/examiner", "/organization"];
   const authRoutes = ["/login", "/signup"];
@@ -175,8 +195,27 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, [pathname, user, loading, router]);
 
   return (
-    <AuthContext.Provider value={{ user, loading, role, isAdmin, isExaminer, orgId, signOut }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+        role,
+        isAdmin,
+        isExaminer,
+        orgId,
+        signOut,
+        isAuthModalOpen,
+        authModalMode,
+        openAuthModal,
+        closeAuthModal,
+      }}
+    >
       {children}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        mode={authModalMode}
+        onClose={closeAuthModal}
+      />
     </AuthContext.Provider>
   );
 };
