@@ -153,4 +153,49 @@ describe("buildQuestionSpeechText", () => {
     expect(text).toContain("Do this next: Review recovery mechanisms.");
     expect(text).toContain("Model answer: A deadlock is a situation");
   });
+
+  it("formats unanswered questions as incorrect in spoken narration", () => {
+    const mcqText = buildQuestionSpeechText(
+      {
+        questionId: "q3",
+        type: "mcq",
+        question_text: "What is virtual memory?",
+        option_a: "RAM on a graphics card",
+        option_b: "Memory management technique that creates an illusion of a large memory",
+        option_c: "A cloud storage drive",
+        option_d: "BIOS firmware",
+        selectedAnswer: null,
+        correctAnswer: "b",
+        isCorrect: false,
+        marksAwarded: 0,
+        fullMarks: 1,
+        explanation: "Virtual memory maps virtual addresses used by an application onto physical addresses in computer memory.",
+      },
+      3
+    );
+
+    expect(mcqText).toContain("You left this question unanswered. Unanswered questions are counted as incorrect.");
+    expect(mcqText).toContain("The correct answer is Option B: Memory management technique");
+
+    const writtenText = buildQuestionSpeechText(
+      {
+        questionId: "q4",
+        type: "written",
+        question_text: "Explain thrashing in operating systems.",
+        option_a: "",
+        option_b: "",
+        option_c: "",
+        option_d: "",
+        selectedAnswer: null,
+        correctAnswer: "",
+        isCorrect: false,
+        marksAwarded: 0,
+        fullMarks: 5,
+        writtenAnswer: "",
+      },
+      4
+    );
+
+    expect(writtenText).toContain("Your answer was left blank. Unanswered questions are counted as incorrect.");
+  });
 });

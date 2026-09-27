@@ -62,7 +62,7 @@ export function buildQuestionSpeechText(item: QuestionBreakdown, questionNumber:
     if (item.writtenAnswer && item.writtenAnswer.trim()) {
       parts.push(`Your answer was: ${item.writtenAnswer}.`);
     } else {
-      parts.push(`Your answer was left blank.`);
+      parts.push(`Your answer was left blank. Unanswered questions are counted as incorrect.`);
     }
 
     if (item.grading_status === "pending") {
@@ -120,7 +120,7 @@ export function buildQuestionSpeechText(item: QuestionBreakdown, questionNumber:
         );
       }
     } else {
-      parts.push("You left this question unanswered.");
+      parts.push("You left this question unanswered. Unanswered questions are counted as incorrect.");
     }
 
     if (!item.isCorrect) {
@@ -148,7 +148,17 @@ interface ExamReviewProps {
 export function ExamReview({ breakdown }: ExamReviewProps) {
   const [showAll, setShowAll] = useState(false);
   const [tutorContext, setTutorContext] = useState<string | null>(null);
-  const wrongAnswers = breakdown.filter((b) => !b.isCorrect && b.selectedAnswer !== null);
+
+  // An unanswered question receives 0 marks and is strictly counted as incorrect.
+  const wrongAnswers = breakdown.filter((b) => !b.isCorrect);
+  const correctAnswers = breakdown.filter((b) => b.isCorrect);
+  const unansweredCount = breakdown.filter(
+    (b) =>
+      !b.isCorrect &&
+      ((b.type === "written" && (!b.writtenAnswer || !b.writtenAnswer.trim())) ||
+        (b.type !== "written" && !b.selectedAnswer))
+  ).length;
+
   const items = showAll ? breakdown : wrongAnswers;
 
   if (breakdown.length === 0) {
@@ -166,7 +176,7 @@ export function ExamReview({ breakdown }: ExamReviewProps) {
           <BookOpen className="w-4 h-4 text-primary-600" />
           Answer review
           <span className="ml-1 text-xs font-normal text-zinc-500">
-            ({wrongAnswers.length} wrong · {breakdown.filter((b) => b.isCorrect).length} correct)
+            ({wrongAnswers.length} incorrect{unansweredCount > 0 ? ` incl. ${unansweredCount} unanswered` : ""} · {correctAnswers.length} correct)
           </span>
         </h2>
         <div className="flex gap-1.5">
@@ -178,7 +188,7 @@ export function ExamReview({ breakdown }: ExamReviewProps) {
                 : "bg-white text-zinc-500 border-zinc-200 hover:bg-zinc-50"
             }`}
           >
-            Wrong only
+            Incorrect & Unanswered ({wrongAnswers.length})
           </button>
           <button
             onClick={() => setShowAll(true)}
@@ -188,7 +198,7 @@ export function ExamReview({ breakdown }: ExamReviewProps) {
                 : "bg-white text-zinc-500 border-zinc-200 hover:bg-zinc-50"
             }`}
           >
-            All questions
+            All questions ({breakdown.length})
           </button>
         </div>
       </div>
@@ -197,26 +207,43 @@ export function ExamReview({ breakdown }: ExamReviewProps) {
         <div className="p-10 bg-white rounded-lg border border-zinc-200 text-center">
           <CheckCircle2 className="w-8 h-8 text-emerald-500 mx-auto mb-3" />
           <p className="text-zinc-500 text-sm">
-            {showAll ? "No questions to display." : "Perfect score! You answered everything correctly."}
+            {showAll ? "No questions to display." : "Perfect score! You answered every question correctly."}
           </p>
         </div>
       )}
 
       {items.map((item) => {
         const globalIdx = breakdown.indexOf(item);
+        const isUnanswered =
+          !item.isCorrect &&
+          ((item.type === "written" && (!item.writtenAnswer || !item.writtenAnswer.trim())) ||
+            (item.type !== "written" && !item.selectedAnswer));
+
         return (
           <div
             key={item.questionId}
             className={`bg-white p-5 rounded-lg border transition-colors ${
-              item.isCorrect ? "border-emerald-200" : "border-red-200"
+              item.isCorrect ? "border-emerald-200" : isUnanswered ? "border-amber-200" : "border-red-200"
             }`}
           >
             <div className="flex items-center gap-2.5 mb-3.5">
-              <span className={`flex items-center gap-1.5 text-[10px] font-bold uppercase px-2 py-1 rounded-md ${
-                item.isCorrect ? "bg-emerald-50 text-emerald-700" : "bg-red-50 text-red-700"
-              }`}>
-                {item.isCorrect ? <CheckCircle2 className="w-3 h-3" /> : <XCircle className="w-3 h-3" />}
-                {item.isCorrect ? "Correct" : "Incorrect"}
+              <span
+                className={`flex items-center gap-1.5 text-[10px] font-bold uppercase px-2 py-1 rounded-md ${
+                  item.isCorrect
+                    ? "bg-emerald-50 text-emerald-700"
+                    : isUnanswered
+                    ? "bg-amber-50 text-amber-800 border border-amber-200"
+                    : "bg-red-50 text-red-700"
+                }`}
+              >
+                {item.isCorrect ? (
+                  <CheckCircle2 className="w-3 h-3" />
+                ) : isUnanswered ? (
+                  <AlertCircle className="w-3 h-3 text-amber-600" />
+                ) : (
+                  <XCircle className="w-3 h-3" />
+                )}
+                {item.isCorrect ? "Correct" : isUnanswered ? "Unanswered (Incorrect)" : "Incorrect"}
               </span>
               <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wide">Question {globalIdx + 1}</span>
               <div className="ml-auto flex items-center gap-2">
@@ -492,10 +519,10 @@ Feedback said I missed: ${item.gaps.join("; ")}` : "")
               </>
             )}
 
-            {!item.selectedAnswer && !item.isCorrect && (
-              <p className="mt-3 text-xs text-amber-700 font-medium flex items-center gap-1.5">
-                <XCircle className="w-3.5 h-3.5" />
-                This question was left unanswered during the exam.
+            {isUnanswered && (
+              <p className="mt-3 text-xs text-amber-800 font-medium flex items-center gap-1.5 p-2.5 bg-amber-50 rounded-md border border-amber-200">
+                <AlertCircle className="w-4 h-4 shrink-0 text-amber-600" />
+                This question was left unanswered during the exam and is counted as incorrect (0 marks).
               </p>
             )}
           </div>

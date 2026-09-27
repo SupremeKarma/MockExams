@@ -122,6 +122,15 @@ export default function ExamResultsPage({ params }: { params: any }) {
   }
 
   const breakdown = attempt.answers_json?.breakdown ?? [];
+  const correctCount = breakdown.filter((b: any) => b.isCorrect).length;
+  const incorrectCount = breakdown.filter((b: any) => !b.isCorrect).length;
+  const unansweredCount = breakdown.filter(
+    (b: any) =>
+      !b.isCorrect &&
+      ((b.type === "written" && (!b.writtenAnswer || !b.writtenAnswer.trim())) ||
+        (b.type !== "written" && !b.selectedAnswer))
+  ).length;
+
   const dateStr = attempt.attempted_at ? new Date(attempt.attempted_at).toLocaleDateString("en-US", {
     weekday: "long",
     year: "numeric",
@@ -173,7 +182,7 @@ export default function ExamResultsPage({ params }: { params: any }) {
             </div>
           </header>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             <ResultStat
               label="Final score"
               value={`${attempt.score}/${attempt.total_questions || attempt.total_marks || '?'}`}
@@ -189,6 +198,12 @@ export default function ExamResultsPage({ params }: { params: any }) {
               label="Time spent"
               value={formatDuration(attempt.time_spent_seconds || 0)}
               subValue="Duration"
+            />
+            <ResultStat
+              label="Unanswered"
+              value={`${unansweredCount}`}
+              subValue="Marked incorrect (0 pts)"
+              color={unansweredCount > 0 ? "text-amber-600" : "text-zinc-600"}
             />
           </div>
 
@@ -276,9 +291,11 @@ export default function ExamResultsPage({ params }: { params: any }) {
                   attempt.total_questions || attempt.total_marks || ""
                 }. Accuracy: ${Number(attempt.percentage || 0).toFixed(1)} percent. Total time spent: ${formatDuration(
                   attempt.time_spent_seconds || 0
-                )}. You got ${breakdown.filter((b: any) => b.isCorrect).length} questions correct, and ${
-                  breakdown.filter((b: any) => !b.isCorrect).length
-                } incorrect.`}
+                )}. You got ${correctCount} questions correct, and ${incorrectCount} incorrect${
+                  unansweredCount > 0
+                    ? `, including ${unansweredCount} question${unansweredCount > 1 ? "s" : ""} left unanswered`
+                    : ""
+                }. Remember that leaving a question unanswered is also counted as incorrect.`}
                 label="exam result summary"
                 buttonText="Listen to summary"
                 title="Listen to overall exam performance summary in female voice"
@@ -449,6 +466,14 @@ function formatDuration(seconds: number) {
  */
 function buildResultMarkdown(attempt: any, breakdown: any[], dateStr: string, timeStr: string): string {
   const lines: string[] = [];
+  const correctCount = breakdown.filter((b) => b.isCorrect).length;
+  const incorrectCount = breakdown.filter((b) => !b.isCorrect).length;
+  const unansweredCount = breakdown.filter(
+    (b) =>
+      !b.isCorrect &&
+      ((b.type === "written" && (!b.writtenAnswer || !b.writtenAnswer.trim())) ||
+        (b.type !== "written" && !b.selectedAnswer))
+  ).length;
 
   lines.push(`# ${attempt.exam_title}`);
   lines.push("");
@@ -462,8 +487,8 @@ function buildResultMarkdown(attempt: any, breakdown: any[], dateStr: string, ti
   lines.push("---");
   lines.push("");
   lines.push(
-    `## Answer review (${breakdown.filter((b) => b.isCorrect).length} correct · ` +
-      `${breakdown.filter((b) => !b.isCorrect).length} incorrect)`
+    `## Answer review (${correctCount} correct · ` +
+      `${incorrectCount} incorrect${unansweredCount > 0 ? ` incl. ${unansweredCount} unanswered` : ""})`
   );
   lines.push("");
 
@@ -550,8 +575,13 @@ function buildResultMarkdown(attempt: any, breakdown: any[], dateStr: string, ti
       }
     }
 
-    if (!item.selectedAnswer && !item.isCorrect) {
-      lines.push("*This question was left unanswered during the exam.*");
+    const isUnanswered =
+      !item.isCorrect &&
+      ((item.type === "written" && (!item.writtenAnswer || !item.writtenAnswer.trim())) ||
+        (item.type !== "written" && !item.selectedAnswer));
+
+    if (isUnanswered) {
+      lines.push("*This question was left unanswered during the exam and is counted as incorrect (0 marks).*");
       lines.push("");
     }
 
