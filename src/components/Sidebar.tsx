@@ -22,6 +22,7 @@ import {
   ShieldCheck,
   GraduationCap,
   Compass,
+  Users,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -60,6 +61,7 @@ export default function Sidebar() {
   const isActive = (href: string) => pathname === href || (href !== "/dashboard" && pathname.startsWith(href));
 
   const workspaceLinks = [
+    (isExaminer || isAdmin) && { name: "Teacher Classes", href: "/teacher/classes", icon: Users },
     isExaminer && { name: "Examiner Console", href: "/examiner", icon: ClipboardList },
     orgId && { name: "Organization", href: `/organization/${orgId}`, icon: Building2 },
     isAdmin && { name: "Admin", href: "/admin", icon: ShieldCheck },

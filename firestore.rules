@@ -325,6 +325,22 @@ service cloud.firestore {
     }
 
     // ---------------------------------------------------------------------
+    // Classes & Class Enrollments (Phase 7)
+    // ---------------------------------------------------------------------
+    match /classes/{classId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update, delete: if isAuthenticated() && (resource.data.teacherId == request.auth.uid || isStaff());
+    }
+
+    match /classEnrollments/{enrollmentId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isAuthenticated() && (resource.data.userId == request.auth.uid || isStaff());
+    }
+
+
+    // ---------------------------------------------------------------------
     // Deny by default. The previous catch-all was
     // `allow read, write: if isAuthenticated()`, which silently granted every
     // signed-in user full access to any collection lacking an explicit rule.

@@ -162,6 +162,34 @@ export interface StudentPathEnrollment {
 }
 
 // ---------------------------------------------------------------------------
+// Teacher Classes & Management (Phase 7)
+// ---------------------------------------------------------------------------
+
+export interface TeacherClass {
+  id: string;
+  name: string;
+  description?: string;
+  joinCode: string;
+  teacherId: string;
+  teacherName: string;
+  assignedCourseIds: string[];
+  studentCount?: number;
+  createdAt: Timestamp | FieldValue | Date | any;
+  updatedAt: Timestamp | FieldValue | Date | any;
+}
+
+export interface ClassEnrollment {
+  id: string;
+  classId: string;
+  userId: string;
+  studentName: string;
+  studentEmail: string;
+  joinedAt: Timestamp | FieldValue | Date | any;
+  progressPercentage?: number;
+}
+
+
+// ---------------------------------------------------------------------------
 // Paper
 // ---------------------------------------------------------------------------
 
