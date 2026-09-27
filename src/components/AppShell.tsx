@@ -12,7 +12,6 @@ import QuickNavRail from "@/components/QuickNavRail";
 const SIDEBAR_PREFIXES = [
   "/dashboard",
   "/courses",
-  "/syllabus",
   "/exams",
   "/flashcards",
   "/analytics",
@@ -40,9 +39,10 @@ const FOCUS_MODE_PATTERN = /^\/exams\/[^/]+\/take$/;
 // marketing page that expects the navbar and footer.
 const READER_PATTERN = /^\/learn\/[^/]+/;
 
-// /notes is built from the same reader.css design system (see
-// src/app/notes/layout.tsx) and supplies its own header the same way.
+// /notes and /syllabus are built from the same reader.css design system (see
+// their layout.tsx files) and supply their own header the same way.
 const NOTES_PATTERN = /^\/notes(\/|$)/;
+const SYLLABUS_PATTERN = /^\/syllabus(\/|$)/;
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() || "/";
@@ -58,9 +58,14 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     !isExcluded &&
     SIDEBAR_PREFIXES.some((p) => pathname === p || pathname.startsWith(p + "/"));
 
-  if (isFocusMode || READER_PATTERN.test(pathname) || NOTES_PATTERN.test(pathname)) {
-    // Exam-taking, the Reader, and Notes all supply their own sticky header —
-    // no chrome at all.
+  if (
+    isFocusMode ||
+    READER_PATTERN.test(pathname) ||
+    NOTES_PATTERN.test(pathname) ||
+    SYLLABUS_PATTERN.test(pathname)
+  ) {
+    // Exam-taking, the Reader, Notes, and Syllabus all supply their own
+    // sticky header — no chrome at all.
     return <>{children}</>;
   }
 

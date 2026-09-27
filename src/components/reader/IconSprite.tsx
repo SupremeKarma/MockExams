@@ -66,6 +66,19 @@ export function IconSprite() {
       <symbol id="i-type" viewBox="0 0 24 24">
         <path d="M4 7V5h16v2M12 5v14M9 19h6" />
       </symbol>
+      <symbol id="i-back" viewBox="0 0 24 24">
+        <path d="M14 6 8 12l6 6" />
+      </symbol>
+      <symbol id="i-forward" viewBox="0 0 24 24">
+        <path d="m10 6 6 6-6 6" />
+      </symbol>
+      <symbol id="i-refresh" viewBox="0 0 24 24">
+        <path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3" />
+        <path d="M18 3v4h-4M6 21v-4h4" />
+      </symbol>
+      <symbol id="i-chevron-down" viewBox="0 0 24 24">
+        <path d="m6 9 6 6 6-6" />
+      </symbol>
     </svg>
   );
 }
