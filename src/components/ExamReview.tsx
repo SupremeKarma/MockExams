@@ -261,8 +261,8 @@ export function ExamReview({ breakdown }: ExamReviewProps) {
               </div>
             </div>
 
-            <div className="text-sm font-semibold mb-4 leading-relaxed text-zinc-900">
-              <FormattedContent content={item.question_text} />
+            <div className="text-base sm:text-lg font-semibold mb-4 leading-relaxed text-zinc-900">
+              <FormattedContent content={item.question_text} size="lg" />
             </div>
 
             {item.type === "written" ? (
@@ -272,11 +272,11 @@ export function ExamReview({ breakdown }: ExamReviewProps) {
                     <PenLine className="w-3.5 h-3.5" />
                     Your answer
                   </div>
-                  <div className="p-3.5 bg-zinc-50/70 rounded-md border border-zinc-200 text-xs text-zinc-800 leading-relaxed">
+                  <div className="p-4 bg-zinc-50/80 rounded-lg border border-zinc-200 text-sm sm:text-base text-zinc-800 leading-relaxed">
                     {item.writtenAnswer && item.writtenAnswer.trim() ? (
-                      <FormattedContent content={item.writtenAnswer} />
+                      <FormattedContent content={item.writtenAnswer} size="base" />
                     ) : (
-                      <span className="text-zinc-400 italic font-mono">(left blank - no answer submitted)</span>
+                      <span className="text-zinc-400 italic font-mono text-sm">(left blank - no answer submitted)</span>
                     )}
                   </div>
                 </div>
@@ -297,25 +297,23 @@ export function ExamReview({ breakdown }: ExamReviewProps) {
                 )}
 
                 {item.teacherReviewed && item.teacherFeedback && (
-                  <div className="p-3.5 rounded-md border bg-blue-50/60 border-blue-100">
-                    <div className="flex items-center gap-1.5 mb-1.5 font-bold text-[11px] uppercase tracking-wide text-blue-700">
-                      <PenLine className="w-3.5 h-3.5" />
+                  <div className="p-4 rounded-lg border bg-blue-50/70 border-blue-200 text-sm sm:text-base text-zinc-800 leading-relaxed">
+                    <div className="flex items-center gap-1.5 mb-2 font-bold text-xs uppercase tracking-wider text-blue-700">
+                      <PenLine className="w-4 h-4" />
                       Teacher feedback
                     </div>
-                    <div className="text-xs text-zinc-700 leading-relaxed">
-                      <FormattedContent content={item.teacherFeedback} />
-                    </div>
+                    <FormattedContent content={item.teacherFeedback} size="base" />
                   </div>
                 )}
 
                 {item.grading_status === "pending" ? (
-                  <div className="p-3.5 rounded-md border bg-zinc-50 border-zinc-200 flex items-center gap-2.5">
-                    <Loader2 className="w-4 h-4 text-primary-600 animate-spin flex-shrink-0" />
+                  <div className="p-4 rounded-lg border bg-zinc-50 border-zinc-200 flex items-center gap-3">
+                    <Loader2 className="w-5 h-5 text-primary-600 animate-spin flex-shrink-0" />
                     <div>
-                      <div className="font-bold text-[11px] uppercase tracking-wide text-zinc-700">
+                      <div className="font-bold text-xs uppercase tracking-wide text-zinc-700">
                         Grading your answer
                       </div>
-                      <p className="text-xs text-zinc-500 leading-relaxed">
+                      <p className="text-sm text-zinc-500 leading-relaxed">
                         Feedback appears here automatically — no need to refresh.
                       </p>
                     </div>
@@ -323,16 +321,18 @@ export function ExamReview({ breakdown }: ExamReviewProps) {
                 ) : (
                   <>
                     {!!item.strengths?.length && (
-                      <div className="p-3.5 rounded-md border bg-emerald-50/60 border-emerald-100">
-                        <div className="flex items-center gap-1.5 mb-1.5 font-bold text-[11px] uppercase tracking-wide text-emerald-700">
-                          <CheckCircle2 className="w-3.5 h-3.5" />
+                      <div className="p-4 rounded-lg border bg-emerald-50/70 border-emerald-200">
+                        <div className="flex items-center gap-1.5 mb-2 font-bold text-xs uppercase tracking-wider text-emerald-800">
+                          <CheckCircle2 className="w-4 h-4" />
                           What you did well
                         </div>
-                        <ul className="space-y-1">
+                        <ul className="space-y-1.5">
                           {item.strengths.map((point, i) => (
-                            <li key={i} className="text-xs text-zinc-600 leading-relaxed flex gap-1.5">
-                              <span className="text-emerald-500 select-none">•</span>
-                              <span>{point}</span>
+                            <li key={i} className="text-sm text-zinc-700 leading-relaxed flex items-start gap-2">
+                              <span className="text-emerald-500 font-bold select-none">•</span>
+                              <div className="flex-1">
+                                <FormattedContent content={point} size="sm" />
+                              </div>
                             </li>
                           ))}
                         </ul>
@@ -340,16 +340,18 @@ export function ExamReview({ breakdown }: ExamReviewProps) {
                     )}
 
                     {!!item.gaps?.length && (
-                      <div className="p-3.5 rounded-md border bg-amber-50/60 border-amber-100">
-                        <div className="flex items-center gap-1.5 mb-1.5 font-bold text-[11px] uppercase tracking-wide text-amber-700">
-                          <AlertTriangle className="w-3.5 h-3.5" />
+                      <div className="p-4 rounded-lg border bg-amber-50/70 border-amber-200">
+                        <div className="flex items-center gap-1.5 mb-2 font-bold text-xs uppercase tracking-wider text-amber-800">
+                          <AlertTriangle className="w-4 h-4" />
                           Where you can improve
                         </div>
-                        <ul className="space-y-1">
+                        <ul className="space-y-1.5">
                           {item.gaps.map((point, i) => (
-                            <li key={i} className="text-xs text-zinc-600 leading-relaxed flex gap-1.5">
-                              <span className="text-amber-500 select-none">•</span>
-                              <span>{point}</span>
+                            <li key={i} className="text-sm text-zinc-700 leading-relaxed flex items-start gap-2">
+                              <span className="text-amber-500 font-bold select-none">•</span>
+                              <div className="flex-1">
+                                <FormattedContent content={point} size="sm" />
+                              </div>
                             </li>
                           ))}
                         </ul>
@@ -438,19 +440,19 @@ Feedback said I missed: ${item.gaps.join("; ")}` : "")
                           {item.marksAwarded} of {item.fullMarks ?? "?"}
                         </span>
                       </div>
-                      <ul className="space-y-1.5">
+                      <ul className="space-y-2">
                         {criteria.map((c, i) => (
-                          <li key={i} className="flex items-start gap-2 text-xs text-zinc-600 leading-relaxed">
-                            <span className="font-bold text-zinc-900 tabular-nums whitespace-nowrap">
+                          <li key={i} className="flex items-start gap-2.5 text-sm text-zinc-700 leading-relaxed">
+                            <span className="font-bold text-zinc-900 tabular-nums whitespace-nowrap px-1.5 py-0.5 rounded bg-zinc-100 text-xs">
                               {c.marks}
                             </span>
                             <div className="flex-1">
-                              <FormattedContent content={c.criterion} />
+                              <FormattedContent content={c.criterion} size="sm" />
                             </div>
                           </li>
                         ))}
                       </ul>
-                      <p className="text-[11px] text-zinc-400 mt-2 leading-relaxed">
+                      <p className="text-xs text-zinc-400 mt-2.5 leading-relaxed">
                         Compare these against your answer above to see exactly where marks were lost.
                       </p>
                     </div>
@@ -458,13 +460,20 @@ Feedback said I missed: ${item.gaps.join("; ")}` : "")
                 })()}
 
                 {item.modelAnswer && (
-                  <div className="p-3.5 bg-primary-50/60 rounded-md border border-primary-100">
-                    <div className="flex items-center gap-1.5 mb-1.5 text-primary-700 font-bold text-[11px] uppercase tracking-wide">
-                      <BookOpen className="w-3.5 h-3.5" />
-                      Model answer
+                  <div className="p-4 sm:p-5 bg-gradient-to-br from-indigo-50/70 via-primary-50/40 to-white rounded-xl border border-primary-200/90 shadow-xs">
+                    <div className="flex items-center justify-between gap-2 mb-3 pb-2.5 border-b border-primary-200/60">
+                      <div className="flex items-center gap-2 text-primary-900 font-bold text-xs sm:text-sm uppercase tracking-wider">
+                        <div className="p-1.5 rounded-md bg-primary-100 text-primary-700">
+                          <BookOpen className="w-4 h-4" />
+                        </div>
+                        <span>Model Answer / Benchmark Solution</span>
+                      </div>
+                      <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-primary-100/90 text-primary-800 border border-primary-200/70">
+                        Full Marks Standard
+                      </span>
                     </div>
-                    <div className="text-xs text-zinc-700 leading-relaxed">
-                      <FormattedContent content={item.modelAnswer} />
+                    <div className="text-sm sm:text-base text-zinc-800 leading-relaxed">
+                      <FormattedContent content={item.modelAnswer} size="base" />
                     </div>
                   </div>
                 )}
@@ -487,8 +496,8 @@ Feedback said I missed: ${item.gaps.join("; ")}` : "")
                         }`}>
                           {opt}
                         </div>
-                        <div className="text-xs flex-1">
-                          <FormattedContent content={item[`option_${opt}`] || ""} />
+                        <div className="text-sm sm:text-base flex-1 text-zinc-800">
+                          <FormattedContent content={item[`option_${opt}`] || ""} size="base" />
                         </div>
                         {isCorrectOpt && <CheckCircle2 className="w-4 h-4 ml-auto shrink-0 text-emerald-600" />}
                         {isSelected && !isCorrectOpt && <XCircle className="w-4 h-4 ml-auto shrink-0 text-red-600" />}
@@ -498,13 +507,15 @@ Feedback said I missed: ${item.gaps.join("; ")}` : "")
                 </div>
 
                 {item.explanation && (
-                  <div className="mt-4 p-3.5 bg-primary-50/60 rounded-md border border-primary-100">
-                    <div className="flex items-center gap-1.5 mb-1.5 text-primary-700 font-bold text-[11px] uppercase tracking-wide">
-                      <BookOpen className="w-3.5 h-3.5" />
-                      Explanation
+                  <div className="mt-4 p-4 sm:p-5 bg-primary-50/50 rounded-xl border border-primary-200">
+                    <div className="flex items-center gap-2 mb-2.5 text-primary-900 font-bold text-xs sm:text-sm uppercase tracking-wider">
+                      <div className="p-1 rounded bg-primary-100 text-primary-700">
+                        <BookOpen className="w-3.5 h-3.5" />
+                      </div>
+                      <span>Explanation</span>
                     </div>
-                    <div className="text-xs text-zinc-700 leading-relaxed">
-                      <FormattedContent content={item.explanation} />
+                    <div className="text-sm sm:text-base text-zinc-800 leading-relaxed">
+                      <FormattedContent content={item.explanation} size="base" />
                     </div>
                   </div>
                 )}

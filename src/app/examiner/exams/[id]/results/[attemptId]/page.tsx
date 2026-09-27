@@ -17,6 +17,7 @@ import {
   Image as ImageIcon,
 } from "lucide-react";
 import Link from "next/link";
+import { FormattedContent } from "@/components/FormattedContent";
 
 interface Breakdown {
   questionId: string;
@@ -185,15 +186,21 @@ export default function AttemptReviewPage({ params }: { params: any }) {
                   )}
                 </div>
 
-                <h3 className="text-sm font-semibold leading-relaxed text-zinc-900">{item.question_text}</h3>
+                <div className="text-sm sm:text-base font-semibold leading-relaxed text-zinc-900">
+                  <FormattedContent content={item.question_text} size="lg" />
+                </div>
 
                 <div>
                   <div className="flex items-center gap-1.5 mb-1.5 text-zinc-500 font-bold text-[11px] uppercase tracking-wide">
                     <PenLine className="w-3.5 h-3.5" /> Student transcript
                   </div>
-                  <p className="text-sm text-zinc-700 leading-relaxed whitespace-pre-wrap p-3 bg-zinc-50 rounded-md border border-zinc-200">
-                    {item.writtenAnswer || "(left blank)"}
-                  </p>
+                  <div className="text-sm sm:text-base text-zinc-800 leading-relaxed p-4 bg-zinc-50 rounded-lg border border-zinc-200">
+                    {item.writtenAnswer && item.writtenAnswer.trim() ? (
+                      <FormattedContent content={item.writtenAnswer} size="base" />
+                    ) : (
+                      <span className="text-zinc-400 italic font-mono text-sm">(left blank - no answer submitted)</span>
+                    )}
+                  </div>
                 </div>
 
                 {!!item.attachmentUrls?.length && (
@@ -212,18 +219,29 @@ export default function AttemptReviewPage({ params }: { params: any }) {
                 )}
 
                 {item.modelAnswer && (
-                  <div className="p-3 bg-primary-50/60 rounded-md border border-primary-100">
-                    <div className="text-primary-700 font-bold text-[11px] uppercase tracking-wide mb-1">Model answer</div>
-                    <p className="text-xs text-zinc-600 leading-relaxed">{item.modelAnswer}</p>
+                  <div className="p-4 sm:p-5 bg-gradient-to-br from-indigo-50/70 via-primary-50/40 to-white rounded-xl border border-primary-200 shadow-xs">
+                    <div className="flex items-center justify-between gap-2 mb-2.5 pb-2 border-b border-primary-200/60">
+                      <div className="text-primary-800 font-bold text-xs sm:text-sm uppercase tracking-wider">
+                        Model Answer / Benchmark Solution
+                      </div>
+                      <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-primary-100 text-primary-800">
+                        Full Marks Standard
+                      </span>
+                    </div>
+                    <div className="text-sm sm:text-base text-zinc-800 leading-relaxed">
+                      <FormattedContent content={item.modelAnswer} size="base" />
+                    </div>
                   </div>
                 )}
 
                 {item.aiFeedback && (
-                  <div className="p-3 bg-amber-50/60 rounded-md border border-amber-100">
-                    <div className="flex items-center gap-1.5 text-amber-700 font-bold text-[11px] uppercase tracking-wide mb-1">
+                  <div className="p-4 bg-amber-50/70 rounded-xl border border-amber-200">
+                    <div className="flex items-center gap-1.5 text-amber-800 font-bold text-xs uppercase tracking-wider mb-2">
                       <Sparkles className="w-3.5 h-3.5" /> AI feedback
                     </div>
-                    <p className="text-xs text-zinc-600 leading-relaxed">{item.aiFeedback}</p>
+                    <div className="text-sm text-zinc-800 leading-relaxed">
+                      <FormattedContent content={item.aiFeedback} size="sm" />
+                    </div>
                   </div>
                 )}
 
