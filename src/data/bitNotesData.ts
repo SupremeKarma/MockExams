@@ -14,6 +14,9 @@ export interface CodeExample {
 export interface Topic {
   id: string;
   name: string;
+  unit?: number;
+  unitTitle?: string;
+  unitCode?: string;
   importance: 'Very High' | 'High' | 'Medium' | 'Low';
   keyPoints: string[];
   theory: string;

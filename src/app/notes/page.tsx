@@ -118,6 +118,29 @@ function NotesContent() {
       ? topicList[currentTopicIndex + 1]
       : null;
 
+  // Group topics by Unit for hierarchical navigation
+  const groupedUnits = useMemo(() => {
+    if (!topicList || topicList.length === 0) return [];
+    const hasUnits = topicList.some((t) => t.unit !== undefined);
+    if (!hasUnits) {
+      return [{ unitNumber: 1, unitTitle: "Course Topics", topics: topicList }];
+    }
+    const map = new Map<number, { unitNumber: number; unitTitle: string; topics: Topic[] }>();
+    const order: number[] = [];
+
+    topicList.forEach((top, idx) => {
+      const uNum = top.unit ?? Math.floor(idx / 3) + 1;
+      const uTitle = top.unitTitle || `Unit ${uNum}`;
+      if (!map.has(uNum)) {
+        map.set(uNum, { unitNumber: uNum, unitTitle: uTitle, topics: [] });
+        order.push(uNum);
+      }
+      map.get(uNum)!.topics.push(top);
+    });
+
+    return order.map((num) => map.get(num)!);
+  }, [topicList]);
+
   // Reading settings and DOM interactions
   useEffect(() => {
     const root = document.documentElement;
@@ -499,53 +522,142 @@ function NotesContent() {
         {/* Left Rail (Syllabus Units & Topics) */}
         <aside className="rail" aria-label="Syllabus">
           <div id="rail-content">
-            <h2 className="course-title">{activeSubjectInfo?.name || selectedSubjectName}</h2>
-            <p className="course-meta">
-              {activeSubjectInfo?.code || currentSubjectNotes?.code || "BIT"}, Semester {semester}, {currentSubjectNotes?.creditHours || 3} Credits
-            </p>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "0.5rem" }}>
+              <div>
+                <h2 className="course-title">{activeSubjectInfo?.name || selectedSubjectName}</h2>
+                <p className="course-meta">
+                  {activeSubjectInfo?.code || currentSubjectNotes?.code || "BIT"}, Semester {semester}, {currentSubjectNotes?.creditHours || 3} Credits
+                </p>
+              </div>
+              <span style={{ fontSize: "0.75rem", padding: "0.2rem 0.5rem", borderRadius: "12px", background: "var(--paper-2)", color: "var(--ink-2)", fontWeight: 600, whiteSpace: "nowrap" }}>
+                {groupedUnits.length} Units
+              </span>
+            </div>
 
-            <ul className="tree">
-              {topicList.length > 0 ? (
-                topicList.map((top, idx) => {
-                  const isCurrent = top.id === selectedTopicId;
-                  const isLearned = !!learnedTopics[top.id];
-                  return (
-                    <li key={top.id}>
-                      <a
-                        href="#main"
-                        aria-current={isCurrent ? "page" : undefined}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setSelectedTopicId(top.id);
-                          window.scrollTo({ top: 0, behavior: "smooth" });
+            {/* Unit-wise and Topic-wise Accordion Tree */}
+            <div className="unit-nav-tree" style={{ marginTop: "1rem" }}>
+              {groupedUnits.map((group) => {
+                const isGroupActive = group.topics.some((t) => t.id === selectedTopicId);
+                const groupLearnedCount = group.topics.filter((t) => !!learnedTopics[t.id]).length;
+                return (
+                  <details
+                    key={group.unitNumber}
+                    open={true}
+                    className="unit-accordion"
+                    style={{
+                      marginBottom: "0.85rem",
+                      border: "1px solid var(--line-subtle)",
+                      borderRadius: "6px",
+                      background: "var(--paper-1)",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <summary
+                      style={{
+                        padding: "0.55rem 0.75rem",
+                        background: isGroupActive ? "var(--paper-2)" : "transparent",
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        fontWeight: 600,
+                        fontSize: "0.8rem",
+                        color: "var(--ink-1)",
+                        borderBottom: "1px solid var(--line-subtle)",
+                        userSelect: "none",
+                      }}
+                    >
+                      <div style={{ display: "flex", alignItems: "center", gap: "0.45rem", minWidth: 0, flex: 1, paddingRight: "0.4rem" }}>
+                        <span
+                          style={{
+                            fontSize: "0.7rem",
+                            fontWeight: 700,
+                            padding: "0.15rem 0.35rem",
+                            background: "var(--ink-1)",
+                            color: "var(--paper-1)",
+                            borderRadius: "3px",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          U{group.unitNumber}
+                        </span>
+                        <span
+                          style={{
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                            flex: 1,
+                          }}
+                          title={group.unitTitle}
+                        >
+                          {group.unitTitle.replace(/^Unit \d+:\s*/i, "")}
+                        </span>
+                      </div>
+                      <span
+                        style={{
+                          fontSize: "0.72rem",
+                          color: "var(--ink-3)",
+                          fontWeight: 500,
+                          whiteSpace: "nowrap",
                         }}
                       >
-                        <span className="code">{idx + 1}</span>
-                        {top.name}
-                        <span
-                          className="dot"
-                          data-state={isLearned ? "learned" : isCurrent ? "progress" : "new"}
-                        >
-                          <span className="sr-only">
-                            {isLearned ? "Learned" : isCurrent ? "In progress" : "Not started"}
-                          </span>
-                        </span>
-                      </a>
-                    </li>
-                  );
-                })
-              ) : (
-                <li style={{ padding: "0.5rem", color: "var(--ink-3)", fontSize: "0.85rem" }}>
-                  Select a topic to begin reading.
-                </li>
-              )}
-            </ul>
+                        {groupLearnedCount}/{group.topics.length}
+                      </span>
+                    </summary>
+
+                    <ul className="tree" style={{ padding: "0.25rem 0.5rem", margin: 0 }}>
+                      {group.topics.map((top) => {
+                        const isCurrent = top.id === selectedTopicId;
+                        const isLearned = !!learnedTopics[top.id];
+                        return (
+                          <li key={top.id} style={{ marginBottom: "0.15rem" }}>
+                            <a
+                              href="#main"
+                              aria-current={isCurrent ? "page" : undefined}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setSelectedTopicId(top.id);
+                                window.scrollTo({ top: 0, behavior: "smooth" });
+                              }}
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "0.45rem",
+                                padding: "0.35rem 0.5rem",
+                                borderRadius: "4px",
+                                fontSize: "0.82rem",
+                                textDecoration: "none",
+                              }}
+                            >
+                              <span className="code" style={{ fontSize: "0.72rem", minWidth: "1.8rem" }}>
+                                {top.unitCode || top.id.split("-").pop()}
+                              </span>
+                              <span style={{ flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                                {top.name}
+                              </span>
+                              <span
+                                className="dot"
+                                data-state={isLearned ? "learned" : isCurrent ? "progress" : "new"}
+                              >
+                                <span className="sr-only">
+                                  {isLearned ? "Learned" : isCurrent ? "In progress" : "Not started"}
+                                </span>
+                              </span>
+                            </a>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </details>
+                );
+              })}
+            </div>
 
             {/* Syllabus Units Accordion from official curriculum */}
             {semesterSyllabus && (
               <div style={{ marginTop: "1.5rem", borderTop: "1px solid var(--line-subtle)", paddingTop: "1rem" }}>
                 <h3 style={{ fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: "0.05em", color: "var(--ink-3)", marginBottom: "0.5rem" }}>
-                  Official Syllabus Units
+                  Official Syllabus Units &amp; Subtopics
                 </h3>
                 {semesterSyllabus.subjects
                   .find((s) => s.name.toLowerCase() === selectedSubjectName.toLowerCase())
@@ -573,7 +685,40 @@ function NotesContent() {
           <article className="prose" lang="en">
             {activeTopic ? (
               <>
-                <h1 id="top">{activeTopic.name}</h1>
+                {/* Unit & Topic Hierarchy Breadcrumb */}
+                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.6rem", flexWrap: "wrap" }}>
+                  {activeTopic.unit && (
+                    <span
+                      style={{
+                        fontSize: "0.75rem",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.05em",
+                        fontWeight: 700,
+                        padding: "0.2rem 0.5rem",
+                        background: "var(--ink-1)",
+                        color: "var(--paper-1)",
+                        borderRadius: "4px",
+                      }}
+                    >
+                      Unit {activeTopic.unit}
+                    </span>
+                  )}
+                  {activeTopic.unitTitle && (
+                    <span style={{ fontSize: "0.85rem", color: "var(--ink-2)", fontWeight: 600 }}>
+                      {activeTopic.unitTitle.replace(/^Unit \d+:\s*/i, "")}
+                    </span>
+                  )}
+                  {activeTopic.unitCode && (
+                    <span style={{ fontSize: "0.82rem", color: "var(--ink-3)", fontWeight: 500 }}>
+                      • Topic {activeTopic.unitCode}
+                    </span>
+                  )}
+                </div>
+
+                <h1 id="top" style={{ marginTop: "0.2rem", marginBottom: "0.75rem" }}>
+                  {activeTopic.unitCode ? <span style={{ color: "var(--ink-3)", marginRight: "0.45rem", fontWeight: 400 }}>{activeTopic.unitCode}</span> : null}
+                  {activeTopic.name}
+                </h1>
                 <div className="lesson-meta">
                   <span className="trust" data-level="approved">
                     Approved Syllabus Notes
@@ -587,6 +732,7 @@ function NotesContent() {
                   </span>
                   <span>About 10–12 minutes</span>
                 </div>
+
 
                 {/* Idea in Plain Words */}
                 <div className="block block--idea">
@@ -783,29 +929,126 @@ function NotesContent() {
       {/* Dialogs */}
       <dialog id="rail-dialog" className="drawer" aria-labelledby="rail-dialog-title">
         <div className="dialog__head">
-          <h2 id="rail-dialog-title">Syllabus</h2>
+          <h2 id="rail-dialog-title">Syllabus Units &amp; Topics</h2>
           <button className="icon-btn" type="button" data-close aria-label="Close syllabus">
             <svg className="icon"><use href="#i-close" /></svg>
           </button>
         </div>
-        <div className="dialog__body" style={{ padding: "1rem" }}>
-          <h3>{activeSubjectInfo?.name || selectedSubjectName}</h3>
-          <ul className="tree">
-            {topicList.map((top, idx) => (
-              <li key={top.id}>
-                <a
-                  href="#main"
-                  onClick={() => {
-                    setSelectedTopicId(top.id);
-                    const dialog = document.getElementById("rail-dialog") as HTMLDialogElement | null;
-                    dialog?.close();
+        <div className="dialog__body" style={{ padding: "0.75rem 1rem" }}>
+          <div style={{ marginBottom: "1rem" }}>
+            <h3 style={{ fontSize: "1rem", margin: 0 }}>{activeSubjectInfo?.name || selectedSubjectName}</h3>
+            <p className="course-meta" style={{ margin: "0.2rem 0 0" }}>
+              {activeSubjectInfo?.code || currentSubjectNotes?.code || "BIT"}, Semester {semester}, {currentSubjectNotes?.creditHours || 3} Credits
+            </p>
+          </div>
+
+          <div className="unit-nav-tree">
+            {groupedUnits.map((group) => {
+              const isGroupActive = group.topics.some((t) => t.id === selectedTopicId);
+              const groupLearnedCount = group.topics.filter((t) => !!learnedTopics[t.id]).length;
+              return (
+                <details
+                  key={group.unitNumber}
+                  open={true}
+                  className="unit-accordion"
+                  style={{
+                    marginBottom: "0.75rem",
+                    border: "1px solid var(--line-subtle)",
+                    borderRadius: "6px",
+                    background: "var(--paper-1)",
+                    overflow: "hidden",
                   }}
                 >
-                  <span className="code">{idx + 1}</span> {top.name}
-                </a>
-              </li>
-            ))}
-          </ul>
+                  <summary
+                    style={{
+                      padding: "0.5rem 0.75rem",
+                      background: isGroupActive ? "var(--paper-2)" : "transparent",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      fontWeight: 600,
+                      fontSize: "0.82rem",
+                      color: "var(--ink-1)",
+                      borderBottom: "1px solid var(--line-subtle)",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.45rem", minWidth: 0, flex: 1, paddingRight: "0.4rem" }}>
+                      <span
+                        style={{
+                          fontSize: "0.7rem",
+                          fontWeight: 700,
+                          padding: "0.15rem 0.35rem",
+                          background: "var(--ink-1)",
+                          color: "var(--paper-1)",
+                          borderRadius: "3px",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        U{group.unitNumber}
+                      </span>
+                      <span
+                        style={{
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "nowrap",
+                          flex: 1,
+                        }}
+                        title={group.unitTitle}
+                      >
+                        {group.unitTitle.replace(/^Unit \d+:\s*/i, "")}
+                      </span>
+                    </div>
+                    <span style={{ fontSize: "0.72rem", color: "var(--ink-3)", fontWeight: 500, whiteSpace: "nowrap" }}>
+                      {groupLearnedCount}/{group.topics.length}
+                    </span>
+                  </summary>
+
+                  <ul className="tree" style={{ padding: "0.25rem 0.5rem", margin: 0 }}>
+                    {group.topics.map((top) => {
+                      const isCurrent = top.id === selectedTopicId;
+                      const isLearned = !!learnedTopics[top.id];
+                      return (
+                        <li key={top.id} style={{ marginBottom: "0.15rem" }}>
+                          <a
+                            href="#main"
+                            aria-current={isCurrent ? "page" : undefined}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setSelectedTopicId(top.id);
+                              const dialog = document.getElementById("rail-dialog") as HTMLDialogElement | null;
+                              dialog?.close();
+                              window.scrollTo({ top: 0, behavior: "smooth" });
+                            }}
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "0.45rem",
+                              padding: "0.35rem 0.5rem",
+                              borderRadius: "4px",
+                              fontSize: "0.82rem",
+                              textDecoration: "none",
+                            }}
+                          >
+                            <span className="code" style={{ fontSize: "0.72rem", minWidth: "1.8rem" }}>
+                              {top.unitCode || top.id.split("-").pop()}
+                            </span>
+                            <span style={{ flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                              {top.name}
+                            </span>
+                            <span
+                              className="dot"
+                              data-state={isLearned ? "learned" : isCurrent ? "progress" : "new"}
+                            />
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </details>
+              );
+            })}
+          </div>
         </div>
       </dialog>
 

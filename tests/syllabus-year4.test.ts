@@ -151,26 +151,43 @@ describe("Year IV BIT Syllabus Data & Markdown Rendering", () => {
       expect(subj.topics.length, `${subjName} should have topics`).toBeGreaterThan(0);
       expect(subj.theoryTopics.length, `${subjName} should have theory topics`).toBeGreaterThan(0);
 
-      // Verify each topic has real content
+      // Verify each topic has real content and unit-wise organization
       subj.topics.forEach((t) => {
         expect(t.name.length).toBeGreaterThan(5);
         expect(t.keyPoints.length).toBeGreaterThanOrEqual(3);
         expect(t.theory.length).toBeGreaterThan(50);
         expect(t.commonExamQuestions?.length).toBeGreaterThanOrEqual(2);
+        expect(t.unit, `Topic ${t.id} must have a unit number`).toBeGreaterThan(0);
+        expect(t.unitTitle, `Topic ${t.id} must have a unit title`).toBeTruthy();
+        expect(t.unitCode, `Topic ${t.id} must have a unit code`).toBeTruthy();
       });
     }
 
-    // Verify lookup by course codes
+    // Verify lookup by course codes and unit counts
     const npNotes = getSubjectNotes("BIT401CO", 7);
     expect(npNotes).toBeDefined();
     expect(npNotes?.subjectName).toBe("Network Programming");
+    expect(npNotes?.topics.length).toBe(12); // All 12 units
+    expect(npNotes?.topics.map((t) => t.unit)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
 
     const dgNotes = getSubjectNotes("BIT402CO", 7);
     expect(dgNotes).toBeDefined();
     expect(dgNotes?.subjectName).toBe("Digital Governance");
+    expect(dgNotes?.topics.length).toBe(10); // All 10 units
+    expect(dgNotes?.topics.map((t) => t.unit)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
     const mlNotes = getSubjectNotes("BIT421CO", 7);
     expect(mlNotes).toBeDefined();
     expect(mlNotes?.subjectName).toBe("Machine Learning (Track A)");
+    expect(mlNotes?.topics.length).toBe(6); // All 6 units
+    expect(mlNotes?.topics.map((t) => t.unit)).toEqual([1, 2, 3, 4, 5, 6]);
+
+    const dlNotes = getSubjectNotes("BIT423CO", 7);
+    expect(dlNotes).toBeDefined();
+    expect(dlNotes?.topics.length).toBe(7); // All 7 units
+
+    const mmNotes = getSubjectNotes("BIT429CO", 7);
+    expect(mmNotes).toBeDefined();
+    expect(mmNotes?.topics.length).toBe(12); // All 12 units
   });
 });
