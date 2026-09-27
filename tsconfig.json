@@ -25,6 +25,9 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "@examai/content": [
+        "./packages/content/src/index.ts"
       ]
     }
   },

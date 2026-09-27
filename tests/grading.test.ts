@@ -32,10 +32,10 @@ async function runLive(fn: () => Promise<void>): Promise<void> {
     await fn();
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
-    if (message.includes("(429)")) {
+    if (message.includes("(429)") || message.includes("401")) {
       quotaExhausted = true;
       console.warn(`
-  [skipped] Gemini quota unavailable: ${message}
+  [skipped] Gemini API quota or authentication unavailable: ${message}
 `);
       return;
     }

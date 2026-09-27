@@ -256,9 +256,9 @@ describe("authorUnitNotes (live model)", () => {
         });
       } catch (err) {
         const message = err instanceof Error ? err.message : String(err);
-        // Quota is an environment problem, not a regression.
-        if (message.includes("(429)")) {
-          console.warn(`[skipped] Gemini quota unavailable: ${message}`);
+        // Quota or invalid auth is an environment problem, not a regression.
+        if (message.includes("(429)") || message.includes("401")) {
+          console.warn(`[skipped] Gemini API quota or authentication unavailable: ${message}`);
           return;
         }
         throw err;
