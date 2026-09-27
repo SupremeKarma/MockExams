@@ -17,6 +17,7 @@ import {
 import { AiTutorModal } from "@/components/AiTutorModal";
 import { BookmarkButton } from "@/components/BookmarkButton";
 import ReadAloud from "@/components/ReadAloud";
+import FormattedContent from "@/components/FormattedContent";
 import { parseStoredRubric } from "@/lib/rubric-authoring";
 
 interface QuestionBreakdown {
@@ -260,9 +261,9 @@ export function ExamReview({ breakdown }: ExamReviewProps) {
               </div>
             </div>
 
-            <h3 className="text-sm font-semibold mb-4 leading-relaxed text-zinc-900">
-              {item.question_text}
-            </h3>
+            <div className="text-sm font-semibold mb-4 leading-relaxed text-zinc-900">
+              <FormattedContent content={item.question_text} />
+            </div>
 
             {item.type === "written" ? (
               <div className="space-y-3">
@@ -271,9 +272,13 @@ export function ExamReview({ breakdown }: ExamReviewProps) {
                     <PenLine className="w-3.5 h-3.5" />
                     Your answer
                   </div>
-                  <p className="text-xs text-zinc-700 leading-relaxed whitespace-pre-wrap p-3 bg-zinc-50 rounded-md border border-zinc-200">
-                    {item.writtenAnswer || "(left blank)"}
-                  </p>
+                  <div className="p-3.5 bg-zinc-50/70 rounded-md border border-zinc-200 text-xs text-zinc-800 leading-relaxed">
+                    {item.writtenAnswer && item.writtenAnswer.trim() ? (
+                      <FormattedContent content={item.writtenAnswer} />
+                    ) : (
+                      <span className="text-zinc-400 italic font-mono">(left blank - no answer submitted)</span>
+                    )}
+                  </div>
                 </div>
 
                 {!!item.attachmentUrls?.length && (
@@ -297,7 +302,9 @@ export function ExamReview({ breakdown }: ExamReviewProps) {
                       <PenLine className="w-3.5 h-3.5" />
                       Teacher feedback
                     </div>
-                    <p className="text-xs text-zinc-600 leading-relaxed">{item.teacherFeedback}</p>
+                    <div className="text-xs text-zinc-700 leading-relaxed">
+                      <FormattedContent content={item.teacherFeedback} />
+                    </div>
                   </div>
                 )}
 
@@ -437,7 +444,9 @@ Feedback said I missed: ${item.gaps.join("; ")}` : "")
                             <span className="font-bold text-zinc-900 tabular-nums whitespace-nowrap">
                               {c.marks}
                             </span>
-                            <span>{c.criterion}</span>
+                            <div className="flex-1">
+                              <FormattedContent content={c.criterion} />
+                            </div>
                           </li>
                         ))}
                       </ul>
@@ -454,7 +463,9 @@ Feedback said I missed: ${item.gaps.join("; ")}` : "")
                       <BookOpen className="w-3.5 h-3.5" />
                       Model answer
                     </div>
-                    <p className="text-xs text-zinc-600 leading-relaxed">{item.modelAnswer}</p>
+                    <div className="text-xs text-zinc-700 leading-relaxed">
+                      <FormattedContent content={item.modelAnswer} />
+                    </div>
                   </div>
                 )}
               </div>
@@ -476,7 +487,9 @@ Feedback said I missed: ${item.gaps.join("; ")}` : "")
                         }`}>
                           {opt}
                         </div>
-                        <span className="text-xs">{item[`option_${opt}` as keyof QuestionBreakdown]}</span>
+                        <div className="text-xs flex-1">
+                          <FormattedContent content={item[`option_${opt}`] || ""} />
+                        </div>
                         {isCorrectOpt && <CheckCircle2 className="w-4 h-4 ml-auto shrink-0 text-emerald-600" />}
                         {isSelected && !isCorrectOpt && <XCircle className="w-4 h-4 ml-auto shrink-0 text-red-600" />}
                       </div>
@@ -490,9 +503,9 @@ Feedback said I missed: ${item.gaps.join("; ")}` : "")
                       <BookOpen className="w-3.5 h-3.5" />
                       Explanation
                     </div>
-                    <p className="text-xs text-zinc-600 leading-relaxed">
-                      {item.explanation}
-                    </p>
+                    <div className="text-xs text-zinc-700 leading-relaxed">
+                      <FormattedContent content={item.explanation} />
+                    </div>
                   </div>
                 )}
 

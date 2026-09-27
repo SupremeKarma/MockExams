@@ -182,7 +182,7 @@ export default function ExamResultsPage({ params }: { params: any }) {
             </div>
           </header>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
             <ResultStat
               label="Final score"
               value={`${attempt.score}/${attempt.total_questions || attempt.total_marks || '?'}`}
@@ -206,6 +206,49 @@ export default function ExamResultsPage({ params }: { params: any }) {
               color={unansweredCount > 0 ? "text-amber-600" : "text-zinc-600"}
             />
           </div>
+
+          {/* Performance Distribution Bar */}
+          {breakdown.length > 0 && (
+            <div className="mb-8 p-4 bg-zinc-50/80 rounded-lg border border-zinc-200">
+              <div className="flex items-center justify-between text-xs font-semibold mb-2">
+                <span className="text-zinc-700">Question Performance Distribution</span>
+                <span className="text-zinc-500 font-mono">
+                  {correctCount} of {breakdown.length} questions correct
+                </span>
+              </div>
+              <div className="w-full h-3 rounded-full bg-zinc-200 flex overflow-hidden">
+                <div
+                  style={{ width: `${(correctCount / breakdown.length) * 100}%` }}
+                  className="bg-emerald-500 h-full transition-all"
+                  title={`Correct: ${correctCount}`}
+                />
+                <div
+                  style={{ width: `${(Math.max(0, incorrectCount - unansweredCount) / breakdown.length) * 100}%` }}
+                  className="bg-red-500 h-full transition-all"
+                  title={`Answered Incorrect: ${Math.max(0, incorrectCount - unansweredCount)}`}
+                />
+                <div
+                  style={{ width: `${(unansweredCount / breakdown.length) * 100}%` }}
+                  className="bg-amber-400 h-full transition-all"
+                  title={`Unanswered: ${unansweredCount}`}
+                />
+              </div>
+              <div className="flex flex-wrap items-center gap-4 text-[11px] font-medium text-zinc-500 mt-2.5">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block" />
+                  <span>Correct: <strong className="text-zinc-800">{correctCount}</strong></span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-500 inline-block" />
+                  <span>Incorrect: <strong className="text-zinc-800">{Math.max(0, incorrectCount - unansweredCount)}</strong></span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block" />
+                  <span>Unanswered: <strong className="text-zinc-800">{unansweredCount}</strong></span>
+                </div>
+              </div>
+            </div>
+          )}
 
           <div className="flex flex-col md:flex-row gap-3 justify-center mb-10">
             <Link
