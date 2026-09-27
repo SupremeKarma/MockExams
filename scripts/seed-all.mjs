@@ -261,6 +261,44 @@ async function main() {
     }
   }
 
+  // Load BIT syllabus data if available
+  const bitSyllabusPath = join(process.cwd(), "src", "data", "bitSyllabus.json");
+  let bitCourses = [];
+  if (existsSync(bitSyllabusPath)) {
+    try {
+      const raw = await readFile(bitSyllabusPath, "utf-8");
+      const semesters = JSON.parse(raw);
+      for (const sem of semesters) {
+        for (const sub of sem.subjects) {
+          bitCourses.push({
+            code: sub.code,
+            name: sub.name,
+            semester: sem.semester,
+            programId: "BIT",
+            credits: sub.credits || 3,
+            curriculum: "new_course",
+            difficulty: "Intermediate",
+            description: sub.description || "",
+            learningOutcomes: [
+              `Master core theoretical principles and problem solving for ${sub.name}.`,
+              `Analyze and solve past university examination questions according to Purbanchal University curriculum.`
+            ],
+            prerequisites: ["Foundational Academic Prerequisite"],
+            syllabusUnits: (sub.keyUnits || []).map((u, idx) => ({
+              unitId: `${sub.code}_U${idx + 1}`,
+              title: u,
+              teachingHours: 5,
+              subtopics: [u],
+            })),
+          });
+        }
+      }
+      console.log(`📖 Loaded ${bitCourses.length} Purbanchal University BIT courses from bitSyllabus.json`);
+    } catch (e) {
+      console.warn("Could not parse bitSyllabus.json:", e);
+    }
+  }
+
   // --- 1. Seed Programs ---
   const allPrograms = [...PROGRAMS, ...globalPrograms];
   console.log(`[1/4] Seeding ${allPrograms.length} Degree, Entrance & Global Programs...`);
@@ -294,20 +332,8 @@ async function main() {
 
   // --- 3. Seed & Verify University & Global Courses ---
   console.log("\n[3/4] Ensuring University & Global Syllabus Courses...");
-  const sampleCourses = [
-    { code: "BIT101CO", name: "Fundamentals of Information Technology", semester: 1, programId: "BIT", credits: 3 },
-    { code: "BIT102HS", name: "Mathematics-I", semester: 1, programId: "BIT", credits: 3 },
-    { code: "BIT105CO", name: "Computer Programming in C", semester: 1, programId: "BIT", credits: 3 },
-    { code: "BIT201CO", name: "Data Structures & Algorithms", semester: 2, programId: "BIT", credits: 3 },
-    { code: "BIT202CO", name: "Database Management Systems", semester: 2, programId: "BIT", credits: 3 },
-    { code: "BIT301CO", name: "Computer Networks", semester: 3, programId: "BIT", credits: 3 },
-    { code: "BIT302CO", name: "Network Security & Cryptography", semester: 3, programId: "BIT", credits: 3 },
-    { code: "BIT351CO", name: "Artificial Intelligence", semester: 4, programId: "BIT", credits: 3 },
-    { code: "IOE_PHY_101", name: "Mechanics & Wave Motion", semester: 1, programId: "IOE_ENTRANCE", credits: 4 },
-    { code: "IOE_MATH_101", name: "Advanced Calculus & Coordinate Geometry", semester: 1, programId: "IOE_ENTRANCE", credits: 4 },
-  ];
+  const allCourses = [...bitCourses];
 
-  const allCourses = [...sampleCourses];
   for (const gc of globalCourses) {
     if (!allCourses.some((c) => c.code === gc.code)) {
       allCourses.push({
@@ -323,6 +349,75 @@ async function main() {
         prerequisites: gc.prerequisites,
         syllabusUnits: gc.syllabusUnits,
       });
+    }
+  }
+
+  const ioeCourses = [
+    {
+      code: "IOE_PHY_101",
+      name: "Mechanics, Heat & Modern Physics",
+      semester: 1,
+      programId: "IOE_ENTRANCE",
+      credits: 4,
+      difficulty: "Advanced",
+      description: "Rigorous pre-engineering physics curriculum covering mechanics, rotational dynamics, wave optics, electrostatics, magnetism, and atomic physics.",
+      learningOutcomes: [
+        "Solve high-speed competitive physics numericals under time constraints.",
+        "Apply conservation laws to projectile, circular, and collision mechanics."
+      ],
+      prerequisites: ["Grade 11/12 Physics"],
+      syllabusUnits: [
+        { unitId: "IOE_PHY_U1", title: "Mechanics & Gravitation", teachingHours: 25, subtopics: ["Vectors", "Newton's Laws", "Work & Energy", "Rotational Dynamics", "Gravitation"] },
+        { unitId: "IOE_PHY_U2", title: "Heat & Thermodynamics", teachingHours: 15, subtopics: ["Calorimetry", "Gas Laws", "First & Second Laws of Thermodynamics"] },
+        { unitId: "IOE_PHY_U3", title: "Waves & Optics", teachingHours: 18, subtopics: ["Wave Motion", "Acoustics", "Interference", "Diffraction", "Polarization"] },
+        { unitId: "IOE_PHY_U4", title: "Electricity & Magnetism", teachingHours: 22, subtopics: ["Electrostatics", "Circuits", "Magnetic Fields", "Electromagnetic Induction"] },
+        { unitId: "IOE_PHY_U5", title: "Modern Physics", teachingHours: 16, subtopics: ["Photoelectric Effect", "Bohr Atom", "Radioactivity", "Semiconductors"] }
+      ]
+    },
+    {
+      code: "IOE_MATH_101",
+      name: "Calculus, Coordinate Geometry & Vectors",
+      semester: 1,
+      programId: "IOE_ENTRANCE",
+      credits: 4,
+      difficulty: "Advanced",
+      description: "Institute of Engineering competitive mathematics covering differential calculus, integral calculus, 2D/3D coordinate geometry, vectors, and complex numbers.",
+      learningOutcomes: [
+        "Evaluate multi-step limits, derivatives, and definite integrals swiftly.",
+        "Solve conic sections, planes, and 3D vector equations with accuracy."
+      ],
+      prerequisites: ["Grade 11/12 Mathematics"],
+      syllabusUnits: [
+        { unitId: "IOE_MATH_U1", title: "Calculus & Analysis", teachingHours: 30, subtopics: ["Limits & Continuity", "Derivatives & Applications", "Definite & Indefinite Integrals", "Differential Equations"] },
+        { unitId: "IOE_MATH_U2", title: "Algebra & Complex Numbers", teachingHours: 20, subtopics: ["Matrices & Determinants", "Complex Numbers", "Quadratic Equations", "Sequences & Series"] },
+        { unitId: "IOE_MATH_U3", title: "Coordinate Geometry", teachingHours: 25, subtopics: ["Straight Lines", "Circles", "Conic Sections: Parabola, Ellipse, Hyperbola"] },
+        { unitId: "IOE_MATH_U4", title: "Vectors & 3D Geometry", teachingHours: 20, subtopics: ["Dot & Cross Products", "Lines and Planes in 3D Space"] }
+      ]
+    },
+    {
+      code: "IOE_CHEM_101",
+      name: "Physical, Organic & Inorganic Chemistry",
+      semester: 1,
+      programId: "IOE_ENTRANCE",
+      credits: 4,
+      difficulty: "Intermediate",
+      description: "Chemical stoichiometry, thermodynamics, reaction kinetics, aromatic organic reaction mechanisms, and industrial metallurgy.",
+      learningOutcomes: [
+        "Calculate mole concepts, chemical equilibrium constants, and electrochemical voltages.",
+        "Predict electrophilic and nucleophilic organic synthesis steps."
+      ],
+      prerequisites: ["Grade 11/12 Chemistry"],
+      syllabusUnits: [
+        { unitId: "IOE_CHEM_U1", title: "Physical Chemistry", teachingHours: 25, subtopics: ["Mole Concept", "Atomic Structure", "Chemical Equilibrium", "Thermodynamics", "Electrochemistry"] },
+        { unitId: "IOE_CHEM_U2", title: "Inorganic Chemistry", teachingHours: 20, subtopics: ["Periodic Table", "Hydrogen, Oxygen, Nitrogen", "Metals & Metallurgy", "Coordination Compounds"] },
+        { unitId: "IOE_CHEM_U3", title: "Organic Chemistry", teachingHours: 25, subtopics: ["Nomenclature", "Reaction Mechanisms", "Hydrocarbons", "Alcohols, Aldehydes & Ketones", "Aromatic Compounds"] }
+      ]
+    }
+  ];
+
+  for (const ic of ioeCourses) {
+    if (!allCourses.some((c) => c.code === ic.code)) {
+      allCourses.push(ic);
     }
   }
 
@@ -413,9 +508,9 @@ async function main() {
 
   console.log("\n=================================================================");
   console.log("✨ Master Seeding Complete!");
-  console.log(`   - Programs Seeded:        ${PROGRAMS.length}`);
+  console.log(`   - Programs Seeded:        ${allPrograms.length}`);
   console.log(`   - Learning Paths Seeded:  ${LEARNING_PATHS.length}`);
-  console.log(`   - Courses Registered:     ${sampleCourses.length}`);
+  console.log(`   - Courses Registered:     ${allCourses.length}`);
   console.log(`   - Past Papers Ingested:   ${totalPapers}`);
   console.log(`   - Questions Ingested:     ${totalQuestions}`);
   console.log("=================================================================\n");

@@ -313,6 +313,223 @@
         { "unitId": "GATE_TOC_U3", "title": "Turing Machines & Undecidability", "teachingHours": 10, "subtopics": ["Turing Machine Models", "Halting Problem & Post Correspondence Problem", "Rice's Theorem"] },
         { "unitId": "GATE_TOC_U4", "title": "Compiler Design: Parsing & Optimization", "teachingHours": 14, "subtopics": ["Lexical Analysis (Lex)", "LL(1) Grammars & First/Follow Sets", "LR Parsers & Intermediate Code Generation"] }
       ]
+    },
+    {
+      "code": "CSC160",
+      "name": "Digital Logic",
+      "programId": "TU_CSIT",
+      "semester": 1,
+      "credits": 3,
+      "difficulty": "Beginner",
+      "description": "Boolean algebra, logic gates, combinational logic design, arithmetic circuits, sequential flip-flops, registers, counters, and finite state machines.",
+      "learningOutcomes": [
+        "Minimize Boolean algebraic expressions using Karnaugh maps and Quine-McCluskey algorithms.",
+        "Design combinational multiplexers, decoders, encoders, and adder/subtractor units.",
+        "Synthesize synchronous sequential circuits and Mealy/Moore finite state machines."
+      ],
+      "prerequisites": ["None (Foundational)"],
+      "syllabusUnits": [
+        { "unitId": "CSC160_U1", "title": "Boolean Algebra & Logic Gates", "teachingHours": 8, "subtopics": ["Axioms and Theorems of Boolean Algebra", "Canonical SOP and POS Forms", "NAND/NOR Universal Gate Implementations"] },
+        { "unitId": "CSC160_U2", "title": "Simplification of Boolean Functions", "teachingHours": 8, "subtopics": ["2, 3, 4, 5-Variable Karnaugh Maps", "Don't-Care Conditions", "Quine-McCluskey Tabular Minimization Method"] },
+        { "unitId": "CSC160_U3", "title": "Combinational Logic Circuits", "teachingHours": 10, "subtopics": ["Half & Full Adders, Carry Lookahead Adders", "Magnitude Comparators", "Decoders, Encoders, Multiplexers & Demultiplexers"] },
+        { "unitId": "CSC160_U4", "title": "Synchronous Sequential Logic", "teachingHours": 10, "subtopics": ["Latches (SR, D)", "Flip-Flops (SR, JK, D, T, Master-Slave)", "Characteristic Tables and State Equations"] },
+        { "unitId": "CSC160_U5", "title": "Registers & Shift Counters", "teachingHours": 9, "subtopics": ["Shift Registers (SISO, SIPO, PISO, PIPO)", "Ripple & Synchronous Binary Counters", "Ring and Johnson Counters", "Finite State Machine Design"] }
+      ]
+    },
+    {
+      "code": "CSC206",
+      "name": "Discrete Structures",
+      "programId": "TU_CSIT",
+      "semester": 3,
+      "credits": 3,
+      "difficulty": "Intermediate",
+      "description": "Propositional and predicate logic, proof methods, sets, relations, functions, recurrence relations, combinatorics, and graph theory.",
+      "learningOutcomes": [
+        "Construct formal mathematical proofs using mathematical induction and contradiction.",
+        "Model binary relations, equivalence classes, and partial order relations.",
+        "Apply graph theory algorithms to network topologies and planar graph colorings."
+      ],
+      "prerequisites": ["Calculus & Linear Algebra"],
+      "syllabusUnits": [
+        { "unitId": "CSC206_U1", "title": "Propositional & Predicate Logic", "teachingHours": 8, "subtopics": ["Truth Tables, Tautology, Contradiction", "Predicate Calculus & Quantifiers", "Inference Rules and Mathematical Proof Methods"] },
+        { "unitId": "CSC206_U2", "title": "Sets, Relations & Functions", "teachingHours": 8, "subtopics": ["Set Operations and Cartesian Products", "Equivalence Relations and Partitions", "Injective, Surjective & Bijective Functions"] },
+        { "unitId": "CSC206_U3", "title": "Mathematical Induction & Recurrences", "teachingHours": 9, "subtopics": ["Well-Ordering Property & Mathematical Induction", "Solving Linear Recurrence Relations", "Generating Functions and Asymptotic Analysis"] },
+        { "unitId": "CSC206_U4", "title": "Combinatorics & Counting", "teachingHours": 8, "subtopics": ["Pigeonhole Principle", "Permutations and Combinations", "Inclusion-Exclusion Principle & Binomial Theorem"] },
+        { "unitId": "CSC206_U5", "title": "Graph Theory & Trees", "teachingHours": 12, "subtopics": ["Graph Representations and Isomorphism", "Eulerian and Hamiltonian Circuits", "Tree Traversals, Spanning Trees, and Planar Graphs"] }
+      ]
+    },
+    {
+      "code": "CSC258",
+      "name": "Computer Networks",
+      "programId": "TU_CSIT",
+      "semester": 4,
+      "credits": 3,
+      "difficulty": "Intermediate",
+      "description": "Network architecture, OSI & TCP/IP layered protocols, physical transmission, medium access control, IP routing algorithms, transport layer reliable transmission, and socket programming.",
+      "learningOutcomes": [
+        "Calculate subnet masks, CIDR blocks, and design hierarchical IPv4/IPv6 networks.",
+        "Analyze link-state and distance-vector dynamic routing convergence.",
+        "Implement reliable data transfer protocols and socket programming in Python/C."
+      ],
+      "prerequisites": ["Data Structures", "Operating Systems"],
+      "syllabusUnits": [
+        { "unitId": "CSC258_U1", "title": "Introduction to Computer Networks", "teachingHours": 6, "subtopics": ["Network Edge vs Core, Packet vs Circuit Switching", "OSI 7-Layer vs TCP/IP 5-Layer Architectures", "Transmission Media (Fiber, Coax, Wireless)"] },
+        { "unitId": "CSC258_U2", "title": "Data Link Layer & MAC Protocols", "teachingHours": 10, "subtopics": ["Framing & Error Detection (CRC, Hamming Codes)", "Sliding Window Protocols (Go-Back-N, Selective Repeat)", "CSMA/CD, CSMA/CA and Ethernet 802.3/802.11 Standards"] },
+        { "unitId": "CSC258_U3", "title": "Network Layer & IP Addressing", "teachingHours": 12, "subtopics": ["IPv4 Classless Addressing & CIDR Subnetting", "IPv6 Transition Mechanisms", "Distance Vector (RIP) & Link State (OSPF) Routing", "NAT, ICMP, and ARP Protocols"] },
+        { "unitId": "CSC258_U4", "title": "Transport Layer Protocols", "teachingHours": 10, "subtopics": ["UDP vs TCP Segment Structure", "Three-Way Handshake and Connection Teardown", "TCP Sliding Window Flow & Congestion Control (Tahoe, Reno)"] },
+        { "unitId": "CSC258_U5", "title": "Application Layer & Network Security", "teachingHours": 7, "subtopics": ["DNS, HTTP/1.1, HTTP/2, and HTTPS Architectures", "SMTP, POP3, IMAP Email Protocols", "TLS/SSL Handshake & Symmetric/Asymmetric Encryption"] }
+      ]
+    },
+    {
+      "code": "CSC314",
+      "name": "Software Engineering",
+      "programId": "TU_CSIT",
+      "semester": 5,
+      "credits": 3,
+      "difficulty": "Intermediate",
+      "description": "Software life cycle paradigms, agile methodologies, software requirements engineering, architectural design, object-oriented modeling with UML, verification, validation, and maintenance.",
+      "learningOutcomes": [
+        "Formulate SRS documents adhering to IEEE 830 standards.",
+        "Model software systems with UML Class, Sequence, and Activity diagrams.",
+        "Design test suites executing boundary value analysis, branch coverage, and integration testing."
+      ],
+      "prerequisites": ["Object Oriented Programming", "Database Management Systems"],
+      "syllabusUnits": [
+        { "unitId": "CSC314_U1", "title": "Software Process Models & Agile", "teachingHours": 8, "subtopics": ["Waterfall, V-Model, Prototyping, Spiral Models", "Agile Philosophy: Scrum, Sprint Planning, Standups", "Extreme Programming (XP) and Test-Driven Development (TDD)"] },
+        { "unitId": "CSC314_U2", "title": "Requirements Engineering", "teachingHours": 8, "subtopics": ["Functional vs Non-Functional Requirements", "Requirements Elicitation & Interviews", "IEEE 830 SRS Specification Standards", "Use Case Modeling"] },
+        { "unitId": "CSC314_U3", "title": "System Modeling with UML", "teachingHours": 10, "subtopics": ["Structural Diagrams: Class, Object, Component, Deployment", "Behavioral Diagrams: Sequence, State Machine, Activity", "Architectural Patterns (Layered, Microservices, MVC)"] },
+        { "unitId": "CSC314_U4", "title": "Software Testing & Quality Assurance", "teachingHours": 10, "subtopics": ["Black-Box Testing: Equivalence Partitioning, BVA", "White-Box Testing: Cyclomatic Complexity, Path Coverage", "Unit, Integration, System, and Acceptance Testing (UAT)"] },
+        { "unitId": "CSC314_U5", "title": "Software Project Management & Maintenance", "teachingHours": 9, "subtopics": ["COCOMO Cost Estimation Models", "Risk Analysis and Mitigation", "Software Refactoring and Legacy Maintenance"] }
+      ]
+    },
+    {
+      "code": "CSC364",
+      "name": "Advanced Java Programming & Web Tech",
+      "programId": "TU_CSIT",
+      "semester": 6,
+      "credits": 3,
+      "difficulty": "Advanced",
+      "description": "Java GUI with Swing/JavaFX, Event Handling, Database connectivity with JDBC, Java Servlets, JSP, JavaBeans, and MVC Web Frameworks.",
+      "learningOutcomes": [
+        "Build enterprise desktop applications utilizing JavaFX and multi-threaded event models.",
+        "Execute relational CRUD operations using JDBC prepared statements and transactions.",
+        "Develop web applications using Servlets, JSP, and Spring Boot REST APIs."
+      ],
+      "prerequisites": ["Object Oriented Programming in Java"],
+      "syllabusUnits": [
+        { "unitId": "CSC364_U1", "title": "GUI Programming with JavaFX/Swing", "teachingHours": 9, "subtopics": ["Layout Managers (Border, Grid, Flow)", "Event Delegation Model and Listener Interfaces", "UI Controls, Dialogs, and Canvas Graphics"] },
+        { "unitId": "CSC364_U2", "title": "Database Connectivity with JDBC", "teachingHours": 9, "subtopics": ["JDBC Driver Architecture (Type 1-4)", "Connection, Statement, PreparedStatement, CallableStatement", "ResultSet Navigation and Transaction Management (Commit/Rollback)"] },
+        { "unitId": "CSC364_U3", "title": "Java Servlets & Web Containers", "teachingHours": 10, "subtopics": ["Servlet Life Cycle (init, service, destroy)", "HttpServletRequest and HttpServletResponse", "Session Tracking: Cookies, HttpSession, URL Rewriting"] },
+        { "unitId": "CSC364_U4", "title": "JavaServer Pages (JSP) & JSTL", "teachingHours": 9, "subtopics": ["JSP Directives, Scriptlets, and Declarations", "Expression Language (EL) and JSTL Core Tags", "MVC Architecture (Model 2 Architecture)"] },
+        { "unitId": "CSC364_U5", "title": "Enterprise Spring & REST APIs", "teachingHours": 8, "subtopics": ["Dependency Injection & Inversion of Control (IoC)", "Building RESTful Web Services with @RestController", "JSON Serialization with Jackson and ORM Hibernate Mapping"] }
+      ]
+    },
+    {
+      "code": "CIE_9702",
+      "name": "Cambridge A-Level Physics (9702)",
+      "programId": "CAMBRIDGE_A_LEVELS",
+      "semester": 2,
+      "credits": 4,
+      "difficulty": "Advanced",
+      "description": "Rigorous Newtonian mechanics, circular motion, gravitational fields, oscillations, thermodynamics, electricity, quantum phenomena, and nuclear physics.",
+      "learningOutcomes": [
+        "Solve complex mechanics problems involving circular motion and gravitational orbits.",
+        "Model simple harmonic motion and damped/forced oscillations mathematically.",
+        "Explain quantum photon energy, photoelectric effect, de Broglie wavelength, and radioactive decay chains."
+      ],
+      "prerequisites": ["IGCSE / O-Level Physics", "Additional Mathematics"],
+      "syllabusUnits": [
+        { "unitId": "CIE_9702_U1", "title": "Mechanics, Dynamics & Circular Motion", "teachingHours": 20, "subtopics": ["Kinematics Equations in 2D", "Newton's Laws and Momentum Conservation", "Uniform Circular Motion & Centripetal Acceleration", "Newton's Universal Law of Gravitation & Orbits"] },
+        { "unitId": "CIE_9702_U2", "title": "Oscillations & Thermal Physics", "teachingHours": 18, "subtopics": ["Simple Harmonic Motion Equations", "Damped & Forced Oscillations, Resonance", "Ideal Gas Laws and Kinetic Theory", "First Law of Thermodynamics & Specific Heat"] },
+        { "unitId": "CIE_9702_U3", "title": "Electric & Magnetic Fields", "teachingHours": 22, "subtopics": ["Coulomb's Law & Electric Potential", "Capacitance & Dielectric Materials", "Magnetic Forces on Charges & Currents", "Faraday's and Lenz's Laws of Induction, AC Transformers"] },
+        { "unitId": "CIE_9702_U4", "title": "Quantum, Nuclear & Medical Physics", "teachingHours": 20, "subtopics": ["Photoelectric Effect & Photon Energy", "Wave-Particle Duality & de Broglie Wavelength", "Atomic Energy Levels & Emission Spectra", "Radioactive Decay Laws, Mass Defect & Binding Energy", "X-Ray Production & Ultrasound Acoustic Impedance"] }
+      ]
+    },
+    {
+      "code": "CIE_9701",
+      "name": "Cambridge A-Level Chemistry (9701)",
+      "programId": "CAMBRIDGE_A_LEVELS",
+      "semester": 2,
+      "credits": 4,
+      "difficulty": "Advanced",
+      "description": "Comprehensive physical, inorganic, and organic chemistry encompassing chemical energetics, reaction kinetics, equilibrium, transition elements, and organic synthesis pathways.",
+      "learningOutcomes": [
+        "Calculate enthalpy changes using Hess's Law and Born-Haber cycles.",
+        "Deduce reaction orders and rate equations from initial rate and concentration data.",
+        "Design multi-step synthetic pathways for aromatic and carbonyl compounds."
+      ],
+      "prerequisites": ["IGCSE Chemistry", "Algebra"],
+      "syllabusUnits": [
+        { "unitId": "CIE_9701_U1", "title": "Physical Chemistry: Energetics & Kinetics", "teachingHours": 22, "subtopics": ["Hess's Law & Born-Haber Cycles", "Gibbs Free Energy & Entropy Changes", "Rate Equations, Rate Constants & Half-Life", "Arrhenius Equation & Activation Energy"] },
+        { "unitId": "CIE_9701_U2", "title": "Chemical Equilibria & Electrochemistry", "teachingHours": 20, "subtopics": ["Equilibrium Constants Kc and Kp", "Brønsted-Lowry Acids, pH, Kw, Ka, and Buffer Solutions", "Standard Electrode Potentials (E°), Nernst Equation", "Electrochemical Cells and Fuel Cells"] },
+        { "unitId": "CIE_9701_U3", "title": "Inorganic Chemistry & Transition Metals", "teachingHours": 18, "subtopics": ["Periodicity across Period 3 Oxides & Chlorides", "Group 2 Alkaline Earth Metals and Trends", "Transition Element Electronic Configurations and Variable Oxidation States", "Complex Ions, Ligand Exchange, and d-Orbital Splitting"] },
+        { "unitId": "CIE_9701_U4", "title": "Organic Chemistry & Analytical Spectroscopy", "teachingHours": 24, "subtopics": ["Electrophilic Addition & Nucleophilic Substitution Mechanisms", "Arenes: Electrophilic Substitution of Benzene", "Carbonyls, Carboxylic Acids, and Nitrogen Compounds (Amines, Amides)", "Infrared Spectroscopy, Mass Spectrometry, and 1H/13C NMR"] }
+      ]
+    },
+    {
+      "code": "ACM_CS_SEC",
+      "name": "Cybersecurity & Defensive Programming",
+      "programId": "ACM_CS2023",
+      "semester": 4,
+      "credits": 4,
+      "difficulty": "Advanced",
+      "description": "Cryptographic foundations, authentication and access control, network intrusion defense, web security (OWASP Top 10), and secure software design practices.",
+      "learningOutcomes": [
+        "Implement symmetric and asymmetric cryptographic algorithms correctly without known implementation flaws.",
+        "Audit source code for buffer overflows, race conditions, and SQL injection vulnerabilities.",
+        "Architect zero-trust access control and secure API communication protocols."
+      ],
+      "prerequisites": ["Computer Networks", "Operating Systems", "Discrete Mathematics"],
+      "syllabusUnits": [
+        { "unitId": "ACM_SEC_U1", "title": "Foundational Cryptography", "teachingHours": 14, "subtopics": ["Symmetric Ciphers (AES, ChaCha20)", "Public-Key Cryptosystems (RSA, ECC, Diffie-Hellman)", "Cryptographic Hash Functions (SHA-256, SHA-3) & HMAC", "Digital Signatures & Public Key Infrastructure (PKI)"] },
+        { "unitId": "ACM_SEC_U2", "title": "Authentication & Access Control", "teachingHours": 12, "subtopics": ["Password Hashing (Argon2, bcrypt)", "Multi-Factor Authentication (TOTP, WebAuthn/FIDO2)", "OAuth 2.0 and OpenID Connect (OIDC) Protocols", "Role-Based (RBAC) and Attribute-Based (ABAC) Access Control"] },
+        { "unitId": "ACM_SEC_U3", "title": "Web Application Security & OWASP Top 10", "teachingHours": 14, "subtopics": ["SQL Injection, Command Injection, and Mitigation", "Cross-Site Scripting (XSS) and Content Security Policy (CSP)", "Cross-Site Request Forgery (CSRF) & SameSite Cookies", "Server-Side Request Forgery (SSRF) and Deserialization Exploits"] },
+        { "unitId": "ACM_SEC_U4", "title": "Defensive Systems & Network Security", "teachingHours": 12, "subtopics": ["Memory Safety: Buffer Overflows, ROP Gadgets, ASLR, DEP", "Firewalls, Intrusion Detection/Prevention Systems (IDS/IPS)", "TLS 1.3 Protocol Mechanics and Certificate Revocation", "Zero-Trust Architecture and Threat Modeling (STRIDE)"] }
+      ]
+    },
+    {
+      "code": "AP_CALC_BC",
+      "name": "AP Calculus BC",
+      "programId": "US_AP",
+      "semester": 2,
+      "credits": 4,
+      "difficulty": "Advanced",
+      "description": "Complete university calculus covering differential and integral calculus, differential equations, sequences, infinite series convergence tests, Taylor series, and parametric/polar/vector functions.",
+      "learningOutcomes": [
+        "Evaluate indefinite and improper integrals using integration by parts, partial fractions, and trigonometric substitutions.",
+        "Determine convergence or divergence of infinite series using ratio, root, integral, and comparison tests.",
+        "Construct Taylor and Maclaurin polynomial series approximations and bound truncation error using Lagrange error bounds."
+      ],
+      "prerequisites": ["Precalculus", "Trigonometry"],
+      "syllabusUnits": [
+        { "unitId": "AP_CALC_U1", "title": "Limits, Continuity & Differentiation", "teachingHours": 20, "subtopics": ["Epsilon-Delta Definition & L'Hôpital's Rule", "Product, Quotient, Chain Rules, Implicit Differentiation", "Mean Value Theorem and Related Rates"] },
+        { "unitId": "AP_CALC_U2", "title": "Integration Techniques & Applications", "teachingHours": 24, "subtopics": ["Fundamental Theorem of Calculus", "Integration by Parts & Partial Fraction Decomposition", "Improper Integrals with Infinite Limits or Discontinuities", "Volumes of Revolution (Discs, Washers, Shells)"] },
+        { "unitId": "AP_CALC_U3", "title": "Differential Equations & Slope Fields", "teachingHours": 16, "subtopics": ["Separable Differential Equations", "Euler's Method for Numerical Approximation", "Logistic Growth Models and Carrying Capacity"] },
+        { "unitId": "AP_CALC_U4", "title": "Parametric, Polar & Vector Functions", "teachingHours": 18, "subtopics": ["Parametric Derivatives and Arc Length", "Polar Coordinates, Derivatives, and Enclosed Area Integrals", "2D Velocity, Acceleration, and Speed Vectors"] },
+        { "unitId": "AP_CALC_U5", "title": "Infinite Sequences & Series", "teachingHours": 24, "subtopics": ["Convergence Tests: Divergence, Integral, p-Series, Comparison", "Alternating Series Test & Error Bound", "Ratio and Root Tests, Radius of Convergence", "Taylor & Maclaurin Series, Lagrange Error Bound"] }
+      ]
+    },
+    {
+      "code": "GATE_DS_ALGO",
+      "name": "GATE Data Structures & Algorithms",
+      "programId": "GATE_CS",
+      "semester": 1,
+      "credits": 4,
+      "difficulty": "Advanced",
+      "description": "Rigorous competitive algorithms, asymptotic time/space complexity analysis, balanced search trees, graph algorithms, divide-and-conquer, greedy heuristics, dynamic programming, and NP-completeness.",
+      "learningOutcomes": [
+        "Prove asymptotic upper and lower bounds using Master Theorem and substitution methods.",
+        "Execute tree balancing rotations on AVL and Red-Black trees under insertion/deletion.",
+        "Design optimal polynomial-time algorithms using dynamic programming and greedy strategies."
+      ],
+      "prerequisites": ["C Programming", "Discrete Mathematics"],
+      "syllabusUnits": [
+        { "unitId": "GATE_DSA_U1", "title": "Asymptotic Analysis & Recurrences", "teachingHours": 12, "subtopics": ["Big-O, Big-Omega, Theta Formal Definitions", "Master Theorem for Divide-and-Conquer Recurrences", "Recursion Tree Method and Akra-Bazzi Method"] },
+        { "unitId": "GATE_DSA_U2", "title": "Linear & Non-Linear Data Structures", "teachingHours": 14, "subtopics": ["Arrays, Linked Lists, Stacks, Queues, Circular Queues", "Binary Trees: Traversals (Inorder, Preorder, Postorder)", "Binary Search Trees (BST), AVL Trees, Red-Black Trees", "Binary Heaps, Priority Queues, and Disjoint Set Union (DSU)"] },
+        { "unitId": "GATE_DSA_U3", "title": "Graph Algorithms & Shortest Paths", "teachingHours": 16, "subtopics": ["Breadth-First Search (BFS) and Depth-First Search (DFS)", "Topological Sort and Strongly Connected Components (Kosaraju, Tarjan)", "Minimum Spanning Trees: Kruskal and Prim Algorithms", "Shortest Paths: Dijkstra, Bellman-Ford, Floyd-Warshall"] },
+        { "unitId": "GATE_DSA_U4", "title": "Dynamic Programming & Greedy Algorithms", "teachingHours": 14, "subtopics": ["Greedy Choice Property: Fractional Knapsack, Huffman Coding", "Optimal Substructure: 0/1 Knapsack, Matrix Chain Multiplication", "Longest Common Subsequence (LCS), Longest Increasing Subsequence (LIS)", "Floyd-Warshall and Bellman-Ford as DP"] },
+        { "unitId": "GATE_DSA_U5", "title": "NP-Completeness & Advanced Topics", "teachingHours": 10, "subtopics": ["Classes P, NP, NP-Hard, and NP-Complete", "Polynomial-Time Reductions (3-SAT to CLIQUE, Vertex Cover)", "String Matching: KMP and Rabin-Karp Algorithms"] }
+      ]
     }
   ]
 }

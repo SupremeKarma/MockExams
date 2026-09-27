@@ -34,6 +34,7 @@ import {
 } from "lucide-react";
 import type { Course, StudentCourseEnrollment, Paper } from "@/lib/examai/types";
 import { GLOBAL_COURSES, type GlobalCourse, type GlobalCourseUnit } from "@/data/globalSyllabusData";
+import { bitSyllabusData } from "@/data/bitSyllabusData";
 
 export default function CourseSlugPage() {
   const params = useParams();
@@ -106,6 +107,40 @@ export default function CourseSlugPage() {
             prerequisites: globalMatch.prerequisites,
             difficulty: globalMatch.difficulty,
           };
+        }
+
+        // If not in global, check Purbanchal University BIT syllabus data
+        if (!loadedCourse) {
+          for (const sem of bitSyllabusData) {
+            const sub = sem.subjects.find(
+              (s) => s.code.toUpperCase() === normalizedCode || s.code.toLowerCase() === slug.toLowerCase()
+            );
+            if (sub) {
+              loadedCourse = {
+                code: sub.code,
+                courseId: sub.code,
+                name: sub.name,
+                semester: sem.semester,
+                programId: "BIT",
+                credits: sub.credits,
+                curriculum: "new_course",
+                syllabusUnits: sub.keyUnits.map((u, idx) => ({
+                  unitId: `${sub.code}_U${idx + 1}`,
+                  title: u,
+                  teachingHours: 5,
+                  subtopics: [u],
+                })),
+                description: sub.description,
+                learningOutcomes: [
+                  `Master core theoretical principles and problem solving for ${sub.name}.`,
+                  `Analyze and solve past university examination questions according to Purbanchal University curriculum.`
+                ],
+                prerequisites: ["Foundational Academic Prerequisite"],
+                difficulty: "Intermediate",
+              };
+              break;
+            }
+          }
         }
       }
 
