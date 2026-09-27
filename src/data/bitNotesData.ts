@@ -175,6 +175,115 @@ export const bitNotesData: Record<number, SemesterNotesData> = {
     }
   },
   4: {
+    "Operating Systems": {
+      subjectName: "Operating Systems",
+      code: "BIT253CO",
+      creditHours: 3,
+      topics: [
+        {
+          id: "os-deadlock-coffman",
+          name: "Four Coffman Conditions & Resource Allocation Graphs (RAG)",
+          importance: "Very High",
+          keyPoints: [
+            "Deadlock requires all 4 Coffman conditions simultaneously: Mutual Exclusion, Hold & Wait, No Preemption, Circular Wait",
+            "Breaking any single condition mathematically guarantees deadlock cannot occur",
+            "Resource Allocation Graph (RAG): P -> R is Request edge, R -> P is Assignment edge",
+            "Single instance with cycle = Deadlock; Multi-instance with cycle = Deadlock is possible but not guaranteed"
+          ],
+          theory: "Coffman conditions form the theoretical basis of all deadlock prevention strategies. Total ordering of resources prevents Circular Wait.",
+          code: `// Detection of Circular Wait in Single-Instance Resource Allocation (Cycle Finding)
+bool hasDeadlockCycle(int u, vector<bool>& visited, vector<bool>& recStack, const vector<vector<int>>& adj) {
+    visited[u] = true;
+    recStack[u] = true;
+    for (int v : adj[u]) {
+        if (!visited[v] && hasDeadlockCycle(v, visited, recStack, adj)) return true;
+        else if (recStack[v]) return true; // Cycle detected = Deadlock
+    }
+    recStack[u] = false;
+    return false;
+}`,
+          example: "Process P1 holds R1, requests R2. Process P2 holds R2, requests R1. Closed loop P1 -> R2 -> P2 -> R1 -> P1 constitutes circular wait.",
+          commonExamQuestions: [
+            "State and explain the four Coffman conditions necessary for deadlock to occur.",
+            "Draw a Resource Allocation Graph showing a deadlock condition and prove how breaking circular wait prevents it."
+          ]
+        },
+        {
+          id: "os-bankers-algorithm",
+          name: "Banker's Algorithm & Safe State Verification",
+          importance: "Very High",
+          keyPoints: [
+            "Banker's Algorithm (Dijkstra) avoids deadlocks by ensuring the system never enters an unsafe state",
+            "Need Matrix Formula: Need[i][j] = Max[i][j] - Allocation[i][j]",
+            "Safety Algorithm: Finds a safe sequence <P1, P2, ... Pn> where each process can finish with Work + Allocation",
+            "Resource-Request Algorithm: Allocates tentatively and checks safety before committing"
+          ],
+          theory: "Avoidance checks future worst-case Need, contrasting with detection which checks current Request.",
+          code: `// C++ Banker's Safety Algorithm
+bool isSafe(int n, int m, vector<int> avail, vector<vector<int>> maxM, vector<vector<int>> allot) {
+    vector<vector<int>> need(n, vector<int>(m));
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            need[i][j] = maxM[i][j] - allot[i][j];
+    vector<bool> finish(n, false);
+    vector<int> work = avail;
+    int count = 0;
+    while (count < n) {
+        bool found = false;
+        for (int p = 0; p < n; p++) {
+            if (!finish[p]) {
+                int j;
+                for (j = 0; j < m; j++) if (need[p][j] > work[j]) break;
+                if (j == m) {
+                    for (int k = 0; k < m; k++) work[k] += allot[p][k];
+                    finish[p] = true; found = true; count++;
+                }
+            }
+        }
+        if (!found) return false; // Unsafe state
+    }
+    return true;
+}`,
+          example: "Given Available=[3, 3, 2], Max & Allocation matrices for P0..P4. Need matrix computed. Safe sequence: <P1, P3, P4, P0, P2>.",
+          commonExamQuestions: [
+            "Given Allocation, Max, and Available matrices, calculate Need matrix and determine if the system is in a safe state.",
+            "If process P1 makes a request for (1, 0, 2), can the request be granted immediately? Justify using Banker's Algorithm."
+          ]
+        },
+        {
+          id: "os-deadlock-recovery",
+          name: "Deadlock Detection & Recovery Strategies",
+          importance: "High",
+          keyPoints: [
+            "Wait-For Graph (WFG) detection for single instance per resource type",
+            "Multiple instance detection uses Available, Allocation, and Request matrices",
+            "Recovery Option 1: Process termination (abort all or abort one-by-one by lowest cost/priority)",
+            "Recovery Option 2: Resource preemption with checkpoint rollback; must guard against starvation"
+          ],
+          theory: "The OS allows deadlock to occur, periodically invokes detection, and breaks the deadlock via preemption or aborts.",
+          code: `// Deadlock Recovery: Select Victim Process with Minimum Penalty Cost
+int selectVictimProcess(const vector<int>& cpuTimeSpent, const vector<int>& priority) {
+    int victim = -1, minScore = 1e9;
+    for (size_t i = 0; i < cpuTimeSpent.size(); i++) {
+        int penalty = cpuTimeSpent[i] + priority[i] * 10;
+        if (penalty < minScore) { minScore = penalty; victim = i; }
+    }
+    return victim;
+}`,
+          example: "Aborting lowest-priority background batch jobs while preserving user interactive foreground sessions.",
+          commonExamQuestions: [
+            "Describe the methods used for recovering from a deadlock situation.",
+            "What is starvation in deadlock preemption, and how can the aging technique prevent it?"
+          ]
+        }
+      ],
+      theoryTopics: [
+        "Compare Deadlock Prevention, Avoidance, and Detection & Recovery with respect to resource utilization and overhead.",
+        "Why is Banker's algorithm not used in general purpose operating systems like Linux and Windows?",
+        "Explain the differences between preemptive and non-preemptive CPU scheduling (Round Robin, SRTF, Priority).",
+        "Describe Virtual Memory Page Replacement algorithms (FIFO, LRU, Optimal) and Belady's Anomaly."
+      ]
+    },
     "Database Management Systems": {
       subjectName: "Database Management Systems",
       code: "BIT401",
@@ -212,26 +321,107 @@ export const bitNotesData: Record<number, SemesterNotesData> = {
       creditHours: 3,
       topics: [
         {
-          id: "os-deadlock",
-          name: "Deadlock Handling & Banker's Algorithm",
+          id: "os-deadlock-coffman",
+          name: "Four Coffman Conditions & Resource Allocation Graphs (RAG)",
           importance: "Very High",
           keyPoints: [
-            "4 Coffman Conditions: Mutual Exclusion, Hold and Wait, No Preemption, Circular Wait",
-            "Banker's Algorithm: Resource Allocation State Verification (Need = Max - Allocation)",
-            "Safe State: System can allocate maximum resources to each process in some sequence"
+            "Deadlock requires all 4 Coffman conditions simultaneously: Mutual Exclusion, Hold & Wait, No Preemption, Circular Wait",
+            "Breaking any single condition mathematically guarantees deadlock cannot occur",
+            "Resource Allocation Graph (RAG): P -> R is Request edge, R -> P is Assignment edge",
+            "Single instance with cycle = Deadlock; Multi-instance with cycle = Deadlock is possible but not guaranteed"
           ],
-          theory: "Process synchronization and resource allocation state safety analysis.",
-          code: `// Banker's Algorithm Safety Check:\n// If Need[i][j] <= Work[j], process i can finish.\n// Work[j] += Allocation[i][j]; Finish[i] = true;`,
-          example: "Total Resources = [10, 5, 7], Available = [3, 3, 2]. Safe Sequence: <P1, P3, P4, P0, P2>",
+          theory: "Coffman conditions form the theoretical basis of all deadlock prevention strategies. Total ordering of resources prevents Circular Wait.",
+          code: `// Detection of Circular Wait in Single-Instance Resource Allocation (Cycle Finding)
+bool hasDeadlockCycle(int u, vector<bool>& visited, vector<bool>& recStack, const vector<vector<int>>& adj) {
+    visited[u] = true;
+    recStack[u] = true;
+    for (int v : adj[u]) {
+        if (!visited[v] && hasDeadlockCycle(v, visited, recStack, adj)) return true;
+        else if (recStack[v]) return true; // Cycle detected = Deadlock
+    }
+    recStack[u] = false;
+    return false;
+}`,
+          example: "Process P1 holds R1, requests R2. Process P2 holds R2, requests R1. Closed loop P1 -> R2 -> P2 -> R1 -> P1 constitutes circular wait.",
           commonExamQuestions: [
-            "Solve Banker's algorithm safe sequence problem given Allocation, Max, and Available matrices.",
-            "Explain paging memory management and calculate effective memory access time with TLB."
+            "State and explain the four Coffman conditions necessary for deadlock to occur.",
+            "Draw a Resource Allocation Graph showing a deadlock condition and prove how breaking circular wait prevents it."
+          ]
+        },
+        {
+          id: "os-bankers-algorithm",
+          name: "Banker's Algorithm & Safe State Verification",
+          importance: "Very High",
+          keyPoints: [
+            "Banker's Algorithm (Dijkstra) avoids deadlocks by ensuring the system never enters an unsafe state",
+            "Need Matrix Formula: Need[i][j] = Max[i][j] - Allocation[i][j]",
+            "Safety Algorithm: Finds a safe sequence <P1, P2, ... Pn> where each process can finish with Work + Allocation",
+            "Resource-Request Algorithm: Allocates tentatively and checks safety before committing"
+          ],
+          theory: "Avoidance checks future worst-case Need, contrasting with detection which checks current Request.",
+          code: `// C++ Banker's Safety Algorithm
+bool isSafe(int n, int m, vector<int> avail, vector<vector<int>> maxM, vector<vector<int>> allot) {
+    vector<vector<int>> need(n, vector<int>(m));
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            need[i][j] = maxM[i][j] - allot[i][j];
+    vector<bool> finish(n, false);
+    vector<int> work = avail;
+    int count = 0;
+    while (count < n) {
+        bool found = false;
+        for (int p = 0; p < n; p++) {
+            if (!finish[p]) {
+                int j;
+                for (j = 0; j < m; j++) if (need[p][j] > work[j]) break;
+                if (j == m) {
+                    for (int k = 0; k < m; k++) work[k] += allot[p][k];
+                    finish[p] = true; found = true; count++;
+                }
+            }
+        }
+        if (!found) return false; // Unsafe state
+    }
+    return true;
+}`,
+          example: "Given Available=[3, 3, 2], Max & Allocation matrices for P0..P4. Need matrix computed. Safe sequence: <P1, P3, P4, P0, P2>.",
+          commonExamQuestions: [
+            "Given Allocation, Max, and Available matrices, calculate Need matrix and determine if the system is in a safe state.",
+            "If process P1 makes a request for (1, 0, 2), can the request be granted immediately? Justify using Banker's Algorithm."
+          ]
+        },
+        {
+          id: "os-deadlock-recovery",
+          name: "Deadlock Detection & Recovery Strategies",
+          importance: "High",
+          keyPoints: [
+            "Wait-For Graph (WFG) detection for single instance per resource type",
+            "Multiple instance detection uses Available, Allocation, and Request matrices",
+            "Recovery Option 1: Process termination (abort all or abort one-by-one by lowest cost/priority)",
+            "Recovery Option 2: Resource preemption with checkpoint rollback; must guard against starvation"
+          ],
+          theory: "The OS allows deadlock to occur, periodically invokes detection, and breaks the deadlock via preemption or aborts.",
+          code: `// Deadlock Recovery: Select Victim Process with Minimum Penalty Cost
+int selectVictimProcess(const vector<int>& cpuTimeSpent, const vector<int>& priority) {
+    int victim = -1, minScore = 1e9;
+    for (size_t i = 0; i < cpuTimeSpent.size(); i++) {
+        int penalty = cpuTimeSpent[i] + priority[i] * 10;
+        if (penalty < minScore) { minScore = penalty; victim = i; }
+    }
+    return victim;
+}`,
+          example: "Aborting lowest-priority background batch jobs while preserving user interactive foreground sessions.",
+          commonExamQuestions: [
+            "Describe the methods used for recovering from a deadlock situation.",
+            "What is starvation in deadlock preemption, and how can the aging technique prevent it?"
           ]
         }
       ],
       theoryTopics: [
-        "Compare preemptive vs non-preemptive CPU scheduling algorithms (Round Robin, SRTF, Priority).",
-        "Describe virtual memory page replacement algorithms (FIFO, LRU, Optimal)."
+        "Compare Deadlock Prevention, Avoidance, and Detection & Recovery with respect to resource utilization and overhead.",
+        "Why is Banker's algorithm not used in general purpose operating systems like Linux and Windows?",
+        "Explain the differences between preemptive and non-preemptive CPU scheduling (Round Robin, SRTF, Priority).",
+        "Describe Virtual Memory Page Replacement algorithms (FIFO, LRU, Optimal) and Belady's Anomaly."
       ]
     }
   },
@@ -342,37 +532,53 @@ export function getSubjectNotes(codeOrName: string, semester?: number): SubjectN
     BIT101CO: "BIT101",
     BIT102HS: "BIT102",
     BIT201CO: "BIT201",
+    BIT253CO: "BIT253CO",
+    BIT253: "BIT253CO",
+    BIT501: "BIT253CO",
+    BIT501CO: "BIT253CO",
     BIT301CO: "BIT301",
     BIT401CO: "BIT401",
-    BIT501CO: "BIT501",
+    BIT254CO: "BIT401",
     BIT601CO: "BIT601",
     BIT701CO: "BIT701",
     BIT801CO: "BIT801",
   };
 
   const targetCode = codeAliases[norm] || norm;
-  const semestersToSearch = semester ? [semester] : [1, 2, 3, 4, 5, 6, 7, 8];
+  const initialSemesters = semester ? [semester] : [1, 2, 3, 4, 5, 6, 7, 8];
 
-  for (const sem of semestersToSearch) {
-    const semData = bitNotesData[sem];
-    if (!semData) continue;
+  const searchInSemesters = (semList: number[]) => {
+    for (const sem of semList) {
+      const semData = bitNotesData[sem];
+      if (!semData) continue;
 
-    for (const [key, subj] of Object.entries(semData)) {
-      const subjNormCode = subj.code.trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
-      const subjNormName = subj.subjectName.trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
-      const keyNorm = key.trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
+      for (const [key, subj] of Object.entries(semData)) {
+        const subjNormCode = subj.code.trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
+        const subjNormName = subj.subjectName.trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
+        const keyNorm = key.trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
 
-      if (
-        subjNormCode === targetCode ||
-        subjNormCode === norm ||
-        subjNormName.includes(norm) ||
-        norm.includes(subjNormName) ||
-        keyNorm.includes(norm) ||
-        norm.includes(keyNorm)
-      ) {
-        return subj;
+        if (
+          subjNormCode === targetCode ||
+          subjNormCode === norm ||
+          subjNormName.includes(norm) ||
+          norm.includes(subjNormName) ||
+          keyNorm.includes(norm) ||
+          norm.includes(keyNorm)
+        ) {
+          return subj;
+        }
       }
     }
+    return null;
+  };
+
+  const result = searchInSemesters(initialSemesters);
+  if (result) return result;
+
+  // Fallback: search all other semesters if not found in requested semester
+  if (semester) {
+    const allRemaining = [1, 2, 3, 4, 5, 6, 7, 8].filter((s) => s !== semester);
+    return searchInSemesters(allRemaining);
   }
 
   return null;

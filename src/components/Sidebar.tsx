@@ -24,13 +24,14 @@ import {
   Compass,
   Users,
   Layers,
+  Cpu,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const CORE_LINKS = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Syllabus", href: "/syllabus", icon: Layers },
-  { name: "Courses", href: "/dashboard/courses", icon: GraduationCap },
+  { name: "Courses", href: "/courses", icon: GraduationCap },
   { name: "Learning Paths", href: "/learning-paths", icon: Compass },
   { name: "Exams", href: "/exams", icon: Zap },
   { name: "Flashcards", href: "/flashcards", icon: Brain },
@@ -60,7 +61,14 @@ export default function Sidebar() {
     });
   };
 
-  const isActive = (href: string) => pathname === href || (href !== "/dashboard" && pathname.startsWith(href));
+  const isActive = (href: string) => {
+    if (pathname === href) return true;
+    if (href === "/dashboard") return false;
+    if (href === "/courses") {
+      return pathname.startsWith("/courses") || pathname.startsWith("/dashboard/courses");
+    }
+    return pathname.startsWith(href);
+  };
 
   const workspaceLinks = [
     (isExaminer || isAdmin) && { name: "Teacher Classes", href: "/teacher/classes", icon: Users },
@@ -94,6 +102,37 @@ export default function Sidebar() {
             </Link>
           );
         })}
+
+        {/* Featured OS Deadlock Notes */}
+        <div className={`pt-3 pb-1 ${collapsed ? "px-0" : "px-2.5"}`}>
+          {!collapsed ? (
+            <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 flex items-center gap-1.5">
+              <Sparkles className="w-3 h-3 text-amber-500" />
+              Featured Notes
+            </span>
+          ) : (
+            <div className="h-px bg-amber-200 mx-1" />
+          )}
+        </div>
+        <Link
+          href="/courses/BIT253CO?tab=notes"
+          title={collapsed ? "OS Deadlock Notes" : undefined}
+          className={`flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-[13px] font-medium transition-colors ${
+            pathname.includes("BIT253CO")
+              ? "bg-amber-100/80 text-amber-900 border border-amber-300 font-bold"
+              : "text-zinc-700 hover:bg-amber-50 hover:text-amber-900"
+          } ${collapsed ? "justify-center" : ""}`}
+        >
+          <Cpu className="w-4 h-4 shrink-0 text-amber-600" />
+          {!collapsed && (
+            <div className="flex items-center justify-between flex-1 truncate">
+              <span className="truncate">OS Deadlock Notes</span>
+              <span className="text-[10px] bg-amber-200/90 text-amber-800 font-extrabold px-1.5 py-0.5 rounded-full shrink-0">
+                Unit 6
+              </span>
+            </div>
+          )}
+        </Link>
 
         {workspaceLinks.length > 0 && (
           <>

@@ -11,6 +11,8 @@ import Sidebar from "@/components/Sidebar";
 // marketing top-nav + footer treatment. See ARCHITECTURE.md.
 const SIDEBAR_PREFIXES = [
   "/dashboard",
+  "/courses",
+  "/syllabus",
   "/exams",
   "/flashcards",
   "/notes",
