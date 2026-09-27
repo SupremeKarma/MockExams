@@ -35,10 +35,12 @@ import {
   AlertCircle,
   Download,
   ListTodo,
+  FileCode,
 } from "lucide-react";
 import type { Course, StudentCourseEnrollment, Paper } from "@/lib/examai/types";
 import { GLOBAL_COURSES, type GlobalCourse, type GlobalCourseUnit } from "@/data/globalSyllabusData";
 import { bitSyllabusData } from "@/data/bitSyllabusData";
+import { getSubjectNotes, generateSubjectNotesMarkdown } from "@/data/bitNotesData";
 
 export default function CourseSlugPage() {
   const params = useParams();
@@ -55,7 +57,17 @@ export default function CourseSlugPage() {
   const [isAcademic, setIsAcademic] = useState<boolean | null>(null);
   const [updatingTopic, setUpdatingTopic] = useState<string | null>(null);
   const [enrolling, setEnrolling] = useState(false);
-  const [curriculumTab, setCurriculumTab] = useState<"topics" | "markdown">("topics");
+  const [curriculumTab, setCurriculumTab] = useState<"topics" | "markdown" | "notes">("topics");
+
+  const courseNotes = useMemo(() => {
+    if (!course) return null;
+    return getSubjectNotes(course.code, course.semester) || getSubjectNotes(course.name, course.semester);
+  }, [course]);
+
+  const notesMarkdown = useMemo(() => {
+    if (!courseNotes || !course) return "";
+    return generateSubjectNotesMarkdown(courseNotes, course.semester);
+  }, [courseNotes, course]);
 
   const courseMarkdown = useMemo(() => {
     if (!course) return "";
@@ -497,10 +509,33 @@ export default function CourseSlugPage() {
                       <FileText className="w-3.5 h-3.5 text-primary-600" />
                       <span>Official .md Syllabus</span>
                     </button>
+                    {courseNotes && (
+                      <button
+                        type="button"
+                        onClick={() => setCurriculumTab("notes")}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all ${
+                          curriculumTab === "notes"
+                            ? "bg-white text-zinc-900 shadow-xs"
+                            : "text-zinc-600 hover:text-zinc-900"
+                        }`}
+                      >
+                        <FileCode className="w-3.5 h-3.5 text-primary-600" />
+                        <span>Official .md Notes</span>
+                      </button>
+                    )}
                   </div>
                 </div>
 
-                {curriculumTab === "markdown" ? (
+                {curriculumTab === "notes" && courseNotes ? (
+                  <div className="pt-1">
+                    <MarkdownViewer
+                      content={notesMarkdown}
+                      title={`${course.name} (${course.code}) Study Notes`}
+                      downloadFilename={`${course.code}_Notes.md`}
+                      showActions={true}
+                    />
+                  </div>
+                ) : curriculumTab === "markdown" ? (
                   <div className="pt-1">
                     <MarkdownViewer
                       content={courseMarkdown}

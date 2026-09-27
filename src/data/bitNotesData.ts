@@ -329,3 +329,97 @@ export const bitNotesData: Record<number, SemesterNotesData> = {
     }
   }
 };
+
+/**
+ * Look up subject notes by course code or subject title.
+ * Handles both legacy (e.g. BIT101) and revised codes (e.g. BIT105CO).
+ */
+export function getSubjectNotes(codeOrName: string, semester?: number): SubjectNotes | null {
+  const norm = codeOrName.trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
+
+  const codeAliases: Record<string, string> = {
+    BIT105CO: "BIT101",
+    BIT101CO: "BIT101",
+    BIT102HS: "BIT102",
+    BIT201CO: "BIT201",
+    BIT301CO: "BIT301",
+    BIT401CO: "BIT401",
+    BIT501CO: "BIT501",
+    BIT601CO: "BIT601",
+    BIT701CO: "BIT701",
+    BIT801CO: "BIT801",
+  };
+
+  const targetCode = codeAliases[norm] || norm;
+  const semestersToSearch = semester ? [semester] : [1, 2, 3, 4, 5, 6, 7, 8];
+
+  for (const sem of semestersToSearch) {
+    const semData = bitNotesData[sem];
+    if (!semData) continue;
+
+    for (const [key, subj] of Object.entries(semData)) {
+      const subjNormCode = subj.code.trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
+      const subjNormName = subj.subjectName.trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
+      const keyNorm = key.trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
+
+      if (
+        subjNormCode === targetCode ||
+        subjNormCode === norm ||
+        subjNormName.includes(norm) ||
+        norm.includes(subjNormName) ||
+        keyNorm.includes(norm) ||
+        norm.includes(keyNorm)
+      ) {
+        return subj;
+      }
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Generate official Markdown (.md) representation of subject study notes.
+ */
+export function generateSubjectNotesMarkdown(notes: SubjectNotes, semester: number): string {
+  const lines: string[] = [];
+  lines.push(`# ${notes.subjectName} (${notes.code})`);
+  lines.push(`**Semester**: ${semester} | **Credits**: ${notes.creditHours || 3}`);
+  lines.push("");
+  lines.push("---");
+  lines.push("");
+  lines.push("## 1. Core Code Algorithms & Practical Implementations");
+  lines.push("");
+
+  notes.topics.forEach((t, i) => {
+    lines.push(`### 1.${i + 1} ${t.name} [Priority: ${t.importance}]`);
+    if (t.keyPoints && t.keyPoints.length > 0) {
+      lines.push("**Key Concepts & Exam Notes:**");
+      t.keyPoints.forEach((kp) => lines.push(`- ${kp}`));
+      lines.push("");
+    }
+    if (t.code) {
+      const lang = t.codeExamples?.[0]?.language || "cpp";
+      lines.push("```" + lang);
+      lines.push(t.code);
+      lines.push("```");
+      lines.push("");
+    }
+    lines.push("---");
+    lines.push("");
+  });
+
+  if (notes.theoryTopics && notes.theoryTopics.length > 0) {
+    lines.push("## 2. High-Frequency Theory Questions & University Solutions");
+    lines.push("");
+    notes.theoryTopics.forEach((tt, i) => {
+      lines.push(`### Q${i + 1}: ${tt}`);
+      lines.push(
+        `> **University Exam Solution Guide**: High-frequency recurring topic for Purbanchal University assessments. Structure your answer with clear definitions, architecture diagram/state flow, and key points.`
+      );
+      lines.push("");
+    });
+  }
+
+  return lines.join("\n");
+}
