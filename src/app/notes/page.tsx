@@ -20,14 +20,16 @@ import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { bitNotesData, type SubjectNotes, type Topic } from "@/data/bitNotesData";
 import ProgramGate from "@/components/ProgramGate";
+import MarkdownViewer from "@/components/MarkdownViewer";
 import { db } from "@/lib/firebase";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
+import { FileText, Download } from "lucide-react";
 
 export default function NotesPage() {
   const [selectedSemester, setSelectedSemester] = useState<number>(1);
   const [selectedSubject, setSelectedSubject] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [activeTab, setActiveTab] = useState<"code" | "theory">("code");
+  const [activeTab, setActiveTab] = useState<"code" | "theory" | "markdown">("code");
   const [copiedCodeIndex, setCopiedCodeIndex] = useState<number | null>(null);
   const [openTheoryIndex, setOpenTheoryIndex] = useState<number | null>(null);
 
@@ -167,6 +169,48 @@ export default function NotesPage() {
     return activeNotes.theoryTopics.filter(tt => tt.toLowerCase().includes(q));
   }, [activeNotes, searchQuery]);
 
+  const notesMarkdown = useMemo(() => {
+    if (!activeNotes) return "";
+    const lines: string[] = [];
+    lines.push(`# ${currentSubject} (${currentCourseCode})`);
+    lines.push(`**Semester**: ${selectedSemester} | **Credits**: ${activeNotes.creditHours || 3}`);
+    lines.push("");
+    lines.push("---");
+    lines.push("");
+    lines.push("## 1. Core Code Algorithms & Practical Implementations");
+    lines.push("");
+
+    activeNotes.topics.forEach((t, i) => {
+      lines.push(`### 1.${i + 1} ${t.name} [Priority: ${t.importance}]`);
+      if (t.keyPoints && t.keyPoints.length > 0) {
+        lines.push("**Key Concepts & Exam Notes:**");
+        t.keyPoints.forEach((kp) => lines.push(`- ${kp}`));
+        lines.push("");
+      }
+      if (t.code) {
+        const lang = t.codeExamples?.[0]?.language || "cpp";
+        lines.push("```" + lang);
+        lines.push(t.code);
+        lines.push("```");
+        lines.push("");
+      }
+      lines.push("---");
+      lines.push("");
+    });
+
+    if (activeNotes.theoryTopics && activeNotes.theoryTopics.length > 0) {
+      lines.push("## 2. High-Frequency Theory Questions & University Solutions");
+      lines.push("");
+      activeNotes.theoryTopics.forEach((tt, i) => {
+        lines.push(`### Q${i + 1}: ${tt}`);
+        lines.push(`> **University Exam Solution Guide**: High-frequency recurring topic for Purbanchal University assessments. Structure your answer with clear definitions, architecture diagram/state flow, and key points.`);
+        lines.push("");
+      });
+    }
+
+    return lines.join("\n");
+  }, [activeNotes, currentSubject, currentCourseCode, selectedSemester]);
+
   const handleCopy = (codeText: string, index: number) => {
     navigator.clipboard.writeText(codeText);
     setCopiedCodeIndex(index);
@@ -282,30 +326,41 @@ export default function NotesPage() {
                 })}
               </div>
 
-              {/* View Switcher: Code vs Theory */}
+              {/* View Switcher: Code vs Theory vs Markdown */}
               <div className="pt-2 border-t border-zinc-100">
-                <div className="grid grid-cols-2 gap-1.5 p-1 rounded-xl bg-zinc-100 border border-zinc-200">
+                <div className="grid grid-cols-1 gap-1.5 p-1 rounded-xl bg-zinc-100 border border-zinc-200">
                   <button
                     onClick={() => setActiveTab("code")}
-                    className={`py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+                    className={`py-2 px-3 text-xs font-bold rounded-lg transition-all flex items-center justify-start gap-2 ${
                       activeTab === "code"
                         ? "bg-white text-primary-700 shadow-sm"
                         : "text-zinc-600 hover:text-zinc-900"
                     }`}
                   >
-                    <Code2 className="w-3.5 h-3.5" />
-                    Code Topics
+                    <Code2 className="w-3.5 h-3.5 text-primary-600" />
+                    <span>Code Topics</span>
                   </button>
                   <button
                     onClick={() => setActiveTab("theory")}
-                    className={`py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+                    className={`py-2 px-3 text-xs font-bold rounded-lg transition-all flex items-center justify-start gap-2 ${
                       activeTab === "theory"
                         ? "bg-white text-primary-700 shadow-sm"
                         : "text-zinc-600 hover:text-zinc-900"
                     }`}
                   >
-                    <HelpCircle className="w-3.5 h-3.5" />
-                    Theory FAQs
+                    <HelpCircle className="w-3.5 h-3.5 text-primary-600" />
+                    <span>Theory FAQs</span>
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("markdown")}
+                    className={`py-2 px-3 text-xs font-bold rounded-lg transition-all flex items-center justify-start gap-2 ${
+                      activeTab === "markdown"
+                        ? "bg-white text-primary-700 shadow-sm"
+                        : "text-zinc-600 hover:text-zinc-900"
+                    }`}
+                  >
+                    <FileText className="w-3.5 h-3.5 text-primary-600" />
+                    <span>Official .md Notes</span>
                   </button>
                 </div>
               </div>
@@ -341,18 +396,39 @@ export default function NotesPage() {
                 <span className="text-xs font-bold uppercase tracking-wider text-primary-600">Semester {selectedSemester}</span>
                 <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900 mt-1">{currentSubject}</h2>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3">
                 <span className="px-3.5 py-1.5 rounded-xl bg-zinc-50 border border-zinc-200 text-xs text-zinc-700 font-bold">
                   {activeNotes?.topics.length || 0} Code Topics
                 </span>
                 <span className="px-3.5 py-1.5 rounded-xl bg-zinc-50 border border-zinc-200 text-xs text-zinc-700 font-bold">
                   {activeNotes?.theoryTopics.length || 0} Theory FAQs
                 </span>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab(activeTab === "markdown" ? "code" : "markdown")}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all border flex items-center gap-1.5 ${
+                    activeTab === "markdown"
+                      ? "bg-primary-600 text-white border-primary-600 shadow-xs"
+                      : "bg-primary-50 text-primary-700 border-primary-200 hover:bg-primary-100"
+                  }`}
+                >
+                  <FileText className="w-3.5 h-3.5" />
+                  <span>{activeTab === "markdown" ? "Interactive Mode" : "Official .md Notes"}</span>
+                </button>
               </div>
             </div>
 
-            {/* Content Display: Code Tab vs Theory Tab */}
-            {activeTab === "code" ? (
+            {/* Content Display: Markdown Document vs Code Tab vs Theory Tab */}
+            {activeTab === "markdown" ? (
+              <div className="space-y-4">
+                <MarkdownViewer
+                  content={notesMarkdown}
+                  title={`${currentSubject} (${currentCourseCode}) Study Notes`}
+                  downloadFilename={`${currentCourseCode || currentSubject}_Notes.md`}
+                  showActions={true}
+                />
+              </div>
+            ) : activeTab === "code" ? (
               <div className="space-y-6">
                 {filteredTopics.length > 0 ? (
                   filteredTopics.map((topic, idx) => (

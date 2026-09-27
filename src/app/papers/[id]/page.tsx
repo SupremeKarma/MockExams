@@ -1,10 +1,11 @@
 "use client";
 
-import { AlertTriangle, ArrowLeft, Loader2, Printer } from "lucide-react";
+import { AlertTriangle, ArrowLeft, Loader2, Printer, FileText } from "lucide-react";
 import Link from "next/link";
-import { use, useEffect, useState } from "react";
+import { use, useEffect, useState, useMemo } from "react";
 import { useAuth } from "@/context/AuthContext";
 import ExamPaperView, { type PaperMeta } from "@/components/ExamPaperView";
+import MarkdownViewer from "@/components/MarkdownViewer";
 import { auth } from "@/lib/firebase";
 
 /**
@@ -46,7 +47,42 @@ export default function SolvedPaperPage({ params }: { params: any }) {
   const [paper, setPaper] = useState<SolvedPaper | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [mode, setMode] = useState<"paper" | "solutions">("solutions");
+  const [mode, setMode] = useState<"paper" | "solutions" | "markdown">("solutions");
+
+  const paperMarkdown = useMemo(() => {
+    if (!paper) return "";
+    const lines: string[] = [];
+    const title = paper.meta?.subjectName || paper.source;
+    lines.push(`# ${title}`);
+    lines.push(`**University / Examination Board**: ${paper.meta?.university || "Purbanchal University"}`);
+    if (paper.meta?.year) lines.push(`**Examination Year**: ${paper.meta.year}`);
+    if (paper.meta?.fullMarks) {
+      lines.push(`**Full Marks**: ${paper.meta.fullMarks} | **Pass Marks**: ${paper.meta.passMarks || "N/A"}`);
+    }
+    lines.push("");
+    lines.push("---");
+    lines.push("");
+    lines.push("## Examination Questions & Verified Solutions");
+    lines.push("");
+
+    paper.questions.forEach((q) => {
+      lines.push(`### Question ${q.number} ${q.marks ? `[${q.marks} Marks]` : ""}`);
+      lines.push(`${q.question}`);
+      lines.push("");
+      lines.push("**Verified Answer / Model Solution:**");
+      lines.push(`${q.answer}`);
+      lines.push("");
+      if (q.explanation) {
+        lines.push(`> **Examiner Rubric & Marking Scheme:**`);
+        lines.push(`> ${q.explanation}`);
+        lines.push("");
+      }
+      lines.push("---");
+      lines.push("");
+    });
+
+    return lines.join("\n");
+  }, [paper]);
 
   useEffect(() => {
     if (authLoading) return;
@@ -155,29 +191,40 @@ export default function SolvedPaperPage({ params }: { params: any }) {
             [
               { id: "paper", label: "Question paper" },
               { id: "solutions", label: "With solutions" },
+              { id: "markdown", label: "Official .md View" },
             ] as const
           ).map(({ id, label }) => (
             <button
               key={id}
               onClick={() => setMode(id)}
               aria-pressed={mode === id}
-              className={`px-3.5 py-2 rounded-md border text-xs font-semibold transition-colors ${
+              className={`px-3.5 py-2 rounded-md border text-xs font-semibold transition-colors flex items-center gap-1.5 ${
                 mode === id
                   ? "bg-primary-50 border-primary-300 text-primary-700"
                   : "bg-white border-zinc-200 text-zinc-600 hover:border-primary-300"
               }`}
             >
-              {label}
+              {id === "markdown" && <FileText className="w-3.5 h-3.5" />}
+              <span>{label}</span>
             </button>
           ))}
         </div>
 
-        <ExamPaperView
-          meta={paper.meta}
-          questions={paper.questions}
-          mode={mode}
-          fallbackTitle={paper.source}
-        />
+        {mode === "markdown" ? (
+          <MarkdownViewer
+            content={paperMarkdown}
+            title={paper.meta?.subjectName || paper.source}
+            downloadFilename={`${paper.id}.md`}
+            showActions={true}
+          />
+        ) : (
+          <ExamPaperView
+            meta={paper.meta}
+            questions={paper.questions}
+            mode={mode}
+            fallbackTitle={paper.source}
+          />
+        )}
 
         {paper.sources.length > 0 && mode === "solutions" && (
           <div className="px-1 print:hidden">
