@@ -49,6 +49,19 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: '/:path*.md',
+          destination: '/api/blocked',
+        },
+      ],
+      afterFiles: [],
+      fallback: [],
+    };
+  },
 };
 
 export default nextConfig;

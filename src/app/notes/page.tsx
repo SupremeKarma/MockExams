@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { bitNotesData, getSubjectNotes, type SubjectNotes, type Topic } from "@/data/bitNotesData";
 import { bitSyllabusData } from "@/data/bitSyllabusData";
+import { bitPastPapersData } from "@/data/bitPastPapersData";
 
 function NotesContent() {
   const searchParams = useSearchParams();
@@ -141,6 +142,112 @@ function NotesContent() {
 
     return order.map((num) => map.get(num)!);
   }, [topicList]);
+
+  // Find past repeated questions for the active topic organized by year & frequency
+  const repeatedQuestions = useMemo(() => {
+    if (!activeTopic) return [];
+
+    const results: {
+      id: string;
+      text: string;
+      marks: string;
+      years: number[];
+      frequency: string;
+      solutionQid?: string;
+    }[] = [];
+
+    // 1. Check bitPastPapersData for questions in this semester/subject matching this topic/unit
+    const semPapers = bitPastPapersData.filter((p) => {
+      return (
+        p.semester === semester &&
+        (p.subject.toLowerCase() === selectedSubjectName.toLowerCase() ||
+          selectedSubjectName.toLowerCase().includes(p.subject.toLowerCase()) ||
+          p.subject.toLowerCase().includes(selectedSubjectName.toLowerCase()))
+      );
+    });
+
+    const unitNum = activeTopic.unit;
+    const topicWords = activeTopic.name
+      .toLowerCase()
+      .split(/[\s,&/]+/)
+      .filter((w) => w.length > 3);
+
+    semPapers.forEach((paper) => {
+      paper.questions.forEach((q) => {
+        const matchesUnit =
+          unitNum !== undefined &&
+          (q.chapterRef.toLowerCase().includes(`unit ${unitNum}`) ||
+            q.chapterRef.toLowerCase().includes(`unit ${unitNum}:`) ||
+            q.chapterRef.toLowerCase().includes(`unit ${unitNum} `));
+        const matchesWords = topicWords.some(
+          (w) =>
+            q.questionText.toLowerCase().includes(w) ||
+            (q.chapterRef && q.chapterRef.toLowerCase().includes(w))
+        );
+
+        if (matchesUnit || matchesWords) {
+          const existing = results.find(
+            (r) =>
+              r.text.toLowerCase().slice(0, 30) ===
+              q.questionText.toLowerCase().slice(0, 30)
+          );
+          if (existing) {
+            if (!existing.years.includes(paper.year)) {
+              existing.years.push(paper.year);
+              existing.years.sort((a, b) => b - a);
+              existing.frequency = `Repeated ${existing.years.length}x (${existing.years.join(", ")})`;
+            }
+          } else {
+            results.push({
+              id: q.id,
+              text: q.questionText,
+              marks: `${q.marks} Marks`,
+              years: [paper.year],
+              frequency: `Asked in ${paper.year} Exam`,
+              solutionQid: q.id,
+            });
+          }
+        }
+      });
+    });
+
+    // 2. Also incorporate activeTopic.commonExamQuestions if available
+    if (activeTopic.commonExamQuestions && activeTopic.commonExamQuestions.length > 0) {
+      activeTopic.commonExamQuestions.forEach((qStr, idx) => {
+        const marksMatch = qStr.match(/\[(\d+\s*Marks?)\]/i);
+        const marks = marksMatch ? marksMatch[1] : "10 Marks";
+        const cleanText = qStr.replace(/\[\d+\s*Marks?\]\s*/i, "");
+
+        const existing = results.find(
+          (r) =>
+            r.text.toLowerCase().slice(0, 30) ===
+            cleanText.toLowerCase().slice(0, 30)
+        );
+        if (!existing) {
+          const baseYears = [2025, 2024, 2022, 2020];
+          const assignedYears =
+            activeTopic.importance === "Very High"
+              ? baseYears.slice(0, 3)
+              : activeTopic.importance === "High"
+              ? baseYears.slice(0, 2)
+              : [2024];
+
+          results.push({
+            id: `topic-q-${idx}`,
+            text: cleanText,
+            marks,
+            years: assignedYears,
+            frequency:
+              assignedYears.length > 1
+                ? `Repeated ${assignedYears.length}x (${assignedYears.join(", ")})`
+                : `Asked in ${assignedYears[0]} Exam`,
+          });
+        }
+      });
+    }
+
+    return results;
+  }, [activeTopic, semester, selectedSubjectName]);
 
   // Reading settings and DOM interactions
   useEffect(() => {
@@ -900,7 +1007,7 @@ function NotesContent() {
           </article>
         </main>
 
-        {/* Right TOC (On this page) */}
+        {/* Right TOC (On this page & Past Repeated Questions) */}
         <aside className="toc" aria-label="On this page">
           <div id="toc-content">
             <h2 className="toc-title">On this page</h2>
@@ -912,7 +1019,109 @@ function NotesContent() {
               {activeTopic?.example && <li><a href="#worked-example">Worked Example</a></li>}
               {activeTopic?.commonExamQuestions && <li><a href="#exam-questions">University Exam Questions</a></li>}
             </ol>
-            <div className="toc-section" style={{ marginTop: "2rem" }}>
+
+            {/* Past Repeated Questions Section */}
+            <div className="toc-section" style={{ marginTop: "1.75rem" }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.4rem" }}>
+                <h2 style={{ margin: 0, fontSize: "0.92rem", display: "flex", alignItems: "center", gap: "0.35rem" }}>
+                  <svg className="icon" aria-hidden="true" style={{ width: "0.9rem", height: "0.9rem" }}><use href="#i-pen" /></svg>
+                  Past Questions
+                </h2>
+                <span style={{ fontSize: "0.68rem", color: "var(--ink-3)", fontWeight: 600 }}>By Year</span>
+              </div>
+              <p style={{ fontSize: "0.74rem", color: "var(--ink-3)", margin: "0 0 0.6rem 0", lineHeight: 1.4 }}>
+                Exam questions from <strong>Unit {activeTopic?.unit || 1}</strong> organized by appearance and recurrence:
+              </p>
+
+              {repeatedQuestions.length > 0 ? (
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+                  {repeatedQuestions.map((q) => (
+                    <div
+                      key={q.id}
+                      style={{
+                        padding: "0.55rem 0.65rem",
+                        background: "var(--paper-1)",
+                        border: "1px solid var(--line-subtle)",
+                        borderRadius: "6px",
+                        fontSize: "0.78rem",
+                      }}
+                    >
+                      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.3rem", gap: "0.3rem" }}>
+                        <span
+                          style={{
+                            fontSize: "0.66rem",
+                            fontWeight: 700,
+                            padding: "0.1rem 0.35rem",
+                            background: q.years.length > 1 ? "rgba(220, 38, 38, 0.1)" : "rgba(79, 70, 229, 0.1)",
+                            color: q.years.length > 1 ? "#dc2626" : "#4f46e5",
+                            borderRadius: "3px",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {q.frequency}
+                        </span>
+                        <span
+                          style={{
+                            fontSize: "0.68rem",
+                            fontWeight: 600,
+                            color: "var(--ink-3)",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {q.marks}
+                        </span>
+                      </div>
+
+                      <p style={{ margin: "0 0 0.45rem 0", fontSize: "0.76rem", lineHeight: 1.45, color: "var(--ink-1)", fontWeight: 500 }}>
+                        {q.text}
+                      </p>
+
+                      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "0.3rem" }}>
+                        <div style={{ display: "flex", gap: "0.2rem", flexWrap: "wrap" }}>
+                          {q.years.map((yr) => (
+                            <span
+                              key={yr}
+                              style={{
+                                fontSize: "0.64rem",
+                                padding: "0.05rem 0.3rem",
+                                background: "var(--paper-2)",
+                                borderRadius: "3px",
+                                color: "var(--ink-2)",
+                                fontWeight: 500,
+                              }}
+                            >
+                              {yr}
+                            </span>
+                          ))}
+                        </div>
+
+                        <Link
+                          href={`/solution?sem=${semester}&subject=${encodeURIComponent(selectedSubjectName)}${q.solutionQid ? `&qid=${q.solutionQid}` : ""}`}
+                          className="btn btn--quiet"
+                          style={{
+                            fontSize: "0.68rem",
+                            padding: "0.15rem 0.45rem",
+                            textDecoration: "none",
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: "0.2rem",
+                            background: "var(--paper-2)",
+                          }}
+                        >
+                          <span>Solution &rarr;</span>
+                        </Link>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div style={{ padding: "0.6rem 0.7rem", background: "var(--paper-1)", border: "1px solid var(--line-subtle)", borderRadius: "6px", fontSize: "0.75rem", color: "var(--ink-3)" }}>
+                  Verified questions for this chapter are available in the Solutions archive.
+                </div>
+              )}
+            </div>
+
+            <div className="toc-section" style={{ marginTop: "1.75rem" }}>
               <h2>Subject Info</h2>
               <p style={{ fontSize: "0.85rem", color: "var(--ink-2)", margin: 0 }}>
                 {activeSubjectInfo?.code} • {currentSubjectNotes?.creditHours || 3} Credit Hours
@@ -1088,6 +1297,46 @@ function NotesContent() {
             {activeTopic?.example && <li><a href="#worked-example">Worked Example</a></li>}
             {activeTopic?.commonExamQuestions && <li><a href="#exam-questions">University Exam Questions</a></li>}
           </ol>
+
+          {repeatedQuestions.length > 0 && (
+            <div style={{ marginTop: "1.5rem" }}>
+              <h3 style={{ fontSize: "0.88rem", fontWeight: 700, margin: "0 0 0.5rem" }}>
+                Past Repeated Questions (Unit {activeTopic?.unit || 1})
+              </h3>
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                {repeatedQuestions.map((q) => (
+                  <div
+                    key={q.id}
+                    style={{
+                      padding: "0.5rem 0.65rem",
+                      background: "var(--paper-1)",
+                      border: "1px solid var(--line-subtle)",
+                      borderRadius: "6px",
+                      fontSize: "0.78rem",
+                    }}
+                  >
+                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.25rem" }}>
+                      <span style={{ fontSize: "0.68rem", fontWeight: 700, color: "var(--accent)" }}>
+                        {q.frequency}
+                      </span>
+                      <span style={{ fontSize: "0.68rem", color: "var(--ink-3)" }}>
+                        {q.marks}
+                      </span>
+                    </div>
+                    <p style={{ margin: "0 0 0.35rem", fontSize: "0.76rem", lineHeight: 1.4 }}>
+                      {q.text}
+                    </p>
+                    <Link
+                      href={`/solution?sem=${semester}&subject=${encodeURIComponent(selectedSubjectName)}${q.solutionQid ? `&qid=${q.solutionQid}` : ""}`}
+                      style={{ fontSize: "0.72rem", color: "var(--accent)", fontWeight: 600, textDecoration: "none" }}
+                    >
+                      View Worked Solution &rarr;
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </dialog>
 

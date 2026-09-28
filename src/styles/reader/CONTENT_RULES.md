@@ -8,8 +8,8 @@ A comprehensive guide to CSS styling rules for consistent design across syllabus
 
 | Content Type | Left Sidebar | Middle Page | Right Sidebar |
 |---|---|---|---|
-| **Syllabus** | Unit/Topic Navigation Tree | Curriculum Outline & Learning Objectives | Table of Contents |
-| **Notes** | Topic Finder & Search | Article Text, Code, Examples | Headings & Quick Links |
+| **Syllabus** | Units of Subject | Complete Syllabus Content | Past Papers |
+| **Notes** | Complete Syllabus | Complete Note Content | Past Repeated Questions (by year) |
 | **Solutions** | Question/Chapter Navigator | Step-by-Step Workings & Answers | Answer Summary |
 
 ---
@@ -325,42 +325,57 @@ font-weight: 600
 
 ### Syllabus Pages
 
-**Left sidebar:** Unit/topic tree with expandable sections
-- Shows curriculum structure
-- Click to navigate to unit details
-- Displays progress indicators (dots)
+**Layout:** Three-column with units navigation, complete syllabus content, and past papers
 
-**Middle:** Curriculum outline
+**Left sidebar:** Units of the subject
+- Clickable unit navigation
+- Shows all units for the subject
+- Expandable sections/topics within each unit
+- Click to navigate to specific unit section
+
+**Middle:** Complete syllabus content
+- Full curriculum for the subject
 - Learning outcomes and objectives
 - Topic lists for each unit
 - Time allocations and difficulty
+- All curriculum details in one scrollable view
 
-**Right:** On-page TOC
-- Jump to specific learning outcomes
-- Navigate sections quickly
+**Right sidebar:** Past papers
+- Links to past papers for this subject
+- Quick access to related exam materials
+- Past paper search/filter (if available)
+- Organized by year or difficulty
 
 **Color focus:**
 - Use `--ink-3` for meta information (unit codes, time)
-- Use `--accent-soft` for current unit highlight
+- Use `--accent-soft` for current unit highlight in sidebar
+- Past papers links = `--accent` color
 
 ---
 
 ### Notes Pages
 
-**Left sidebar:** Topic/lesson finder
-- Search functionality
-- Chapter/lesson list
-- Progress tracking per topic
+**Layout:** Three-column with complete syllabus, note content, and past repeated questions
 
-**Middle:** Article content
+**Left sidebar:** Complete syllabus
+- Full curriculum structure
+- All units and topics for the subject
+- Click to view/switch between different notes topics
+- Shows current note's position in syllabus
+
+**Middle:** Complete note content
+- Full note content for the selected topic/chapter
 - Main reading material
 - Code examples and diagrams
 - Study blocks (ideas, examples, tips)
+- Scrollable, single-note view
 
-**Right:** Heading navigation
-- Quick jump to any section
-- Shows current position
-- Helps skim content
+**Right sidebar:** Past repeated questions
+- Past exam questions from this chapter/topic
+- Organized by year (which years it appeared)
+- Shows question frequency/recurrence
+- Links to solutions or past papers
+- Helps identify important concepts (frequently tested topics)
 
 **Block usage:**
 ```
@@ -369,6 +384,11 @@ font-weight: 600
 --tip:     Teacher tip with red pen
 --warning: Common mistakes
 ```
+
+**Color focus:**
+- Current chapter in left syllabus = `--accent-soft` highlight
+- Past question years = `--ink-3` (meta info)
+- Frequently tested indicator = `--accent` or `--warn-*`
 
 ---
 
@@ -460,11 +480,45 @@ font-weight: 600
 /* WRONG: No theme awareness */
 .notes h2 { color: #1A2230; }  /* Only looks good on "paper" theme */
 
-/* RIGHT: Always use tokens (they change per theme) */
-.notes .prose h2 { color: var(--ink); }
-```
+## Three-Column Layout Rules
+
+### Syllabus Page Three-Column Layout:
+1. **Left Sidebar (`.rail`)**: Units of Subject
+   - Clickable unit navigation
+   - Expandable sections/topics
+   - Course metadata (code, semester, credits, teaching hours)
+   
+2. **Middle (`.sheet` / `.prose`)**: Complete Syllabus Content
+   - Full curriculum for the subject
+   - Learning outcomes, objectives, topics
+   - Laboratory guidelines & practical work
+   - Reference textbooks & materials
+   
+3. **Right Sidebar (`.toc`)**: Past Papers
+   - Links to past papers for this subject
+   - Organized by year
+   - Question count and marks weightage
+
+### Notes Page Three-Column Layout:
+1. **Left Sidebar (`.rail`)**: Complete Syllabus
+   - Full curriculum structure
+   - Unit accordions with topic lists
+   - Click to switch between topics
+   
+2. **Middle (`.sheet` / `.prose`)**: Complete Note Content
+   - Full note for selected topic/chapter
+   - Single note view, fully scrollable
+   - Theoretical foundations, key examination points, implementation, worked examples
+   
+3. **Right Sidebar (`.toc`)**: Past Repeated Questions
+   - Past exam questions from this chapter/topic
+   - Organized by year (shows which years)
+   - Shows frequency/recurrence (e.g., Repeated 3x in 5 years, High Recurrence)
+   - Helps identify frequently tested concepts
+   - Direct links to verified solutions
 
 ---
+
 
 ## Implementation Checklist
 

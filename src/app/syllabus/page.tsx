@@ -4,8 +4,7 @@ import React, { useState, useEffect, useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { bitSyllabusData, type SubjectInfo } from "@/data/bitSyllabusData";
-import { generateCourseMarkdown } from "@/lib/syllabusMarkdown";
-import MarkdownViewer from "@/components/MarkdownViewer";
+import { bitPastPapersData, type FullPastPaper } from "@/data/bitPastPapersData";
 
 function SyllabusContent() {
   const searchParams = useSearchParams();
@@ -54,24 +53,28 @@ function SyllabusContent() {
     };
   }, [semesterCourses, selectedCode]);
 
-  // Generate authoritative markdown for the selected course
-  const courseMarkdown = useMemo(() => {
-    return generateCourseMarkdown({
-      code: selectedCourse.code,
-      name: selectedCourse.name,
-      programName: "Purbanchal University B.I.T.",
-      semester: selectedSemester,
-      credits: selectedCourse.credits,
-      description: selectedCourse.description,
-      keyUnits: selectedCourse.keyUnits,
-      syllabusUnits: selectedCourse.syllabusUnits,
-      labWork: selectedCourse.labWork,
-      referenceBooks: selectedCourse.referenceBooks,
+  // Past papers for this subject organized by year
+  const subjectPastPapers: FullPastPaper[] = useMemo(() => {
+    return bitPastPapersData.filter((p) => {
+      return (
+        p.semester === selectedSemester &&
+        (p.subject.toLowerCase() === selectedCourse.name.toLowerCase() ||
+          p.subjectCode.toLowerCase() === selectedCourse.code.toLowerCase() ||
+          selectedCourse.name.toLowerCase().includes(p.subject.toLowerCase()) ||
+          p.subject.toLowerCase().includes(selectedCourse.name.toLowerCase()))
+      );
     });
-  }, [selectedCourse, selectedSemester]);
+  }, [selectedSemester, selectedCourse]);
 
-  // View mode: rich outline view or official markdown view
-  const [viewMode, setViewMode] = useState<"outline" | "markdown">("outline");
+  const papersByYear = useMemo(() => {
+    const map: Record<number, FullPastPaper[]> = {};
+    subjectPastPapers.forEach((paper) => {
+      if (!map[paper.year]) map[paper.year] = [];
+      map[paper.year].push(paper);
+    });
+    return Object.entries(map).sort(([a], [b]) => Number(b) - Number(a));
+  }, [subjectPastPapers]);
+
   const [isLearned, setIsLearned] = useState<boolean>(false);
 
   // Sync learned state from localStorage
@@ -266,49 +269,20 @@ function SyllabusContent() {
 
           {/* Quick Action Badges */}
           <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-            {/* View Mode Toggle: Outline vs Markdown (.md) */}
-            <div
+            <span
+              className="badge"
               style={{
-                display: "inline-flex",
+                fontSize: "0.74rem",
+                padding: "0.2rem 0.55rem",
+                borderRadius: "4px",
+                fontWeight: 600,
                 background: "var(--paper-2)",
-                borderRadius: "6px",
-                padding: "2px",
+                color: "var(--ink-2)",
                 border: "1px solid var(--line-subtle)",
               }}
             >
-              <button
-                type="button"
-                onClick={() => setViewMode("outline")}
-                style={{
-                  padding: "0.25rem 0.65rem",
-                  fontSize: "0.78rem",
-                  fontWeight: 600,
-                  borderRadius: "4px",
-                  border: "none",
-                  cursor: "pointer",
-                  background: viewMode === "outline" ? "var(--ink-1)" : "transparent",
-                  color: viewMode === "outline" ? "var(--paper-1)" : "var(--ink-2)",
-                }}
-              >
-                Outline View
-              </button>
-              <button
-                type="button"
-                onClick={() => setViewMode("markdown")}
-                style={{
-                  padding: "0.25rem 0.65rem",
-                  fontSize: "0.78rem",
-                  fontWeight: 600,
-                  borderRadius: "4px",
-                  border: "none",
-                  cursor: "pointer",
-                  background: viewMode === "markdown" ? "var(--ink-1)" : "transparent",
-                  color: viewMode === "markdown" ? "var(--paper-1)" : "var(--ink-2)",
-                }}
-              >
-                Markdown (.md)
-              </button>
-            </div>
+              In-App Protected
+            </span>
 
             {/* Jump to Notes */}
             <Link
@@ -332,24 +306,107 @@ function SyllabusContent() {
               {selectedCourse.code}, Semester {selectedSemester}, {totalTeachingHours} teaching hours &middot; {selectedCourse.credits} credits
             </p>
 
-            {/* Units Navigation Tree matching ExamAI Reader Design */}
-            <ul className="tree" style={{ marginTop: "1rem" }}>
-              {unitsList.map((unitTitle, idx) => (
-                <li key={idx}>
-                  <a href={`#unit-${idx + 1}`}>
-                    <span className="code">{idx + 1}</span> {unitTitle}
-                  </a>
-                </li>
-              ))}
+            {/* Units Navigation Tree with expandable topics matching ExamAI Reader Design */}
+            {selectedCourse.syllabusUnits && selectedCourse.syllabusUnits.length > 0 ? (
+              <div className="unit-nav-tree" style={{ marginTop: "1rem" }}>
+                {selectedCourse.syllabusUnits.map((unit, idx) => (
+                  <details
+                    key={idx}
+                    open={idx < 2}
+                    style={{
+                      marginBottom: "0.5rem",
+                      border: "1px solid var(--line-subtle)",
+                      borderRadius: "6px",
+                      background: "var(--paper-1)",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <summary
+                      style={{
+                        padding: "0.45rem 0.65rem",
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        fontWeight: 600,
+                        fontSize: "0.8rem",
+                        color: "var(--ink-1)",
+                      }}
+                    >
+                      <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", minWidth: 0, flex: 1, paddingRight: "0.35rem" }}>
+                        <span
+                          className="code"
+                          style={{
+                            fontSize: "0.68rem",
+                            padding: "0.1rem 0.35rem",
+                            borderRadius: "3px",
+                            background: "var(--ink-1)",
+                            color: "var(--paper-1)",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          U{idx + 1}
+                        </span>
+                        <span
+                          style={{
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                            flex: 1,
+                          }}
+                          title={unit.title}
+                        >
+                          {unit.title}
+                        </span>
+                      </div>
+                      {unit.teachingHours ? (
+                        <span style={{ fontSize: "0.7rem", color: "var(--ink-3)", fontWeight: 500, whiteSpace: "nowrap" }}>
+                          {unit.teachingHours}h
+                        </span>
+                      ) : null}
+                    </summary>
+                    <div style={{ padding: "0.4rem 0.65rem", borderTop: "1px solid var(--line-subtle)", background: "var(--paper-2)" }}>
+                      <a
+                        href={`#unit-${idx + 1}`}
+                        style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--accent)", marginBottom: "0.35rem", textDecoration: "none" }}
+                      >
+                        Unit {idx + 1} Overview &rarr;
+                      </a>
+                      {unit.subtopics && unit.subtopics.length > 0 && (
+                        <ul className="tree" style={{ padding: 0, margin: 0, fontSize: "0.75rem" }}>
+                          {unit.subtopics.map((sub, sIdx) => (
+                            <li key={sIdx} style={{ marginBottom: "0.2rem" }}>
+                              <a href={`#unit-${idx + 1}-topic-${sIdx + 1}`} style={{ textDecoration: "none" }}>
+                                <span className="code" style={{ fontSize: "0.68rem" }}>{idx + 1}.{sIdx + 1}</span> {sub}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  </details>
+                ))}
+              </div>
+            ) : (
+              <ul className="tree" style={{ marginTop: "1rem" }}>
+                {unitsList.map((unitTitle, idx) => (
+                  <li key={idx}>
+                    <a href={`#unit-${idx + 1}`}>
+                      <span className="code">{idx + 1}</span> {unitTitle}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
 
+            <ul className="tree" style={{ marginTop: "0.5rem" }}>
               {selectedCourse.labWork && selectedCourse.labWork.length > 0 && (
-                <li style={{ marginTop: "0.5rem" }}>
+                <li>
                   <a href="#lab-work">
                     <span className="code">&para;</span> Laboratory &amp; Practical
                   </a>
                 </li>
               )}
-
               {selectedCourse.referenceBooks && selectedCourse.referenceBooks.length > 0 && (
                 <li>
                   <a href="#reference-books">
@@ -383,177 +440,155 @@ function SyllabusContent() {
           </div>
         </aside>
 
-        {/* Main Content Area */}
+        {/* Main Content Area: Complete Syllabus Content */}
         <main id="main" className="sheet" tabIndex={-1}>
-          {viewMode === "markdown" ? (
-            /* Rendered Markdown Mode with Protected In-App Controls */
-            <div style={{ padding: "1.5rem" }}>
-              <MarkdownViewer
-                content={courseMarkdown}
-                title={`${selectedCourse.name} (${selectedCourse.code})`}
-                downloadFilename={`${selectedCourse.code}_Syllabus.md`}
-                showActions={true}
-                allowDownload={false}
-              />
+          <article className="prose" lang="en">
+            <h1 id="top">{selectedCourse.name} &mdash; Syllabus</h1>
+            <div className="lesson-meta">
+              <span className="trust" data-level="teacher-verified">Official PU Syllabus</span>
+              <span>
+                {selectedCourse.code} &middot; Semester {selectedSemester} &middot; {selectedCourse.credits} credits &middot; {selectedCourse.type}
+              </span>
             </div>
-          ) : (
-            /* Rich Interactive Outline Mode */
-            <article className="prose" lang="en">
-              <h1 id="top">{selectedCourse.name} &mdash; Syllabus</h1>
-              <div className="lesson-meta">
-                <span className="trust" data-level="teacher-verified">Official PU Syllabus</span>
-                <span>
-                  {selectedCourse.code} &middot; Semester {selectedSemester} &middot; {selectedCourse.credits} credits &middot; {selectedCourse.type}
-                </span>
-              </div>
 
-              {/* Course Objective */}
-              <div className="block block--idea">
-                <p className="block__label">
-                  <svg className="icon" aria-hidden="true"><use href="#i-bulb" /></svg>
-                  Course Objective &amp; Scope
-                </p>
-                <p>{selectedCourse.description}</p>
-              </div>
+            {/* Course Objective */}
+            <div className="block block--idea">
+              <p className="block__label">
+                <svg className="icon" aria-hidden="true"><use href="#i-bulb" /></svg>
+                Course Objective &amp; Scope
+              </p>
+              <p>{selectedCourse.description}</p>
+            </div>
 
-              {/* Detailed Syllabus Chapters & Teaching Units with Topics matching ExamAI Reader Design */}
-              {selectedCourse.syllabusUnits && selectedCourse.syllabusUnits.length > 0 ? (
-                selectedCourse.syllabusUnits.map((unit, idx) => (
-                  <section key={idx}>
-                    <h2 id={`unit-${idx + 1}`}>
-                      Unit {idx + 1}: {unit.title}
-                      {unit.teachingHours ? (
-                        <small
-                          style={{
-                            fontWeight: 400,
-                            color: "var(--ink-3)",
-                            fontSize: "0.72em",
-                            marginLeft: "0.65em",
-                            fontVariantNumeric: "tabular-nums",
-                          }}
-                        >
-                          &mdash; {unit.teachingHours} hrs
-                        </small>
-                      ) : null}
-                    </h2>
+            {/* Detailed Syllabus Chapters & Teaching Units with Topics matching ExamAI Reader Design */}
+            {selectedCourse.syllabusUnits && selectedCourse.syllabusUnits.length > 0 ? (
+              selectedCourse.syllabusUnits.map((unit, idx) => (
+                <section key={idx}>
+                  <h2 id={`unit-${idx + 1}`}>
+                    Unit {idx + 1}: {unit.title}
+                    {unit.teachingHours ? (
+                      <small
+                        style={{
+                          fontWeight: 400,
+                          color: "var(--ink-3)",
+                          fontSize: "0.72em",
+                          marginLeft: "0.65em",
+                          fontVariantNumeric: "tabular-nums",
+                        }}
+                      >
+                        &mdash; {unit.teachingHours} hrs
+                      </small>
+                    ) : null}
+                  </h2>
 
-                    {unit.subtopics && unit.subtopics.length > 0 ? (
-                      <ul>
-                        {unit.subtopics.map((sub, sIdx) => (
-                          <li key={sIdx} id={`unit-${idx + 1}-topic-${sIdx + 1}`}>
-                            {sub}
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p style={{ color: "var(--ink-3)", fontStyle: "italic" }}>
-                        Core foundational syllabus unit. Full subtopic breakdown and study guides are covered in notes.
-                      </p>
-                    )}
-                  </section>
-                ))
-              ) : (
-                selectedCourse.keyUnits.map((unit, idx) => (
-                  <section key={idx}>
-                    <h2 id={`unit-${idx + 1}`}>Unit {idx + 1}: {unit}</h2>
-                  </section>
-                ))
-              )}
-
-              {/* Laboratory & Practical Work Guidelines */}
-              {selectedCourse.labWork && selectedCourse.labWork.length > 0 && (
-                <div id="lab-work" className="block block--example" style={{ marginTop: "2.5rem" }}>
-                  <p className="block__label">
-                    <svg className="icon" aria-hidden="true"><use href="#i-grid" /></svg>
-                    Laboratory Guidelines &amp; Practical Work
-                  </p>
-                  <ul>
-                    {selectedCourse.labWork.map((work, wIdx) => (
-                      <li key={wIdx}>{work}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {/* Reference Textbooks & Materials */}
-              {selectedCourse.referenceBooks && selectedCourse.referenceBooks.length > 0 && (
-                <section id="reference-books" style={{ marginTop: "2.5rem" }}>
-                  <h2>Reference Textbooks &amp; Materials</h2>
-                  <ol>
-                    {selectedCourse.referenceBooks.map((book, bIdx) => (
-                      <li key={bIdx}>{book}</li>
-                    ))}
-                  </ol>
+                  {unit.subtopics && unit.subtopics.length > 0 ? (
+                    <ul>
+                      {unit.subtopics.map((sub, sIdx) => (
+                        <li key={sIdx} id={`unit-${idx + 1}-topic-${sIdx + 1}`}>
+                          {sub}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p style={{ color: "var(--ink-3)", fontStyle: "italic" }}>
+                      Core foundational syllabus unit. Full subtopic breakdown and study guides are covered in notes.
+                    </p>
+                  )}
                 </section>
+              ))
+            ) : (
+              selectedCourse.keyUnits.map((unit, idx) => (
+                <section key={idx}>
+                  <h2 id={`unit-${idx + 1}`}>Unit {idx + 1}: {unit}</h2>
+                </section>
+              ))
+            )}
+
+            {/* Laboratory & Practical Work Guidelines */}
+            {selectedCourse.labWork && selectedCourse.labWork.length > 0 && (
+              <div id="lab-work" className="block block--example" style={{ marginTop: "2.5rem" }}>
+                <p className="block__label">
+                  <svg className="icon" aria-hidden="true"><use href="#i-grid" /></svg>
+                  Laboratory Guidelines &amp; Practical Work
+                </p>
+                <ul>
+                  {selectedCourse.labWork.map((work, wIdx) => (
+                    <li key={wIdx}>{work}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Reference Textbooks & Materials */}
+            {selectedCourse.referenceBooks && selectedCourse.referenceBooks.length > 0 && (
+              <section id="reference-books" style={{ marginTop: "2.5rem" }}>
+                <h2>Reference Textbooks &amp; Materials</h2>
+                <ol>
+                  {selectedCourse.referenceBooks.map((book, bIdx) => (
+                    <li key={bIdx}>{book}</li>
+                  ))}
+                </ol>
+              </section>
+            )}
+
+            {/* Action Buttons */}
+            <div className="lesson-end" style={{ marginTop: "3rem", display: "flex", flexWrap: "wrap", gap: "0.75rem", alignItems: "center" }}>
+              <Link
+                href={`/notes?sem=${selectedSemester}&subject=${encodeURIComponent(selectedCourse.name)}`}
+                className="btn btn--primary"
+                style={{ display: "inline-flex", alignItems: "center", gap: "0.45rem" }}
+              >
+                <svg className="icon" aria-hidden="true"><use href="#i-doc" /></svg>
+                <span>Open Full Study Notes</span>
+              </Link>
+
+              <button
+                className="btn btn--quiet"
+                type="button"
+                onClick={toggleLearned}
+                aria-pressed={isLearned ? "true" : "false"}
+              >
+                <svg className="icon" aria-hidden="true"><use href="#i-check" /></svg>
+                <span>{isLearned ? "Syllabus Reviewed" : "Mark as Reviewed"}</span>
+              </button>
+            </div>
+
+            {/* Previous / Next Course Pager */}
+            <nav className="pager" aria-label="Course Pager" style={{ marginTop: "2.5rem" }}>
+              {prevCourse ? (
+                <a
+                  href="#main"
+                  rel="prev"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleCourseChange(prevCourse.code);
+                  }}
+                >
+                  <small>Previous Course</small>
+                  {prevCourse.name}
+                </a>
+              ) : (
+                <span />
               )}
 
-              {/* Action Buttons */}
-              <div className="lesson-end" style={{ marginTop: "3rem", display: "flex", flexWrap: "wrap", gap: "0.75rem", alignItems: "center" }}>
-                <Link
-                  href={`/notes?sem=${selectedSemester}&subject=${encodeURIComponent(selectedCourse.name)}`}
-                  className="btn btn--primary"
-                  style={{ display: "inline-flex", alignItems: "center", gap: "0.45rem" }}
+              {nextCourse && (
+                <a
+                  href="#main"
+                  rel="next"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleCourseChange(nextCourse.code);
+                  }}
                 >
-                  <svg className="icon" aria-hidden="true"><use href="#i-doc" /></svg>
-                  <span>Open Full Study Notes</span>
-                </Link>
-
-                <button
-                  className="btn btn--quiet"
-                  type="button"
-                  onClick={() => setViewMode("markdown")}
-                >
-                  View as Markdown (.md)
-                </button>
-
-                <button
-                  className="btn btn--quiet"
-                  type="button"
-                  onClick={toggleLearned}
-                  aria-pressed={isLearned ? "true" : "false"}
-                >
-                  <svg className="icon" aria-hidden="true"><use href="#i-check" /></svg>
-                  <span>{isLearned ? "Syllabus Reviewed" : "Mark as Reviewed"}</span>
-                </button>
-              </div>
-
-              {/* Previous / Next Course Pager */}
-              <nav className="pager" aria-label="Course Pager" style={{ marginTop: "2.5rem" }}>
-                {prevCourse ? (
-                  <a
-                    href="#main"
-                    rel="prev"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleCourseChange(prevCourse.code);
-                    }}
-                  >
-                    <small>Previous Course</small>
-                    {prevCourse.name}
-                  </a>
-                ) : (
-                  <span />
-                )}
-
-                {nextCourse && (
-                  <a
-                    href="#main"
-                    rel="next"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleCourseChange(nextCourse.code);
-                    }}
-                  >
-                    <small>Next Course</small>
-                    {nextCourse.name}
-                  </a>
-                )}
-              </nav>
-            </article>
-          )}
+                  <small>Next Course</small>
+                  {nextCourse.name}
+                </a>
+              )}
+            </nav>
+          </article>
         </main>
 
-        {/* Right Rail: On this page Table of Contents */}
+        {/* Right Rail: Table of Contents & Past Papers Organized by Year */}
         <aside className="toc" aria-label="On this page">
           <div id="toc-content">
             <h2>On this page</h2>
@@ -579,6 +614,101 @@ function SyllabusContent() {
                 <li><a href="#reference-books">Reference Books</a></li>
               )}
             </ol>
+
+            {/* Past Papers Section Organized by Year */}
+            <div className="toc-section" style={{ marginTop: "1.75rem" }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.6rem" }}>
+                <h2 style={{ margin: 0, fontSize: "0.92rem", display: "flex", alignItems: "center", gap: "0.35rem" }}>
+                  <svg className="icon" aria-hidden="true" style={{ width: "0.95rem", height: "0.95rem" }}><use href="#i-doc" /></svg>
+                  Past Papers
+                </h2>
+                <span style={{ fontSize: "0.7rem", color: "var(--ink-3)", fontWeight: 600 }}>By Year</span>
+              </div>
+
+              {papersByYear.length > 0 ? (
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>
+                  {papersByYear.map(([yearStr, papers]) => {
+                    const paper = papers[0];
+                    return (
+                      <div
+                        key={yearStr}
+                        style={{
+                          padding: "0.6rem 0.75rem",
+                          background: "var(--paper-1)",
+                          border: "1px solid var(--line-subtle)",
+                          borderRadius: "6px",
+                          fontSize: "0.8rem",
+                        }}
+                      >
+                        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.35rem" }}>
+                          <span style={{ fontWeight: 700, color: "var(--ink-1)" }}>
+                            {yearStr} Board Exam
+                          </span>
+                          <span
+                            style={{
+                              fontSize: "0.68rem",
+                              padding: "0.1rem 0.35rem",
+                              borderRadius: "3px",
+                              background: "var(--paper-2)",
+                              color: "var(--ink-2)",
+                              fontWeight: 600,
+                            }}
+                          >
+                            {paper.totalMarks} Marks
+                          </span>
+                        </div>
+                        <p style={{ margin: "0 0 0.45rem", fontSize: "0.75rem", color: "var(--ink-3)" }}>
+                          {paper.questions.length} Questions &middot; {paper.timeHours} Hours
+                        </p>
+                        <Link
+                          href={`/solution?sem=${selectedSemester}&subject=${encodeURIComponent(selectedCourse.name)}`}
+                          className="btn btn--quiet"
+                          style={{
+                            width: "100%",
+                            justifyContent: "center",
+                            fontSize: "0.74rem",
+                            padding: "0.3rem 0.5rem",
+                            textDecoration: "none",
+                            background: "var(--paper-2)",
+                            border: "1px solid var(--line-subtle)",
+                          }}
+                        >
+                          <span>View {yearStr} Paper &amp; Solutions &rarr;</span>
+                        </Link>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div
+                  style={{
+                    padding: "0.65rem 0.75rem",
+                    background: "var(--paper-1)",
+                    border: "1px solid var(--line-subtle)",
+                    borderRadius: "6px",
+                    fontSize: "0.78rem",
+                  }}
+                >
+                  <p style={{ margin: "0 0 0.45rem", color: "var(--ink-3)", lineHeight: 1.4 }}>
+                    Past papers for Semester {selectedSemester} are accessible in the Solutions portal.
+                  </p>
+                  <Link
+                    href={`/solution?sem=${selectedSemester}`}
+                    className="btn btn--quiet"
+                    style={{
+                      width: "100%",
+                      justifyContent: "center",
+                      fontSize: "0.74rem",
+                      padding: "0.3rem 0.5rem",
+                      textDecoration: "none",
+                      background: "var(--paper-2)",
+                    }}
+                  >
+                    <span>Open Sem {selectedSemester} Solutions &rarr;</span>
+                  </Link>
+                </div>
+              )}
+            </div>
 
             <div className="toc-section" style={{ marginTop: "1.5rem" }}>
               <h2>Course Info</h2>
@@ -618,13 +748,13 @@ function SyllabusContent() {
           <svg className="icon" aria-hidden="true"><use href="#i-list" /></svg>
           Units
         </button>
-        <button
-          type="button"
-          onClick={() => setViewMode(viewMode === "outline" ? "markdown" : "outline")}
+        <Link
+          href={`/notes?sem=${selectedSemester}&subject=${encodeURIComponent(selectedCourse.name)}`}
+          style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textDecoration: "none", color: "inherit", fontSize: "0.75rem" }}
         >
           <svg className="icon" aria-hidden="true"><use href="#i-doc" /></svg>
-          <span>{viewMode === "outline" ? ".md View" : "Outline"}</span>
-        </button>
+          <span>Notes</span>
+        </Link>
         <button
           type="button"
           onClick={toggleLearned}
