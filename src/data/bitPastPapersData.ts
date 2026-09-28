@@ -324,5 +324,133 @@ export const bitPastPapersData: FullPastPaper[] = [
         chapterRef: "Unit 4: Transport Layer & TCP Mechanisms"
       }
     ]
+  },
+
+  // ── Semester 7 ──
+  {
+    id: "sem7-netprog-2025",
+    semester: 7,
+    subject: "Network Programming",
+    subjectCode: "BIT401CO",
+    year: 2025,
+    totalMarks: 80,
+    passMarks: 32,
+    timeHours: 3,
+    questions: [
+      {
+        id: "np-25-1",
+        group: "Group A (10 Marks)",
+        marks: 10,
+        questionText: "Illustrate the TCP State Transition Diagram with special emphasis on TIME_WAIT state. Explain why 2MSL wait time is mandatory before socket closure.",
+        orQuestionText: "Differentiate between Iterative and Concurrent servers. Write a complete C socket program implementing a concurrent TCP echo server using fork().",
+        solutionSummary: "TIME_WAIT ensures trailing FIN/ACK segments are received and old duplicate segments expire in the network. fork() allows parent to listen while child processes client descriptor.",
+        chapterRef: "Unit 1 & 3: Introduction & TCP/UDP Protocols"
+      },
+      {
+        id: "np-25-2",
+        group: "Group A (10 Marks)",
+        marks: 10,
+        questionText: "Explain I/O Multiplexing. Compare select(), poll(), and epoll() in terms of algorithmic complexity, file descriptor limits, and kernel buffer overhead.",
+        solutionSummary: "select() is O(N) with FD_SETSIZE limit (1024); poll() is O(N) without fixed limit; epoll() uses event-driven epoll_ctl and epoll_wait for O(1) ready notification.",
+        chapterRef: "Unit 6: I/O Multiplexing"
+      },
+      {
+        id: "np-25-3",
+        group: "Group B (5 Marks)",
+        marks: 5,
+        questionText: "Explain socket address structures: sockaddr_in (IPv4) versus sockaddr_in6 (IPv6). How does sockaddr provide generic polymorphism in C?",
+        solutionSummary: "sockaddr defines generic sa_family_t and 14 bytes char; sockaddr_in casts to sockaddr using sin_family, sin_port, sin_addr.",
+        chapterRef: "Unit 4: Elementary Socket Calls"
+      },
+      {
+        id: "np-25-4",
+        group: "Group B (5 Marks)",
+        marks: 5,
+        questionText: "What are socket options? Explain SO_REUSEADDR, SO_KEEPALIVE, and TCP_NODELAY (Nagle's Algorithm disable).",
+        solutionSummary: "SO_REUSEADDR allows instant server restart on ports in TIME_WAIT. TCP_NODELAY disables Nagle's algorithm for interactive real-time payloads.",
+        chapterRef: "Unit 7: Socket Options"
+      },
+      {
+        id: "np-25-5",
+        group: "Group B (5 Marks)",
+        marks: 5,
+        questionText: "Explain Unix Domain Sockets (AF_UNIX). Why are they faster than standard loopback TCP (AF_INET 127.0.0.1)?",
+        solutionSummary: "AF_UNIX bypasses network stack checksumming, IP header generation, and packet segmentation, passing memory buffers directly in kernel space.",
+        chapterRef: "Unit 9: Unix Domain Protocol"
+      }
+    ]
+  },
+  {
+    id: "sem7-gov-2025",
+    semester: 7,
+    subject: "Digital Governance",
+    subjectCode: "BIT402CO",
+    year: 2025,
+    totalMarks: 80,
+    passMarks: 32,
+    timeHours: 3,
+    questions: [
+      {
+        id: "dg-25-1",
+        group: "Group A (10 Marks)",
+        marks: 10,
+        questionText: "Explain the architectural layers of an e-Governance system. Analyze Nepal's Digital Nepal Framework (DNF) across its eight key sectors.",
+        solutionSummary: "DNF covers Digital Foundation, Agriculture, Health, Education, Energy, Tourism, Finance, and Urban Infrastructure with enterprise government architecture.",
+        chapterRef: "Unit 1: Overview of E-Governance & DNF"
+      },
+      {
+        id: "dg-25-2",
+        group: "Group A (10 Marks)",
+        marks: 10,
+        questionText: "Discuss G2C, G2B, G2G, and G2E service delivery models. How has the Nagarik App transformed citizen service delivery and interoperability?",
+        solutionSummary: "Nagarik App integrates PAN, Citizenships, Voter ID, Land ownership, and Vehicle tax via RESTful microservices and National Data Center API gateway.",
+        chapterRef: "Unit 2: Models of E-Governance"
+      },
+      {
+        id: "dg-25-3",
+        group: "Group B (5 Marks)",
+        marks: 5,
+        questionText: "Explain Public Key Infrastructure (PKI) and Digital Signatures in the context of Nepal's Electronic Transactions Act (ETA 2063).",
+        solutionSummary: "ETA 2063 legalizes asymmetric cryptography (RSA/ECC) with Controller of Certifying Authorities (CCA) issuing root trust certificates.",
+        chapterRef: "Unit 5: Legal & Security Frameworks"
+      }
+    ]
+  },
+  {
+    id: "sem7-ml-2025",
+    semester: 7,
+    subject: "Machine Learning (Track A)",
+    subjectCode: "BIT421CO",
+    year: 2025,
+    totalMarks: 80,
+    passMarks: 32,
+    timeHours: 3,
+    questions: [
+      {
+        id: "ml-25-1",
+        group: "Group A (10 Marks)",
+        marks: 10,
+        questionText: "Derive the Cost Function for Linear Regression with Gradient Descent updates. Explain the Bias-Variance Tradeoff with learning curves.",
+        solutionSummary: "J(w,b) = 1/(2m) sum(y_hat - y)^2. High bias = underfitting (high train & val error); high variance = overfitting (large train/val gap).",
+        chapterRef: "Unit 2: Supervised Learning & Regression"
+      },
+      {
+        id: "ml-25-2",
+        group: "Group A (10 Marks)",
+        marks: 10,
+        questionText: "Explain Support Vector Machines (SVM). How does the Kernel Trick (RBF / Polynomial) enable classification in non-linearly separable spaces?",
+        solutionSummary: "SVM maximizes the margin 2/||w||. Kernel functions K(x, z) = phi(x)^T phi(z) compute inner products in infinite-dimensional Hilbert spaces without explicit mapping.",
+        chapterRef: "Unit 3: Classification Algorithms"
+      },
+      {
+        id: "ml-25-3",
+        group: "Group B (5 Marks)",
+        marks: 5,
+        questionText: "Differentiate between Bagging (Random Forest) and Boosting (AdaBoost / XGBoost). When is each preferred?",
+        solutionSummary: "Bagging trains parallel independent trees on bootstrap samples to reduce variance. Boosting trains sequential trees focusing on residual errors to reduce bias.",
+        chapterRef: "Unit 4: Ensemble Learning"
+      }
+    ]
   }
 ];
+
