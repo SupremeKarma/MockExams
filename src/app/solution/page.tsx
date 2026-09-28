@@ -6,6 +6,7 @@ import Link from "next/link";
 import { bitSyllabusData } from "@/data/bitSyllabusData";
 import { bitPastPapersData, type PastPaperQuestion } from "@/data/bitPastPapersData";
 import { bitNotesData } from "@/data/bitNotesData";
+import MathRenderer from "@/components/MathRenderer";
 
 function SolutionContent() {
   const searchParams = useSearchParams();
@@ -363,11 +364,11 @@ function SolutionContent() {
                   </span>
                 </div>
                 <h1 style={{ margin: "0.5rem 0 0", fontSize: "1.25rem", fontWeight: 700, lineHeight: 1.45, color: "var(--ink-1)" }}>
-                  {activeQuestionItem.question.questionText}
+                  <MathRenderer content={activeQuestionItem.question.questionText} inline={true} />
                 </h1>
                 {activeQuestionItem.question.orQuestionText && (
                   <p style={{ margin: "0.5rem 0 0", fontSize: "0.88rem", color: "var(--ink-2)" }}>
-                    <strong>Alternative:</strong> {activeQuestionItem.question.orQuestionText}
+                    <strong>Alternative:</strong> <MathRenderer content={activeQuestionItem.question.orQuestionText} inline={true} />
                   </p>
                 )}
               </div>
@@ -380,20 +381,20 @@ function SolutionContent() {
                     <svg className="icon" aria-hidden="true"><use href="#i-check" /></svg>
                     High-Yield Answer Summary
                   </p>
-                  <p style={{ margin: 0, fontSize: "0.95rem", lineHeight: 1.6 }}>
-                    {activeQuestionItem.question.solutionSummary}
-                  </p>
+                  <div style={{ margin: 0, fontSize: "0.95rem", lineHeight: 1.6 }}>
+                    <MathRenderer content={activeQuestionItem.question.solutionSummary} />
+                  </div>
                 </div>
               </section>
 
-              {/* Section 2: Detailed Point-Wise Examination Presentation */}
+              {/* Section 2: Detailed Point-Wise Examination Answer */}
               <section id="point-wise" style={{ marginBottom: "2.5rem" }}>
                 <h2>2. Detailed Point-Wise Examination Answer</h2>
                 {relatedNoteTopic?.keyPoints && relatedNoteTopic.keyPoints.length > 0 ? (
                   <ul style={{ lineHeight: 1.65 }}>
                     {relatedNoteTopic.keyPoints.map((pt, pIdx) => (
                       <li key={pIdx} style={{ marginBottom: "0.75rem" }}>
-                        {pt}
+                        <MathRenderer content={pt} inline={true} />
                       </li>
                     ))}
                   </ul>
@@ -417,7 +418,7 @@ function SolutionContent() {
                 <section id="theory" style={{ marginBottom: "2.5rem" }}>
                   <h2>3. Theoretical Deep Dive &amp; Protocol Mechanism</h2>
                   <div style={{ whiteSpace: "pre-line", lineHeight: 1.7, fontSize: "0.95rem", color: "var(--ink-1)" }}>
-                    {relatedNoteTopic.theory}
+                    <MathRenderer content={relatedNoteTopic.theory} />
                   </div>
                 </section>
               )}

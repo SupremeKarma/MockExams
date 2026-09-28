@@ -2,6 +2,7 @@
 
 import React, { useMemo } from "react";
 import { Download, Eye, Printer, Lock } from "lucide-react";
+import MathRenderer from "./MathRenderer";
 
 interface MarkdownViewerProps {
   content: string;
@@ -66,18 +67,29 @@ export default function MarkdownViewer({
     let i = 0;
 
     const renderInline = (text: string): React.ReactNode => {
-      // Parse bold **text**, inline `code`, and links [text](url)
+      // Parse LaTeX ($$...$$, $...$), bold **text**, inline `code`, and links [text](url)
       const parts: React.ReactNode[] = [];
       let lastIdx = 0;
-      const regex = /(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g;
+      const regex = /(\$\$[\s\S]*?\$\$|\$(?!\s)[^$\n]+?(?<!\s)\$|\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g;
       let match;
 
       while ((match = regex.exec(text)) !== null) {
         if (match.index > lastIdx) {
-          parts.push(text.substring(lastIdx, match.index));
+          const plain = text.substring(lastIdx, match.index);
+          parts.push(
+            <MathRenderer key={`plain-${lastIdx}`} content={plain} inline={true} />
+          );
         }
         const m = match[0];
-        if (m.startsWith("**") && m.endsWith("**")) {
+        if (m.startsWith("$$") && m.endsWith("$$")) {
+          parts.push(
+            <MathRenderer key={match.index} content={m} isBlock={true} />
+          );
+        } else if (m.startsWith("$") && m.endsWith("$")) {
+          parts.push(
+            <MathRenderer key={match.index} content={m} inline={true} />
+          );
+        } else if (m.startsWith("**") && m.endsWith("**")) {
           parts.push(
             <strong key={match.index} className="font-bold text-zinc-900">
               {m.slice(2, -2)}
@@ -111,7 +123,10 @@ export default function MarkdownViewer({
         lastIdx = match.index + m.length;
       }
       if (lastIdx < text.length) {
-        parts.push(text.substring(lastIdx));
+        const plain = text.substring(lastIdx);
+        parts.push(
+          <MathRenderer key={`plain-end-${lastIdx}`} content={plain} inline={true} />
+        );
       }
       return parts.length > 0 ? parts : text;
     };
@@ -122,6 +137,42 @@ export default function MarkdownViewer({
       // Empty line
       if (!line.trim()) {
         i++;
+        continue;
+      }
+
+      // Block Math ($$...$$)
+      if (line.trim().startsWith("$$")) {
+        const mathLines: string[] = [];
+        if (line.trim() === "$$") {
+          i++;
+          while (i < lines.length && !lines[i].trim().endsWith("$$")) {
+            mathLines.push(lines[i]);
+            i++;
+          }
+          i++; // skip closing $$
+        } else if (line.trim().endsWith("$$") && line.trim().length > 2) {
+          mathLines.push(line.trim().slice(2, -2).trim());
+          i++;
+        } else {
+          mathLines.push(line.trim().slice(2).trim());
+          i++;
+          while (i < lines.length && !lines[i].includes("$$")) {
+            mathLines.push(lines[i]);
+            i++;
+          }
+          if (i < lines.length) {
+            const closing = lines[i].split("$$")[0];
+            if (closing.trim()) mathLines.push(closing.trim());
+            i++;
+          }
+        }
+
+        const formula = mathLines.join("\n").trim();
+        elements.push(
+          <div key={`math-block-${i}`} className="my-4 overflow-x-auto text-center">
+            <MathRenderer content={formula} isBlock={true} />
+          </div>
+        );
         continue;
       }
 

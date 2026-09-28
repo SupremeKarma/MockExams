@@ -6,6 +6,7 @@ import Link from "next/link";
 import { bitNotesData, getSubjectNotes, type SubjectNotes, type Topic } from "@/data/bitNotesData";
 import { bitSyllabusData } from "@/data/bitSyllabusData";
 import { bitPastPapersData } from "@/data/bitPastPapersData";
+import MathRenderer from "@/components/MathRenderer";
 
 function NotesContent() {
   const searchParams = useSearchParams();
@@ -797,19 +798,21 @@ function NotesContent() {
                     <svg className="icon" aria-hidden="true"><use href="#i-bulb" /></svg>
                     Idea in plain words
                   </p>
-                  <p>{activeTopic.keyPoints[0]}</p>
+                  <p><MathRenderer content={activeTopic.keyPoints[0]} inline={true} /></p>
                 </div>
 
                 {/* Theory & Concepts */}
                 <h2 id="theory-foundations">Theoretical Foundations &amp; Concepts</h2>
-                <p style={{ lineHeight: 1.75 }}>{activeTopic.theory}</p>
+                <div style={{ lineHeight: 1.75, margin: "0.5rem 0 1rem" }}>
+                  <MathRenderer content={activeTopic.theory} />
+                </div>
 
                 {/* Key Points */}
                 <h2 id="key-points">Key Examination Concepts &amp; Principles</h2>
                 <ul>
                   {activeTopic.keyPoints.map((point, pIdx) => (
                     <li key={pIdx} style={{ marginBottom: "0.4rem" }}>
-                      {point}
+                      <MathRenderer content={point} inline={true} />
                     </li>
                   ))}
                 </ul>
@@ -839,7 +842,9 @@ function NotesContent() {
                         <svg className="icon" aria-hidden="true"><use href="#i-grid" /></svg>
                         Worked Example / Real-World Case
                       </p>
-                      <p style={{ margin: 0, lineHeight: 1.6 }}>{activeTopic.example}</p>
+                      <div style={{ margin: 0, lineHeight: 1.6 }}>
+                        <MathRenderer content={activeTopic.example} />
+                      </div>
                     </div>
                   </>
                 )}
@@ -856,7 +861,7 @@ function NotesContent() {
                       <ol style={{ paddingLeft: "1.2rem", margin: 0 }}>
                         {activeTopic.commonExamQuestions.map((q, qIdx) => (
                           <li key={qIdx} style={{ marginBottom: "0.5rem", fontWeight: 500 }}>
-                            {q}
+                            <MathRenderer content={q} inline={true} />
                           </li>
                         ))}
                       </ol>

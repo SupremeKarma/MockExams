@@ -145,6 +145,17 @@
   line-height: 1;
 }
 
+/* Fallback rendering for unparsed or degraded math formulas */
+.katex-fallback {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.85em;
+  background: var(--paper-2);
+  color: var(--ink-1);
+  border: 1px solid var(--line-subtle);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+
 /* --------------------------------------------------------------------------
    4b. Mobile-responsive math scaling.
 

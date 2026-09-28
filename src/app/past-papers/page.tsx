@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { bitSyllabusData } from "@/data/bitSyllabusData";
 import { bitPastPapersData, type FullPastPaper, type PastPaperQuestion } from "@/data/bitPastPapersData";
+import MathRenderer from "@/components/MathRenderer";
 
 function PastPapersContent() {
   const searchParams = useSearchParams();
@@ -477,14 +478,16 @@ function PastPapersContent() {
                           </span>
                         </div>
 
-                        <p style={{ fontSize: "1rem", fontWeight: 600, lineHeight: 1.5, color: "var(--ink-1)", margin: "0 0 0.5rem" }}>
-                          {q.questionText}
-                        </p>
+                        <div style={{ fontSize: "1rem", fontWeight: 600, lineHeight: 1.5, color: "var(--ink-1)", margin: "0 0 0.5rem" }}>
+                          <MathRenderer content={q.questionText} inline={true} />
+                        </div>
 
                         {q.orQuestionText && (
                           <div style={{ margin: "0.75rem 0", padding: "0.6rem", background: "var(--paper-2)", borderRadius: "6px", borderLeft: "3px solid var(--accent-1, #2563eb)" }}>
                             <span style={{ fontSize: "0.72rem", fontWeight: 700, textTransform: "uppercase", color: "var(--ink-3)" }}>OR:</span>
-                            <p style={{ margin: "0.2rem 0 0", fontSize: "0.92rem", fontWeight: 600 }}>{q.orQuestionText}</p>
+                            <div style={{ margin: "0.2rem 0 0", fontSize: "0.92rem", fontWeight: 600 }}>
+                              <MathRenderer content={q.orQuestionText} inline={true} />
+                            </div>
                           </div>
                         )}
 
@@ -508,9 +511,9 @@ function PastPapersContent() {
                               </Link>
                             </div>
                           </div>
-                          <p style={{ margin: 0, fontSize: "0.88rem", color: "var(--ink-1)", lineHeight: 1.5 }}>
-                            {q.solutionSummary}
-                          </p>
+                          <div style={{ margin: 0, fontSize: "0.88rem", color: "var(--ink-1)", lineHeight: 1.5 }}>
+                            <MathRenderer content={q.solutionSummary} />
+                          </div>
                         </div>
                       </div>
                     ))}
