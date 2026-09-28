@@ -416,98 +416,45 @@ function SyllabusContent() {
                 <p>{selectedCourse.description}</p>
               </div>
 
-              {/* Detailed Syllabus Chapters & Teaching Units with Topics */}
+              {/* Detailed Syllabus Chapters & Teaching Units with Topics matching ExamAI Reader Design */}
               {selectedCourse.syllabusUnits && selectedCourse.syllabusUnits.length > 0 ? (
                 selectedCourse.syllabusUnits.map((unit, idx) => (
-                  <section key={idx} style={{ marginBottom: "2.5rem" }}>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "baseline",
-                        borderBottom: "2px solid var(--line-subtle)",
-                        paddingBottom: "0.4rem",
-                        marginBottom: "1rem",
-                      }}
-                    >
-                      <h2 id={`unit-${idx + 1}`} style={{ margin: 0, fontSize: "1.25rem", color: "var(--ink-1)" }}>
-                        Unit {idx + 1}: {unit.title}
-                      </h2>
-                      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                        <span style={{ fontSize: "0.78rem", padding: "0.15rem 0.5rem", borderRadius: "12px", background: "var(--paper-2)", color: "var(--ink-2)", fontWeight: 600 }}>
-                          {unit.teachingHours} Hours
-                        </span>
-                        <span style={{ fontSize: "0.78rem", padding: "0.15rem 0.5rem", borderRadius: "12px", background: "var(--paper-2)", color: "var(--ink-2)", fontWeight: 600 }}>
-                          {unit.subtopics?.length || 0} Topics
-                        </span>
-                      </div>
-                    </div>
+                  <section key={idx}>
+                    <h2 id={`unit-${idx + 1}`}>
+                      Unit {idx + 1}: {unit.title}
+                      {unit.teachingHours ? (
+                        <small
+                          style={{
+                            fontWeight: 400,
+                            color: "var(--ink-3)",
+                            fontSize: "0.72em",
+                            marginLeft: "0.65em",
+                            fontVariantNumeric: "tabular-nums",
+                          }}
+                        >
+                          &mdash; {unit.teachingHours} hrs
+                        </small>
+                      ) : null}
+                    </h2>
 
-                    {/* Topics List with Point-Wise Topic Cards */}
                     {unit.subtopics && unit.subtopics.length > 0 ? (
-                      <div className="topics-container" style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+                      <ul>
                         {unit.subtopics.map((sub, sIdx) => (
-                          <div
-                            key={sIdx}
-                            id={`unit-${idx + 1}-topic-${sIdx + 1}`}
-                            style={{
-                              padding: "0.65rem 0.85rem",
-                              background: "var(--paper-1)",
-                              border: "1px solid var(--line-subtle)",
-                              borderRadius: "6px",
-                              display: "flex",
-                              justifyContent: "space-between",
-                              alignItems: "center",
-                              gap: "0.75rem",
-                            }}
-                          >
-                            <div style={{ display: "flex", alignItems: "flex-start", gap: "0.65rem", minWidth: 0, flex: 1 }}>
-                              <span
-                                style={{
-                                  fontSize: "0.72rem",
-                                  fontWeight: 700,
-                                  padding: "0.15rem 0.4rem",
-                                  background: "var(--paper-2)",
-                                  color: "var(--ink-1)",
-                                  borderRadius: "4px",
-                                  border: "1px solid var(--line-subtle)",
-                                  whiteSpace: "nowrap",
-                                  marginTop: "0.1rem",
-                                }}
-                              >
-                                Topic {idx + 1}.{sIdx + 1}
-                              </span>
-                              <span style={{ fontSize: "0.9rem", fontWeight: 500, color: "var(--ink-1)", lineHeight: 1.45 }}>
-                                {sub}
-                              </span>
-                            </div>
-                            <Link
-                              href={`/notes?sem=${selectedSemester}&subject=${encodeURIComponent(selectedCourse.name)}`}
-                              style={{
-                                fontSize: "0.75rem",
-                                color: "var(--accent-1, #2563eb)",
-                                fontWeight: 600,
-                                textDecoration: "none",
-                                whiteSpace: "nowrap",
-                                display: "inline-flex",
-                                alignItems: "center",
-                                gap: "0.2rem",
-                              }}
-                            >
-                              <span>Notes</span>
-                              <span>&rarr;</span>
-                            </Link>
-                          </div>
+                          <li key={sIdx} id={`unit-${idx + 1}-topic-${sIdx + 1}`}>
+                            {sub}
+                          </li>
                         ))}
-                      </div>
+                      </ul>
                     ) : (
-                      <p style={{ color: "var(--ink-3)", fontStyle: "italic" }}>No specific subtopics listed.</p>
+                      <p style={{ color: "var(--ink-3)", fontStyle: "italic" }}>
+                        Core foundational syllabus unit. Full subtopic breakdown and study guides are covered in notes.
+                      </p>
                     )}
                   </section>
                 ))
               ) : (
                 selectedCourse.keyUnits.map((unit, idx) => (
-                  <section key={idx} style={{ marginBottom: "2rem" }}>
+                  <section key={idx}>
                     <h2 id={`unit-${idx + 1}`}>Unit {idx + 1}: {unit}</h2>
                   </section>
                 ))
@@ -614,25 +561,8 @@ function SyllabusContent() {
               <li><a href="#top">Course Overview</a></li>
               {selectedCourse.syllabusUnits && selectedCourse.syllabusUnits.length > 0 ? (
                 selectedCourse.syllabusUnits.map((u, i) => (
-                  <li key={i} style={{ marginBottom: "0.4rem" }}>
-                    <a href={`#unit-${i + 1}`} style={{ fontWeight: 600 }}>
-                      Unit {i + 1}: {u.title.substring(0, 32)}
-                    </a>
-                    {u.subtopics && u.subtopics.length > 0 && (
-                      <ol style={{ paddingLeft: "0.75rem", marginTop: "0.2rem", fontSize: "0.74rem", listStyleType: "none" }}>
-                        {u.subtopics.map((st, si) => (
-                          <li key={si} style={{ marginBottom: "0.15rem" }}>
-                            <a
-                              href={`#unit-${i + 1}-topic-${si + 1}`}
-                              style={{ color: "var(--ink-3)", textDecoration: "none", display: "block", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
-                              title={st}
-                            >
-                              {i + 1}.{si + 1} {st}
-                            </a>
-                          </li>
-                        ))}
-                      </ol>
-                    )}
+                  <li key={i}>
+                    <a href={`#unit-${i + 1}`}>Unit {i + 1}: {u.title}</a>
                   </li>
                 ))
               ) : (
@@ -767,10 +697,9 @@ function SyllabusContent() {
           <ol className="toc-list" style={{ padding: 0 }}>
             {selectedCourse.syllabusUnits && selectedCourse.syllabusUnits.length > 0 ? (
               selectedCourse.syllabusUnits.map((u, i) => (
-                <li key={i} style={{ marginBottom: "0.75rem" }}>
+                <li key={i} style={{ marginBottom: "0.5rem" }}>
                   <a
                     href={`#unit-${i + 1}`}
-                    style={{ fontWeight: 600, fontSize: "0.9rem" }}
                     onClick={() => {
                       const dialog = document.getElementById("toc-dialog") as HTMLDialogElement | null;
                       dialog?.close();
@@ -778,24 +707,6 @@ function SyllabusContent() {
                   >
                     Unit {i + 1}: {u.title} ({u.teachingHours} hrs)
                   </a>
-                  {u.subtopics && u.subtopics.length > 0 && (
-                    <ol style={{ paddingLeft: "1rem", marginTop: "0.3rem", fontSize: "0.8rem", listStyleType: "none" }}>
-                      {u.subtopics.map((st, si) => (
-                        <li key={si} style={{ marginBottom: "0.25rem" }}>
-                          <a
-                            href={`#unit-${i + 1}-topic-${si + 1}`}
-                            onClick={() => {
-                              const dialog = document.getElementById("toc-dialog") as HTMLDialogElement | null;
-                              dialog?.close();
-                            }}
-                            style={{ color: "var(--ink-2)", textDecoration: "none" }}
-                          >
-                            {i + 1}.{si + 1} {st}
-                          </a>
-                        </li>
-                      ))}
-                    </ol>
-                  )}
                 </li>
               ))
             ) : (
