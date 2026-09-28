@@ -8,6 +8,88 @@ import { bitPastPapersData, type PastPaperQuestion } from "@/data/bitPastPapersD
 import { bitNotesData } from "@/data/bitNotesData";
 import MathRenderer from "@/components/MathRenderer";
 
+interface SolutionStep {
+  title: string;
+  content: string;
+}
+
+function parseStepsFromSolution(text: string): SolutionStep[] {
+  if (!text) return [];
+
+  // 1. Check if explicit "Step 1", "Step 2", etc. exists
+  if (/step\s*\d+[:.]/i.test(text)) {
+    const parts = text.split(/(?=step\s*\d+[:.])/i).filter(Boolean);
+    return parts.map((part, idx) => {
+      const match = part.match(/^step\s*(\d+)[:.]\s*(.*)/is);
+      if (match) {
+        return {
+          title: `Step ${match[1]}`,
+          content: match[2].trim(),
+        };
+      }
+      return {
+        title: `Step ${idx + 1}`,
+        content: part.trim(),
+      };
+    });
+  }
+
+  // 2. Check if "Case 1", "Case 2", etc. exists
+  if (/case\s*\d+[:.]/i.test(text)) {
+    const parts = text.split(/(?=case\s*\d+[:.])/i).filter(Boolean);
+    return parts.map((part, idx) => {
+      const match = part.match(/^case\s*(\d+)[:.]\s*(.*)/is);
+      if (match) {
+        return {
+          title: `Case ${match[1]}`,
+          content: match[2].trim(),
+        };
+      }
+      return {
+        title: `Part ${idx + 1}`,
+        content: part.trim(),
+      };
+    });
+  }
+
+  // 3. Otherwise, split by major sentence boundaries without breaking inside math $...$
+  const sentences: string[] = [];
+  let inMath = false;
+  let current = "";
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    if (char === '$') {
+      inMath = !inMath;
+    }
+    current += char;
+    if (!inMath && (char === '.' || char === ';') && (i === text.length - 1 || text[i + 1] === ' ')) {
+      if (current.trim().length > 18) {
+        sentences.push(current.trim());
+        current = "";
+        if (text[i + 1] === ' ') i++;
+      }
+    }
+  }
+  if (current.trim()) {
+    sentences.push(current.trim());
+  }
+
+  if (sentences.length > 1) {
+    return sentences.map((s, idx) => {
+      let title = `Step ${idx + 1}`;
+      if (idx === 0) title = "Step 1: Formula Setup & Identification";
+      else if (idx === sentences.length - 1) title = `Step ${idx + 1}: Final Simplification & Verification`;
+      else title = `Step ${idx + 1}: Intermediate Derivation`;
+      return {
+        title,
+        content: s,
+      };
+    });
+  }
+
+  return [{ title: "Complete Derivation", content: text }];
+}
+
 function SolutionContent() {
   const searchParams = useSearchParams();
   const initialSemParam = searchParams ? Number(searchParams.get("sem")) : NaN;
@@ -87,6 +169,19 @@ function SolutionContent() {
   const activeQuestionItem = useMemo(() => {
     return subjectQuestions.find((sq) => sq.question.id === selectedQid) || subjectQuestions[0] || null;
   }, [subjectQuestions, selectedQid]);
+
+  // Interactive progressive disclosure step state
+  const [revealedSteps, setRevealedSteps] = useState<number>(1);
+  const [interactiveMode, setInteractiveMode] = useState<boolean>(true);
+
+  const solutionSteps = useMemo(() => {
+    if (!activeQuestionItem?.question?.solutionSummary) return [];
+    return parseStepsFromSolution(activeQuestionItem.question.solutionSummary);
+  }, [activeQuestionItem]);
+
+  useEffect(() => {
+    setRevealedSteps(1);
+  }, [selectedQid]);
 
   // Find corresponding topic from bitNotesData for deep theoretical answer
   const relatedNoteTopic = useMemo(() => {
@@ -418,18 +513,136 @@ function SolutionContent() {
                 )}
               </div>
 
-              {/* Section 1: Core Concept Definition */}
+              {/* Section 1: Core Concept Definition with Progressive Disclosure Step Walker */}
               <section id="core-concept" style={{ marginBottom: "2rem" }}>
-                <h2>1. Core Concept &amp; Direct Answer</h2>
-                <div className="block block--idea">
-                  <p className="block__label">
-                    <svg className="icon" aria-hidden="true"><use href="#i-check" /></svg>
-                    High-Yield Answer Summary
-                  </p>
-                  <div style={{ margin: 0, fontSize: "0.95rem", lineHeight: 1.6 }}>
-                    <MathRenderer content={activeQuestionItem.question.solutionSummary} />
-                  </div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.5rem", marginBottom: "0.75rem" }}>
+                  <h2 style={{ margin: 0 }}>1. Core Concept &amp; Direct Answer</h2>
+                  
+                  {solutionSteps.length > 1 && (
+                    <div style={{ display: "inline-flex", background: "var(--paper-2)", padding: "0.2rem", borderRadius: "6px", border: "1px solid var(--line-subtle)", fontSize: "0.75rem" }}>
+                      <button
+                        type="button"
+                        onClick={() => setInteractiveMode(true)}
+                        style={{
+                          padding: "0.25rem 0.6rem",
+                          borderRadius: "4px",
+                          border: "none",
+                          background: interactiveMode ? "var(--ink-1)" : "transparent",
+                          color: interactiveMode ? "var(--paper-1)" : "var(--ink-2)",
+                          fontWeight: 700,
+                          cursor: "pointer",
+                        }}
+                      >
+                        Step-by-Step Walker ({revealedSteps}/{solutionSteps.length})
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setInteractiveMode(false)}
+                        style={{
+                          padding: "0.25rem 0.6rem",
+                          borderRadius: "4px",
+                          border: "none",
+                          background: !interactiveMode ? "var(--ink-1)" : "transparent",
+                          color: !interactiveMode ? "var(--paper-1)" : "var(--ink-2)",
+                          fontWeight: 700,
+                          cursor: "pointer",
+                        }}
+                      >
+                        Show Full Solution
+                      </button>
+                    </div>
+                  )}
                 </div>
+
+                {interactiveMode && solutionSteps.length > 1 ? (
+                  <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                    {/* Progress Bar */}
+                    <div style={{ height: "4px", background: "var(--paper-2)", borderRadius: "2px", overflow: "hidden", border: "1px solid var(--line-subtle)" }}>
+                      <div
+                        style={{
+                          height: "100%",
+                          width: `${(revealedSteps / solutionSteps.length) * 100}%`,
+                          background: "var(--accent-1, #2563eb)",
+                          transition: "width 0.3s ease",
+                        }}
+                      />
+                    </div>
+
+                    {/* Step Cards */}
+                    {solutionSteps.slice(0, revealedSteps).map((step, sIdx) => (
+                      <div
+                        key={sIdx}
+                        className="block block--idea"
+                        style={{ margin: 0, borderLeftWidth: "4px" }}
+                      >
+                        <p className="block__label" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                          <span>
+                            <svg className="icon" aria-hidden="true"><use href="#i-check" /></svg>
+                            {step.title}
+                          </span>
+                          <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--ink-3)", textTransform: "uppercase" }}>
+                            Phase {sIdx + 1} of {solutionSteps.length}
+                          </span>
+                        </p>
+                        <div style={{ margin: 0, fontSize: "0.95rem", lineHeight: 1.65 }}>
+                          <MathRenderer content={step.content} />
+                        </div>
+                      </div>
+                    ))}
+
+                    {/* Step Controls */}
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "0.5rem", marginTop: "0.25rem" }}>
+                      {revealedSteps < solutionSteps.length ? (
+                        <button
+                          type="button"
+                          className="btn btn--primary"
+                          onClick={() => setRevealedSteps((prev) => Math.min(solutionSteps.length, prev + 1))}
+                          style={{ fontSize: "0.82rem", padding: "0.45rem 1rem", fontWeight: 700 }}
+                        >
+                          <span>Reveal Next: {solutionSteps[revealedSteps].title}</span>
+                          <span className="code">&rarr;</span>
+                        </button>
+                      ) : (
+                        <div style={{ fontSize: "0.82rem", fontWeight: 700, color: "var(--ink-2)" }}>
+                          🎉 All derivation steps revealed!
+                        </div>
+                      )}
+
+                      <div style={{ display: "flex", gap: "0.5rem" }}>
+                        {revealedSteps < solutionSteps.length && (
+                          <button
+                            type="button"
+                            className="btn btn--quiet"
+                            onClick={() => setRevealedSteps(solutionSteps.length)}
+                            style={{ fontSize: "0.78rem", padding: "0.3rem 0.65rem" }}
+                          >
+                            Reveal All Steps
+                          </button>
+                        )}
+                        {revealedSteps > 1 && (
+                          <button
+                            type="button"
+                            className="btn btn--quiet"
+                            onClick={() => setRevealedSteps(1)}
+                            style={{ fontSize: "0.78rem", padding: "0.3rem 0.65rem" }}
+                          >
+                            Reset to Step 1
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="block block--idea">
+                    <p className="block__label">
+                      <svg className="icon" aria-hidden="true"><use href="#i-check" /></svg>
+                      High-Yield Answer Summary
+                    </p>
+                    <div style={{ margin: 0, fontSize: "0.95rem", lineHeight: 1.6 }}>
+                      <MathRenderer content={activeQuestionItem.question.solutionSummary} />
+                    </div>
+                  </div>
+                )}
               </section>
 
               {/* Section 2: Detailed Point-Wise Examination Answer */}
