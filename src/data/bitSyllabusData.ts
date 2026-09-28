@@ -128,14 +128,115 @@ export const bitSyllabusData: SemesterSyllabus[] = [
         "name": "Mathematics-II",
         "credits": 3,
         "type": "Core",
-        "description": "Multiple integrals, differential equations, Fourier series, and functions of a complex variable.",
+        "description": "Multiple integrals, ordinary differential equations of the first order, linear differential equations with constant/variable coefficients, Fourier series and integrals, functions of a complex variable, and complex series, residues, and poles.",
         "keyUnits": [
-          "Multiple Integrals",
+          "Multiple Integrals (Double & Triple Integrals)",
           "Differential Equations of the First Order",
-          "Linear Differential Equations",
+          "Linear Differential Equations with Constant & Variable Coefficients",
           "Fourier Series and Integrals",
-          "Functions of a Complex Variable",
-          "Complex Series, Residues and Poles"
+          "Functions of a Complex Variable (Analytic Functions & C-R Equations)",
+          "Complex Series, Residues and Poles (Contour Integration)"
+        ],
+        "syllabusUnits": [
+          {
+            "title": "Multiple Integrals",
+            "teachingHours": 6,
+            "subtopics": [
+              "Double integrals and evaluation in Cartesian coordinates",
+              "Evaluation of double integrals in polar coordinates",
+              "Change of order of integration in double integrals",
+              "Change of variables in double integrals (Jacobian of transformation)",
+              "Triple integrals in Cartesian coordinates",
+              "Triple integrals in cylindrical and spherical polar coordinates",
+              "Applications of multiple integrals: areas of plane regions and volumes of solid bodies",
+              "Physical applications: centers of gravity, moments of inertia, and mass of lamina"
+            ]
+          },
+          {
+            "title": "Differential Equations of the First Order",
+            "teachingHours": 8,
+            "subtopics": [
+              "Basic concepts, order, degree, and formation of differential equations",
+              "Equations of first order and first degree: Variables separable method",
+              "Homogeneous and reducible to homogeneous differential equations",
+              "Exact differential equations and necessary and sufficient conditions",
+              "Integrating factors and rules for finding integrating factors",
+              "Linear differential equations of first order (Integrating Factor method)",
+              "Bernoulli's equation (equations reducible to linear form)",
+              "Equations of the first order but higher degree (solvable for p, solvable for y, solvable for x)",
+              "Clairaut's equation and singular solutions",
+              "Applications: Orthogonal trajectories, Newton's law of cooling, chemical mixture problems, growth and decay models"
+            ]
+          },
+          {
+            "title": "Linear Differential Equations with Constant and Variable Coefficients",
+            "teachingHours": 7,
+            "subtopics": [
+              "Linear differential equations of second and higher orders with constant coefficients",
+              "Linear independence and dependence of solutions, Wronskian determinant",
+              "Complementary function (CF) for real, distinct, repeated, and complex roots",
+              "Particular integral (PI) using operator D = d/dx methods for standard forms: e^{ax}, sin(ax), cos(ax), x^m, and e^{ax}*V(x)",
+              "Method of variation of parameters for non-homogeneous linear differential equations",
+              "Cauchy-Euler homogeneous linear equations and reducible forms",
+              "Legendre's linear differential equations",
+              "Simultaneous linear differential equations with constant coefficients"
+            ]
+          },
+          {
+            "title": "Fourier Series and Integrals",
+            "teachingHours": 10,
+            "subtopics": [
+              "Periodic functions and Dirichlet's conditions for Fourier expansion",
+              "Euler's formulae for Fourier coefficients",
+              "Fourier series of functions with period 2*pi and arbitrary period 2*L",
+              "Fourier series for even and odd functions (simplification of coefficients)",
+              "Half-range Fourier sine series and half-range Fourier cosine series",
+              "Parseval's identity and its application in summing infinite series",
+              "Complex exponential form of Fourier series",
+              "Fourier integral theorem and Fourier integral representations",
+              "Fourier cosine and Fourier sine transforms",
+              "Complex Fourier transform, inverse transform, and key properties (linearity, shifting, modulation, convolution)"
+            ]
+          },
+          {
+            "title": "Functions of a Complex Variable",
+            "teachingHours": 8,
+            "subtopics": [
+              "Review of complex numbers, modulus, argument, and polar representation",
+              "Neighborhoods, open and closed sets, domains in the complex plane",
+              "Limits, continuity, and differentiability of complex functions",
+              "Analytic functions (holomorphic functions) and singular points",
+              "Cauchy-Riemann (C-R) equations in Cartesian coordinates (necessary and sufficient conditions)",
+              "Cauchy-Riemann equations in polar coordinates",
+              "Harmonic functions, harmonic conjugates, and orthogonal families of curves",
+              "Construction of analytic functions: Milne-Thomson method",
+              "Conformal mapping: Definition, conditions, scale factor, and angle preservation",
+              "Bilinear transformation (Mobius transformation), invariant points, cross-ratio preservation"
+            ]
+          },
+          {
+            "title": "Complex Series, Residues and Poles",
+            "teachingHours": 6,
+            "subtopics": [
+              "Sequences and series of complex numbers, absolute and uniform convergence",
+              "Power series, radius of convergence, and Cauchy-Hadamard theorem",
+              "Taylor's theorem and expansion of analytic functions in Taylor series",
+              "Laurent's theorem and Laurent series expansion about singular points",
+              "Classification of singularities: Isolated singularities, removable singularities, poles, and essential singularities",
+              "Zeros of analytic functions and their relationship to poles",
+              "Residues: Definition and formulas for computing residues at simple and multiple poles",
+              "Cauchy's Residue Theorem and contour integration fundamentals",
+              "Evaluation of real definite trigonometric integrals of the type integral from 0 to 2*pi of R(cos theta, sin theta) d theta",
+              "Evaluation of improper real integrals of rational functions from -infinity to +infinity using semicircular contours"
+            ]
+          }
+        ],
+        "referenceBooks": [
+          "Erwin Kreyszig, Advanced Engineering Mathematics (10th ed.), John Wiley & Sons.",
+          "H.K. Dass and Er. Rajnish Verma, Higher Engineering Mathematics, S. Chand & Company.",
+          "B.S. Grewal, Higher Engineering Mathematics (44th ed.), Khanna Publishers.",
+          "R.K. Jain and S.R.K. Iyengar, Advanced Engineering Mathematics, Narosa Publishing House.",
+          "James Ward Brown and Ruel V. Churchill, Complex Variables and Applications (9th ed.), McGraw-Hill."
         ]
       },
       {
@@ -143,14 +244,125 @@ export const bitSyllabusData: SemesterSyllabus[] = [
         "name": "Digital Logic",
         "credits": 3,
         "type": "Core",
-        "description": "Number systems, Boolean algebra, combinational and sequential circuit design, registers and counters.",
+        "description": "Number systems, binary arithmetic and codes, Boolean algebra, logic gates, gate-level minimization (K-Maps, Quine-McCluskey), combinational logic circuits (adders, subtractors, multiplexers, decoders, encoders, ALUs), synchronous and asynchronous sequential logic circuits (flip-flops, registers, counters), and semiconductor memories.",
         "keyUnits": [
-          "Number Systems",
+          "Number Systems and Codes",
           "Boolean Algebra and Logic Gates",
-          "Simplification of Boolean Functions",
-          "Combinational Logic",
-          "Sequential Logic",
-          "Registers and Counters"
+          "Simplification of Boolean Functions (K-Maps & Tabulation)",
+          "Combinational Logic Circuits (Adders, Multiplexers, Decoders, ROM, PLA)",
+          "Sequential Logic Circuits (Latches & Flip-Flops)",
+          "Registers and Counters (Shift Registers, Ripple & Synchronous Counters)"
+        ],
+        "syllabusUnits": [
+          {
+            "title": "Number Systems and Codes",
+            "teachingHours": 5,
+            "subtopics": [
+              "Digital systems overview and analog vs digital signals",
+              "Binary, octal, decimal, and hexadecimal number systems and radix conversions",
+              "Binary arithmetic: addition, subtraction, unsigned multiplication, and division",
+              "Signed binary numbers: Signed magnitude, 1's complement, and 2's complement representations",
+              "2's complement arithmetic and hardware overflow detection conditions",
+              "Binary codes: BCD (8421), Excess-3, Gray code, and ASCII alphanumeric code",
+              "Code conversions: Binary to Gray code and Gray code to Binary conversion",
+              "Error detecting and correcting codes: Parity bit generation and Hamming code principles"
+            ]
+          },
+          {
+            "title": "Boolean Algebra and Logic Gates",
+            "teachingHours": 6,
+            "subtopics": [
+              "Basic definitions, axiomatic properties, and huntington postulates of Boolean algebra",
+              "Fundamental theorems of Boolean algebra: Duality principle, involution, idempotency, and De Morgan's laws",
+              "Boolean algebraic functions, truth tables, and algebraic manipulations",
+              "Canonical and standard forms: Minterms, Maxterms, Sum of Products (SOP), and Product of Sums (POS)",
+              "Digital logic gates: NOT, AND, OR, NAND, NOR, XOR, XNOR truth tables and symbols",
+              "Universal logic gates: Implementation of inverter, AND, and OR gates using NAND-only and NOR-only logic",
+              "Multi-level gate implementations and conversion to non-degenerate forms (AND-OR, NAND-NAND, NOR-NOR)"
+            ]
+          },
+          {
+            "title": "Simplification of Boolean Functions",
+            "teachingHours": 6,
+            "subtopics": [
+              "The Map Method: Two-variable, three-variable, four-variable, and five-variable Karnaugh Maps (K-Maps)",
+              "Adjacent squares, grouping rules (pairs, quads, octets), and algebraic minimization",
+              "Prime implicants, essential prime implicants, and non-essential prime implicants",
+              "Simplification with don't-care (X) conditions for incompletely specified functions",
+              "Product of Sums (POS) simplification using K-Maps and duality",
+              "Implementation of minimized expressions using two-level NAND and NOR logic",
+              "Tabulation method (Quine-McCluskey method) for multi-variable boolean function optimization"
+            ]
+          },
+          {
+            "title": "Combinational Logic Circuits",
+            "teachingHours": 16,
+            "subtopics": [
+              "Design procedure for combinational logic circuits: Problem specification, truth table, optimization, and schematic design",
+              "Arithmetic circuits: Half adder, Full adder (circuit design and Boolean equations)",
+              "Half subtractor and Full subtractor (circuit design using XOR and universal gates)",
+              "Binary Parallel Adder (Ripple Carry Adder) and carry propagation delay analysis",
+              "Carry Look-Ahead Adder (CLA) design: Carry generate (G) and carry propagate (P) expressions",
+              "Binary adder-subtractor circuit using 2's complement and XOR control line",
+              "Magnitude comparator: 1-bit and 4-bit binary magnitude comparators",
+              "Decoders: 2-to-4 line decoder, 3-to-8 line decoder with enable inputs, and decoder tree expansion",
+              "BCD-to-7-segment decoder/driver (common anode and common cathode displays)",
+              "Encoders: Octal-to-binary encoder and 4-to-2/8-to-3 priority encoders",
+              "Multiplexers (Data Selectors): 2-to-1, 4-to-1, 8-to-1 multiplexers and multiplexer expansion trees",
+              "Implementation of arbitrary combinational Boolean logic functions using Multiplexers and Decoders",
+              "Demultiplexers (Data Distributors) and decoder-demultiplexer duality",
+              "Programmable logic devices: Read-Only Memory (ROM), Programmable Logic Array (PLA), and Programmable Array Logic (PAL)"
+            ]
+          },
+          {
+            "title": "Sequential Logic Circuits",
+            "teachingHours": 6,
+            "subtopics": [
+              "Introduction to sequential circuits: Combinational vs sequential circuits, feedback, and memory",
+              "Latches: SR latch using NOR gates and NAND gates, bistable multivibrator operation",
+              "Clocked / Gated latches: Gated SR latch and Gated D latch (transparent latch)",
+              "Flip-Flops: Clocked D flip-flop, Clocked JK flip-flop, and T (Toggle) flip-flop",
+              "Race-around condition in level-triggered JK flip-flops and remedy using Master-Slave JK flip-flop architecture",
+              "Edge-triggered flip-flops (positive and negative edge triggering)",
+              "Characteristic tables, characteristic equations, and excitation tables of SR, D, JK, and T flip-flops",
+              "Flip-flop conversion techniques (converting any flip-flop type to another)",
+              "Clock skew, propagation delay, setup time, and hold time considerations"
+            ]
+          },
+          {
+            "title": "Registers and Counters",
+            "teachingHours": 6,
+            "subtopics": [
+              "Registers: Basic buffer register with parallel load capability",
+              "Shift registers: Serial-In Serial-Out (SISO), Serial-In Parallel-Out (SIPO), Parallel-In Serial-Out (PISO), Parallel-In Parallel-Out (PIPO)",
+              "Bidirectional shift register with parallel load and Universal Shift Register architecture (IC 74194)",
+              "Asynchronous (Ripple) counters: 4-bit binary ripple up-counter, down-counter, and propagation delay limitations",
+              "Synchronous counters: 4-bit synchronous binary up-counter and up/down counter design",
+              "Modulo-N counters: Decade (BCD) counter (IC 7490) and arbitrary truncated sequence counters",
+              "Ring counter and Johnson (twisted ring / Mobius) counter",
+              "Design procedure for synchronous sequential circuits: State diagrams, state tables, state reduction, state assignment, and flip-flop excitation derivation"
+            ]
+          }
+        ],
+        "labWork": [
+          "Verification of truth tables of basic logic gates (AND, OR, NOT, NAND, NOR, XOR, XNOR) using 74-series TTL ICs",
+          "Realization of basic gates and arbitrary Boolean expressions using universal gates (NAND and NOR)",
+          "Verification of Boolean algebra theorems, involution, absorption, and De Morgan's laws",
+          "Design and experimental verification of Half Adder and Full Adder circuits using basic gates and XOR gates",
+          "Design and experimental verification of Half Subtractor and Full Subtractor circuits",
+          "Implementation of 4-bit Binary Parallel Adder and 4-bit Subtractor using IC 7483 and XOR control gates",
+          "Design and verification of 2-to-4 and 3-to-8 line decoders (IC 74138) and BCD-to-7-segment display drivers (IC 7447)",
+          "Implementation of combinational Boolean functions using 4-to-1 and 8-to-1 Multiplexers (IC 74151 / IC 74153)",
+          "Realization and truth table verification of SR, D, JK, and T flip-flops (IC 7474, IC 7476)",
+          "Design and implementation of 4-bit Asynchronous (Ripple) Counter and 4-bit Synchronous Binary Counter using JK flip-flops",
+          "Implementation of 4-bit Shift Register (SISO, SIPO, PIPO) and study of Ring counter and Johnson counter"
+        ],
+        "referenceBooks": [
+          "M. Morris Mano and Michael D. Ciletti, Digital Design: With an Introduction to the Verilog HDL (5th ed.), Pearson.",
+          "Ronald J. Tocci, Neal S. Widmer, and Gregory L. Moss, Digital Systems: Principles and Applications (12th ed.), Pearson.",
+          "Thomas L. Floyd, Digital Fundamentals (11th ed.), Pearson.",
+          "Donald P. Leach, Albert Paul Malvino, and Goutam Saha, Digital Principles and Applications (8th ed.), McGraw-Hill.",
+          "A. Anand Kumar, Fundamentals of Digital Circuits (4th ed.), PHI Learning."
         ]
       },
       {
@@ -158,15 +370,130 @@ export const bitSyllabusData: SemesterSyllabus[] = [
         "name": "Discrete Structure",
         "credits": 3,
         "type": "Core",
-        "description": "Set theory, counting, logic, relations, graphs and trees, order relations, and automata theory.",
+        "description": "Set theory, functions, mathematical reasoning and counting techniques, propositional and predicate logic, binary relations and directed graphs, graph theory and trees, partially ordered sets and lattices, algebraic structures, and finite automata, languages, and grammars.",
         "keyUnits": [
           "Set Theory and Matrices",
-          "Function and Counting",
-          "Logic",
-          "Relation and Digraphs",
-          "Graph and Tree",
-          "Order Relation and Structure",
-          "Automata, Language and Grammar"
+          "Functions and Counting Techniques",
+          "Logic and Mathematical Proofs",
+          "Relations and Digraphs (Closures & Warshall's Algorithm)",
+          "Graph Theory and Trees (Euler, Hamilton, Shortest Path & MST)",
+          "Order Relations and Structures (Posets & Lattices)",
+          "Automata, Languages and Grammars (FSM, DFA, NFA & Regular Expressions)"
+        ],
+        "syllabusUnits": [
+          {
+            "title": "Set Theory and Matrices",
+            "teachingHours": 3,
+            "subtopics": [
+              "Sets, elements, set-builder notation, empty set, universal set, and power sets",
+              "Set operations: union, intersection, set difference, symmetric difference, and complement",
+              "Venn diagrams, set identities, algebraic laws of sets, and principle of duality",
+              "Computer representation of sets using bit strings and bitwise Boolean operations",
+              "Matrices: matrix addition, scalar multiplication, matrix multiplication, and transpose",
+              "Zero-one matrices (Boolean matrices): join (OR), meet (AND), and Boolean product (circle dot) of zero-one matrices"
+            ]
+          },
+          {
+            "title": "Functions and Counting",
+            "teachingHours": 7,
+            "subtopics": [
+              "Functions: domain, codomain, range, image, and preimage",
+              "Classification of functions: Injection (one-to-one), Surjection (onto), and Bijection (one-to-one correspondence)",
+              "Inverse functions, composition of functions, and associativity of composition",
+              "Special functions: Floor function, ceiling function, and factorial function",
+              "Basic counting principles: The Sum Rule, The Product Rule, The Subtraction Rule (Inclusion-Exclusion), and The Division Rule",
+              "The Pigeonhole Principle: Classical form, generalized pigeonhole principle, and elegant combinatorial applications",
+              "Permutations (ordered arrangements) and Combinations (unordered selections) without and with repetition",
+              "Binomial theorem, Pascal's triangle, and algebraic identities involving binomial coefficients"
+            ]
+          },
+          {
+            "title": "Logic and Proofs",
+            "teachingHours": 6,
+            "subtopics": [
+              "Propositional logic: propositions, truth values, and logical connectives (conjunction, disjunction, negation, implication, biconditional)",
+              "Truth tables for compound propositions, converse, contrapositive, and inverse of conditional statements",
+              "Propositional equivalences: Tautology, contradiction, contingency, logical equivalence, and De Morgan's laws for logic",
+              "Predicates and quantifiers: Propositional functions, universal quantifier (forall), and existential quantifier (exists)",
+              "Nested quantifiers, negation of quantified statements, and scope of quantifiers",
+              "Rules of inference for propositional logic: Modus Ponens, Modus Tollens, Hypothetical Syllogism, Disjunctive Syllogism, and Resolution",
+              "Methods of mathematical proof: Direct proof, proof by contraposition, proof by contradiction, and counterexamples",
+              "The Principle of Mathematical Induction, basis step, inductive step, and strong induction with well-ordering principle"
+            ]
+          },
+          {
+            "title": "Relations and Digraphs",
+            "teachingHours": 8,
+            "subtopics": [
+              "Binary relations: Definition, relations from set A to set B, and relations on a set A",
+              "Properties of relations: Reflexive, irreflexive, symmetric, antisymmetric, and transitive relations",
+              "Combining relations: Union, intersection, difference, and composition of relations",
+              "Representation of relations: Matrix of a relation (zero-one matrix) and Directed Graphs (digraphs)",
+              "Closures of relations: Reflexive closure, symmetric closure, and transitive closure",
+              "Paths in directed graphs and connection to transitive closure",
+              "Warshall's algorithm for computing transitive closures with time complexity analysis",
+              "Equivalence relations, equivalence classes, congruence modulo m, and partitions of sets"
+            ]
+          },
+          {
+            "title": "Graph Theory and Trees",
+            "teachingHours": 8,
+            "subtopics": [
+              "Graphs and graph models: Simple graphs, multigraphs, pseudographs, directed and undirected graphs",
+              "Graph terminology: Degrees of vertices, Handshaking Lemma (sum of degrees = 2E), isolated and pendant vertices",
+              "Special simple graphs: Complete graphs (K_n), Cycles (C_n), Wheels (W_n), Bipartite graphs, and Complete Bipartite graphs (K_{m,n})",
+              "Representations of graphs: Adjacency matrices, incidence matrices, and adjacency lists",
+              "Graph isomorphism and invariant properties",
+              "Connectivity: Paths, cycles, connected components, cut-vertices, and cut-edges (bridges)",
+              "Euler paths and Euler circuits: Euler's Theorem (all even degree vertices) and Fleury's algorithm",
+              "Hamilton paths and Hamilton circuits: Dirac's theorem, Ore's theorem, and Traveling Salesperson Problem (TSP)",
+              "Planar graphs, Euler's formula for planar graphs (V - E + R = 2), Kuratowski's theorem, and graph coloring (chromatic number)",
+              "Trees: Definition, properties, rooted trees, m-ary trees, and binary trees",
+              "Tree traversal algorithms: Preorder, Inorder, and Postorder traversals",
+              "Spanning trees: Depth-First Search (DFS) and Breadth-First Search (BFS) spanning trees",
+              "Minimum Spanning Trees (MST): Kruskal's greedy algorithm and Prim's algorithm with worked examples"
+            ]
+          },
+          {
+            "title": "Order Relations and Structures",
+            "teachingHours": 6,
+            "subtopics": [
+              "Partially ordered sets (Posets): Definition (reflexive, antisymmetric, transitive) and formal notation (S, <=)",
+              "Comparability and incomparability of poset elements, and totally ordered sets (chains)",
+              "Hasse diagrams: Construction rules, removing reflexive loops and transitive edges",
+              "Extremal elements in posets: Maximal elements, minimal elements, greatest element (maximum), and least element (minimum)",
+              "Upper bounds, lower bounds, Least Upper Bound (LUB / Supremum / Join), and Greatest Lower Bound (GLB / Infimum / Meet)",
+              "Well-ordered sets and the well-ordering theorem",
+              "Lattices: Definition as posets where every pair has a unique LUB and GLB, and algebraic definition with meet and join operations",
+              "Properties of lattices: Idempotent, commutative, associative, absorption, and modular laws",
+              "Special lattices: Sublattices, bounded lattices, distributive lattices, and complemented lattices",
+              "Boolean algebra as a complemented distributive lattice and isomorphism with switching circuits"
+            ]
+          },
+          {
+            "title": "Automata, Languages and Grammars",
+            "teachingHours": 7,
+            "subtopics": [
+              "Formal languages: Alphabets, strings, string length, concatenation, prefix, suffix, and empty string",
+              "Operations on languages: Union, intersection, concatenation, and Kleene star closure",
+              "Phrase-structure grammars: Terminal symbols, non-terminals, start symbol, and production rules",
+              "Chomsky hierarchy of grammars: Type 0 (Unrestricted), Type 1 (Context-sensitive), Type 2 (Context-free), Type 3 (Regular)",
+              "Derivations, derivation trees (parse trees), and sentential forms",
+              "Finite State Machines (FSM): State diagrams, state transition tables, and machines with output (Moore and Mealy machines)",
+              "Deterministic Finite Automata (DFA): Formal 5-tuple definition (Q, Sigma, delta, q_0, F), language accepted by DFA, and string tracing",
+              "Non-Deterministic Finite Automata (NFA): Definition, lambda/epsilon-transitions, and language acceptance",
+              "Equivalence of DFA and NFA: The Subset Construction (powerset construction) algorithm to convert NFA to DFA",
+              "Regular expressions, correspondence with regular languages, and Arden's theorem",
+              "Pumping Lemma for regular languages: Statement, proof methodology, and application to prove languages non-regular"
+            ]
+          }
+        ],
+        "referenceBooks": [
+          "Kenneth H. Rosen, Discrete Mathematics and Its Applications (8th ed.), McGraw-Hill.",
+          "Bernard Kolman, Robert C. Busby, and Sharon Cutler Ross, Discrete Mathematical Structures (6th ed.), Pearson.",
+          "C.L. Liu and D.P. Mohapatra, Elements of Discrete Mathematics: A Computer Oriented Approach (4th ed.), McGraw-Hill.",
+          "John E. Hopcroft, Rajeev Motwani, and Jeffrey D. Ullman, Introduction to Automata Theory, Languages, and Computation (3rd ed.), Pearson.",
+          "Peter Linz, An Introduction to Formal Languages and Automata (6th ed.), Jones & Bartlett Learning."
         ]
       },
       {
@@ -174,19 +501,202 @@ export const bitSyllabusData: SemesterSyllabus[] = [
         "name": "Object-Oriented Programming in C++",
         "credits": 3,
         "type": "Core",
-        "description": "C++ OOP fundamentals — classes, constructors, operator overloading, inheritance, polymorphism, templates, and file handling.",
+        "description": "Object-oriented paradigms, classes and objects, constructors and destructors, operator overloading, inheritance and derived classes, virtual functions, abstract classes and runtime polymorphism, templates and generic programming, namespaces, exception handling, and streams and file handling in C++.",
         "keyUnits": [
-          "Introduction to Object Oriented Programming",
-          "C++ Programming Concept",
-          "Functions Used in C++",
-          "Classes and Objects",
-          "Constructor & Destructor",
-          "Operator Overloading",
-          "Inheritance",
-          "Virtual Functions and Polymorphism",
-          "File Handling",
-          "Templates and Namespaces",
-          "Exception Handling"
+          "Introduction to Object-Oriented Programming",
+          "C++ Programming Concepts and Language Extensions",
+          "Functions in C++ (Overloading, Inline & Reference)",
+          "Classes and Objects (Encapsulation, Friends & Static)",
+          "Constructors and Destructors (Lifecycle & Copy Semantics)",
+          "Operator Overloading and Type Conversions",
+          "Inheritance: Extending Classes (Diamond Problem & Virtual Base)",
+          "Virtual Functions and Polymorphism (vptr, vtable & Abstract Classes)",
+          "Streams and File Handling (Binary I/O & File Pointers)",
+          "Templates and Namespaces (Generic Programming)",
+          "Exception Handling (try, catch & throw)"
+        ],
+        "syllabusUnits": [
+          {
+            "title": "Introduction to Object-Oriented Programming",
+            "teachingHours": 2,
+            "subtopics": [
+              "Limitations of procedural programming and structured paradigm pitfalls",
+              "Paradigm shift: Procedure-Oriented Programming (POP) vs Object-Oriented Programming (OOP)",
+              "Core fundamental principles of OOP: Objects, Classes, Data abstraction, Encapsulation, Inheritance, Polymorphism, Dynamic binding, and Message passing",
+              "Software reusability, modularity, maintainability, and enterprise applications of OOP"
+            ]
+          },
+          {
+            "title": "C++ Programming Concepts and Language Extensions",
+            "teachingHours": 3,
+            "subtopics": [
+              "Evolution and history of C++ (Bjarne Stroustrup, C with Classes)",
+              "Structure of a modern C++ program and compilation pipeline",
+              "Tokens, keywords, identifiers, constants, and basic vs user-defined data types",
+              "Reference variables: Definition, syntax, and comparison with pointers",
+              "Dynamic memory management: new and delete operators vs malloc() and free()",
+              "Scope resolution operator (::), member dereferencing operators (.* and ->*)",
+              "Type casting operators (static_cast, const_cast, reinterpret_cast, dynamic_cast)",
+              "Stream I/O manipulators: endl, setw, setprecision, setfill, and flags in <iomanip>"
+            ]
+          },
+          {
+            "title": "Functions in C++",
+            "teachingHours": 3,
+            "subtopics": [
+              "Function prototyping and type-safe linkage in C++",
+              "Parameter passing mechanisms: Call by value, Call by pointer, and Call by reference",
+              "Return by reference and returning lvalues from functions",
+              "Inline functions: Definition, compiler expansion mechanism, benefits, and execution constraints",
+              "Default arguments in functions: Rules, declaration syntax, and restrictions",
+              "Constant function parameters (const correctness) and const return types",
+              "Function overloading: Compile-time polymorphism, resolution rules, and ambiguous calls"
+            ]
+          },
+          {
+            "title": "Classes and Objects",
+            "teachingHours": 7,
+            "subtopics": [
+              "Specifying a class: Class declaration, data members, and member functions",
+              "Access specifiers: private, protected, and public visibility rules",
+              "Defining member functions inside the class (implicit inlining) and outside using scope resolution (::)",
+              "Nesting of member functions and private helper functions",
+              "Memory allocation for objects: Shared member functions and independent data members",
+              "Static data members: Class-wide shared variables, external definition, and initialization",
+              "Static member functions: Characteristics, restrictions (cannot access this pointer or non-static members)",
+              "Arrays of objects and object pointer indexing",
+              "Objects as function arguments: Pass by value and pass by reference",
+              "Friend functions: Need, syntax, accessing private members, and bridging disparate classes",
+              "Friend classes: Complete encapsulation sharing between cooperating classes",
+              "Returning objects from functions and anonymous temporary objects"
+            ]
+          },
+          {
+            "title": "Constructor and Destructor",
+            "teachingHours": 3,
+            "subtopics": [
+              "Constructors: Definition, automatic invocation, naming rules, and characteristics",
+              "Default constructor: Compiler-synthesized vs user-defined default constructors",
+              "Parameterized constructors: Initialization with arguments and explicit calls",
+              "Constructor overloading in a class and constructor chaining",
+              "Constructors with default arguments and ambiguity resolution",
+              "Dynamic initialization of objects through constructors at runtime",
+              "Copy constructor: Definition, shallow copy vs deep copy, dynamic memory replication, and pass-by-value invocation",
+              "Dynamic constructors using new operator inside constructors",
+              "Destructors: Characteristics, no-argument rule, cleanup of dynamically allocated resources",
+              "Order of invocation of constructors and destructors for global, local, and dynamic objects"
+            ]
+          },
+          {
+            "title": "Operator Overloading",
+            "teachingHours": 6,
+            "subtopics": [
+              "Operator overloading: Concept, syntax, and operator keyword",
+              "Rules and limitations: Operators that cannot be overloaded (. , .* , :: , ?: , sizeof)",
+              "Overloading unary operators: Unary minus (-), logical NOT (!), and increment/decrement (++ and --)",
+              "Distinguishing prefix and postfix increment/decrement operators using dummy int argument",
+              "Overloading binary arithmetic operators (+, -, *, /) using member functions",
+              "Overloading binary operators using friend functions (handling commutative operands like int + Object)",
+              "Overloading stream insertion (<<) and stream extraction (>>) operators for custom classes",
+              "Overloading comparison and assignment operators (operator=, deep copy, and self-assignment checks)",
+              "Data conversion: Basic type to class type (using single-argument constructor)",
+              "Data conversion: Class type to basic type (using custom conversion operator functions)",
+              "Data conversion: Class type to another class type (using constructor in destination class or conversion routine in source class)"
+            ]
+          },
+          {
+            "title": "Inheritance",
+            "teachingHours": 6,
+            "subtopics": [
+              "Inheritance: Concept, base class, derived class, and software reusability",
+              "Access control in derived classes: public, protected, and private derivation modes and member visibility matrix",
+              "Forms of inheritance: Single inheritance, Multilevel inheritance, Multiple inheritance, Hierarchical inheritance, and Hybrid inheritance",
+              "Multipath inheritance and member duplication ambiguity: The Diamond Problem",
+              "Virtual base classes: Syntax, internal shared memory mechanism, and resolving diamond ambiguity",
+              "Constructors and destructors in derived classes: Passing arguments from derived to base constructors",
+              "Member initialization list (MIL) syntax, order of execution, and member initialization order",
+              "Overriding base class member functions and accessing overridden members using scope resolution"
+            ]
+          },
+          {
+            "title": "Virtual Functions and Polymorphism",
+            "teachingHours": 4,
+            "subtopics": [
+              "Pointers to objects, object pointer arithmetic, and the this pointer",
+              "Pointers to derived classes: Base class pointer pointing to derived class object (Upcasting)",
+              "Compile-time polymorphism (early binding) vs Run-time polymorphism (late binding / dynamic dispatch)",
+              "Virtual functions: virtual keyword, mechanics of dynamic dispatch, and rules for virtual functions",
+              "Virtual method table (vtable) and virtual pointer (vptr) internal implementation mechanism",
+              "Pure virtual functions (= 0 syntax) and Abstract Base Classes (interfaces)",
+              "Virtual destructors: Preventing partial destruction and memory leaks when deleting derived objects via base pointers"
+            ]
+          },
+          {
+            "title": "File Handling",
+            "teachingHours": 6,
+            "subtopics": [
+              "Streams in C++: Standard input/output streams and hierarchy of stream classes in <iostream> and <fstream>",
+              "File stream classes: ifstream (input), ofstream (output), and fstream (input/output)",
+              "Opening and closing files using constructors and open() member function",
+              "File opening modes: ios::in, ios::out, ios::app, ios::ate, ios::binary, ios::trunc, and bitwise OR combining",
+              "Detecting end-of-file: eof() function, good(), fail(), and bad() stream status flags",
+              "File pointers and manipulators: get pointer (seekg, tellg) and put pointer (seekp, tellp)",
+              "Random access in files using seekg/seekp with ios::beg, ios::cur, and ios::end offsets",
+              "Formatted text file I/O vs Unformatted binary file I/O",
+              "Reading and writing binary records/objects using read() and write() member functions with reinterpret_cast<char*>",
+              "Updating, searching, modifying, and deleting records in binary data files"
+            ]
+          },
+          {
+            "title": "Templates and Namespaces",
+            "teachingHours": 3,
+            "subtopics": [
+              "Generic programming philosophy and type independence",
+              "Function templates: Syntax, template type parameters, and automatic template argument deduction",
+              "Function templates with multiple type arguments and non-type template arguments",
+              "Overloading function templates with ordinary functions and other templates",
+              "Class templates: Definition, syntax, member function definitions outside template class",
+              "Class templates with default parameters and multiple parameters",
+              "Generic data structures implementation: Generic Stack and Generic Queue using class templates",
+              "Namespaces: Resolving identifier collisions, defining namespaces, and the std standard namespace",
+              "Accessing namespace members: Explicit qualification (::), using declaration, and using directive",
+              "Nested namespaces, aliased namespaces, and unnamed (anonymous) namespaces"
+            ]
+          },
+          {
+            "title": "Exception Handling",
+            "teachingHours": 2,
+            "subtopics": [
+              "Traditional error handling vs C++ structured exception handling",
+              "Exception handling architecture: try block, throw statement, and catch handler blocks",
+              "Control flow in exception handling, stack unwinding, and automatic destruction of local objects",
+              "Catching multiple exceptions and catch-all handler (catch(...))",
+              "Re-throwing exceptions from catch handlers and nested try-catch blocks",
+              "Exception specifications (throw() lists) and modern noexcept specifier",
+              "Standard library exceptions hierarchy in <stdexcept> (exception, runtime_error, out_of_range, bad_alloc)"
+            ]
+          }
+        ],
+        "labWork": [
+          "Programs demonstrating reference variables, function overloading, inline functions, and default arguments",
+          "Class creation, private/public members, objects as arguments, and member functions defined inside and outside classes",
+          "Implementation of static data members, static member functions, friend functions, and friend classes",
+          "Default, parameterized, copy, and dynamic constructors with destructors demonstrating exact lifecycle destruction order",
+          "Overloading unary operators (++ prefix/postfix, unary -) and binary arithmetic operators (+, -, *)",
+          "Overloading stream insertion (<<) and stream extraction (>>) operators, and custom class-to-basic / basic-to-class type conversions",
+          "Implementation of single, multilevel, multiple, and hierarchical inheritance hierarchies",
+          "Resolving multipath diamond inheritance ambiguity using virtual base classes",
+          "Dynamic polymorphism: Virtual functions, pure virtual functions, and abstract base classes demonstrating vtable dispatch",
+          "File stream handling: Writing, reading, searching, and updating class objects in binary files using read() and write()",
+          "Function templates and class templates for generic data structures (generic Stack and Queue)",
+          "Structured exception handling using try, throw, and catch blocks for divide-by-zero and array bounds checking"
+        ],
+        "referenceBooks": [
+          "E. Balagurusamy, Object Oriented Programming with C++ (8th ed.), McGraw-Hill.",
+          "Robert Lafore, Object-Oriented Programming in C++ (4th ed.), Sams Publishing.",
+          "Bjarne Stroustrup, The C++ Programming Language (4th ed.), Addison-Wesley.",
+          "Herbert Schildt, C++: The Complete Reference (4th ed.), McGraw-Hill.",
+          "Stanley B. Lippman, Josee Lajoie, and Barbara E. Moo, C++ Primer (5th ed.), Addison-Wesley."
         ]
       },
       {
@@ -194,19 +704,173 @@ export const bitSyllabusData: SemesterSyllabus[] = [
         "name": "Financial Management and Accounting",
         "credits": 3,
         "type": "Core",
-        "description": "Financial management fundamentals, capital budgeting and structure, and core accounting processes and statements.",
+        "description": "Principles of financial management, time value of money, capital budgeting and investment appraisal, working capital management, capital structure and leverage, dividend policy, double-entry accounting fundamentals, accounting cycle (journal, ledger, trial balance), financial statements (Trading, Profit & Loss, Balance Sheet), financial ratio analysis, and Cash Flow Statement (Direct Method).",
         "keyUnits": [
-          "Nature of Financial Management",
-          "Time Value of Money",
-          "Capital Budgeting",
-          "Working Capital",
-          "Capital Structure",
-          "Dividends",
-          "Nature of Accounting",
-          "Accounting Process",
-          "Financial Statement",
-          "Financial Analysis",
-          "Cash Flow Statement - Direct Method"
+          "Nature and Scope of Financial Management",
+          "Time Value of Money (Compounding & Discounting)",
+          "Capital Budgeting Decisions (NPV, IRR, PBP & PI)",
+          "Working Capital Management (Operating Cycle & Cash/Inventory)",
+          "Capital Structure and Leverage (DOL, DFL, DCL & Theories)",
+          "Dividend Decisions and Corporate Policies",
+          "Nature and Scope of Accounting (GAAP & Principles)",
+          "The Accounting Process and Cycle (Journal, Ledger & Trial Balance)",
+          "Financial Statements (Trading, Profit & Loss Account & Balance Sheet)",
+          "Financial Statement Analysis (Ratio Analysis)",
+          "Cash Flow Statement (Direct Method - NAS 07 / IAS 7)"
+        ],
+        "syllabusUnits": [
+          {
+            "title": "Nature of Financial Management",
+            "teachingHours": 3,
+            "subtopics": [
+              "Meaning, definition, and evolutionary stages of financial management",
+              "Key financial decisions: Investment decisions (capital budgeting), Financing decisions (capital structure), and Dividend decisions",
+              "Objectives of financial management: Profit maximization vs Wealth maximization (Shareholder wealth maximization)",
+              "Agency problem, agency costs, conflicts between shareholders and management, and corporate governance solutions",
+              "Role and responsibilities of the Chief Financial Officer (CFO) and finance manager in IT firms"
+            ]
+          },
+          {
+            "title": "Time Value of Money",
+            "teachingHours": 3,
+            "subtopics": [
+              "Concept, rationale, and real-world importance of time value of money in capital investment",
+              "Compounding techniques: Future value of a single cash flow, continuous compounding, and effective interest rates",
+              "Discounting techniques: Present value of a single cash flow and discount factors",
+              "Annuities: Future value and present value of Ordinary Annuity vs Annuity Due",
+              "Perpetuity: Present value of perpetual cash streams and growing perpetuities",
+              "Loan amortization schedules: Equal annual installments, principal reduction, and interest split calculation"
+            ]
+          },
+          {
+            "title": "Capital Budgeting",
+            "teachingHours": 4,
+            "subtopics": [
+              "Nature, significance, and process of capital budgeting decisions",
+              "Types of investment proposals: Independent, Mutually exclusive, and Replacement projects",
+              "Cash flow estimation: Initial cash outlay, operating cash flows after taxes (CFAT), and terminal cash flows",
+              "Non-discounted capital appraisal techniques: Payback Period (PBP) and Accounting Rate of Return (ARR)",
+              "Discounted capital appraisal techniques: Net Present Value (NPV), Internal Rate of Return (IRR), and Profitability Index (PI)",
+              "Comparison of NPV and IRR: Conflicting rankings in mutually exclusive projects and reinvestment rate assumptions"
+            ]
+          },
+          {
+            "title": "Working Capital",
+            "teachingHours": 5,
+            "subtopics": [
+              "Concept of working capital: Gross working capital vs Net working capital",
+              "Permanent (fixed) working capital vs Temporary (variable) working capital",
+              "Operating cycle and Cash Conversion Cycle (CCC) calculation and trade-offs",
+              "Working capital financing strategies: Matching (hedging), Conservative, and Aggressive financing approaches",
+              "Cash management: Transaction, precautionary, and speculative motives; Baumol's economic order quantity cash model and Miller-Orr model",
+              "Receivables management: Credit policy, credit standards, terms of credit, collection procedures, and aging schedule",
+              "Inventory management: Motives for holding inventory, Economic Order Quantity (EOQ) formula, reorder level, and ABC analysis"
+            ]
+          },
+          {
+            "title": "Capital Structure",
+            "teachingHours": 4,
+            "subtopics": [
+              "Meaning, definition, and optimal capital structure concept",
+              "Financial leverage vs Operating leverage: Meaning, mechanics, and risk implications",
+              "Degree of Operating Leverage (DOL), Degree of Financial Leverage (DFL), and Degree of Combined Leverage (DCL)",
+              "EBIT-EPS analysis and financial indifference point calculation",
+              "Capital structure theories: Net Income (NI) approach, Net Operating Income (NOI) approach, and Traditional approach",
+              "Modigliani-Miller (MM) hypothesis: Proposition I and II without taxes (arbitrage mechanism) and with corporate taxes",
+              "Determinants of capital structure: Business risk, tax shelter, financial distress costs, and agency costs"
+            ]
+          },
+          {
+            "title": "Dividends",
+            "teachingHours": 4,
+            "subtopics": [
+              "Meaning and forms of dividend: Cash dividends, stock dividends (bonus shares), and stock splits",
+              "Determinants of dividend policy: Legal constraints, liquidity, investment opportunities, and stability",
+              "Dividend theories: Walter's model (relationship between internal rate of return r and cost of capital k)",
+              "Gordon's dividend capitalization model and constant growth assumptions",
+              "Modigliani-Miller (MM) dividend irrelevance hypothesis and arbitrage proof",
+              "Practical dividend policies: Constant payout, stable dividend, and residual dividend policy"
+            ]
+          },
+          {
+            "title": "Nature of Accounting",
+            "teachingHours": 4,
+            "subtopics": [
+              "Meaning, definition, objectives, and scope of accounting in business",
+              "Accounting as an information system for economic decision-making",
+              "Users of accounting information: Internal users (management, employees) and external users (investors, creditors, tax authorities)",
+              "Branches of accounting: Financial accounting, Cost accounting, and Management accounting",
+              "Generally Accepted Accounting Principles (GAAP) and international alignment",
+              "Fundamental accounting concepts: Business entity, Money measurement, Going concern, Accounting period, Cost concept, Dual aspect concept",
+              "Fundamental accounting conventions: Accrual convention, Matching principle, Realization principle, Consistency, Conservatism (prudence), Materiality, and Full disclosure"
+            ]
+          },
+          {
+            "title": "Accounting Process",
+            "teachingHours": 6,
+            "subtopics": [
+              "The accounting cycle: Source documents, journalizing, posting, balancing, trial balance, and financial statement preparation",
+              "Double-entry bookkeeping system: Concepts of debit and credit, accounting equation (Assets = Liabilities + Owner's Equity)",
+              "Golden rules of debit and credit for Personal accounts, Real accounts, and Nominal accounts",
+              "Journal entries: Preparation of simple journal entries and compound journal entries",
+              "Sub-division of journals: Cash Book (single, double, and triple column cash book), Purchases Day Book, Sales Day Book",
+              "Ledger posting: Ledger account formats (T-account), posting from journal to ledger, and balancing of ledger accounts",
+              "Trial Balance: Objectives, format, rules for preparation, and classification of errors (errors revealed vs errors not revealed by trial balance)"
+            ]
+          },
+          {
+            "title": "Financial Statement",
+            "teachingHours": 5,
+            "subtopics": [
+              "Meaning, objectives, and importance of final accounts / financial statements",
+              "Trading Account: Concept, components (opening stock, purchases, direct expenses, sales, closing stock), and gross profit calculation",
+              "Profit and Loss Account: Operating expenses, non-operating income/expenses, operating profit, and net profit calculation",
+              "Balance Sheet: Structure, classification, and marshalling of assets (liquidity vs permanence order) and liabilities",
+              "Key year-end accounting adjustments: Closing stock, outstanding expenses, prepaid expenses, accrued income, unearned income, depreciation, bad debts, and provision for doubtful debts"
+            ]
+          },
+          {
+            "title": "Financial Analysis",
+            "teachingHours": 4,
+            "subtopics": [
+              "Meaning, significance, and tools of financial statement analysis",
+              "Comparative financial statements and common-size financial statements (horizontal and vertical analysis)",
+              "Ratio Analysis: Classification, standards, and diagnostic utility",
+              "Liquidity ratios: Current Ratio and Quick Ratio (Acid-Test Ratio)",
+              "Leverage / Solvency ratios: Debt-to-Equity Ratio, Debt-to-Total-Assets Ratio, and Interest Coverage Ratio",
+              "Activity / Turnover ratios: Inventory Turnover Ratio, Debtors (Receivables) Turnover Ratio, Average Collection Period, and Total Assets Turnover",
+              "Profitability ratios: Gross Profit Margin, Net Profit Margin, Return on Assets (ROA), Return on Equity (ROE), and Earnings Per Share (EPS)"
+            ]
+          },
+          {
+            "title": "Cash Flow Statement - Direct Method",
+            "teachingHours": 3,
+            "subtopics": [
+              "Meaning, objectives, and significance of Cash Flow Statement as per Nepal Accounting Standard (NAS 07) / IAS 7",
+              "Distinction between Cash Flow Statement, Funds Flow Statement, and Profit & Loss Account",
+              "Classification of enterprise cash flows: Operating activities, Investing activities, and Financing activities",
+              "Direct Method of preparing Cash Flow Statement: Cash collections from customers, cash paid to suppliers and employees, operating expenses, tax paid",
+              "Cash flows from investing activities: Purchase and sale of fixed assets and long-term investments",
+              "Cash flows from financing activities: Issue of shares, debentures, loan borrowings, dividend payments, and repayment of debt",
+              "Net increase/decrease in cash and cash equivalents and reconciliation with opening and closing cash balances"
+            ]
+          }
+        ],
+        "labWork": [
+          "Hands-on practical exposure to computerized accounting software (Tally Prime / QuickBooks or Excel financial modeling)",
+          "Creation of company profile, configuration of financial year, and creation of Chart of Accounts (groups and ledgers)",
+          "Recording business transactions using accounting vouchers: Payment, Receipt, Contra, Sales, Purchase, and Journal vouchers",
+          "Generating and interpreting computerized Day Book, General Ledger, Trial Balance, Profit & Loss Account, and Balance Sheet",
+          "Building automated financial spreadsheet models in Excel for Time Value of Money calculations (PV, FV, PMT, RATE, NPER)",
+          "Capital budgeting investment modeling in Excel: Calculating NPV, IRR, and Profitability Index for competing projects",
+          "Automated financial ratio analysis model and comparative balance sheet templates with graphical dashboards"
+        ],
+        "referenceBooks": [
+          "I.M. Pandey, Financial Management (11th ed.), Vikas Publishing House.",
+          "James C. Van Horne and John M. Wachowicz, Fundamentals of Financial Management (13th ed.), Pearson.",
+          "S.N. Maheshwari, S.K. Maheshwari, and Sharad K. Maheshwari, An Introduction to Accountancy (12th ed.), Vikas Publishing House.",
+          "T.S. Grewal, Double Entry Book Keeping: Financial Accounting, Sultan Chand & Sons.",
+          "M.Y. Khan and P.K. Jain, Financial Management: Text, Problems and Cases (8th ed.), McGraw-Hill."
         ]
       },
       {
@@ -214,12 +878,98 @@ export const bitSyllabusData: SemesterSyllabus[] = [
         "name": "Project-II",
         "credits": 2,
         "type": "Project / Practical",
-        "description": "Group software project (2-3 students) built using Object-Oriented Programming in C++ — 45 lab hours.",
+        "description": "Group software development project (2-3 students) applying Object-Oriented Analysis, Design, and Implementation in C++. Emphasizes practical problem-solving, modular code organization, file-based persistence, exception handling, technical documentation, and oral defense.",
         "keyUnits": [
-          "Topic Selection & Information Gathering",
-          "System Requirements & Specifications",
-          "Coding & Implementation",
-          "Documentation & Final Presentation"
+          "Topic Selection, Feasibility Study & Project Proposal",
+          "System Requirements & Object-Oriented Analysis (OOA)",
+          "Object-Oriented Design (OOD) & Architecture",
+          "System Implementation & Coding in C++",
+          "Verification, Testing & Bug Fixing",
+          "Project Documentation & Final Viva Voce Defense"
+        ],
+        "syllabusUnits": [
+          {
+            "title": "Topic Selection, Feasibility Study & Project Proposal",
+            "teachingHours": 6,
+            "subtopics": [
+              "Software project domain exploration: Academic management systems, banking systems, hospital management, library systems, inventory tracking, airline reservation, or 2D game engines in C++",
+              "Team formation (2-3 students per team) and role assignment (lead developer, architect, QA/documentation)",
+              "Feasibility analysis: Technical feasibility, operational feasibility, and schedule/economic feasibility",
+              "Preparation and submission of formal Project Proposal (problem statement, objectives, scope, methodology, tools, and Gantt chart timeline)",
+              "Proposal defense presentation before departmental evaluation committee (10% marks weightage)"
+            ]
+          },
+          {
+            "title": "System Requirements & Object-Oriented Analysis (OOA)",
+            "teachingHours": 8,
+            "subtopics": [
+              "Requirement elicitation: Gathering functional requirements and non-functional requirements (performance, reliability, security)",
+              "Use case analysis: Identifying system actors, writing structured use case descriptions, and diagramming use case boundaries",
+              "Domain modeling: Identifying candidate classes and entity abstraction from requirements",
+              "Class Responsibility Collaborator (CRC) modeling",
+              "Defining object relationships: Association, Aggregation (has-a weak), Composition (has-a strong), and Generalization/Inheritance (is-a)"
+            ]
+          },
+          {
+            "title": "Object-Oriented Design (OOD) & Architecture",
+            "teachingHours": 8,
+            "subtopics": [
+              "System architectural design: Multi-tiered architecture (Presentation/Console UI layer, Business logic layer, Data persistence layer)",
+              "Detailed Class Diagram modeling: Class names, attributes with types, member functions with signatures, and visibility specifiers (+, -, #)",
+              "Interaction modeling: Sequence diagrams for critical transaction workflows (e.g., authentication, record creation, transaction processing)",
+              "Persistent data file architecture: File formats, record structures, index files, header blocks, and data validation rules"
+            ]
+          },
+          {
+            "title": "System Implementation & Coding in C++",
+            "teachingHours": 12,
+            "subtopics": [
+              "Project modularization: Structuring headers (.h) and implementation source files (.cpp) with header guards",
+              "Clean coding standards: Meaningful naming conventions, commenting guidelines, and indentation",
+              "Implementation of class hierarchies: Encapsulation, parameterized constructors, copy constructors, and destructors",
+              "Applying operator overloading for domain arithmetic or custom stream formatting (<< and >>)",
+              "Dynamic polymorphism implementation: Base class pointers, virtual functions, and abstract base classes",
+              "File handling implementation: Persistent binary file I/O using ifstream, ofstream, fstream, and seekg/seekp",
+              "Structured exception handling: Custom exception classes, try-catch hierarchies, and graceful error recovery"
+            ]
+          },
+          {
+            "title": "Verification, Testing & Bug Fixing",
+            "teachingHours": 4,
+            "subtopics": [
+              "Unit testing of individual class member functions and boundary cases",
+              "Integration testing: Verifying interaction between UI layer, logic layer, and file storage layer",
+              "Validation testing: Input sanitization, erroneous data rejection, and edge case resilience",
+              "Debugging techniques, memory leak detection, dynamic memory verification (proper delete of new objects), and code refactoring"
+            ]
+          },
+          {
+            "title": "Project Documentation & Final Viva Voce Defense",
+            "teachingHours": 7,
+            "subtopics": [
+              "Purbanchal University standard project report preparation guidelines and formatting standards",
+              "Report structure: Cover page, Certificate of Approval, Recommendation, Acknowledgments, Abstract, Table of Contents, List of Figures/Tables",
+              "Core chapters: Introduction, System Analysis, System Design, Implementation & Testing, Conclusion & Recommendations, References, Appendix (code listings & user manual)",
+              "Mid-term progress demonstration and evaluation (20% marks weightage)",
+              "Pre-final project defense and working prototype verification (30% marks weightage)",
+              "Final viva voce defense, live software demonstration, and oral examination by internal and external examiners (40% marks weightage)"
+            ]
+          }
+        ],
+        "labWork": [
+          "Phase 1: Project proposal preparation, problem specification, and proposal defense (Week 1-3)",
+          "Phase 2: Requirement analysis, CRC modeling, and detailed UML class diagram design (Week 4-6)",
+          "Phase 3: Core C++ implementation of domain classes, inheritance hierarchies, and virtual functions (Week 7-9)",
+          "Phase 4: Binary file persistence, stream operators, and exception handling integration (Week 10-11)",
+          "Phase 5: System integration, unit testing, debugging, and user interface refinement (Week 12-13)",
+          "Phase 6: Project report drafting, documentation formatting, and pre-final defense (Week 14)",
+          "Phase 7: Final software demonstration, viva voce examination, and code defense (Week 15)"
+        ],
+        "referenceBooks": [
+          "Grady Booch, Robert A. Maksimchuk, Michael W. Engle, and Jim Conallen, Object-Oriented Analysis and Design with Applications (3rd ed.), Addison-Wesley.",
+          "Bjarne Stroustrup, The C++ Programming Language (4th ed.), Addison-Wesley.",
+          "Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software, Addison-Wesley.",
+          "Robert C. Martin, Clean Code: A Handbook of Agile Software Craftsmanship, Prentice Hall."
         ]
       }
     ]

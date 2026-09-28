@@ -2,6 +2,7 @@
  * Comprehensive Purbanchal University BIT Semester 1-8 Notes Database
  */
 
+import { semester2NotesData } from "./semester2NotesData";
 import { semester7NotesData } from "./semester7NotesData";
 
 export interface CodeExample {
@@ -118,35 +119,7 @@ export const bitNotesData: Record<number, SemesterNotesData> = {
     }
   },
   2: {
-    "Object-Oriented Programming in C++": {
-      subjectName: "Object-Oriented Programming in C++",
-      code: "BIT201",
-      creditHours: 3,
-      topics: [
-        {
-          id: "cpp-polymorphism",
-          name: "Virtual Functions, Abstract Classes & Dynamic Polymorphism",
-          importance: "Very High",
-          keyPoints: [
-            "Virtual functions enable runtime dynamic dispatch via vtable and vptr",
-            "Pure virtual functions (= 0) create abstract classes that cannot be instantiated",
-            "Virtual destructors ensure derived class destructors execute properly during base-pointer deletion"
-          ],
-          theory: "Polymorphism allows objects of different classes to respond uniquely to the same function call.",
-          code: `#include <iostream>\nusing namespace std;\n\nclass Shape {\npublic:\n    virtual void draw() = 0; // Pure virtual\n    virtual ~Shape() {}\n};\n\nclass Circle : public Shape {\npublic:\n    void draw() override { cout << "Drawing Circle\\n"; }\n};\n\nint main() {\n    Shape *s = new Circle();\n    s->draw();\n    delete s;\n    return 0;\n}`,
-          example: "Dynamic dispatch: vptr -> vtable[index] at runtime.",
-          commonExamQuestions: [
-            "Explain virtual function mechanism using vptr and vtable diagrams.",
-            "What is multiple inheritance? Explain ambiguity and how virtual base class resolves it."
-          ]
-        }
-      ],
-      theoryTopics: [
-        "Compare compile-time polymorphism (overloading) with run-time polymorphism (overriding).",
-        "Explain C++ exception handling mechanism (try, catch, throw).",
-        "Describe C++ template classes and function templates with generic examples."
-      ]
-    }
+    ...semester2NotesData,
   },
   3: {
     "Data Structures & Algorithms": {
@@ -508,7 +481,22 @@ export function getSubjectNotes(codeOrName: string, semester?: number): SubjectN
     BIT105CO: "BIT101",
     BIT101CO: "BIT101",
     BIT102HS: "BIT102",
-    BIT201CO: "BIT201",
+    BIT151HS: "BIT151HS",
+    BIT152SH: "BIT151HS",
+    BIT151: "BIT151HS",
+    BIT152CO: "BIT152CO",
+    BIT152: "BIT152CO",
+    BIT153HS: "BIT153HS",
+    BIT153: "BIT153HS",
+    BIT154CO: "BIT154CO",
+    BIT154: "BIT154CO",
+    BIT201: "BIT154CO",
+    BIT201CO: "BIT154CO",
+    BIT155MS: "BIT155MS",
+    BIT155: "BIT155MS",
+    BIT156CO: "BIT156CO",
+    BIT156PR: "BIT156CO",
+    BIT156: "BIT156CO",
     BIT253CO: "BIT253CO",
     BIT253: "BIT253CO",
     BIT501: "BIT253CO",
