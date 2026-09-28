@@ -399,200 +399,200 @@ export const bitPastPapersData: FullPastPaper[] = [
       "id": "m2-24-1",
       "group": "Group A (2 Marks)",
       "marks": 2,
-      "questionText": "Evaluate: \\int_0^a \\int_0^a \\int_0^a (x + y + z) dx dy dz",
-      "solutionSummary": "By symmetry, \\iiint x dxdydz = \\iiint y dxdydz = \\iiint z dxdydz = (a^2/2) * a * a = a^4/2. Therefore, \\int_0^a \\int_0^a \\int_0^a (x + y + z) dx dy dz = 3 * (a^4 / 2) = \\frac{3a^4}{2}.",
+      "questionText": "Evaluate: $\\int_0^a \\int_0^a \\int_0^a (x + y + z) \\, dx \\, dy \\, dz$",
+      "solutionSummary": "By symmetry over the cube $[0, a]^3$, $\\iiint x \\, dx\\,dy\\,dz = \\left(\\int_0^a x\\,dx\\right) a^2 = \\frac{a^4}{2}$. Since each term contributes equally: $\\int_0^a \\int_0^a \\int_0^a (x + y + z) \\, dx \\, dy \\, dz = 3 \\times \\frac{a^4}{2} = \\frac{3a^4}{2}$.",
       "chapterRef": "Unit 1: Triple Integrals & Applications"
     },
     {
       "id": "m2-24-2",
       "group": "Group A (2 Marks)",
       "marks": 2,
-      "questionText": "Evaluate the integral by changing the order of integration: \\int_0^\\infty \\int_x^\\infty \\frac{e^{-y}}{y} dy dx",
-      "solutionSummary": "Original region is bounded by y = x and y = \\infty as x goes from 0 to \\infty. Changing order of integration gives x running from 0 to y while y runs from 0 to \\infty. Integral becomes \\int_0^\\infty \\int_0^y \\frac{e^{-y}}{y} dx dy = \\int_0^\\infty \\frac{e^{-y}}{y} [x]_0^y dy = \\int_0^\\infty e^{-y} dy = [-e^{-y}]_0^\\infty = 1.",
+      "questionText": "Evaluate the integral by changing the order of integration: $\\int_0^\\infty \\int_x^\\infty \\frac{e^{-y}}{y} \\, dy \\, dx$",
+      "solutionSummary": "The region is $0 \\le x \\le y < \\infty$. Reversing order of integration: $x$ runs from $0$ to $y$ while $y$ runs from $0$ to $\\infty$. The integral becomes $\\int_0^\\infty \\int_0^y \\frac{e^{-y}}{y} \\, dx \\, dy = \\int_0^\\infty \\frac{e^{-y}}{y} [x]_0^y \\, dy = \\int_0^\\infty e^{-y} \\, dy = [-e^{-y}]_0^\\infty = 1$.",
       "chapterRef": "Unit 1: Multiple Integrals (Double & Polar)"
     },
     {
       "id": "m2-24-3",
       "group": "Group A (2 Marks)",
       "marks": 2,
-      "questionText": "Determine the order and degree of the differential equation: \\sqrt{\\frac{d^3 y}{dx^3}} = \\frac{dy}{dx}",
-      "solutionSummary": "Squaring both sides to make the derivatives polynomial (rational and integral powers): d^3y/dx^3 = (dy/dx)^2. The highest order derivative is d^3y/dx^3, so Order = 3. The power of this highest derivative is 1, so Degree = 1.",
+      "questionText": "Determine the order and degree of the differential equation: $\\sqrt{\\frac{d^3 y}{dx^3}} = \\frac{dy}{dx}$",
+      "solutionSummary": "Squaring both sides to eliminate fractional powers on derivatives yields $\\frac{d^3 y}{dx^3} = \\left(\\frac{dy}{dx}\\right)^2$. The highest derivative is $\\frac{d^3 y}{dx^3}$ (order 3), and its power is 1 (degree 1). Thus, $\\text{Order} = 3, \\text{Degree} = 1$.",
       "chapterRef": "Unit 2: Differential Equations of First Order"
     },
     {
       "id": "m2-24-4",
       "group": "Group A (2 Marks)",
       "marks": 2,
-      "questionText": "Solve: (x + 1) dy = (y - 1) dx",
-      "solutionSummary": "Separating variables: dy / (y - 1) = dx / (x + 1). Integrating both sides: ln|y - 1| = ln|x + 1| + ln C => y - 1 = C (x + 1).",
+      "questionText": "Solve: $(x + 1) \\, dy = (y - 1) \\, dx$",
+      "solutionSummary": "Separating variables: $\\frac{dy}{y - 1} = \\frac{dx}{x + 1}$. Integrating both sides: $\\ln|y - 1| = \\ln|x + 1| + \\ln C \\implies y - 1 = C (x + 1)$, or $y = C(x + 1) + 1$.",
       "chapterRef": "Unit 2: Differential Equations of First Order"
     },
     {
       "id": "m2-24-5",
       "group": "Group A (2 Marks)",
       "marks": 2,
-      "questionText": "Solve: \\frac{d^2 y}{dx^2} - 4 \\frac{dy}{dx} + 13 y = 0",
-      "solutionSummary": "Auxiliary equation: m^2 - 4m + 13 = 0 => m = [4 \\pm \\sqrt{16 - 52}] / 2 = 2 \\pm 3i. General solution: y = e^{2x} (c_1 cos 3x + c_2 sin 3x).",
+      "questionText": "Solve: $\\frac{d^2 y}{dx^2} - 4 \\frac{dy}{dx} + 13 y = 0$",
+      "solutionSummary": "Auxiliary equation: $m^2 - 4m + 13 = 0 \\implies m = \\frac{4 \\pm \\sqrt{16 - 52}}{2} = 2 \\pm 3i$. The general solution is $y = e^{2x} (c_1 \\cos 3x + c_2 \\sin 3x)$.",
       "chapterRef": "Unit 3: Higher-Order Linear ODEs"
     },
     {
       "id": "m2-24-6",
       "group": "Group A (2 Marks)",
       "marks": 2,
-      "questionText": "Determine the function f(x) = \\log|\\frac{1 - x}{1 + x}| is even or odd.",
-      "solutionSummary": "Test f(-x): f(-x) = log|(1 - (-x))/(1 + (-x))| = log|(1 + x)/(1 - x)| = log|[(1 - x)/(1 + x)]^{-1}| = -log|(1 - x)/(1 + x)| = -f(x). Since f(-x) = -f(x), the function is Odd.",
+      "questionText": "Determine whether the function $f(x) = \\log\\left|\\frac{1 - x}{1 + x}\\right|$ is even or odd.",
+      "solutionSummary": "Evaluating at $-x$: $f(-x) = \\log\\left|\\frac{1 - (-x)}{1 + (-x)}\\right| = \\log\\left|\\frac{1 + x}{1 - x}\\right| = \\log\\left|\\left(\\frac{1 - x}{1 + x}\\right)^{-1}\\right| = -\\log\\left|\\frac{1 - x}{1 + x}\\right| = -f(x)$. Since $f(-x) = -f(x)$, $f(x)$ is an odd function.",
       "chapterRef": "Unit 4: Fourier Series (Period 2pi & 2L)"
     },
     {
       "id": "m2-24-7",
       "group": "Group A (2 Marks)",
       "marks": 2,
-      "questionText": "Express the function f(z) = \\sin z in the form of u(x, y) + i v(x, y).",
-      "solutionSummary": "Let z = x + iy. Then sin z = sin(x + iy) = sin x cos(iy) + cos x sin(iy) = (sin x cosh y) + i (cos x sinh y). Thus u(x, y) = sin x cosh y and v(x, y) = cos x sinh y.",
+      "questionText": "Express the function $f(z) = \\sin z$ in the form of $u(x, y) + i v(x, y)$.",
+      "solutionSummary": "Let $z = x + iy$. Then $\\sin z = \\sin(x + iy) = \\sin x \\cos(iy) + \\cos x \\sin(iy)$. Using $\\cos(iy) = \\cosh y$ and $\\sin(iy) = i \\sinh y$, we have $f(z) = (\\sin x \\cosh y) + i (\\cos x \\sinh y)$. Thus $u(x, y) = \\sin x \\cosh y$ and $v(x, y) = \\cos x \\sinh y$.",
       "chapterRef": "Unit 5: Functions of a Complex Variable"
     },
     {
       "id": "m2-24-8",
       "group": "Group A (2 Marks)",
       "marks": 2,
-      "questionText": "If f(z) is differentiable at z_0, then show that f(z) is continuous at z = z_0.",
-      "solutionSummary": "Consider lim_{z->z_0} [f(z) - f(z_0)] = lim_{z->z_0} \\frac{f(z) - f(z_0)}{z - z_0} * (z - z_0) = f'(z_0) * 0 = 0. Therefore lim_{z->z_0} f(z) = f(z_0), proving f(z) is continuous at z_0.",
+      "questionText": "If $f(z)$ is differentiable at $z_0$, then show that $f(z)$ is continuous at $z = z_0$.",
+      "solutionSummary": "Since $f'(z_0) = \\lim_{z \\to z_0} \\frac{f(z) - f(z_0)}{z - z_0}$ exists, $\\lim_{z \\to z_0} [f(z) - f(z_0)] = \\lim_{z \\to z_0} \\left[ \\frac{f(z) - f(z_0)}{z - z_0} \\right] \\cdot \\lim_{z \\to z_0} (z - z_0) = f'(z_0) \\cdot 0 = 0$. Hence $\\lim_{z \\to z_0} f(z) = f(z_0)$, proving continuity.",
       "chapterRef": "Unit 5: Functions of a Complex Variable"
     },
     {
       "id": "m2-24-9",
       "group": "Group A (2 Marks)",
       "marks": 2,
-      "questionText": "Find the zeros of the function f(z) = (\\frac{z + 2}{z^2 + 1})^3.",
-      "solutionSummary": "Zeros occur where numerator is zero: (z + 2)^3 = 0 => z = -2 with multiplicity 3 (a zero of order 3).",
+      "questionText": "Find the zeros of the function $f(z) = \\left(\\frac{z + 2}{z^2 + 1}\\right)^3$.",
+      "solutionSummary": "Zeros occur where the numerator vanishes while the denominator is non-zero: $(z + 2)^3 = 0 \\implies z = -2$. Denominator $((-2)^2 + 1)^3 = 125 \\ne 0$. Thus $z = -2$ is a zero of order 3.",
       "chapterRef": "Unit 6: Laurent Series & Singularities"
     },
     {
       "id": "m2-24-10",
       "group": "Group A (2 Marks)",
       "marks": 2,
-      "questionText": "Show that the function f(z) = \\frac{z^2 - 2z + 5}{z - 2} has a simple pole at z = 2.",
-      "solutionSummary": "lim_{z->2} (z - 2) f(z) = lim_{z->2} (z^2 - 2z + 5) = 4 - 4 + 5 = 5 != 0. Since the limit is a non-zero finite value, z = 2 is a simple pole (pole of order 1) with residue 5.",
+      "questionText": "Show that the function $f(z) = \\frac{z^2 - 2z + 5}{z - 2}$ has a simple pole at $z = 2$.",
+      "solutionSummary": "Evaluating $\\lim_{z \\to 2} (z - 2) f(z) = \\lim_{z \\to 2} (z^2 - 2z + 5) = 4 - 4 + 5 = 5 \\ne 0$. Since this limit is a non-zero finite value, $z = 2$ is a simple pole (pole of order 1) with residue 5.",
       "chapterRef": "Unit 6: Laurent Series & Singularities"
     },
     {
       "id": "m2-24-11",
       "group": "Group B (5 Marks)",
       "marks": 5,
-      "questionText": "Evaluate: \\iint_R xy dx dy where R is the positive quadrant of the circle x^2 + y^2 = a^2.",
-      "solutionSummary": "Transform to polar coordinates x = r cos \\theta, y = r sin \\theta with Jacobian r: \\iint_R xy dx dy = \\int_0^{\\pi/2} \\int_0^a (r cos \\theta)(r sin \\theta) r dr d\\theta = (\\int_0^{\\pi/2} sin \\theta cos \\theta d\\theta) * (\\int_0^a r^3 dr) = [sin^2 \\theta / 2]_0^{\\pi/2} * [r^4 / 4]_0^a = (1/2) * (a^4/4) = \\frac{a^4}{8}.",
+      "questionText": "Evaluate: $\\iint_R xy \\, dx \\, dy$ where $R$ is the positive quadrant of the circle $x^2 + y^2 = a^2$.",
+      "solutionSummary": "In polar coordinates $x = r \\cos\\theta, y = r \\sin\\theta, dx\\,dy = r\\,dr\\,d\\theta$ where $0 \\le r \\le a$ and $0 \\le \\theta \\le \\pi/2$: $I = \\int_0^{\\pi/2} \\sin\\theta \\cos\\theta \\, d\\theta \\int_0^a r^3 \\, dr = \\left[ \\frac{\\sin^2\\theta}{2} \\right]_0^{\\pi/2} \\left[ \\frac{r^4}{4} \\right]_0^a = \\frac{1}{2} \\times \\frac{a^4}{4} = \\frac{a^4}{8}$.",
       "chapterRef": "Unit 1: Multiple Integrals (Double & Polar)"
     },
     {
       "id": "m2-24-12",
       "group": "Group B (5 Marks)",
       "marks": 5,
-      "questionText": "Solve: \\frac{dy}{dx} + \\frac{y}{x^2} = \\frac{1}{x^2}",
-      "solutionSummary": "Linear ODE with P(x) = 1/x^2, Q(x) = 1/x^2. Integrating factor: I.F. = e^{\\int x^{-2} dx} = e^{-1/x}. General solution: y * e^{-1/x} = \\int x^{-2} e^{-1/x} dx = e^{-1/x} + C => y = 1 + C e^{1/x}.",
+      "questionText": "Solve: $\\frac{dy}{dx} + \\frac{y}{x^2} = \\frac{1}{x^2}$",
+      "solutionSummary": "First-order linear ODE with $P(x) = \\frac{1}{x^2}, Q(x) = \\frac{1}{x^2}$. Integrating factor $\\text{I.F.} = e^{\\int x^{-2} \\, dx} = e^{-1/x}$. General solution: $y \\cdot e^{-1/x} = \\int \\frac{1}{x^2} e^{-1/x} \\, dx + C = e^{-1/x} + C \\implies y = 1 + C e^{1/x}$.",
       "chapterRef": "Unit 2: Linear, Bernoulli & Clairaut Equations"
     },
     {
       "id": "m2-24-13",
       "group": "Group B (5 Marks)",
       "marks": 5,
-      "questionText": "Find the general solution of the differential equation: \\frac{d^2 y}{dx^2} - \\frac{dy}{dx} - 2y = 6e^x",
-      "solutionSummary": "Auxiliary equation: m^2 - m - 2 = 0 => (m - 2)(m + 1) = 0 => m = 2, -1. Complementary function: y_c = c_1 e^{2x} + c_2 e^{-x}. Particular integral: PI = 1/(D^2 - D - 2) [6 e^x] = 6 e^x / (1^2 - 1 - 2) = 6 e^x / (-2) = -3 e^x. General solution: y = c_1 e^{2x} + c_2 e^{-x} - 3 e^x.",
+      "questionText": "Find the general solution of the differential equation: $\\frac{d^2 y}{dx^2} - \\frac{dy}{dx} - 2y = 6e^x$",
+      "solutionSummary": "Auxiliary equation: $m^2 - m - 2 = 0 \\implies m = 2, -1 \\implies y_c = c_1 e^{2x} + c_2 e^{-x}$. Particular integral $y_p = \\frac{1}{D^2 - D - 2} (6e^x) = \\frac{6e^x}{1^2 - 1 - 2} = -3e^x$. General solution: $y = c_1 e^{2x} + c_2 e^{-x} - 3e^x$.",
       "chapterRef": "Unit 3: Higher-Order Linear ODEs"
     },
     {
       "id": "m2-24-14",
       "group": "Group B (5 Marks)",
       "marks": 5,
-      "questionText": "Find the Fourier series for the function f(x) = 2x, 0 <= x <= pi where f(x) = f(x + 2pi).",
-      "solutionSummary": "Period 2L = 2pi => L = pi. a_0 = (1/\\pi) \\int_0^\\pi 2x dx = \\pi. a_n = (2/\\pi) \\int_0^\\pi 2x cos(nx) dx = 4/(\\pi n^2) [(-1)^n - 1]. For even n, a_n = 0; for odd n = 2k-1, a_n = -8/(\\pi (2k-1)^2). b_n = (2/\\pi) \\int_0^\\pi 2x sin(nx) dx = -4 (-1)^n / n. Series: f(x) = \\pi/2 - \\frac{8}{\\pi} \\sum_{k=1}^\\infty \\frac{\\cos((2k-1)x)}{(2k-1)^2} + 4 \\sum_{n=1}^\\infty \\frac{(-1)^{n+1}}{n} \\sin(nx).",
+      "questionText": "Find the Fourier series for the function $f(x) = 2x, 0 \\le x \\le \\pi$ where $f(x) = f(x + 2\\pi)$.",
+      "solutionSummary": "Extended as an odd periodic function on $(-\\pi, \\pi)$: $a_0 = 0, a_n = 0$. Fourier sine coefficients: $b_n = \\frac{2}{\\pi} \\int_0^\\pi 2x \\sin(nx) \\, dx = \\frac{4}{\\pi} \\left[ \\frac{-x\\cos nx}{n} + \\frac{\\sin nx}{n^2} \\right]_0^\\pi = \\frac{4(-1)^{n+1}}{n}$. The Fourier series is $f(x) = 4 \\sum_{n=1}^\\infty \\frac{(-1)^{n+1}}{n} \\sin(nx) = 4 \\left( \\sin x - \\frac{\\sin 2x}{2} + \\frac{\\sin 3x}{3} - \\dots \\right)$.",
       "chapterRef": "Unit 4: Fourier Series (Period 2pi & 2L)"
     },
     {
       "id": "m2-24-15",
       "group": "Group B (5 Marks)",
       "marks": 5,
-      "questionText": "Expand the following function in Fourier cosine series: f(x) = 1 for 0 < x < pi/2, = 0 for pi/2 < x < pi.",
-      "solutionSummary": "Half-range cosine series on [0, \\pi]: b_n = 0. a_0 = (2/\\pi) \\int_0^{\\pi/2} 1 dx = 1. a_n = (2/\\pi) \\int_0^{\\pi/2} cos(nx) dx = (2/\\pi n) sin(n\\pi/2). For even n, a_n = 0; for odd n: a_1 = 2/\\pi, a_3 = -2/(3\\pi), a_5 = 2/(5\\pi). Fourier cosine series: f(x) = \\frac{1}{2} + \\frac{2}{\\pi} [ \\cos x - \\frac{\\cos 3x}{3} + \\frac{\\cos 5x}{5} - \\dots ].",
+      "questionText": "Expand the following function in Fourier cosine series: $f(x) = \\begin{cases} 1, & 0 < x < \\frac{\\pi}{2} \\\\ 0, & \\frac{\\pi}{2} < x < \\pi \\end{cases}$",
+      "solutionSummary": "Half-range cosine series on $(0, \\pi)$: $a_0 = \\frac{2}{\\pi} \\int_0^{\\pi/2} 1 \\, dx = 1 \\implies \\frac{a_0}{2} = \\frac{1}{2}$. $a_n = \\frac{2}{\\pi} \\int_0^{\\pi/2} \\cos(nx) \\, dx = \\frac{2}{n\\pi} \\sin\\left(\\frac{n\\pi}{2}\\right)$. For even $n$, $a_n = 0$; for odd $n = 2k-1$, $a_{2k-1} = \\frac{2(-1)^{k-1}}{(2k-1)\\pi}$. Fourier cosine series: $f(x) = \\frac{1}{2} + \\frac{2}{\\pi} \\left( \\cos x - \\frac{\\cos 3x}{3} + \\frac{\\cos 5x}{5} - \\dots \\right)$.",
       "chapterRef": "Unit 4: Half-Range Series & Parseval's Identity"
     },
     {
       "id": "m2-24-16",
       "group": "Group B (5 Marks)",
       "marks": 5,
-      "questionText": "Verify Cauchy-Riemann equation for the function f(z) = \\frac{x - iy}{x^2 + y^2}.",
-      "solutionSummary": "Notice f(z) = \\bar{z} / |z|^2 = 1/z. Here u = x/(x^2 + y^2) and v = -y/(x^2 + y^2). Partial derivatives: u_x = (y^2 - x^2)/(x^2 + y^2)^2, u_y = -2xy/(x^2 + y^2)^2. v_x = 2xy/(x^2 + y^2)^2, v_y = (y^2 - x^2)/(x^2 + y^2)^2. Since u_x = v_y and u_y = -v_x for all (x, y) != (0, 0), the Cauchy-Riemann equations are fully satisfied everywhere except at z = 0.",
+      "questionText": "Verify Cauchy-Riemann equation for the function: $f(z) = \\frac{x - iy}{x^2 + y^2}$",
+      "solutionSummary": "$u = \\frac{x}{x^2 + y^2}, v = \\frac{-y}{x^2 + y^2}$. Partial derivatives: $\\frac{\\partial u}{\\partial x} = \\frac{y^2 - x^2}{(x^2 + y^2)^2} = \\frac{\\partial v}{\\partial y}$ and $\\frac{\\partial u}{\\partial y} = \\frac{-2xy}{(x^2 + y^2)^2} = -\\frac{\\partial v}{\\partial x}$. Both Cauchy-Riemann equations hold everywhere for $(x, y) \\ne (0, 0)$.",
       "chapterRef": "Unit 5: Cauchy-Riemann Equations (Cartesian & Polar)"
     },
     {
       "id": "m2-24-17",
       "group": "Group B (5 Marks)",
       "marks": 5,
-      "questionText": "Expand f(z) = 1/z by Taylor's series about the point z = 1.",
-      "solutionSummary": "Write in powers of (z - 1): f(z) = \\frac{1}{1 + (z - 1)} = [1 + (z - 1)]^{-1}. Since |z - 1| < 1, using geometric series: f(z) = \\sum_{n=0}^\\infty (-1)^n (z - 1)^n = 1 - (z - 1) + (z - 1)^2 - (z - 1)^3 + ... with radius of convergence R = 1.",
+      "questionText": "Expand $f(z) = \\frac{1}{z}$ by Taylor's series about the point $z = 1$.",
+      "solutionSummary": "Writing $z = 1 + (z - 1)$: $f(z) = \\frac{1}{1 + (z - 1)} = [1 + (z - 1)]^{-1}$. Since $|z - 1| < 1$, geometric series expansion gives $f(z) = \\sum_{n=0}^\\infty (-1)^n (z - 1)^n = 1 - (z - 1) + (z - 1)^2 - (z - 1)^3 + \\dots$ with radius of convergence $R = 1$.",
       "chapterRef": "Unit 6: Laurent Series & Singularities"
     },
     {
       "id": "m2-24-18",
       "group": "Group B (5 Marks)",
       "marks": 5,
-      "questionText": "Solve the equation: x dy/dx = y + x^2 log x",
-      "solutionSummary": "Rearranging: dy/dx - (1/x) y = x ln x. Integrating factor: I.F. = e^{\\int -1/x dx} = 1/x. Solution: y * (1/x) = \\int (x ln x)/x dx = \\int ln x dx = x ln x - x + C => y = x^2 \\ln x - x^2 + C x.",
+      "questionText": "Solve the equation: $x \\frac{dy}{dx} = y + x^2 \\log x$",
+      "solutionSummary": "Standard linear form: $\\frac{dy}{dx} - \\frac{1}{x} y = x \\log x$. Integrating factor $\\text{I.F.} = e^{-\\int \\frac{1}{x} dx} = \\frac{1}{x}$. Solution: $\\frac{y}{x} = \\int \\frac{x \\log x}{x} \\, dx + C = \\int \\log x \\, dx + C = x \\log x - x + C \\implies y = x^2(\\log x - 1) + Cx$.",
       "chapterRef": "Unit 2: Linear, Bernoulli & Clairaut Equations"
     },
     {
       "id": "m2-24-19",
       "group": "Group B (5 Marks)",
       "marks": 5,
-      "questionText": "State and prove the Cauchy Riemann equations.",
-      "solutionSummary": "Theorem: If f(z) = u(x, y) + i v(x, y) is differentiable at z_0 = x_0 + i y_0, then \\partial u/\\partial x = \\partial v/\\partial y and \\partial u/\\partial y = -\\partial v/\\partial x. Proof evaluates f'(z_0) along horizontal path (\\Delta z = \\Delta x) giving u_x + i v_x, and along vertical path (\\Delta z = i \\Delta y) giving v_y - i u_y. Equating real and imaginary components establishes the C-R equations.",
+      "questionText": "State and prove the Cauchy-Riemann equations.",
+      "solutionSummary": "Theorem: If $f(z) = u(x, y) + i v(x, y)$ is differentiable at $z$, then $\\frac{\\partial u}{\\partial x} = \\frac{\\partial v}{\\partial y}$ and $\\frac{\\partial u}{\\partial y} = -\\frac{\\partial v}{\\partial x}$. Proof evaluates $f'(z) = \\lim_{\\Delta z \\to 0} \\frac{f(z + \\Delta z) - f(z)}{\\Delta z}$ along real axis ($\\Delta z = \\Delta x \\implies u_x + i v_x$) and imaginary axis ($\\Delta z = i\\Delta y \\implies v_y - i u_y$). Equating real and imaginary parts proves the relations.",
       "chapterRef": "Unit 5: Cauchy-Riemann Equations (Cartesian & Polar)"
     },
     {
       "id": "m2-24-20",
       "group": "Group B (5 Marks)",
       "marks": 5,
-      "questionText": "A function f(x) is defined by: f(x) = 1 for -1 <= x <= 1, = 0 otherwise. Find the Fourier integral representation of f(x).",
-      "solutionSummary": "Since f(x) is even, B(\\omega) = 0. A(\\omega) = 2 \\int_0^1 1 * cos(\\omega x) dx = 2 [sin(\\omega)/\\omega]. By Fourier integral formula: f(x) = (1/\\pi) \\int_0^\\infty A(\\omega) cos(\\omega x) d\\omega = \\frac{2}{\\pi} \\int_0^\\infty \\frac{\\sin \\omega \\cos(\\omega x)}{\\omega} d\\omega.",
+      "questionText": "A function $f(x)$ is defined by $f(x) = \\begin{cases} 1, & -1 \\le x \\le 1 \\\\ 0, & \\text{otherwise} \\end{cases}$. Find the Fourier integral representation of $f(x)$.",
+      "solutionSummary": "Since $f(x)$ is an even function, $B(\\lambda) = 0$. $A(\\lambda) = 2 \\int_0^1 1 \\cdot \\cos(\\lambda t) \\, dt = 2 \\frac{\\sin \\lambda}{\\lambda}$. By Fourier integral formula: $f(x) = \\frac{1}{\\pi} \\int_0^\\infty A(\\lambda) \\cos(\\lambda x) \\, d\\lambda = \\frac{2}{\\pi} \\int_0^\\infty \\frac{\\sin \\lambda \\cos(\\lambda x)}{\\lambda} \\, d\\lambda$.",
       "chapterRef": "Unit 4: Fourier Integrals & Transforms"
     },
     {
       "id": "m2-24-21",
       "group": "Group C (5 Marks)",
       "marks": 5,
-      "questionText": "Solve: \\frac{dy}{dx} = \\frac{2x - y + 1}{6x - 5y + 4}",
-      "solutionSummary": "Non-homogeneous linear fractional equation. Let x = X + h, y = Y + k. Setting 2h - k + 1 = 0 and 6h - 5k + 4 = 0 gives h = -1/4, k = 1/2. Equation becomes dY/dX = (2X - Y)/(6X - 5Y). Put Y = vX => v + X dv/dX = (2 - v)/(6 - 5v) => X dv/dX = (5v^2 - 7v + 2)/(6 - 5v). Separating variables and integrating gives (2x - y + 1)^3 = C (x - y + 3/4).",
+      "questionText": "Solve: $\\frac{dy}{dx} = \\frac{2x - y + 1}{6x - 5y + 4}$",
+      "solutionSummary": "Setting $x = X + h, y = Y + k$ with $2h - k + 1 = 0$ and $6h - 5k + 4 = 0$ yields $h = -1/4, k = 1/2$. Substituting $Y = vX$ gives homogeneous ODE $X \\frac{dv}{dX} = \\frac{5v^2 - 7v + 2}{6 - 5v}$. Separating variables and integrating via partial fractions yields $(Y - X) = C_1 (5Y - 2X)^4$, which transforms back to $4(y - x) - 3 = C (5y - 2x - 3)^4$.",
       "chapterRef": "Unit 2: Differential Equations of First Order"
     },
     {
       "id": "m2-24-22",
       "group": "Group C (5 Marks)",
       "marks": 5,
-      "questionText": "Find the general solution of the differential equation: \\frac{d^2 y}{dx^2} + 2 \\frac{dy}{dx} + y = 2x + x^2",
-      "solutionSummary": "Auxiliary equation: (m + 1)^2 = 0 => m = -1, -1. Complementary function: y_c = (c_1 + c_2 x) e^{-x}. Particular integral: PI = 1/(1 + D)^2 [x^2 + 2x] = (1 - 2D + 3D^2) [x^2 + 2x] = (x^2 + 2x) - 2(2x + 2) + 3(2) = x^2 - 2x + 2. General solution: y = (c_1 + c_2 x) e^{-x} + x^2 - 2x + 2.",
+      "questionText": "Find the general solution of the differential equation: $\\frac{d^2 y}{dx^2} + 2 \\frac{dy}{dx} + y = 2x + x^2$",
+      "solutionSummary": "Auxiliary equation: $(m + 1)^2 = 0 \\implies m = -1, -1 \\implies y_c = (c_1 + c_2 x) e^{-x}$. Particular integral: $y_p = (1 + D)^{-2} (x^2 + 2x) = (1 - 2D + 3D^2) (x^2 + 2x) = (x^2 + 2x) - 2(2x + 2) + 3(2) = x^2 - 2x + 2$. General solution: $y = (c_1 + c_2 x) e^{-x} + x^2 - 2x + 2$.",
       "chapterRef": "Unit 3: Higher-Order Linear ODEs"
     },
     {
       "id": "m2-24-23",
       "group": "Group C (5 Marks)",
       "marks": 5,
-      "questionText": "Find the Fourier sine series for f(x) = x^2 in the interval 0 < x < 3.",
-      "solutionSummary": "Interval length L = 3. Half-range sine series: b_n = (2/3) \\int_0^3 x^2 sin(n\\pi x / 3) dx. Integrating by parts: b_n = (2/3) [ -x^2 (3/n\\pi) cos(n\\pi x / 3) + 2x (9/n^2\\pi^2) sin(n\\pi x / 3) + 2 (27/n^3\\pi^3) cos(n\\pi x / 3) ]_0^3 = \\frac{-18 (-1)^n}{n\\pi} + \\frac{36 [(-1)^n - 1]}{n^3 \\pi^3}. Fourier sine series: f(x) = \\sum_{n=1}^\\infty b_n \\sin(n\\pi x / 3).",
+      "questionText": "Find the Fourier sine series for $f(x) = x^2$ in the interval $0 < x < 3$.",
+      "solutionSummary": "With $L = 3$, $b_n = \\frac{2}{3} \\int_0^3 x^2 \\sin\\left(\\frac{n\\pi x}{3}\\right) dx$. Integrating by parts: $b_n = \\frac{18(-1)^{n+1}}{n\\pi} - \\frac{36(1 - (-1)^n)}{n^3 \\pi^3}$. The Fourier sine series is $f(x) = \\sum_{n=1}^\\infty \\left[ \\frac{18(-1)^{n+1}}{n\\pi} - \\frac{36(1 - (-1)^n)}{n^3 \\pi^3} \\right] \\sin\\left(\\frac{n\\pi x}{3}\\right)$.",
       "chapterRef": "Unit 4: Half-Range Series & Parseval's Identity"
     },
     {
       "id": "m2-24-24",
       "group": "Group C (5 Marks)",
       "marks": 5,
-      "questionText": "Find an analytic function f(z) whose real part is e^x (x \\cos y - y \\sin y).",
-      "solutionSummary": "Given u = e^x (x cos y - y sin y). By Milne-Thomson Method: u_x(z, 0) = e^z(z + 1), u_y(z, 0) = 0. f'(z) = u_x(z, 0) - i u_y(z, 0) = (z + 1) e^z. Integrating with respect to z: f(z) = \\int (z + 1) e^z dz = z e^z + C.",
+      "questionText": "Find an analytic function $f(z)$ whose real part is $e^x (x \\cos y - y \\sin y)$.",
+      "solutionSummary": "Given $u = e^x (x \\cos y - y \\sin y)$. Using Milne-Thomson Method: $u_x(z, 0) = (z + 1) e^z$ and $u_y(z, 0) = 0$. Then $f'(z) = u_x(z, 0) - i u_y(z, 0) = (z + 1) e^z$. Integrating gives $f(z) = \\int (z + 1) e^z \\, dz = z e^z + C$.",
       "chapterRef": "Unit 5: Harmonic Functions & Milne-Thomson Method"
     },
     {
       "id": "m2-24-25",
       "group": "Group C (5 Marks)",
       "marks": 5,
-      "questionText": "Find the residue of f(z) = \\frac{z}{(z - 1)(z - 2)^2} at its poles.",
-      "solutionSummary": "Simple pole at z = 1: Res(f, 1) = lim_{z->1} (z - 1) f(z) = 1 / (1 - 2)^2 = 1. Double pole at z = 2: Res(f, 2) = lim_{z->2} d/dz [(z - 2)^2 f(z)] = lim_{z->2} d/dz [z/(z - 1)] = lim_{z->2} [(1)(z - 1) - z(1)] / (z - 1)^2 = -1 / (z - 1)^2 = -1. Notice sum of residues = 1 + (-1) = 0.",
+      "questionText": "Find the residue of $f(z) = \\frac{z}{(z - 1)(z - 2)^2}$ at its poles.",
+      "solutionSummary": "Simple pole at $z = 1$: $\\text{Res}(f, 1) = \\lim_{z \\to 1} (z - 1) f(z) = \\frac{1}{(1 - 2)^2} = 1$. Double pole at $z = 2$: $\\text{Res}(f, 2) = \\lim_{z \\to 2} \\frac{d}{dz} \\left[ (z - 2)^2 f(z) \\right] = \\lim_{z \\to 2} \\frac{d}{dz} \\left(\\frac{z}{z - 1}\\right) = \\lim_{z \\to 2} \\frac{-1}{(z - 1)^2} = -1$. (Note $\\sum \\text{Res} = 1 + (-1) = 0$).",
       "chapterRef": "Unit 6: Residue Theorem & Trigonometric Contours"
     }
   ]
