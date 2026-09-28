@@ -7,10 +7,11 @@
 
 import { Suspense } from 'react';
 import Link from 'next/link';
+import ExportMenu from '@/components/ExportMenu';
 
 interface SharePageProps {
-  params: { token: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ token: string }> | { token: string };
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 /**
@@ -164,28 +165,9 @@ async function SharedContent({ token }: { token: string }) {
         </div>
       </section>
 
-      <div className="export-actions">
-        <h3>Download This Result</h3>
-        <a
-          href={`/api/share/${token}/export?format=pdf`}
-          className="btn btn-primary"
-          download={`exam-result-${contentId}.pdf`}
-        >
-          📥 Download as PDF
-        </a>
-        <a
-          href={`/api/share/${token}/export?format=docx`}
-          className="btn btn-primary"
-          download={`exam-result-${contentId}.docx`}
-        >
-          📥 Download as Word
-        </a>
-        <button
-          onClick={() => window.print()}
-          className="btn btn-secondary"
-        >
-          🖨️ Print
-        </button>
+      <div className="export-actions" style={{ marginTop: '2rem', marginBottom: '1.5rem' }}>
+        <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.75rem' }}>Download or Print This Result</h3>
+        <ExportMenu contentType="exam-results" contentId={contentId} token={token} />
       </div>
 
       <footer className="shared-footer">
@@ -202,9 +184,12 @@ async function SharedContent({ token }: { token: string }) {
 /**
  * Main Share Page Component
  */
-export default function SharePage({
-  params: { token },
+export default async function SharePage({
+  params,
 }: SharePageProps) {
+  const resolvedParams = await Promise.resolve(params);
+  const token = resolvedParams.token;
+
   return (
     <main className="share-page">
       <Suspense fallback={<LoadingState />}>
@@ -229,7 +214,8 @@ function LoadingState() {
  * Metadata for share page
  */
 export async function generateMetadata({ params }: SharePageProps) {
-  const { token } = params;
+  const resolvedParams = await Promise.resolve(params);
+  const token = resolvedParams.token;
 
   try {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://examai.local';

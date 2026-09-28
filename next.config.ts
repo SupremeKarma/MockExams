@@ -11,6 +11,44 @@ const nextConfig: NextConfig = {
   // its menu button — it covers the control during local testing and in any
   // screenshot taken from the dev server.
   devIndicators: false,
+
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+          { key: 'X-XSS-Protection', value: '1; mode=block' },
+        ],
+      },
+    ];
+  },
+
+  async redirects() {
+    return [
+      {
+        source: '/:category/:slug.md',
+        destination: '/:category/:slug',
+        permanent: true,
+      },
+      {
+        source: '/content/:path*',
+        destination: '/404',
+        permanent: false,
+      },
+      {
+        source: '/markdown/:path*',
+        destination: '/404',
+        permanent: false,
+      },
+      {
+        source: '/raw/:path*',
+        destination: '/404',
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

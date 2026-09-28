@@ -25,6 +25,7 @@ import Link from "next/link";
 import { ExamReview } from "@/components/ExamReview";
 import { ReadAloud } from "@/components/ReadAloud";
 import { parseStoredRubric } from "@/lib/rubric-authoring";
+import ShareButton from "@/components/ShareButton";
 
 export default function ExamResultsPage({ params }: { params: any }) {
   const router = useRouter();
@@ -342,6 +343,11 @@ export default function ExamResultsPage({ params }: { params: any }) {
                 label="exam result summary"
                 buttonText="Listen to summary"
                 title="Listen to overall exam performance summary in female voice"
+              />
+              <ShareButton
+                contentType="exam-results"
+                contentId={attemptId}
+                userId={user?.uid}
               />
               <button
                 type="button"

@@ -8,6 +8,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:prod": "node scripts/verify-no-md-files.js && next build && node scripts/verify-no-md-files.js",
+    "verify:security": "node scripts/verify-no-md-files.js",
     "start": "next start",
     "lint": "eslint",
     "seed-firebase": "dotenv -e .env.local ts-node -r tsconfig-paths/register supabase/seed-firestore.ts",

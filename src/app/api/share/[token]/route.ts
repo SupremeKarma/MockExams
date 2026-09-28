@@ -6,7 +6,8 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { validateShareToken, logAccessAttempt } from '@/middleware/access-control';
+import { validateShareToken } from '@/middleware/access-control';
+import { logAccessAttempt } from '@/lib/access-control';
 
 export interface VerifyShareResponse {
   valid: boolean;
@@ -19,38 +20,12 @@ export interface VerifyShareResponse {
   message?: string;
 }
 
-/**
- * GET /api/share/[token]
- * Verify a share token and get content details
- *
- * Response (valid):
- * {
- *   "valid": true,
- *   "contentType": "exam-results",
- *   "contentId": "attempt-123",
- *   "expiresAt": "2026-10-05T14:23:45.000Z",
- *   "createdAt": "2026-09-28T14:23:45.000Z"
- * }
- *
- * Response (invalid/expired):
- * {
- *   "valid": false,
- *   "error": "Invalid or expired share token",
- *   "message": "This share link has expired or is invalid"
- * }
- *
- * Response (protected content):
- * {
- *   "valid": false,
- *   "error": "Access Denied",
- *   "message": "Only exam results can be shared"
- * }
- */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { token: string } }
+  { params }: { params: Promise<{ token: string }> | { token: string } }
 ): Promise<NextResponse> {
-  const token = params.token;
+  const resolvedParams = await Promise.resolve(params);
+  const token = resolvedParams.token;
   const ipAddress = request.headers.get('x-forwarded-for') || 'unknown';
 
   try {

@@ -7,6 +7,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { enforceShareAction, logAccessAttempt, AccessLog } from '@/lib/access-control';
+export { logAccessAttempt } from '@/lib/access-control';
 
 /**
  * MIDDLEWARE: Protect share/download endpoints

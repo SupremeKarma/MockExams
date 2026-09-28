@@ -8,46 +8,21 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {
   validateShareToken,
-  logAccessAttempt,
   activityDetector,
 } from '@/middleware/access-control';
-import { isActionAllowed } from '@/lib/access-control';
+import { isActionAllowed, logAccessAttempt } from '@/lib/access-control';
 
 export interface ExportRequest {
   format: 'pdf' | 'docx';
   token: string;
 }
 
-/**
- * GET /api/share/[token]/export?format=pdf
- * Export shared content
- *
- * Query params:
- * - format: "pdf" or "docx" (required)
- * - includeAnswers: "true" or "false" (for exam results)
- *
- * Response (success):
- * - Binary file (PDF or Word document)
- * - Content-Type: application/pdf or application/vnd.openxmlformats-officedocument.wordprocessingml.document
- * - Content-Disposition: attachment; filename="exam-result-123.pdf"
- *
- * Response (error - protected content):
- * {
- *   "error": "Access Denied",
- *   "message": "Cannot export content of type 'notes'"
- * }
- *
- * Response (error - invalid token):
- * {
- *   "error": "Invalid share token",
- *   "message": "This share link has expired or is invalid"
- * }
- */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { token: string } }
+  { params }: { params: Promise<{ token: string }> | { token: string } }
 ): Promise<NextResponse> {
-  const token = params.token;
+  const resolvedParams = await Promise.resolve(params);
+  const token = resolvedParams.token;
   const format = request.nextUrl.searchParams.get('format') || 'pdf';
   const ipAddress = request.headers.get('x-forwarded-for') || 'unknown';
   const userAgent = request.headers.get('user-agent') || 'unknown';
@@ -72,7 +47,7 @@ export async function GET(
         timestamp: new Date().toISOString(),
         userId: 'public',
         contentType: 'unknown' as any,
-        action: `export-${format}`,
+        action: `export-${format}` as any,
         allowed: false,
         ipAddress,
         userAgent,
@@ -99,7 +74,7 @@ export async function GET(
         timestamp: new Date().toISOString(),
         userId: 'public',
         contentType: tokenData.contentType as any,
-        action: exportAction,
+        action: exportAction as any,
         allowed: false,
         ipAddress,
         userAgent,
@@ -109,7 +84,7 @@ export async function GET(
         timestamp: new Date().toISOString(),
         userId: 'public',
         contentType: tokenData.contentType as any,
-        action: exportAction,
+        action: exportAction as any,
         allowed: false,
         ipAddress,
         userAgent,
@@ -129,19 +104,13 @@ export async function GET(
       timestamp: new Date().toISOString(),
       userId: 'public',
       contentType: tokenData.contentType as any,
-      action: exportAction,
+      action: exportAction as any,
       allowed: true,
       ipAddress,
       userAgent,
     });
 
-    // In production: Generate actual PDF/Word document
-    // For now, return placeholder
-
     if (format === 'pdf') {
-      // TODO: Generate PDF from exam result data
-      // const pdfContent = await generateExamResultPDF(tokenData.contentId);
-
       return new NextResponse(
         Buffer.from('PDF content placeholder'),
         {
@@ -156,10 +125,6 @@ export async function GET(
         }
       );
     } else {
-      // format === 'docx'
-      // TODO: Generate Word document from exam result data
-      // const docxContent = await generateExamResultDocx(tokenData.contentId);
-
       return new NextResponse(
         Buffer.from('DOCX content placeholder'),
         {
