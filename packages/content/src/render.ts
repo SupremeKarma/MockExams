@@ -224,6 +224,43 @@ function blockLabelIcons() {
 }
 
 /**
+ * Wrap display math ($$...$$ or KaTeX display mode) in a scrollable container
+ * for complex nested integrals, Jacobians, and matrices that exceed mobile viewport.
+ *
+ * Semester 2 contains multi-line integrals and Jacobian determinants that need
+ * graceful overflow handling on tablets and phones.
+ */
+function wrapDisplayMath() {
+  return () => (tree: unknown) => {
+    visit(tree as never, "element", (node: any, index: number | undefined, parent: any) => {
+      if (!parent || index === undefined) return;
+
+      const classes: string[] = node.properties?.className ?? [];
+      const isDisplayMath = classes.includes("katex-display") ||
+                           (node.tagName === "script" && node.properties?.type === "math/tex; mode=display");
+
+      if (!isDisplayMath) return;
+
+      // Check if already wrapped
+      if (parent.properties?.className?.includes?.("math-wrap")) return;
+
+      const wrapper = {
+        type: "element",
+        tagName: "div",
+        properties: {
+          className: ["math-wrap"],
+          role: "region",
+          "aria-label": "Mathematical formula",
+        },
+        children: [node],
+      };
+
+      parent.children[index] = wrapper;
+    });
+  };
+}
+
+/**
  * Wrap tables so a wide matrix scrolls inside its own box, not the page.
  *
  * The trailing `.table-hint` is part of the design system's contract: it is
@@ -312,6 +349,7 @@ export function renderMarkdown(
     // whole page render: KaTeX shows the source in red instead, which a
     // reviewer can see and fix.
     .use(rehypeKatex, { output: "html", throwOnError: false } as never)
+    .use(wrapDisplayMath())
     .use(rehypeStringify)
     .processSync(markdown);
 
