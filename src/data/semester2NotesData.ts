@@ -20,211 +20,829 @@ export const semester2NotesData: SemesterNotesData = {
     creditHours: 3,
     topics: [
       {
-        id: "m2-u1-double-integrals",
-        name: "Double & Triple Integrals, Change of Order & Polar Coordinates",
+        id: "m2-u1-double-integrals-eval",
+        name: "Double Integrals: Definition, Evaluation in Cartesian Coordinates & Area of Plane Regions",
         unit: 1,
         unitTitle: "Unit 1: Multiple Integrals",
         unitCode: "1.1",
         importance: "Very High",
         keyPoints: [
-          "Double integral ∬_R f(x, y) dA computes volume under surface z = f(x,y) over 2D region R.",
-          "Change of order of integration alters limits: from dy dx (vertical stripes) to dx dy (horizontal stripes), often simplifying impossible antiderivatives.",
-          "Transformation to polar coordinates: x = r cos θ, y = r sin θ with Jacobian determinant J = r, giving dA = r dr dθ.",
-          "Triple integral ∭_V f(x, y, z) dV in spherical coordinates: x = ρ sin φ cos θ, y = ρ sin φ sin θ, z = ρ cos φ with dV = ρ² sin φ dρ dφ dθ.",
-          "Applications: Area of plane region A = ∬_R dx dy; Mass M = ∬_R ρ(x, y) dA; Center of gravity (x̄, ȳ) where x̄ = (1/M) ∬_R x ρ(x, y) dA."
+          "Double Integral ∬_R f(x, y) dA is the limit of Riemann sums ∑_{i=1}^n f(x_i*, y_i*) ΔA_i as mesh size approaches zero.",
+          "Geometric Meaning: When f(x, y) ≥ 0, ∬_R f(x, y) dA represents the volume of the solid cylindrical column bounded above by surface z = f(x,y) and below by plane region R.",
+          "When f(x, y) = 1, the double integral computes the exact Area of the planar region: Area(R) = ∬_R dx dy.",
+          "Type I (Vertical Slices): R = {(x, y) | a ≤ x ≤ b, g₁(x) ≤ y ≤ g₂(x)} => ∬_R f(x, y) dA = ∫_a^b [ ∫_{g₁(x)}^{g₂(x)} f(x, y) dy ] dx.",
+          "Type II (Horizontal Slices): R = {(x, y) | c ≤ y ≤ d, h₁(y) ≤ x ≤ h₂(y)} => ∬_R f(x, y) dA = ∫_c^d [ ∫_{h₁(y)}^{h₂(y)} f(x, y) dx ] dy.",
+          "Fubini's Theorem: If f(x, y) is continuous on rectangular region R = [a, b] × [c, d], then ∫_a^b ∫_c^d f(x, y) dy dx = ∫_c^d ∫_a^b f(x, y) dx dy."
         ],
-        theory: "Multiple integrals extend single-variable Riemann integration to higher-dimensional Euclidean spaces. Fubini's Theorem guarantees that for continuous functions over bounded regions, multiple integrals evaluate as iterated single integrals. When switching coordinate systems, the transformation scale factor is quantified by the Jacobian determinant J = ∂(x, y)/∂(u, v). Changing the order of integration requires sketching the boundary curves, identifying intersection points, and rewriting the independent and dependent variable bounds.",
-        code: `// Analytical Evaluation: Change of Order of Integration
-// Evaluate: I = ∫_0^1 ∫_x^1 sin(y^2) dy dx
-// Step 1: Region R is bounded by y = x, y = 1, x = 0, x = 1 (triangle)
-// Step 2: In horizontal strips: for a fixed y ∈ [0, 1], x ranges from 0 to y
-// Step 3: Rewritten Integral:
-// I = ∫_0^1 [ ∫_0^y sin(y^2) dx ] dy
-//   = ∫_0^1 sin(y^2) [x]_0^y dy = ∫_0^1 y sin(y^2) dy
-// Let u = y^2 => du = 2y dy => (1/2) ∫_0^1 sin(u) du
-//   = (1/2) [-cos(u)]_0^1 = (1 - cos(1)) / 2 ≈ 0.2298`,
-        example: "Area of circle x² + y² = a² using polar double integrals: ∬_R dA = ∫_0^{2π} ∫_0^a r dr dθ = ∫_0^{2π} [r²/2]_0^a dθ = (a²/2)(2π) = π a².",
+        theory: "Double integration extends single-variable calculus to functions of two independent variables over bounded planar domains. Evaluation is executed via iterated single integrals. The innermost integral treats the outer variable as a fixed parameter while integrating with respect to the inner variable. Careful determination of the bounding functions g₁(x) and g₂(x) is achieved by drawing test vertical or horizontal lines traversing the domain from entry boundary to exit boundary.",
+        code: `// Analytical Evaluation: Area Bounded by Parabola and Line
+// Problem: Find the area enclosed by y = x^2 and y = 2x + 3
+// Step 1: Find points of intersection:
+//    x^2 = 2x + 3 => x^2 - 2x - 3 = 0 => (x - 3)(x + 1) = 0
+//    Intersection points: x = -1 (y = 1) and x = 3 (y = 9)
+// Step 2: For any x ∈ [-1, 3], vertical strip enters at y = x^2 (lower) and exits at y = 2x + 3 (upper)
+// Step 3: Set up iterated double integral for Area:
+//    Area = ∬_R dy dx = ∫_{-1}^3 [ ∫_{x^2}^{2x + 3} dy ] dx
+//         = ∫_{-1}^3 [ y ]_{x^2}^{2x + 3} dx
+//         = ∫_{-1}^3 (2x + 3 - x^2) dx
+// Step 4: Evaluate antiderivative:
+//    = [ x^2 + 3x - (x^3 / 3) ]_{-1}^3
+//    At x = 3:  3^2 + 3(3) - (27/3) = 9 + 9 - 9 = 9
+//    At x = -1: (-1)^2 + 3(-1) - (-1/3) = 1 - 3 + 1/3 = -5/3
+//    Area = 9 - (-5/3) = 9 + 5/3 = 32 / 3 square units (≈ 10.67)`,
+        example: "Evaluate ∬_R xy dx dy over the positive quadrant of the ellipse x²/a² + y²/b² = 1: Limits: x from 0 to a; y from 0 to b√(1 - x²/a²). ∬ xy dy dx = ∫_0^a x [y²/2]_0^{b√(1-x²/a²)} dx = (b²/2) ∫_0^a x(1 - x²/a²) dx = (b²/2) [x²/2 - x⁴/(4a²)]_0^a = a²b² / 8.",
         commonExamQuestions: [
-          "[8 Marks] Change the order of integration and evaluate ∫_0^∞ ∫_x^∞ (e^{-y} / y) dy dx.",
-          "[7 Marks] Find the volume of the sphere x² + y² + z² = a² using spherical polar coordinates triple integration.",
-          "[7 Marks] Evaluate ∬_R (x + y)² dx dy over the region bounded by x + y = 0, x + y = 1, 2x - y = 0, and 2x - y = 3 using change of variables."
+          "[8 Marks] Evaluate ∬_R (x² + y²) dx dy over the region R bounded by y = x² and x = y².",
+          "[7 Marks] Find the area of the region bounded by the parabola y² = 4ax and its latus rectum x = a using double integration.",
+          "[7 Marks] Evaluate ∬_R x y (x + y) dx dy over the region bounded by y = x and y = x²."
         ]
       },
       {
-        id: "m2-u2-first-order-ode",
-        name: "First Order Differential Equations: Exact, Linear & Bernoulli",
+        id: "m2-u1-change-order-jacobians",
+        name: "Change of Order of Integration & Change of Variables via Jacobians",
+        unit: 1,
+        unitTitle: "Unit 1: Multiple Integrals",
+        unitCode: "1.2",
+        importance: "Very High",
+        keyPoints: [
+          "Change of Order of Integration: Reverses the sequence of iterated integration from dy dx to dx dy (or vice-versa), converting impossible non-elementary antiderivatives into easily solvable forms.",
+          "Procedure: (1) Extract existing boundary equations from integral limits, (2) Sketch the exact 2D bounded region R, (3) Switch perspective from vertical strips to horizontal strips (or vice-versa), (4) Determine new inner variable limits as functions and outer limits as constants.",
+          "Change of Variables in Double Integrals: ∬_R f(x, y) dx dy = ∬_{R'} f(x(u, v), y(u, v)) |J| du dv.",
+          "The Jacobian Determinant: J = ∂(x, y)/∂(u, v) = |(∂x/∂u  ∂x/∂v) / (∂y/∂u  ∂y/∂v)| = (∂x/∂u)(∂y/∂v) - (∂x/∂v)(∂y/∂u).",
+          "Inverse Jacobian Property: J · J' = 1, meaning ∂(x, y)/∂(u, v) = 1 / [∂(u, v)/∂(x, y)].",
+          "Polar Coordinate Transformation: x = r cos θ, y = r sin θ => Jacobian J = r => dx dy = r dr dθ."
+        ],
+        theory: "Many practical definite integrals (such as ∫ (sin y / y) dy or ∫ e^{-x²} dx) have no elementary antiderivative. By changing the order of integration, the non-integrable variable becomes the outer parameter, yielding an inner integrand of 1 that integrates trivially. When transforming coordinate geometries (e.g., from skewed parallelograms to unit squares), the Jacobian determinant measures the local surface area distortion factor |dA_{xy} / dA_{uv}|.",
+        code: `// Change of Order of Integration: Classic University Exam Proof
+// Evaluate: I = ∫_0^a ∫_{x/a}^{√(x/a)} (x^2 + y^2) dy dx
+// Step 1: Identify existing boundary curves:
+//    Inner limits: y = x/a (straight line x = ay) to y = √(x/a) (parabola x = a y^2)
+//    Outer limits: x = 0 to x = a
+// Step 2: Points of intersection:
+//    ay = ay^2 => ay(1 - y) = 0 => y = 0 and y = 1.
+//    At y = 0, x = 0. At y = 1, x = a.
+// Step 3: Draw horizontal strips across region R:
+//    For a fixed y ∈ [0, 1]:
+//    Left boundary curve (enters):  x = a y^2
+//    Right boundary curve (exits): x = a y
+// Step 4: Rewritten integral with changed order:
+//    I = ∫_0^1 [ ∫_{a y^2}^{a y} (x^2 + y^2) dx ] dy
+//      = ∫_0^1 [ (x^3 / 3) + y^2 x ]_{a y^2}^{a y} dy
+//      = ∫_0^1 [ (a^3 y^3 / 3 + a y^3) - (a^3 y^6 / 3 + a y^4) ] dy
+// Step 5: Integrate with respect to y:
+//    = [ (a^3/3 + a) (y^4 / 4) - (a^3 / 21) y^7 - (a / 5) y^5 ]_0^1
+//    = (a^3 / 12) + (a / 4) - (a^3 / 21) - (a / 5)
+//    = a^3 (1/12 - 1/21) + a (1/4 - 1/5) = (3 a^3 / 84) + (a / 20) = (a^3 / 28) + (a / 20)`,
+        example: "Evaluate ∫_0^∞ ∫_0^x x e^{-x²/y} dy dx: Changing order of integration transforms the limits to y ∈ [0, ∞) and x ∈ [y, ∞). The resulting integral evaluates to 1/2.",
+        commonExamQuestions: [
+          "[8 Marks] Change the order of integration and evaluate ∫_0^1 ∫_x^1 [x / (x² + y²)] dy dx.",
+          "[8 Marks] Change the order of integration of ∫_0^4a ∫_{x²/4a}^{2√(ax)} dy dx and evaluate.",
+          "[7 Marks] Transform to polar coordinates and evaluate ∬_R √(a² - x² - y²) dx dy over the positive quadrant of the circle x² + y² ≤ a².",
+          "[7 Marks] Find the Jacobian ∂(u, v)/∂(x, y) if u = (x² - y²) / 2 and v = xy."
+        ]
+      },
+      {
+        id: "m2-u1-triple-integrals",
+        name: "Triple Integrals: Evaluation in Cartesian, Cylindrical & Spherical Coordinates and Volume of Solids",
+        unit: 1,
+        unitTitle: "Unit 1: Multiple Integrals",
+        unitCode: "1.3",
+        importance: "Very High",
+        keyPoints: [
+          "Triple Integral ∭_V f(x, y, z) dV computes physical properties over a 3D volumetric domain V.",
+          "When f(x, y, z) = 1, the triple integral yields the total solid Volume: Volume(V) = ∭_V dx dy dz.",
+          "Cartesian Evaluation: ∭_V f dV = ∫_{x=a}^b ∫_{y=g₁(x)}^{g₂(x)} ∫_{z=h₁(x,y)}^{h₂(x,y)} f(x, y, z) dz dy dx.",
+          "Cylindrical Coordinates: x = r cos θ, y = r sin θ, z = z with dV = r dz dr dθ. Ideal for solids of revolution, cylinders, and cones.",
+          "Spherical Polar Coordinates: x = ρ sin φ cos θ, y = ρ sin φ sin θ, z = ρ cos φ with dV = ρ² sin φ dρ dφ dθ (where ρ ≥ 0, 0 ≤ φ ≤ π is colatitude, 0 ≤ θ ≤ 2π is azimuth). Ideal for spheres, spherical shells, and pyramids.",
+          "Physical Applications: Mass M = ∭_V ρ(x, y, z) dV; Center of gravity z̄ = (1/M) ∭_V z ρ dV; Moment of inertia I_z = ∭_V (x² + y²) ρ dV."
+        ],
+        theory: "Triple integrals extend multi-variable accumulation across three-dimensional Euclidean volumes. When physical geometries exhibit radial symmetry about an axis, cylindrical transformations simplify boundaries to constant cylinder limits r = R. When geometries exhibit point symmetry about the origin (e.g., gravitating bodies, celestial spheres, electrical field potentials), spherical polar coordinates decouple boundaries into completely independent rectangular product limits [0, R] × [0, π] × [0, 2π].",
+        code: `// Derivation: Volume of a Sphere via Spherical Triple Integration
+// Sphere Equation: x^2 + y^2 + z^2 ≤ a^2
+// Coordinate transformation:
+//   x = ρ sin φ cos θ,  y = ρ sin φ sin θ,  z = ρ cos φ
+//   Volume element: dV = ρ^2 sin φ dρ dφ dθ
+// Limits for the entire sphere:
+//   Radial distance: ρ ranges from 0 to a
+//   Colatitude angle: φ ranges from 0 to π
+//   Azimuthal angle:  θ ranges from 0 to 2π
+//
+// Volume V = ∫_0^{2π} dθ ∫_0^π sin φ dφ ∫_0^a ρ^2 dρ
+// Step 1: Radial integral:
+//   ∫_0^a ρ^2 dρ = [ ρ^3 / 3 ]_0^a = a^3 / 3
+// Step 2: Colatitude integral:
+//   ∫_0^π sin φ dφ = [ -cos φ ]_0^π = -(-1) - (-1) = 1 + 1 = 2
+// Step 3: Azimuthal integral:
+//   ∫_0^{2π} dθ = [ θ ]_0^{2π} = 2π
+//
+// Total Volume:
+//   V = (2π) * (2) * (a^3 / 3) = (4/3) π a^3 (Q.E.D.)`,
+        example: "Evaluate ∭_V z dV over the upper hemisphere x² + y² + z² ≤ a², z ≥ 0: Limits: ρ ∈ [0, a], φ ∈ [0, π/2], θ ∈ [0, 2π]. Integrand z = ρ cos φ. V = ∫_0^{2π} dθ ∫_0^{π/2} sin φ cos φ dφ ∫_0^a ρ³ dρ = (2π) · [sin²φ / 2]_0^{π/2} · [a⁴/4] = (2π) · (1/2) · (a⁴/4) = π a⁴ / 4.",
+        commonExamQuestions: [
+          "[8 Marks] Evaluate ∭_V dx dy dz / (x + y + z + 1)³ over the region bounded by x = 0, y = 0, z = 0, and x + y + z = 1.",
+          "[8 Marks] Find the volume common to the cylinders x² + y² = a² and x² + z² = a² using multiple integration.",
+          "[7 Marks] Find the center of gravity of a uniform hemisphere of radius a using spherical polar coordinates."
+        ]
+      },
+      {
+        id: "m2-u2-exact-ode-integrating-factors",
+        name: "First Order ODEs: Variable Separable, Homogeneous & Exact Equations with Integrating Factors",
         unit: 2,
         unitTitle: "Unit 2: Differential Equations of the First Order",
         unitCode: "2.1",
         importance: "Very High",
         keyPoints: [
-          "Exact ODE test: M(x, y) dx + N(x, y) dy = 0 is exact if and only if ∂M/∂y = ∂N/∂x.",
-          "Integrating Factors (IF): If (1/N)(∂M/∂y - ∂N/∂x) = f(x), then IF = e^{∫ f(x) dx}.",
-          "First-order linear ODE: dy/dx + P(x) y = Q(x) has integrating factor IF = e^{∫ P(x) dx}; General solution: y * IF = ∫ (Q(x) * IF) dx + C.",
-          "Bernoulli's equation: dy/dx + P(x) y = Q(x) y^n. Divide by y^n and substitute v = y^{1-n} to linearize into dv/dx + (1-n) P(x) v = (1-n) Q(x).",
-          "Orthogonal trajectories: Replace dy/dx with -dx/dy in Cartesian, or dr/dθ with -r² (dθ/dr) in polar coordinates."
+          "Differential Equation of First Order & First Degree: M(x, y) dx + N(x, y) dy = 0.",
+          "Variable Separable: f(x) dx + g(y) dy = 0 => ∫ f(x) dx + ∫ g(y) dy = C.",
+          "Homogeneous Equations: dy/dx = f(y/x). Substitute y = vx => dy/dx = v + x (dv/dx) to separate variables in v and x.",
+          "Exact Differential Equations: M dx + N dy = 0 is exact if and only if ∂M/∂y = ∂N/∂x.",
+          "Solution of Exact ODE: ∫_{y=const} M dx + ∫ (terms of N free from x) dy = C.",
+          "Integrating Factors (IF) Rules:",
+          "  Rule 1 (Homogeneous): If M dx + N dy = 0 is homogeneous and Mx + Ny ≠ 0, then IF = 1 / (Mx + Ny).",
+          "  Rule 2 (f₁(xy)y dx + f₂(xy)x dy = 0): If Mx - Ny ≠ 0, then IF = 1 / (Mx - Ny).",
+          "  Rule 3 (Function of x alone): If (1/N)(∂M/∂y - ∂N/∂x) = f(x), then IF = e^{∫ f(x) dx}.",
+          "  Rule 4 (Function of y alone): If (1/M)(∂N/∂x - ∂M/∂y) = g(y), then IF = e^{∫ g(y) dy}."
         ],
-        theory: "Ordinary differential equations (ODEs) of the first order relate an unknown function y(x) and its first derivative. A differential equation represents a family of curves, where the general solution contains one arbitrary constant C. An exact differential equation arises directly from the total differential dU = (∂U/∂x) dx + (∂U/∂y) dy = 0. When non-exact, multiplying by an integrating factor μ(x, y) enforces the Euler reciprocity condition ∂(μM)/∂y = ∂(μN)/∂x.",
-        code: `// Solution Pattern for Bernoulli ODE:
-// dy/dx + (1/x) y = x * y^2
-// 1. Divide by y^2: y^{-2} (dy/dx) + (1/x) y^{-1} = x
-// 2. Let v = y^{-1} => dv/dx = -y^{-2} (dy/dx) => y^{-2} (dy/dx) = -dv/dx
-// 3. Substitute: -dv/dx + (1/x) v = x => dv/dx - (1/x) v = -x
-// 4. Linear IF: e^{∫ -1/x dx} = e^{-ln x} = 1/x
-// 5. Solution: v * (1/x) = ∫ (-x * 1/x) dx = -x + C
-// 6. Back-substitute v = 1/y: 1/(x*y) = -x + C => y = 1 / (C*x - x^2)`,
-        example: "Orthogonal trajectories of parabolas y² = 4ax: Differentiating gives 2y(dy/dx) = 4a = 4(y²/4x) = y²/x => dy/dx = y/(2x). Replacing dy/dx with -dx/dy: -dx/dy = y/(2x) => 2x dx + y dy = 0 => 2x²/2 + y²/2 = C => 2x² + y² = C (a family of ellipses).",
+        theory: "First-order ordinary differential equations describe instantaneous rates of change in dynamical systems. An exact differential equation corresponds to the level curves of a potential scalar function U(x, y) = C such that dU = (∂U/∂x)dx + (∂U/∂y)dy = 0. When ∂M/∂y ≠ ∂N/∂x, the differential form is non-conservative; multiplying by an integrating factor μ(x, y) restores exactness by warping the geometry into a conservative potential field.",
+        code: `// Complete Analytical Solution of Non-Exact ODE via Integrating Factor:
+// Problem: (x^2 + y^2 + 2x) dx + 2y dy = 0
+// Step 1: Identify M and N:
+//    M = x^2 + y^2 + 2x
+//    N = 2y
+// Step 2: Test for exactness:
+//    ∂M/∂y = 2y
+//    ∂N/∂x = 0
+//    ∂M/∂y ≠ ∂N/∂x => NOT EXACT!
+// Step 3: Check Rule 3 (Function of x alone):
+//    (1/N) * (∂M/∂y - ∂N/∂x) = [1 / (2y)] * (2y - 0) = 2y / 2y = 1 = f(x) (constant)
+// Step 4: Calculate Integrating Factor (IF):
+//    IF = e^{∫ 1 dx} = e^x
+// Step 5: Multiply entire ODE by IF = e^x:
+//    e^x (x^2 + y^2 + 2x) dx + 2y e^x dy = 0
+//    Now: M' = e^x (x^2 + y^2 + 2x), N' = 2y e^x
+//    ∂M'/∂y = 2y e^x, ∂N'/∂x = 2y e^x (EXACT!)
+// Step 6: Integrate to find potential function U(x, y):
+//    U = ∫_{y=const} e^x (x^2 + y^2 + 2x) dx + ∫ (terms of N' free from x) dy
+//    Notice: d/dx [ e^x (x^2 + y^2) ] = e^x (x^2 + y^2) + e^x (2x) = e^x (x^2 + y^2 + 2x)
+//    Terms of N' = 2y e^x free from x: NONE (0 terms)
+//    Therefore: e^x (x^2 + y^2) = C (General Solution!)`,
+        example: "Homogeneous ODE (x² - y²) dx + 2xy dy = 0: Let y = vx => dy = v dx + x dv. (x² - v²x²)dx + 2x(vx)(v dx + x dv) = 0 => (1 + v²)dx + 2xv dv = 0 => dx/x + 2v dv/(1 + v²) = 0. Integrating: ln|x| + ln(1 + v²) = ln C => x(1 + y²/x²) = C => x² + y² = Cx.",
         commonExamQuestions: [
-          "[8 Marks] Solve the exact differential equation (x⁴ - 2xy² + y⁴) dx - (2x²y - 4xy³ + sin y) dy = 0.",
-          "[7 Marks] Solve the linear equation (x + 1) (dy/dx) - y = e^{3x} (x + 1)².",
-          "[7 Marks] Find the orthogonal trajectories of the family of cardioids r = a (1 - cos θ)."
+          "[8 Marks] Solve the differential equation: (x⁴ e^x - 2m y² x) dx + 2m x² y dy = 0.",
+          "[8 Marks] Solve: (x² y - 2x y²) dx - (x³ - 3x² y) dy = 0 using an integrating factor.",
+          "[7 Marks] Solve the homogeneous differential equation: [x - y cos(y/x)] dx + x cos(y/x) dy = 0."
         ]
       },
       {
-        id: "m2-u3-higher-order-linear-ode",
-        name: "Higher Order Linear Differential Equations & Variation of Parameters",
+        id: "m2-u2-linear-bernoulli-clairaut",
+        name: "Linear Differential Equations, Bernoulli's Form & Clairaut's Singular Solutions",
+        unit: 2,
+        unitTitle: "Unit 2: Differential Equations of the First Order",
+        unitCode: "2.2",
+        importance: "Very High",
+        keyPoints: [
+          "Leibniz's Linear First Order ODE: dy/dx + P(x) y = Q(x).",
+          "Integrating Factor: IF = e^{∫ P(x) dx}. General solution: y · (IF) = ∫ [Q(x) · (IF)] dx + C.",
+          "Alternative Form: dx/dy + P(y) x = Q(y) with IF = e^{∫ P(y) dy} and solution x · (IF) = ∫ [Q(y) · (IF)] dy + C.",
+          "Bernoulli's Equation: dy/dx + P(x) y = Q(x) y^n. Divide by y^n: y^{-n} (dy/dx) + P(x) y^{1-n} = Q(x). Substitute v = y^{1-n} to obtain linear ODE: (1/(1-n)) (dv/dx) + P(x) v = Q(x).",
+          "Clairaut's Equation: y = p x + f(p) where p = dy/dx.",
+          "Clairaut's Solutions: Differentiating with respect to x gives p = p + [x + f'(p)] (dp/dx) => (dp/dx) [x + f'(p)] = 0.",
+          "  (1) General Solution: Set dp/dx = 0 => p = c => y = c x + f(c) (family of straight lines).",
+          "  (2) Singular Solution: Set x + f'(p) = 0 and eliminate p between x + f'(p) = 0 and y = px + f(p) (envelope of the family of lines)."
+        ],
+        theory: "Linear differential equations satisfy the principle of superposition. When an equation is non-linear solely due to a power y^n on the right side, Bernoulli's substitution v = y^{1-n} collapses the non-linear curve into a linear differential manifold. Clairaut's equations represent a remarkable class where the singular solution forms the envelope of the family of straight line solutions, representing states unreachable through any choice of the arbitrary constant C.",
+        code: `// Solution of Clairaut's Equation & Singular Solution Extraction:
+// Problem: y = p x + a / p   (where p = dy/dx)
+// Step 1: Differentiate with respect to x:
+//    dy/dx = p = p + x (dp/dx) - (a / p^2) (dp/dx)
+//    0 = (dp/dx) [ x - a / p^2 ]
+// Step 2: Case 1: dp/dx = 0 => p = c
+//    Substitute p = c into original equation:
+//    y = c x + a / c  <== GENERAL SOLUTION (Family of tangent lines!)
+//
+// Step 3: Case 2: x - a / p^2 = 0 => p^2 = a / x => p = √(a / x)
+//    Substitute p back into original equation:
+//    y = [√(a / x)] * x + a / [√(a / x)]
+//      = √(a x) + √(a x) = 2 √(a x)
+//    Squaring both sides:
+//    y^2 = 4 a x  <== SINGULAR SOLUTION (Parabola envelope!)
+// Notice: The parabola y^2 = 4ax cannot be obtained from y = cx + a/c for any choice of c!`,
+        example: "Solve dy/dx + y tan x = sec x: P = tan x, Q = sec x. IF = e^{∫ tan x dx} = e^{ln sec x} = sec x. Solution: y · sec x = ∫ sec x · sec x dx = ∫ sec² x dx = tan x + C => y = sin x + C cos x.",
+        commonExamQuestions: [
+          "[8 Marks] Solve the differential equation: (1 + y²) dx = (tan⁻¹ y - x) dy.",
+          "[8 Marks] Solve the Bernoulli equation: dy/dx + (xy / (1 - x²)) = x √y.",
+          "[7 Marks] Find the general and singular solutions of Clairaut's equation: y = p x + √(a² p² + b²)."
+        ]
+      },
+      {
+        id: "m2-u2-ode-applications",
+        name: "Applications of First Order ODEs: Orthogonal Trajectories, Newton's Law of Cooling & Growth Models",
+        unit: 2,
+        unitTitle: "Unit 2: Differential Equations of the First Order",
+        unitCode: "2.3",
+        importance: "High",
+        keyPoints: [
+          "Orthogonal Trajectories: A curve that intersects every member of a given family of curves at right angles (90°).",
+          "Cartesian Procedure: (1) Differentiate family equation F(x, y, c) = 0, (2) Eliminate constant c to get f(x, y, dy/dx) = 0, (3) Replace dy/dx with -dx/dy, (4) Integrate to find orthogonal trajectories.",
+          "Polar Procedure: (1) Differentiate F(r, θ, c) = 0 with respect to θ, (2) Eliminate c, (3) Replace dr/dθ with -r² (dθ/dr), (4) Integrate.",
+          "Newton's Law of Cooling: dT/dt = -k (T - T_m) where T is temperature, T_m is ambient medium temperature, and k > 0 is heat transfer coefficient. Solution: T(t) = T_m + (T₀ - T_m) e^{-kt}.",
+          "Malthusian Growth & Decay: dN/dt = k N => N(t) = N₀ e^{kt}. Half-life t_{1/2} = (ln 2) / k.",
+          "Physical Equipotential & Streamlines: In fluid dynamics and electrostatics, streamlines and equipotential curves form orthogonal trajectory systems."
+        ],
+        theory: "Orthogonal trajectories have profound physical significance across physics and engineering: lines of electric force are orthogonal to equipotential surfaces; heat flow lines are orthogonal to isothermal curves; fluid streamlines are orthogonal to velocity potential lines. The algebraic replacement of slope m with -1/m enforces perpendicularity at every differential tangency point.",
+        code: `// Derivation: Orthogonal Trajectories of Confocal Conics
+// Problem: Find the orthogonal trajectories of the family of coaxial circles:
+//    x^2 + y^2 + 2gx = 0  (circles passing through origin with centers on x-axis)
+// Step 1: Differentiate with respect to x:
+//    2x + 2y (dy/dx) + 2g = 0 => g = -(x + y y')
+// Step 2: Eliminate parameter g by substituting into original equation:
+//    x^2 + y^2 + 2(-x - y y') x = 0
+//    x^2 + y^2 - 2x^2 - 2xy y' = 0 => y^2 - x^2 - 2xy y' = 0
+//    dy/dx = (y^2 - x^2) / (2xy)
+// Step 3: Replace dy/dx with -dx/dy for orthogonal family:
+//    -dx/dy = (y^2 - x^2) / (2xy) => dx/dy = (x^2 - y^2) / (2xy)
+//    2xy dx + (y^2 - x^2) dy = 0
+// Step 4: Solve the homogeneous ODE (or recognize exact form):
+//    Divide by y^2: (2x/y) dx + [1 - (x/y)^2] dy = 0
+//    Notice: d [ (x^2 + y^2) / y ] = 0
+//    Therefore: x^2 + y^2 = 2cy  (or x^2 + y^2 - 2cy = 0)
+// Conclusion: The orthogonal trajectories are a family of circles passing through the origin with centers on the y-axis!`,
+        example: "A metal bar at 100°C is placed in a room at 20°C. After 10 minutes, its temperature drops to 60°C. Find its temperature after 20 minutes: T(t) = 20 + 80 e^{-kt}. T(10) = 20 + 80 e^{-10k} = 60 => e^{-10k} = 40/80 = 0.5. At t = 20: T(20) = 20 + 80 (e^{-10k})² = 20 + 80(0.25) = 20 + 20 = 40°C.",
+        commonExamQuestions: [
+          "[8 Marks] Find the orthogonal trajectories of the family of parabolas y² = 4ax. Sketch both families.",
+          "[7 Marks] Find the orthogonal trajectories of the family of cardioids r = a (1 + cos θ).",
+          "[7 Marks] A body at temperature 80°F is placed in an atmosphere of constant temperature 50°F. After 5 minutes, body temperature is 70°F. Find: (i) temperature after 15 minutes, (ii) time when temperature is 60°F."
+        ]
+      },
+      {
+        id: "m2-u3-higher-order-linear-constant-coeff",
+        name: "Higher Order Linear ODEs with Constant Coefficients: Complementary Functions & Operator D Methods",
         unit: 3,
         unitTitle: "Unit 3: Linear Differential Equations",
         unitCode: "3.1",
         importance: "Very High",
         keyPoints: [
-          "Linear ODE with constant coefficients: a_n (d^n y/dx^n) + ... + a_0 y = X(x). General solution: y = y_h (CF) + y_p (PI).",
-          "Complementary Function (CF): Form auxiliary equation f(m) = 0. Distinct real roots: c₁e^{m₁x} + c₂e^{m₂x}; Repeated roots: (c₁ + c₂x)e^{mx}; Complex roots α ± iβ: e^{αx}(c₁ cos βx + c₂ sin βx).",
-          "Particular Integral (PI) shortcut formulas: 1/f(D) [e^{ax}] = e^{ax}/f(a) (for f(a) ≠ 0); 1/f(D²) [sin ax] = sin ax / f(-a²).",
-          "Method of Variation of Parameters: Finds PI for arbitrary RHS R(x): y_p = -y₁ ∫ (y₂ R / W) dx + y₂ ∫ (y₁ R / W) dx, where W = Wronskian(y₁, y₂).",
-          "Cauchy-Euler equation: x² (d²y/dx²) + p x (dy/dx) + q y = X(x). Substitute x = e^z (z = ln x) to transform into constant coefficient ODE with x (d/dx) = D_z."
+          "nth-order Linear ODE: a_n (d^n y/dx^n) + a_{n-1} (d^{n-1} y/dx^{n-1}) + ... + a_0 y = X(x).",
+          "Differential Operator notation: D = d/dx, D² = d²/dx² => f(D) y = X(x).",
+          "Complete Solution: y = y_c (Complementary Function) + y_p (Particular Integral).",
+          "Auxiliary Equation (AE): f(m) = 0.",
+          "  Case 1 (Real distinct roots m₁, m₂): y_c = c₁ e^{m₁x} + c₂ e^{m₂x}.",
+          "  Case 2 (Real repeated roots m₁ = m₂ = m): y_c = (c₁ + c₂x) e^{mx}.",
+          "  Case 3 (Complex roots α ± iβ): y_c = e^{αx} [c₁ cos βx + c₂ sin βx].",
+          "Rules for Particular Integral y_p = [1 / f(D)] X(x):",
+          "  Rule 1: [1 / f(D)] e^{ax} = e^{ax} / f(a), provided f(a) ≠ 0. If f(a) = 0, y_p = x [1 / f'(D)] e^{ax}.",
+          "  Rule 2: [1 / f(D²)] sin ax = sin ax / f(-a²), provided f(-a²) ≠ 0. Same for cos ax.",
+          "  Rule 3: [1 / f(D)] x^m = [f(D)]⁻¹ x^m by expanding [f(D)]⁻¹ in ascending powers of D via binomial theorem.",
+          "  Rule 4: [1 / f(D)] [e^{ax} V(x)] = e^{ax} [1 / f(D + a)] V(x) (Exponential Shift Theorem)."
         ],
-        theory: "The solution space of an nth-order homogeneous linear differential equation forms an n-dimensional vector space. Linear independence of solutions y₁, y₂, ..., y_n is established if their Wronskian determinant W(y₁, y₂, ..., y_n) ≠ 0. For non-homogeneous equations L[y] = R(x), the operator method treats D = d/dx algebraically. When standard inverse operator shortcuts fail (such as for sec x, tan x, or quotient expressions), the Method of Variation of Parameters replaces constants c₁, c₂ with variable functions u₁(x), u₂(x).",
-        code: `// Variation of Parameters for: y'' + y = sec x
-// 1. Auxiliary Equation: m^2 + 1 = 0 => m = ±i
-//    CF: y_h = c1 cos x + c2 sin x => y1 = cos x, y2 = sin x
-// 2. Wronskian W(y1, y2):
-//    W = | cos x    sin x |
-//        |-sin x    cos x | = cos^2 x + sin^2 x = 1
-// 3. RHS R(x) = sec x
-//    u1 = -∫ (y2 * R / W) dx = -∫ sin x * sec x dx = -∫ tan x dx = ln|cos x|
-//    u2 = ∫ (y1 * R / W) dx = ∫ cos x * sec x dx = ∫ 1 dx = x
-// 4. Particular Integral:
-//    y_p = u1*y1 + u2*y2 = (ln|cos x|) cos x + x sin x
-// 5. General Solution:
-//    y = c1 cos x + c2 sin x + (ln|cos x|) cos x + x sin x`,
-        example: "Cauchy-Euler equation x² y'' - 2x y' - 4y = x²: Let x = e^z => [D(D - 1) - 2D - 4]y = e^{2z} => (D² - 3D - 4)y = e^{2z}. Roots: m = 4, -1 => CF = c₁e^{4z} + c₂e^{-z} = c₁x⁴ + c₂x⁻¹. PI = e^{2z}/(2² - 3(2) - 4) = e^{2z}/(-6) = -x²/6. General solution: y = c₁x⁴ + c₂/x - x²/6.",
+        theory: "Linear differential equations with constant coefficients describe physical systems governed by time-invariant linear laws (e.g., RLC circuits, mechanical oscillators). The algebraic operator D acts as an algebraic polynomial over the ring of infinitely differentiable functions. The complementary function represents the natural transient response of the system (decaying to zero in dissipative systems), while the particular integral represents the forced steady-state response.",
+        code: `// Comprehensive Solution: Non-Homogeneous Second Order Linear ODE
+// Solve: (D^2 - 4D + 4) y = 8 (e^{2x} + sin 2x + x^2)
+// Step 1: Auxiliary Equation:
+//    m^2 - 4m + 4 = 0 => (m - 2)^2 = 0 => m = 2, 2 (Repeated real roots)
+//    Complementary Function: y_c = (c1 + c2 x) e^{2x}
+//
+// Step 2: Particular Integral y_p = y_p1 + y_p2 + y_p3:
+// Part (a): X1 = 8 e^{2x}
+//    f(D) = (D - 2)^2. Since f(2) = 0, use shift / derivative rule:
+//    y_p1 = 8 * [1 / (D - 2)^2] e^{2x} = 8 * e^{2x} * [1 / D^2] (1)
+//         = 8 e^{2x} * (x^2 / 2) = 4 x^2 e^{2x}
+//
+// Part (b): X2 = 8 sin 2x
+//    Replace D^2 with -(2^2) = -4 in f(D) = D^2 - 4D + 4:
+//    y_p2 = [1 / (-4 - 4D + 4)] (8 sin 2x) = [1 / (-4D)] (8 sin 2x)
+//         = (-2) * ∫ sin 2x dx = (-2) * (-cos 2x / 2) = cos 2x
+//
+// Part (c): X3 = 8 x^2
+//    Expand [f(D)]^-1 = 4^-1 [ 1 - (D - D^2/4) ]^-1 = (1/4) [ 1 + D - D^2/4 + D^2 + ... ]
+//    y_p3 = 8 * (1/4) [ 1 + D + (3/4) D^2 ] x^2
+//         = 2 [ x^2 + 2x + (3/4)(2) ] = 2x^2 + 4x + 3
+//
+// Step 3: Complete General Solution:
+//    y = (c1 + c2 x) e^{2x} + 4 x^2 e^{2x} + cos 2x + 2x^2 + 4x + 3`,
+        example: "Solve (D² + 9) y = cos 3x: AE: m² + 9 = 0 => m = ±3i => y_c = c₁ cos 3x + c₂ sin 3x. Since f(-3²) = 0, y_p = x [1 / 2D] cos 3x = (x/2) (sin 3x / 3) = (x/6) sin 3x. General solution: y = c₁ cos 3x + c₂ sin 3x + (x/6) sin 3x.",
         commonExamQuestions: [
-          "[8 Marks] Solve by method of variation of parameters: d²y/dx² + 4y = 4 tan 2x.",
-          "[7 Marks] Solve the Cauchy-Euler differential equation: x² (d²y/dx²) - 3x (dy/dx) + 4y = 2x².",
-          "[7 Marks] Solve (D³ - 3D² + 4D - 2) y = e^x + cos x."
+          "[8 Marks] Solve: (D³ - 3D² + 4) y = e^{2x} + x + sin 2x.",
+          "[8 Marks] Solve: (D² - 2D + 1) y = x e^x sin x.",
+          "[7 Marks] Solve: (D² + 4) y = sec 2x by operator methods."
         ]
       },
       {
-        id: "m2-u4-fourier-series-integrals",
-        name: "Fourier Series, Half-Range Expansions & Fourier Transforms",
+        id: "m2-u3-variation-of-parameters-cauchy-euler",
+        name: "Method of Variation of Parameters & Cauchy-Euler Homogeneous Linear Equations",
+        unit: 3,
+        unitTitle: "Unit 3: Linear Differential Equations",
+        unitCode: "3.2",
+        importance: "Very High",
+        keyPoints: [
+          "Method of Variation of Parameters: Finds particular integral y_p for any linear 2nd order ODE y'' + P(x) y' + Q(x) y = R(x) where operator D shortcuts fail.",
+          "Wronskian Determinant: W = y₁ y₂' - y₁' y₂ ≠ 0, where y₁ and y₂ are independent solutions of the homogeneous equation.",
+          "Particular Integral Formula: y_p = u(x) y₁(x) + v(x) y₂(x) where: u(x) = -∫ [y₂ R / W] dx and v(x) = ∫ [y₁ R / W] dx.",
+          "Cauchy-Euler Equation: a_n x^n (d^n y/dx^n) + ... + a₁ x (dy/dx) + a₀ y = X(x).",
+          "Transformation to Constant Coefficients: Let x = e^z (z = ln x).",
+          "Operator Substitutions: x (d/dx) = D_z, x² (d²/dx²) = D_z(D_z - 1), x³ (d³/dx³) = D_z(D_z - 1)(D_z - 2).",
+          "Legendre's Linear Equation: (ax + b)^n (d^n y/dx^n) + ... = X(x). Substitute ax + b = e^z."
+        ],
+        theory: "The Method of Variation of Parameters replaces the arbitrary constants c₁, c₂ of the homogeneous solution with function variables u(x), v(x), imposing the condition u'y₁ + v'y₂ = 0 to eliminate second derivatives of the unknown functions. Cauchy-Euler equations represent scale-invariant differential systems where powers of independent variable x balance corresponding derivative orders.",
+        code: `// Detailed Solution: Cauchy-Euler Differential Equation
+// Problem: x^2 (d^2y/dx^2) - x (dy/dx) + 4y = cos(ln x) + x sin(ln x)
+// Step 1: Transformation:
+//    Let x = e^z => z = ln x. Let D = d/dz.
+//    x (dy/dx) = D y
+//    x^2 (d^2y/dx^2) = D(D - 1) y
+// Step 2: Substitute into ODE:
+//    [ D(D - 1) - D + 4 ] y = cos z + e^z sin z
+//    (D^2 - 2D + 4) y = cos z + e^z sin z
+// Step 3: Complementary Function:
+//    Auxiliary Equation: m^2 - 2m + 4 = 0
+//    Roots: m = [2 ± √(4 - 16)] / 2 = 1 ± i √3
+//    y_c = e^z [ c1 cos(√3 z) + c2 sin(√3 z) ]
+//        = x [ c1 cos(√3 ln x) + c2 sin(√3 ln x) ]
+// Step 4: Particular Integral y_p = y_p1 + y_p2:
+//    y_p1 = [1 / (D^2 - 2D + 4)] cos z = [1 / (-1 - 2D + 4)] cos z
+//         = [1 / (3 - 2D)] cos z = (3 + 2D) / (9 - 4D^2) cos z
+//         = (3 cos z - 2 sin z) / (9 + 4) = (3 cos z - 2 sin z) / 13
+//    y_p2 = [1 / (D^2 - 2D + 4)] e^z sin z = e^z [1 / ((D+1)^2 - 2(D+1) + 4)] sin z
+//         = e^z [1 / (D^2 + 3)] sin z = e^z [1 / (-1 + 3)] sin z = (e^z sin z) / 2
+// Step 5: Back-substitute z = ln x, e^z = x:
+//    y_p = [3 cos(ln x) - 2 sin(ln x)] / 13 + [x sin(ln x)] / 2
+// General Solution: y = y_c + y_p`,
+        example: "Variation of Parameters for y'' + 4y = 4 sec 2x: y₁ = cos 2x, y₂ = sin 2x. W = 2 cos² 2x + 2 sin² 2x = 2. u = -∫ (sin 2x · 4 sec 2x / 2) dx = -2 ∫ tan 2x dx = ln|cos 2x|. v = ∫ (cos 2x · 4 sec 2x / 2) dx = 2 ∫ 1 dx = 2x. y_p = (ln|cos 2x|) cos 2x + 2x sin 2x.",
+        commonExamQuestions: [
+          "[8 Marks] Solve by variation of parameters: d²y/dx² + y = cosec x.",
+          "[8 Marks] Solve the Cauchy-Euler equation: x² (d²y/dx²) - 2x (dy/dx) - 4y = x⁴.",
+          "[7 Marks] Solve Legendre's linear differential equation: (2x + 3)² (d²y/dx²) - 2(2x + 3) (dy/dx) - 12y = 6x."
+        ]
+      },
+      {
+        id: "m2-u3-particle-vibrations-shm",
+        name: "Applications to Vibrations of a Particle & Simple Harmonic Motion (SHM)",
+        unit: 3,
+        unitTitle: "Unit 3: Linear Differential Equations",
+        unitCode: "3.3",
+        importance: "High",
+        keyPoints: [
+          "Simple Harmonic Motion (SHM): Acceleration is directly proportional to displacement from a fixed origin and directed towards it: d²x/dt² = -ω² x.",
+          "Periodic Time: T = 2π / ω; Frequency f = 1/T = ω / (2π); Amplitude A is maximum displacement.",
+          "Velocity in SHM: v² = ω² (A² - x²); Maximum velocity v_{max} = A ω at center x = 0.",
+          "Damped Oscillations: d²x/dt² + 2k (dx/dt) + ω² x = 0 where 2k is damping resistance per unit mass.",
+          "  Case 1 (Overdamped k > ω): Roots are real and negative; particle creeps back to rest without oscillating.",
+          "  Case 2 (Critically Damped k = ω): Fastest return to equilibrium without oscillation.",
+          "  Case 3 (Underdamped / Oscillatory k < ω): x(t) = e^{-kt} [c₁ cos(ω_d t) + c₂ sin(ω_d t)] with damped frequency ω_d = √(ω² - k²).",
+          "Forced Vibrations & Resonance: d²x/dt² + 2k (dx/dt) + ω² x = F₀ cos(pt). When external excitation frequency p approaches natural frequency ω, amplitude reaches catastrophic resonance peak."
+        ],
+        theory: "Physical vibration models (spring-mass dampers, acoustic resonance, electrical LC/RLC oscillations) derive directly from Newton's second law F = m a. The second-order differential equation models restoring elasticity, viscous dissipation, and external harmonic forcing. Resonance occurs when energy is pumped into the system at its natural eigenvalue frequency.",
+        code: `// Mathematical Formulation: Free Damped Particle Motion
+// Equation: m (d^2x/dt^2) + c (dx/dt) + k x = 0
+// Divide by m: d^2x/dt^2 + 2γ (dx/dt) + ω0^2 x = 0
+//   where 2γ = c/m (damping factor), ω0 = √(k/m) (natural frequency)
+// Auxiliary equation: r^2 + 2γ r + ω0^2 = 0
+// Roots: r1, r2 = -γ ± √(γ^2 - ω0^2)
+//
+// In underdamped case (γ < ω0):
+// Let damped angular frequency ω_d = √(ω0^2 - γ^2)
+// Solution: x(t) = A e^{-γ t} cos(ω_d t - φ)
+//
+// Logarithmic Decrement δ:
+// Ratio of successive maximum amplitudes x_n and x_{n+1}:
+//   x_n / x_{n+1} = e^{γ T_d} where T_d = 2π / ω_d
+//   δ = ln(x_n / x_{n+1}) = γ T_d = (2π γ) / √(ω0^2 - γ^2)`,
+        example: "A particle moves in SHM with amplitude 5 meters and periodic time 4 seconds. Find velocity and acceleration at distance 3 meters from center: ω = 2π / 4 = π/2 rad/s. v = ω √(A² - x²) = (π/2) √(25 - 9) = (π/2)(4) = 2π m/s. Acceleration a = -ω² x = -(π²/4)(3) = -3π²/4 m/s².",
+        commonExamQuestions: [
+          "[8 Marks] A particle vibrates according to the equation d²x/dt² + 4 (dx/dt) + 13x = 0. If it starts from x = 1 with velocity v = 2 at t = 0, find its displacement at any time t.",
+          "[7 Marks] Define Simple Harmonic Motion. Derive the expressions for velocity, periodic time, and amplitude.",
+          "[7 Marks] Explain resonance in forced mechanical vibrations with a differential equation model and amplitude-frequency curve."
+        ]
+      },
+      {
+        id: "m2-u4-fourier-series-derivations",
+        name: "Fourier Series of Period 2π & Arbitrary Period 2L: Dirichlet Conditions & Euler's Formulae",
         unit: 4,
         unitTitle: "Unit 4: Fourier Series and Integrals",
         unitCode: "4.1",
         importance: "Very High",
         keyPoints: [
-          "Fourier Series of f(x) on [-L, L]: f(x) = a₀/2 + ∑_{n=1}^∞ [a_n cos(nπx/L) + b_n sin(nπx/L)].",
-          "Euler-Fourier Coefficients: a₀ = (1/L) ∫_{-L}^L f(x) dx; a_n = (1/L) ∫_{-L}^L f(x) cos(nπx/L) dx; b_n = (1/L) ∫_{-L}^L f(x) sin(nπx/L) dx.",
-          "Even functions: f(-x) = f(x) => b_n = 0 (Fourier Cosine Series); Odd functions: f(-x) = -f(x) => a₀ = 0, a_n = 0 (Fourier Sine Series).",
-          "Dirichlet's Conditions: f(x) must be single-valued, periodic, piece-wise continuous with a finite number of finite discontinuities and extrema.",
-          "Parseval's Identity: (1/L) ∫_{-L}^L [f(x)]² dx = a₀²/2 + ∑_{n=1}^∞ (a_n² + b_n²), widely used to evaluate infinite reciprocal square sums.",
-          "Fourier Transform: F(ω) = (1/√(2π)) ∫_{-∞}^∞ f(t) e^{-iωt} dt; Inverse: f(t) = (1/√(2π)) ∫_{-∞}^∞ F(ω) e^{iωt} dω."
+          "Fourier Series expresses periodic f(x) as an infinite trigonometric polynomial: f(x) = a₀/2 + ∑_{n=1}^∞ [a_n cos(nπx/L) + b_n sin(nπx/L)].",
+          "Dirichlet's Conditions for Convergence:",
+          "  1. f(x) is single-valued and bounded in interval (-L, L).",
+          "  2. f(x) has a finite number of maxima and minima in any period.",
+          "  3. f(x) has a finite number of finite discontinuities in any period.",
+          "Value at Discontinuity x₀: Fourier series converges to [f(x₀+) + f(x₀-)] / 2.",
+          "Euler's Formulae for Period 2L (-L to L):",
+          "  a₀ = (1/L) ∫_{-L}^L f(x) dx,",
+          "  a_n = (1/L) ∫_{-L}^L f(x) cos(nπx/L) dx,",
+          "  b_n = (1/L) ∫_{-L}^L f(x) sin(nπx/L) dx.",
+          "Orthogonality Relations of Trigonometric Functions: ∫_{-L}^L cos(mπx/L) cos(nπx/L) dx = L δ_{mn}; ∫_{-L}^L sin(mπx/L) sin(nπx/L) dx = L δ_{mn}; ∫_{-L}^L cos(mπx/L) sin(nπx/L) dx = 0."
         ],
-        theory: "Fourier analysis decomposes arbitrary periodic waveform signals into harmonically related sinusoidal components. Under Dirichlet conditions, the series converges to f(x) at points of continuity, and to the average value [f(x+) + f(x-)]/2 at finite jump discontinuities. For non-periodic transient functions on (-∞, ∞), the discrete spectrum extends to a continuous frequency distribution via the Fourier Integral Theorem.",
-        code: `// Fourier Series Calculation for Square Wave on [-π, π]:
-// f(x) = -k for -π < x < 0; f(x) = +k for 0 < x < π (Odd function)
-// Since f(x) is odd: a0 = 0 and an = 0 for all n.
-// bn = (2/π) ∫_0^π k sin(nx) dx = (2k/π) [-cos(nx)/n]_0^π
-//    = (2k / (n*π)) [1 - (-1)^n]
-// For even n: bn = 0
-// For odd n:  bn = 4k / (n*π)
-// Resulting Fourier Series:
-// f(x) = (4k/π) [ sin(x) + sin(3x)/3 + sin(5x)/5 + ... ]
-// At x = π/2: f(π/2) = k => k = (4k/π) [ 1 - 1/3 + 1/5 - 1/7 + ... ]
-// => π/4 = 1 - 1/3 + 1/5 - 1/7 + ... (Leibniz's Formula for π)`,
-        example: "Half-range cosine series for f(x) = x on [0, π]: a₀ = (2/π) ∫_0^π x dx = π; a_n = (2/π) ∫_0^π x cos(nx) dx = (2/(π n²))[(-1)^n - 1]. For odd n, a_n = -4/(π n²); for even n, a_n = 0. f(x) = π/2 - (4/π) ∑_{n=1,3,5...} [cos(nx)/n²]. Setting x = 0 yields ∑_{odd} 1/n² = π²/8.",
+        theory: "Fourier series decomposes periodic non-sinusoidal waveforms into linear combinations of harmonic sinusoids. Orthogonality of sine and cosine functions allows individual harmonic coefficients a_n and b_n to be extracted independently via definite integration over one period, analogous to projecting vectors onto an orthogonal coordinate basis in Hilbert space.",
+        code: `// Complete Fourier Expansion: f(x) = x + x^2 on (-π, π)
+// Step 1: Calculate a0:
+//    a0 = (1/π) ∫_{-π}^π (x + x^2) dx = (1/π) [ (x^2/2) + (x^3/3) ]_{-π}^π
+//       = (1/π) [ (π^3/3) - (-π^3/3) ] = (2π^2) / 3
+//    Therefore: a0 / 2 = π^2 / 3
+//
+// Step 2: Calculate an:
+//    an = (1/π) ∫_{-π}^π (x + x^2) cos(nx) dx
+//       = (1/π) [ ∫_{-π}^π x cos(nx) dx (ODD=0) + 2 ∫_0^π x^2 cos(nx) dx ]
+//    Integrate by parts:
+//       ∫_0^π x^2 cos(nx) dx = [ x^2 (sin nx / n) ]_0^π - ∫_0^π 2x (sin nx / n) dx
+//       = 0 - (2/n) [ x (-cos nx / n) - ∫ (-cos nx / n) dx ]_0^π
+//       = (2/n^2) [ π cos(nπ) ] = (2π / n^2) (-1)^n
+//    Therefore: an = (2/π) * [ (2π / n^2) (-1)^n ] = 4 (-1)^n / n^2
+//
+// Step 3: Calculate bn:
+//    bn = (1/π) ∫_{-π}^π (x + x^2) sin(nx) dx
+//       = (1/π) [ 2 ∫_0^π x sin(nx) dx + ∫_{-π}^π x^2 sin(nx) dx (ODD=0) ]
+//       = (2/π) [ x (-cos nx / n) - (1) (-sin nx / n^2) ]_0^π
+//       = (2/π) [ -π (-1)^n / n ] = -2 (-1)^n / n = 2 (-1)^{n+1} / n
+//
+// Step 4: Resulting Fourier Series:
+//    f(x) = π^2/3 + ∑_{n=1}^∞ [ (4(-1)^n / n^2) cos(nx) + (2(-1)^{n+1} / n) sin(nx) ]
+//
+// Step 5: Deduction at x = π:
+//    At continuous boundary point x = π (average of f(π) and f(-π)):
+//    f(π) = (-π + π^2 + π + π^2)/2 = π^2
+//    π^2 = π^2/3 + 4 ∑_{n=1}^∞ [ (-1)^n (-1)^n / n^2 ] = π^2/3 + 4 ∑ (1/n^2)
+//    (2π^2 / 3) = 4 ∑ (1/n^2) => ∑_{n=1}^∞ (1 / n^2) = π^2 / 6 (Euler's Basel Problem!)`,
+        example: "For f(x) = |x| on [-π, π]: Since f is even, b_n = 0. a₀ = π. a_n = (2/π) ∫_0^π x cos(nx) dx = (2/(π n²))[(-1)^n - 1]. For odd n, a_n = -4/(π n²); for even n, a_n = 0. f(x) = π/2 - (4/π) ∑_{odd} cos(nx)/n².",
         commonExamQuestions: [
-          "[8 Marks] Obtain the Fourier series expansion of f(x) = x² in the interval -π < x < π. Hence deduce that 1/1² - 1/2² + 1/3² - ... = π²/12.",
-          "[7 Marks] Find the half-range sine series for f(x) = e^x in 0 < x < 1.",
-          "[7 Marks] State Dirichlet conditions. Find the Fourier transform of f(x) = 1 for |x| < a and f(x) = 0 for |x| > a."
+          "[8 Marks] Find the Fourier series of f(x) = x sin x in the interval -π < x < π. Hence deduce that 1/(1·3) - 1/(3·5) + 1/(5·7) - ... = (π - 2) / 4.",
+          "[8 Marks] Obtain the Fourier series for f(x) = e^{-x} in the interval 0 < x < 2π.",
+          "[7 Marks] State Dirichlet's conditions for the expansion of a function in Fourier series."
         ]
       },
       {
-        id: "m2-u5-complex-variables-analytic",
-        name: "Complex Analytic Functions, Cauchy-Riemann Equations & Conformal Mapping",
+        id: "m2-u4-half-range-parseval",
+        name: "Even & Odd Functions, Half-Range Sine/Cosine Series & Parseval's Identity",
+        unit: 4,
+        unitTitle: "Unit 4: Fourier Series and Integrals",
+        unitCode: "4.2",
+        importance: "Very High",
+        keyPoints: [
+          "Symmetry Simplification: Even function f(-x) = f(x) => b_n = 0, a_n = (2/L) ∫_0^L f(x) cos(nπx/L) dx; Odd function f(-x) = -f(x) => a₀ = 0, a_n = 0, b_n = (2/L) ∫_0^L f(x) sin(nπx/L) dx.",
+          "Half-Range Expansions: Given f(x) on [0, L], we can extend it as an even function to get a Half-Range Cosine Series, or as an odd function to get a Half-Range Sine Series.",
+          "Half-Range Cosine Series: f(x) = a₀/2 + ∑_{n=1}^∞ a_n cos(nπx/L) where a₀ = (2/L) ∫_0^L f(x) dx, a_n = (2/L) ∫_0^L f(x) cos(nπx/L) dx.",
+          "Half-Range Sine Series: f(x) = ∑_{n=1}^∞ b_n sin(nπx/L) where b_n = (2/L) ∫_0^L f(x) sin(nπx/L) dx.",
+          "Parseval's Identity (Root Mean Square Energy): (1/L) ∫_{-L}^L [f(x)]² dx = a₀²/2 + ∑_{n=1}^∞ (a_n² + b_n²).",
+          "For Half-Range Cosine: (2/L) ∫_0^L [f(x)]² dx = a₀²/2 + ∑_{n=1}^∞ a_n².",
+          "For Half-Range Sine: (2/L) ∫_0^L [f(x)]² dx = ∑_{n=1}^∞ b_n²."
+        ],
+        theory: "Half-range expansions solve boundary value problems in heat conduction and wave vibration over finite rods [0, L] with specified Dirichlet (temperature zero at ends => Sine series) or Neumann (insulated ends => Cosine series) boundary conditions. Parseval's identity is the trigonometric generalization of the Pythagorean theorem in function space, stating that total signal energy equals the sum of energy across all spectral harmonics.",
+        code: `// Application of Parseval's Identity to Sum 1/n^4:
+// Consider Half-Range Cosine Series of f(x) = x on [0, π]:
+// f(x) = π/2 - (4/π) ∑_{n=1,3,5...} [cos(nx) / n^2]
+// Here: a0/2 = π/2 => a0 = π
+// For odd n: an = -4 / (π n^2); For even n: an = 0.
+//
+// By Parseval's Identity for Half-Range Cosine Series:
+//   (2/π) ∫_0^π [f(x)]^2 dx = a0^2 / 2 + ∑_{n=1}^∞ an^2
+//
+// LHS = (2/π) ∫_0^π x^2 dx = (2/π) [ x^3 / 3 ]_0^π = (2/π) (π^3 / 3) = 2π^2 / 3
+// RHS = (π^2 / 2) + ∑_{odd n} [ -4 / (π n^2) ]^2
+//     = (π^2 / 2) + (16 / π^2) ∑_{odd n} (1 / n^4)
+//
+// Equating LHS and RHS:
+//   2π^2 / 3 - π^2 / 2 = (16 / π^2) ∑_{odd n} (1 / n^4)
+//   π^2 / 6 = (16 / π^2) ∑_{odd n} (1 / n^4)
+//   ∑_{n=1,3,5...}^∞ (1 / n^4) = π^4 / 96 (Q.E.D.!)`,
+        example: "Half-range sine series for f(x) = c (constant) on [0, L]: b_n = (2/L) ∫_0^L c sin(nπx/L) dx = (2c/nπ)[1 - (-1)^n]. For odd n, b_n = 4c/(nπ). f(x) = (4c/π) [ sin(πx/L) + (1/3) sin(3πx/L) + (1/5) sin(5πx/L) + ... ].",
+        commonExamQuestions: [
+          "[8 Marks] Find the half-range sine series of f(x) = x (π - x) in 0 < x < π. Hence deduce that 1/1³ - 1/3³ + 1/5³ - ... = π³ / 32.",
+          "[8 Marks] Using Parseval's identity for f(x) = x² on (-π, π), prove that ∑_{n=1}^∞ (1 / n⁴) = π⁴ / 90.",
+          "[7 Marks] Expand f(x) = l - x in a half-range cosine series in the interval 0 < x < l."
+        ]
+      },
+      {
+        id: "m2-u4-fourier-integrals-transforms",
+        name: "Fourier Integral Theorem, Fourier Sine/Cosine Transforms & Inversion Theorems",
+        unit: 4,
+        unitTitle: "Unit 4: Fourier Series and Integrals",
+        unitCode: "4.3",
+        importance: "Very High",
+        keyPoints: [
+          "Fourier Integral Theorem: As period L → ∞, discrete Fourier series becomes a continuous integral: f(x) = (1/π) ∫_0^∞ ∫_{-∞}^∞ f(t) cos[ω(t - x)] dt dω.",
+          "Fourier Cosine Integral: f(x) = (2/π) ∫_0^∞ cos(ωx) [ ∫_0^∞ f(t) cos(ωt) dt ] dω.",
+          "Fourier Sine Integral: f(x) = (2/π) ∫_0^∞ sin(ωx) [ ∫_0^∞ f(t) sin(ωt) dt ] dω.",
+          "Fourier Transform F{f(t)} = F(s) = (1/√(2π)) ∫_{-∞}^∞ f(t) e^{-ist} dt.",
+          "Inverse Fourier Transform: f(t) = (1/√(2π)) ∫_{-∞}^∞ F(s) e^{ist} ds.",
+          "Fourier Sine Transform: F_s{f(t)} = F_s(s) = √(2/π) ∫_0^∞ f(t) sin(st) dt; Inverse: f(t) = √(2/π) ∫_0^∞ F_s(s) sin(st) ds.",
+          "Fourier Cosine Transform: F_c{f(t)} = F_c(s) = √(2/π) ∫_0^∞ f(t) cos(st) dt; Inverse: f(t) = √(2/π) ∫_0^∞ F_c(s) cos(st) ds.",
+          "Properties: Linearity, Shifting F{f(t - a)} = e^{-isa} F(s), Modulation F{f(t) cos at} = [F(s - a) + F(s + a)] / 2, Derivative F{f'(t)} = is F(s)."
+        ],
+        theory: "Fourier series requires periodicity. The Fourier transform extends harmonic analysis to non-periodic transient functions on (-∞, ∞) by taking the asymptotic limit of Fourier series as the fundamental period approaches infinity. In engineering, it transforms differential equations in the time domain into algebraic relationships in the continuous frequency domain.",
+        code: `// Fourier Sine Transform & Integral Evaluation:
+// Find Fourier Sine Transform of f(t) = e^{-at} (a > 0)
+// Step 1: Definition:
+//    Fs(s) = √(2/π) ∫_0^∞ e^{-at} sin(st) dt
+// Step 2: Use standard integration formula ∫ e^{-at} sin(st) dt = e^{-at}(-a sin st - s cos st) / (a^2 + s^2):
+//    Fs(s) = √(2/π) [ e^{-at} (-a sin st - s cos st) / (a^2 + s^2) ]_0^∞
+//          = √(2/π) [ 0 - (-s / (a^2 + s^2)) ] = √(2/π) * [ s / (a^2 + s^2) ]
+//
+// Step 3: By Fourier Sine Inversion Formula:
+//    f(t) = √(2/π) ∫_0^∞ Fs(s) sin(st) ds
+//    e^{-at} = √(2/π) ∫_0^∞ [ √(2/π) * (s / (a^2 + s^2)) ] sin(st) ds
+//    e^{-at} = (2/π) ∫_0^∞ [ (s sin st) / (a^2 + s^2) ] ds
+//
+// Step 4: Rearranging gives the famous Definite Integral:
+//    ∫_0^∞ [ (s sin st) / (s^2 + a^2) ] ds = (π / 2) e^{-at}  (for a > 0, t > 0)`,
+        example: "Fourier Cosine Transform of f(t) = e^{-at}: F_c(s) = √(2/π) ∫_0^∞ e^{-at} cos(st) dt = √(2/π) [a / (s² + a²)]. Using inverse transform: ∫_0^∞ [cos(st) / (s² + a²)] ds = (π / 2a) e^{-at}.",
+        commonExamQuestions: [
+          "[8 Marks] Find the Fourier transform of f(x) = 1 - x² for |x| ≤ 1 and f(x) = 0 for |x| > 1. Hence evaluate ∫_0^∞ [(x cos x - sin x) / x³] cos(x/2) dx.",
+          "[8 Marks] Using Fourier integral theorem, show that ∫_0^∞ [cos(ωx) / (1 + ω²)] dω = (π / 2) e^{-x} for x ≥ 0.",
+          "[7 Marks] Find the Fourier cosine transform of e^{-x²}."
+        ]
+      },
+      {
+        id: "m2-u5-cr-equations-cartesian-polar",
+        name: "Complex Limits, Continuity, Differentiability & Cauchy-Riemann Equations (Cartesian & Polar)",
         unit: 5,
         unitTitle: "Unit 5: Functions of a Complex Variable",
         unitCode: "5.1",
         importance: "Very High",
         keyPoints: [
-          "A complex function f(z) = u(x, y) + i v(x, y) is analytic (holomorphic) in a domain D if it is single-valued and differentiable at every point in D.",
-          "Cauchy-Riemann (C-R) Equations in Cartesian form: ∂u/∂x = ∂v/∂y and ∂u/∂y = -∂v/∂x.",
-          "C-R Equations in Polar form: ∂u/∂r = (1/r) (∂v/∂θ) and ∂v/∂r = -(1/r) (∂u/∂θ).",
-          "Harmonic Functions: Both real and imaginary parts of an analytic function satisfy Laplace's equation: ∇²u = ∂²u/∂x² + ∂²u/∂y² = 0. v is called the harmonic conjugate of u.",
-          "Milne-Thomson Method: Reconstructs f(z) directly from u(x, y) without calculating v: f'(z) = u_x(z, 0) - i u_y(z, 0) => f(z) = ∫ [u_x(z, 0) - i u_y(z, 0)] dz + C.",
-          "Bilinear (Mobius) Transformation: w = (az + b)/(cz + d) where ad - bc ≠ 0. Preserves the cross-ratio of four distinct points and maps circles/lines into circles/lines."
+          "Complex Function: w = f(z) = u(x, y) + i v(x, y) where z = x + iy.",
+          "Derivative: f'(z) = lim_{Δz → 0} [f(z + Δz) - f(z)] / Δz. Must be identical along every approaching path in the complex plane.",
+          "Analytic Function: f(z) is analytic at z₀ if it is differentiable at z₀ and throughout some open neighborhood around z₀.",
+          "Cauchy-Riemann (C-R) Equations in Cartesian Coordinates:",
+          "  ∂u/∂x = ∂v/∂y  and  ∂u/∂y = -∂v/∂x.",
+          "Necessary Condition: If f(z) = u + iv is differentiable at z, C-R equations MUST hold.",
+          "Sufficient Condition: If u, v and all four first partial derivatives u_x, u_y, v_x, v_y exist, are continuous, and satisfy C-R equations, then f(z) is analytic.",
+          "Cauchy-Riemann Equations in Polar Coordinates (z = r e^{iθ}, f(z) = u(r, θ) + i v(r, θ)):",
+          "  ∂u/∂r = (1/r) (∂v/∂θ)  and  ∂v/∂r = -(1/r) (∂u/∂θ)."
         ],
-        theory: "Complex differentiability is a much stronger condition than real differentiability because Δz = Δx + iΔy can approach zero from infinitely many directions in the complex plane. The C-R equations ensure that the limit of [f(z+Δz) - f(z)]/Δz is path-independent. Geometric mapping w = f(z) is conformal (preserves magnitude and sense of angles between curves) at all points where f'(z) ≠ 0.",
-        code: `// Milne-Thomson Construction of Analytic Function:
-// Given: u(x, y) = x^3 - 3xy^2 + 3x^2 - 3y^2 + 1
-// 1. Partial derivatives:
-//    u_x = 3x^2 - 3y^2 + 6x
-//    u_y = -6xy - 6y
-// 2. Put x = z and y = 0:
-//    u_x(z, 0) = 3z^2 + 6z
-//    u_y(z, 0) = 0
-// 3. By Milne-Thomson Method:
-//    f'(z) = u_x(z, 0) - i * u_y(z, 0) = 3z^2 + 6z
-// 4. Integrate with respect to z:
-//    f(z) = ∫ (3z^2 + 6z) dz + C = z^3 + 3z^2 + C`,
-        example: "Verify harmonicity of u = e^x cos y: u_x = e^x cos y, u_{xx} = e^x cos y; u_y = -e^x sin y, u_{yy} = -e^x cos y. ∇²u = u_{xx} + u_{yy} = e^x cos y - e^x cos y = 0 (Harmonic). Harmonic conjugate v = e^x sin y + C.",
+        theory: "Complex differentiability is vastly more restrictive than real multivariable differentiability. In ℝ², Δz = Δx + iΔy can approach 0 from infinitely many radial and spiral directions. Equating the horizontal limit (Δy = 0, Δx → 0) with the vertical limit (Δx = 0, Δy → 0) yields the C-R equations. When satisfied with continuous partial derivatives, conformal geometry, infinite differentiability, and analyticity follow immediately.",
+        code: `// Rigorous Derivation of Cauchy-Riemann Equations in Cartesian Form:
+// Let f(z) = u(x, y) + i v(x, y) be differentiable at z = x + iy.
+// By definition: f'(z) = lim_{Δz -> 0} [ Δw / Δz ]
+// where Δw = [u(x + Δx, y + Δy) - u(x, y)] + i [v(x + Δx, y + Δy) - v(x, y)]
+// and Δz = Δx + i Δy.
+//
+// Path 1: Approach along the Real Axis (Horizontal: Δy = 0, Δz = Δx -> 0):
+//   f'(z) = lim_{Δx -> 0} [ (u(x+Δx, y) - u(x, y))/Δx + i (v(x+Δx, y) - v(x, y))/Δx ]
+//   f'(z) = ∂u/∂x + i (∂v/∂x)  ---------- (Equation 1)
+//
+// Path 2: Approach along the Imaginary Axis (Vertical: Δx = 0, Δz = i Δy -> 0):
+//   f'(z) = lim_{Δy -> 0} [ (u(x, y+Δy) - u(x, y))/(i Δy) + i (v(x, y+Δy) - v(x, y))/(i Δy) ]
+//   Since 1/i = -i:
+//   f'(z) = -i (∂u/∂y) + ∂v/∂y
+//   f'(z) = ∂v/∂y - i (∂u/∂y)  ---------- (Equation 2)
+//
+// Since f(z) is differentiable, the limits along Path 1 and Path 2 must be EQUAL:
+//   ∂u/∂x + i (∂v/∂x) = ∂v/∂y - i (∂u/∂y)
+//
+// Equating Real and Imaginary parts:
+//   ∂u/∂x = ∂v/∂y   and   ∂u/∂y = -∂v/∂x  (Q.E.D.!)`,
+        example: "Is f(z) = z̄ = x - iy analytic? u = x, v = -y. u_x = 1, v_y = -1. u_x ≠ v_y (1 ≠ -1). C-R equations are violated everywhere! Hence, f(z) = z̄ is nowhere differentiable and not analytic.",
         commonExamQuestions: [
-          "[8 Marks] State and prove the necessary and sufficient conditions for a complex function f(z) = u + iv to be analytic (derive Cauchy-Riemann equations).",
-          "[7 Marks] If u = x² - y², find its harmonic conjugate v(x, y) and express f(z) as a function of z.",
-          "[7 Marks] Find the bilinear transformation which maps the points z = {1, i, -1} into the points w = {i, 0, -i}."
+          "[8 Marks] Derive the Cauchy-Riemann equations in polar coordinates: ∂u/∂r = (1/r)(∂v/∂θ) and ∂v/∂r = -(1/r)(∂u/∂θ).",
+          "[8 Marks] Prove that f(z) = |z|² is differentiable only at the origin, but is nowhere analytic.",
+          "[7 Marks] If f(z) = u + iv is an analytic function and u - v = (x - y)(x² + 4xy + y²), find f(z) in terms of z."
         ]
       },
       {
-        id: "m2-u6-residues-contour-integration",
-        name: "Laurent Series, Poles, Residue Theorem & Contour Integration",
+        id: "m2-u5-harmonic-milne-thomson",
+        name: "Harmonic Functions, Harmonic Conjugates & Milne-Thomson Construction Method",
+        unit: 5,
+        unitTitle: "Unit 5: Functions of a Complex Variable",
+        unitCode: "5.2",
+        importance: "Very High",
+        keyPoints: [
+          "Harmonic Function: A real function φ(x, y) satisfying Laplace's 2D Partial Differential Equation: ∇²φ = ∂²φ/∂x² + ∂²φ/∂y² = 0.",
+          "Theorem: If f(z) = u + iv is analytic, then BOTH u and v are harmonic functions. v is the harmonic conjugate of u.",
+          "Orthogonal System: The families of curves u(x, y) = c₁ and v(x, y) = c₂ intersect orthogonally at all points where f'(z) ≠ 0: (m₁ · m₂ = -1).",
+          "Finding Harmonic Conjugate v(x, y): dv = (∂v/∂x) dx + (∂v/∂y) dy = (-∂u/∂y) dx + (∂u/∂x) dy (exact differential, integrated directly).",
+          "Milne-Thomson Method: Directly constructs f(z) without finding v:",
+          "  1. Compute u_x = ∂u/∂x = φ₁(x, y) and u_y = ∂u/∂y = φ₂(x, y).",
+          "  2. Substitute x = z and y = 0.",
+          "  3. Integrate: f(z) = ∫ [φ₁(z, 0) - i φ₂(z, 0)] dz + C.",
+          "When v(x, y) is given: f(z) = ∫ [ψ₁(z, 0) + i ψ₂(z, 0)] dz + C where ψ₁ = ∂v/∂y and ψ₂ = ∂v/∂x."
+        ],
+        theory: "Laplace's equation models steady-state temperature distributions, electrostatic potential, and irrotational inviscid fluid flows. In two dimensions, every harmonic function corresponds to the real part of an analytic complex function. The Milne-Thomson method leverages the identity f'(z) = u_x - i u_y on the real axis (y = 0), reducing multi-variable partial integration to single-variable complex antiderivatives.",
+        code: `// Milne-Thomson Method Example:
+// Given: u(x, y) = e^x (x cos y - y sin y)
+// Step 1: Find partial derivatives:
+//    u_x = e^x (x cos y - y sin y) + e^x (cos y)
+//    u_y = e^x (-x sin y - sin y - y cos y)
+// Step 2: Put x = z and y = 0:
+//    φ1(z, 0) = u_x(z, 0) = e^z (z * 1 - 0) + e^z (1) = z e^z + e^z
+//    φ2(z, 0) = u_y(z, 0) = e^z (0 - 0 - 0) = 0
+// Step 3: By Milne-Thomson Formula:
+//    f'(z) = φ1(z, 0) - i φ2(z, 0) = z e^z + e^z
+// Step 4: Integrate with respect to z:
+//    f(z) = ∫ (z e^z + e^z) dz + C
+//         = [ z e^z - e^z + e^z ] + C = z e^z + C
+// Verify:
+//    z e^z = (x + iy) e^{x + iy} = (x + iy) e^x (cos y + i sin y)
+//          = e^x [ (x cos y - y sin y) + i (y cos y + x sin y) ]
+//    Real part is exactly u(x, y)! (Harmonic conjugate v = e^x (y cos y + x sin y))`,
+        example: "Prove that u = 2x - x³ + 3xy² is harmonic: u_x = 2 - 3x² + 3y², u_{xx} = -6x. u_y = 6xy, u_{yy} = 6x. ∇²u = u_{xx} + u_{yy} = -6x + 6x = 0. By Milne-Thomson: f'(z) = (2 - 3z²) - i(0) => f(z) = 2z - z³ + C.",
+        commonExamQuestions: [
+          "[8 Marks] Show that u = x³ - 3xy² + 3x² - 3y² + 1 is harmonic. Find its harmonic conjugate v and express f(z) in terms of z.",
+          "[8 Marks] If u = e^{2x} (x cos 2y - y sin 2y), find the analytic function f(z) using the Milne-Thomson method.",
+          "[7 Marks] Prove that the families of curves u(x, y) = c₁ and v(x, y) = c₂ cut orthogonally if f(z) = u + iv is an analytic function."
+        ]
+      },
+      {
+        id: "m2-u5-conformal-bilinear-mapping",
+        name: "Conformal Mapping, Bilinear (Mobius) Transformations & Cross-Ratio Invariance",
+        unit: 5,
+        unitTitle: "Unit 5: Functions of a Complex Variable",
+        unitCode: "5.3",
+        importance: "High",
+        keyPoints: [
+          "Conformal Mapping: A transformation w = f(z) is conformal at z₀ if it preserves both the MAGNITUDE and SENSE (direction) of angles between intersecting curves.",
+          "Condition for Conformality: f(z) must be analytic at z₀ and f'(z₀) ≠ 0. Points where f'(z) = 0 are called Critical Points.",
+          "Bilinear (Mobius) Transformation: w = (az + b) / (cz + d) where a, b, c, d are complex constants and ad - bc ≠ 0 (determinant non-zero).",
+          "Decomposition: Every bilinear transformation is a composition of Translation (w = z + α), Rotation & Magnification (w = β z), and Inversion (w = 1/z).",
+          "Circle-Preserving Property: Bilinear transformations map generalized circles (circles and straight lines) in the z-plane into generalized circles in the w-plane.",
+          "Cross-Ratio Invariance: The cross-ratio of four distinct points is invariant under bilinear transformation:",
+          "  [(w - w₁)(w₂ - w₃)] / [(w - w₃)(w₂ - w₁)] = [(z - z₁)(z₂ - z₃)] / [(z - z₃)(z₂ - z₁)].",
+          "Fixed Points (Invariant Points): Roots of z = (az + b)/(cz + d) => c z² + (d - a) z - b = 0 (at most 2 fixed points)."
+        ],
+        theory: "Conformal mapping allows complicated physical flow and potential problems (such as aerodynamic flow around an airplane airfoil) to be mapped into simple geometric boundaries (such as a circular cylinder) where solutions are classical, and then transformed back without altering orthogonal field boundaries.",
+        code: `// Finding Bilinear Transformation via Cross-Ratio Invariance:
+// Problem: Find the bilinear transformation that maps:
+//    z1 = 1,  z2 = i,  z3 = -1   into
+//    w1 = i,  w2 = 0,  w3 = -i
+// Step 1: Set up Cross-Ratio Equation:
+//    (w - w1)(w2 - w3) / [ (w - w3)(w2 - w1) ] = (z - z1)(z2 - z3) / [ (z - z3)(z2 - z1) ]
+// Step 2: Substitute values:
+//    LHS = (w - i)(0 - (-i)) / [ (w - (-i))(0 - i) ]
+//        = (w - i)(i) / [ (w + i)(-i) ] = -(w - i) / (w + i) = (i - w) / (i + w)
+//    RHS = (z - 1)(i - (-1)) / [ (z - (-1))(i - 1) ]
+//        = (z - 1)(1 + i) / [ (z + 1)(i - 1) ]
+//    Notice: (1 + i) / (i - 1) = (1 + i)^2 / (i^2 - 1) = (1 + 2i - 1) / (-2) = -i
+//    RHS = -i (z - 1) / (z + 1)
+// Step 3: Equate LHS and RHS:
+//    -(w - i) / (w + i) = -i (z - 1) / (z + 1)
+//    (w - i) / (w + i) = i (z - 1) / (z + 1)
+// Step 4: Cross-multiply and solve for w:
+//    (w - i)(z + 1) = i (z - 1)(w + i) = (i z - i)(w + i)
+//    wz + w - iz - i = i z w - z + w + 1
+//    wz + w - i z w - w = iz + i - z + 1
+//    w [ z (1 - i) ] = z (i - 1) + (1 + i)
+//    w = [ (i - 1) z + (1 + i) ] / [ (1 - i) z ]
+//    Divide numerator and denominator by (1 - i):
+//    w = -z / z + (1 + i)/(1 - i) / z => w = (i - z) / (i z + 1)`,
+        example: "Find the fixed points of w = (3z - 4) / (z - 1): Set w = z => z(z - 1) = 3z - 4 => z² - 4z + 4 = 0 => (z - 2)² = 0 => z = 2 (single repeated fixed point).",
+        commonExamQuestions: [
+          "[8 Marks] Find the bilinear transformation which maps z = {2, 1, 0} into w = {1, 0, i}.",
+          "[7 Marks] Show that the transformation w = 1/z maps circles and straight lines in the z-plane into circles or straight lines in the w-plane.",
+          "[7 Marks] Find the critical points of the transformation w = z + 1/z."
+        ]
+      },
+      {
+        id: "m2-u6-laurent-singularities-classification",
+        name: "Taylor's Theorem, Laurent's Series & Complete Classification of Singularities and Poles",
         unit: 6,
         unitTitle: "Unit 6: Complex Series, Residues and Poles",
         unitCode: "6.1",
         importance: "Very High",
         keyPoints: [
-          "Laurent Series: f(z) = ∑_{n=0}^∞ a_n (z - z₀)^n + ∑_{n=1}^∞ b_n / (z - z₀)^n valid in an annulus r < |z - z₀| < R.",
-          "Classification of Singularities: Removable singularity (no negative powers in principal part); Pole of order m (principal part terminates at b_m/(z-z₀)^m); Essential singularity (infinite terms in principal part, e.g., e^{1/z}).",
-          "Residue Calculation: For a simple pole (order 1): Res(z₀) = lim_{z → z₀} (z - z₀) f(z). For a pole of order m: Res(z₀) = (1/(m-1)!) lim_{z → z₀} d^{m-1}/dz^{m-1} [(z - z₀)^m f(z)].",
-          "Cauchy's Residue Theorem: ∮_C f(z) dz = 2πi ∑ Res(z_k), summing residues at all poles enclosed within closed contour C.",
-          "Contour Integration of Real Integrals: ∫_0^{2π} R(cos θ, sin θ) dθ transformed using z = e^{iθ}, cos θ = (z + 1/z)/2, sin θ = (z - 1/z)/(2i), dz = i z dθ over unit circle |z| = 1."
+          "Taylor's Theorem: If f(z) is analytic within a disk |z - z₀| < R, it can be expanded into a unique power series: f(z) = ∑_{n=0}^∞ a_n (z - z₀)^n where a_n = f^{(n)}(z₀) / n!.",
+          "Laurent's Theorem: If f(z) is analytic in an annular region r < |z - z₀| < R, it has a unique expansion: f(z) = ∑_{n=0}^∞ a_n (z - z₀)^n + ∑_{n=1}^∞ b_n / (z - z₀)^n.",
+          "Analytic Part: ∑_{n=0}^∞ a_n (z - z₀)^n (regular non-negative powers).",
+          "Principal Part: ∑_{n=1}^∞ b_n / (z - z₀)^n (negative powers of z - z₀).",
+          "Classification of Singularities based on Principal Part:",
+          "  1. Removable Singularity: Principal part has ZERO terms (b_n = 0 for all n). lim_{z → z₀} f(z) exists and is finite. (e.g., (sin z) / z at z = 0).",
+          "  2. Pole of Order m: Principal part terminates after m terms: b_m / (z - z₀)^m with b_m ≠ 0. If m = 1, it is a Simple Pole. lim_{z → z₀} f(z) = ∞.",
+          "  3. Essential Singularity: Principal part has an INFINITE number of non-zero negative terms. lim_{z → z₀} f(z) does not exist (Picard's theorem). (e.g., e^{1/z} at z = 0)."
         ],
-        theory: "Where Taylor series expansions require analyticity throughout an entire disk, Laurent series extend representation to punctured disks containing isolated singular points. The coefficient b₁ = (1/2πi) ∮_C f(z) dz of the 1/(z - z₀) term is precisely the Residue. Cauchy's Residue Theorem turns difficult definite and improper real integrals across (-∞, ∞) into algebraic pole-residue evaluations along semicircular Bromwich or indented contours.",
-        code: `// Evaluate Real Definite Integral via Residue Calculus:
-// I = ∫_0^{2π} dθ / (5 - 4 cos θ)
-// 1. Substitute z = e^{iθ} => cos θ = (z^2 + 1)/(2z), dθ = dz / (i*z)
-// 2. Transformed contour integral over unit circle C: |z| = 1
-//    I = ∮_C [dz / (i*z)] / [5 - 4((z^2 + 1)/(2z))]
-//      = ∮_C dz / [ i * z * (5 - (2z^2 + 2)/z) ]
-//      = ∮_C dz / [ i * (5z - 2z^2 - 2) ] = (1/i) ∮_C dz / [-(2z - 1)(z - 2)]
-// 3. Poles: z = 1/2 (inside |z|=1) and z = 2 (outside |z|=1)
-// 4. Residue at simple pole z = 1/2:
-//    Res(1/2) = lim_{z -> 1/2} (z - 1/2) * [ 1 / (-2(z - 1/2)(z - 2)) ]
-//             = 1 / [-2(1/2 - 2)] = 1 / [-2(-3/2)] = 1/3
-// 5. By Cauchy's Residue Theorem:
-//    I = (1/i) * [2πi * Res(1/2)] = (1/i) * (2πi * (1/3)) = 2π / 3`,
-        example: "Laurent series of f(z) = 1 / [(z - 1)(z - 2)] in 1 < |z| < 2: f(z) = 1/(z - 2) - 1/(z - 1) = -(1/2)/(1 - z/2) - (1/z)/(1 - 1/z) = -∑_{n=0}^∞ (z^n / 2^{n+1}) - ∑_{n=1}^∞ (1 / z^n). Contains both positive and negative powers.",
+        theory: "Where Taylor's series is confined to disks of holomorphy free of singularities, Laurent's theorem handles functions punctured by singular points. The presence and length of the principal part uniquely diagnoses the nature of the singularity, separating tame removable points from poles and infinitely chaotic essential singularities.",
+        code: `// Expansion in Different Annuli of f(z) = 1 / [ (z + 1)(z + 3) ]
+// Partial Fractions:
+//   f(z) = [1/2] / (z + 1) - [1/2] / (z + 3)
+//
+// Region 1: Inside disk |z| < 1 (Taylor series):
+//   f(z) = (1/2) (1 + z)^-1 - (1/6) (1 + z/3)^-1
+//        = (1/2) ∑_{n=0}^∞ (-1)^n z^n - (1/6) ∑_{n=0}^∞ (-1)^n (z/3)^n
+//        = ∑_{n=0}^∞ (-1)^n [ 1/2 - 1/(2 * 3^{n+1}) ] z^n  (Only positive powers)
+//
+// Region 2: Annulus 1 < |z| < 3 (Laurent series):
+//   For |z| > 1: (1 + z)^-1 = z^-1 (1 + 1/z)^-1 = ∑_{n=0}^∞ (-1)^n z^{-(n+1)}
+//   For |z| < 3: (z + 3)^-1 = (1/3)(1 + z/3)^-1 = ∑_{n=0}^∞ (-1)^n z^n / 3^{n+1}
+//   f(z) = (1/2) ∑_{n=0}^∞ (-1)^n / z^{n+1} - (1/2) ∑_{n=0}^∞ (-1)^n z^n / 3^{n+1}
+//   (Contains both positive and negative powers!)
+//
+// Region 3: Outside disk |z| > 3:
+//   f(z) = (1/2) [ 1/z (1 + 1/z)^-1 - 1/z (1 + 3/z)^-1 ]
+//        = (1/2) ∑_{n=0}^∞ (-1)^n [ 1 - 3^n ] / z^{n+1} (Only negative powers)`,
+        example: "Classify singularity of f(z) = (e^z - 1) / z: e^z - 1 = z + z²/2! + z³/3! + ... => f(z) = 1 + z/2! + z²/3! + ... No negative powers! z = 0 is a Removable Singularity.",
         commonExamQuestions: [
-          "[8 Marks] State Cauchy's Residue Theorem. Evaluate ∮_C [(z - 3) / (z² + 2z + 5)] dz where C is |z + 1 - i| = 2.",
-          "[7 Marks] Expand f(z) = 1 / (z² - 3z + 2) in Laurent series valid for: (i) |z| < 1, (ii) 1 < |z| < 2, (iii) |z| > 2.",
-          "[7 Marks] Using contour integration, evaluate ∫_{-∞}^∞ [1 / (x⁴ + 1)] dx."
+          "[8 Marks] Expand f(z) = 1 / [(z - 1)(z - 2)] in Laurent series valid for: (i) |z| < 1, (ii) 1 < |z| < 2, (iii) |z| > 2, (iv) 0 < |z - 1| < 1.",
+          "[7 Marks] Define isolated singularity, removable singularity, pole of order m, and essential singularity with an example of each.",
+          "[7 Marks] Find and classify the singularities of f(z) = [z - sin z] / z³ and g(z) = e^{1/(z - 2)}."
+        ]
+      },
+      {
+        id: "m2-u6-residue-theorem-contour-trig",
+        name: "Calculation of Residues, Cauchy's Residue Theorem & Evaluation of Real Trigonometric Integrals",
+        unit: 6,
+        unitTitle: "Unit 6: Complex Series, Residues and Poles",
+        unitCode: "6.2",
+        importance: "Very High",
+        keyPoints: [
+          "Residue: The coefficient b₁ of the 1/(z - z₀) term in the Laurent expansion of f(z) around z₀: Res[f(z), z₀] = b₁.",
+          "Residue Formula for Simple Pole (order 1): Res(z₀) = lim_{z → z₀} (z - z₀) f(z).",
+          "Alternative Simple Pole Formula: If f(z) = P(z) / Q(z) where P(z₀) ≠ 0 and Q(z₀) = 0, Q'(z₀) ≠ 0, then Res(z₀) = P(z₀) / Q'(z₀).",
+          "Residue Formula for Pole of Order m: Res(z₀) = (1 / (m - 1)!) lim_{z → z₀} [ d^{m-1}/dz^{m-1} { (z - z₀)^m f(z) } ].",
+          "Cauchy's Residue Theorem: ∮_C f(z) dz = 2πi ∑_{k=1}^N Res[f(z), z_k], where z_k are all isolated poles enclosed inside simple closed contour C.",
+          "Evaluation of Real Trigonometric Integrals: I = ∫_0^{2π} R(cos θ, sin θ) dθ.",
+          "  Transformation to unit circle C: |z| = 1 via z = e^{iθ}:",
+          "  dz = i e^{iθ} dθ = i z dθ => dθ = dz / (iz).",
+          "  cos θ = (z + 1/z) / 2 = (z² + 1) / (2z);  sin θ = (z - 1/z) / (2i) = (z² - 1) / (2iz)."
+        ],
+        theory: "Cauchy's Residue Theorem is the pinnacle of complex analysis. By expressing definite real integrals as closed contours around the unit circle |z| = 1, difficult integration is reduced to algebraic polynomial root-finding and residue calculation at poles situated strictly inside the unit disk.",
+        code: `// Complete Contour Evaluation: Real Trigonometric Integral
+// Evaluate: I = ∫_0^{2π} dθ / (a + b cos θ)   (where a > b > 0)
+// Step 1: Map to unit circle C: |z| = 1 using z = e^{iθ}:
+//    cos θ = (z^2 + 1) / (2z),  dθ = dz / (i z)
+//    I = ∮_C [ dz / (i z) ] / [ a + b(z^2 + 1)/(2z) ]
+//      = ∮_C [ dz / (i z) ] / [ (2az + b z^2 + b) / (2z) ]
+//      = (2 / i) ∮_C dz / [ b z^2 + 2az + b ]
+//      = (2 / (i b)) ∮_C dz / [ z^2 + (2a/b) z + 1 ]
+//
+// Step 2: Find poles (roots of z^2 + (2a/b) z + 1 = 0):
+//    z = [ -(2a/b) ± √(4a^2/b^2 - 4) ] / 2
+//      = -(a/b) ± √((a^2 - b^2)/b^2) = [ -a ± √(a^2 - b^2) ] / b
+//    Let α = [ -a + √(a^2 - b^2) ] / b  and  β = [ -a - √(a^2 - b^2) ] / b
+//    Notice: α · β = 1.
+//    Since a > b > 0: |β| > 1 (lies OUTSIDE |z| = 1)
+//    Therefore: |α| < 1 (lies strictly INSIDE |z| = 1!)
+//
+// Step 3: Compute Residue at simple pole z = α:
+//    f(z) = 1 / [ (z - α)(z - β) ]
+//    Res(α) = lim_{z -> α} (z - α) f(z) = 1 / (α - β)
+//    α - β = 2 √(a^2 - b^2) / b
+//    Res(α) = b / [ 2 √(a^2 - b^2) ]
+//
+// Step 4: Apply Cauchy's Residue Theorem:
+//    I = (2 / (i b)) * [ 2πi * Res(α) ]
+//      = (2 / (i b)) * [ 2πi * (b / (2 √(a^2 - b^2))) ]
+//      = 2π / √(a^2 - b^2)  (Exact University Analytical Solution!)`,
+        example: "Evaluate ∫_0^{2π} dθ / (13 + 5 sin θ): Map to unit circle. z² + (26i/5)z - 1 = 0. Roots: z = -5i, -i/5. Inside pole is z = -i/5. Res = 1/(10z + 26i)|_{-i/5} = 1/(24i). I = (2/i)(2πi)(1/24i) = π/6.",
+        commonExamQuestions: [
+          "[8 Marks] State Cauchy's Residue Theorem. Using contour integration, evaluate ∫_0^{2π} [dθ / (5 - 3 cos θ)].",
+          "[8 Marks] Evaluate ∫_0^{2π} [cos 2θ / (5 + 4 cos θ)] dθ using residue calculus.",
+          "[7 Marks] Find the residues of f(z) = z² / [(z - 1)² (z + 2)] at all its poles."
+        ]
+      },
+      {
+        id: "m2-u6-contour-improper-integrals",
+        name: "Contour Integration of Infinite Improper Rational Integrals across (-∞, ∞)",
+        unit: 6,
+        unitTitle: "Unit 6: Complex Series, Residues and Poles",
+        unitCode: "6.3",
+        importance: "Very High",
+        keyPoints: [
+          "Evaluation of Infinite Real Integrals: I = ∫_{-∞}^∞ [P(x) / Q(x)] dx where Q(x) has no real zeros and deg(Q) ≥ deg(P) + 2.",
+          "Contour Construction: Closed contour Γ consisting of the real line segment [-R, R] and the upper semicircle C_R: z = R e^{iθ} (0 ≤ θ ≤ π).",
+          "Jordan's Lemma / Semicircle Vanishing: As R → ∞, ∫_{C_R} f(z) dz → 0 because |f(z)| ≤ M / R².",
+          "Formula: ∫_{-∞}^∞ f(x) dx = 2πi ∑ Res[f(z)] at all poles lying strictly in the UPPER HALF-PLANE (Im(z) > 0).",
+          "Poles with Trigonometric Factors: For ∫_{-∞}^∞ [P(x)/Q(x)] cos(mx) dx, integrate f(z) = [P(z)/Q(z)] e^{imz} and take the Real part of 2πi ∑ Res."
+        ],
+        theory: "Improper real integrals extending across the entire real axis (-∞, ∞) cannot be evaluated by ordinary antiderivatives when polynomials lack elementary factorizations. By closing the real axis with a semi-infinite semicircular arc in the upper half complex plane, Jordan's lemma guarantees that the arc integral vanishes to zero as radius R → ∞, converting the infinite integral into the sum of residues at upper-half-plane poles.",
+        code: `// Complete Analytical Contour Solution: Infinite Real Integral
+// Evaluate: I = ∫_{-∞}^∞ dx / (x^4 + 1)
+// Step 1: Consider complex function f(z) = 1 / (z^4 + 1) over contour Γ = [-R, R] ∪ C_R:
+//    ∮_Γ f(z) dz = ∫_{-R}^R [dx / (x^4 + 1)] + ∫_{C_R} f(z) dz
+//    As R -> ∞, ∫_{C_R} f(z) dz -> 0 (since degree denominator - degree numerator = 4 ≥ 2).
+//    Therefore: ∫_{-∞}^∞ dx / (x^4 + 1) = 2πi ∑ Res[f(z), upper-half poles]
+//
+// Step 2: Find poles (roots of z^4 + 1 = 0 => z^4 = -1 = e^{i(π + 2kπ)}):
+//    z_k = e^{i (2k + 1)π / 4}  for k = 0, 1, 2, 3
+//    z0 = e^{i π/4} = cos(π/4) + i sin(π/4) = (1 + i) / √2   [Im > 0: UPPER]
+//    z1 = e^{i 3π/4} = cos(3π/4) + i sin(3π/4) = (-1 + i) / √2 [Im > 0: UPPER]
+//    z2 = e^{i 5π/4}  [Im < 0: LOWER - Ignore]
+//    z3 = e^{i 7π/4}  [Im < 0: LOWER - Ignore]
+//
+// Step 3: Compute residues using P(z)/Q'(z) formula:
+//    Q'(z) = 4 z^3. Since z^4 = -1 => z^3 = -1/z.
+//    Res(z_k) = 1 / (4 z_k^3) = z_k / (4 z_k^4) = -z_k / 4
+//    Sum of residues at upper-half poles:
+//    ∑ Res = Res(z0) + Res(z1) = -(1/4) [ z0 + z1 ]
+//          = -(1/4) [ (1 + i)/√2 + (-1 + i)/√2 ]
+//          = -(1/4) [ (2i) / √2 ] = -i / (2 √2)
+//
+// Step 4: Apply Cauchy's Residue Theorem:
+//    I = 2πi * [ -i / (2 √2) ]
+//      = 2π (-i^2) / (2 √2) = π / √2  (Exact University Analytical Solution!)`,
+        example: "Evaluate ∫_{-∞}^∞ dx / (x² + 1)²: Poles at z = ±i (order 2). Upper pole is z = i. Res(i) = d/dz [(z - i)² / (z² + 1)²]|_{z=i} = d/dz [1/(z + i)²]|_{z=i} = -2/(2i)³ = -2/(-8i) = 1/(4i). I = 2πi(1/4i) = π/2.",
+        commonExamQuestions: [
+          "[8 Marks] Using contour integration, evaluate: ∫_0^∞ [dx / (x² + a²)] and hence evaluate ∫_0^∞ [dx / (x² + 1)²].",
+          "[8 Marks] Evaluate ∫_{-∞}^∞ [cos(mx) / (x² + a²)] dx (a > 0, m > 0) using contour integration.",
+          "[7 Marks] Show that ∫_0^∞ [dx / (x⁶ + 1)] = π / 3 using Cauchy's residue theorem."
         ]
       }
     ],
     theoryTopics: [
+      "State and prove Cauchy's Residue Theorem with full mathematical conditions.",
       "Derive the Euler equations for finding Fourier coefficients of periodic functions over arbitrary interval [-L, L].",
-      "Explain the physical significance of divergence and curl of vector fields, and prove that the real and imaginary parts of an analytic function form orthogonal trajectories.",
-      "Distinguish between isolated, removable, pole, and essential singularities with standard complex variable examples.",
-      "Explain how Cauchy-Euler differential equations are transformed into linear differential equations with constant coefficients."
+      "Explain the physical significance of the Jacobian of transformation and derive the polar coordinate scale factor J = r.",
+      "Distinguish between isolated, removable, pole of order m, and essential singularities with standard complex variable examples.",
+      "Derive the Cauchy-Riemann equations in polar coordinates and prove that the real and imaginary parts of an analytic function satisfy Laplace's equation.",
+      "Explain how Cauchy-Euler differential equations are transformed into linear differential equations with constant coefficients.",
+      "Explain the physical modeling of damped simple harmonic motion and contrast overdamped, critically damped, and underdamped systems."
     ]
   },
 
