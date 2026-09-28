@@ -87,6 +87,30 @@ function SyllabusContent() {
     }
   }, [selectedCourse.code]);
 
+  const [activeUnitId, setActiveUnitId] = useState<string>("unit-1");
+
+  // Track active unit via intersection observer
+  useEffect(() => {
+    setActiveUnitId("unit-1");
+    if (typeof window === "undefined" || !("IntersectionObserver" in window)) return;
+
+    const headings = document.querySelectorAll<HTMLElement>("h2[id^='unit-'], #lab-work, #reference-books");
+    if (!headings.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.find((e) => e.isIntersecting);
+        if (visible?.target?.id) {
+          setActiveUnitId(visible.target.id);
+        }
+      },
+      { rootMargin: "-10% 0px -70% 0px", threshold: 0 }
+    );
+
+    headings.forEach((h) => observer.observe(h));
+    return () => observer.disconnect();
+  }, [selectedCourse.code]);
+
   const toggleLearned = () => {
     const next = !isLearned;
     setIsLearned(next);
@@ -306,111 +330,71 @@ function SyllabusContent() {
               {selectedCourse.code}, Semester {selectedSemester}, {totalTeachingHours} teaching hours &middot; {selectedCourse.credits} credits
             </p>
 
-            {/* Units Navigation Tree with expandable topics matching ExamAI Reader Design */}
-            {selectedCourse.syllabusUnits && selectedCourse.syllabusUnits.length > 0 ? (
-              <div className="unit-nav-tree" style={{ marginTop: "1rem" }}>
-                {selectedCourse.syllabusUnits.map((unit, idx) => (
-                  <details
-                    key={idx}
-                    open={idx < 2}
-                    style={{
-                      marginBottom: "0.5rem",
-                      border: "1px solid var(--line-subtle)",
-                      borderRadius: "6px",
-                      background: "var(--paper-1)",
-                      overflow: "hidden",
-                    }}
-                  >
-                    <summary
-                      style={{
-                        padding: "0.45rem 0.65rem",
-                        cursor: "pointer",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        fontWeight: 600,
-                        fontSize: "0.8rem",
-                        color: "var(--ink-1)",
+            {/* Units Navigation Tree matching ExamAI Reader Design */}
+            <ul className="tree" style={{ marginTop: "1rem" }}>
+              {unitsList.map((unitTitle, idx) => {
+                const unitId = `unit-${idx + 1}`;
+                const isCurrent = activeUnitId === unitId;
+                return (
+                  <li key={idx}>
+                    <a
+                      href={`#${unitId}`}
+                      aria-current={isCurrent ? "page" : undefined}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setActiveUnitId(unitId);
+                        const target = document.getElementById(unitId);
+                        if (target) {
+                          target.scrollIntoView({ behavior: "smooth", block: "start" });
+                          window.history.pushState(null, "", `#${unitId}`);
+                        }
                       }}
                     >
-                      <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", minWidth: 0, flex: 1, paddingRight: "0.35rem" }}>
-                        <span
-                          className="code"
-                          style={{
-                            fontSize: "0.68rem",
-                            padding: "0.1rem 0.35rem",
-                            borderRadius: "3px",
-                            background: "var(--ink-1)",
-                            color: "var(--paper-1)",
-                            whiteSpace: "nowrap",
-                          }}
-                        >
-                          U{idx + 1}
-                        </span>
-                        <span
-                          style={{
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            whiteSpace: "nowrap",
-                            flex: 1,
-                          }}
-                          title={unit.title}
-                        >
-                          {unit.title}
-                        </span>
-                      </div>
-                      {unit.teachingHours ? (
-                        <span style={{ fontSize: "0.7rem", color: "var(--ink-3)", fontWeight: 500, whiteSpace: "nowrap" }}>
-                          {unit.teachingHours}h
-                        </span>
-                      ) : null}
-                    </summary>
-                    <div style={{ padding: "0.4rem 0.65rem", borderTop: "1px solid var(--line-subtle)", background: "var(--paper-2)" }}>
-                      <a
-                        href={`#unit-${idx + 1}`}
-                        style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--accent)", marginBottom: "0.35rem", textDecoration: "none" }}
-                      >
-                        Unit {idx + 1} Overview &rarr;
-                      </a>
-                      {unit.subtopics && unit.subtopics.length > 0 && (
-                        <ul className="tree" style={{ padding: 0, margin: 0, fontSize: "0.75rem" }}>
-                          {unit.subtopics.map((sub, sIdx) => (
-                            <li key={sIdx} style={{ marginBottom: "0.2rem" }}>
-                              <a href={`#unit-${idx + 1}-topic-${sIdx + 1}`} style={{ textDecoration: "none" }}>
-                                <span className="code" style={{ fontSize: "0.68rem" }}>{idx + 1}.{sIdx + 1}</span> {sub}
-                              </a>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                  </details>
-                ))}
-              </div>
-            ) : (
-              <ul className="tree" style={{ marginTop: "1rem" }}>
-                {unitsList.map((unitTitle, idx) => (
-                  <li key={idx}>
-                    <a href={`#unit-${idx + 1}`}>
-                      <span className="code">{idx + 1}</span> {unitTitle}
+                      <span className="code">{idx + 1}</span>
+                      <span style={{ flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                        {unitTitle}
+                      </span>
                     </a>
                   </li>
-                ))}
-              </ul>
-            )}
-
-            <ul className="tree" style={{ marginTop: "0.5rem" }}>
+                );
+              })}
               {selectedCourse.labWork && selectedCourse.labWork.length > 0 && (
                 <li>
-                  <a href="#lab-work">
-                    <span className="code">&para;</span> Laboratory &amp; Practical
+                  <a
+                    href="#lab-work"
+                    aria-current={activeUnitId === "lab-work" ? "page" : undefined}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setActiveUnitId("lab-work");
+                      const target = document.getElementById("lab-work");
+                      if (target) {
+                        target.scrollIntoView({ behavior: "smooth", block: "start" });
+                        window.history.pushState(null, "", "#lab-work");
+                      }
+                    }}
+                  >
+                    <span className="code">&para;</span>
+                    <span>Laboratory &amp; Practical</span>
                   </a>
                 </li>
               )}
               {selectedCourse.referenceBooks && selectedCourse.referenceBooks.length > 0 && (
                 <li>
-                  <a href="#reference-books">
-                    <span className="code">&sect;</span> Reference Textbooks
+                  <a
+                    href="#reference-books"
+                    aria-current={activeUnitId === "reference-books" ? "page" : undefined}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setActiveUnitId("reference-books");
+                      const target = document.getElementById("reference-books");
+                      if (target) {
+                        target.scrollIntoView({ behavior: "smooth", block: "start" });
+                        window.history.pushState(null, "", "#reference-books");
+                      }
+                    }}
+                  >
+                    <span className="code">&sect;</span>
+                    <span>Reference Textbooks</span>
                   </a>
                 </li>
               )}
@@ -825,35 +809,19 @@ function SyllabusContent() {
         </div>
         <div className="dialog__body" style={{ padding: "1rem" }}>
           <ol className="toc-list" style={{ padding: 0 }}>
-            {selectedCourse.syllabusUnits && selectedCourse.syllabusUnits.length > 0 ? (
-              selectedCourse.syllabusUnits.map((u, i) => (
-                <li key={i} style={{ marginBottom: "0.5rem" }}>
-                  <a
-                    href={`#unit-${i + 1}`}
-                    onClick={() => {
-                      const dialog = document.getElementById("toc-dialog") as HTMLDialogElement | null;
-                      dialog?.close();
-                    }}
-                  >
-                    Unit {i + 1}: {u.title} ({u.teachingHours} hrs)
-                  </a>
-                </li>
-              ))
-            ) : (
-              selectedCourse.keyUnits.map((u, i) => (
-                <li key={i} style={{ marginBottom: "0.5rem" }}>
-                  <a
-                    href={`#unit-${i + 1}`}
-                    onClick={() => {
-                      const dialog = document.getElementById("toc-dialog") as HTMLDialogElement | null;
-                      dialog?.close();
-                    }}
-                  >
-                    Unit {i + 1}: {u}
-                  </a>
-                </li>
-              ))
-            )}
+            {unitsList.map((unitTitle, i) => (
+              <li key={i} style={{ marginBottom: "0.5rem" }}>
+                <a
+                  href={`#unit-${i + 1}`}
+                  onClick={() => {
+                    const dialog = document.getElementById("toc-dialog") as HTMLDialogElement | null;
+                    dialog?.close();
+                  }}
+                >
+                  Unit {i + 1}: {unitTitle}
+                </a>
+              </li>
+            ))}
           </ol>
         </div>
       </dialog>
