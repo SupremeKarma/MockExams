@@ -1,5 +1,6 @@
 import "@/styles/reader/tokens.css";
 import "@/styles/reader/reader.css";
+import "@/styles/reader/content-rules.css";
 import "@/styles/reader/integration.css";
 
 /**

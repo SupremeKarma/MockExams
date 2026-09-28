@@ -1,0 +1,679 @@
+/* ==========================================================================
+   ExamAI Content Rules: Syllabus, Notes, Solutions
+   Explicit CSS rules for consistent styling across all content types.
+   Prevents design inconsistencies and usage mistakes.
+   ========================================================================== */
+
+/* ==========================================================================
+   SYLLABUS RULES
+   Left sidebar: Unit/Topic tree navigation
+   Middle: Curriculum outline and learning objectives
+   Right sidebar: On-page table of contents
+   ========================================================================== */
+
+/* Syllabus - Left Rail (Navigation) */
+.syllabus .rail {
+  background: var(--bg-rail);
+  border-inline-end: 1px solid var(--rule);
+}
+
+/* Syllabus - Left Rail Text Colors */
+.syllabus .course-title {
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.syllabus .course-meta {
+  color: var(--ink-3);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+/* Syllabus - Left Rail Tree Navigation */
+.syllabus .tree summary,
+.syllabus .tree a {
+  font-size: 0.95rem;
+  color: var(--ink-2);
+  font-weight: 600;
+}
+
+.syllabus .tree a[aria-current="page"] {
+  background: var(--accent-soft);
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* Syllabus - Unit codes in rail */
+.syllabus .tree .code {
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85em;
+}
+
+/* Syllabus - Main Content (Middle Pane) */
+.syllabus .sheet {
+  background: var(--bg);
+  padding: var(--space-6) var(--gutter) var(--space-8);
+}
+
+/* Syllabus - Heading Hierarchy */
+.syllabus .prose h1 {
+  font-size: clamp(1.7em, 1.3em + 1.6vw, 2.074em);
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0.2em 0 0.45em;
+}
+
+.syllabus .prose h2 {
+  font-size: var(--step-2); /* 1.44em */
+  font-weight: 700;
+  color: var(--ink);
+  margin: 2.2em 0 0.6em;
+}
+
+.syllabus .prose h3 {
+  font-size: var(--step-1); /* 1.2em */
+  font-weight: 600;
+  color: var(--ink-2);
+  margin: 1.8em 0 0.5em;
+}
+
+/* Syllabus - Body Text */
+.syllabus .prose p {
+  font-size: var(--text-base);
+  line-height: var(--reading-leading);
+  color: var(--ink);
+  margin: 0 0 var(--para-space);
+}
+
+.syllabus .prose li {
+  color: var(--ink);
+  font-size: var(--text-base);
+}
+
+.syllabus .prose li::marker {
+  color: var(--ink-3);
+  font-weight: 600;
+}
+
+/* Syllabus - Right Sidebar (TOC) */
+.syllabus .toc {
+  background: var(--bg);
+  border-inline-start: 1px solid var(--rule);
+  padding: var(--space-6) var(--space-4) var(--space-7);
+  font-size: 0.9rem;
+}
+
+.syllabus .toc h2 {
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem;
+}
+
+/* Syllabus - TOC Links */
+.syllabus .toc-list a {
+  color: var(--ink-3);
+  font-size: 0.9rem;
+  text-decoration: none;
+  padding: 0.3rem 0.75rem;
+  border-inline-start: 2px solid transparent;
+}
+
+.syllabus .toc-list a[aria-current="location"] {
+  color: var(--accent);
+  border-inline-start-color: var(--accent);
+  font-weight: 600;
+}
+
+/* Syllabus - Blocks/Special Content */
+.syllabus .block {
+  margin: 1.6em 0;
+  padding: 1em 1.2em;
+  border-radius: var(--radius-m);
+  font-size: var(--text-base);
+}
+
+.syllabus .block--idea {
+  background: var(--highlight);
+  border-radius: 3px 12px 4px 14px / 12px 4px 14px 3px;
+}
+
+.syllabus .block--example {
+  background-color: var(--grid-bg);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 1.25rem 1.25rem;
+  border: 1px solid var(--rule);
+}
+
+/* ==========================================================================
+   NOTES RULES
+   Left sidebar: Notes/Topic finder with search
+   Middle: Article text with code, examples, diagrams
+   Right sidebar: Headings and quick jump links
+   ========================================================================== */
+
+/* Notes - Left Rail (Topic Finder) */
+.notes .rail {
+  background: var(--bg-rail);
+  border-inline-end: 1px solid var(--rule);
+}
+
+/* Notes - Left Rail Search/Title */
+.notes .course-title {
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.notes .course-meta {
+  color: var(--ink-3);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+/* Notes - Left Rail Tree */
+.notes .tree a {
+  color: var(--ink-2);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.notes .tree a[aria-current="page"] {
+  background: var(--accent-soft);
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* Notes - Main Content (Middle Pane) */
+.notes .sheet {
+  background: var(--bg);
+  padding: var(--space-6) var(--gutter) var(--space-8);
+}
+
+/* Notes - Heading Hierarchy */
+.notes .prose h1 {
+  font-size: clamp(1.7em, 1.3em + 1.6vw, 2.074em);
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0.2em 0 0.45em;
+}
+
+.notes .prose h2 {
+  font-size: var(--step-2); /* 1.44em */
+  font-weight: 700;
+  color: var(--ink);
+  margin: 2.2em 0 0.6em;
+}
+
+.notes .prose h3 {
+  font-size: var(--step-1); /* 1.2em */
+  font-weight: 600;
+  color: var(--ink-2);
+  margin: 1.8em 0 0.5em;
+}
+
+/* Notes - Body Text */
+.notes .prose p {
+  font-size: var(--text-base);
+  line-height: var(--reading-leading);
+  color: var(--ink);
+  margin: 0 0 var(--para-space);
+}
+
+/* Notes - Code Styling */
+.notes .prose code {
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  background: var(--bg-rail);
+  color: var(--ink);
+  padding: 0.1em 0.35em;
+  border-radius: var(--radius-s);
+}
+
+.notes .prose pre {
+  background: var(--bg-rail);
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  font-size: 0.84em;
+  line-height: 1.6;
+  padding: 0.9em 1.1em;
+  margin: 1.2em 0;
+  border-radius: var(--radius-m);
+}
+
+/* Notes - Links */
+.notes .prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.2em;
+}
+
+/* Notes - Lists */
+.notes .prose ul,
+.notes .prose ol {
+  color: var(--ink);
+  margin: 0 0 var(--para-space);
+  padding-inline-start: 1.4em;
+}
+
+.notes .prose li::marker {
+  color: var(--ink-3);
+  font-family: var(--font-clear);
+  font-weight: 600;
+}
+
+/* Notes - Right Sidebar (TOC) */
+.notes .toc {
+  background: var(--bg);
+  border-inline-start: 1px solid var(--rule);
+  padding: var(--space-6) var(--space-4) var(--space-7);
+  font-size: 0.9rem;
+}
+
+.notes .toc h2 {
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem;
+}
+
+.notes .toc-list {
+  border-inline-start: 2px solid var(--rule);
+  margin: 0;
+  padding: 0;
+}
+
+.notes .toc-list a {
+  color: var(--ink-3);
+  font-size: 0.9rem;
+  text-decoration: none;
+  padding: 0.3rem 0.75rem;
+  border-inline-start: 2px solid transparent;
+}
+
+.notes .toc-list a[aria-current="location"] {
+  color: var(--accent);
+  border-inline-start-color: var(--accent);
+  font-weight: 600;
+}
+
+/* Notes - Study Blocks */
+.notes .block {
+  margin: 1.6em 0;
+  padding: 1em 1.2em;
+  border-radius: var(--radius-m);
+}
+
+.notes .block--idea {
+  background: var(--highlight);
+  color: var(--ink);
+  border-radius: 3px 12px 4px 14px / 12px 4px 14px 3px;
+}
+
+.notes .block--example {
+  background-color: var(--grid-bg);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 1.25rem 1.25rem;
+  border: 1px solid var(--rule);
+}
+
+.notes .block--tip {
+  padding: 0.15em 0 0.15em 1.1em;
+  border-inline-start: 2px solid var(--pen);
+  background: transparent;
+}
+
+.notes .block--warning {
+  background: var(--warn-bg);
+  border-inline-start: 4px solid var(--warn-line);
+  color: var(--ink);
+}
+
+/* Notes - Tables */
+.notes .prose table {
+  background: var(--surface);
+  border-collapse: collapse;
+  font-size: 0.88em;
+  color: var(--ink);
+}
+
+.notes .prose th {
+  background: var(--bg-rail);
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.notes .prose td {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+}
+
+/* ==========================================================================
+   SOLUTIONS RULES
+   Left sidebar: Solution navigator (chapter/question list)
+   Middle: Solution content with step-by-step workings
+   Right sidebar: Answer summary and quick links
+   ========================================================================== */
+
+/* Solutions - Left Rail (Navigator) */
+.solution .rail {
+  background: var(--bg-rail);
+  border-inline-end: 1px solid var(--rule);
+}
+
+/* Solutions - Left Rail Title and Meta */
+.solution .course-title {
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.solution .course-meta {
+  color: var(--ink-3);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+/* Solutions - Left Rail Tree */
+.solution .tree summary {
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.solution .tree a {
+  color: var(--ink-2);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.solution .tree a[aria-current="page"] {
+  background: var(--accent-soft);
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* Solutions - Main Content (Middle Pane) */
+.solution .sheet {
+  background: var(--bg);
+  padding: var(--space-6) var(--gutter) var(--space-8);
+}
+
+/* Solutions - Heading Hierarchy */
+.solution .prose h1 {
+  font-size: clamp(1.7em, 1.3em + 1.6vw, 2.074em);
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0.2em 0 0.45em;
+}
+
+.solution .prose h2 {
+  font-size: var(--step-2); /* 1.44em */
+  font-weight: 700;
+  color: var(--ink);
+  margin: 2.2em 0 0.6em;
+}
+
+.solution .prose h3 {
+  font-size: var(--step-1); /* 1.2em */
+  font-weight: 600;
+  color: var(--ink-2);
+  margin: 1.8em 0 0.5em;
+}
+
+/* Solutions - Body Text */
+.solution .prose p {
+  font-size: var(--text-base);
+  line-height: var(--reading-leading);
+  color: var(--ink);
+  margin: 0 0 var(--para-space);
+}
+
+/* Solutions - Working Steps (Emphasis) */
+.solution .block--working {
+  border: 1px solid var(--rule);
+  background: var(--bg);
+  padding: 1em 1.2em;
+  margin: 1.6em 0;
+}
+
+.solution .block--working ol {
+  color: var(--ink);
+  padding-inline-start: 1.6em;
+}
+
+.solution .block--working li::marker {
+  color: var(--ink-2);
+  font-weight: 700;
+  font-size: 1em;
+}
+
+/* Solutions - Answer Box (Final Answer) */
+.solution .block--answer {
+  padding: 0.8em 1.1em;
+  border: 3px double var(--accent);
+  border-radius: var(--radius-s);
+  background: transparent;
+  margin: 1.6em 0;
+}
+
+.solution .block--answer .block__label {
+  color: var(--accent);
+  font-weight: 700;
+  margin: 0 0 0.45em;
+}
+
+.solution .block--answer p,
+.solution .block--answer li {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* Solutions - Teacher Tips */
+.solution .block--tip {
+  padding: 0.15em 0 0.15em 1.1em;
+  border-inline-start: 2px solid var(--pen);
+  background: transparent;
+  margin: 1.6em 0;
+}
+
+.solution .block--tip .block__label {
+  color: var(--pen);
+}
+
+/* Solutions - Common Mistakes */
+.solution .block--warning {
+  background: var(--warn-bg);
+  border-inline-start: 4px solid var(--warn-line);
+  padding: 1em 1.2em;
+  margin: 1.6em 0;
+}
+
+.solution .block--warning .block__label {
+  color: var(--warn-ink);
+}
+
+/* Solutions - Right Sidebar (Summary) */
+.solution .toc {
+  background: var(--bg);
+  border-inline-start: 1px solid var(--rule);
+  padding: var(--space-6) var(--space-4) var(--space-7);
+  font-size: 0.9rem;
+}
+
+.solution .toc h2 {
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem;
+}
+
+.solution .toc-list {
+  border-inline-start: 2px solid var(--rule);
+  margin: 0 0 1.75rem;
+  padding: 0;
+}
+
+.solution .toc-list a {
+  color: var(--ink-3);
+  font-size: 0.9rem;
+  text-decoration: none;
+  padding: 0.3rem 0.75rem;
+  border-inline-start: 2px solid transparent;
+}
+
+.solution .toc-list a[aria-current="location"] {
+  color: var(--accent);
+  border-inline-start-color: var(--accent);
+  font-weight: 600;
+}
+
+/* Solutions - Formula/Math Content */
+.solution .block--formula {
+  padding: 0.9em 0.5em;
+  overflow-x: auto;
+  border-block: 1px solid var(--rule);
+  background: transparent;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+  color: var(--ink);
+  margin: 1.6em 0;
+}
+
+/* Solutions - Tables */
+.solution .prose table {
+  background: var(--surface);
+  border-collapse: collapse;
+  font-size: 0.88em;
+  color: var(--ink);
+}
+
+.solution .prose th {
+  background: var(--bg-rail);
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.solution .prose td {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+}
+
+/* ==========================================================================
+   SHARED RULES FOR ALL CONTENT TYPES
+   These ensure consistency across syllabus, notes, and solutions
+   ========================================================================== */
+
+.syllabus,
+.notes,
+.solution {
+  /* Root text color always comes from --ink */
+  color: var(--ink);
+}
+
+.syllabus .shell,
+.notes .shell,
+.solution .shell {
+  background: var(--bg);
+}
+
+/* All three use same header treatment */
+.syllabus .app-header,
+.notes .app-header,
+.solution .app-header {
+  background: var(--bg);
+  border-block-end: 1px solid var(--rule);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.syllabus .wordmark,
+.notes .wordmark,
+.solution .wordmark {
+  color: var(--ink);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* All three use same breadcrumb styling */
+.syllabus .crumbs,
+.notes .crumbs,
+.solution .crumbs {
+  color: var(--ink-3);
+  font-size: 0.9rem;
+}
+
+.syllabus .crumbs a,
+.notes .crumbs a,
+.solution .crumbs a {
+  color: var(--ink-2);
+  text-decoration: none;
+}
+
+/* All reading preferences apply consistently */
+:root[data-theme="paper"] .syllabus,
+:root[data-theme="paper"] .notes,
+:root[data-theme="paper"] .solution {
+  color: #1A2230;
+}
+
+:root[data-theme="warm"] .syllabus,
+:root[data-theme="warm"] .notes,
+:root[data-theme="warm"] .solution {
+  color: #2B241B;
+}
+
+:root[data-theme="blackboard"] .syllabus,
+:root[data-theme="blackboard"] .notes,
+:root[data-theme="blackboard"] .solution {
+  color: #E7E5DD;
+}
+
+:root[data-theme="night"] .syllabus,
+:root[data-theme="night"] .notes,
+:root[data-theme="night"] .solution {
+  color: #C9C4B8;
+}
+
+/* All three use the same progress indicator */
+.syllabus .progress,
+.notes .progress,
+.solution .progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  block-size: 3px;
+  z-index: 30;
+  background: transparent;
+}
+
+.syllabus .progress span,
+.notes .progress span,
+.solution .progress span {
+  display: block;
+  block-size: 100%;
+  background: var(--accent);
+  transform-origin: 0 50%;
+  transform: scaleX(var(--progress, 0));
+}
+
+/* Phone toolbar consistency */
+.syllabus .toolbar,
+.notes .toolbar,
+.solution .toolbar {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  background: var(--bg);
+  border-block-start: 1px solid var(--rule);
+}
