@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import MathRenderer from "./MathRenderer";
 import { Check, Copy } from "lucide-react";
 
 export type ContentSize = "xs" | "sm" | "base" | "lg";
@@ -62,7 +63,8 @@ function hideEmDashes(text: string): string {
 
 /**
  * Formats inline markdown (math, bold, italic, code, links).
- * Strictly hides any em-dash (—) or en-dash (–) characters.
+ * Strictly hides any em-dash (\u2014) or en-dash (\u2013) characters.
+ * Delegates plain text segments to MathRenderer to handle bare LaTeX commands.
  */
 export function renderInlineMarkdown(text: string, keyPrefix: string = "inline"): React.ReactNode[] {
   if (!text) return [];
@@ -70,87 +72,137 @@ export function renderInlineMarkdown(text: string, keyPrefix: string = "inline")
   // Strip all em-dashes / en-dashes per user requirement
   const cleanText = hideEmDashes(text);
 
-  // Match:
-  // 1) Inline math: $...$
-  // 2) Inline code: `...`
-  // 3) Bold: **...**
-  // 4) Italic: *...*
-  // 5) Link: [label](url)
-  const tokenRegex = /(\$[^$\n]+?\$|`[^`\n]+?`|\*\*[^*]+?\*\*|\*[^*]+?\*|\[[^\]]+\]\([^)]+\))/g;
-  const parts = cleanText.split(tokenRegex);
+  // Match (in priority order — longer/more-specific patterns first):
+  // 1) Display math:  $$...$$ or \[...\]
+  // 2) Inline math:   $...$ or \(...\)
+  // 3) Inline code:   `...`
+  // 4) Bold:          **...**
+  // 5) Italic:        *...*
+  // 6) Link:          [label](url)
+  const tokenRegex = /(\$\$[\s\S]*?\$\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\)|\$[^$\n]+?\$|`[^`\n]+?`|\*\*[^*]+?\*\*|\*[^*]+?\*|\[[^\]]+\]\([^)]+\))/g;
 
-  return parts.map((part, idx) => {
-    const key = `${keyPrefix}-${idx}`;
-    if (!part) return null;
+  const parts: React.ReactNode[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
 
-    // Inline LaTeX math: $...$
-    if (part.startsWith("$") && part.endsWith("$") && part.length > 2) {
-      const math = part.slice(1, -1).trim();
-      return (
-        <span key={key} className="inline-block mx-0.5 align-middle">
-          <InlineMath
-            renderError={(_err) => (
-              <span className="font-mono text-amber-700 bg-amber-50 px-1 rounded text-xs">
-                {part}
-              </span>
-            )}
-          >
-            {math}
-          </InlineMath>
-        </span>
+  // Reset regex
+  tokenRegex.lastIndex = 0;
+
+  while ((match = tokenRegex.exec(cleanText)) !== null) {
+    const token = match[0];
+    const start = match.index;
+
+    // Push preceding plain text through MathRenderer (handles bare LaTeX)
+    if (start > lastIndex) {
+      const plain = cleanText.slice(lastIndex, start);
+      parts.push(
+        <MathRenderer key={`${keyPrefix}-plain-${lastIndex}`} content={plain} inline={true} />
       );
     }
 
+    const key = `${keyPrefix}-tok-${start}`;
+
+    // Display math: $$...$$ or \[...\]
+    if ((token.startsWith("$$") && token.endsWith("$$")) ||
+        (token.startsWith("\\[") && token.endsWith("\\]"))) {
+      const inner = token.startsWith("$$")
+        ? token.slice(2, -2).trim()
+        : token.slice(2, -2).trim();
+      parts.push(
+        <span key={key} className="block my-2 overflow-x-auto text-center">
+          <BlockMath
+            math={inner}
+            renderError={(_err) => (
+              <span className="font-mono text-amber-700 bg-amber-50 px-1 rounded text-xs">
+                {token}
+              </span>
+            )}
+          />
+        </span>
+      );
+    }
+    // Inline math: $...$ or \(...\)
+    else if ((token.startsWith("$") && token.endsWith("$") && token.length > 2) ||
+             (token.startsWith("\\(") && token.endsWith("\\)"))) {
+      const inner = token.startsWith("$")
+        ? token.slice(1, -1).trim()
+        : token.slice(2, -2).trim();
+      parts.push(
+        <span key={key} className="inline-block mx-0.5 align-middle">
+          <InlineMath
+            math={inner}
+            renderError={(_err) => (
+              <span className="font-mono text-amber-700 bg-amber-50 px-1 rounded text-xs">
+                {token}
+              </span>
+            )}
+          />
+        </span>
+      );
+    }
     // Inline code: `...`
-    if (part.startsWith("`") && part.endsWith("`") && part.length > 2) {
-      return (
+    else if (token.startsWith("`") && token.endsWith("`") && token.length > 2) {
+      parts.push(
         <code
           key={key}
           className="px-1.5 py-0.5 rounded bg-zinc-100 text-primary-700 font-mono text-[0.88em] border border-zinc-200"
         >
-          {part.slice(1, -1)}
+          {token.slice(1, -1)}
         </code>
       );
     }
-
     // Bold: **...**
-    if (part.startsWith("**") && part.endsWith("**") && part.length > 4) {
-      return (
+    else if (token.startsWith("**") && token.endsWith("**") && token.length > 4) {
+      parts.push(
         <strong key={key} className="font-semibold text-zinc-900">
-          {part.slice(2, -2)}
+          {token.slice(2, -2)}
         </strong>
       );
     }
-
     // Italic: *...*
-    if (part.startsWith("*") && part.endsWith("*") && part.length > 2) {
-      return (
+    else if (token.startsWith("*") && token.endsWith("*") && token.length > 2) {
+      parts.push(
         <em key={key} className="italic text-zinc-700">
-          {part.slice(1, -1)}
+          {token.slice(1, -1)}
         </em>
       );
     }
-
     // Link: [label](url)
-    if (part.startsWith("[") && part.includes("](") && part.endsWith(")")) {
-      const match = /^\[([^\]]+)\]\(([^)]+)\)$/.exec(part);
-      if (match) {
-        return (
+    else if (token.startsWith("[") && token.includes("](") && token.endsWith(")")) {
+      const linkMatch = /^\[([^\]]+)\]\(([^)]+)\)$/.exec(token);
+      if (linkMatch) {
+        parts.push(
           <a
             key={key}
-            href={match[2]}
+            href={linkMatch[2]}
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary-600 hover:text-primary-700 underline font-medium"
           >
-            {match[1]}
+            {linkMatch[1]}
           </a>
         );
+      } else {
+        parts.push(<React.Fragment key={key}>{token}</React.Fragment>);
       }
     }
+    // Fallback plain text
+    else {
+      parts.push(<React.Fragment key={key}>{token}</React.Fragment>);
+    }
 
-    return <React.Fragment key={key}>{part}</React.Fragment>;
-  });
+    lastIndex = start + token.length;
+  }
+
+  // Remaining plain text (run through MathRenderer for bare LaTeX support)
+  if (lastIndex < cleanText.length) {
+    const remaining = cleanText.slice(lastIndex);
+    parts.push(
+      <MathRenderer key={`${keyPrefix}-plain-end`} content={remaining} inline={true} />
+    );
+  }
+
+  return parts;
 }
 
 export interface ListItemData {
@@ -307,7 +359,13 @@ function parseContentBlocks(content: string): BlockItem[] {
   const placeholderMap = new Map<string, BlockItem>();
   let placeholderCounter = 0;
 
-  const processed = normalized.replace(/(```[\s\S]*?```|\$\$[\s\S]*?\$\$)/g, (match) => {
+  // Also normalize \[...\] LaTeX display math to $$...$$ before block extraction
+  const withNormalizedDisplayMath = normalized.replace(
+    /\\\[([\s\S]*?)\\\]/g,
+    (_, m) => `$$${m}$$`
+  );
+
+  const processed = withNormalizedDisplayMath.replace(/(```[\s\S]*?```|\$\$[\s\S]*?\$\$)/g, (match) => {
     const key = `@@BLOCK_PLACEHOLDER_${placeholderCounter++}@@`;
 
     if (match.startsWith("```") && match.endsWith("```")) {

@@ -140,34 +140,47 @@ export default function MarkdownViewer({
         continue;
       }
 
-      // Block Math ($$...$$)
-      if (line.trim().startsWith("$$")) {
+      // Block Math: $$...$$ or \[...\]
+      // Normalize \[...\] to $$ for unified handling
+      const isBackslashBracketOpen = line.trim().startsWith('\\[');
+      const normalizedBlockLine = isBackslashBracketOpen
+        ? '$$' + line.trim().slice(2)
+        : line.trim();
+
+      if (normalizedBlockLine.startsWith('$$')) {
         const mathLines: string[] = [];
-        if (line.trim() === "$$") {
+        if (normalizedBlockLine === '$$') {
+          // Opening $$ on its own line — collect until closing $$ or \]
           i++;
-          while (i < lines.length && !lines[i].trim().endsWith("$$")) {
+          while (i < lines.length && lines[i].trim() !== '$$' && lines[i].trim() !== '\\]') {
             mathLines.push(lines[i]);
             i++;
           }
-          i++; // skip closing $$
-        } else if (line.trim().endsWith("$$") && line.trim().length > 2) {
-          mathLines.push(line.trim().slice(2, -2).trim());
+          i++; // skip closing $$ or \]
+        } else if ((normalizedBlockLine.endsWith('$$') || line.trim().endsWith('\\]')) && normalizedBlockLine.length > 2) {
+          // Entire formula on one line: $$formula$$ or \[formula\]
+          mathLines.push(normalizedBlockLine.slice(2, -2).trim());
           i++;
         } else {
-          mathLines.push(line.trim().slice(2).trim());
+          // Opening $$ followed by formula on same line, closing $$ on a later line
+          const openContent = normalizedBlockLine.slice(2).trim();
+          if (openContent) mathLines.push(openContent);
           i++;
-          while (i < lines.length && !lines[i].includes("$$")) {
+          while (i < lines.length && lines[i].trim() !== '$$' && !lines[i].includes('$$')) {
             mathLines.push(lines[i]);
             i++;
           }
           if (i < lines.length) {
-            const closing = lines[i].split("$$")[0];
-            if (closing.trim()) mathLines.push(closing.trim());
+            const closingLine = lines[i].trim();
+            if (closingLine !== '$$') {
+              const beforeClose = closingLine.split('$$')[0];
+              if (beforeClose.trim()) mathLines.push(beforeClose.trim());
+            }
             i++;
           }
         }
 
-        const formula = mathLines.join("\n").trim();
+        const formula = mathLines.join('\n').trim();
         elements.push(
           <div key={`math-block-${i}`} className="my-4 overflow-x-auto text-center">
             <MathRenderer content={formula} isBlock={true} />
