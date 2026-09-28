@@ -1,0 +1,389 @@
+/* ==========================================================================
+   Access Control: Content Sharing & Export Rules
+
+   Proprietary content (syllabus, notes, solutions) cannot be shared,
+   downloaded, or exported. Only exam results are shareable and exportable.
+   ========================================================================== */
+
+/* ==========================================================================
+   RULE 1: HIDE SHARE BUTTONS ON PROTECTED CONTENT
+   Syllabus, Notes, Solutions, Past Papers MUST NOT have share/download UI
+   ========================================================================== */
+
+/* Syllabus: No sharing allowed */
+.syllabus .share-actions,
+.syllabus .share-button,
+.syllabus .download-button,
+.syllabus .export-menu,
+.syllabus [data-action="share"],
+.syllabus [data-action="download"],
+.syllabus [data-action="export"] {
+  display: none !important;
+}
+
+/* Notes: No sharing allowed */
+.notes .share-actions,
+.notes .share-button,
+.notes .download-button,
+.notes .export-menu,
+.notes [data-action="share"],
+.notes [data-action="download"],
+.notes [data-action="export"] {
+  display: none !important;
+}
+
+/* Solutions: No sharing allowed */
+.solution .share-actions,
+.solution .share-button,
+.solution .download-button,
+.solution .export-menu,
+.solution [data-action="share"],
+.solution [data-action="download"],
+.solution [data-action="export"] {
+  display: none !important;
+}
+
+/* Past Papers: No sharing allowed */
+.past-papers .share-actions,
+.past-papers .share-button,
+.past-papers .download-button,
+.past-papers .export-menu,
+.past-papers [data-action="share"],
+.past-papers [data-action="download"],
+.past-papers [data-action="export"] {
+  display: none !important;
+}
+
+/* ==========================================================================
+   RULE 2: SHOW SHARE/EXPORT BUTTONS ONLY ON EXAM RESULTS
+   ========================================================================== */
+
+/* Default: hide all share UI everywhere */
+[class*="share-actions"],
+[class*="share-button"],
+[class*="download-button"],
+[class*="export-menu"],
+[data-action="share"],
+[data-action="download"],
+[data-action="export"],
+[data-action="print"] {
+  display: none !important;
+}
+
+/* Exception: Show ONLY on exam results pages */
+.exam-results .share-actions,
+.exam-results .share-button,
+.exam-results .export-menu,
+.exam-results [data-action="share"],
+.exam-results [data-action="export-pdf"],
+.exam-results [data-action="export-word"],
+.exam-results [data-action="print"],
+.exam-results [data-action="email"] {
+  display: flex !important;
+  display: inline-flex !important;
+}
+
+/* ==========================================================================
+   RULE 3: PRINT BEHAVIOR
+   Proprietary content: watermark + discouragement
+   Exam results: full print support
+   ========================================================================== */
+
+/* Print styles for protected content */
+@media print {
+  /* Add warning watermark to protected content */
+  .syllabus::before,
+  .notes::before,
+  .solution::before,
+  .past-papers::before {
+    content: "FOR INTERNAL USE ONLY - UNAUTHORIZED PRINTING RESTRICTED";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 72px;
+    font-weight: 900;
+    color: rgba(255, 0, 0, 0.15);
+    z-index: -1;
+    width: 200%;
+    height: 200%;
+    text-align: center;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  /* Hide navigation UI when printing protected content */
+  .syllabus .app-header,
+  .syllabus .rail,
+  .syllabus .toc,
+  .syllabus .toolbar,
+  .notes .app-header,
+  .notes .rail,
+  .notes .toc,
+  .notes .toolbar,
+  .solution .app-header,
+  .solution .rail,
+  .solution .toc,
+  .solution .toolbar {
+    display: none !important;
+  }
+
+  /* Add footer warning to protected content */
+  .syllabus .sheet::after,
+  .notes .sheet::after,
+  .solution .sheet::after {
+    content: "This document is for internal use only. Unauthorized reproduction prohibited.";
+    display: block;
+    padding-top: 2cm;
+    border-top: 2px solid #ff0000;
+    font-weight: bold;
+    color: #ff0000;
+    font-size: 10pt;
+  }
+}
+
+/* Print styles for exam results (full support) */
+@media print {
+  /* Show all content on exam results */
+  .exam-results .app-header,
+  .exam-results .sheet,
+  .exam-results .result-content {
+    display: block !important;
+  }
+
+  /* Hide interactive buttons */
+  .exam-results .share-button,
+  .exam-results .export-menu,
+  .exam-results button[data-action],
+  .exam-results .action-buttons {
+    display: none !important;
+  }
+
+  /* Style exam result for printing */
+  .exam-results .sheet {
+    box-shadow: none;
+    border: none;
+    padding: 0.5in;
+  }
+
+  /* Add page break before sections */
+  .exam-results .result-section {
+    page-break-inside: avoid;
+    margin-bottom: 1in;
+  }
+
+  /* Footer with date/time */
+  .exam-results .sheet::after {
+    content: "Printed: " attr(data-print-date) " | Student Copy";
+    display: block;
+    padding-top: 0.5in;
+    border-top: 1px solid #666;
+    font-size: 9pt;
+    color: #666;
+    text-align: right;
+  }
+}
+
+/* ==========================================================================
+   RULE 4: RIGHT-CLICK CONTEXT MENU CONTROLS
+   Block save-as on protected content
+   ========================================================================== */
+
+/* Disable right-click context menu on protected content */
+.syllabus,
+.notes,
+.solution,
+.past-papers {
+  /* Prevent default context menu with select disabled */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Allow text selection in reading content */
+.syllabus .prose,
+.syllabus .sheet,
+.notes .prose,
+.notes .sheet,
+.solution .prose,
+.solution .sheet {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+}
+
+/* ==========================================================================
+   RULE 5: VISUAL INDICATORS
+   Show which content is/isn't shareable
+   ========================================================================== */
+
+/* Proprietary badge on protected pages */
+.syllabus .header-badge,
+.notes .header-badge,
+.solution .header-badge,
+.past-papers .header-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: var(--warn-bg);
+  color: var(--warn-ink);
+  border: 1px solid var(--warn-line);
+  border-radius: var(--radius-s);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Shareable badge on exam results */
+.exam-results .header-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-s);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   RULE 6: API RESPONSE INDICATORS
+   Show which endpoints return data vs 403
+   ========================================================================== */
+
+/* Prevent exposing API structure in dev tools */
+[data-api-endpoint*="syllabus"],
+[data-api-endpoint*="notes"],
+[data-api-endpoint*="solution"],
+[data-api-endpoint*="past-papers"] {
+  /* Hidden from casual inspection */
+  display: none !important;
+}
+
+/* ==========================================================================
+   RULE 7: EXAM RESULTS EXPORT OPTIONS
+   Style export buttons
+   ========================================================================== */
+
+.exam-results .export-menu {
+  display: flex !important;
+  gap: 0.5rem;
+  align-items: center;
+  margin-inline-start: auto;
+}
+
+.exam-results [data-action="export-pdf"],
+.exam-results [data-action="export-word"],
+.exam-results [data-action="print"],
+.exam-results [data-action="share"],
+.exam-results [data-action="email"] {
+  display: inline-flex !important;
+  gap: 0.3rem;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease);
+}
+
+@media (hover: hover) {
+  .exam-results [data-action="export-pdf"]:hover,
+  .exam-results [data-action="export-word"]:hover,
+  .exam-results [data-action="print"]:hover,
+  .exam-results [data-action="share"]:hover,
+  .exam-results [data-action="email"]:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--ink);
+  }
+}
+
+/* ==========================================================================
+   RULE 8: MOBILE MENU (PROTECTED CONTENT)
+   Remove share from mobile toolbar on protected pages
+   ========================================================================== */
+
+@media (max-width: 767px) {
+  /* Hide share in mobile toolbar on protected content */
+  .syllabus .toolbar [data-action="share"],
+  .syllabus .toolbar [data-action="download"],
+  .notes .toolbar [data-action="share"],
+  .notes .toolbar [data-action="download"],
+  .solution .toolbar [data-action="share"],
+  .solution .toolbar [data-action="download"],
+  .past-papers .toolbar [data-action="share"],
+  .past-papers .toolbar [data-action="download"] {
+    display: none !important;
+  }
+
+  /* Show share in mobile toolbar on exam results */
+  .exam-results .toolbar [data-action="share"],
+  .exam-results .toolbar [data-action="export-pdf"],
+  .exam-results .toolbar [data-action="print"] {
+    display: flex !important;
+  }
+}
+
+/* ==========================================================================
+   RULE 9: ACCESSIBILITY
+   Show that content is protected
+   ========================================================================== */
+
+/* ARIA live region for share status */
+.share-status {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Screen reader only: share permissions info */
+.share-permission-notice {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Visible on focus for keyboard users */
+.syllabus .share-permission-notice::after,
+.notes .share-permission-notice::after,
+.solution .share-permission-notice::after {
+  content: "This content is not shareable. To access, visit the website.";
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: var(--warn-bg);
+  color: var(--warn-ink);
+  padding: 0.5rem;
+  border: 1px solid var(--warn-line);
+  border-radius: var(--radius-m);
+}
+
+/* ==========================================================================
+   RULE 10: DEVELOPER WARNINGS
+   Warn when accessing protected endpoints via console
+   ========================================================================== */
+
+/* Data attributes for runtime checks */
+[data-content-type="syllabus"],
+[data-content-type="notes"],
+[data-content-type="solution"],
+[data-content-type="past-papers"] {
+  --is-protected: true;
+}
+
+[data-content-type="exam-results"] {
+  --is-protected: false;
+}
