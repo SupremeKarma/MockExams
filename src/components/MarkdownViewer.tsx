@@ -70,7 +70,7 @@ export default function MarkdownViewer({
       // Parse LaTeX ($$...$$, $...$), bold **text**, inline `code`, and links [text](url)
       const parts: React.ReactNode[] = [];
       let lastIdx = 0;
-      const regex = /(\$\$[\s\S]*?\$\$|\$(?!\s)[^$\n]+?(?<!\s)\$|\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g;
+      const regex = /(\$\$[\s\S]*?\$\$|\$(?:\\\$|[^\$])+?\$|\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g;
       let match;
 
       while ((match = regex.exec(text)) !== null) {

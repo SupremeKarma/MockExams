@@ -27,12 +27,12 @@ export const semester2NotesData: SemesterNotesData = {
         unitCode: "1.1",
         importance: "Very High",
         keyPoints: [
-          "Double Integral ∬_R f(x, y) dA is the limit of Riemann sums ∑_{i=1}^n f(x_i*, y_i*) ΔA_i as mesh size approaches zero.",
-          "Geometric Meaning: When f(x, y) ≥ 0, ∬_R f(x, y) dA represents the volume of the solid cylindrical column bounded above by surface z = f(x,y) and below by plane region R.",
-          "When f(x, y) = 1, the double integral computes the exact Area of the planar region: Area(R) = ∬_R dx dy.",
-          "Type I (Vertical Slices): R = {(x, y) | a ≤ x ≤ b, g₁(x) ≤ y ≤ g₂(x)} => ∬_R f(x, y) dA = ∫_a^b [ ∫_{g₁(x)}^{g₂(x)} f(x, y) dy ] dx.",
-          "Type II (Horizontal Slices): R = {(x, y) | c ≤ y ≤ d, h₁(y) ≤ x ≤ h₂(y)} => ∬_R f(x, y) dA = ∫_c^d [ ∫_{h₁(y)}^{h₂(y)} f(x, y) dx ] dy.",
-          "Fubini's Theorem: If f(x, y) is continuous on rectangular region R = [a, b] × [c, d], then ∫_a^b ∫_c^d f(x, y) dy dx = ∫_c^d ∫_a^b f(x, y) dx dy."
+          "Double Integral $\\iint_R f(x, y) \\, dA$ is the limit of Riemann sums $\\sum_{i=1}^n f(x_i^*, y_i^*) \\Delta A_i$ as mesh size approaches zero.",
+          "Geometric Meaning: When $f(x, y) \\ge 0$, $\\iint_R f(x, y) \\, dA$ represents the volume of the solid cylindrical column bounded above by surface $z = f(x,y)$ and below by plane region $R$.",
+          "When $f(x, y) = 1$, the double integral computes the exact Area of the planar region: $\\text{Area}(R) = \\iint_R dx \\, dy$.",
+          "Type I (Vertical Slices): $R = \\{(x, y) \\mid a \\le x \\le b, \\, g_1(x) \\le y \\le g_2(x)\\} \\implies \\iint_R f(x, y) \\, dA = \\int_a^b \\left[ \\int_{g_1(x)}^{g_2(x)} f(x, y) \\, dy \\right] dx$.",
+          "Type II (Horizontal Slices): $R = \\{(x, y) \\mid c \\le y \\le d, \\, h_1(y) \\le x \\le h_2(y)\\} \\implies \\iint_R f(x, y) \\, dA = \\int_c^d \\left[ \\int_{h_1(y)}^{h_2(y)} f(x, y) \\, dx \\right] dy$.",
+          "Fubini's Theorem: If $f(x, y)$ is continuous on rectangular region $R = [a, b] \\times [c, d]$, then $\\int_a^b \\int_c^d f(x, y) \\, dy \\, dx = \\int_c^d \\int_a^b f(x, y) \\, dx \\, dy$."
         ],
         theory: "Double integration extends single-variable calculus to functions of two independent variables over bounded planar domains. Evaluation is executed via iterated single integrals. The innermost integral treats the outer variable as a fixed parameter while integrating with respect to the inner variable. Careful determination of the bounding functions g₁(x) and g₂(x) is achieved by drawing test vertical or horizontal lines traversing the domain from entry boundary to exit boundary.",
         code: `// Analytical Evaluation: Area Bounded by Parabola and Line
@@ -65,12 +65,12 @@ export const semester2NotesData: SemesterNotesData = {
         unitCode: "1.2",
         importance: "Very High",
         keyPoints: [
-          "Change of Order of Integration: Reverses the sequence of iterated integration from dy dx to dx dy (or vice-versa), converting impossible non-elementary antiderivatives into easily solvable forms.",
-          "Procedure: (1) Extract existing boundary equations from integral limits, (2) Sketch the exact 2D bounded region R, (3) Switch perspective from vertical strips to horizontal strips (or vice-versa), (4) Determine new inner variable limits as functions and outer limits as constants.",
-          "Change of Variables in Double Integrals: ∬_R f(x, y) dx dy = ∬_{R'} f(x(u, v), y(u, v)) |J| du dv.",
-          "The Jacobian Determinant: J = ∂(x, y)/∂(u, v) = |(∂x/∂u  ∂x/∂v) / (∂y/∂u  ∂y/∂v)| = (∂x/∂u)(∂y/∂v) - (∂x/∂v)(∂y/∂u).",
-          "Inverse Jacobian Property: J · J' = 1, meaning ∂(x, y)/∂(u, v) = 1 / [∂(u, v)/∂(x, y)].",
-          "Polar Coordinate Transformation: x = r cos θ, y = r sin θ => Jacobian J = r => dx dy = r dr dθ."
+          "Change of Order of Integration: Reverses the sequence of iterated integration from $dy \\, dx$ to $dx \\, dy$ (or vice-versa), converting impossible non-elementary antiderivatives into easily solvable forms.",
+          "Procedure: (1) Extract existing boundary equations from integral limits, (2) Sketch the exact 2D bounded region $R$, (3) Switch perspective from vertical strips to horizontal strips (or vice-versa), (4) Determine new inner variable limits as functions and outer limits as constants.",
+          "Change of Variables in Double Integrals: $\\iint_R f(x, y) \\, dx \\, dy = \\iint_{R'} f(x(u, v), y(u, v)) \\, |J| \\, du \\, dv$.",
+          "The Jacobian Determinant: $J = \\frac{\\partial(x, y)}{\\partial(u, v)} = \\begin{vmatrix} \\frac{\\partial x}{\\partial u} & \\frac{\\partial x}{\\partial v} \\\\ \\frac{\\partial y}{\\partial u} & \\frac{\\partial y}{\\partial v} \\end{vmatrix} = \\frac{\\partial x}{\\partial u} \\frac{\\partial y}{\\partial v} - \\frac{\\partial x}{\\partial v} \\frac{\\partial y}{\\partial u}$.",
+          "Inverse Jacobian Property: $J \\cdot J' = 1$, meaning $\\frac{\\partial(x, y)}{\\partial(u, v)} = \\frac{1}{\\frac{\\partial(u, v)}{\\partial(x, y)}}$.",
+          "Polar Coordinate Transformation: $x = r \\cos \\theta$, $y = r \\sin \\theta \\implies$ Jacobian $J = r \\implies dx \\, dy = r \\, dr \\, d\\theta$."
         ],
         theory: "Many practical definite integrals (such as ∫ (sin y / y) dy or ∫ e^{-x²} dx) have no elementary antiderivative. By changing the order of integration, the non-integrable variable becomes the outer parameter, yielding an inner integrand of 1 that integrates trivially. When transforming coordinate geometries (e.g., from skewed parallelograms to unit squares), the Jacobian determinant measures the local surface area distortion factor |dA_{xy} / dA_{uv}|.",
         code: `// Change of Order of Integration: Classic University Exam Proof
@@ -93,7 +93,7 @@ export const semester2NotesData: SemesterNotesData = {
 //    = [ (a^3/3 + a) (y^4 / 4) - (a^3 / 21) y^7 - (a / 5) y^5 ]_0^1
 //    = (a^3 / 12) + (a / 4) - (a^3 / 21) - (a / 5)
 //    = a^3 (1/12 - 1/21) + a (1/4 - 1/5) = (3 a^3 / 84) + (a / 20) = (a^3 / 28) + (a / 20)`,
-        example: "Evaluate ∫_0^∞ ∫_0^x x e^{-x²/y} dy dx: Changing order of integration transforms the limits to y ∈ [0, ∞) and x ∈ [y, ∞). The resulting integral evaluates to 1/2.",
+//        example: "Evaluate ∫_0^∞ ∫_0^x x e^{-x²/y} dy dx: Changing order of integration transforms the limits to y ∈ [0, ∞) and x ∈ [y, ∞). The resulting integral evaluates to 1/2.",
         commonExamQuestions: [
           "[8 Marks] Change the order of integration and evaluate ∫_0^1 ∫_x^1 [x / (x² + y²)] dy dx.",
           "[8 Marks] Change the order of integration of ∫_0^4a ∫_{x²/4a}^{2√(ax)} dy dx and evaluate.",
@@ -109,12 +109,12 @@ export const semester2NotesData: SemesterNotesData = {
         unitCode: "1.3",
         importance: "Very High",
         keyPoints: [
-          "Triple Integral ∭_V f(x, y, z) dV computes physical properties over a 3D volumetric domain V.",
-          "When f(x, y, z) = 1, the triple integral yields the total solid Volume: Volume(V) = ∭_V dx dy dz.",
-          "Cartesian Evaluation: ∭_V f dV = ∫_{x=a}^b ∫_{y=g₁(x)}^{g₂(x)} ∫_{z=h₁(x,y)}^{h₂(x,y)} f(x, y, z) dz dy dx.",
-          "Cylindrical Coordinates: x = r cos θ, y = r sin θ, z = z with dV = r dz dr dθ. Ideal for solids of revolution, cylinders, and cones.",
-          "Spherical Polar Coordinates: x = ρ sin φ cos θ, y = ρ sin φ sin θ, z = ρ cos φ with dV = ρ² sin φ dρ dφ dθ (where ρ ≥ 0, 0 ≤ φ ≤ π is colatitude, 0 ≤ θ ≤ 2π is azimuth). Ideal for spheres, spherical shells, and pyramids.",
-          "Physical Applications: Mass M = ∭_V ρ(x, y, z) dV; Center of gravity z̄ = (1/M) ∭_V z ρ dV; Moment of inertia I_z = ∭_V (x² + y²) ρ dV."
+          "Triple Integral $\\iiint_V f(x, y, z) \\, dV$ computes physical properties over a 3D volumetric domain $V$.",
+          "When $f(x, y, z) = 1$, the triple integral yields the total solid Volume: $\\text{Volume}(V) = \\iiint_V dx \\, dy \\, dz$.",
+          "Cartesian Evaluation: $\\iiint_V f \\, dV = \\int_{x=a}^b \\int_{y=g_1(x)}^{g_2(x)} \\int_{z=h_1(x,y)}^{h_2(x,y)} f(x, y, z) \\, dz \\, dy \\, dx$.",
+          "Cylindrical Coordinates: $x = r \\cos \\theta$, $y = r \\sin \\theta$, $z = z$ with $dV = r \\, dz \\, dr \\, d\\theta$. Ideal for solids of revolution, cylinders, and cones.",
+          "Spherical Polar Coordinates: $x = \\rho \\sin \\phi \\cos \\theta$, $y = \\rho \\sin \\phi \\sin \\theta$, $z = \\rho \\cos \\phi$ with $dV = \\rho^2 \\sin \\phi \\, d\\rho \\, d\\phi \\, d\\theta$ (where $\\rho \\ge 0$, $0 \\le \\phi \\le \\pi$ is colatitude, $0 \\le \\theta \\le 2\\pi$ is azimuth).",
+          "Physical Applications: $\\text{Mass } M = \\iiint_V \\rho(x, y, z) \\, dV$; Center of gravity $\\bar{z} = \\frac{1}{M} \\iiint_V z \\rho \\, dV$; Moment of inertia $I_z = \\iiint_V (x^2 + y^2) \\rho \\, dV$."
         ],
         theory: "Triple integrals extend multi-variable accumulation across three-dimensional Euclidean volumes. When physical geometries exhibit radial symmetry about an axis, cylindrical transformations simplify boundaries to constant cylinder limits r = R. When geometries exhibit point symmetry about the origin (e.g., gravitating bodies, celestial spheres, electrical field potentials), spherical polar coordinates decouple boundaries into completely independent rectangular product limits [0, R] × [0, π] × [0, 2π].",
         code: `// Derivation: Volume of a Sphere via Spherical Triple Integration
@@ -560,15 +560,13 @@ export const semester2NotesData: SemesterNotesData = {
         unitCode: "5.1",
         importance: "Very High",
         keyPoints: [
-          "Complex Function: w = f(z) = u(x, y) + i v(x, y) where z = x + iy.",
-          "Derivative: f'(z) = lim_{Δz → 0} [f(z + Δz) - f(z)] / Δz. Must be identical along every approaching path in the complex plane.",
-          "Analytic Function: f(z) is analytic at z₀ if it is differentiable at z₀ and throughout some open neighborhood around z₀.",
-          "Cauchy-Riemann (C-R) Equations in Cartesian Coordinates:",
-          "  ∂u/∂x = ∂v/∂y  and  ∂u/∂y = -∂v/∂x.",
-          "Necessary Condition: If f(z) = u + iv is differentiable at z, C-R equations MUST hold.",
-          "Sufficient Condition: If u, v and all four first partial derivatives u_x, u_y, v_x, v_y exist, are continuous, and satisfy C-R equations, then f(z) is analytic.",
-          "Cauchy-Riemann Equations in Polar Coordinates (z = r e^{iθ}, f(z) = u(r, θ) + i v(r, θ)):",
-          "  ∂u/∂r = (1/r) (∂v/∂θ)  and  ∂v/∂r = -(1/r) (∂u/∂θ)."
+          "Complex Function: $w = f(z) = u(x, y) + i \\, v(x, y)$ where $z = x + iy$.",
+          "Derivative: $f'(z) = \\lim_{\\Delta z \\to 0} \\frac{f(z + \\Delta z) - f(z)}{\\Delta z}$. Must be identical along every approaching path in the complex plane.",
+          "Analytic Function: $f(z)$ is analytic at $z_0$ if it is differentiable at $z_0$ and throughout some open neighborhood around $z_0$.",
+          "Cauchy-Riemann (C-R) Equations in Cartesian Coordinates: $\\frac{\\partial u}{\\partial x} = \\frac{\\partial v}{\\partial y}$ and $\\frac{\\partial u}{\\partial y} = -\\frac{\\partial v}{\\partial x}$.",
+          "Necessary Condition: If $f(z) = u + iv$ is differentiable at $z$, C-R equations MUST hold.",
+          "Sufficient Condition: If $u, v$ and all four first partial derivatives $u_x, u_y, v_x, v_y$ exist, are continuous, and satisfy C-R equations, then $f(z)$ is analytic.",
+          "Cauchy-Riemann Equations in Polar Coordinates ($z = r e^{i\\theta}, \\, f(z) = u(r, \\theta) + i \\, v(r, \\theta)$): $\\frac{\\partial u}{\\partial r} = \\frac{1}{r} \\frac{\\partial v}{\\partial \\theta}$ and $\\frac{\\partial v}{\\partial r} = -\\frac{1}{r} \\frac{\\partial u}{\\partial \\theta}$."
         ],
         theory: "Complex differentiability is vastly more restrictive than real multivariable differentiability. In ℝ², Δz = Δx + iΔy can approach 0 from infinitely many radial and spiral directions. Equating the horizontal limit (Δy = 0, Δx → 0) with the vertical limit (Δx = 0, Δy → 0) yields the C-R equations. When satisfied with continuous partial derivatives, conformal geometry, infinite differentiability, and analyticity follow immediately.",
         code: `// Rigorous Derivation of Cauchy-Riemann Equations in Cartesian Form:

@@ -95,21 +95,66 @@ function SolutionContent() {
     const subNotes = Object.values(semData).find(
       (sn) =>
         sn.subjectName.toLowerCase() === selectedSubject.toLowerCase() ||
-        selectedSubject.toLowerCase().includes(sn.subjectName.toLowerCase())
+        selectedSubject.toLowerCase().includes(sn.subjectName.toLowerCase()) ||
+        sn.code.toLowerCase() === selectedSubject.toLowerCase()
     );
     if (!subNotes) return null;
 
     if (activeQuestionItem) {
-      const match = subNotes.topics.find((t) => {
-        return (
-          t.commonExamQuestions?.some((cq) =>
-            cq.toLowerCase().includes(activeQuestionItem.question.questionText.slice(0, 20).toLowerCase())
-          ) ||
-          t.name.toLowerCase().includes(activeQuestionItem.question.chapterRef.toLowerCase()) ||
-          activeQuestionItem.question.questionText.toLowerCase().includes(t.name.toLowerCase().slice(0, 15))
-        );
-      });
-      if (match) return match;
+      const q = activeQuestionItem.question;
+      const qText = q.questionText.toLowerCase();
+      const chRef = q.chapterRef.toLowerCase();
+
+      // Extract unit number from chapterRef (e.g. "Unit 5: ..." -> 5)
+      const unitNumMatch = chRef.match(/unit\s*(\d+)/i);
+      const unitNum = unitNumMatch ? parseInt(unitNumMatch[1], 10) : null;
+
+      // Filter candidate topics that match the unit
+      const candidateTopics = unitNum !== null
+        ? subNotes.topics.filter((t) => t.unit === unitNum)
+        : subNotes.topics;
+
+      const topicsToSearch = candidateTopics.length > 0 ? candidateTopics : subNotes.topics;
+
+      let bestTopic: (typeof subNotes.topics)[0] | null = null;
+      let highestScore = -1;
+
+      for (const t of topicsToSearch) {
+        let score = 0;
+        const tName = t.name.toLowerCase();
+        const tUnitTitle = (t.unitTitle || "").toLowerCase();
+
+        // Match unitTitle with chapterRef
+        if (tUnitTitle && (chRef.includes(tUnitTitle) || tUnitTitle.includes(chRef))) {
+          score += 15;
+        }
+
+        // Match topic name with chapterRef
+        if (chRef && (tName.includes(chRef) || chRef.includes(tName))) {
+          score += 10;
+        }
+
+        // Check commonExamQuestions
+        if (t.commonExamQuestions?.some((cq) => qText.includes(cq.slice(0, 20).toLowerCase()))) {
+          score += 20;
+        }
+
+        // Check key terms overlap (e.g. "derivative", "zeros", "residue", "integral", "fourier", "jacobian", "cauchy")
+        const keywords = qText.replace(/[^a-z0-9]/g, " ").split(/\s+/).filter((w) => w.length > 3);
+        for (const kw of keywords) {
+          if (tName.includes(kw)) score += 5;
+          if (t.keyPoints?.some((kp) => kp.toLowerCase().includes(kw))) score += 2;
+          if (t.theory?.toLowerCase().includes(kw)) score += 1;
+        }
+
+        if (score > highestScore) {
+          highestScore = score;
+          bestTopic = t;
+        }
+      }
+
+      if (bestTopic && highestScore > 0) return bestTopic;
+      if (candidateTopics.length > 0) return candidateTopics[0];
     }
     return subNotes.topics[0] || null;
   }, [selectedSemester, selectedSubject, activeQuestionItem]);
@@ -331,7 +376,7 @@ function SolutionContent() {
                           Q{idx + 1}
                         </span>
                         <span style={{ flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                          {sq.question.questionText}
+                          <MathRenderer content={sq.question.questionText} inline={true} />
                         </span>
                         <span className="dot" data-state={isCurrent ? "progress" : "learned"} />
                       </a>
@@ -401,13 +446,13 @@ function SolutionContent() {
                 ) : (
                   <ul style={{ lineHeight: 1.65 }}>
                     <li>
-                      <strong>Definition &amp; Core Context:</strong> Answers must establish standard terminology and protocol standards per IEEE/RFC/ISO specifications.
+                      <strong>Core Definition &amp; Theorem Statement:</strong> Formally state governing laws, definitions, or equations relevant to the question.
                     </li>
                     <li>
-                      <strong>Architectural Mechanism:</strong> Explain state diagrams, memory buffers, and algorithmic steps sequentially.
+                      <strong>Systematic Analytical Derivation:</strong> Execute step-by-step mathematical or architectural transitions with full justifications.
                     </li>
                     <li>
-                      <strong>Comparative Analysis:</strong> Highlight performance implications, edge cases, and design trade-offs.
+                      <strong>Final Evaluated Result &amp; Verification:</strong> Conclude with the simplified answer, edge-case analysis, and verification.
                     </li>
                   </ul>
                 )}
@@ -416,7 +461,12 @@ function SolutionContent() {
               {/* Section 3: Theory & Technical Exposition */}
               {relatedNoteTopic?.theory && (
                 <section id="theory" style={{ marginBottom: "2.5rem" }}>
-                  <h2>3. Theoretical Deep Dive &amp; Protocol Mechanism</h2>
+                  <h2>
+                    3. Theoretical Deep Dive &amp;{" "}
+                    {selectedSubject.toLowerCase().includes("math")
+                      ? "Mathematical Principles"
+                      : "Protocol Mechanism"}
+                  </h2>
                   <div style={{ whiteSpace: "pre-line", lineHeight: 1.7, fontSize: "0.95rem", color: "var(--ink-1)" }}>
                     <MathRenderer content={relatedNoteTopic.theory} />
                   </div>
@@ -426,7 +476,12 @@ function SolutionContent() {
               {/* Section 4: Implementation Code or Diagram */}
               {relatedNoteTopic?.code && (
                 <section id="code" style={{ marginBottom: "2.5rem" }}>
-                  <h2>4. Code Implementation &amp; System Calls</h2>
+                  <h2>
+                    4.{" "}
+                    {selectedSubject.toLowerCase().includes("math")
+                      ? "Analytical Derivation & Step-by-Step Method"
+                      : "Code Implementation & System Architecture"}
+                  </h2>
                   <pre
                     style={{
                       background: "var(--paper-2)",

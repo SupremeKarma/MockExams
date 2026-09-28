@@ -348,7 +348,7 @@ function PastPapersContent() {
                               Q{qIdx + 1}
                             </span>
                             <span style={{ flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                              {q.questionText}
+                              <MathRenderer content={q.questionText} inline={true} />
                             </span>
                             <span className="dot" data-state="learned" />
                           </a>

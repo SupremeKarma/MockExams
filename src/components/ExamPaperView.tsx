@@ -15,6 +15,7 @@
  */
 
 import { ShieldQuestion } from "lucide-react";
+import MathRenderer from "./MathRenderer";
 
 export interface PaperMeta {
   university: string;
@@ -157,10 +158,10 @@ export function ExamPaperView({ meta, questions, mode, fallbackTitle }: ExamPape
                   style={{ scrollMarginTop: "calc(var(--header-h, 0px) + 1rem)" }}
                 >
                   <div className="flex items-start justify-between gap-4">
-                    <p className="text-sm text-zinc-900 leading-relaxed">
+                    <div className="text-sm text-zinc-900 leading-relaxed">
                       <span className="font-bold mr-2 tabular-nums">{q.number}.</span>
-                      {q.question}
-                    </p>
+                      <MathRenderer content={q.question} inline={true} />
+                    </div>
                     {q.marks !== null && (
                       <span className="text-xs text-zinc-700 tabular-nums whitespace-nowrap">
                         [{q.marks}]
@@ -170,14 +171,14 @@ export function ExamPaperView({ meta, questions, mode, fallbackTitle }: ExamPape
 
                   {mode === "solutions" && (
                     <div className="mt-3 ml-6 space-y-3 font-sans">
-                      <p className="text-sm text-zinc-800 leading-7 whitespace-pre-wrap">
-                        {q.answer}
-                      </p>
+                      <div className="text-sm text-zinc-800 leading-7 whitespace-pre-wrap">
+                        <MathRenderer content={q.answer} />
+                      </div>
 
                       {q.explanation && (
-                        <p className="text-xs text-zinc-500 leading-relaxed italic">
-                          {q.explanation}
-                        </p>
+                        <div className="text-xs text-zinc-500 leading-relaxed italic">
+                          <MathRenderer content={q.explanation} />
+                        </div>
                       )}
 
                       {q.rubric.length > 0 && (
