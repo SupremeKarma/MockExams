@@ -654,10 +654,9 @@ function NotesContent() {
                         <span className="code">{group.unitNumber}</span>
                         <span
                           style={{
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            whiteSpace: "nowrap",
                             flex: 1,
+                            lineHeight: 1.4,
+                            wordBreak: "normal",
                           }}
                           title={group.unitTitle}
                         >
@@ -695,7 +694,7 @@ function NotesContent() {
                                 <span className="code">
                                   {top.unitCode || top.id.split("-").pop()}
                                 </span>
-                                <span style={{ flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                                <span style={{ flex: 1, lineHeight: 1.4, wordBreak: "normal" }}>
                                   {top.name}
                                 </span>
                                 <span

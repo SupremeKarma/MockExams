@@ -351,7 +351,7 @@ function SyllabusContent() {
                       }}
                     >
                       <span className="code">{idx + 1}</span>
-                      <span style={{ flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                      <span style={{ flex: 1, minWidth: 0, lineHeight: 1.4, wordBreak: "normal" }}>
                         {unitTitle}
                       </span>
                     </a>
