@@ -65,7 +65,7 @@ export async function GET(
 
     const mdContent = generateCourseMarkdown(matchedCourse);
 
-    // If requested with format=md or Accept: text/markdown, serve raw markdown file
+    // If requested with format=md or Accept: text/markdown, serve raw text for in-app client reader
     if (
       format === "md" ||
       request.headers.get("accept")?.includes("text/markdown")
@@ -74,12 +74,11 @@ export async function GET(
         status: 200,
         headers: {
           "Content-Type": "text/markdown; charset=utf-8",
-          "Content-Disposition": `inline; filename="${matchedCourse.code}_Syllabus.md"`,
         },
       });
     }
 
-    // Default JSON response
+    // Default JSON response for in-app reader
     const scheme = getCourseExaminationScheme(matchedCourse.code, matchedCourse.credits);
     return NextResponse.json({
       success: true,
@@ -90,7 +89,6 @@ export async function GET(
       programName: matchedCourse.programName,
       examinationScheme: scheme,
       markdownContent: mdContent,
-      downloadUrl: `/public/syllabus/${matchedCourse.code}_Syllabus.md`,
     });
   } catch (error: any) {
     return NextResponse.json(

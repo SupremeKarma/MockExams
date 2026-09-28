@@ -455,6 +455,30 @@ function SolutionContent() {
                     <li><strong>Real-World Example or Code Snippet:</strong> 20% of marks</li>
                   </ul>
                 </div>
+
+                {/* ExamAI Pro Evaluator Callout */}
+                <div style={{ marginTop: "1.5rem", padding: "1.25rem", background: "linear-gradient(135deg, rgba(238, 242, 255, 0.95), rgba(245, 243, 255, 0.95))", border: "1px solid rgba(199, 210, 254, 0.7)", borderRadius: "8px" }}>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "0.5rem", marginBottom: "0.5rem" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", fontWeight: 700, fontSize: "0.92rem", color: "#4338ca" }}>
+                      <span style={{ display: "inline-block", width: "8px", height: "8px", borderRadius: "50%", background: "#4f46e5" }}></span>
+                      <span>Targeting 80/80 on this Subject?</span>
+                    </div>
+                    <span style={{ fontSize: "0.72rem", fontWeight: 700, padding: "0.15rem 0.5rem", borderRadius: "999px", background: "#4f46e5", color: "white" }}>
+                      EXAMAI PRO
+                    </span>
+                  </div>
+                  <p style={{ margin: "0 0 1rem", fontSize: "0.86rem", color: "#475569", lineHeight: 1.5 }}>
+                    Upgrade to ExamAI Pro to get unlimited Socratic tutoring on this question, direct AI examiner grading for your handwritten answers, and full past paper solution predictions.
+                  </p>
+                  <Link
+                    href="/pricing"
+                    className="btn btn--primary"
+                    style={{ fontSize: "0.82rem", padding: "0.5rem 1rem", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
+                  >
+                    <span>Upgrade to ExamAI Pro</span>
+                    <span className="code">&rarr;</span>
+                  </Link>
+                </div>
               </section>
 
               {/* Navigation Actions */}

@@ -449,19 +449,22 @@ function SyllabusContent() {
               )}
             </div>
 
-            <div style={{ marginTop: "1.25rem", padding: "0.75rem", background: "var(--paper-2)", borderRadius: "6px", fontSize: "0.78rem" }}>
-              <div style={{ fontWeight: 600, marginBottom: "0.25rem", color: "var(--ink-1)" }}>Official Syllabus File (.md)</div>
-              <p style={{ margin: "0 0 0.5rem", color: "var(--ink-3)", lineHeight: 1.4 }}>
-                Full official markdown curriculum file for download and offline study.
+            <div style={{ marginTop: "1.25rem", padding: "0.85rem", background: "linear-gradient(135deg, rgba(238, 242, 255, 0.95), rgba(245, 243, 255, 0.95))", border: "1px solid rgba(199, 210, 254, 0.7)", borderRadius: "8px", fontSize: "0.78rem" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.35rem", fontWeight: 700, marginBottom: "0.35rem", color: "#4338ca" }}>
+                <span style={{ display: "inline-block", width: "7px", height: "7px", borderRadius: "50%", background: "#4f46e5" }}></span>
+                ExamAI Pro &bull; In-App Reader
+              </div>
+              <p style={{ margin: "0 0 0.6rem", color: "#475569", lineHeight: 1.45 }}>
+                Proprietary syllabus curriculum with unit &amp; topic breakdown, marks weightage rubrics, and AI exam predictions.
               </p>
-              <a
-                href={`/syllabus/semester-${selectedSemester}/${selectedCourse.code}.md`}
-                download={`${selectedCourse.code}_${selectedCourse.name.replace(/[^a-zA-Z0-9]/g, "_")}.md`}
-                className="btn btn--quiet"
-                style={{ width: "100%", justifyContent: "center", fontSize: "0.75rem", padding: "0.3rem" }}
+              <Link
+                href="/pricing"
+                className="btn btn--primary"
+                style={{ width: "100%", justifyContent: "center", fontSize: "0.76rem", padding: "0.4rem 0.6rem", gap: "0.35rem", textDecoration: "none" }}
               >
-                Download .md File
-              </a>
+                <span>Unlock Pro Benefits</span>
+                <span className="code">&rarr;</span>
+              </Link>
             </div>
 
             <p className="rail-note" style={{ marginTop: "1rem" }}>
@@ -473,13 +476,14 @@ function SyllabusContent() {
         {/* Main Content Area */}
         <main id="main" className="sheet" tabIndex={-1}>
           {viewMode === "markdown" ? (
-            /* Rendered Markdown Mode with Raw Copy/Download Controls */
+            /* Rendered Markdown Mode with Protected In-App Controls */
             <div style={{ padding: "1.5rem" }}>
               <MarkdownViewer
                 content={courseMarkdown}
                 title={`${selectedCourse.name} (${selectedCourse.code})`}
                 downloadFilename={`${selectedCourse.code}_Syllabus.md`}
                 showActions={true}
+                allowDownload={false}
               />
             </div>
           ) : (

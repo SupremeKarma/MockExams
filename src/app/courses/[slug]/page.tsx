@@ -58,8 +58,6 @@ export default function CourseSlugPage() {
   const [updatingTopic, setUpdatingTopic] = useState<string | null>(null);
   const [enrolling, setEnrolling] = useState(false);
   const [curriculumTab, setCurriculumTab] = useState<"topics" | "markdown" | "notes">("topics");
-  const [staticNotesMd, setStaticNotesMd] = useState<string>("");
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       const searchTab = new URLSearchParams(window.location.search).get("tab");
@@ -74,29 +72,10 @@ export default function CourseSlugPage() {
     return getSubjectNotes(course.code, course.semester) || getSubjectNotes(course.name, course.semester);
   }, [course]);
 
-  useEffect(() => {
-    if (!course) return;
-    const code = course.code.toUpperCase();
-    if (
-      code === "BIT253CO" ||
-      code === "BIT501" ||
-      code === "BIT253" ||
-      course.name.toLowerCase().includes("operating system")
-    ) {
-      fetch("/notes/Operating_Systems_Deadlock_Notes.md")
-        .then((res) => (res.ok ? res.text() : ""))
-        .then((text) => {
-          if (text) setStaticNotesMd(text);
-        })
-        .catch(() => {});
-    }
-  }, [course]);
-
   const notesMarkdown = useMemo(() => {
-    if (staticNotesMd) return staticNotesMd;
     if (!courseNotes || !course) return "";
     return generateSubjectNotesMarkdown(courseNotes, course.semester);
-  }, [staticNotesMd, courseNotes, course]);
+  }, [courseNotes, course]);
 
   const courseMarkdown = useMemo(() => {
     if (!course) return "";

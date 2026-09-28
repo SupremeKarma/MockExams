@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 import { bitNotesData, getSubjectNotes, type SubjectNotes, type Topic } from "@/data/bitNotesData";
 import { bitSyllabusData } from "@/data/bitSyllabusData";
 
@@ -677,6 +678,25 @@ function NotesContent() {
                   ))}
               </div>
             )}
+
+            {/* Pro Monetization Card */}
+            <div style={{ marginTop: "1.5rem", padding: "0.85rem", background: "linear-gradient(135deg, rgba(238, 242, 255, 0.95), rgba(245, 243, 255, 0.95))", border: "1px solid rgba(199, 210, 254, 0.7)", borderRadius: "8px", fontSize: "0.78rem" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.35rem", fontWeight: 700, marginBottom: "0.35rem", color: "#4338ca" }}>
+                <span style={{ display: "inline-block", width: "7px", height: "7px", borderRadius: "50%", background: "#4f46e5" }}></span>
+                ExamAI Pro &bull; In-App Notes
+              </div>
+              <p style={{ margin: "0 0 0.6rem", color: "#475569", lineHeight: 1.45 }}>
+                Proprietary semester notes with high-yield key points, code implementations, and AI audio tutoring.
+              </p>
+              <Link
+                href="/pricing"
+                className="btn btn--primary"
+                style={{ width: "100%", justifyContent: "center", fontSize: "0.76rem", padding: "0.4rem 0.6rem", gap: "0.35rem", textDecoration: "none" }}
+              >
+                <span>Unlock Pro Notes</span>
+                <span className="code">&rarr;</span>
+              </Link>
+            </div>
           </div>
         </aside>
 

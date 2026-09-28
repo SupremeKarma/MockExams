@@ -362,6 +362,25 @@ function PastPapersContent() {
                 No past question paper records uploaded for this subject yet.
               </div>
             )}
+
+            {/* Pro Monetization Card */}
+            <div style={{ marginTop: "1.5rem", padding: "0.85rem", background: "linear-gradient(135deg, rgba(238, 242, 255, 0.95), rgba(245, 243, 255, 0.95))", border: "1px solid rgba(199, 210, 254, 0.7)", borderRadius: "8px", fontSize: "0.78rem" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.35rem", fontWeight: 700, marginBottom: "0.35rem", color: "#4338ca" }}>
+                <span style={{ display: "inline-block", width: "7px", height: "7px", borderRadius: "50%", background: "#4f46e5" }}></span>
+                ExamAI Pro &bull; Past Paper Solver
+              </div>
+              <p style={{ margin: "0 0 0.6rem", color: "#475569", lineHeight: 1.45 }}>
+                Get turn-by-turn interactive Socratic AI tutor answers, code breakdowns, and scoring rubrics for every question.
+              </p>
+              <Link
+                href="/pricing"
+                className="btn btn--primary"
+                style={{ width: "100%", justifyContent: "center", fontSize: "0.76rem", padding: "0.4rem 0.6rem", gap: "0.35rem", textDecoration: "none" }}
+              >
+                <span>Unlock Pro Solutions</span>
+                <span className="code">&rarr;</span>
+              </Link>
+            </div>
           </div>
         </aside>
 
@@ -474,12 +493,20 @@ function PastPapersContent() {
                             <span style={{ fontSize: "0.72rem", fontWeight: 700, textTransform: "uppercase", color: "var(--ink-2)" }}>
                               Verified Model Answer Key &bull; {q.chapterRef}
                             </span>
-                            <Link
-                              href={`/solution?sem=${selectedSemester}&subject=${encodeURIComponent(selectedSubject)}&qid=${q.id}`}
-                              style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--accent-1, #2563eb)", textDecoration: "none" }}
-                            >
-                              View Full Solution &rarr;
-                            </Link>
+                            <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+                              <Link
+                                href={`/solution?sem=${selectedSemester}&subject=${encodeURIComponent(selectedSubject)}&qid=${q.id}`}
+                                style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--accent-1, #2563eb)", textDecoration: "none" }}
+                              >
+                                View Model Answer &rarr;
+                              </Link>
+                              <Link
+                                href="/pricing"
+                                style={{ fontSize: "0.72rem", fontWeight: 700, color: "#4f46e5", background: "rgba(99, 102, 241, 0.12)", padding: "0.15rem 0.45rem", borderRadius: "4px", textDecoration: "none" }}
+                              >
+                                Pro AI Tutor &infin;
+                              </Link>
+                            </div>
                           </div>
                           <p style={{ margin: 0, fontSize: "0.88rem", color: "var(--ink-1)", lineHeight: 1.5 }}>
                             {q.solutionSummary}

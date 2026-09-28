@@ -1,25 +1,28 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { Copy, Check, Download, FileText, Code2, Eye, Printer, Sparkles } from "lucide-react";
+import { Copy, Check, Download, FileText, Code2, Eye, Printer, Sparkles, Lock, Shield } from "lucide-react";
 
 interface MarkdownViewerProps {
   content: string;
   title?: string;
   downloadFilename?: string;
   showActions?: boolean;
+  allowDownload?: boolean;
   className?: string;
 }
 
 /**
  * Lightweight, robust markdown parser that converts GFM-style Markdown
  * (tables, headings, lists, blockquotes, code blocks) into accessible, styled JSX.
+ * Renders proprietary curriculum content strictly in-app without leaking source files.
  */
 export default function MarkdownViewer({
   content,
   title,
   downloadFilename = "syllabus.md",
   showActions = true,
+  allowDownload = false,
   className = "",
 }: MarkdownViewerProps) {
   const [viewMode, setViewMode] = useState<"rendered" | "raw">("rendered");
@@ -413,16 +416,26 @@ export default function MarkdownViewer({
               )}
             </button>
 
-            {/* Download Button */}
-            <button
-              type="button"
-              onClick={handleDownload}
-              className="px-2.5 py-1 rounded-lg border border-zinc-200 bg-white hover:bg-zinc-100 text-zinc-700 text-[11px] font-semibold flex items-center gap-1 transition-colors"
-              title="Download as .md file"
-            >
-              <Download className="w-3 h-3 text-primary-600" />
-              <span>Download</span>
-            </button>
+            {/* Download Button or Protected Badge */}
+            {allowDownload ? (
+              <button
+                type="button"
+                onClick={handleDownload}
+                className="px-2.5 py-1 rounded-lg border border-zinc-200 bg-white hover:bg-zinc-100 text-zinc-700 text-[11px] font-semibold flex items-center gap-1 transition-colors"
+                title="Download as .md file"
+              >
+                <Download className="w-3 h-3 text-primary-600" />
+                <span>Download</span>
+              </button>
+            ) : (
+              <span
+                className="px-2 py-1 rounded-md bg-amber-50 text-amber-800 text-[10px] font-semibold border border-amber-200/80 flex items-center gap-1 select-none"
+                title="Proprietary In-App Curriculum • Protected by ExamAI"
+              >
+                <Lock className="w-2.5 h-2.5 text-amber-600" />
+                <span>In-App Protected</span>
+              </span>
+            )}
 
             {/* Print Button */}
             <button
