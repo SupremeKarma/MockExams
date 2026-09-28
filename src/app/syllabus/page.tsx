@@ -126,6 +126,14 @@ function SyllabusContent() {
     ? selectedCourse.syllabusUnits.reduce((acc, u) => acc + (u.teachingHours || 0), 0)
     : 45;
 
+  // Extract clean unit titles matching the ExamAI Reader left sidebar design
+  const unitsList = useMemo(() => {
+    if (selectedCourse.syllabusUnits && selectedCourse.syllabusUnits.length > 0) {
+      return selectedCourse.syllabusUnits.map((u) => u.title);
+    }
+    return selectedCourse.keyUnits || [];
+  }, [selectedCourse]);
+
   return (
     <>
       <a className="skip" href="#main">Skip to lesson</a>
@@ -324,130 +332,32 @@ function SyllabusContent() {
               {selectedCourse.code}, Semester {selectedSemester}, {totalTeachingHours} teaching hours &middot; {selectedCourse.credits} credits
             </p>
 
-            {/* Unit-wise and Topic-wise Accordion Tree */}
-            <div className="unit-nav-tree" style={{ marginTop: "1rem" }}>
-              {selectedCourse.syllabusUnits && selectedCourse.syllabusUnits.length > 0 ? (
-                selectedCourse.syllabusUnits.map((unit, idx) => (
-                  <details
-                    key={idx}
-                    open={true}
-                    className="unit-accordion"
-                    style={{
-                      marginBottom: "0.75rem",
-                      border: "1px solid var(--line-subtle)",
-                      borderRadius: "6px",
-                      background: "var(--paper-1)",
-                      overflow: "hidden",
-                    }}
-                  >
-                    <summary
-                      style={{
-                        padding: "0.5rem 0.65rem",
-                        background: "var(--paper-2)",
-                        cursor: "pointer",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        fontWeight: 600,
-                        fontSize: "0.8rem",
-                        color: "var(--ink-1)",
-                        borderBottom: "1px solid var(--line-subtle)",
-                      }}
-                    >
-                      <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", minWidth: 0, flex: 1, paddingRight: "0.3rem" }}>
-                        <span
-                          style={{
-                            fontSize: "0.7rem",
-                            fontWeight: 700,
-                            padding: "0.1rem 0.35rem",
-                            background: "var(--ink-1)",
-                            color: "var(--paper-1)",
-                            borderRadius: "3px",
-                            whiteSpace: "nowrap",
-                          }}
-                        >
-                          U{idx + 1}
-                        </span>
-                        <span
-                          style={{
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            whiteSpace: "nowrap",
-                            flex: 1,
-                          }}
-                          title={unit.title}
-                        >
-                          {unit.title}
-                        </span>
-                      </div>
-                      <span style={{ fontSize: "0.7rem", color: "var(--ink-3)", whiteSpace: "nowrap" }}>
-                        {unit.teachingHours}h
-                      </span>
-                    </summary>
-
-                    {/* Topics under this unit */}
-                    <ul className="tree" style={{ padding: "0.35rem 0.5rem", margin: 0 }}>
-                      {unit.subtopics && unit.subtopics.length > 0 ? (
-                        unit.subtopics.map((sub, sIdx) => (
-                          <li key={sIdx} style={{ marginBottom: "0.2rem" }}>
-                            <a
-                              href={`#unit-${idx + 1}-topic-${sIdx + 1}`}
-                              style={{
-                                display: "flex",
-                                alignItems: "flex-start",
-                                gap: "0.4rem",
-                                padding: "0.25rem 0.4rem",
-                                fontSize: "0.78rem",
-                                textDecoration: "none",
-                              }}
-                            >
-                              <span className="code" style={{ fontSize: "0.7rem", minWidth: "1.7rem", paddingTop: "0.1rem" }}>
-                                {idx + 1}.{sIdx + 1}
-                              </span>
-                              <span style={{ flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={sub}>
-                                {sub}
-                              </span>
-                            </a>
-                          </li>
-                        ))
-                      ) : (
-                        <li>
-                          <a href={`#unit-${idx + 1}`}>
-                            <span className="code">{idx + 1}.1</span> Overview
-                          </a>
-                        </li>
-                      )}
-                    </ul>
-                  </details>
-                ))
-              ) : (
-                <ul className="tree">
-                  {selectedCourse.keyUnits.map((unit, idx) => (
-                    <li key={idx}>
-                      <a href={`#unit-${idx + 1}`}>
-                        <span className="code">{idx + 1}</span> {unit}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              )}
+            {/* Units Navigation Tree matching ExamAI Reader Design */}
+            <ul className="tree" style={{ marginTop: "1rem" }}>
+              {unitsList.map((unitTitle, idx) => (
+                <li key={idx}>
+                  <a href={`#unit-${idx + 1}`}>
+                    <span className="code">{idx + 1}</span> {unitTitle}
+                  </a>
+                </li>
+              ))}
 
               {selectedCourse.labWork && selectedCourse.labWork.length > 0 && (
-                <div style={{ marginTop: "0.5rem", padding: "0.25rem 0.5rem" }}>
-                  <a href="#lab-work" style={{ fontSize: "0.82rem", fontWeight: 600, display: "flex", alignItems: "center", gap: "0.4rem" }}>
+                <li style={{ marginTop: "0.5rem" }}>
+                  <a href="#lab-work">
                     <span className="code">&para;</span> Laboratory &amp; Practical
                   </a>
-                </div>
+                </li>
               )}
 
               {selectedCourse.referenceBooks && selectedCourse.referenceBooks.length > 0 && (
-                <div style={{ padding: "0.25rem 0.5rem" }}>
-                  <a href="#reference-books" style={{ fontSize: "0.82rem", fontWeight: 600, display: "flex", alignItems: "center", gap: "0.4rem" }}>
+                <li>
+                  <a href="#reference-books">
                     <span className="code">&sect;</span> Reference Textbooks
                   </a>
-                </div>
+                </li>
               )}
-            </div>
+            </ul>
 
             <div style={{ marginTop: "1.25rem", padding: "0.85rem", background: "linear-gradient(135deg, rgba(238, 242, 255, 0.95), rgba(245, 243, 255, 0.95))", border: "1px solid rgba(199, 210, 254, 0.7)", borderRadius: "8px", fontSize: "0.78rem" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "0.35rem", fontWeight: 700, marginBottom: "0.35rem", color: "#4338ca" }}>
