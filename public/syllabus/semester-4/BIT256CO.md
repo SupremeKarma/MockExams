@@ -25,13 +25,13 @@ Group application software project (up to 3 students) developed in Java, with pr
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Title Identification & Proposal Writing [15 Hours]
-- Title Identification & Proposal Writing
+- **Topic 1.1**: Title Identification & Proposal Writing
 
 ### Unit 2: Mid-Term Presentation [15 Hours]
-- Mid-Term Presentation
+- **Topic 2.1**: Mid-Term Presentation
 
 ### Unit 3: Pre-Final Submission & Final Presentation [15 Hours]
-- Pre-Final Submission & Final Presentation
+- **Topic 3.1**: Pre-Final Submission & Final Presentation
 
 ---
 

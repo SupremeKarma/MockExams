@@ -25,31 +25,31 @@ Computer instruction sets, control unit design, CPU architecture, pipelining, me
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction [5 Hours]
-- Introduction
+- **Topic 1.1**: Introduction
 
 ### Unit 2: Computer organization and design [5 Hours]
-- Computer organization and design
+- **Topic 2.1**: Computer organization and design
 
 ### Unit 3: Control unit design [5 Hours]
-- Control unit design
+- **Topic 3.1**: Control unit design
 
 ### Unit 4: Central processing unit [5 Hours]
-- Central processing unit
+- **Topic 4.1**: Central processing unit
 
 ### Unit 5: Pipeline and vector processing [5 Hours]
-- Pipeline and vector processing
+- **Topic 5.1**: Pipeline and vector processing
 
 ### Unit 6: Computer arithmetic [5 Hours]
-- Computer arithmetic
+- **Topic 6.1**: Computer arithmetic
 
 ### Unit 7: Input and output organization [5 Hours]
-- Input and output organization
+- **Topic 7.1**: Input and output organization
 
 ### Unit 8: Memory organization [5 Hours]
-- Memory organization
+- **Topic 8.1**: Memory organization
 
 ### Unit 9: Multiprocessor [5 Hours]
-- Multiprocessor
+- **Topic 9.1**: Multiprocessor
 
 ---
 

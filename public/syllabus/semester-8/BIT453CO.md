@@ -25,16 +25,16 @@
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Title Identification & Proposal Writing (10 Marks) [11 Hours]
-- Title Identification & Proposal Writing (10 Marks)
+- **Topic 1.1**: Title Identification & Proposal Writing (10 Marks)
 
 ### Unit 2: Mid-Term Architecture & DB Design Presentation (20 Marks) [11 Hours]
-- Mid-Term Architecture & DB Design Presentation (20 Marks)
+- **Topic 2.1**: Mid-Term Architecture & DB Design Presentation (20 Marks)
 
 ### Unit 3: Pre-Final Application Submission & Demo (30 Marks) [11 Hours]
-- Pre-Final Application Submission & Demo (30 Marks)
+- **Topic 3.1**: Pre-Final Application Submission & Demo (30 Marks)
 
 ### Unit 4: Final Documentation (APA Format: 20 Marks), Presentation (10) & Viva (10) [11 Hours]
-- Final Documentation (APA Format: 20 Marks), Presentation (10) & Viva (10)
+- **Topic 4.1**: Final Documentation (APA Format: 20 Marks), Presentation (10) & Viva (10)
 
 ---
 

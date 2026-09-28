@@ -48,34 +48,34 @@ AI foundations from agents and search through knowledge representation, learning
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction & Applications of AI [5 Hours]
-- Introduction & Applications of AI
+- **Topic 1.1**: Introduction & Applications of AI
 
 ### Unit 2: Agents: PEAS, Rationality & Agent Types [5 Hours]
-- Agents: PEAS, Rationality & Agent Types
+- **Topic 2.1**: Agents: PEAS, Rationality & Agent Types
 
 ### Unit 3: Uninformed & Informed Search (BFS, DFS, A*, Hill Climbing) [5 Hours]
-- Uninformed & Informed Search (BFS, DFS, A*, Hill Climbing)
+- **Topic 3.1**: Uninformed & Informed Search (BFS, DFS, A*, Hill Climbing)
 
 ### Unit 4: Adversarial Search & Constraint Satisfaction (Minimax, Alpha-Beta, CSP) [5 Hours]
-- Adversarial Search & Constraint Satisfaction (Minimax, Alpha-Beta, CSP)
+- **Topic 4.1**: Adversarial Search & Constraint Satisfaction (Minimax, Alpha-Beta, CSP)
 
 ### Unit 5: Knowledge Representation (Logic, Semantic Nets, FOPL) [5 Hours]
-- Knowledge Representation (Logic, Semantic Nets, FOPL)
+- **Topic 5.1**: Knowledge Representation (Logic, Semantic Nets, FOPL)
 
 ### Unit 6: Learning Systems (Decision Trees, Reinforcement Learning) [5 Hours]
-- Learning Systems (Decision Trees, Reinforcement Learning)
+- **Topic 6.1**: Learning Systems (Decision Trees, Reinforcement Learning)
 
 ### Unit 7: Reasoning (Monotonic, Bayesian, Case-Based) [5 Hours]
-- Reasoning (Monotonic, Bayesian, Case-Based)
+- **Topic 7.1**: Reasoning (Monotonic, Bayesian, Case-Based)
 
 ### Unit 8: Expert Systems (Inference Engine, Forward/Backward Chaining) [5 Hours]
-- Expert Systems (Inference Engine, Forward/Backward Chaining)
+- **Topic 8.1**: Expert Systems (Inference Engine, Forward/Backward Chaining)
 
 ### Unit 9: Artificial Neural Networks (Perceptron, Backpropagation) [5 Hours]
-- Artificial Neural Networks (Perceptron, Backpropagation)
+- **Topic 9.1**: Artificial Neural Networks (Perceptron, Backpropagation)
 
 ### Unit 10: Natural Language Processing [5 Hours]
-- Natural Language Processing
+- **Topic 10.1**: Natural Language Processing
 
 ---
 
@@ -125,34 +125,34 @@ Information systems in global business, IT infrastructure, decision support and 
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Information Systems in Global Business Today [5 Hours]
-- Information Systems in Global Business Today
+- **Topic 1.1**: Information Systems in Global Business Today
 
 ### Unit 2: Global E-Business & Collaboration [5 Hours]
-- Global E-Business & Collaboration
+- **Topic 2.1**: Global E-Business & Collaboration
 
 ### Unit 3: Information Systems Organization & Strategy (Value Chain) [5 Hours]
-- Information Systems Organization & Strategy (Value Chain)
+- **Topic 3.1**: Information Systems Organization & Strategy (Value Chain)
 
 ### Unit 4: IT Infrastructure & Platform Trends [5 Hours]
-- IT Infrastructure & Platform Trends
+- **Topic 4.1**: IT Infrastructure & Platform Trends
 
 ### Unit 5: Business Intelligence Foundations [5 Hours]
-- Business Intelligence Foundations
+- **Topic 5.1**: Business Intelligence Foundations
 
 ### Unit 6: Decision Support Systems (DSS) & Executive Information Systems (EIS) [5 Hours]
-- Decision Support Systems (DSS) & Executive Information Systems (EIS)
+- **Topic 6.1**: Decision Support Systems (DSS) & Executive Information Systems (EIS)
 
 ### Unit 7: Business Information Systems (Marketing, Manufacturing, Finance) [5 Hours]
-- Business Information Systems (Marketing, Manufacturing, Finance)
+- **Topic 7.1**: Business Information Systems (Marketing, Manufacturing, Finance)
 
 ### Unit 8: Security of Information Systems [5 Hours]
-- Security of Information Systems
+- **Topic 8.1**: Security of Information Systems
 
 ### Unit 9: Enterprise Systems, SCM & CRM [5 Hours]
-- Enterprise Systems, SCM & CRM
+- **Topic 9.1**: Enterprise Systems, SCM & CRM
 
 ### Unit 10: Strategic Information Systems & SISP [5 Hours]
-- Strategic Information Systems & SISP
+- **Topic 10.1**: Strategic Information Systems & SISP
 
 ---
 
@@ -202,22 +202,22 @@ Data warehouse architecture and OLAP, plus core data mining techniques — assoc
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to Data Mining & Data Warehousing [8 Hours]
-- Introduction to Data Mining & Data Warehousing
+- **Topic 1.1**: Introduction to Data Mining & Data Warehousing
 
 ### Unit 2: Data Warehouse & OLAP Technology, KDD [8 Hours]
-- Data Warehouse & OLAP Technology, KDD
+- **Topic 2.1**: Data Warehouse & OLAP Technology, KDD
 
 ### Unit 3: Mining Association Rules (Apriori, Market Basket Analysis) [8 Hours]
-- Mining Association Rules (Apriori, Market Basket Analysis)
+- **Topic 3.1**: Mining Association Rules (Apriori, Market Basket Analysis)
 
 ### Unit 4: Multidimensional & Multilevel Association Rules [8 Hours]
-- Multidimensional & Multilevel Association Rules
+- **Topic 4.1**: Multidimensional & Multilevel Association Rules
 
 ### Unit 5: Classification & Prediction (Decision Trees, Bayesian, k-NN) [8 Hours]
-- Classification & Prediction (Decision Trees, Bayesian, k-NN)
+- **Topic 5.1**: Classification & Prediction (Decision Trees, Bayesian, k-NN)
 
 ### Unit 6: Cluster Analysis (k-Means, k-Medoids, Hierarchical Methods) [8 Hours]
-- Cluster Analysis (k-Means, k-Medoids, Hierarchical Methods)
+- **Topic 6.1**: Cluster Analysis (k-Means, k-Medoids, Hierarchical Methods)
 
 ---
 
@@ -267,22 +267,22 @@ Simulation concepts and system types, the Monte Carlo method, random number gene
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Concepts of Simulation (Types, Advantages, Limitations) [8 Hours]
-- Concepts of Simulation (Types, Advantages, Limitations)
+- **Topic 1.1**: Concepts of Simulation (Types, Advantages, Limitations)
 
 ### Unit 2: Monte Carlo Method [8 Hours]
-- Monte Carlo Method
+- **Topic 2.1**: Monte Carlo Method
 
 ### Unit 3: Simulation of Continuous Systems (Queuing, Markov Chains) [8 Hours]
-- Simulation of Continuous Systems (Queuing, Markov Chains)
+- **Topic 3.1**: Simulation of Continuous Systems (Queuing, Markov Chains)
 
 ### Unit 4: Random Numbers: Generation & Testing (Chi-Square, Poker Test) [8 Hours]
-- Random Numbers: Generation & Testing (Chi-Square, Poker Test)
+- **Topic 4.1**: Random Numbers: Generation & Testing (Chi-Square, Poker Test)
 
 ### Unit 5: Analysis of Simulation Output & Replication of Runs [8 Hours]
-- Analysis of Simulation Output & Replication of Runs
+- **Topic 5.1**: Analysis of Simulation Output & Replication of Runs
 
 ### Unit 6: Simulation Languages & Discrete/Continuous Modeling [8 Hours]
-- Simulation Languages & Discrete/Continuous Modeling
+- **Topic 6.1**: Simulation Languages & Discrete/Continuous Modeling
 
 ---
 
@@ -332,28 +332,28 @@ The software engineering lifecycle — process models, project management, requi
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to Software Engineering [6 Hours]
-- Introduction to Software Engineering
+- **Topic 1.1**: Introduction to Software Engineering
 
 ### Unit 2: Process Models (Waterfall, Prototyping, RAD, Spiral, Agile) [6 Hours]
-- Process Models (Waterfall, Prototyping, RAD, Spiral, Agile)
+- **Topic 2.1**: Process Models (Waterfall, Prototyping, RAD, Spiral, Agile)
 
 ### Unit 3: Software Project Management (4Ps, COCOMO, Risk, Scheduling) [6 Hours]
-- Software Project Management (4Ps, COCOMO, Risk, Scheduling)
+- **Topic 3.1**: Software Project Management (4Ps, COCOMO, Risk, Scheduling)
 
 ### Unit 4: Software Requirements & Specification [6 Hours]
-- Software Requirements & Specification
+- **Topic 4.1**: Software Requirements & Specification
 
 ### Unit 5: Software Design (Principles, Architecture Types) [6 Hours]
-- Software Design (Principles, Architecture Types)
+- **Topic 5.1**: Software Design (Principles, Architecture Types)
 
 ### Unit 6: Software Testing (Black-Box, White-Box, V&V) [6 Hours]
-- Software Testing (Black-Box, White-Box, V&V)
+- **Topic 6.1**: Software Testing (Black-Box, White-Box, V&V)
 
 ### Unit 7: Metrics for Process & Product Quality (ISO 9000) [6 Hours]
-- Metrics for Process & Product Quality (ISO 9000)
+- **Topic 7.1**: Metrics for Process & Product Quality (ISO 9000)
 
 ### Unit 8: SE Trends: Agile, XP, Cloud Computing, SOA [6 Hours]
-- SE Trends: Agile, XP, Cloud Computing, SOA
+- **Topic 8.1**: SE Trends: Agile, XP, Cloud Computing, SOA
 
 ---
 
@@ -403,19 +403,19 @@ Group web-based application project (up to 3 students) built with server-side sc
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Title Presentation [9 Hours]
-- Title Presentation
+- **Topic 1.1**: Title Presentation
 
 ### Unit 2: Mid-Term Presentation [9 Hours]
-- Mid-Term Presentation
+- **Topic 2.1**: Mid-Term Presentation
 
 ### Unit 3: Server-Side Web Application Development [9 Hours]
-- Server-Side Web Application Development
+- **Topic 3.1**: Server-Side Web Application Development
 
 ### Unit 4: AI or Data Mining-Related Project Topic [9 Hours]
-- AI or Data Mining-Related Project Topic
+- **Topic 4.1**: AI or Data Mining-Related Project Topic
 
 ### Unit 5: Pre-Final Submission & Presentation [9 Hours]
-- Pre-Final Submission & Presentation
+- **Topic 5.1**: Pre-Final Submission & Presentation
 
 ---
 

@@ -25,55 +25,55 @@ Geographic Information Systems — spatial/attribute data, raster vs vector stru
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Basic Concepts & Components of GIS [4 Hours]
-- Definition and components of GIS (Hardware, Software, Data, People, Methods)
-- Functionality of GIS
-- Areas of GIS application
-- Advantages and limitations of GIS
+- **Topic 1.1**: Definition and components of GIS (Hardware, Software, Data, People, Methods)
+- **Topic 1.2**: Functionality of GIS
+- **Topic 1.3**: Areas of GIS application
+- **Topic 1.4**: Advantages and limitations of GIS
 
 ### Unit 2: GIS Data & Database [8 Hours]
-- Spatial and attribute data concepts
-- Spatial data handling
-- Data representations: points, lines, polygons
-- Information organization and data structures: Raster and Vector data structures, Tessellations
-- File organization and formats
-- Geo-database concepts and GIS software packages
+- **Topic 2.1**: Spatial and attribute data concepts
+- **Topic 2.2**: Spatial data handling
+- **Topic 2.3**: Data representations: points, lines, polygons
+- **Topic 2.4**: Information organization and data structures: Raster and Vector data structures, Tessellations
+- **Topic 2.5**: File organization and formats
+- **Topic 2.6**: Geo-database concepts and GIS software packages
 
 ### Unit 3: GIS Data Input [6 Hours]
-- Nature and source of spatial data
-- Methods of spatial data capture: Primary and Secondary sources
-- Digitization and scanning methods, techniques and procedures for digitizing, errors of digitization
-- Attribute data capture
-- GPS and Remote Sensing integration for data collection
+- **Topic 3.1**: Nature and source of spatial data
+- **Topic 3.2**: Methods of spatial data capture: Primary and Secondary sources
+- **Topic 3.3**: Digitization and scanning methods, techniques and procedures for digitizing, errors of digitization
+- **Topic 3.4**: Attribute data capture
+- **Topic 3.5**: GPS and Remote Sensing integration for data collection
 
 ### Unit 4: GIS Mapping and Map Projections [8 Hours]
-- Defining maps, categories of maps, map contents and map scales
-- Georeferencing principles and coordinate systems
-- Projection systems: types and aspects (cylindrical, conical, azimuthal)
-- Universal Transverse Mercator (UTM) coordinate system
+- **Topic 4.1**: Defining maps, categories of maps, map contents and map scales
+- **Topic 4.2**: Georeferencing principles and coordinate systems
+- **Topic 4.3**: Projection systems: types and aspects (cylindrical, conical, azimuthal)
+- **Topic 4.4**: Universal Transverse Mercator (UTM) coordinate system
 
 ### Unit 5: Data Editing in GIS [4 Hours]
-- Detecting and correcting topological errors
-- Re-projection, coordinate transformation, and map generalization
-- Edge matching and rubber sheeting
-- Conversion from other digital sources and CAD formats
+- **Topic 5.1**: Detecting and correcting topological errors
+- **Topic 5.2**: Re-projection, coordinate transformation, and map generalization
+- **Topic 5.3**: Edge matching and rubber sheeting
+- **Topic 5.4**: Conversion from other digital sources and CAD formats
 
 ### Unit 6: Spatial Analysis [7 Hours]
-- Types of spatial analysis and measurements in GIS
-- Query by attributes and spatial queries (point-in-polygon, line-in-polygon)
-- Attribute-based operations
-- Neighborhood analysis and buffering
-- Connectivity analysis and network routing
-- Overlay operations (union, intersect, identity) and coverage rebuilding
+- **Topic 6.1**: Types of spatial analysis and measurements in GIS
+- **Topic 6.2**: Query by attributes and spatial queries (point-in-polygon, line-in-polygon)
+- **Topic 6.3**: Attribute-based operations
+- **Topic 6.4**: Neighborhood analysis and buffering
+- **Topic 6.5**: Connectivity analysis and network routing
+- **Topic 6.6**: Overlay operations (union, intersect, identity) and coverage rebuilding
 
 ### Unit 7: Data Sharing and Spatial Data Infrastructure [6 Hours]
-- Concept of Geospatial Infrastructure
-- Components of Spatial Data Infrastructure (SDI): Standards, Metadata, Data Sharing Clearinghouse
-- National Spatial Data Infrastructure (NSDI) frameworks
+- **Topic 7.1**: Concept of Geospatial Infrastructure
+- **Topic 7.2**: Components of Spatial Data Infrastructure (SDI): Standards, Metadata, Data Sharing Clearinghouse
+- **Topic 7.3**: National Spatial Data Infrastructure (NSDI) frameworks
 
 ### Unit 8: GIS in Nepal [2 Hours]
-- Present situation of GIS in Nepal
-- Major GIS activities and national geospatial initiatives
-- Prospects and challenges of GIS implementation in Nepal
+- **Topic 8.1**: Present situation of GIS in Nepal
+- **Topic 8.2**: Major GIS activities and national geospatial initiatives
+- **Topic 8.3**: Prospects and challenges of GIS implementation in Nepal
 
 ---
 

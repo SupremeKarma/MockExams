@@ -25,37 +25,37 @@ Procedural programming fundamentals in C — control flow, arrays, functions, po
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Problem Solving with Computer [4 Hours]
-- Problem Solving with Computer
+- **Topic 1.1**: Problem Solving with Computer
 
 ### Unit 2: Elements of C [4 Hours]
-- Elements of C
+- **Topic 2.1**: Elements of C
 
 ### Unit 3: Input and Output [4 Hours]
-- Input and Output
+- **Topic 3.1**: Input and Output
 
 ### Unit 4: Operators and Expression [4 Hours]
-- Operators and Expression
+- **Topic 4.1**: Operators and Expression
 
 ### Unit 5: Control Statements [4 Hours]
-- Control Statements
+- **Topic 5.1**: Control Statements
 
 ### Unit 6: Arrays [4 Hours]
-- Arrays
+- **Topic 6.1**: Arrays
 
 ### Unit 7: Functions [4 Hours]
-- Functions
+- **Topic 7.1**: Functions
 
 ### Unit 8: Pointers [4 Hours]
-- Pointers
+- **Topic 8.1**: Pointers
 
 ### Unit 9: Structure and Union [4 Hours]
-- Structure and Union
+- **Topic 9.1**: Structure and Union
 
 ### Unit 10: Files and File Handling in C [4 Hours]
-- Files and File Handling in C
+- **Topic 10.1**: Files and File Handling in C
 
 ### Unit 11: Introduction to Graphics [4 Hours]
-- Introduction to Graphics
+- **Topic 11.1**: Introduction to Graphics
 
 ---
 

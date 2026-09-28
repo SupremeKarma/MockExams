@@ -324,41 +324,130 @@ function SyllabusContent() {
               {selectedCourse.code}, Semester {selectedSemester}, {totalTeachingHours} teaching hours &middot; {selectedCourse.credits} credits
             </p>
 
-            <ul className="tree">
+            {/* Unit-wise and Topic-wise Accordion Tree */}
+            <div className="unit-nav-tree" style={{ marginTop: "1rem" }}>
               {selectedCourse.syllabusUnits && selectedCourse.syllabusUnits.length > 0 ? (
                 selectedCourse.syllabusUnits.map((unit, idx) => (
-                  <li key={idx}>
-                    <a href={`#unit-${idx + 1}`}>
-                      <span className="code">{idx + 1}</span> {unit.title}
-                    </a>
-                  </li>
+                  <details
+                    key={idx}
+                    open={true}
+                    className="unit-accordion"
+                    style={{
+                      marginBottom: "0.75rem",
+                      border: "1px solid var(--line-subtle)",
+                      borderRadius: "6px",
+                      background: "var(--paper-1)",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <summary
+                      style={{
+                        padding: "0.5rem 0.65rem",
+                        background: "var(--paper-2)",
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        fontWeight: 600,
+                        fontSize: "0.8rem",
+                        color: "var(--ink-1)",
+                        borderBottom: "1px solid var(--line-subtle)",
+                      }}
+                    >
+                      <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", minWidth: 0, flex: 1, paddingRight: "0.3rem" }}>
+                        <span
+                          style={{
+                            fontSize: "0.7rem",
+                            fontWeight: 700,
+                            padding: "0.1rem 0.35rem",
+                            background: "var(--ink-1)",
+                            color: "var(--paper-1)",
+                            borderRadius: "3px",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          U{idx + 1}
+                        </span>
+                        <span
+                          style={{
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                            flex: 1,
+                          }}
+                          title={unit.title}
+                        >
+                          {unit.title}
+                        </span>
+                      </div>
+                      <span style={{ fontSize: "0.7rem", color: "var(--ink-3)", whiteSpace: "nowrap" }}>
+                        {unit.teachingHours}h
+                      </span>
+                    </summary>
+
+                    {/* Topics under this unit */}
+                    <ul className="tree" style={{ padding: "0.35rem 0.5rem", margin: 0 }}>
+                      {unit.subtopics && unit.subtopics.length > 0 ? (
+                        unit.subtopics.map((sub, sIdx) => (
+                          <li key={sIdx} style={{ marginBottom: "0.2rem" }}>
+                            <a
+                              href={`#unit-${idx + 1}-topic-${sIdx + 1}`}
+                              style={{
+                                display: "flex",
+                                alignItems: "flex-start",
+                                gap: "0.4rem",
+                                padding: "0.25rem 0.4rem",
+                                fontSize: "0.78rem",
+                                textDecoration: "none",
+                              }}
+                            >
+                              <span className="code" style={{ fontSize: "0.7rem", minWidth: "1.7rem", paddingTop: "0.1rem" }}>
+                                {idx + 1}.{sIdx + 1}
+                              </span>
+                              <span style={{ flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={sub}>
+                                {sub}
+                              </span>
+                            </a>
+                          </li>
+                        ))
+                      ) : (
+                        <li>
+                          <a href={`#unit-${idx + 1}`}>
+                            <span className="code">{idx + 1}.1</span> Overview
+                          </a>
+                        </li>
+                      )}
+                    </ul>
+                  </details>
                 ))
               ) : (
-                selectedCourse.keyUnits.map((unit, idx) => (
-                  <li key={idx}>
-                    <a href={`#unit-${idx + 1}`}>
-                      <span className="code">{idx + 1}</span> {unit}
-                    </a>
-                  </li>
-                ))
+                <ul className="tree">
+                  {selectedCourse.keyUnits.map((unit, idx) => (
+                    <li key={idx}>
+                      <a href={`#unit-${idx + 1}`}>
+                        <span className="code">{idx + 1}</span> {unit}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               )}
 
               {selectedCourse.labWork && selectedCourse.labWork.length > 0 && (
-                <li>
-                  <a href="#lab-work">
+                <div style={{ marginTop: "0.5rem", padding: "0.25rem 0.5rem" }}>
+                  <a href="#lab-work" style={{ fontSize: "0.82rem", fontWeight: 600, display: "flex", alignItems: "center", gap: "0.4rem" }}>
                     <span className="code">&para;</span> Laboratory &amp; Practical
                   </a>
-                </li>
+                </div>
               )}
 
               {selectedCourse.referenceBooks && selectedCourse.referenceBooks.length > 0 && (
-                <li>
-                  <a href="#reference-books">
+                <div style={{ padding: "0.25rem 0.5rem" }}>
+                  <a href="#reference-books" style={{ fontSize: "0.82rem", fontWeight: 600, display: "flex", alignItems: "center", gap: "0.4rem" }}>
                     <span className="code">&sect;</span> Reference Textbooks
                   </a>
-                </li>
+                </div>
               )}
-            </ul>
+            </div>
 
             <div style={{ marginTop: "1.25rem", padding: "0.75rem", background: "var(--paper-2)", borderRadius: "6px", fontSize: "0.78rem" }}>
               <div style={{ fontWeight: 600, marginBottom: "0.25rem", color: "var(--ink-1)" }}>Official Syllabus File (.md)</div>
@@ -376,7 +465,7 @@ function SyllabusContent() {
             </div>
 
             <p className="rail-note" style={{ marginTop: "1rem" }}>
-              Official syllabus units for {selectedCourse.code}, Purbanchal University BIT (May 2022 Curriculum Revision).
+              Official syllabus units and topics for {selectedCourse.code}, Purbanchal University BIT.
             </p>
           </div>
         </aside>
@@ -413,22 +502,92 @@ function SyllabusContent() {
                 <p>{selectedCourse.description}</p>
               </div>
 
-              {/* Detailed Syllabus Chapters & Teaching Units */}
+              {/* Detailed Syllabus Chapters & Teaching Units with Topics */}
               {selectedCourse.syllabusUnits && selectedCourse.syllabusUnits.length > 0 ? (
                 selectedCourse.syllabusUnits.map((unit, idx) => (
-                  <section key={idx} style={{ marginBottom: "2rem" }}>
-                    <h2 id={`unit-${idx + 1}`} style={{ display: "flex", alignItems: "baseline", gap: "0.5rem" }}>
-                      <span>Unit {idx + 1}: {unit.title}</span>
-                      <small style={{ color: "var(--ink-3)", fontSize: "0.85rem", fontWeight: 500 }}>
-                        &mdash; {unit.teachingHours} hrs
-                      </small>
-                    </h2>
-                    {unit.subtopics && unit.subtopics.length > 0 && (
-                      <ul>
+                  <section key={idx} style={{ marginBottom: "2.5rem" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "baseline",
+                        borderBottom: "2px solid var(--line-subtle)",
+                        paddingBottom: "0.4rem",
+                        marginBottom: "1rem",
+                      }}
+                    >
+                      <h2 id={`unit-${idx + 1}`} style={{ margin: 0, fontSize: "1.25rem", color: "var(--ink-1)" }}>
+                        Unit {idx + 1}: {unit.title}
+                      </h2>
+                      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                        <span style={{ fontSize: "0.78rem", padding: "0.15rem 0.5rem", borderRadius: "12px", background: "var(--paper-2)", color: "var(--ink-2)", fontWeight: 600 }}>
+                          {unit.teachingHours} Hours
+                        </span>
+                        <span style={{ fontSize: "0.78rem", padding: "0.15rem 0.5rem", borderRadius: "12px", background: "var(--paper-2)", color: "var(--ink-2)", fontWeight: 600 }}>
+                          {unit.subtopics?.length || 0} Topics
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Topics List with Point-Wise Topic Cards */}
+                    {unit.subtopics && unit.subtopics.length > 0 ? (
+                      <div className="topics-container" style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
                         {unit.subtopics.map((sub, sIdx) => (
-                          <li key={sIdx}>{sub}</li>
+                          <div
+                            key={sIdx}
+                            id={`unit-${idx + 1}-topic-${sIdx + 1}`}
+                            style={{
+                              padding: "0.65rem 0.85rem",
+                              background: "var(--paper-1)",
+                              border: "1px solid var(--line-subtle)",
+                              borderRadius: "6px",
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                              gap: "0.75rem",
+                            }}
+                          >
+                            <div style={{ display: "flex", alignItems: "flex-start", gap: "0.65rem", minWidth: 0, flex: 1 }}>
+                              <span
+                                style={{
+                                  fontSize: "0.72rem",
+                                  fontWeight: 700,
+                                  padding: "0.15rem 0.4rem",
+                                  background: "var(--paper-2)",
+                                  color: "var(--ink-1)",
+                                  borderRadius: "4px",
+                                  border: "1px solid var(--line-subtle)",
+                                  whiteSpace: "nowrap",
+                                  marginTop: "0.1rem",
+                                }}
+                              >
+                                Topic {idx + 1}.{sIdx + 1}
+                              </span>
+                              <span style={{ fontSize: "0.9rem", fontWeight: 500, color: "var(--ink-1)", lineHeight: 1.45 }}>
+                                {sub}
+                              </span>
+                            </div>
+                            <Link
+                              href={`/notes?sem=${selectedSemester}&subject=${encodeURIComponent(selectedCourse.name)}`}
+                              style={{
+                                fontSize: "0.75rem",
+                                color: "var(--accent-1, #2563eb)",
+                                fontWeight: 600,
+                                textDecoration: "none",
+                                whiteSpace: "nowrap",
+                                display: "inline-flex",
+                                alignItems: "center",
+                                gap: "0.2rem",
+                              }}
+                            >
+                              <span>Notes</span>
+                              <span>&rarr;</span>
+                            </Link>
+                          </div>
                         ))}
-                      </ul>
+                      </div>
+                    ) : (
+                      <p style={{ color: "var(--ink-3)", fontStyle: "italic" }}>No specific subtopics listed.</p>
                     )}
                   </section>
                 ))
@@ -541,8 +700,25 @@ function SyllabusContent() {
               <li><a href="#top">Course Overview</a></li>
               {selectedCourse.syllabusUnits && selectedCourse.syllabusUnits.length > 0 ? (
                 selectedCourse.syllabusUnits.map((u, i) => (
-                  <li key={i}>
-                    <a href={`#unit-${i + 1}`}>Unit {i + 1}: {u.title.substring(0, 36)}</a>
+                  <li key={i} style={{ marginBottom: "0.4rem" }}>
+                    <a href={`#unit-${i + 1}`} style={{ fontWeight: 600 }}>
+                      Unit {i + 1}: {u.title.substring(0, 32)}
+                    </a>
+                    {u.subtopics && u.subtopics.length > 0 && (
+                      <ol style={{ paddingLeft: "0.75rem", marginTop: "0.2rem", fontSize: "0.74rem", listStyleType: "none" }}>
+                        {u.subtopics.map((st, si) => (
+                          <li key={si} style={{ marginBottom: "0.15rem" }}>
+                            <a
+                              href={`#unit-${i + 1}-topic-${si + 1}`}
+                              style={{ color: "var(--ink-3)", textDecoration: "none", display: "block", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
+                              title={st}
+                            >
+                              {i + 1}.{si + 1} {st}
+                            </a>
+                          </li>
+                        ))}
+                      </ol>
+                    )}
                   </li>
                 ))
               ) : (
@@ -677,9 +853,10 @@ function SyllabusContent() {
           <ol className="toc-list" style={{ padding: 0 }}>
             {selectedCourse.syllabusUnits && selectedCourse.syllabusUnits.length > 0 ? (
               selectedCourse.syllabusUnits.map((u, i) => (
-                <li key={i} style={{ marginBottom: "0.5rem" }}>
+                <li key={i} style={{ marginBottom: "0.75rem" }}>
                   <a
                     href={`#unit-${i + 1}`}
+                    style={{ fontWeight: 600, fontSize: "0.9rem" }}
                     onClick={() => {
                       const dialog = document.getElementById("toc-dialog") as HTMLDialogElement | null;
                       dialog?.close();
@@ -687,6 +864,24 @@ function SyllabusContent() {
                   >
                     Unit {i + 1}: {u.title} ({u.teachingHours} hrs)
                   </a>
+                  {u.subtopics && u.subtopics.length > 0 && (
+                    <ol style={{ paddingLeft: "1rem", marginTop: "0.3rem", fontSize: "0.8rem", listStyleType: "none" }}>
+                      {u.subtopics.map((st, si) => (
+                        <li key={si} style={{ marginBottom: "0.25rem" }}>
+                          <a
+                            href={`#unit-${i + 1}-topic-${si + 1}`}
+                            onClick={() => {
+                              const dialog = document.getElementById("toc-dialog") as HTMLDialogElement | null;
+                              dialog?.close();
+                            }}
+                            style={{ color: "var(--ink-2)", textDecoration: "none" }}
+                          >
+                            {i + 1}.{si + 1} {st}
+                          </a>
+                        </li>
+                      ))}
+                    </ol>
+                  )}
                 </li>
               ))
             ) : (

@@ -25,34 +25,34 @@ Information systems in global business, IT infrastructure, decision support and 
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Information Systems in Global Business Today [5 Hours]
-- Information Systems in Global Business Today
+- **Topic 1.1**: Information Systems in Global Business Today
 
 ### Unit 2: Global E-Business & Collaboration [5 Hours]
-- Global E-Business & Collaboration
+- **Topic 2.1**: Global E-Business & Collaboration
 
 ### Unit 3: Information Systems Organization & Strategy (Value Chain) [5 Hours]
-- Information Systems Organization & Strategy (Value Chain)
+- **Topic 3.1**: Information Systems Organization & Strategy (Value Chain)
 
 ### Unit 4: IT Infrastructure & Platform Trends [5 Hours]
-- IT Infrastructure & Platform Trends
+- **Topic 4.1**: IT Infrastructure & Platform Trends
 
 ### Unit 5: Business Intelligence Foundations [5 Hours]
-- Business Intelligence Foundations
+- **Topic 5.1**: Business Intelligence Foundations
 
 ### Unit 6: Decision Support Systems (DSS) & Executive Information Systems (EIS) [5 Hours]
-- Decision Support Systems (DSS) & Executive Information Systems (EIS)
+- **Topic 6.1**: Decision Support Systems (DSS) & Executive Information Systems (EIS)
 
 ### Unit 7: Business Information Systems (Marketing, Manufacturing, Finance) [5 Hours]
-- Business Information Systems (Marketing, Manufacturing, Finance)
+- **Topic 7.1**: Business Information Systems (Marketing, Manufacturing, Finance)
 
 ### Unit 8: Security of Information Systems [5 Hours]
-- Security of Information Systems
+- **Topic 8.1**: Security of Information Systems
 
 ### Unit 9: Enterprise Systems, SCM & CRM [5 Hours]
-- Enterprise Systems, SCM & CRM
+- **Topic 9.1**: Enterprise Systems, SCM & CRM
 
 ### Unit 10: Strategic Information Systems & SISP [5 Hours]
-- Strategic Information Systems & SISP
+- **Topic 10.1**: Strategic Information Systems & SISP
 
 ---
 

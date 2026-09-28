@@ -52,71 +52,71 @@ Management fundamentals, organization design, entrepreneurship, business plannin
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to Management Principles and Functions [3 Hours]
-- Concept and scope of management
-- Levels, principles, and functions of management
-- Roles and skills of managers
-- Women in organizational hierarchy and leadership
+- **Topic 1.1**: Concept and scope of management
+- **Topic 1.2**: Levels, principles, and functions of management
+- **Topic 1.3**: Roles and skills of managers
+- **Topic 1.4**: Women in organizational hierarchy and leadership
 
 ### Unit 2: Organization Design and Decentralization [3 Hours]
-- Concept, principles, and benefits of organizing
-- Approaches to organization structure and design
-- Departmentation methods
-- Formal and informal organizations
-- Authority, responsibility, and delegation
-- Decentralization of authority
+- **Topic 2.1**: Concept, principles, and benefits of organizing
+- **Topic 2.2**: Approaches to organization structure and design
+- **Topic 2.3**: Departmentation methods
+- **Topic 2.4**: Formal and informal organizations
+- **Topic 2.5**: Authority, responsibility, and delegation
+- **Topic 2.6**: Decentralization of authority
 
 ### Unit 3: The Foundation of Entrepreneurship [5 Hours]
-- The world of the entrepreneur: definition and entrepreneurial mindset
-- Benefits and potential drawbacks of entrepreneurship
-- Behind the boom: factors driving the entrepreneurial fire
-- Cultural diversity of entrepreneurship
-- The ten deadly mistakes of entrepreneurship and how to avoid the pitfalls
+- **Topic 3.1**: The world of the entrepreneur: definition and entrepreneurial mindset
+- **Topic 3.2**: Benefits and potential drawbacks of entrepreneurship
+- **Topic 3.3**: Behind the boom: factors driving the entrepreneurial fire
+- **Topic 3.4**: Cultural diversity of entrepreneurship
+- **Topic 3.5**: The ten deadly mistakes of entrepreneurship and how to avoid the pitfalls
 
 ### Unit 4: Feasibility Analysis and Crafting Winning Business Plans [5 Hours]
-- Conducting a comprehensive feasibility analysis (Product/Service, Financial, Industry)
-- Why develop a business plan: strategic and funding imperatives
-- Elements and structural outline of a professional business plan
-- Making the business plan pitch and executive presentation
-- Standard business plan formatting guidelines
+- **Topic 4.1**: Conducting a comprehensive feasibility analysis (Product/Service, Financial, Industry)
+- **Topic 4.2**: Why develop a business plan: strategic and funding imperatives
+- **Topic 4.3**: Elements and structural outline of a professional business plan
+- **Topic 4.4**: Making the business plan pitch and executive presentation
+- **Topic 4.5**: Standard business plan formatting guidelines
 
 ### Unit 5: Forms of Business Ownership and Franchising [4 Hours]
-- Sole proprietorship, partnership, and corporation structures
-- Other forms of ownership (LLCs, Joint Ventures)
-- Types of franchising
-- Benefits and drawbacks of buying a franchise
-- The right way to evaluate and acquire a franchise
+- **Topic 5.1**: Sole proprietorship, partnership, and corporation structures
+- **Topic 5.2**: Other forms of ownership (LLCs, Joint Ventures)
+- **Topic 5.3**: Types of franchising
+- **Topic 5.4**: Benefits and drawbacks of buying a franchise
+- **Topic 5.5**: The right way to evaluate and acquire a franchise
 
 ### Unit 6: Building a Powerful Marketing Plan [4 Hours]
-- Building a guerrilla marketing plan
-- Pinpointing the target market and market segmentation
-- Determining customer needs and wants through market research
-- Plotting guerrilla marketing strategies on a bootstrap budget
-- Marketing on the World Wide Web and the modern marketing mix (4Ps/4Cs)
+- **Topic 6.1**: Building a guerrilla marketing plan
+- **Topic 6.2**: Pinpointing the target market and market segmentation
+- **Topic 6.3**: Determining customer needs and wants through market research
+- **Topic 6.4**: Plotting guerrilla marketing strategies on a bootstrap budget
+- **Topic 6.5**: Marketing on the World Wide Web and the modern marketing mix (4Ps/4Cs)
 
 ### Unit 7: Choosing the Right Location and Layout [4 Hours]
-- Location as a source of competitive advantage
-- Location criteria and options for service, retail, and manufacturing businesses
-- Layout optimization: maximizing revenues, increasing operational efficiency, and reducing costs
+- **Topic 7.1**: Location as a source of competitive advantage
+- **Topic 7.2**: Location criteria and options for service, retail, and manufacturing businesses
+- **Topic 7.3**: Layout optimization: maximizing revenues, increasing operational efficiency, and reducing costs
 
 ### Unit 8: E-Commerce and the Entrepreneur [5 Hours]
-- Benefits of selling on the Web for startups
-- Factors to consider before launching into e-commerce
-- Twelve myths of e-commerce
-- Strategies for successful e-commerce execution
-- Designing a high-converting web storefront
-- Tracking web results and web analytics
-- Ensuring customer privacy and transaction security
+- **Topic 8.1**: Benefits of selling on the Web for startups
+- **Topic 8.2**: Factors to consider before launching into e-commerce
+- **Topic 8.3**: Twelve myths of e-commerce
+- **Topic 8.4**: Strategies for successful e-commerce execution
+- **Topic 8.5**: Designing a high-converting web storefront
+- **Topic 8.6**: Tracking web results and web analytics
+- **Topic 8.7**: Ensuring customer privacy and transaction security
 
 ### Unit 9: Entrepreneur of IT and Technology Transfer [8 Hours]
-- Marketing Information Technology products
-- Technological life cycle and adoption curves
-- Classification of buyers in the IT market
-- Technological SWOT analysis and techno-ready marketing
-- How and why customers adopt information technology innovations
-- Issues in technology management and intellectual property protection
-- Mechanisms and modes of international technology transfer to developing nations
-- Information technology as the wealth of nations
-- Case study and student presentations based on Chapters 8 & 9 [4 Hrs]
+- **Topic 9.1**: Marketing Information Technology products
+- **Topic 9.2**: Technological life cycle and adoption curves
+- **Topic 9.3**: Classification of buyers in the IT market
+- **Topic 9.4**: Technological SWOT analysis and techno-ready marketing
+- **Topic 9.5**: How and why customers adopt information technology innovations
+- **Topic 9.6**: Issues in technology management and intellectual property protection
+- **Topic 9.7**: Mechanisms and modes of international technology transfer to developing nations
+- **Topic 9.8**: Information technology as the wealth of nations
+- **Topic 9.9**: Case study and student presentations based on Chapters 8 & 9 [4 Hrs]
 
 ---
 
@@ -157,19 +157,19 @@ Distributed systems fundamentals and cloud computing service/deployment models, 
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Distributed Systems Fundamentals (RPC, RMI, Consistency) [9 Hours]
-- Distributed Systems Fundamentals (RPC, RMI, Consistency)
+- **Topic 1.1**: Distributed Systems Fundamentals (RPC, RMI, Consistency)
 
 ### Unit 2: Cloud Computing Service Models (IaaS, PaaS, SaaS, Serverless) [9 Hours]
-- Cloud Computing Service Models (IaaS, PaaS, SaaS, Serverless)
+- **Topic 2.1**: Cloud Computing Service Models (IaaS, PaaS, SaaS, Serverless)
 
 ### Unit 3: Virtualization Technologies (Hypervisors, Containers, K8s) [9 Hours]
-- Virtualization Technologies (Hypervisors, Containers, K8s)
+- **Topic 3.1**: Virtualization Technologies (Hypervisors, Containers, K8s)
 
 ### Unit 4: Cloud Storage and Big Data Architectures [9 Hours]
-- Cloud Storage and Big Data Architectures
+- **Topic 4.1**: Cloud Storage and Big Data Architectures
 
 ### Unit 5: Cloud Security, IAM and Shared Responsibility [9 Hours]
-- Cloud Security, IAM and Shared Responsibility
+- **Topic 5.1**: Cloud Security, IAM and Shared Responsibility
 
 ---
 
@@ -220,53 +220,53 @@ Speech and language processing, morphological parsing with FSTs, N-grams, HMM PO
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to NLP [6 Hours]
-- Definition, issues, and strategies in speech and language processing
-- Application domains and software tools for NLP
-- Linguistic organization of NLP, Natural Language Processing vs Programming Language Processing
-- Word classes, review of Regular Expressions, Context-Free Grammars (CFG), and parsing techniques
+- **Topic 1.1**: Definition, issues, and strategies in speech and language processing
+- **Topic 1.2**: Application domains and software tools for NLP
+- **Topic 1.3**: Linguistic organization of NLP, Natural Language Processing vs Programming Language Processing
+- **Topic 1.4**: Word classes, review of Regular Expressions, Context-Free Grammars (CFG), and parsing techniques
 
 ### Unit 2: Morphology and Phonology [7 Hours]
-- Inflectional and derivational morphology
-- Morphological parsing with Finite State Transducers (FSTs) and combinational rules
-- Phonology: Speech sounds, phonetic transcription (IPA), phoneme definitions and phonological rules
-- Optimality theory and machine learning of phonological rules
-- Phonological aspects of prosody and speech synthesis (TTS)
+- **Topic 2.1**: Inflectional and derivational morphology
+- **Topic 2.2**: Morphological parsing with Finite State Transducers (FSTs) and combinational rules
+- **Topic 2.3**: Phonology: Speech sounds, phonetic transcription (IPA), phoneme definitions and phonological rules
+- **Topic 2.4**: Optimality theory and machine learning of phonological rules
+- **Topic 2.5**: Phonological aspects of prosody and speech synthesis (TTS)
 
 ### Unit 3: Pronunciation, Spelling and N-grams [7 Hours]
-- Spelling error detection and correction using probabilistic noisy channel models
-- Pronunciation variation: lexical, allophonic, and dialectal variations
-- Decision tree models for pronunciation
-- Counting words in corpora and simple N-gram language models
-- Smoothing techniques: Add-One (Laplace), Witten-Bell, Good-Turing discounting
-- N-grams for spelling correction and pronunciation modeling
+- **Topic 3.1**: Spelling error detection and correction using probabilistic noisy channel models
+- **Topic 3.2**: Pronunciation variation: lexical, allophonic, and dialectal variations
+- **Topic 3.3**: Decision tree models for pronunciation
+- **Topic 3.4**: Counting words in corpora and simple N-gram language models
+- **Topic 3.5**: Smoothing techniques: Add-One (Laplace), Witten-Bell, Good-Turing discounting
+- **Topic 3.6**: N-grams for spelling correction and pronunciation modeling
 
 ### Unit 4: Syntax and Part-of-Speech Tagging [6 Hours]
-- Penn Treebank tagsets and word categories
-- Concept of Hidden Markov Model (HMM) taggers
-- Rule-based vs stochastic POS tagging
-- Viterbi algorithm for HMM decoding and tagging
-- Transformation-Based Learning (Brill) tagger
+- **Topic 4.1**: Penn Treebank tagsets and word categories
+- **Topic 4.2**: Concept of Hidden Markov Model (HMM) taggers
+- **Topic 4.3**: Rule-based vs stochastic POS tagging
+- **Topic 4.4**: Viterbi algorithm for HMM decoding and tagging
+- **Topic 4.5**: Transformation-Based Learning (Brill) tagger
 
 ### Unit 5: Sentence Level Construction & Unification Semantics [7 Hours]
-- Noun phrase structures, co-ordination, and sub-categorization
-- Concept of feature structures and unification
-- Representing Meaning: Unambiguous representation, canonical form, expressiveness, meaning structure of language
-- Basics of First-Order Predicate Calculus (FOPC) in semantic interpretation
-- Syntax-driven semantic analysis, attachment, integration, and robustness
+- **Topic 5.1**: Noun phrase structures, co-ordination, and sub-categorization
+- **Topic 5.2**: Concept of feature structures and unification
+- **Topic 5.3**: Representing Meaning: Unambiguous representation, canonical form, expressiveness, meaning structure of language
+- **Topic 5.4**: Basics of First-Order Predicate Calculus (FOPC) in semantic interpretation
+- **Topic 5.5**: Syntax-driven semantic analysis, attachment, integration, and robustness
 
 ### Unit 6: Lexical Semantics [6 Hours]
-- Lexemes and semantic relationships: homonymy, polysemy, synonymy, hyponymy
-- WordNet taxonomy and relational database structure
-- Internal structure of words, metaphors, and metonymy with computational approaches
-- Word Sense Disambiguation (WSD): Selectional restriction-based, machine learning-based, and dictionary-based (Lesk algorithm) approaches
+- **Topic 6.1**: Lexemes and semantic relationships: homonymy, polysemy, synonymy, hyponymy
+- **Topic 6.2**: WordNet taxonomy and relational database structure
+- **Topic 6.3**: Internal structure of words, metaphors, and metonymy with computational approaches
+- **Topic 6.4**: Word Sense Disambiguation (WSD): Selectional restriction-based, machine learning-based, and dictionary-based (Lesk algorithm) approaches
 
 ### Unit 7: Pragmatics and Discourse Structure [6 Hours]
-- Discourse reference resolution and referential phenomena
-- Syntactic and semantic constraints on co-reference
-- Pronoun resolution algorithms (Hobbs algorithm, centering theory)
-- Text coherence and discourse rhetorical structure
-- Dialogues: Turns and utterances, grounding, dialogue acts and conversational structures
-- Natural Language Generation (NLG): introduction to language generation architecture and discourse planning
+- **Topic 7.1**: Discourse reference resolution and referential phenomena
+- **Topic 7.2**: Syntactic and semantic constraints on co-reference
+- **Topic 7.3**: Pronoun resolution algorithms (Hobbs algorithm, centering theory)
+- **Topic 7.4**: Text coherence and discourse rhetorical structure
+- **Topic 7.5**: Dialogues: Turns and utterances, grounding, dialogue acts and conversational structures
+- **Topic 7.6**: Natural Language Generation (NLG): introduction to language generation architecture and discourse planning
 
 ---
 
@@ -320,52 +320,52 @@ Data analytics and machine learning applied to supply chain management — data 
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to Supply Chain Analytics [4 Hours]
-- Definition of Supply Chain and need for supply chain management
-- Structure of supply chains, processes, flows, and strategic decision making
-- Supply chain analytics definitions, value proposition, and role of AI
-- Defining SMART goals and KPIs for supply chain optimization
+- **Topic 1.1**: Definition of Supply Chain and need for supply chain management
+- **Topic 1.2**: Structure of supply chains, processes, flows, and strategic decision making
+- **Topic 1.3**: Supply chain analytics definitions, value proposition, and role of AI
+- **Topic 1.4**: Defining SMART goals and KPIs for supply chain optimization
 
 ### Unit 2: Data-Driven Supply Chains with Python [5 Hours]
-- Data-driven decision making in supply chain environments
-- Setting up the Python analytics runtime environment (Jupyter, NumPy, Pandas)
-- Structure of tabular data, variables, and series data types
-- Data cleaning, outlier treatment, and missing value imputation in supply datasets
+- **Topic 2.1**: Data-driven decision making in supply chain environments
+- **Topic 2.2**: Setting up the Python analytics runtime environment (Jupyter, NumPy, Pandas)
+- **Topic 2.3**: Structure of tabular data, variables, and series data types
+- **Topic 2.4**: Data cleaning, outlier treatment, and missing value imputation in supply datasets
 
 ### Unit 3: Data Manipulation & Indexing in Python [5 Hours]
-- Pandas data manipulation: indexing, slicing, filtering, and grouping
-- Data aggregation, pivoting, and merging disparate logistical datasets
-- Feature engineering for delivery performance and transit time calculations
+- **Topic 3.1**: Pandas data manipulation: indexing, slicing, filtering, and grouping
+- **Topic 3.2**: Data aggregation, pivoting, and merging disparate logistical datasets
+- **Topic 3.3**: Feature engineering for delivery performance and transit time calculations
 
 ### Unit 4: Data Visualization & Geospatial Analysis [5 Hours]
-- Exploratory data visualization using Seaborn and Matplotlib
-- Distribution plots, correlation heatmaps, and trend analysis
-- Geospatial visualization of supplier locations, transport corridors, and delivery zones
+- **Topic 4.1**: Exploratory data visualization using Seaborn and Matplotlib
+- **Topic 4.2**: Distribution plots, correlation heatmaps, and trend analysis
+- **Topic 4.3**: Geospatial visualization of supplier locations, transport corridors, and delivery zones
 
 ### Unit 5: Customer Management & RFM Segmentation [6 Hours]
-- Customer relationship analytics in supply chain operations
-- Customer cohort analysis and churn prediction
-- Recency, Frequency, Monetary (RFM) customer segmentation
-- k-means clustering for behavioral customer categorization
+- **Topic 5.1**: Customer relationship analytics in supply chain operations
+- **Topic 5.2**: Customer cohort analysis and churn prediction
+- **Topic 5.3**: Recency, Frequency, Monetary (RFM) customer segmentation
+- **Topic 5.4**: k-means clustering for behavioral customer categorization
 
 ### Unit 6: Supply Management & Supplier Risk Analysis [5 Hours]
-- Procurement analytics and supplier performance scorecarding
-- Assessing supplier delivery risk using multiple linear regression and logistic regression
-- Lead time variability analysis and supplier reliability benchmarking
+- **Topic 6.1**: Procurement analytics and supplier performance scorecarding
+- **Topic 6.2**: Assessing supplier delivery risk using multiple linear regression and logistic regression
+- **Topic 6.3**: Lead time variability analysis and supplier reliability benchmarking
 
 ### Unit 7: Warehouse and Inventory Optimization [5 Hours]
-- Inventory management metrics: Economic Order Quantity (EOQ), Reorder Point (ROP), Safety Stock
-- ABC and XYZ inventory classifications
-- Warehouse slotting optimization and picking path efficiency
+- **Topic 7.1**: Inventory management metrics: Economic Order Quantity (EOQ), Reorder Point (ROP), Safety Stock
+- **Topic 7.2**: ABC and XYZ inventory classifications
+- **Topic 7.3**: Warehouse slotting optimization and picking path efficiency
 
 ### Unit 8: Demand Forecasting [5 Hours]
-- Importance of demand forecasting in mitigating the Bullwhip Effect
-- Quantitative time series methods: Moving Averages, Exponential Smoothing (Holt-Winters)
-- Evaluating forecast accuracy: MAD, MSE, RMSE, and MAPE metrics
+- **Topic 8.1**: Importance of demand forecasting in mitigating the Bullwhip Effect
+- **Topic 8.2**: Quantitative time series methods: Moving Averages, Exponential Smoothing (Holt-Winters)
+- **Topic 8.3**: Evaluating forecast accuracy: MAD, MSE, RMSE, and MAPE metrics
 
 ### Unit 9: Logistics Management & Route Optimization [5 Hours]
-- Transportation modes, freight logistics, and carrier selection
-- Logistics network design and facility location decisions
-- Route optimization fundamentals and Vehicle Routing Problem (VRP) solving with Python
+- **Topic 9.1**: Transportation modes, freight logistics, and carrier selection
+- **Topic 9.2**: Logistics network design and facility location decisions
+- **Topic 9.3**: Route optimization fundamentals and Vehicle Routing Problem (VRP) solving with Python
 
 ---
 
@@ -419,41 +419,41 @@ Big data paradigms in business intelligence — MapReduce workflow anatomy, NoSQ
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to Big Data [5 Hours]
-- Overview of Big Data and comparison with traditional database architectures
-- Background of Data Analytics and emergence of distributed systems
-- Big Data usage in distributed systems and cloud platforms
-- Development history and milestones of Big Data technologies
-- Current trends in Big Data Analytics
-- Benefits and real-world applications of Big Data (telecom, healthcare, e-commerce, banking)
+- **Topic 1.1**: Overview of Big Data and comparison with traditional database architectures
+- **Topic 1.2**: Background of Data Analytics and emergence of distributed systems
+- **Topic 1.3**: Big Data usage in distributed systems and cloud platforms
+- **Topic 1.4**: Development history and milestones of Big Data technologies
+- **Topic 1.5**: Current trends in Big Data Analytics
+- **Topic 1.6**: Benefits and real-world applications of Big Data (telecom, healthcare, e-commerce, banking)
 
 ### Unit 2: MapReduce Applications [8 Hours]
-- MapReduce fundamentals and programming model
-- MapReduce workflows, mappers, reducers, partitioners, and combiners
-- Anatomy of a MapReduce job execution run
-- Fault tolerance, node failures, and speculative execution
-- Real-world problems solved via MapReduce
-- Scalability goals, optimization techniques, and data locality exploitation
-- Parallel efficiency and performance bottlenecks of MapReduce
+- **Topic 2.1**: MapReduce fundamentals and programming model
+- **Topic 2.2**: MapReduce workflows, mappers, reducers, partitioners, and combiners
+- **Topic 2.3**: Anatomy of a MapReduce job execution run
+- **Topic 2.4**: Fault tolerance, node failures, and speculative execution
+- **Topic 2.5**: Real-world problems solved via MapReduce
+- **Topic 2.6**: Scalability goals, optimization techniques, and data locality exploitation
+- **Topic 2.7**: Parallel efficiency and performance bottlenecks of MapReduce
 
 ### Unit 3: Data Management & Taxonomy of NoSQL Implementations [12 Hours]
-- Structured, semi-structured, and unstructured data management
-- Taxonomy of NoSQL implementations: Key-Value, Document, Column-Family, and Graph stores
-- Schemaless database designs and CAP theorem implications (Consistency, Availability, Partition tolerance)
-- Basic architecture, data models, and query mechanisms of Apache HBase, Apache Cassandra, and MongoDB
-- Partitioning, sharding, replication, and composing analytical calculations over NoSQL datastores
+- **Topic 3.1**: Structured, semi-structured, and unstructured data management
+- **Topic 3.2**: Taxonomy of NoSQL implementations: Key-Value, Document, Column-Family, and Graph stores
+- **Topic 3.3**: Schemaless database designs and CAP theorem implications (Consistency, Availability, Partition tolerance)
+- **Topic 3.4**: Basic architecture, data models, and query mechanisms of Apache HBase, Apache Cassandra, and MongoDB
+- **Topic 3.5**: Partitioning, sharding, replication, and composing analytical calculations over NoSQL datastores
 
 ### Unit 4: Fundamentals of HADOOP [10 Hours]
-- Analyzing data at scale with Apache Hadoop
-- Hadoop Distributed File System (HDFS): NameNode, DataNode, Secondary NameNode, blocks, and replication topology
-- HDFS command line interface and file operations
-- Hadoop Streaming and Hadoop Pipes for multi-language execution
-- Hadoop I/O: Data integrity, compression codecs, serialization formats (Avro, Parquet, SequenceFiles)
+- **Topic 4.1**: Analyzing data at scale with Apache Hadoop
+- **Topic 4.2**: Hadoop Distributed File System (HDFS): NameNode, DataNode, Secondary NameNode, blocks, and replication topology
+- **Topic 4.3**: HDFS command line interface and file operations
+- **Topic 4.4**: Hadoop Streaming and Hadoop Pipes for multi-language execution
+- **Topic 4.5**: Hadoop I/O: Data integrity, compression codecs, serialization formats (Avro, Parquet, SequenceFiles)
 
 ### Unit 5: Hadoop Tools: HBase, Cassandra, Pig, and Hive [10 Hours]
-- Apache HBase architecture: RegionServers, ZooKeeper coordination, and column-family storage
-- Apache Cassandra peer-to-peer gossip protocol and CQL operations
-- Apache Pig: Architecture, Pig Latin execution environment, data types, and relational operations
-- Apache Hive: Hive architecture, HiveQL queries, metastore configurations, managed vs external tables, and partitioning
+- **Topic 5.1**: Apache HBase architecture: RegionServers, ZooKeeper coordination, and column-family storage
+- **Topic 5.2**: Apache Cassandra peer-to-peer gossip protocol and CQL operations
+- **Topic 5.3**: Apache Pig: Architecture, Pig Latin execution environment, data types, and relational operations
+- **Topic 5.4**: Apache Hive: Hive architecture, HiveQL queries, metastore configurations, managed vs external tables, and partitioning
 
 ---
 
@@ -507,54 +507,54 @@ Mobile application development on Android — UI layouts, activity lifecycles, i
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to Mobile Devices & Architectures [5 Hours]
-- History of mobile devices and mobile computing evolution
-- Modern mobile operating systems: Android, iOS architecture comparison
-- Hardware architecture of smartphones: SoC, ARM processors, power constraints, sensors, and wireless radios
+- **Topic 1.1**: History of mobile devices and mobile computing evolution
+- **Topic 1.2**: Modern mobile operating systems: Android, iOS architecture comparison
+- **Topic 1.3**: Hardware architecture of smartphones: SoC, ARM processors, power constraints, sensors, and wireless radios
 
 ### Unit 2: Mobile Platforms & Wireless Communication Constraints [4 Hours]
-- Wireless network standards: Wi-Fi, Bluetooth BLE, Cellular (3G/4G/5G)
-- Mobile communication constraints: intermittent connectivity, latency, battery consumption, and bandwidth throttling
-- Offline-first mobile application design principles and data synchronization strategies
+- **Topic 2.1**: Wireless network standards: Wi-Fi, Bluetooth BLE, Cellular (3G/4G/5G)
+- **Topic 2.2**: Mobile communication constraints: intermittent connectivity, latency, battery consumption, and bandwidth throttling
+- **Topic 2.3**: Offline-first mobile application design principles and data synchronization strategies
 
 ### Unit 3: Introduction to Android Platform [5 Hours]
-- Android OS architecture: Linux Kernel, Hardware Abstraction Layer (HAL), Android Runtime (ART/Dalvik), Native C/C++ libraries, and Application Framework
-- Android development tooling: Android Studio, Gradle build system, Android SDK, and ADB
-- Android Project Anatomy: AndroidManifest.xml, java/kotlin sources, res directory, and Gradle scripts
+- **Topic 3.1**: Android OS architecture: Linux Kernel, Hardware Abstraction Layer (HAL), Android Runtime (ART/Dalvik), Native C/C++ libraries, and Application Framework
+- **Topic 3.2**: Android development tooling: Android Studio, Gradle build system, Android SDK, and ADB
+- **Topic 3.3**: Android Project Anatomy: AndroidManifest.xml, java/kotlin sources, res directory, and Gradle scripts
 
 ### Unit 4: Android Application Design Essentials [6 Hours]
-- UI layout components: LinearLayout, RelativeLayout, ConstraintLayout, and FrameLayout
-- Core UI widgets: TextView, EditText, Button, ImageView, CheckBox, RadioButton, and Spinner
-- Lists and dynamic collections: RecyclerView, LayoutManagers, ViewHolders, and Custom Adapters
-- Material Design components, themes, styles, and responsive layout guidelines
+- **Topic 4.1**: UI layout components: LinearLayout, RelativeLayout, ConstraintLayout, and FrameLayout
+- **Topic 4.2**: Core UI widgets: TextView, EditText, Button, ImageView, CheckBox, RadioButton, and Spinner
+- **Topic 4.3**: Lists and dynamic collections: RecyclerView, LayoutManagers, ViewHolders, and Custom Adapters
+- **Topic 4.4**: Material Design components, themes, styles, and responsive layout guidelines
 
 ### Unit 5: Writing Basic Applications & Core Components [6 Hours]
-- Android core components: Activity, Service, BroadcastReceiver, ContentProvider
-- Activity lifecycle: onCreate(), onStart(), onResume(), onPause(), onStop(), onDestroy()
-- Intents and Intent Filters: Explicit vs Implicit Intents, passing bundle data, starting activities for results
-- Fragments: lifecycle, fragment manager, and tablet/phone adaptive layouts
+- **Topic 5.1**: Android core components: Activity, Service, BroadcastReceiver, ContentProvider
+- **Topic 5.2**: Activity lifecycle: onCreate(), onStart(), onResume(), onPause(), onStop(), onDestroy()
+- **Topic 5.3**: Intents and Intent Filters: Explicit vs Implicit Intents, passing bundle data, starting activities for results
+- **Topic 5.4**: Fragments: lifecycle, fragment manager, and tablet/phone adaptive layouts
 
 ### Unit 6: Data Handling in Android [6 Hours]
-- Internal and external file storage
-- SharedPreferences for key-value settings storage
-- Local structured databases: SQLite database helpers and Android Room ORM library
-- Content Providers: sharing data between applications and querying system contacts/media
+- **Topic 6.1**: Internal and external file storage
+- **Topic 6.2**: SharedPreferences for key-value settings storage
+- **Topic 6.3**: Local structured databases: SQLite database helpers and Android Room ORM library
+- **Topic 6.4**: Content Providers: sharing data between applications and querying system contacts/media
 
 ### Unit 7: Developing Real-Time Applications & Networking [6 Hours]
-- Background processing: Threads, Coroutines, WorkManager, and Services
-- Consuming RESTful APIs using HTTP libraries (Retrofit, OkHttp, Volley) and JSON parsing
-- Telephony and SMS APIs in Android
-- Push notifications using Firebase Cloud Messaging (FCM)
+- **Topic 7.1**: Background processing: Threads, Coroutines, WorkManager, and Services
+- **Topic 7.2**: Consuming RESTful APIs using HTTP libraries (Retrofit, OkHttp, Volley) and JSON parsing
+- **Topic 7.3**: Telephony and SMS APIs in Android
+- **Topic 7.4**: Push notifications using Firebase Cloud Messaging (FCM)
 
 ### Unit 8: Debugging, Testing & Deployment [4 Hours]
-- Android debugging with Logcat, breakpoints, and Android Profiler (CPU, Memory, Network)
-- Unit testing with JUnit and UI testing with Espresso
-- Generating signed APKs and Android App Bundles (AAB)
-- Google Play Store publishing guidelines, permissions, and app privacy compliance
+- **Topic 8.1**: Android debugging with Logcat, breakpoints, and Android Profiler (CPU, Memory, Network)
+- **Topic 8.2**: Unit testing with JUnit and UI testing with Espresso
+- **Topic 8.3**: Generating signed APKs and Android App Bundles (AAB)
+- **Topic 8.4**: Google Play Store publishing guidelines, permissions, and app privacy compliance
 
 ### Unit 9: Recent Concepts & Advanced Android APIs [3 Hours]
-- Location-based services: Google Maps API, Fused Location Provider, geofencing
-- On-device machine learning with Google ML Kit
-- App monetization models: in-app purchases, Google AdMob banner/interstitial ads, and subscriptions
+- **Topic 9.1**: Location-based services: Google Maps API, Fused Location Provider, geofencing
+- **Topic 9.2**: On-device machine learning with Google ML Kit
+- **Topic 9.3**: App monetization models: in-app purchases, Google AdMob banner/interstitial ads, and subscriptions
 
 ---
 
@@ -609,46 +609,46 @@ Incident command systems (NEOC/DEOC), early warning alert systems, multi-agency 
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to Incident Response System [5 Hours]
-- Introduction to Incident Response Systems and Incident Command System (ICS) origins
-- Incident Response System (IRS) terminology, principles, and characteristics
-- Organization of National Emergency Operation Centers (NEOC), Provincial Emergency Operation Centers (PEOC), and District Emergency Operation Centers (DEOC) in Nepal
+- **Topic 1.1**: Introduction to Incident Response Systems and Incident Command System (ICS) origins
+- **Topic 1.2**: Incident Response System (IRS) terminology, principles, and characteristics
+- **Topic 1.3**: Organization of National Emergency Operation Centers (NEOC), Provincial Emergency Operation Centers (PEOC), and District Emergency Operation Centers (DEOC) in Nepal
 
 ### Unit 2: Functioning of Incident Response System [6 Hours]
-- Chain of command and unity of command principles
-- Unified Command across multi-agency disaster operations
-- Management by objectives and operational period planning
-- Incident action planning (IAP) process and documentation
-- Span of control management and resource typing
+- **Topic 2.1**: Chain of command and unity of command principles
+- **Topic 2.2**: Unified Command across multi-agency disaster operations
+- **Topic 2.3**: Management by objectives and operational period planning
+- **Topic 2.4**: Incident action planning (IAP) process and documentation
+- **Topic 2.5**: Span of control management and resource typing
 
 ### Unit 3: Resources and Infrastructure Management [6 Hours]
-- Resource management: ordering, mobilizing, tracking, and demobilizing physical and human resources
-- Incident facility setup: Incident Command Post (ICP), Staging Areas, Bases, Camps, and Helispots
-- Interoperable communications: frequency coordination, communication plans, and public safety radio networks
+- **Topic 3.1**: Resource management: ordering, mobilizing, tracking, and demobilizing physical and human resources
+- **Topic 3.2**: Incident facility setup: Incident Command Post (ICP), Staging Areas, Bases, Camps, and Helispots
+- **Topic 3.3**: Interoperable communications: frequency coordination, communication plans, and public safety radio networks
 
 ### Unit 4: Incident Decision System and Reporting [6 Hours]
-- Incident assessment, situation awareness, and decision support tools
-- Early Warning Systems (EWS) integration and siren/broadcast network triggers
-- Multi-agency coordination systems (MACS) and Emergency Support Functions (ESFs)
-- Public information officer (PIO) role, media briefings, and rumor control during emergencies
+- **Topic 4.1**: Incident assessment, situation awareness, and decision support tools
+- **Topic 4.2**: Early Warning Systems (EWS) integration and siren/broadcast network triggers
+- **Topic 4.3**: Multi-agency coordination systems (MACS) and Emergency Support Functions (ESFs)
+- **Topic 4.4**: Public information officer (PIO) role, media briefings, and rumor control during emergencies
 
 ### Unit 5: Disaster Recovery Portals & Information Systems [6 Hours]
-- Disaster Risk Reduction (DRR) portals and emergency information repositories in Nepal (Bipad Portal, Sahana)
-- Real-time sensor data feeds: hydrological river gauges, seismological alerts, weather radar
-- Crowdsourcing and volunteer-generated data in disaster response
-- Geographic Information Systems (GIS) for real-time situational mapping
+- **Topic 5.1**: Disaster Risk Reduction (DRR) portals and emergency information repositories in Nepal (Bipad Portal, Sahana)
+- **Topic 5.2**: Real-time sensor data feeds: hydrological river gauges, seismological alerts, weather radar
+- **Topic 5.3**: Crowdsourcing and volunteer-generated data in disaster response
+- **Topic 5.4**: Geographic Information Systems (GIS) for real-time situational mapping
 
 ### Unit 6: Phases of Disaster Management [8 Hours]
-- Disaster management cycle: Mitigation, Preparedness, Response, and Recovery
-- Mitigation strategies: structural and non-structural interventions
-- Preparedness planning: standard operating procedures (SOPs), simulations, and drills
-- Emergency search, rescue, triage, and relief distribution operations
-- Post-disaster needs assessment (PDNA), build-back-better recovery, and critical infrastructure rehabilitation
+- **Topic 6.1**: Disaster management cycle: Mitigation, Preparedness, Response, and Recovery
+- **Topic 6.2**: Mitigation strategies: structural and non-structural interventions
+- **Topic 6.3**: Preparedness planning: standard operating procedures (SOPs), simulations, and drills
+- **Topic 6.4**: Emergency search, rescue, triage, and relief distribution operations
+- **Topic 6.5**: Post-disaster needs assessment (PDNA), build-back-better recovery, and critical infrastructure rehabilitation
 
 ### Unit 7: Cyber Threats and Disaster Management [8 Hours]
-- Critical information infrastructure (CII) protection during national crises
-- Cyberattacks targeting emergency services, hospitals, power grids, and telecommunication switches
-- Disaster recovery sites for emergency operation centers and communication redundancy
-- Combating fake news, misinformation, and panic on social media during disaster situations
+- **Topic 7.1**: Critical information infrastructure (CII) protection during national crises
+- **Topic 7.2**: Cyberattacks targeting emergency services, hospitals, power grids, and telecommunication switches
+- **Topic 7.3**: Disaster recovery sites for emergency operation centers and communication redundancy
+- **Topic 7.4**: Combating fake news, misinformation, and panic on social media during disaster situations
 
 ---
 
@@ -690,48 +690,48 @@ Climate change science, greenhouse warming physics, climate impacts in Nepal, in
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Overview of Climate Change Science [5 Hours]
-- Weather vs climate, climate system components (Atmosphere, Hydrosphere, Cryosphere, Lithosphere, Biosphere)
-- Historical climate variability, ice age cycles, and modern anthropogenic warming trends
-- Intergovernmental Panel on Climate Change (IPCC) assessment reports and global climate treaties (UNFCCC, Paris Agreement)
+- **Topic 1.1**: Weather vs climate, climate system components (Atmosphere, Hydrosphere, Cryosphere, Lithosphere, Biosphere)
+- **Topic 1.2**: Historical climate variability, ice age cycles, and modern anthropogenic warming trends
+- **Topic 1.3**: Intergovernmental Panel on Climate Change (IPCC) assessment reports and global climate treaties (UNFCCC, Paris Agreement)
 
 ### Unit 2: Causes of Climate Change [6 Hours]
-- Greenhouse effect physics and Earth's radiative equilibrium budget
-- Greenhouse gases: Carbon dioxide (CO2), Methane (CH4), Nitrous oxide (N2O), Fluorinated gases, and global warming potential (GWP)
-- Natural radiative forcing (volcanic aerosols, solar cycles) vs anthropogenic forcing (fossil fuel emissions, deforestation, industrial agriculture)
+- **Topic 2.1**: Greenhouse effect physics and Earth's radiative equilibrium budget
+- **Topic 2.2**: Greenhouse gases: Carbon dioxide (CO2), Methane (CH4), Nitrous oxide (N2O), Fluorinated gases, and global warming potential (GWP)
+- **Topic 2.3**: Natural radiative forcing (volcanic aerosols, solar cycles) vs anthropogenic forcing (fossil fuel emissions, deforestation, industrial agriculture)
 
 ### Unit 3: Future of Climate Change & Projections [5 Hours]
-- Global Climate Models (GCMs) and Regional Climate Models (RCMs)
-- IPCC Representative Concentration Pathways (RCPs) and Shared Socioeconomic Pathways (SSPs)
-- Global temperature rise projections, sea level rise, and ocean acidification
+- **Topic 3.1**: Global Climate Models (GCMs) and Regional Climate Models (RCMs)
+- **Topic 3.2**: IPCC Representative Concentration Pathways (RCPs) and Shared Socioeconomic Pathways (SSPs)
+- **Topic 3.3**: Global temperature rise projections, sea level rise, and ocean acidification
 
 ### Unit 4: Climate Change Impacts in Nepal [6 Hours]
-- Himalayan vulnerability: Third Pole warming amplification and snowpack retreat
-- Impacts on water resources: glacial retreat, streamflow volatility, and hydroelectricity vulnerability
-- Agricultural impacts: crop yield fluctuations, shifts in agro-ecological zones, and food security
-- Forestry and biodiversity: species migration, habitat disruption, and forest fires
-- Public health impacts: vector-borne disease expansion and heat stress
+- **Topic 4.1**: Himalayan vulnerability: Third Pole warming amplification and snowpack retreat
+- **Topic 4.2**: Impacts on water resources: glacial retreat, streamflow volatility, and hydroelectricity vulnerability
+- **Topic 4.3**: Agricultural impacts: crop yield fluctuations, shifts in agro-ecological zones, and food security
+- **Topic 4.4**: Forestry and biodiversity: species migration, habitat disruption, and forest fires
+- **Topic 4.5**: Public health impacts: vector-borne disease expansion and heat stress
 
 ### Unit 5: Climate Change Indicators & Extreme Events [5 Hours]
-- Glacial Lake Outburst Floods (GLOFs) in Nepal: risk factors, monitoring, and early warning drainage
-- Extreme weather phenomena: erratic monsoons, cloudbursts, intense flash flooding, and prolonged droughts
-- Phenological shifts in flora and fauna as climate indicators
+- **Topic 5.1**: Glacial Lake Outburst Floods (GLOFs) in Nepal: risk factors, monitoring, and early warning drainage
+- **Topic 5.2**: Extreme weather phenomena: erratic monsoons, cloudbursts, intense flash flooding, and prolonged droughts
+- **Topic 5.3**: Phenological shifts in flora and fauna as climate indicators
 
 ### Unit 6: Climate Change Adaptation and Disaster Risk Management [6 Hours]
-- Climate change mitigation vs adaptation strategies
-- Community-Based Adaptation (CBA) and Ecosystem-Based Adaptation (EbA)
-- Nepal's National Adaptation Plan (NAP) and Local Adaptation Plans for Action (LAPA)
-- Climate finance mechanisms: Green Climate Fund (GCF), clean development mechanisms, and carbon trading
+- **Topic 6.1**: Climate change mitigation vs adaptation strategies
+- **Topic 6.2**: Community-Based Adaptation (CBA) and Ecosystem-Based Adaptation (EbA)
+- **Topic 6.3**: Nepal's National Adaptation Plan (NAP) and Local Adaptation Plans for Action (LAPA)
+- **Topic 6.4**: Climate finance mechanisms: Green Climate Fund (GCF), clean development mechanisms, and carbon trading
 
 ### Unit 7: ICT for Climate Change and Green Growth [6 Hours]
-- Role of Information and Communication Technology in climate monitoring and green growth
-- Remote sensing satellite imagery and IoT weather sensor networks for environmental monitoring
-- Green IT concepts: reducing data center carbon footprint, energy-efficient algorithms, and e-waste management
-- Smart grids, precision agriculture, and ICT-enabled carbon accounting
+- **Topic 7.1**: Role of Information and Communication Technology in climate monitoring and green growth
+- **Topic 7.2**: Remote sensing satellite imagery and IoT weather sensor networks for environmental monitoring
+- **Topic 7.3**: Green IT concepts: reducing data center carbon footprint, energy-efficient algorithms, and e-waste management
+- **Topic 7.4**: Smart grids, precision agriculture, and ICT-enabled carbon accounting
 
 ### Unit 8: Climate Change Impacts and Risk Analysis (CIRA Framework) [6 Hours]
-- Climate Change Impacts and Risk Analysis (CIRA) framework methodology
-- Quantitative hazard, vulnerability, and exposure risk assessment models
-- Cost-benefit analysis of climate adaptation interventions and resilience building
+- **Topic 8.1**: Climate Change Impacts and Risk Analysis (CIRA) framework methodology
+- **Topic 8.2**: Quantitative hazard, vulnerability, and exposure risk assessment models
+- **Topic 8.3**: Cost-benefit analysis of climate adaptation interventions and resilience building
 
 ---
 
@@ -773,51 +773,51 @@ Digital governance models for disaster risk reduction — knowledge repositories
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Overview of Digital Governance in Disaster Management [5 Hours]
-- Definitions and conceptual foundations of disaster governance
-- Electronic and digital governance models applied to Disaster Risk Reduction (DRR)
-- Institutional mechanisms: role of central, provincial, and local governments in emergency governance
-- Public-private partnerships and civic society involvement in disaster resilience
+- **Topic 1.1**: Definitions and conceptual foundations of disaster governance
+- **Topic 1.2**: Electronic and digital governance models applied to Disaster Risk Reduction (DRR)
+- **Topic 1.3**: Institutional mechanisms: role of central, provincial, and local governments in emergency governance
+- **Topic 1.4**: Public-private partnerships and civic society involvement in disaster resilience
 
 ### Unit 2: Knowledge Management in Digital Governance [5 Hours]
-- Knowledge management definitions, cycles, and organizational memory in disaster contexts
-- Establishing disaster knowledge repositories and open data portals (e.g. Nepal DRR portal)
-- Information sharing protocols, taxonomies, and cross-agency data standardisation
-- Lessons-learned mechanisms and post-incident review knowledge transfer
+- **Topic 2.1**: Knowledge management definitions, cycles, and organizational memory in disaster contexts
+- **Topic 2.2**: Establishing disaster knowledge repositories and open data portals (e.g. Nepal DRR portal)
+- **Topic 2.3**: Information sharing protocols, taxonomies, and cross-agency data standardisation
+- **Topic 2.4**: Lessons-learned mechanisms and post-incident review knowledge transfer
 
 ### Unit 3: Overview of Disasters & Sendai Framework [6 Hours]
-- Disaster taxonomy: natural, technological, and complex humanitarian emergencies
-- The Sendai Framework for Disaster Risk Reduction (2015-2030): four priorities for action and global targets
-- Hyogo Framework for Action review and progress transition
-- Aligning national disaster policies with the Sendai Framework
+- **Topic 3.1**: Disaster taxonomy: natural, technological, and complex humanitarian emergencies
+- **Topic 3.2**: The Sendai Framework for Disaster Risk Reduction (2015-2030): four priorities for action and global targets
+- **Topic 3.3**: Hyogo Framework for Action review and progress transition
+- **Topic 3.4**: Aligning national disaster policies with the Sendai Framework
 
 ### Unit 4: Disaster Governance Effectiveness and SDGs [5 Hours]
-- Metrics and indicators for evaluating disaster governance effectiveness
-- Interlinkages between Disaster Risk Reduction and the Sustainable Development Goals (SDGs)
-- Governance challenges: political will, bureaucratic coordination, resource constraints, and corruption risks in relief funding
+- **Topic 4.1**: Metrics and indicators for evaluating disaster governance effectiveness
+- **Topic 4.2**: Interlinkages between Disaster Risk Reduction and the Sustainable Development Goals (SDGs)
+- **Topic 4.3**: Governance challenges: political will, bureaucratic coordination, resource constraints, and corruption risks in relief funding
 
 ### Unit 5: Governance in Disaster Mitigation [6 Hours]
-- Legal and regulatory frameworks for hazard mitigation (building codes, land-use zoning)
-- Critical infrastructure protection policies and structural resilience regulations
-- Enforcing disaster safety compliance across private and public sectors
-- Mainstreaming disaster risk reduction into national economic and development planning
+- **Topic 5.1**: Legal and regulatory frameworks for hazard mitigation (building codes, land-use zoning)
+- **Topic 5.2**: Critical infrastructure protection policies and structural resilience regulations
+- **Topic 5.3**: Enforcing disaster safety compliance across private and public sectors
+- **Topic 5.4**: Mainstreaming disaster risk reduction into national economic and development planning
 
 ### Unit 6: Governance in Disaster Preparedness [6 Hours]
-- National Strategy for Disaster Risk Management (NSDRM) of Nepal and Disaster Risk Reduction and Management (DRRM) Act 2017
-- Early warning governance: institutional command, alert dissemination, and SOP protocols
-- Evacuation planning, emergency stockpiling, and institutional readiness audits
-- Civil society, community, and volunteer mobilization governance
+- **Topic 6.1**: National Strategy for Disaster Risk Management (NSDRM) of Nepal and Disaster Risk Reduction and Management (DRRM) Act 2017
+- **Topic 6.2**: Early warning governance: institutional command, alert dissemination, and SOP protocols
+- **Topic 6.3**: Evacuation planning, emergency stockpiling, and institutional readiness audits
+- **Topic 6.4**: Civil society, community, and volunteer mobilization governance
 
 ### Unit 7: Governance in Disaster Response [6 Hours]
-- Command and control governance during emergency operations
-- Multi-agency coordination: military, police, civil administration, Red Cross, and NGOs
-- Emergency resource deployment, supply chain oversight, and customs facilitation for international humanitarian aid
-- Public emergency communications, media briefings, and citizen transparency during crises
+- **Topic 7.1**: Command and control governance during emergency operations
+- **Topic 7.2**: Multi-agency coordination: military, police, civil administration, Red Cross, and NGOs
+- **Topic 7.3**: Emergency resource deployment, supply chain oversight, and customs facilitation for international humanitarian aid
+- **Topic 7.4**: Public emergency communications, media briefings, and citizen transparency during crises
 
 ### Unit 8: Governance in Disaster Recovery and Reconstruction [6 Hours]
-- Post-Disaster Needs Assessment (PDNA) governance and reconstruction authorities (e.g. National Reconstruction Authority - NRA Nepal)
-- Build Back Better principles in physical reconstruction and livelihood restoration
-- Accountability, financial auditing, and anti-corruption safeguards in recovery grants and reconstruction funds
-- Restoring critical governmental IT infrastructure and public service continuity
+- **Topic 8.1**: Post-Disaster Needs Assessment (PDNA) governance and reconstruction authorities (e.g. National Reconstruction Authority - NRA Nepal)
+- **Topic 8.2**: Build Back Better principles in physical reconstruction and livelihood restoration
+- **Topic 8.3**: Accountability, financial auditing, and anti-corruption safeguards in recovery grants and reconstruction funds
+- **Topic 8.4**: Restoring critical governmental IT infrastructure and public service continuity
 
 ---
 
@@ -859,16 +859,16 @@ Digital governance models for disaster risk reduction — knowledge repositories
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Title Identification & Proposal Writing (10 Marks) [11 Hours]
-- Title Identification & Proposal Writing (10 Marks)
+- **Topic 1.1**: Title Identification & Proposal Writing (10 Marks)
 
 ### Unit 2: Mid-Term Architecture & DB Design Presentation (20 Marks) [11 Hours]
-- Mid-Term Architecture & DB Design Presentation (20 Marks)
+- **Topic 2.1**: Mid-Term Architecture & DB Design Presentation (20 Marks)
 
 ### Unit 3: Pre-Final Application Submission & Demo (30 Marks) [11 Hours]
-- Pre-Final Application Submission & Demo (30 Marks)
+- **Topic 3.1**: Pre-Final Application Submission & Demo (30 Marks)
 
 ### Unit 4: Final Documentation (APA Format: 20 Marks), Presentation (10) & Viva (10) [11 Hours]
-- Final Documentation (APA Format: 20 Marks), Presentation (10) & Viva (10)
+- **Topic 4.1**: Final Documentation (APA Format: 20 Marks), Presentation (10) & Viva (10)
 
 ---
 

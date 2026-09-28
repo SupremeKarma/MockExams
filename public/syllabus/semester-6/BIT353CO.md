@@ -25,22 +25,22 @@ Data warehouse architecture and OLAP, plus core data mining techniques — assoc
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to Data Mining & Data Warehousing [8 Hours]
-- Introduction to Data Mining & Data Warehousing
+- **Topic 1.1**: Introduction to Data Mining & Data Warehousing
 
 ### Unit 2: Data Warehouse & OLAP Technology, KDD [8 Hours]
-- Data Warehouse & OLAP Technology, KDD
+- **Topic 2.1**: Data Warehouse & OLAP Technology, KDD
 
 ### Unit 3: Mining Association Rules (Apriori, Market Basket Analysis) [8 Hours]
-- Mining Association Rules (Apriori, Market Basket Analysis)
+- **Topic 3.1**: Mining Association Rules (Apriori, Market Basket Analysis)
 
 ### Unit 4: Multidimensional & Multilevel Association Rules [8 Hours]
-- Multidimensional & Multilevel Association Rules
+- **Topic 4.1**: Multidimensional & Multilevel Association Rules
 
 ### Unit 5: Classification & Prediction (Decision Trees, Bayesian, k-NN) [8 Hours]
-- Classification & Prediction (Decision Trees, Bayesian, k-NN)
+- **Topic 5.1**: Classification & Prediction (Decision Trees, Bayesian, k-NN)
 
 ### Unit 6: Cluster Analysis (k-Means, k-Medoids, Hierarchical Methods) [8 Hours]
-- Cluster Analysis (k-Means, k-Medoids, Hierarchical Methods)
+- **Topic 6.1**: Cluster Analysis (k-Means, k-Medoids, Hierarchical Methods)
 
 ---
 

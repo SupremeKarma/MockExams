@@ -25,41 +25,41 @@ Big data paradigms in business intelligence — MapReduce workflow anatomy, NoSQ
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to Big Data [5 Hours]
-- Overview of Big Data and comparison with traditional database architectures
-- Background of Data Analytics and emergence of distributed systems
-- Big Data usage in distributed systems and cloud platforms
-- Development history and milestones of Big Data technologies
-- Current trends in Big Data Analytics
-- Benefits and real-world applications of Big Data (telecom, healthcare, e-commerce, banking)
+- **Topic 1.1**: Overview of Big Data and comparison with traditional database architectures
+- **Topic 1.2**: Background of Data Analytics and emergence of distributed systems
+- **Topic 1.3**: Big Data usage in distributed systems and cloud platforms
+- **Topic 1.4**: Development history and milestones of Big Data technologies
+- **Topic 1.5**: Current trends in Big Data Analytics
+- **Topic 1.6**: Benefits and real-world applications of Big Data (telecom, healthcare, e-commerce, banking)
 
 ### Unit 2: MapReduce Applications [8 Hours]
-- MapReduce fundamentals and programming model
-- MapReduce workflows, mappers, reducers, partitioners, and combiners
-- Anatomy of a MapReduce job execution run
-- Fault tolerance, node failures, and speculative execution
-- Real-world problems solved via MapReduce
-- Scalability goals, optimization techniques, and data locality exploitation
-- Parallel efficiency and performance bottlenecks of MapReduce
+- **Topic 2.1**: MapReduce fundamentals and programming model
+- **Topic 2.2**: MapReduce workflows, mappers, reducers, partitioners, and combiners
+- **Topic 2.3**: Anatomy of a MapReduce job execution run
+- **Topic 2.4**: Fault tolerance, node failures, and speculative execution
+- **Topic 2.5**: Real-world problems solved via MapReduce
+- **Topic 2.6**: Scalability goals, optimization techniques, and data locality exploitation
+- **Topic 2.7**: Parallel efficiency and performance bottlenecks of MapReduce
 
 ### Unit 3: Data Management & Taxonomy of NoSQL Implementations [12 Hours]
-- Structured, semi-structured, and unstructured data management
-- Taxonomy of NoSQL implementations: Key-Value, Document, Column-Family, and Graph stores
-- Schemaless database designs and CAP theorem implications (Consistency, Availability, Partition tolerance)
-- Basic architecture, data models, and query mechanisms of Apache HBase, Apache Cassandra, and MongoDB
-- Partitioning, sharding, replication, and composing analytical calculations over NoSQL datastores
+- **Topic 3.1**: Structured, semi-structured, and unstructured data management
+- **Topic 3.2**: Taxonomy of NoSQL implementations: Key-Value, Document, Column-Family, and Graph stores
+- **Topic 3.3**: Schemaless database designs and CAP theorem implications (Consistency, Availability, Partition tolerance)
+- **Topic 3.4**: Basic architecture, data models, and query mechanisms of Apache HBase, Apache Cassandra, and MongoDB
+- **Topic 3.5**: Partitioning, sharding, replication, and composing analytical calculations over NoSQL datastores
 
 ### Unit 4: Fundamentals of HADOOP [10 Hours]
-- Analyzing data at scale with Apache Hadoop
-- Hadoop Distributed File System (HDFS): NameNode, DataNode, Secondary NameNode, blocks, and replication topology
-- HDFS command line interface and file operations
-- Hadoop Streaming and Hadoop Pipes for multi-language execution
-- Hadoop I/O: Data integrity, compression codecs, serialization formats (Avro, Parquet, SequenceFiles)
+- **Topic 4.1**: Analyzing data at scale with Apache Hadoop
+- **Topic 4.2**: Hadoop Distributed File System (HDFS): NameNode, DataNode, Secondary NameNode, blocks, and replication topology
+- **Topic 4.3**: HDFS command line interface and file operations
+- **Topic 4.4**: Hadoop Streaming and Hadoop Pipes for multi-language execution
+- **Topic 4.5**: Hadoop I/O: Data integrity, compression codecs, serialization formats (Avro, Parquet, SequenceFiles)
 
 ### Unit 5: Hadoop Tools: HBase, Cassandra, Pig, and Hive [10 Hours]
-- Apache HBase architecture: RegionServers, ZooKeeper coordination, and column-family storage
-- Apache Cassandra peer-to-peer gossip protocol and CQL operations
-- Apache Pig: Architecture, Pig Latin execution environment, data types, and relational operations
-- Apache Hive: Hive architecture, HiveQL queries, metastore configurations, managed vs external tables, and partitioning
+- **Topic 5.1**: Apache HBase architecture: RegionServers, ZooKeeper coordination, and column-family storage
+- **Topic 5.2**: Apache Cassandra peer-to-peer gossip protocol and CQL operations
+- **Topic 5.3**: Apache Pig: Architecture, Pig Latin execution environment, data types, and relational operations
+- **Topic 5.4**: Apache Hive: Hive architecture, HiveQL queries, metastore configurations, managed vs external tables, and partitioning
 
 ---
 

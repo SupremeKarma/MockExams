@@ -25,48 +25,48 @@ Climate change science, greenhouse warming physics, climate impacts in Nepal, in
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Overview of Climate Change Science [5 Hours]
-- Weather vs climate, climate system components (Atmosphere, Hydrosphere, Cryosphere, Lithosphere, Biosphere)
-- Historical climate variability, ice age cycles, and modern anthropogenic warming trends
-- Intergovernmental Panel on Climate Change (IPCC) assessment reports and global climate treaties (UNFCCC, Paris Agreement)
+- **Topic 1.1**: Weather vs climate, climate system components (Atmosphere, Hydrosphere, Cryosphere, Lithosphere, Biosphere)
+- **Topic 1.2**: Historical climate variability, ice age cycles, and modern anthropogenic warming trends
+- **Topic 1.3**: Intergovernmental Panel on Climate Change (IPCC) assessment reports and global climate treaties (UNFCCC, Paris Agreement)
 
 ### Unit 2: Causes of Climate Change [6 Hours]
-- Greenhouse effect physics and Earth's radiative equilibrium budget
-- Greenhouse gases: Carbon dioxide (CO2), Methane (CH4), Nitrous oxide (N2O), Fluorinated gases, and global warming potential (GWP)
-- Natural radiative forcing (volcanic aerosols, solar cycles) vs anthropogenic forcing (fossil fuel emissions, deforestation, industrial agriculture)
+- **Topic 2.1**: Greenhouse effect physics and Earth's radiative equilibrium budget
+- **Topic 2.2**: Greenhouse gases: Carbon dioxide (CO2), Methane (CH4), Nitrous oxide (N2O), Fluorinated gases, and global warming potential (GWP)
+- **Topic 2.3**: Natural radiative forcing (volcanic aerosols, solar cycles) vs anthropogenic forcing (fossil fuel emissions, deforestation, industrial agriculture)
 
 ### Unit 3: Future of Climate Change & Projections [5 Hours]
-- Global Climate Models (GCMs) and Regional Climate Models (RCMs)
-- IPCC Representative Concentration Pathways (RCPs) and Shared Socioeconomic Pathways (SSPs)
-- Global temperature rise projections, sea level rise, and ocean acidification
+- **Topic 3.1**: Global Climate Models (GCMs) and Regional Climate Models (RCMs)
+- **Topic 3.2**: IPCC Representative Concentration Pathways (RCPs) and Shared Socioeconomic Pathways (SSPs)
+- **Topic 3.3**: Global temperature rise projections, sea level rise, and ocean acidification
 
 ### Unit 4: Climate Change Impacts in Nepal [6 Hours]
-- Himalayan vulnerability: Third Pole warming amplification and snowpack retreat
-- Impacts on water resources: glacial retreat, streamflow volatility, and hydroelectricity vulnerability
-- Agricultural impacts: crop yield fluctuations, shifts in agro-ecological zones, and food security
-- Forestry and biodiversity: species migration, habitat disruption, and forest fires
-- Public health impacts: vector-borne disease expansion and heat stress
+- **Topic 4.1**: Himalayan vulnerability: Third Pole warming amplification and snowpack retreat
+- **Topic 4.2**: Impacts on water resources: glacial retreat, streamflow volatility, and hydroelectricity vulnerability
+- **Topic 4.3**: Agricultural impacts: crop yield fluctuations, shifts in agro-ecological zones, and food security
+- **Topic 4.4**: Forestry and biodiversity: species migration, habitat disruption, and forest fires
+- **Topic 4.5**: Public health impacts: vector-borne disease expansion and heat stress
 
 ### Unit 5: Climate Change Indicators & Extreme Events [5 Hours]
-- Glacial Lake Outburst Floods (GLOFs) in Nepal: risk factors, monitoring, and early warning drainage
-- Extreme weather phenomena: erratic monsoons, cloudbursts, intense flash flooding, and prolonged droughts
-- Phenological shifts in flora and fauna as climate indicators
+- **Topic 5.1**: Glacial Lake Outburst Floods (GLOFs) in Nepal: risk factors, monitoring, and early warning drainage
+- **Topic 5.2**: Extreme weather phenomena: erratic monsoons, cloudbursts, intense flash flooding, and prolonged droughts
+- **Topic 5.3**: Phenological shifts in flora and fauna as climate indicators
 
 ### Unit 6: Climate Change Adaptation and Disaster Risk Management [6 Hours]
-- Climate change mitigation vs adaptation strategies
-- Community-Based Adaptation (CBA) and Ecosystem-Based Adaptation (EbA)
-- Nepal's National Adaptation Plan (NAP) and Local Adaptation Plans for Action (LAPA)
-- Climate finance mechanisms: Green Climate Fund (GCF), clean development mechanisms, and carbon trading
+- **Topic 6.1**: Climate change mitigation vs adaptation strategies
+- **Topic 6.2**: Community-Based Adaptation (CBA) and Ecosystem-Based Adaptation (EbA)
+- **Topic 6.3**: Nepal's National Adaptation Plan (NAP) and Local Adaptation Plans for Action (LAPA)
+- **Topic 6.4**: Climate finance mechanisms: Green Climate Fund (GCF), clean development mechanisms, and carbon trading
 
 ### Unit 7: ICT for Climate Change and Green Growth [6 Hours]
-- Role of Information and Communication Technology in climate monitoring and green growth
-- Remote sensing satellite imagery and IoT weather sensor networks for environmental monitoring
-- Green IT concepts: reducing data center carbon footprint, energy-efficient algorithms, and e-waste management
-- Smart grids, precision agriculture, and ICT-enabled carbon accounting
+- **Topic 7.1**: Role of Information and Communication Technology in climate monitoring and green growth
+- **Topic 7.2**: Remote sensing satellite imagery and IoT weather sensor networks for environmental monitoring
+- **Topic 7.3**: Green IT concepts: reducing data center carbon footprint, energy-efficient algorithms, and e-waste management
+- **Topic 7.4**: Smart grids, precision agriculture, and ICT-enabled carbon accounting
 
 ### Unit 8: Climate Change Impacts and Risk Analysis (CIRA Framework) [6 Hours]
-- Climate Change Impacts and Risk Analysis (CIRA) framework methodology
-- Quantitative hazard, vulnerability, and exposure risk assessment models
-- Cost-benefit analysis of climate adaptation interventions and resilience building
+- **Topic 8.1**: Climate Change Impacts and Risk Analysis (CIRA) framework methodology
+- **Topic 8.2**: Quantitative hazard, vulnerability, and exposure risk assessment models
+- **Topic 8.3**: Cost-benefit analysis of climate adaptation interventions and resilience building
 
 ---
 

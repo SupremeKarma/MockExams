@@ -25,16 +25,16 @@ Group software project (2-3 students) built using Object-Oriented Programming in
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Topic Selection & Information Gathering [11 Hours]
-- Topic Selection & Information Gathering
+- **Topic 1.1**: Topic Selection & Information Gathering
 
 ### Unit 2: System Requirements & Specifications [11 Hours]
-- System Requirements & Specifications
+- **Topic 2.1**: System Requirements & Specifications
 
 ### Unit 3: Coding & Implementation [11 Hours]
-- Coding & Implementation
+- **Topic 3.1**: Coding & Implementation
 
 ### Unit 4: Documentation & Final Presentation [11 Hours]
-- Documentation & Final Presentation
+- **Topic 4.1**: Documentation & Final Presentation
 
 ---
 

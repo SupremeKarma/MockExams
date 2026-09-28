@@ -25,22 +25,22 @@ Classical and modern ciphers, public key cryptosystems, digital signatures, hash
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Security Concepts & Attacks [8 Hours]
-- Security Concepts & Attacks
+- **Topic 1.1**: Security Concepts & Attacks
 
 ### Unit 2: Classical Encryption Techniques [8 Hours]
-- Classical Encryption Techniques
+- **Topic 2.1**: Classical Encryption Techniques
 
 ### Unit 3: Symmetric Ciphers (DES, AES) [8 Hours]
-- Symmetric Ciphers (DES, AES)
+- **Topic 3.1**: Symmetric Ciphers (DES, AES)
 
 ### Unit 4: Public Key Cryptography (RSA, ECC) [8 Hours]
-- Public Key Cryptography (RSA, ECC)
+- **Topic 4.1**: Public Key Cryptography (RSA, ECC)
 
 ### Unit 5: Hash Functions & Digital Signatures [8 Hours]
-- Hash Functions & Digital Signatures
+- **Topic 5.1**: Hash Functions & Digital Signatures
 
 ### Unit 6: Network Security Protocols (TLS, IPSec) [8 Hours]
-- Network Security Protocols (TLS, IPSec)
+- **Topic 6.1**: Network Security Protocols (TLS, IPSec)
 
 ---
 

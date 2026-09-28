@@ -25,37 +25,37 @@ C++ OOP fundamentals — classes, constructors, operator overloading, inheritanc
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to Object Oriented Programming [4 Hours]
-- Introduction to Object Oriented Programming
+- **Topic 1.1**: Introduction to Object Oriented Programming
 
 ### Unit 2: C++ Programming Concept [4 Hours]
-- C++ Programming Concept
+- **Topic 2.1**: C++ Programming Concept
 
 ### Unit 3: Functions Used in C++ [4 Hours]
-- Functions Used in C++
+- **Topic 3.1**: Functions Used in C++
 
 ### Unit 4: Classes and Objects [4 Hours]
-- Classes and Objects
+- **Topic 4.1**: Classes and Objects
 
 ### Unit 5: Constructor & Destructor [4 Hours]
-- Constructor & Destructor
+- **Topic 5.1**: Constructor & Destructor
 
 ### Unit 6: Operator Overloading [4 Hours]
-- Operator Overloading
+- **Topic 6.1**: Operator Overloading
 
 ### Unit 7: Inheritance [4 Hours]
-- Inheritance
+- **Topic 7.1**: Inheritance
 
 ### Unit 8: Virtual Functions and Polymorphism [4 Hours]
-- Virtual Functions and Polymorphism
+- **Topic 8.1**: Virtual Functions and Polymorphism
 
 ### Unit 9: File Handling [4 Hours]
-- File Handling
+- **Topic 9.1**: File Handling
 
 ### Unit 10: Templates and Namespaces [4 Hours]
-- Templates and Namespaces
+- **Topic 10.1**: Templates and Namespaces
 
 ### Unit 11: Exception Handling [4 Hours]
-- Exception Handling
+- **Topic 11.1**: Exception Handling
 
 ---
 

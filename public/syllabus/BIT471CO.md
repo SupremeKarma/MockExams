@@ -25,53 +25,53 @@ Speech and language processing, morphological parsing with FSTs, N-grams, HMM PO
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to NLP [6 Hours]
-- Definition, issues, and strategies in speech and language processing
-- Application domains and software tools for NLP
-- Linguistic organization of NLP, Natural Language Processing vs Programming Language Processing
-- Word classes, review of Regular Expressions, Context-Free Grammars (CFG), and parsing techniques
+- **Topic 1.1**: Definition, issues, and strategies in speech and language processing
+- **Topic 1.2**: Application domains and software tools for NLP
+- **Topic 1.3**: Linguistic organization of NLP, Natural Language Processing vs Programming Language Processing
+- **Topic 1.4**: Word classes, review of Regular Expressions, Context-Free Grammars (CFG), and parsing techniques
 
 ### Unit 2: Morphology and Phonology [7 Hours]
-- Inflectional and derivational morphology
-- Morphological parsing with Finite State Transducers (FSTs) and combinational rules
-- Phonology: Speech sounds, phonetic transcription (IPA), phoneme definitions and phonological rules
-- Optimality theory and machine learning of phonological rules
-- Phonological aspects of prosody and speech synthesis (TTS)
+- **Topic 2.1**: Inflectional and derivational morphology
+- **Topic 2.2**: Morphological parsing with Finite State Transducers (FSTs) and combinational rules
+- **Topic 2.3**: Phonology: Speech sounds, phonetic transcription (IPA), phoneme definitions and phonological rules
+- **Topic 2.4**: Optimality theory and machine learning of phonological rules
+- **Topic 2.5**: Phonological aspects of prosody and speech synthesis (TTS)
 
 ### Unit 3: Pronunciation, Spelling and N-grams [7 Hours]
-- Spelling error detection and correction using probabilistic noisy channel models
-- Pronunciation variation: lexical, allophonic, and dialectal variations
-- Decision tree models for pronunciation
-- Counting words in corpora and simple N-gram language models
-- Smoothing techniques: Add-One (Laplace), Witten-Bell, Good-Turing discounting
-- N-grams for spelling correction and pronunciation modeling
+- **Topic 3.1**: Spelling error detection and correction using probabilistic noisy channel models
+- **Topic 3.2**: Pronunciation variation: lexical, allophonic, and dialectal variations
+- **Topic 3.3**: Decision tree models for pronunciation
+- **Topic 3.4**: Counting words in corpora and simple N-gram language models
+- **Topic 3.5**: Smoothing techniques: Add-One (Laplace), Witten-Bell, Good-Turing discounting
+- **Topic 3.6**: N-grams for spelling correction and pronunciation modeling
 
 ### Unit 4: Syntax and Part-of-Speech Tagging [6 Hours]
-- Penn Treebank tagsets and word categories
-- Concept of Hidden Markov Model (HMM) taggers
-- Rule-based vs stochastic POS tagging
-- Viterbi algorithm for HMM decoding and tagging
-- Transformation-Based Learning (Brill) tagger
+- **Topic 4.1**: Penn Treebank tagsets and word categories
+- **Topic 4.2**: Concept of Hidden Markov Model (HMM) taggers
+- **Topic 4.3**: Rule-based vs stochastic POS tagging
+- **Topic 4.4**: Viterbi algorithm for HMM decoding and tagging
+- **Topic 4.5**: Transformation-Based Learning (Brill) tagger
 
 ### Unit 5: Sentence Level Construction & Unification Semantics [7 Hours]
-- Noun phrase structures, co-ordination, and sub-categorization
-- Concept of feature structures and unification
-- Representing Meaning: Unambiguous representation, canonical form, expressiveness, meaning structure of language
-- Basics of First-Order Predicate Calculus (FOPC) in semantic interpretation
-- Syntax-driven semantic analysis, attachment, integration, and robustness
+- **Topic 5.1**: Noun phrase structures, co-ordination, and sub-categorization
+- **Topic 5.2**: Concept of feature structures and unification
+- **Topic 5.3**: Representing Meaning: Unambiguous representation, canonical form, expressiveness, meaning structure of language
+- **Topic 5.4**: Basics of First-Order Predicate Calculus (FOPC) in semantic interpretation
+- **Topic 5.5**: Syntax-driven semantic analysis, attachment, integration, and robustness
 
 ### Unit 6: Lexical Semantics [6 Hours]
-- Lexemes and semantic relationships: homonymy, polysemy, synonymy, hyponymy
-- WordNet taxonomy and relational database structure
-- Internal structure of words, metaphors, and metonymy with computational approaches
-- Word Sense Disambiguation (WSD): Selectional restriction-based, machine learning-based, and dictionary-based (Lesk algorithm) approaches
+- **Topic 6.1**: Lexemes and semantic relationships: homonymy, polysemy, synonymy, hyponymy
+- **Topic 6.2**: WordNet taxonomy and relational database structure
+- **Topic 6.3**: Internal structure of words, metaphors, and metonymy with computational approaches
+- **Topic 6.4**: Word Sense Disambiguation (WSD): Selectional restriction-based, machine learning-based, and dictionary-based (Lesk algorithm) approaches
 
 ### Unit 7: Pragmatics and Discourse Structure [6 Hours]
-- Discourse reference resolution and referential phenomena
-- Syntactic and semantic constraints on co-reference
-- Pronoun resolution algorithms (Hobbs algorithm, centering theory)
-- Text coherence and discourse rhetorical structure
-- Dialogues: Turns and utterances, grounding, dialogue acts and conversational structures
-- Natural Language Generation (NLG): introduction to language generation architecture and discourse planning
+- **Topic 7.1**: Discourse reference resolution and referential phenomena
+- **Topic 7.2**: Syntactic and semantic constraints on co-reference
+- **Topic 7.3**: Pronoun resolution algorithms (Hobbs algorithm, centering theory)
+- **Topic 7.4**: Text coherence and discourse rhetorical structure
+- **Topic 7.5**: Dialogues: Turns and utterances, grounding, dialogue acts and conversational structures
+- **Topic 7.6**: Natural Language Generation (NLG): introduction to language generation architecture and discourse planning
 
 ---
 

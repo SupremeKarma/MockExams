@@ -25,35 +25,35 @@ Theoretical concepts and practical implementations of supervised regression/clas
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to Machine Learning [5 Hours]
-- Components of learning, Learning Models: Geometric, Probabilistic, Logical models
-- Introduction to machine learning frameworks: Supervised, Unsupervised, Reinforcement Learning
+- **Topic 1.1**: Components of learning, Learning Models: Geometric, Probabilistic, Logical models
+- **Topic 1.2**: Introduction to machine learning frameworks: Supervised, Unsupervised, Reinforcement Learning
 
 ### Unit 2: Supervised Learning [12 Hours]
-- Linear regression, Polynomial regression
-- Logistic regression, Support Vector Machines (SVM)
-- k-NN (k-Nearest Neighbors)
-- Decision tree: Representation, ID3, C4.5, Inductive bias
+- **Topic 2.1**: Linear regression, Polynomial regression
+- **Topic 2.2**: Logistic regression, Support Vector Machines (SVM)
+- **Topic 2.3**: k-NN (k-Nearest Neighbors)
+- **Topic 2.4**: Decision tree: Representation, ID3, C4.5, Inductive bias
 
 ### Unit 3: Unsupervised Learning [4 Hours]
-- Clustering fundamentals and similarity metrics
-- k-means clustering algorithm and variants
-- k-modes algorithm for categorical data
+- **Topic 3.1**: Clustering fundamentals and similarity metrics
+- **Topic 3.2**: k-means clustering algorithm and variants
+- **Topic 3.3**: k-modes algorithm for categorical data
 
 ### Unit 4: Model Diagnosis and Tuning [7 Hours]
-- Evaluating a hypothesis: Bias-variance tradeoff
-- Model selection: k-fold Cross-validation
-- Ensemble methods: Random forests and bagging
+- **Topic 4.1**: Evaluating a hypothesis: Bias-variance tradeoff
+- **Topic 4.2**: Model selection: k-fold Cross-validation
+- **Topic 4.3**: Ensemble methods: Random forests and bagging
 
 ### Unit 5: Text Mining [6 Hours]
-- Text preprocessing: Tokenization, Stopwords removal, Stemming, Lemmatization
-- Feature representation: Bag of Words, TF-IDF
-- Text exploration and classification
+- **Topic 5.1**: Text preprocessing: Tokenization, Stopwords removal, Stemming, Lemmatization
+- **Topic 5.2**: Feature representation: Bag of Words, TF-IDF
+- **Topic 5.3**: Text exploration and classification
 
 ### Unit 6: Deep Learning [11 Hours]
-- Feedforward neural networks, Perceptron and Multilayer Perceptron
-- Cost functions, Gradient descent and Backpropagation training
-- Convolutional Neural Networks (CNNs)
-- Recurrent Neural Networks (RNNs)
+- **Topic 6.1**: Feedforward neural networks, Perceptron and Multilayer Perceptron
+- **Topic 6.2**: Cost functions, Gradient descent and Backpropagation training
+- **Topic 6.3**: Convolutional Neural Networks (CNNs)
+- **Topic 6.4**: Recurrent Neural Networks (RNNs)
 
 ---
 

@@ -48,22 +48,22 @@ Scientific inquiry, quantitative and qualitative research designs, hypothesis fo
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Foundations of Scientific Research [8 Hours]
-- Foundations of Scientific Research
+- **Topic 1.1**: Foundations of Scientific Research
 
 ### Unit 2: Literature Review & Research Gap [8 Hours]
-- Literature Review & Research Gap
+- **Topic 2.1**: Literature Review & Research Gap
 
 ### Unit 3: Research Design & Sampling Strategies [8 Hours]
-- Research Design & Sampling Strategies
+- **Topic 3.1**: Research Design & Sampling Strategies
 
 ### Unit 4: Hypothesis Formulation & Testing [8 Hours]
-- Hypothesis Formulation & Testing
+- **Topic 4.1**: Hypothesis Formulation & Testing
 
 ### Unit 5: Data Analysis & Interpretation [8 Hours]
-- Data Analysis & Interpretation
+- **Topic 5.1**: Data Analysis & Interpretation
 
 ### Unit 6: Report Writing & Publication Ethics [8 Hours]
-- Report Writing & Publication Ethics
+- **Topic 6.1**: Report Writing & Publication Ethics
 
 ---
 
@@ -103,22 +103,22 @@ Rasterization algorithms, 2D/3D transformations, clipping, illumination, and sha
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Display Devices & Raster Graphics [8 Hours]
-- Display Devices & Raster Graphics
+- **Topic 1.1**: Display Devices & Raster Graphics
 
 ### Unit 2: Line & Circle Drawing Algorithms [8 Hours]
-- Line & Circle Drawing Algorithms
+- **Topic 2.1**: Line & Circle Drawing Algorithms
 
 ### Unit 3: 2D Transformations & Clipping [8 Hours]
-- 2D Transformations & Clipping
+- **Topic 3.1**: 2D Transformations & Clipping
 
 ### Unit 4: 3D Transformations & Projections [8 Hours]
-- 3D Transformations & Projections
+- **Topic 4.1**: 3D Transformations & Projections
 
 ### Unit 5: Visible Surface Detection (Z-Buffer) [8 Hours]
-- Visible Surface Detection (Z-Buffer)
+- **Topic 5.1**: Visible Surface Detection (Z-Buffer)
 
 ### Unit 6: Illumination & Shading Models [8 Hours]
-- Illumination & Shading Models
+- **Topic 6.1**: Illumination & Shading Models
 
 ---
 
@@ -168,22 +168,22 @@ Classical and modern ciphers, public key cryptosystems, digital signatures, hash
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Security Concepts & Attacks [8 Hours]
-- Security Concepts & Attacks
+- **Topic 1.1**: Security Concepts & Attacks
 
 ### Unit 2: Classical Encryption Techniques [8 Hours]
-- Classical Encryption Techniques
+- **Topic 2.1**: Classical Encryption Techniques
 
 ### Unit 3: Symmetric Ciphers (DES, AES) [8 Hours]
-- Symmetric Ciphers (DES, AES)
+- **Topic 3.1**: Symmetric Ciphers (DES, AES)
 
 ### Unit 4: Public Key Cryptography (RSA, ECC) [8 Hours]
-- Public Key Cryptography (RSA, ECC)
+- **Topic 4.1**: Public Key Cryptography (RSA, ECC)
 
 ### Unit 5: Hash Functions & Digital Signatures [8 Hours]
-- Hash Functions & Digital Signatures
+- **Topic 5.1**: Hash Functions & Digital Signatures
 
 ### Unit 6: Network Security Protocols (TLS, IPSec) [8 Hours]
-- Network Security Protocols (TLS, IPSec)
+- **Topic 6.1**: Network Security Protocols (TLS, IPSec)
 
 ---
 

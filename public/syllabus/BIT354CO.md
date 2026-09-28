@@ -25,22 +25,22 @@ Simulation concepts and system types, the Monte Carlo method, random number gene
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Concepts of Simulation (Types, Advantages, Limitations) [8 Hours]
-- Concepts of Simulation (Types, Advantages, Limitations)
+- **Topic 1.1**: Concepts of Simulation (Types, Advantages, Limitations)
 
 ### Unit 2: Monte Carlo Method [8 Hours]
-- Monte Carlo Method
+- **Topic 2.1**: Monte Carlo Method
 
 ### Unit 3: Simulation of Continuous Systems (Queuing, Markov Chains) [8 Hours]
-- Simulation of Continuous Systems (Queuing, Markov Chains)
+- **Topic 3.1**: Simulation of Continuous Systems (Queuing, Markov Chains)
 
 ### Unit 4: Random Numbers: Generation & Testing (Chi-Square, Poker Test) [8 Hours]
-- Random Numbers: Generation & Testing (Chi-Square, Poker Test)
+- **Topic 4.1**: Random Numbers: Generation & Testing (Chi-Square, Poker Test)
 
 ### Unit 5: Analysis of Simulation Output & Replication of Runs [8 Hours]
-- Analysis of Simulation Output & Replication of Runs
+- **Topic 5.1**: Analysis of Simulation Output & Replication of Runs
 
 ### Unit 6: Simulation Languages & Discrete/Continuous Modeling [8 Hours]
-- Simulation Languages & Discrete/Continuous Modeling
+- **Topic 6.1**: Simulation Languages & Discrete/Continuous Modeling
 
 ---
 

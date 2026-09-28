@@ -25,22 +25,22 @@ Multiple integrals, differential equations, Fourier series, and functions of a c
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Multiple Integrals [8 Hours]
-- Multiple Integrals
+- **Topic 1.1**: Multiple Integrals
 
 ### Unit 2: Differential Equations of the First Order [8 Hours]
-- Differential Equations of the First Order
+- **Topic 2.1**: Differential Equations of the First Order
 
 ### Unit 3: Linear Differential Equations [8 Hours]
-- Linear Differential Equations
+- **Topic 3.1**: Linear Differential Equations
 
 ### Unit 4: Fourier Series and Integrals [8 Hours]
-- Fourier Series and Integrals
+- **Topic 4.1**: Fourier Series and Integrals
 
 ### Unit 5: Functions of a Complex Variable [8 Hours]
-- Functions of a Complex Variable
+- **Topic 5.1**: Functions of a Complex Variable
 
 ### Unit 6: Complex Series, Residues and Poles [8 Hours]
-- Complex Series, Residues and Poles
+- **Topic 6.1**: Complex Series, Residues and Poles
 
 ---
 

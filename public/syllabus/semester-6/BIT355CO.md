@@ -25,28 +25,28 @@ The software engineering lifecycle — process models, project management, requi
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to Software Engineering [6 Hours]
-- Introduction to Software Engineering
+- **Topic 1.1**: Introduction to Software Engineering
 
 ### Unit 2: Process Models (Waterfall, Prototyping, RAD, Spiral, Agile) [6 Hours]
-- Process Models (Waterfall, Prototyping, RAD, Spiral, Agile)
+- **Topic 2.1**: Process Models (Waterfall, Prototyping, RAD, Spiral, Agile)
 
 ### Unit 3: Software Project Management (4Ps, COCOMO, Risk, Scheduling) [6 Hours]
-- Software Project Management (4Ps, COCOMO, Risk, Scheduling)
+- **Topic 3.1**: Software Project Management (4Ps, COCOMO, Risk, Scheduling)
 
 ### Unit 4: Software Requirements & Specification [6 Hours]
-- Software Requirements & Specification
+- **Topic 4.1**: Software Requirements & Specification
 
 ### Unit 5: Software Design (Principles, Architecture Types) [6 Hours]
-- Software Design (Principles, Architecture Types)
+- **Topic 5.1**: Software Design (Principles, Architecture Types)
 
 ### Unit 6: Software Testing (Black-Box, White-Box, V&V) [6 Hours]
-- Software Testing (Black-Box, White-Box, V&V)
+- **Topic 6.1**: Software Testing (Black-Box, White-Box, V&V)
 
 ### Unit 7: Metrics for Process & Product Quality (ISO 9000) [6 Hours]
-- Metrics for Process & Product Quality (ISO 9000)
+- **Topic 7.1**: Metrics for Process & Product Quality (ISO 9000)
 
 ### Unit 8: SE Trends: Agile, XP, Cloud Computing, SOA [6 Hours]
-- SE Trends: Agile, XP, Cloud Computing, SOA
+- **Topic 8.1**: SE Trends: Agile, XP, Cloud Computing, SOA
 
 ---
 

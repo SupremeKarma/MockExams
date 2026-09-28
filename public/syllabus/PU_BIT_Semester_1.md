@@ -48,31 +48,31 @@ Computer components and history, hardware and storage, software and databases, n
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to Computer [5 Hours]
-- Introduction to Computer
+- **Topic 1.1**: Introduction to Computer
 
 ### Unit 2: Basic Computer Organization and Computer Peripherals [5 Hours]
-- Basic Computer Organization and Computer Peripherals
+- **Topic 2.1**: Basic Computer Organization and Computer Peripherals
 
 ### Unit 3: Computer Storage [5 Hours]
-- Computer Storage
+- **Topic 3.1**: Computer Storage
 
 ### Unit 4: Computer Software [5 Hours]
-- Computer Software
+- **Topic 4.1**: Computer Software
 
 ### Unit 5: Introduction to Database [5 Hours]
-- Introduction to Database
+- **Topic 5.1**: Introduction to Database
 
 ### Unit 6: Networks and Internet [5 Hours]
-- Networks and Internet
+- **Topic 6.1**: Networks and Internet
 
 ### Unit 7: Information Security [5 Hours]
-- Information Security
+- **Topic 7.1**: Information Security
 
 ### Unit 8: Computer Hardware [5 Hours]
-- Computer Hardware
+- **Topic 8.1**: Computer Hardware
 
 ### Unit 9: Technological trends in Information Technology [5 Hours]
-- Technological trends in Information Technology
+- **Topic 9.1**: Technological trends in Information Technology
 
 ---
 
@@ -122,25 +122,25 @@ Matrix algebra, coordinate systems and geometry, vectors and solid geometry, and
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Matrix Algebra [6 Hours]
-- Matrix Algebra
+- **Topic 1.1**: Matrix Algebra
 
 ### Unit 2: Coordinate Systems [6 Hours]
-- Coordinate Systems
+- **Topic 2.1**: Coordinate Systems
 
 ### Unit 3: Elementary Coordinate Geometry [6 Hours]
-- Elementary Coordinate Geometry
+- **Topic 3.1**: Elementary Coordinate Geometry
 
 ### Unit 4: Vectors and Solid Geometry [6 Hours]
-- Vectors and Solid Geometry
+- **Topic 4.1**: Vectors and Solid Geometry
 
 ### Unit 5: Applications of Differentiation [6 Hours]
-- Applications of Differentiation
+- **Topic 5.1**: Applications of Differentiation
 
 ### Unit 6: Applications of the Definite Integral [6 Hours]
-- Applications of the Definite Integral
+- **Topic 6.1**: Applications of the Definite Integral
 
 ### Unit 7: Functions of Several Variables [6 Hours]
-- Functions of Several Variables
+- **Topic 7.1**: Functions of Several Variables
 
 ---
 
@@ -180,13 +180,13 @@ Oral presentation skills, intensive and extensive reading, and professional busi
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Oral Communication [15 Hours]
-- Oral Communication
+- **Topic 1.1**: Oral Communication
 
 ### Unit 2: Reading: Intensive and Extensive [15 Hours]
-- Reading: Intensive and Extensive
+- **Topic 2.1**: Reading: Intensive and Extensive
 
 ### Unit 3: Writing [15 Hours]
-- Writing
+- **Topic 3.1**: Writing
 
 ---
 
@@ -226,28 +226,28 @@ Sociology fundamentals, social and cultural change, Nepali society, professional
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction [6 Hours]
-- Introduction
+- **Topic 1.1**: Introduction
 
 ### Unit 2: Social and Cultural Change [6 Hours]
-- Social and Cultural Change
+- **Topic 2.1**: Social and Cultural Change
 
 ### Unit 3: Understanding Development [6 Hours]
-- Understanding Development
+- **Topic 3.1**: Understanding Development
 
 ### Unit 4: Process of Transformation [6 Hours]
-- Process of Transformation
+- **Topic 4.1**: Process of Transformation
 
 ### Unit 5: Historical Characteristics of Nepali Society and Culture [6 Hours]
-- Historical Characteristics of Nepali Society and Culture
+- **Topic 5.1**: Historical Characteristics of Nepali Society and Culture
 
 ### Unit 6: Ethical issues in IT [6 Hours]
-- Ethical issues in IT
+- **Topic 6.1**: Ethical issues in IT
 
 ### Unit 7: Introduction to Emotional Intelligence [6 Hours]
-- Introduction to Emotional Intelligence
+- **Topic 7.1**: Introduction to Emotional Intelligence
 
 ### Unit 8: Social Management and Responsibility [6 Hours]
-- Social Management and Responsibility
+- **Topic 8.1**: Social Management and Responsibility
 
 ---
 
@@ -287,37 +287,37 @@ Procedural programming fundamentals in C — control flow, arrays, functions, po
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Problem Solving with Computer [4 Hours]
-- Problem Solving with Computer
+- **Topic 1.1**: Problem Solving with Computer
 
 ### Unit 2: Elements of C [4 Hours]
-- Elements of C
+- **Topic 2.1**: Elements of C
 
 ### Unit 3: Input and Output [4 Hours]
-- Input and Output
+- **Topic 3.1**: Input and Output
 
 ### Unit 4: Operators and Expression [4 Hours]
-- Operators and Expression
+- **Topic 4.1**: Operators and Expression
 
 ### Unit 5: Control Statements [4 Hours]
-- Control Statements
+- **Topic 5.1**: Control Statements
 
 ### Unit 6: Arrays [4 Hours]
-- Arrays
+- **Topic 6.1**: Arrays
 
 ### Unit 7: Functions [4 Hours]
-- Functions
+- **Topic 7.1**: Functions
 
 ### Unit 8: Pointers [4 Hours]
-- Pointers
+- **Topic 8.1**: Pointers
 
 ### Unit 9: Structure and Union [4 Hours]
-- Structure and Union
+- **Topic 9.1**: Structure and Union
 
 ### Unit 10: Files and File Handling in C [4 Hours]
-- Files and File Handling in C
+- **Topic 10.1**: Files and File Handling in C
 
 ### Unit 11: Introduction to Graphics [4 Hours]
-- Introduction to Graphics
+- **Topic 11.1**: Introduction to Graphics
 
 ---
 
@@ -367,16 +367,16 @@ Group software project (2-3 students) built in C, covering requirement gathering
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Information Gathering & Requirements [11 Hours]
-- Information Gathering & Requirements
+- **Topic 1.1**: Information Gathering & Requirements
 
 ### Unit 2: Algorithms & Flowcharts [11 Hours]
-- Algorithms & Flowcharts
+- **Topic 2.1**: Algorithms & Flowcharts
 
 ### Unit 3: Coding & Implementation [11 Hours]
-- Coding & Implementation
+- **Topic 3.1**: Coding & Implementation
 
 ### Unit 4: Documentation & Final Presentation [11 Hours]
-- Documentation & Final Presentation
+- **Topic 4.1**: Documentation & Final Presentation
 
 ---
 

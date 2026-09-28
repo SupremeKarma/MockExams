@@ -25,19 +25,19 @@
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to Microcontroller & 8051 Architecture [9 Hours]
-- Introduction to Microcontroller & 8051 Architecture
+- **Topic 1.1**: Introduction to Microcontroller & 8051 Architecture
 
 ### Unit 2: Instruction Set & Addressing Modes [9 Hours]
-- Instruction Set & Addressing Modes
+- **Topic 2.1**: Instruction Set & Addressing Modes
 
 ### Unit 3: Stack, I/O Port Interfacing & Programming [9 Hours]
-- Stack, I/O Port Interfacing & Programming
+- **Topic 3.1**: Stack, I/O Port Interfacing & Programming
 
 ### Unit 4: Timers and Serial Port [9 Hours]
-- Timers and Serial Port
+- **Topic 4.1**: Timers and Serial Port
 
 ### Unit 5: Interrupts and Interfacing Applications [9 Hours]
-- Interrupts and Interfacing Applications
+- **Topic 5.1**: Interrupts and Interfacing Applications
 
 ---
 

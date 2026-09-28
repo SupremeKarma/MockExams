@@ -25,46 +25,46 @@ Foundations of business intelligence, data warehousing, visual analytics with Ta
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Overview of Business Intelligence & Decision Support [6 Hours]
-- Decision support systems (DSS) concept and evolution
-- Business intelligence definitions, frameworks, and architecture
-- OLTP vs OLAP transaction vs analytical processing models
-- Business analytics overview: descriptive, predictive, prescriptive
+- **Topic 1.1**: Decision support systems (DSS) concept and evolution
+- **Topic 1.2**: Business intelligence definitions, frameworks, and architecture
+- **Topic 1.3**: OLTP vs OLAP transaction vs analytical processing models
+- **Topic 1.4**: Business analytics overview: descriptive, predictive, prescriptive
 
 ### Unit 2: Data Warehousing and ETL Processes [6 Hours]
-- Data warehousing definitions, characteristics, and architectures
-- Multidimensional data modeling: Star, Snowflake, and Fact Constellation schemas
-- Data extraction, transformation, and loading (ETL) pipeline architecture
-- Real-time data warehousing and operational data stores (ODS)
+- **Topic 2.1**: Data warehousing definitions, characteristics, and architectures
+- **Topic 2.2**: Multidimensional data modeling: Star, Snowflake, and Fact Constellation schemas
+- **Topic 2.3**: Data extraction, transformation, and loading (ETL) pipeline architecture
+- **Topic 2.4**: Real-time data warehousing and operational data stores (ODS)
 
 ### Unit 3: Business Reporting & Visual Analytics [6 Hours]
-- Business reporting definitions, metrics, and report types
-- Information visualization and visual analytics principles
-- Performance dashboards, scorecards, and Balanced Scorecard methodology
-- Visual analytics tools: Tableau, Microsoft Power BI, and interactive dashboards
+- **Topic 3.1**: Business reporting definitions, metrics, and report types
+- **Topic 3.2**: Information visualization and visual analytics principles
+- **Topic 3.3**: Performance dashboards, scorecards, and Balanced Scorecard methodology
+- **Topic 3.4**: Visual analytics tools: Tableau, Microsoft Power BI, and interactive dashboards
 
 ### Unit 4: Data Mining Concepts & Applications [9 Hours]
-- Data mining definitions, process models (CRISP-DM), and taxonomy
-- Association rule mining: Apriori algorithm and FP-Growth
-- Classification and clustering methods in data mining
-- Data mining software and open source toolkits: WEKA, RapidMiner
+- **Topic 4.1**: Data mining definitions, process models (CRISP-DM), and taxonomy
+- **Topic 4.2**: Association rule mining: Apriori algorithm and FP-Growth
+- **Topic 4.3**: Classification and clustering methods in data mining
+- **Topic 4.4**: Data mining software and open source toolkits: WEKA, RapidMiner
 
 ### Unit 5: Text and Web Analytics [6 Hours]
-- Text analytics and Natural Language Processing for business insights
-- Sentiment analysis and opinion mining architectures
-- Web mining taxonomy: Web content mining, Web structure mining, and Web usage mining
-- Social media analytics and network metrics
+- **Topic 5.1**: Text analytics and Natural Language Processing for business insights
+- **Topic 5.2**: Sentiment analysis and opinion mining architectures
+- **Topic 5.3**: Web mining taxonomy: Web content mining, Web structure mining, and Web usage mining
+- **Topic 5.4**: Social media analytics and network metrics
 
 ### Unit 6: Big Data Analytics & Stream Processing [5 Hours]
-- Big Data definition, V-characteristics (Volume, Velocity, Variety, Veracity, Value)
-- Hadoop ecosystem and MapReduce processing framework
-- NoSQL database architectures for analytical workloads
-- Real-time stream analytics and in-memory computing architectures
+- **Topic 6.1**: Big Data definition, V-characteristics (Volume, Velocity, Variety, Veracity, Value)
+- **Topic 6.2**: Hadoop ecosystem and MapReduce processing framework
+- **Topic 6.3**: NoSQL database architectures for analytical workloads
+- **Topic 6.4**: Real-time stream analytics and in-memory computing architectures
 
 ### Unit 7: Business Analytics Emerging Trends and Ethics [7 Hours]
-- Location-based analytics and geospatial business intelligence
-- Automated decision making and recommendation systems
-- Data governance, privacy laws (GDPR), and ethical considerations in analytics
-- Cloud-based BI and analytics service models
+- **Topic 7.1**: Location-based analytics and geospatial business intelligence
+- **Topic 7.2**: Automated decision making and recommendation systems
+- **Topic 7.3**: Data governance, privacy laws (GDPR), and ethical considerations in analytics
+- **Topic 7.4**: Cloud-based BI and analytics service models
 
 ---
 

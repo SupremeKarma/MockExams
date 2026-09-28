@@ -48,22 +48,22 @@ Numerical solutions to nonlinear equations, interpolation, linear systems, diffe
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Errors in Numerical Computation [8 Hours]
-- Errors in Numerical Computation
+- **Topic 1.1**: Errors in Numerical Computation
 
 ### Unit 2: Solution of Nonlinear Equations (Bisection, Newton-Raphson) [8 Hours]
-- Solution of Nonlinear Equations (Bisection, Newton-Raphson)
+- **Topic 2.1**: Solution of Nonlinear Equations (Bisection, Newton-Raphson)
 
 ### Unit 3: Interpolation & Least Square Methods [8 Hours]
-- Interpolation & Least Square Methods
+- **Topic 3.1**: Interpolation & Least Square Methods
 
 ### Unit 4: System of Linear Equations (Direct & Indirect Methods) [8 Hours]
-- System of Linear Equations (Direct & Indirect Methods)
+- **Topic 4.1**: System of Linear Equations (Direct & Indirect Methods)
 
 ### Unit 5: Numerical Differentiation & Integration [8 Hours]
-- Numerical Differentiation & Integration
+- **Topic 5.1**: Numerical Differentiation & Integration
 
 ### Unit 6: Numerical Solution of ODEs (Euler, Runge-Kutta) [8 Hours]
-- Numerical Solution of ODEs (Euler, Runge-Kutta)
+- **Topic 6.1**: Numerical Solution of ODEs (Euler, Runge-Kutta)
 
 ---
 
@@ -103,19 +103,19 @@ Numerical solutions to nonlinear equations, interpolation, linear systems, diffe
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to Microcontroller & 8051 Architecture [9 Hours]
-- Introduction to Microcontroller & 8051 Architecture
+- **Topic 1.1**: Introduction to Microcontroller & 8051 Architecture
 
 ### Unit 2: Instruction Set & Addressing Modes [9 Hours]
-- Instruction Set & Addressing Modes
+- **Topic 2.1**: Instruction Set & Addressing Modes
 
 ### Unit 3: Stack, I/O Port Interfacing & Programming [9 Hours]
-- Stack, I/O Port Interfacing & Programming
+- **Topic 3.1**: Stack, I/O Port Interfacing & Programming
 
 ### Unit 4: Timers and Serial Port [9 Hours]
-- Timers and Serial Port
+- **Topic 4.1**: Timers and Serial Port
 
 ### Unit 5: Interrupts and Interfacing Applications [9 Hours]
-- Interrupts and Interfacing Applications
+- **Topic 5.1**: Interrupts and Interfacing Applications
 
 ---
 
@@ -165,25 +165,25 @@ Core data structures — stacks, queues, lists, trees, graphs — plus sorting, 
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction & Algorithm Efficiency [6 Hours]
-- Introduction & Algorithm Efficiency
+- **Topic 1.1**: Introduction & Algorithm Efficiency
 
 ### Unit 2: Stack & Queue [6 Hours]
-- Stack & Queue
+- **Topic 2.1**: Stack & Queue
 
 ### Unit 3: List and Linked List [6 Hours]
-- List and Linked List
+- **Topic 3.1**: List and Linked List
 
 ### Unit 4: Recursion [6 Hours]
-- Recursion
+- **Topic 4.1**: Recursion
 
 ### Unit 5: Trees (BST, AVL, Huffman) [6 Hours]
-- Trees (BST, AVL, Huffman)
+- **Topic 5.1**: Trees (BST, AVL, Huffman)
 
 ### Unit 6: Sorting (Quick, Merge, Heap) [6 Hours]
-- Sorting (Quick, Merge, Heap)
+- **Topic 6.1**: Sorting (Quick, Merge, Heap)
 
 ### Unit 7: Searching, Hashing & Graphs (DFS, BFS, Dijkstra) [6 Hours]
-- Searching, Hashing & Graphs (DFS, BFS, Dijkstra)
+- **Topic 7.1**: Searching, Hashing & Graphs (DFS, BFS, Dijkstra)
 
 ---
 
@@ -233,25 +233,25 @@ Networking fundamentals, the OSI/TCP-IP layered model, data link/network/transpo
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to Networking & Data Communication [6 Hours]
-- Introduction to Networking & Data Communication
+- **Topic 1.1**: Introduction to Networking & Data Communication
 
 ### Unit 2: Layered Network Architecture (OSI, TCP/IP) [6 Hours]
-- Layered Network Architecture (OSI, TCP/IP)
+- **Topic 2.1**: Layered Network Architecture (OSI, TCP/IP)
 
 ### Unit 3: Data Transmission & Physical Layer [6 Hours]
-- Data Transmission & Physical Layer
+- **Topic 3.1**: Data Transmission & Physical Layer
 
 ### Unit 4: Data Link Control (Error Detection, HDLC) [6 Hours]
-- Data Link Control (Error Detection, HDLC)
+- **Topic 4.1**: Data Link Control (Error Detection, HDLC)
 
 ### Unit 5: Network Layer (IP Addressing, Subnetting, Routing) [6 Hours]
-- Network Layer (IP Addressing, Subnetting, Routing)
+- **Topic 5.1**: Network Layer (IP Addressing, Subnetting, Routing)
 
 ### Unit 6: Transport & Application Layer [6 Hours]
-- Transport & Application Layer
+- **Topic 6.1**: Transport & Application Layer
 
 ### Unit 7: Network Security (Cryptography, SSL/TLS, Firewall) [6 Hours]
-- Network Security (Cryptography, SSL/TLS, Firewall)
+- **Topic 7.1**: Network Security (Cryptography, SSL/TLS, Firewall)
 
 ---
 
@@ -301,22 +301,22 @@ SDLC models, process/conceptual modeling with DFDs and ERDs, systems analysis an
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Overview of Systems Analysis & Design (SDLC Models) [8 Hours]
-- Overview of Systems Analysis & Design (SDLC Models)
+- **Topic 1.1**: Overview of Systems Analysis & Design (SDLC Models)
 
 ### Unit 2: Process & Conceptual Modeling (DFD, ERD) [8 Hours]
-- Process & Conceptual Modeling (DFD, ERD)
+- **Topic 2.1**: Process & Conceptual Modeling (DFD, ERD)
 
 ### Unit 3: Logic Modeling (Decision Table/Tree) [8 Hours]
-- Logic Modeling (Decision Table/Tree)
+- **Topic 3.1**: Logic Modeling (Decision Table/Tree)
 
 ### Unit 4: Systems Analysis (Requirements, Feasibility) [8 Hours]
-- Systems Analysis (Requirements, Feasibility)
+- **Topic 4.1**: Systems Analysis (Requirements, Feasibility)
 
 ### Unit 5: Systems Design & Implementation [8 Hours]
-- Systems Design & Implementation
+- **Topic 5.1**: Systems Design & Implementation
 
 ### Unit 6: Object-Oriented Analysis & Design (UML) [8 Hours]
-- Object-Oriented Analysis & Design (UML)
+- **Topic 6.1**: Object-Oriented Analysis & Design (UML)
 
 ---
 
@@ -366,13 +366,13 @@ Group project (2-3 students) developing a microcontroller (BIT202CO)-based syste
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Title Identification & Proposal Writing [15 Hours]
-- Title Identification & Proposal Writing
+- **Topic 1.1**: Title Identification & Proposal Writing
 
 ### Unit 2: Mid-Term Presentation [15 Hours]
-- Mid-Term Presentation
+- **Topic 2.1**: Mid-Term Presentation
 
 ### Unit 3: Pre-Final Submission & Final Presentation [15 Hours]
-- Pre-Final Submission & Final Presentation
+- **Topic 3.1**: Pre-Final Submission & Final Presentation
 
 ---
 

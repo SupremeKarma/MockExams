@@ -25,25 +25,25 @@ Networking fundamentals, the OSI/TCP-IP layered model, data link/network/transpo
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to Networking & Data Communication [6 Hours]
-- Introduction to Networking & Data Communication
+- **Topic 1.1**: Introduction to Networking & Data Communication
 
 ### Unit 2: Layered Network Architecture (OSI, TCP/IP) [6 Hours]
-- Layered Network Architecture (OSI, TCP/IP)
+- **Topic 2.1**: Layered Network Architecture (OSI, TCP/IP)
 
 ### Unit 3: Data Transmission & Physical Layer [6 Hours]
-- Data Transmission & Physical Layer
+- **Topic 3.1**: Data Transmission & Physical Layer
 
 ### Unit 4: Data Link Control (Error Detection, HDLC) [6 Hours]
-- Data Link Control (Error Detection, HDLC)
+- **Topic 4.1**: Data Link Control (Error Detection, HDLC)
 
 ### Unit 5: Network Layer (IP Addressing, Subnetting, Routing) [6 Hours]
-- Network Layer (IP Addressing, Subnetting, Routing)
+- **Topic 5.1**: Network Layer (IP Addressing, Subnetting, Routing)
 
 ### Unit 6: Transport & Application Layer [6 Hours]
-- Transport & Application Layer
+- **Topic 6.1**: Transport & Application Layer
 
 ### Unit 7: Network Security (Cryptography, SSL/TLS, Firewall) [6 Hours]
-- Network Security (Cryptography, SSL/TLS, Firewall)
+- **Topic 7.1**: Network Security (Cryptography, SSL/TLS, Firewall)
 
 ---
 

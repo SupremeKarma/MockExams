@@ -25,22 +25,22 @@ Number systems, Boolean algebra, combinational and sequential circuit design, re
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Number Systems [8 Hours]
-- Number Systems
+- **Topic 1.1**: Number Systems
 
 ### Unit 2: Boolean Algebra and Logic Gates [8 Hours]
-- Boolean Algebra and Logic Gates
+- **Topic 2.1**: Boolean Algebra and Logic Gates
 
 ### Unit 3: Simplification of Boolean Functions [8 Hours]
-- Simplification of Boolean Functions
+- **Topic 3.1**: Simplification of Boolean Functions
 
 ### Unit 4: Combinational Logic [8 Hours]
-- Combinational Logic
+- **Topic 4.1**: Combinational Logic
 
 ### Unit 5: Sequential Logic [8 Hours]
-- Sequential Logic
+- **Topic 5.1**: Sequential Logic
 
 ### Unit 6: Registers and Counters [8 Hours]
-- Registers and Counters
+- **Topic 6.1**: Registers and Counters
 
 ---
 

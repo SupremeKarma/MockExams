@@ -25,31 +25,31 @@ DBMS architecture, relational model, SQL, normalization, database security, and 
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction [5 Hours]
-- Introduction
+- **Topic 1.1**: Introduction
 
 ### Unit 2: Database System Concepts and Architecture (E-R model) [5 Hours]
-- Database System Concepts and Architecture (E-R model)
+- **Topic 2.1**: Database System Concepts and Architecture (E-R model)
 
 ### Unit 3: Relational Model [5 Hours]
-- Relational Model
+- **Topic 3.1**: Relational Model
 
 ### Unit 4: SQL (incl. PL/SQL) [5 Hours]
-- SQL (incl. PL/SQL)
+- **Topic 4.1**: SQL (incl. PL/SQL)
 
 ### Unit 5: Integrity Constraints [5 Hours]
-- Integrity Constraints
+- **Topic 5.1**: Integrity Constraints
 
 ### Unit 6: Normalization (1NF-5NF, BCNF) [5 Hours]
-- Normalization (1NF-5NF, BCNF)
+- **Topic 6.1**: Normalization (1NF-5NF, BCNF)
 
 ### Unit 7: Database Security [5 Hours]
-- Database Security
+- **Topic 7.1**: Database Security
 
 ### Unit 8: Transaction and Query Processing (ACID, concurrency, WAL) [5 Hours]
-- Transaction and Query Processing (ACID, concurrency, WAL)
+- **Topic 8.1**: Transaction and Query Processing (ACID, concurrency, WAL)
 
 ### Unit 9: Backup and Recovery [5 Hours]
-- Backup and Recovery
+- **Topic 9.1**: Backup and Recovery
 
 ---
 

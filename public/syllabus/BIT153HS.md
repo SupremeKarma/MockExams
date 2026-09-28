@@ -25,25 +25,25 @@ Set theory, counting, logic, relations, graphs and trees, order relations, and a
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Set Theory and Matrices [6 Hours]
-- Set Theory and Matrices
+- **Topic 1.1**: Set Theory and Matrices
 
 ### Unit 2: Function and Counting [6 Hours]
-- Function and Counting
+- **Topic 2.1**: Function and Counting
 
 ### Unit 3: Logic [6 Hours]
-- Logic
+- **Topic 3.1**: Logic
 
 ### Unit 4: Relation and Digraphs [6 Hours]
-- Relation and Digraphs
+- **Topic 4.1**: Relation and Digraphs
 
 ### Unit 5: Graph and Tree [6 Hours]
-- Graph and Tree
+- **Topic 5.1**: Graph and Tree
 
 ### Unit 6: Order Relation and Structure [6 Hours]
-- Order Relation and Structure
+- **Topic 6.1**: Order Relation and Structure
 
 ### Unit 7: Automata, Language and Grammar [6 Hours]
-- Automata, Language and Grammar
+- **Topic 7.1**: Automata, Language and Grammar
 
 ---
 

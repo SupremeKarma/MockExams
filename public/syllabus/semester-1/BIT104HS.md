@@ -25,28 +25,28 @@ Sociology fundamentals, social and cultural change, Nepali society, professional
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction [6 Hours]
-- Introduction
+- **Topic 1.1**: Introduction
 
 ### Unit 2: Social and Cultural Change [6 Hours]
-- Social and Cultural Change
+- **Topic 2.1**: Social and Cultural Change
 
 ### Unit 3: Understanding Development [6 Hours]
-- Understanding Development
+- **Topic 3.1**: Understanding Development
 
 ### Unit 4: Process of Transformation [6 Hours]
-- Process of Transformation
+- **Topic 4.1**: Process of Transformation
 
 ### Unit 5: Historical Characteristics of Nepali Society and Culture [6 Hours]
-- Historical Characteristics of Nepali Society and Culture
+- **Topic 5.1**: Historical Characteristics of Nepali Society and Culture
 
 ### Unit 6: Ethical issues in IT [6 Hours]
-- Ethical issues in IT
+- **Topic 6.1**: Ethical issues in IT
 
 ### Unit 7: Introduction to Emotional Intelligence [6 Hours]
-- Introduction to Emotional Intelligence
+- **Topic 7.1**: Introduction to Emotional Intelligence
 
 ### Unit 8: Social Management and Responsibility [6 Hours]
-- Social Management and Responsibility
+- **Topic 8.1**: Social Management and Responsibility
 
 ---
 

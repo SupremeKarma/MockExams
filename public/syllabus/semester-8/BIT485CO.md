@@ -25,46 +25,46 @@ Incident command systems (NEOC/DEOC), early warning alert systems, multi-agency 
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to Incident Response System [5 Hours]
-- Introduction to Incident Response Systems and Incident Command System (ICS) origins
-- Incident Response System (IRS) terminology, principles, and characteristics
-- Organization of National Emergency Operation Centers (NEOC), Provincial Emergency Operation Centers (PEOC), and District Emergency Operation Centers (DEOC) in Nepal
+- **Topic 1.1**: Introduction to Incident Response Systems and Incident Command System (ICS) origins
+- **Topic 1.2**: Incident Response System (IRS) terminology, principles, and characteristics
+- **Topic 1.3**: Organization of National Emergency Operation Centers (NEOC), Provincial Emergency Operation Centers (PEOC), and District Emergency Operation Centers (DEOC) in Nepal
 
 ### Unit 2: Functioning of Incident Response System [6 Hours]
-- Chain of command and unity of command principles
-- Unified Command across multi-agency disaster operations
-- Management by objectives and operational period planning
-- Incident action planning (IAP) process and documentation
-- Span of control management and resource typing
+- **Topic 2.1**: Chain of command and unity of command principles
+- **Topic 2.2**: Unified Command across multi-agency disaster operations
+- **Topic 2.3**: Management by objectives and operational period planning
+- **Topic 2.4**: Incident action planning (IAP) process and documentation
+- **Topic 2.5**: Span of control management and resource typing
 
 ### Unit 3: Resources and Infrastructure Management [6 Hours]
-- Resource management: ordering, mobilizing, tracking, and demobilizing physical and human resources
-- Incident facility setup: Incident Command Post (ICP), Staging Areas, Bases, Camps, and Helispots
-- Interoperable communications: frequency coordination, communication plans, and public safety radio networks
+- **Topic 3.1**: Resource management: ordering, mobilizing, tracking, and demobilizing physical and human resources
+- **Topic 3.2**: Incident facility setup: Incident Command Post (ICP), Staging Areas, Bases, Camps, and Helispots
+- **Topic 3.3**: Interoperable communications: frequency coordination, communication plans, and public safety radio networks
 
 ### Unit 4: Incident Decision System and Reporting [6 Hours]
-- Incident assessment, situation awareness, and decision support tools
-- Early Warning Systems (EWS) integration and siren/broadcast network triggers
-- Multi-agency coordination systems (MACS) and Emergency Support Functions (ESFs)
-- Public information officer (PIO) role, media briefings, and rumor control during emergencies
+- **Topic 4.1**: Incident assessment, situation awareness, and decision support tools
+- **Topic 4.2**: Early Warning Systems (EWS) integration and siren/broadcast network triggers
+- **Topic 4.3**: Multi-agency coordination systems (MACS) and Emergency Support Functions (ESFs)
+- **Topic 4.4**: Public information officer (PIO) role, media briefings, and rumor control during emergencies
 
 ### Unit 5: Disaster Recovery Portals & Information Systems [6 Hours]
-- Disaster Risk Reduction (DRR) portals and emergency information repositories in Nepal (Bipad Portal, Sahana)
-- Real-time sensor data feeds: hydrological river gauges, seismological alerts, weather radar
-- Crowdsourcing and volunteer-generated data in disaster response
-- Geographic Information Systems (GIS) for real-time situational mapping
+- **Topic 5.1**: Disaster Risk Reduction (DRR) portals and emergency information repositories in Nepal (Bipad Portal, Sahana)
+- **Topic 5.2**: Real-time sensor data feeds: hydrological river gauges, seismological alerts, weather radar
+- **Topic 5.3**: Crowdsourcing and volunteer-generated data in disaster response
+- **Topic 5.4**: Geographic Information Systems (GIS) for real-time situational mapping
 
 ### Unit 6: Phases of Disaster Management [8 Hours]
-- Disaster management cycle: Mitigation, Preparedness, Response, and Recovery
-- Mitigation strategies: structural and non-structural interventions
-- Preparedness planning: standard operating procedures (SOPs), simulations, and drills
-- Emergency search, rescue, triage, and relief distribution operations
-- Post-disaster needs assessment (PDNA), build-back-better recovery, and critical infrastructure rehabilitation
+- **Topic 6.1**: Disaster management cycle: Mitigation, Preparedness, Response, and Recovery
+- **Topic 6.2**: Mitigation strategies: structural and non-structural interventions
+- **Topic 6.3**: Preparedness planning: standard operating procedures (SOPs), simulations, and drills
+- **Topic 6.4**: Emergency search, rescue, triage, and relief distribution operations
+- **Topic 6.5**: Post-disaster needs assessment (PDNA), build-back-better recovery, and critical infrastructure rehabilitation
 
 ### Unit 7: Cyber Threats and Disaster Management [8 Hours]
-- Critical information infrastructure (CII) protection during national crises
-- Cyberattacks targeting emergency services, hospitals, power grids, and telecommunication switches
-- Disaster recovery sites for emergency operation centers and communication redundancy
-- Combating fake news, misinformation, and panic on social media during disaster situations
+- **Topic 7.1**: Critical information infrastructure (CII) protection during national crises
+- **Topic 7.2**: Cyberattacks targeting emergency services, hospitals, power grids, and telecommunication switches
+- **Topic 7.3**: Disaster recovery sites for emergency operation centers and communication redundancy
+- **Topic 7.4**: Combating fake news, misinformation, and panic on social media during disaster situations
 
 ---
 

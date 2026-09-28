@@ -25,13 +25,13 @@ Group project (2-3 students) developing a microcontroller (BIT202CO)-based syste
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Title Identification & Proposal Writing [15 Hours]
-- Title Identification & Proposal Writing
+- **Topic 1.1**: Title Identification & Proposal Writing
 
 ### Unit 2: Mid-Term Presentation [15 Hours]
-- Mid-Term Presentation
+- **Topic 2.1**: Mid-Term Presentation
 
 ### Unit 3: Pre-Final Submission & Final Presentation [15 Hours]
-- Pre-Final Submission & Final Presentation
+- **Topic 3.1**: Pre-Final Submission & Final Presentation
 
 ---
 

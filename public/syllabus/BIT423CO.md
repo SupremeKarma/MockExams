@@ -25,46 +25,46 @@ Neural network architectures — multilayer perceptrons, deep CNNs, RNNs, LSTMs,
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Basics of Artificial Neural Networks [4 Hours]
-- Biological neuron inspiration and artificial neuron models
-- Perceptron model and perceptron learning algorithm
-- Linear separability and the XOR problem
-- Activation functions: Sigmoid, Tanh, ReLU, Leaky ReLU, Softmax
+- **Topic 1.1**: Biological neuron inspiration and artificial neuron models
+- **Topic 1.2**: Perceptron model and perceptron learning algorithm
+- **Topic 1.3**: Linear separability and the XOR problem
+- **Topic 1.4**: Activation functions: Sigmoid, Tanh, ReLU, Leaky ReLU, Softmax
 
 ### Unit 2: Feedforward Neural Networks and Backpropagation [5 Hours]
-- Multi-layer perceptron (MLP) architecture
-- Forward propagation matrix formulations
-- Loss functions: Mean Squared Error, Cross-Entropy loss
-- Backpropagation algorithm, chain rule derivations, and gradient descent optimization
+- **Topic 2.1**: Multi-layer perceptron (MLP) architecture
+- **Topic 2.2**: Forward propagation matrix formulations
+- **Topic 2.3**: Loss functions: Mean Squared Error, Cross-Entropy loss
+- **Topic 2.4**: Backpropagation algorithm, chain rule derivations, and gradient descent optimization
 
 ### Unit 3: Deep Neural Networks and Optimization [8 Hours]
-- Vanishing and exploding gradient problems
-- Optimization algorithms: Momentum, RMSProp, Adam, AdaGrad
-- Regularization techniques: L1/L2 weight decay, Dropout, Early Stopping
-- Batch Normalization, Layer Normalization, and hyperparameter tuning
+- **Topic 3.1**: Vanishing and exploding gradient problems
+- **Topic 3.2**: Optimization algorithms: Momentum, RMSProp, Adam, AdaGrad
+- **Topic 3.3**: Regularization techniques: L1/L2 weight decay, Dropout, Early Stopping
+- **Topic 3.4**: Batch Normalization, Layer Normalization, and hyperparameter tuning
 
 ### Unit 4: Convolutional Neural Networks (CNNs) [8 Hours]
-- Convolution operation, kernels, stride, padding, and feature maps
-- Pooling layers: Max pooling, Average pooling
-- CNN architectures: LeNet-5, AlexNet, VGGNet, ResNet, Inception
-- Transfer learning and fine-tuning pretrained CNNs for image classification
+- **Topic 4.1**: Convolution operation, kernels, stride, padding, and feature maps
+- **Topic 4.2**: Pooling layers: Max pooling, Average pooling
+- **Topic 4.3**: CNN architectures: LeNet-5, AlexNet, VGGNet, ResNet, Inception
+- **Topic 4.4**: Transfer learning and fine-tuning pretrained CNNs for image classification
 
 ### Unit 5: Recurrent Neural Networks (RNNs) [7 Hours]
-- Sequential data modeling and recurrent neuron architecture
-- Backpropagation Through Time (BPTT)
-- Long Short-Term Memory (LSTM) cell architecture and gates
-- Gated Recurrent Unit (GRU) architecture
-- Bidirectional RNNs and sequence-to-sequence architectures
+- **Topic 5.1**: Sequential data modeling and recurrent neuron architecture
+- **Topic 5.2**: Backpropagation Through Time (BPTT)
+- **Topic 5.3**: Long Short-Term Memory (LSTM) cell architecture and gates
+- **Topic 5.4**: Gated Recurrent Unit (GRU) architecture
+- **Topic 5.5**: Bidirectional RNNs and sequence-to-sequence architectures
 
 ### Unit 6: Generative Models [7 Hours]
-- Energy-based models and Restricted Boltzmann Machines (RBM)
-- Deep Belief Networks (DBN) training and contrastive divergence
-- Autoencoders and Variational Autoencoders (VAE)
-- Generative Adversarial Networks (GAN) generator and discriminator dynamics
+- **Topic 6.1**: Energy-based models and Restricted Boltzmann Machines (RBM)
+- **Topic 6.2**: Deep Belief Networks (DBN) training and contrastive divergence
+- **Topic 6.3**: Autoencoders and Variational Autoencoders (VAE)
+- **Topic 6.4**: Generative Adversarial Networks (GAN) generator and discriminator dynamics
 
 ### Unit 7: Applications in Vision, Speech and NLP [6 Hours]
-- Object detection and image segmentation (YOLO, Mask R-CNN concepts)
-- Acoustic modeling and speech recognition overview
-- Word embeddings (Word2Vec, GloVe) and Transformer attention mechanisms in NLP
+- **Topic 7.1**: Object detection and image segmentation (YOLO, Mask R-CNN concepts)
+- **Topic 7.2**: Acoustic modeling and speech recognition overview
+- **Topic 7.3**: Word embeddings (Word2Vec, GloVe) and Transformer attention mechanisms in NLP
 
 ---
 

@@ -25,54 +25,54 @@ Mobile application development on Android — UI layouts, activity lifecycles, i
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to Mobile Devices & Architectures [5 Hours]
-- History of mobile devices and mobile computing evolution
-- Modern mobile operating systems: Android, iOS architecture comparison
-- Hardware architecture of smartphones: SoC, ARM processors, power constraints, sensors, and wireless radios
+- **Topic 1.1**: History of mobile devices and mobile computing evolution
+- **Topic 1.2**: Modern mobile operating systems: Android, iOS architecture comparison
+- **Topic 1.3**: Hardware architecture of smartphones: SoC, ARM processors, power constraints, sensors, and wireless radios
 
 ### Unit 2: Mobile Platforms & Wireless Communication Constraints [4 Hours]
-- Wireless network standards: Wi-Fi, Bluetooth BLE, Cellular (3G/4G/5G)
-- Mobile communication constraints: intermittent connectivity, latency, battery consumption, and bandwidth throttling
-- Offline-first mobile application design principles and data synchronization strategies
+- **Topic 2.1**: Wireless network standards: Wi-Fi, Bluetooth BLE, Cellular (3G/4G/5G)
+- **Topic 2.2**: Mobile communication constraints: intermittent connectivity, latency, battery consumption, and bandwidth throttling
+- **Topic 2.3**: Offline-first mobile application design principles and data synchronization strategies
 
 ### Unit 3: Introduction to Android Platform [5 Hours]
-- Android OS architecture: Linux Kernel, Hardware Abstraction Layer (HAL), Android Runtime (ART/Dalvik), Native C/C++ libraries, and Application Framework
-- Android development tooling: Android Studio, Gradle build system, Android SDK, and ADB
-- Android Project Anatomy: AndroidManifest.xml, java/kotlin sources, res directory, and Gradle scripts
+- **Topic 3.1**: Android OS architecture: Linux Kernel, Hardware Abstraction Layer (HAL), Android Runtime (ART/Dalvik), Native C/C++ libraries, and Application Framework
+- **Topic 3.2**: Android development tooling: Android Studio, Gradle build system, Android SDK, and ADB
+- **Topic 3.3**: Android Project Anatomy: AndroidManifest.xml, java/kotlin sources, res directory, and Gradle scripts
 
 ### Unit 4: Android Application Design Essentials [6 Hours]
-- UI layout components: LinearLayout, RelativeLayout, ConstraintLayout, and FrameLayout
-- Core UI widgets: TextView, EditText, Button, ImageView, CheckBox, RadioButton, and Spinner
-- Lists and dynamic collections: RecyclerView, LayoutManagers, ViewHolders, and Custom Adapters
-- Material Design components, themes, styles, and responsive layout guidelines
+- **Topic 4.1**: UI layout components: LinearLayout, RelativeLayout, ConstraintLayout, and FrameLayout
+- **Topic 4.2**: Core UI widgets: TextView, EditText, Button, ImageView, CheckBox, RadioButton, and Spinner
+- **Topic 4.3**: Lists and dynamic collections: RecyclerView, LayoutManagers, ViewHolders, and Custom Adapters
+- **Topic 4.4**: Material Design components, themes, styles, and responsive layout guidelines
 
 ### Unit 5: Writing Basic Applications & Core Components [6 Hours]
-- Android core components: Activity, Service, BroadcastReceiver, ContentProvider
-- Activity lifecycle: onCreate(), onStart(), onResume(), onPause(), onStop(), onDestroy()
-- Intents and Intent Filters: Explicit vs Implicit Intents, passing bundle data, starting activities for results
-- Fragments: lifecycle, fragment manager, and tablet/phone adaptive layouts
+- **Topic 5.1**: Android core components: Activity, Service, BroadcastReceiver, ContentProvider
+- **Topic 5.2**: Activity lifecycle: onCreate(), onStart(), onResume(), onPause(), onStop(), onDestroy()
+- **Topic 5.3**: Intents and Intent Filters: Explicit vs Implicit Intents, passing bundle data, starting activities for results
+- **Topic 5.4**: Fragments: lifecycle, fragment manager, and tablet/phone adaptive layouts
 
 ### Unit 6: Data Handling in Android [6 Hours]
-- Internal and external file storage
-- SharedPreferences for key-value settings storage
-- Local structured databases: SQLite database helpers and Android Room ORM library
-- Content Providers: sharing data between applications and querying system contacts/media
+- **Topic 6.1**: Internal and external file storage
+- **Topic 6.2**: SharedPreferences for key-value settings storage
+- **Topic 6.3**: Local structured databases: SQLite database helpers and Android Room ORM library
+- **Topic 6.4**: Content Providers: sharing data between applications and querying system contacts/media
 
 ### Unit 7: Developing Real-Time Applications & Networking [6 Hours]
-- Background processing: Threads, Coroutines, WorkManager, and Services
-- Consuming RESTful APIs using HTTP libraries (Retrofit, OkHttp, Volley) and JSON parsing
-- Telephony and SMS APIs in Android
-- Push notifications using Firebase Cloud Messaging (FCM)
+- **Topic 7.1**: Background processing: Threads, Coroutines, WorkManager, and Services
+- **Topic 7.2**: Consuming RESTful APIs using HTTP libraries (Retrofit, OkHttp, Volley) and JSON parsing
+- **Topic 7.3**: Telephony and SMS APIs in Android
+- **Topic 7.4**: Push notifications using Firebase Cloud Messaging (FCM)
 
 ### Unit 8: Debugging, Testing & Deployment [4 Hours]
-- Android debugging with Logcat, breakpoints, and Android Profiler (CPU, Memory, Network)
-- Unit testing with JUnit and UI testing with Espresso
-- Generating signed APKs and Android App Bundles (AAB)
-- Google Play Store publishing guidelines, permissions, and app privacy compliance
+- **Topic 8.1**: Android debugging with Logcat, breakpoints, and Android Profiler (CPU, Memory, Network)
+- **Topic 8.2**: Unit testing with JUnit and UI testing with Espresso
+- **Topic 8.3**: Generating signed APKs and Android App Bundles (AAB)
+- **Topic 8.4**: Google Play Store publishing guidelines, permissions, and app privacy compliance
 
 ### Unit 9: Recent Concepts & Advanced Android APIs [3 Hours]
-- Location-based services: Google Maps API, Fused Location Provider, geofencing
-- On-device machine learning with Google ML Kit
-- App monetization models: in-app purchases, Google AdMob banner/interstitial ads, and subscriptions
+- **Topic 9.1**: Location-based services: Google Maps API, Fused Location Provider, geofencing
+- **Topic 9.2**: On-device machine learning with Google ML Kit
+- **Topic 9.3**: App monetization models: in-app purchases, Google AdMob banner/interstitial ads, and subscriptions
 
 ---
 

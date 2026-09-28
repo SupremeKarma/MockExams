@@ -25,13 +25,13 @@ Oral presentation skills, intensive and extensive reading, and professional busi
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Oral Communication [15 Hours]
-- Oral Communication
+- **Topic 1.1**: Oral Communication
 
 ### Unit 2: Reading: Intensive and Extensive [15 Hours]
-- Reading: Intensive and Extensive
+- **Topic 2.1**: Reading: Intensive and Extensive
 
 ### Unit 3: Writing [15 Hours]
-- Writing
+- **Topic 3.1**: Writing
 
 ---
 

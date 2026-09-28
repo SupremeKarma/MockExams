@@ -25,47 +25,47 @@ Electromagnetic radiation spectrum, sensor platforms and satellite orbits, Lands
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Concept and Scope of Remote Sensing [8 Hours]
-- Definitions, process, and characteristics of Remote Sensing systems
-- Types and components of Remote Sensing
-- Advantages and limitations of satellite remote sensing
+- **Topic 1.1**: Definitions, process, and characteristics of Remote Sensing systems
+- **Topic 1.2**: Types and components of Remote Sensing
+- **Topic 1.3**: Advantages and limitations of satellite remote sensing
 
 ### Unit 2: Concept of Electromagnetic Radiation (EMR) [8 Hours]
-- Wavelength-frequency-energy relationship of EMR
-- EMR spectrum and its properties across visible, infrared, and microwave bands
-- EMR wavelength regions and their specific applications
-- Atmospheric windows and atmospheric scattering (Rayleigh, Mie, Non-selective)
-- Interactions of EMR with matter, energy interaction in the atmosphere, energy interactions with Earth surface features
-- Spectral signatures of vegetation, soil, and water
+- **Topic 2.1**: Wavelength-frequency-energy relationship of EMR
+- **Topic 2.2**: EMR spectrum and its properties across visible, infrared, and microwave bands
+- **Topic 2.3**: EMR wavelength regions and their specific applications
+- **Topic 2.4**: Atmospheric windows and atmospheric scattering (Rayleigh, Mie, Non-selective)
+- **Topic 2.5**: Interactions of EMR with matter, energy interaction in the atmosphere, energy interactions with Earth surface features
+- **Topic 2.6**: Spectral signatures of vegetation, soil, and water
 
 ### Unit 3: Types and Characteristics of Sensor [10 Hours]
-- Sensor materials and detector arrays
-- Sensor systems: Framing and Scanning systems (Whiskbroom scanner, Push-broom scanner, Side-looking scanner)
-- Imaging and non-imaging sensors; Active and passive sensors
-- Resolutions of sensors: Spectral, Spatial, Radiometric, and Temporal resolution
-- Scale, mapping unit, multi-band concepts, and False Color Composites (FCC)
+- **Topic 3.1**: Sensor materials and detector arrays
+- **Topic 3.2**: Sensor systems: Framing and Scanning systems (Whiskbroom scanner, Push-broom scanner, Side-looking scanner)
+- **Topic 3.3**: Imaging and non-imaging sensors; Active and passive sensors
+- **Topic 3.4**: Resolutions of sensors: Spectral, Spatial, Radiometric, and Temporal resolution
+- **Topic 3.5**: Scale, mapping unit, multi-band concepts, and False Color Composites (FCC)
 
 ### Unit 4: Remote Sensor Platforms and Satellite Orbits [8 Hours]
-- Ground, Airborne, and Space-borne platforms
-- Orbital characteristics: Coverage, Passes, Pointing accuracy
-- Geostationary orbits, Sun-synchronous orbits, Shuttle orbits, Semisynchronous orbits (Molniya orbit), and Quasi-zenith satellite orbits
+- **Topic 4.1**: Ground, Airborne, and Space-borne platforms
+- **Topic 4.2**: Orbital characteristics: Coverage, Passes, Pointing accuracy
+- **Topic 4.3**: Geostationary orbits, Sun-synchronous orbits, Shuttle orbits, Semisynchronous orbits (Molniya orbit), and Quasi-zenith satellite orbits
 
 ### Unit 5: Space Imaging Satellites [7 Hours]
-- Early history of space imaging systems
-- Multispectral and Hyperspectral sensors; RADAR and LiDAR systems
-- Specifications of popular Earth resource satellites: IRS, LANDSAT, and SPOT series
-- High resolution satellites: IKONOS, Cartosat, QuickBird, OrbView, WorldView
-- Recent Earth observation satellite constellations (Sentinel, PlanetScope)
+- **Topic 5.1**: Early history of space imaging systems
+- **Topic 5.2**: Multispectral and Hyperspectral sensors; RADAR and LiDAR systems
+- **Topic 5.3**: Specifications of popular Earth resource satellites: IRS, LANDSAT, and SPOT series
+- **Topic 5.4**: High resolution satellites: IKONOS, Cartosat, QuickBird, OrbView, WorldView
+- **Topic 5.5**: Recent Earth observation satellite constellations (Sentinel, PlanetScope)
 
 ### Unit 6: Integration of GIS and Remote Sensing [2 Hours]
-- Mechanisms of integrating satellite imagery with GIS layers
-- Data interchange formats and coordinate alignment
-- Updating GIS databases using remote sensing imagery
+- **Topic 6.1**: Mechanisms of integrating satellite imagery with GIS layers
+- **Topic 6.2**: Data interchange formats and coordinate alignment
+- **Topic 6.3**: Updating GIS databases using remote sensing imagery
 
 ### Unit 7: Applications of Remote Sensing [2 Hours]
-- Agricultural monitoring and crop yield estimation
-- Forestry and land use / land cover (LULC) change detection
-- Water resources, flood mapping, and glacial lake monitoring
-- Urban planning and disaster impact assessment in Nepal
+- **Topic 7.1**: Agricultural monitoring and crop yield estimation
+- **Topic 7.2**: Forestry and land use / land cover (LULC) change detection
+- **Topic 7.3**: Water resources, flood mapping, and glacial lake monitoring
+- **Topic 7.4**: Urban planning and disaster impact assessment in Nepal
 
 ---
 

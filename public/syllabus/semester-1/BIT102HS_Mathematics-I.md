@@ -25,25 +25,25 @@ Matrix algebra, coordinate systems and geometry, vectors and solid geometry, and
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Matrix Algebra [6 Hours]
-- Matrix Algebra
+- **Topic 1.1**: Matrix Algebra
 
 ### Unit 2: Coordinate Systems [6 Hours]
-- Coordinate Systems
+- **Topic 2.1**: Coordinate Systems
 
 ### Unit 3: Elementary Coordinate Geometry [6 Hours]
-- Elementary Coordinate Geometry
+- **Topic 3.1**: Elementary Coordinate Geometry
 
 ### Unit 4: Vectors and Solid Geometry [6 Hours]
-- Vectors and Solid Geometry
+- **Topic 4.1**: Vectors and Solid Geometry
 
 ### Unit 5: Applications of Differentiation [6 Hours]
-- Applications of Differentiation
+- **Topic 5.1**: Applications of Differentiation
 
 ### Unit 6: Applications of the Definite Integral [6 Hours]
-- Applications of the Definite Integral
+- **Topic 6.1**: Applications of the Definite Integral
 
 ### Unit 7: Functions of Several Variables [6 Hours]
-- Functions of Several Variables
+- **Topic 7.1**: Functions of Several Variables
 
 ---
 

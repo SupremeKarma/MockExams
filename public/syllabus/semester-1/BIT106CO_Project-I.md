@@ -25,16 +25,16 @@ Group software project (2-3 students) built in C, covering requirement gathering
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Information Gathering & Requirements [11 Hours]
-- Information Gathering & Requirements
+- **Topic 1.1**: Information Gathering & Requirements
 
 ### Unit 2: Algorithms & Flowcharts [11 Hours]
-- Algorithms & Flowcharts
+- **Topic 2.1**: Algorithms & Flowcharts
 
 ### Unit 3: Coding & Implementation [11 Hours]
-- Coding & Implementation
+- **Topic 3.1**: Coding & Implementation
 
 ### Unit 4: Documentation & Final Presentation [11 Hours]
-- Documentation & Final Presentation
+- **Topic 4.1**: Documentation & Final Presentation
 
 ---
 

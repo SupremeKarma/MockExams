@@ -48,22 +48,22 @@ Multiple integrals, differential equations, Fourier series, and functions of a c
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Multiple Integrals [8 Hours]
-- Multiple Integrals
+- **Topic 1.1**: Multiple Integrals
 
 ### Unit 2: Differential Equations of the First Order [8 Hours]
-- Differential Equations of the First Order
+- **Topic 2.1**: Differential Equations of the First Order
 
 ### Unit 3: Linear Differential Equations [8 Hours]
-- Linear Differential Equations
+- **Topic 3.1**: Linear Differential Equations
 
 ### Unit 4: Fourier Series and Integrals [8 Hours]
-- Fourier Series and Integrals
+- **Topic 4.1**: Fourier Series and Integrals
 
 ### Unit 5: Functions of a Complex Variable [8 Hours]
-- Functions of a Complex Variable
+- **Topic 5.1**: Functions of a Complex Variable
 
 ### Unit 6: Complex Series, Residues and Poles [8 Hours]
-- Complex Series, Residues and Poles
+- **Topic 6.1**: Complex Series, Residues and Poles
 
 ---
 
@@ -103,22 +103,22 @@ Number systems, Boolean algebra, combinational and sequential circuit design, re
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Number Systems [8 Hours]
-- Number Systems
+- **Topic 1.1**: Number Systems
 
 ### Unit 2: Boolean Algebra and Logic Gates [8 Hours]
-- Boolean Algebra and Logic Gates
+- **Topic 2.1**: Boolean Algebra and Logic Gates
 
 ### Unit 3: Simplification of Boolean Functions [8 Hours]
-- Simplification of Boolean Functions
+- **Topic 3.1**: Simplification of Boolean Functions
 
 ### Unit 4: Combinational Logic [8 Hours]
-- Combinational Logic
+- **Topic 4.1**: Combinational Logic
 
 ### Unit 5: Sequential Logic [8 Hours]
-- Sequential Logic
+- **Topic 5.1**: Sequential Logic
 
 ### Unit 6: Registers and Counters [8 Hours]
-- Registers and Counters
+- **Topic 6.1**: Registers and Counters
 
 ---
 
@@ -168,25 +168,25 @@ Set theory, counting, logic, relations, graphs and trees, order relations, and a
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Set Theory and Matrices [6 Hours]
-- Set Theory and Matrices
+- **Topic 1.1**: Set Theory and Matrices
 
 ### Unit 2: Function and Counting [6 Hours]
-- Function and Counting
+- **Topic 2.1**: Function and Counting
 
 ### Unit 3: Logic [6 Hours]
-- Logic
+- **Topic 3.1**: Logic
 
 ### Unit 4: Relation and Digraphs [6 Hours]
-- Relation and Digraphs
+- **Topic 4.1**: Relation and Digraphs
 
 ### Unit 5: Graph and Tree [6 Hours]
-- Graph and Tree
+- **Topic 5.1**: Graph and Tree
 
 ### Unit 6: Order Relation and Structure [6 Hours]
-- Order Relation and Structure
+- **Topic 6.1**: Order Relation and Structure
 
 ### Unit 7: Automata, Language and Grammar [6 Hours]
-- Automata, Language and Grammar
+- **Topic 7.1**: Automata, Language and Grammar
 
 ---
 
@@ -226,37 +226,37 @@ C++ OOP fundamentals — classes, constructors, operator overloading, inheritanc
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to Object Oriented Programming [4 Hours]
-- Introduction to Object Oriented Programming
+- **Topic 1.1**: Introduction to Object Oriented Programming
 
 ### Unit 2: C++ Programming Concept [4 Hours]
-- C++ Programming Concept
+- **Topic 2.1**: C++ Programming Concept
 
 ### Unit 3: Functions Used in C++ [4 Hours]
-- Functions Used in C++
+- **Topic 3.1**: Functions Used in C++
 
 ### Unit 4: Classes and Objects [4 Hours]
-- Classes and Objects
+- **Topic 4.1**: Classes and Objects
 
 ### Unit 5: Constructor & Destructor [4 Hours]
-- Constructor & Destructor
+- **Topic 5.1**: Constructor & Destructor
 
 ### Unit 6: Operator Overloading [4 Hours]
-- Operator Overloading
+- **Topic 6.1**: Operator Overloading
 
 ### Unit 7: Inheritance [4 Hours]
-- Inheritance
+- **Topic 7.1**: Inheritance
 
 ### Unit 8: Virtual Functions and Polymorphism [4 Hours]
-- Virtual Functions and Polymorphism
+- **Topic 8.1**: Virtual Functions and Polymorphism
 
 ### Unit 9: File Handling [4 Hours]
-- File Handling
+- **Topic 9.1**: File Handling
 
 ### Unit 10: Templates and Namespaces [4 Hours]
-- Templates and Namespaces
+- **Topic 10.1**: Templates and Namespaces
 
 ### Unit 11: Exception Handling [4 Hours]
-- Exception Handling
+- **Topic 11.1**: Exception Handling
 
 ---
 
@@ -306,37 +306,37 @@ Financial management fundamentals, capital budgeting and structure, and core acc
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Nature of Financial Management [4 Hours]
-- Nature of Financial Management
+- **Topic 1.1**: Nature of Financial Management
 
 ### Unit 2: Time Value of Money [4 Hours]
-- Time Value of Money
+- **Topic 2.1**: Time Value of Money
 
 ### Unit 3: Capital Budgeting [4 Hours]
-- Capital Budgeting
+- **Topic 3.1**: Capital Budgeting
 
 ### Unit 4: Working Capital [4 Hours]
-- Working Capital
+- **Topic 4.1**: Working Capital
 
 ### Unit 5: Capital Structure [4 Hours]
-- Capital Structure
+- **Topic 5.1**: Capital Structure
 
 ### Unit 6: Dividends [4 Hours]
-- Dividends
+- **Topic 6.1**: Dividends
 
 ### Unit 7: Nature of Accounting [4 Hours]
-- Nature of Accounting
+- **Topic 7.1**: Nature of Accounting
 
 ### Unit 8: Accounting Process [4 Hours]
-- Accounting Process
+- **Topic 8.1**: Accounting Process
 
 ### Unit 9: Financial Statement [4 Hours]
-- Financial Statement
+- **Topic 9.1**: Financial Statement
 
 ### Unit 10: Financial Analysis [4 Hours]
-- Financial Analysis
+- **Topic 10.1**: Financial Analysis
 
 ### Unit 11: Cash Flow Statement - Direct Method [4 Hours]
-- Cash Flow Statement - Direct Method
+- **Topic 11.1**: Cash Flow Statement - Direct Method
 
 ---
 
@@ -386,16 +386,16 @@ Group software project (2-3 students) built using Object-Oriented Programming in
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Topic Selection & Information Gathering [11 Hours]
-- Topic Selection & Information Gathering
+- **Topic 1.1**: Topic Selection & Information Gathering
 
 ### Unit 2: System Requirements & Specifications [11 Hours]
-- System Requirements & Specifications
+- **Topic 2.1**: System Requirements & Specifications
 
 ### Unit 3: Coding & Implementation [11 Hours]
-- Coding & Implementation
+- **Topic 3.1**: Coding & Implementation
 
 ### Unit 4: Documentation & Final Presentation [11 Hours]
-- Documentation & Final Presentation
+- **Topic 4.1**: Documentation & Final Presentation
 
 ---
 

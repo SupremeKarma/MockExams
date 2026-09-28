@@ -48,37 +48,37 @@ Descriptive statistics, probability theory, theoretical distributions, estimatio
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Nature and scope of statistics [4 Hours]
-- Nature and scope of statistics
+- **Topic 1.1**: Nature and scope of statistics
 
 ### Unit 2: Data and its collection [4 Hours]
-- Data and its collection
+- **Topic 2.1**: Data and its collection
 
 ### Unit 3: Classification and tabulation of data [4 Hours]
-- Classification and tabulation of data
+- **Topic 3.1**: Classification and tabulation of data
 
 ### Unit 4: Diagrammatic and graphic presentation [4 Hours]
-- Diagrammatic and graphic presentation
+- **Topic 4.1**: Diagrammatic and graphic presentation
 
 ### Unit 5: Measures of central tendency [4 Hours]
-- Measures of central tendency
+- **Topic 5.1**: Measures of central tendency
 
 ### Unit 6: Measures of dispersion [4 Hours]
-- Measures of dispersion
+- **Topic 6.1**: Measures of dispersion
 
 ### Unit 7: Probability [4 Hours]
-- Probability
+- **Topic 7.1**: Probability
 
 ### Unit 8: Theoretical distribution (Binomial, Poisson, Normal, Hyper-geometric) [4 Hours]
-- Theoretical distribution (Binomial, Poisson, Normal, Hyper-geometric)
+- **Topic 8.1**: Theoretical distribution (Binomial, Poisson, Normal, Hyper-geometric)
 
 ### Unit 9: Estimation theory and testing of hypothesis [4 Hours]
-- Estimation theory and testing of hypothesis
+- **Topic 9.1**: Estimation theory and testing of hypothesis
 
 ### Unit 10: Chi-Square distribution [4 Hours]
-- Chi-Square distribution
+- **Topic 10.1**: Chi-Square distribution
 
 ### Unit 11: Correlation and regression analysis [4 Hours]
-- Correlation and regression analysis
+- **Topic 11.1**: Correlation and regression analysis
 
 ---
 
@@ -118,31 +118,31 @@ Computer instruction sets, control unit design, CPU architecture, pipelining, me
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction [5 Hours]
-- Introduction
+- **Topic 1.1**: Introduction
 
 ### Unit 2: Computer organization and design [5 Hours]
-- Computer organization and design
+- **Topic 2.1**: Computer organization and design
 
 ### Unit 3: Control unit design [5 Hours]
-- Control unit design
+- **Topic 3.1**: Control unit design
 
 ### Unit 4: Central processing unit [5 Hours]
-- Central processing unit
+- **Topic 4.1**: Central processing unit
 
 ### Unit 5: Pipeline and vector processing [5 Hours]
-- Pipeline and vector processing
+- **Topic 5.1**: Pipeline and vector processing
 
 ### Unit 6: Computer arithmetic [5 Hours]
-- Computer arithmetic
+- **Topic 6.1**: Computer arithmetic
 
 ### Unit 7: Input and output organization [5 Hours]
-- Input and output organization
+- **Topic 7.1**: Input and output organization
 
 ### Unit 8: Memory organization [5 Hours]
-- Memory organization
+- **Topic 8.1**: Memory organization
 
 ### Unit 9: Multiprocessor [5 Hours]
-- Multiprocessor
+- **Topic 9.1**: Multiprocessor
 
 ---
 
@@ -192,31 +192,31 @@ Process/thread management, memory management, file systems, I/O, deadlocks, and 
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction [5 Hours]
-- Introduction
+- **Topic 1.1**: Introduction
 
 ### Unit 2: Processes and Threads [5 Hours]
-- Processes and Threads
+- **Topic 2.1**: Processes and Threads
 
 ### Unit 3: Memory Management [5 Hours]
-- Memory Management
+- **Topic 3.1**: Memory Management
 
 ### Unit 4: File Systems [5 Hours]
-- File Systems
+- **Topic 4.1**: File Systems
 
 ### Unit 5: Input/Output [5 Hours]
-- Input/Output
+- **Topic 5.1**: Input/Output
 
 ### Unit 6: Deadlocks [5 Hours]
-- Deadlocks
+- **Topic 6.1**: Deadlocks
 
 ### Unit 7: Real Time System [5 Hours]
-- Real Time System
+- **Topic 7.1**: Real Time System
 
 ### Unit 8: Distributed System [5 Hours]
-- Distributed System
+- **Topic 8.1**: Distributed System
 
 ### Unit 9: Case study (UNIX/LINUX/Windows/Android/iOS) [5 Hours]
-- Case study (UNIX/LINUX/Windows/Android/iOS)
+- **Topic 9.1**: Case study (UNIX/LINUX/Windows/Android/iOS)
 
 ---
 
@@ -266,31 +266,31 @@ DBMS architecture, relational model, SQL, normalization, database security, and 
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction [5 Hours]
-- Introduction
+- **Topic 1.1**: Introduction
 
 ### Unit 2: Database System Concepts and Architecture (E-R model) [5 Hours]
-- Database System Concepts and Architecture (E-R model)
+- **Topic 2.1**: Database System Concepts and Architecture (E-R model)
 
 ### Unit 3: Relational Model [5 Hours]
-- Relational Model
+- **Topic 3.1**: Relational Model
 
 ### Unit 4: SQL (incl. PL/SQL) [5 Hours]
-- SQL (incl. PL/SQL)
+- **Topic 4.1**: SQL (incl. PL/SQL)
 
 ### Unit 5: Integrity Constraints [5 Hours]
-- Integrity Constraints
+- **Topic 5.1**: Integrity Constraints
 
 ### Unit 6: Normalization (1NF-5NF, BCNF) [5 Hours]
-- Normalization (1NF-5NF, BCNF)
+- **Topic 6.1**: Normalization (1NF-5NF, BCNF)
 
 ### Unit 7: Database Security [5 Hours]
-- Database Security
+- **Topic 7.1**: Database Security
 
 ### Unit 8: Transaction and Query Processing (ACID, concurrency, WAL) [5 Hours]
-- Transaction and Query Processing (ACID, concurrency, WAL)
+- **Topic 8.1**: Transaction and Query Processing (ACID, concurrency, WAL)
 
 ### Unit 9: Backup and Recovery [5 Hours]
-- Backup and Recovery
+- **Topic 9.1**: Backup and Recovery
 
 ---
 
@@ -340,28 +340,28 @@ Core Java OOP, GUI programming, file I/O, JDBC, socket programming, and Servlet/
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to Java [6 Hours]
-- Introduction to Java
+- **Topic 1.1**: Introduction to Java
 
 ### Unit 2: Applet Programming [6 Hours]
-- Applet Programming
+- **Topic 2.1**: Applet Programming
 
 ### Unit 3: GUI Programming (AWT/Swing) [6 Hours]
-- GUI Programming (AWT/Swing)
+- **Topic 3.1**: GUI Programming (AWT/Swing)
 
 ### Unit 4: Java IO [6 Hours]
-- Java IO
+- **Topic 4.1**: Java IO
 
 ### Unit 5: JDBC [6 Hours]
-- JDBC
+- **Topic 5.1**: JDBC
 
 ### Unit 6: Socket Programming [6 Hours]
-- Socket Programming
+- **Topic 6.1**: Socket Programming
 
 ### Unit 7: Distributed Application (RMI) [6 Hours]
-- Distributed Application (RMI)
+- **Topic 7.1**: Distributed Application (RMI)
 
 ### Unit 8: Overview of Servlet and JSP [6 Hours]
-- Overview of Servlet and JSP
+- **Topic 8.1**: Overview of Servlet and JSP
 
 ---
 
@@ -411,13 +411,13 @@ Group application software project (up to 3 students) developed in Java, with pr
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Title Identification & Proposal Writing [15 Hours]
-- Title Identification & Proposal Writing
+- **Topic 1.1**: Title Identification & Proposal Writing
 
 ### Unit 2: Mid-Term Presentation [15 Hours]
-- Mid-Term Presentation
+- **Topic 2.1**: Mid-Term Presentation
 
 ### Unit 3: Pre-Final Submission & Final Presentation [15 Hours]
-- Pre-Final Submission & Final Presentation
+- **Topic 3.1**: Pre-Final Submission & Final Presentation
 
 ---
 

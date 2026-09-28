@@ -25,31 +25,31 @@ Process/thread management, memory management, file systems, I/O, deadlocks, and 
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction [5 Hours]
-- Introduction
+- **Topic 1.1**: Introduction
 
 ### Unit 2: Processes and Threads [5 Hours]
-- Processes and Threads
+- **Topic 2.1**: Processes and Threads
 
 ### Unit 3: Memory Management [5 Hours]
-- Memory Management
+- **Topic 3.1**: Memory Management
 
 ### Unit 4: File Systems [5 Hours]
-- File Systems
+- **Topic 4.1**: File Systems
 
 ### Unit 5: Input/Output [5 Hours]
-- Input/Output
+- **Topic 5.1**: Input/Output
 
 ### Unit 6: Deadlocks [5 Hours]
-- Deadlocks
+- **Topic 6.1**: Deadlocks
 
 ### Unit 7: Real Time System [5 Hours]
-- Real Time System
+- **Topic 7.1**: Real Time System
 
 ### Unit 8: Distributed System [5 Hours]
-- Distributed System
+- **Topic 8.1**: Distributed System
 
 ### Unit 9: Case study (UNIX/LINUX/Windows/Android/iOS) [5 Hours]
-- Case study (UNIX/LINUX/Windows/Android/iOS)
+- **Topic 9.1**: Case study (UNIX/LINUX/Windows/Android/iOS)
 
 ---
 

@@ -25,25 +25,25 @@ Core data structures — stacks, queues, lists, trees, graphs — plus sorting, 
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction & Algorithm Efficiency [6 Hours]
-- Introduction & Algorithm Efficiency
+- **Topic 1.1**: Introduction & Algorithm Efficiency
 
 ### Unit 2: Stack & Queue [6 Hours]
-- Stack & Queue
+- **Topic 2.1**: Stack & Queue
 
 ### Unit 3: List and Linked List [6 Hours]
-- List and Linked List
+- **Topic 3.1**: List and Linked List
 
 ### Unit 4: Recursion [6 Hours]
-- Recursion
+- **Topic 4.1**: Recursion
 
 ### Unit 5: Trees (BST, AVL, Huffman) [6 Hours]
-- Trees (BST, AVL, Huffman)
+- **Topic 5.1**: Trees (BST, AVL, Huffman)
 
 ### Unit 6: Sorting (Quick, Merge, Heap) [6 Hours]
-- Sorting (Quick, Merge, Heap)
+- **Topic 6.1**: Sorting (Quick, Merge, Heap)
 
 ### Unit 7: Searching, Hashing & Graphs (DFS, BFS, Dijkstra) [6 Hours]
-- Searching, Hashing & Graphs (DFS, BFS, Dijkstra)
+- **Topic 7.1**: Searching, Hashing & Graphs (DFS, BFS, Dijkstra)
 
 ---
 

@@ -25,22 +25,22 @@ Numerical solutions to nonlinear equations, interpolation, linear systems, diffe
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Errors in Numerical Computation [8 Hours]
-- Errors in Numerical Computation
+- **Topic 1.1**: Errors in Numerical Computation
 
 ### Unit 2: Solution of Nonlinear Equations (Bisection, Newton-Raphson) [8 Hours]
-- Solution of Nonlinear Equations (Bisection, Newton-Raphson)
+- **Topic 2.1**: Solution of Nonlinear Equations (Bisection, Newton-Raphson)
 
 ### Unit 3: Interpolation & Least Square Methods [8 Hours]
-- Interpolation & Least Square Methods
+- **Topic 3.1**: Interpolation & Least Square Methods
 
 ### Unit 4: System of Linear Equations (Direct & Indirect Methods) [8 Hours]
-- System of Linear Equations (Direct & Indirect Methods)
+- **Topic 4.1**: System of Linear Equations (Direct & Indirect Methods)
 
 ### Unit 5: Numerical Differentiation & Integration [8 Hours]
-- Numerical Differentiation & Integration
+- **Topic 5.1**: Numerical Differentiation & Integration
 
 ### Unit 6: Numerical Solution of ODEs (Euler, Runge-Kutta) [8 Hours]
-- Numerical Solution of ODEs (Euler, Runge-Kutta)
+- **Topic 6.1**: Numerical Solution of ODEs (Euler, Runge-Kutta)
 
 ---
 

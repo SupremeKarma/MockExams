@@ -164,8 +164,8 @@ export function generateCourseMarkdown(course: {
     const hoursStr = unit.teachingHours ? ` [${unit.teachingHours} Hours]` : "";
     lines.push(`### Unit ${idx + 1}: ${unit.title}${hoursStr}`);
     if (unit.subtopics && unit.subtopics.length > 0) {
-      unit.subtopics.forEach((st) => {
-        lines.push(`- ${st}`);
+      unit.subtopics.forEach((st, sIdx) => {
+        lines.push(`- **Topic ${idx + 1}.${sIdx + 1}**: ${st}`);
       });
     }
     lines.push("");

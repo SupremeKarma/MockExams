@@ -25,64 +25,64 @@ Multimedia data representations — audio/MIDI, image processing, video encoding
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Multimedia Systems [3 Hours]
-- Multimedia aspects and definitions, key elements of multimedia systems
-- Continuous vs discrete media streams, characterization of multimedia systems
+- **Topic 1.1**: Multimedia aspects and definitions, key elements of multimedia systems
+- **Topic 1.2**: Continuous vs discrete media streams, characterization of multimedia systems
 
 ### Unit 2: Sound and Audio [4 Hours]
-- Physics of sound, sampling rate, quantization, and signal-to-quantization-noise ratio (SQNR)
-- Audio file formats: WAV, MP3, AAC, FLAC
-- MIDI protocol: messages, devices, synthesizers, and comparison with digital audio
-- Speech processing: speech synthesis and recognition principles
+- **Topic 2.1**: Physics of sound, sampling rate, quantization, and signal-to-quantization-noise ratio (SQNR)
+- **Topic 2.2**: Audio file formats: WAV, MP3, AAC, FLAC
+- **Topic 2.3**: MIDI protocol: messages, devices, synthesizers, and comparison with digital audio
+- **Topic 2.4**: Speech processing: speech synthesis and recognition principles
 
 ### Unit 3: Images and Graphics [4 Hours]
-- Raster vs vector graphics representations
-- Color models: RGB, CMYK, HSV, YUV, and color palettes
-- Image file formats: BMP, GIF, PNG, TIFF, JPEG
-- Basic image processing: spatial filtering, enhancement, and histogram equalization
+- **Topic 3.1**: Raster vs vector graphics representations
+- **Topic 3.2**: Color models: RGB, CMYK, HSV, YUV, and color palettes
+- **Topic 3.3**: Image file formats: BMP, GIF, PNG, TIFF, JPEG
+- **Topic 3.4**: Basic image processing: spatial filtering, enhancement, and histogram equalization
 
 ### Unit 4: Video and Animation [4 Hours]
-- Television and video signals: Component, Composite, S-Video
-- Analog broadcast standards (NTSC, PAL, SECAM) and digital video standards (HDTV, 4K)
-- Principles of computer animation: keyframing, kinematics, morphing, and rendering
+- **Topic 4.1**: Television and video signals: Component, Composite, S-Video
+- **Topic 4.2**: Analog broadcast standards (NTSC, PAL, SECAM) and digital video standards (HDTV, 4K)
+- **Topic 4.3**: Principles of computer animation: keyframing, kinematics, morphing, and rendering
 
 ### Unit 5: Data Compression [6 Hours]
-- Lossless vs lossy compression fundamentals
-- Entropy encoding: Run-length encoding (RLE), Huffman coding, Arithmetic coding, LZW
-- Image compression: JPEG standard (DCT, quantization, entropy coding)
-- Video compression: MPEG standards (I, P, B frames, motion estimation) and H.261/H.264
+- **Topic 5.1**: Lossless vs lossy compression fundamentals
+- **Topic 5.2**: Entropy encoding: Run-length encoding (RLE), Huffman coding, Arithmetic coding, LZW
+- **Topic 5.3**: Image compression: JPEG standard (DCT, quantization, entropy coding)
+- **Topic 5.4**: Video compression: MPEG standards (I, P, B frames, motion estimation) and H.261/H.264
 
 ### Unit 6: Optical Storage Media [4 Hours]
-- Optical recording technology and track geometry
-- CD-ROM, CD-R, CD-RW standards and logical formats (ISO 9660)
-- DVD technology, DVD-Video, and Blu-Ray disc physical and logical specifications
+- **Topic 6.1**: Optical recording technology and track geometry
+- **Topic 6.2**: CD-ROM, CD-R, CD-RW standards and logical formats (ISO 9660)
+- **Topic 6.3**: DVD technology, DVD-Video, and Blu-Ray disc physical and logical specifications
 
 ### Unit 7: Multimedia Operating Systems [4 Hours]
-- Real-time processing requirements for continuous media
-- Real-time scheduling algorithms: Earliest Deadline First (EDF) and Rate Monotonic (RM)
-- Resource management, buffer management, and memory allocation in multimedia OS
+- **Topic 7.1**: Real-time processing requirements for continuous media
+- **Topic 7.2**: Real-time scheduling algorithms: Earliest Deadline First (EDF) and Rate Monotonic (RM)
+- **Topic 7.3**: Resource management, buffer management, and memory allocation in multimedia OS
 
 ### Unit 8: Multimedia Communication Systems [4 Hours]
-- Quality of Service (QoS) parameters: bandwidth, latency, jitter, packet loss rate
-- Protocols for real-time transport: RTP, RTCP, RTSP, and RSVP
-- Streaming media architectures, adaptive bitrate streaming (HLS, DASH), and CDN distribution
+- **Topic 8.1**: Quality of Service (QoS) parameters: bandwidth, latency, jitter, packet loss rate
+- **Topic 8.2**: Protocols for real-time transport: RTP, RTCP, RTSP, and RSVP
+- **Topic 8.3**: Streaming media architectures, adaptive bitrate streaming (HLS, DASH), and CDN distribution
 
 ### Unit 9: Documentation, Hypertext and MHEG [4 Hours]
-- Hypertext and hypermedia concepts, nodes and links
-- Document architecture standards: SGML, ODA (Open Document Architecture)
-- MHEG (Multimedia and Hypermedia Information Coding Expert Group) standards
+- **Topic 9.1**: Hypertext and hypermedia concepts, nodes and links
+- **Topic 9.2**: Document architecture standards: SGML, ODA (Open Document Architecture)
+- **Topic 9.3**: MHEG (Multimedia and Hypermedia Information Coding Expert Group) standards
 
 ### Unit 10: Synchronization [4 Hours]
-- Notion of synchronization: intra-media vs inter-media synchronization
-- Lip-sync synchronization requirements and skew limits
-- Synchronization reference models and specification methods (interval-based, timeline-based)
+- **Topic 10.1**: Notion of synchronization: intra-media vs inter-media synchronization
+- **Topic 10.2**: Lip-sync synchronization requirements and skew limits
+- **Topic 10.3**: Synchronization reference models and specification methods (interval-based, timeline-based)
 
 ### Unit 11: Abstraction of Programming & Toolkits [2 Hours]
-- Higher-level programming abstractions for multimedia objects
-- Media frameworks and toolkits (DirectShow, GStreamer, QuickTime, WebRTC APIs)
+- **Topic 11.1**: Higher-level programming abstractions for multimedia objects
+- **Topic 11.2**: Media frameworks and toolkits (DirectShow, GStreamer, QuickTime, WebRTC APIs)
 
 ### Unit 12: Multimedia Applications [2 Hours]
-- Video on Demand (VoD) system architectures and server scheduling
-- Interactive video conferencing architectures and collaborative virtual environments
+- **Topic 12.1**: Video on Demand (VoD) system architectures and server scheduling
+- **Topic 12.2**: Interactive video conferencing architectures and collaborative virtual environments
 
 ---
 

@@ -25,22 +25,22 @@ Rasterization algorithms, 2D/3D transformations, clipping, illumination, and sha
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Display Devices & Raster Graphics [8 Hours]
-- Display Devices & Raster Graphics
+- **Topic 1.1**: Display Devices & Raster Graphics
 
 ### Unit 2: Line & Circle Drawing Algorithms [8 Hours]
-- Line & Circle Drawing Algorithms
+- **Topic 2.1**: Line & Circle Drawing Algorithms
 
 ### Unit 3: 2D Transformations & Clipping [8 Hours]
-- 2D Transformations & Clipping
+- **Topic 3.1**: 2D Transformations & Clipping
 
 ### Unit 4: 3D Transformations & Projections [8 Hours]
-- 3D Transformations & Projections
+- **Topic 4.1**: 3D Transformations & Projections
 
 ### Unit 5: Visible Surface Detection (Z-Buffer) [8 Hours]
-- Visible Surface Detection (Z-Buffer)
+- **Topic 5.1**: Visible Surface Detection (Z-Buffer)
 
 ### Unit 6: Illumination & Shading Models [8 Hours]
-- Illumination & Shading Models
+- **Topic 6.1**: Illumination & Shading Models
 
 ---
 

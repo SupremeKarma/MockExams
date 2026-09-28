@@ -25,37 +25,37 @@ Financial management fundamentals, capital budgeting and structure, and core acc
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Nature of Financial Management [4 Hours]
-- Nature of Financial Management
+- **Topic 1.1**: Nature of Financial Management
 
 ### Unit 2: Time Value of Money [4 Hours]
-- Time Value of Money
+- **Topic 2.1**: Time Value of Money
 
 ### Unit 3: Capital Budgeting [4 Hours]
-- Capital Budgeting
+- **Topic 3.1**: Capital Budgeting
 
 ### Unit 4: Working Capital [4 Hours]
-- Working Capital
+- **Topic 4.1**: Working Capital
 
 ### Unit 5: Capital Structure [4 Hours]
-- Capital Structure
+- **Topic 5.1**: Capital Structure
 
 ### Unit 6: Dividends [4 Hours]
-- Dividends
+- **Topic 6.1**: Dividends
 
 ### Unit 7: Nature of Accounting [4 Hours]
-- Nature of Accounting
+- **Topic 7.1**: Nature of Accounting
 
 ### Unit 8: Accounting Process [4 Hours]
-- Accounting Process
+- **Topic 8.1**: Accounting Process
 
 ### Unit 9: Financial Statement [4 Hours]
-- Financial Statement
+- **Topic 9.1**: Financial Statement
 
 ### Unit 10: Financial Analysis [4 Hours]
-- Financial Analysis
+- **Topic 10.1**: Financial Analysis
 
 ### Unit 11: Cash Flow Statement - Direct Method [4 Hours]
-- Cash Flow Statement - Direct Method
+- **Topic 11.1**: Cash Flow Statement - Direct Method
 
 ---
 

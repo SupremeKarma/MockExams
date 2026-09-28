@@ -25,19 +25,19 @@ Group web-based application project (up to 3 students) built with server-side sc
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Title Presentation [9 Hours]
-- Title Presentation
+- **Topic 1.1**: Title Presentation
 
 ### Unit 2: Mid-Term Presentation [9 Hours]
-- Mid-Term Presentation
+- **Topic 2.1**: Mid-Term Presentation
 
 ### Unit 3: Server-Side Web Application Development [9 Hours]
-- Server-Side Web Application Development
+- **Topic 3.1**: Server-Side Web Application Development
 
 ### Unit 4: AI or Data Mining-Related Project Topic [9 Hours]
-- AI or Data Mining-Related Project Topic
+- **Topic 4.1**: AI or Data Mining-Related Project Topic
 
 ### Unit 5: Pre-Final Submission & Presentation [9 Hours]
-- Pre-Final Submission & Presentation
+- **Topic 5.1**: Pre-Final Submission & Presentation
 
 ---
 

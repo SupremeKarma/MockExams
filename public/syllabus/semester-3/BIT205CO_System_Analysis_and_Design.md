@@ -25,22 +25,22 @@ SDLC models, process/conceptual modeling with DFDs and ERDs, systems analysis an
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Overview of Systems Analysis & Design (SDLC Models) [8 Hours]
-- Overview of Systems Analysis & Design (SDLC Models)
+- **Topic 1.1**: Overview of Systems Analysis & Design (SDLC Models)
 
 ### Unit 2: Process & Conceptual Modeling (DFD, ERD) [8 Hours]
-- Process & Conceptual Modeling (DFD, ERD)
+- **Topic 2.1**: Process & Conceptual Modeling (DFD, ERD)
 
 ### Unit 3: Logic Modeling (Decision Table/Tree) [8 Hours]
-- Logic Modeling (Decision Table/Tree)
+- **Topic 3.1**: Logic Modeling (Decision Table/Tree)
 
 ### Unit 4: Systems Analysis (Requirements, Feasibility) [8 Hours]
-- Systems Analysis (Requirements, Feasibility)
+- **Topic 4.1**: Systems Analysis (Requirements, Feasibility)
 
 ### Unit 5: Systems Design & Implementation [8 Hours]
-- Systems Design & Implementation
+- **Topic 5.1**: Systems Design & Implementation
 
 ### Unit 6: Object-Oriented Analysis & Design (UML) [8 Hours]
-- Object-Oriented Analysis & Design (UML)
+- **Topic 6.1**: Object-Oriented Analysis & Design (UML)
 
 ---
 

@@ -25,44 +25,44 @@ Electronic commerce architectures, mercantile retailing models, mobile commerce 
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: E-Commerce Foundations [11 Hours]
-- Introduction to Electronic Commerce: definitions, history, and framework
-- E-Commerce business models: B2B, B2C, C2C, C2B, G2C, and m-Commerce
-- Electronic payment systems: digital credit cards, debit cards, smart cards, e-wallets, token-based payment
-- Security protocols for e-commerce: SSL/TLS, SET, digital signatures, certificates, and PKI
-- Legal, regulatory, and taxation issues in global e-commerce
+- **Topic 1.1**: Introduction to Electronic Commerce: definitions, history, and framework
+- **Topic 1.2**: E-Commerce business models: B2B, B2C, C2C, C2B, G2C, and m-Commerce
+- **Topic 1.3**: Electronic payment systems: digital credit cards, debit cards, smart cards, e-wallets, token-based payment
+- **Topic 1.4**: Security protocols for e-commerce: SSL/TLS, SET, digital signatures, certificates, and PKI
+- **Topic 1.5**: Legal, regulatory, and taxation issues in global e-commerce
 
 ### Unit 2: Electronic Retailing [2 Hours]
-- Consumer mercantile models and the consumer purchasing decision cycle
-- Electronic store models, online catalogs, search engines, and shopping carts
+- **Topic 2.1**: Consumer mercantile models and the consumer purchasing decision cycle
+- **Topic 2.2**: Electronic store models, online catalogs, search engines, and shopping carts
 
 ### Unit 3: Introduction to Digital Commerce Trends [3 Hours]
-- Omnichannel retail strategies and social commerce
-- Subscription business models and hyper-personalization
-- Cross-border digital commerce logistics and supply integration
+- **Topic 3.1**: Omnichannel retail strategies and social commerce
+- **Topic 3.2**: Subscription business models and hyper-personalization
+- **Topic 3.3**: Cross-border digital commerce logistics and supply integration
 
 ### Unit 4: Fundamentals of Mobile Commerce [8 Hours]
-- M-Commerce concepts, drivers, and architectural frameworks
-- Mobile networks: GSM, GPRS, 3G, 4G, and 5G infrastructure constraints
-- Mobile payment systems, contactless NFC, QR-code payment, and digital wallets
-- Location-based services (LBS) and proximity marketing
+- **Topic 4.1**: M-Commerce concepts, drivers, and architectural frameworks
+- **Topic 4.2**: Mobile networks: GSM, GPRS, 3G, 4G, and 5G infrastructure constraints
+- **Topic 4.3**: Mobile payment systems, contactless NFC, QR-code payment, and digital wallets
+- **Topic 4.4**: Location-based services (LBS) and proximity marketing
 
 ### Unit 5: Digital Marketing [8 Hours]
-- Search Engine Optimization (SEO): on-page and off-page optimization
-- Pay-per-click advertising: Google Ads, keyword research, and bidding strategies
-- Social media marketing (SMM) and content marketing strategies
-- Email marketing campaigns, conversion rate optimization (CRO), and analytics
+- **Topic 5.1**: Search Engine Optimization (SEO): on-page and off-page optimization
+- **Topic 5.2**: Pay-per-click advertising: Google Ads, keyword research, and bidding strategies
+- **Topic 5.3**: Social media marketing (SMM) and content marketing strategies
+- **Topic 5.4**: Email marketing campaigns, conversion rate optimization (CRO), and analytics
 
 ### Unit 6: Web Content Management Systems [7 Hours]
-- Content Management System (CMS) architecture and selection criteria
-- WordPress architecture, theme development, and plugin ecosystem
-- E-commerce CMS implementation using WooCommerce / Shopify
-- Product catalog configuration, payment gateway integration, and shipping calculators
+- **Topic 6.1**: Content Management System (CMS) architecture and selection criteria
+- **Topic 6.2**: WordPress architecture, theme development, and plugin ecosystem
+- **Topic 6.3**: E-commerce CMS implementation using WooCommerce / Shopify
+- **Topic 6.4**: Product catalog configuration, payment gateway integration, and shipping calculators
 
 ### Unit 7: Application of Artificial Intelligence in Commerce [6 Hours]
-- Conversational AI: customer support chatbots and virtual assistants
-- Personalized product recommendation algorithms (collaborative vs content-based filtering)
-- Dynamic pricing algorithms and predictive inventory management
-- AI-driven fraud detection in online financial transactions
+- **Topic 7.1**: Conversational AI: customer support chatbots and virtual assistants
+- **Topic 7.2**: Personalized product recommendation algorithms (collaborative vs content-based filtering)
+- **Topic 7.3**: Dynamic pricing algorithms and predictive inventory management
+- **Topic 7.4**: AI-driven fraud detection in online financial transactions
 
 ---
 

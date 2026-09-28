@@ -25,31 +25,31 @@ Computer components and history, hardware and storage, software and databases, n
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to Computer [5 Hours]
-- Introduction to Computer
+- **Topic 1.1**: Introduction to Computer
 
 ### Unit 2: Basic Computer Organization and Computer Peripherals [5 Hours]
-- Basic Computer Organization and Computer Peripherals
+- **Topic 2.1**: Basic Computer Organization and Computer Peripherals
 
 ### Unit 3: Computer Storage [5 Hours]
-- Computer Storage
+- **Topic 3.1**: Computer Storage
 
 ### Unit 4: Computer Software [5 Hours]
-- Computer Software
+- **Topic 4.1**: Computer Software
 
 ### Unit 5: Introduction to Database [5 Hours]
-- Introduction to Database
+- **Topic 5.1**: Introduction to Database
 
 ### Unit 6: Networks and Internet [5 Hours]
-- Networks and Internet
+- **Topic 6.1**: Networks and Internet
 
 ### Unit 7: Information Security [5 Hours]
-- Information Security
+- **Topic 7.1**: Information Security
 
 ### Unit 8: Computer Hardware [5 Hours]
-- Computer Hardware
+- **Topic 8.1**: Computer Hardware
 
 ### Unit 9: Technological trends in Information Technology [5 Hours]
-- Technological trends in Information Technology
+- **Topic 9.1**: Technological trends in Information Technology
 
 ---
 

@@ -25,34 +25,34 @@ AI foundations from agents and search through knowledge representation, learning
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction & Applications of AI [5 Hours]
-- Introduction & Applications of AI
+- **Topic 1.1**: Introduction & Applications of AI
 
 ### Unit 2: Agents: PEAS, Rationality & Agent Types [5 Hours]
-- Agents: PEAS, Rationality & Agent Types
+- **Topic 2.1**: Agents: PEAS, Rationality & Agent Types
 
 ### Unit 3: Uninformed & Informed Search (BFS, DFS, A*, Hill Climbing) [5 Hours]
-- Uninformed & Informed Search (BFS, DFS, A*, Hill Climbing)
+- **Topic 3.1**: Uninformed & Informed Search (BFS, DFS, A*, Hill Climbing)
 
 ### Unit 4: Adversarial Search & Constraint Satisfaction (Minimax, Alpha-Beta, CSP) [5 Hours]
-- Adversarial Search & Constraint Satisfaction (Minimax, Alpha-Beta, CSP)
+- **Topic 4.1**: Adversarial Search & Constraint Satisfaction (Minimax, Alpha-Beta, CSP)
 
 ### Unit 5: Knowledge Representation (Logic, Semantic Nets, FOPL) [5 Hours]
-- Knowledge Representation (Logic, Semantic Nets, FOPL)
+- **Topic 5.1**: Knowledge Representation (Logic, Semantic Nets, FOPL)
 
 ### Unit 6: Learning Systems (Decision Trees, Reinforcement Learning) [5 Hours]
-- Learning Systems (Decision Trees, Reinforcement Learning)
+- **Topic 6.1**: Learning Systems (Decision Trees, Reinforcement Learning)
 
 ### Unit 7: Reasoning (Monotonic, Bayesian, Case-Based) [5 Hours]
-- Reasoning (Monotonic, Bayesian, Case-Based)
+- **Topic 7.1**: Reasoning (Monotonic, Bayesian, Case-Based)
 
 ### Unit 8: Expert Systems (Inference Engine, Forward/Backward Chaining) [5 Hours]
-- Expert Systems (Inference Engine, Forward/Backward Chaining)
+- **Topic 8.1**: Expert Systems (Inference Engine, Forward/Backward Chaining)
 
 ### Unit 9: Artificial Neural Networks (Perceptron, Backpropagation) [5 Hours]
-- Artificial Neural Networks (Perceptron, Backpropagation)
+- **Topic 9.1**: Artificial Neural Networks (Perceptron, Backpropagation)
 
 ### Unit 10: Natural Language Processing [5 Hours]
-- Natural Language Processing
+- **Topic 10.1**: Natural Language Processing
 
 ---
 

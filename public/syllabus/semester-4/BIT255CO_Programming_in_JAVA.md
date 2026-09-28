@@ -25,28 +25,28 @@ Core Java OOP, GUI programming, file I/O, JDBC, socket programming, and Servlet/
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Introduction to Java [6 Hours]
-- Introduction to Java
+- **Topic 1.1**: Introduction to Java
 
 ### Unit 2: Applet Programming [6 Hours]
-- Applet Programming
+- **Topic 2.1**: Applet Programming
 
 ### Unit 3: GUI Programming (AWT/Swing) [6 Hours]
-- GUI Programming (AWT/Swing)
+- **Topic 3.1**: GUI Programming (AWT/Swing)
 
 ### Unit 4: Java IO [6 Hours]
-- Java IO
+- **Topic 4.1**: Java IO
 
 ### Unit 5: JDBC [6 Hours]
-- JDBC
+- **Topic 5.1**: JDBC
 
 ### Unit 6: Socket Programming [6 Hours]
-- Socket Programming
+- **Topic 6.1**: Socket Programming
 
 ### Unit 7: Distributed Application (RMI) [6 Hours]
-- Distributed Application (RMI)
+- **Topic 7.1**: Distributed Application (RMI)
 
 ### Unit 8: Overview of Servlet and JSP [6 Hours]
-- Overview of Servlet and JSP
+- **Topic 8.1**: Overview of Servlet and JSP
 
 ---
 

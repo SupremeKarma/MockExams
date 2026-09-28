@@ -25,22 +25,22 @@ Scientific inquiry, quantitative and qualitative research designs, hypothesis fo
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Foundations of Scientific Research [8 Hours]
-- Foundations of Scientific Research
+- **Topic 1.1**: Foundations of Scientific Research
 
 ### Unit 2: Literature Review & Research Gap [8 Hours]
-- Literature Review & Research Gap
+- **Topic 2.1**: Literature Review & Research Gap
 
 ### Unit 3: Research Design & Sampling Strategies [8 Hours]
-- Research Design & Sampling Strategies
+- **Topic 3.1**: Research Design & Sampling Strategies
 
 ### Unit 4: Hypothesis Formulation & Testing [8 Hours]
-- Hypothesis Formulation & Testing
+- **Topic 4.1**: Hypothesis Formulation & Testing
 
 ### Unit 5: Data Analysis & Interpretation [8 Hours]
-- Data Analysis & Interpretation
+- **Topic 5.1**: Data Analysis & Interpretation
 
 ### Unit 6: Report Writing & Publication Ethics [8 Hours]
-- Report Writing & Publication Ethics
+- **Topic 6.1**: Report Writing & Publication Ethics
 
 ---
 

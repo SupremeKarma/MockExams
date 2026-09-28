@@ -25,24 +25,24 @@
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Proposal Defense & Organization Placement [10 Hours]
-- Partner organization identification (Bank, Hospital, Software Company, Telecom, or Government IT Unit)
-- Problem identification, scope definition, and internship plan preparation (first 2 weeks)
-- Proposal defense presentation (10% weight: 5% topic selection, 5% presentation) evaluated by supervisor and mentor
+- **Topic 1.1**: Partner organization identification (Bank, Hospital, Software Company, Telecom, or Government IT Unit)
+- **Topic 1.2**: Problem identification, scope definition, and internship plan preparation (first 2 weeks)
+- **Topic 1.3**: Proposal defense presentation (10% weight: 5% topic selection, 5% presentation) evaluated by supervisor and mentor
 
 ### Unit 2: Mid-Term Progress Review & System Design [15 Hours]
-- System requirements specification (SRS) and architecture modeling
-- Database design, ER diagrams, and normalized schema
-- Mid-term progress presentation and prototype demo (30% weight: 10% program design, 10% demo, 10% viva) after 2 months
+- **Topic 2.1**: System requirements specification (SRS) and architecture modeling
+- **Topic 2.2**: Database design, ER diagrams, and normalized schema
+- **Topic 2.3**: Mid-term progress presentation and prototype demo (30% weight: 10% program design, 10% demo, 10% viva) after 2 months
 
 ### Unit 3: System Implementation & Quality Testing [10 Hours]
-- Module implementation, database connectivity, and backend API integration
-- System testing: Unit testing, integration testing, and bug fixing
-- Evaluation of professional code quality, security, and documentation
+- **Topic 3.1**: Module implementation, database connectivity, and backend API integration
+- **Topic 3.2**: System testing: Unit testing, integration testing, and bug fixing
+- **Topic 3.3**: Evaluation of professional code quality, security, and documentation
 
 ### Unit 4: Final Internship Report & University Viva [10 Hours]
-- Technical report writing according to APA format (Abstract, Intro, System Analysis, System Design, Implementation, Testing, Future Enhancements, References)
-- Preparation of individual project portfolios (max 3 students per group)
-- End-term final defense (60% weight: 15% depth of work, 25% report, 10% presentation, 10% external viva) before Purbanchal University external examiner
+- **Topic 4.1**: Technical report writing according to APA format (Abstract, Intro, System Analysis, System Design, Implementation, Testing, Future Enhancements, References)
+- **Topic 4.2**: Preparation of individual project portfolios (max 3 students per group)
+- **Topic 4.3**: End-term final defense (60% weight: 15% depth of work, 25% report, 10% presentation, 10% external viva) before Purbanchal University external examiner
 
 ---
 

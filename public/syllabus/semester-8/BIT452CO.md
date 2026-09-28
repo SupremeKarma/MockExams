@@ -25,19 +25,19 @@ Distributed systems fundamentals and cloud computing service/deployment models, 
 ## 3. Detailed Syllabus Chapters & Teaching Units
 
 ### Unit 1: Distributed Systems Fundamentals (RPC, RMI, Consistency) [9 Hours]
-- Distributed Systems Fundamentals (RPC, RMI, Consistency)
+- **Topic 1.1**: Distributed Systems Fundamentals (RPC, RMI, Consistency)
 
 ### Unit 2: Cloud Computing Service Models (IaaS, PaaS, SaaS, Serverless) [9 Hours]
-- Cloud Computing Service Models (IaaS, PaaS, SaaS, Serverless)
+- **Topic 2.1**: Cloud Computing Service Models (IaaS, PaaS, SaaS, Serverless)
 
 ### Unit 3: Virtualization Technologies (Hypervisors, Containers, K8s) [9 Hours]
-- Virtualization Technologies (Hypervisors, Containers, K8s)
+- **Topic 3.1**: Virtualization Technologies (Hypervisors, Containers, K8s)
 
 ### Unit 4: Cloud Storage and Big Data Architectures [9 Hours]
-- Cloud Storage and Big Data Architectures
+- **Topic 4.1**: Cloud Storage and Big Data Architectures
 
 ### Unit 5: Cloud Security, IAM and Shared Responsibility [9 Hours]
-- Cloud Security, IAM and Shared Responsibility
+- **Topic 5.1**: Cloud Security, IAM and Shared Responsibility
 
 ---
 
