@@ -32,6 +32,7 @@ import {
   where,
   getDocs,
   updateDoc,
+  addDoc,
   serverTimestamp,
 } from "firebase/firestore";
 import { TeacherClass, ClassEnrollment } from "@/lib/examai/types";
@@ -261,29 +262,44 @@ export default function ClassProgressPage() {
   const handleIssueCertificate = async (student: ClassEnrollment) => {
     try {
       setIssuingCert(student.id);
-      const token = await user?.getIdToken();
 
       // Issue completion certificate for first assigned course or general class mastery
       const targetCourse = classData?.assignedCourseIds?.[0] || "BIT-DEGREE";
+      const courseTitle = classData?.name ? `${classData.name} Mastery` : "Class Syllabus Mastery";
 
-      // Call issue certificate endpoint
-      const res = await fetch(`/api/exams/${targetCourse}/submit`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          studentId: student.userId,
-          classId: classData?.id,
-          reason: "Class Syllabus Mastery Completion",
-        }),
-      }).catch(() => null);
+      // Check if certificate already exists for this student and course
+      const existingCertSnap = await getDocs(
+        query(
+          collection(db, "certificates"),
+          where("user_id", "==", student.userId),
+          where("exam_id", "==", targetCourse)
+        )
+      );
 
-      const code = `MX-${Math.random().toString(36).substring(2, 6).toUpperCase()}-${Math.random()
-        .toString(36)
-        .substring(2, 6)
-        .toUpperCase()}`;
+      let code = "";
+      if (!existingCertSnap.empty) {
+        code = existingCertSnap.docs[0].data().code;
+      } else {
+        const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+        const bytes = new Uint8Array(8);
+        if (typeof window !== "undefined" && window.crypto) {
+          window.crypto.getRandomValues(bytes);
+        }
+        for (let i = 0; i < 8; i++) code += alphabet[bytes[i] % alphabet.length];
+        code = `MX-${code.slice(0, 4)}-${code.slice(4)}`;
+
+        await addDoc(collection(db, "certificates"), {
+          code,
+          user_id: student.userId,
+          user_name: student.studentName || "Student",
+          exam_id: targetCourse,
+          exam_title: courseTitle,
+          percentage: Math.round(student.progressPercentage || 100),
+          attempts: 1,
+          issued_at: new Date().toISOString(),
+          class_id: classData?.id || null,
+        });
+      }
 
       setCertSuccess((prev) => ({
         ...prev,

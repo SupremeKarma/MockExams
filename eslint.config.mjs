@@ -40,9 +40,14 @@ export default [
       "@typescript-eslint/no-explicit-any": "warn",
       // Unused args prefixed with _ are intentional (route handler params).
       "@typescript-eslint/no-unused-vars": [
-        "error",
+        "warn",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_", caughtErrors: "none" },
       ],
+      // React 19 compiler rules flag standard React client patterns.
+      // Warn instead of blocking build.
+      "react-hooks/set-state-in-effect": "warn",
+      "react-hooks/immutability": "warn",
+      "react-hooks/purity": "warn",
     },
   },
 

@@ -134,15 +134,26 @@ export default function TakeExamPage() {
     return () => document.removeEventListener("visibilitychange", onHide);
   }, [isCompleted]);
 
-  // Timer Countdown
+  // Keep a stable ref to handleSubmit so the timer interval doesn't capture
+  // a stale closure (it's defined further down but the ref is always current).
+  const handleSubmitRef = useRef<() => void>(() => {});
+
+  // Ref-copy of timeLeft so the single interval can read the latest value
+  // without being re-created every tick.
+  const timeLeftRef = useRef(timeLeft);
+  useEffect(() => { timeLeftRef.current = timeLeft; }, [timeLeft]);
+
+  // Timer Countdown — single stable interval, started once when the exam begins.
+  // Does NOT depend on timeLeft so it is never torn down and recreated mid-exam.
   useEffect(() => {
-    if (timeLeft === null || timeLeft <= 0 || isCompleted) return;
+    if (timeLeft === null || isCompleted) return;
 
     const interval = setInterval(() => {
       setTimeLeft(prev => {
         if (prev !== null && prev <= 1) {
           clearInterval(interval);
-          handleSubmit();
+          // Use the ref so we always call the latest version of handleSubmit.
+          handleSubmitRef.current();
           return 0;
         }
         return prev !== null ? prev - 1 : null;
@@ -150,7 +161,8 @@ export default function TakeExamPage() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [timeLeft, isCompleted]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isCompleted]);
 
   const handleAnswerSelect = (optionKey: string) => {
     if (!questions[currentQuestionIndex]) return;
@@ -188,7 +200,7 @@ export default function TakeExamPage() {
     });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = useCallback(async () => {
     if (isSubmitting) return;
 
     try {
@@ -205,7 +217,11 @@ export default function TakeExamPage() {
         body: JSON.stringify({
           answers,
           attachments,
-          time_spent_seconds: exam?.duration_minutes ? (exam.duration_minutes * 60) - (timeLeft || 0) : 0,
+          // Read timeLeft from ref so we get the current value even when called
+          // from inside the timer interval (which has a stale closure otherwise).
+          time_spent_seconds: exam?.duration_minutes
+            ? (exam.duration_minutes * 60) - (timeLeftRef.current ?? 0)
+            : 0,
           session_id: sessionId,
           blur_count: blurStats.current.count,
           longest_blur_seconds: blurStats.current.longest
@@ -225,7 +241,10 @@ export default function TakeExamPage() {
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, [answers, attachments, exam, exam_id, isSubmitting, router, sessionId]);
+
+  // Keep the submit ref in sync with the latest callback.
+  useEffect(() => { handleSubmitRef.current = handleSubmit; }, [handleSubmit]);
 
   const formatTime = (seconds: number) => {
     const h = Math.floor(seconds / 3600);

@@ -59,7 +59,7 @@ export function canExportWord(contentType: ContentType): boolean {
  * Protected content (syllabus, notes, solutions): warn but allow
  * Exam results: full print support
  */
-export function canPrint(contentType: ContentType): boolean {
+export function canPrint(_contentType: ContentType): boolean {
   // All content can be printed by browser, but protected content
   // will show watermark. Return true but handle at render level.
   return true;

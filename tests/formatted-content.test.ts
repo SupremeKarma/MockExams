@@ -143,4 +143,11 @@ describe("FormattedContent component", () => {
     expect(html).not.toContain("—");
     expect(html).not.toContain("–");
   });
+
+  it("normalizes academic answer text by expanding run-on enumerated items into lines", () => {
+    const raw = "DBMS benefits: (1) Reduced redundancy. (2) Data integrity.";
+    const normalized = normalizeAcademicAnswerText(raw);
+    expect(normalized).toContain("(1) ");
+    expect(normalized).toContain("\n(2) ");
+  });
 });

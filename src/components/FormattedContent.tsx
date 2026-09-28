@@ -244,7 +244,7 @@ export function normalizeAcademicAnswerText(content: string): string {
   if (!content) return "";
 
   // Normalize CRLF
-  let text = content.replace(/\r\n/g, "\n");
+  const text = content.replace(/\r\n/g, "\n");
 
   const lines = text.split("\n");
   const processedLines: string[] = [];
@@ -308,7 +308,7 @@ export function normalizeAcademicAnswerText(content: string): string {
  * into title and body text, strictly stripping em-dashes.
  */
 function parseListItemLine(marker: string, fullText: string): ListItemData {
-  let cleanText = fullText.trim();
+  const cleanText = fullText.trim();
 
   // Pattern 1: Title followed by em-dash (—), en-dash (–), colon (:), or hyphen (-)
   // e.g. "Reduced data redundancy and inconsistency — a DBMS centralizes data..."

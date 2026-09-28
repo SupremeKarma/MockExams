@@ -98,7 +98,7 @@ function parseMathSegments(text: string, isBlock: boolean = false): MathSegment[
   normalized = normalizeUnicodeMath(normalized);
 
   // 2. Tokenize by $$...$$ first, then $...$
-  const tokenRegex = /(\$\$[\s\S]*?\$\$|\$(?:\\\$|[^\$])+?\$)/g;
+  const tokenRegex = /(\$\$[\s\S]*?\$\$|\$(?:\\\$|[^$\n])+?\$)/g;
   const rawParts = normalized.split(tokenRegex);
 
   const finalParts: MathSegment[] = [];
@@ -109,7 +109,7 @@ function parseMathSegments(text: string, isBlock: boolean = false): MathSegment[
     if (part.startsWith('$$') && part.endsWith('$$') && part.length >= 4) {
       const inner = part.slice(2, -2).trim();
       if (inner) finalParts.push({ type: 'block', content: inner });
-    } else if (part.startsWith('$') && part.endsWith('$') && part.length >= 2) {
+    } else if (part.startsWith('$') && part.endsWith('$') && part.length >= 3) {
       const inner = part.slice(1, -1).trim();
       if (inner) finalParts.push({ type: 'inline', content: inner });
     } else {
@@ -202,9 +202,12 @@ export const MathRenderer: React.FC<MathRendererProps> = ({
   inline = false,
   renderError,
 }) => {
-  if (!content) return null;
+  const segments = useMemo(
+    () => (content ? parseMathSegments(content, isBlock) : []),
+    [content, isBlock]
+  );
 
-  const segments = useMemo(() => parseMathSegments(content, isBlock), [content, isBlock]);
+  if (!content || segments.length === 0) return null;
 
   const renderContent = () => (
     <>

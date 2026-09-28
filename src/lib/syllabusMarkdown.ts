@@ -1,5 +1,5 @@
-import { bitSyllabusData, SubjectInfo } from "@/data/bitSyllabusData";
-import { globalSyllabusCourses, globalPrograms, GlobalCourse } from "@/data/globalSyllabusData";
+import { bitSyllabusData } from "@/data/bitSyllabusData";
+import { globalSyllabusCourses, globalPrograms } from "@/data/globalSyllabusData";
 
 export interface ExaminationScheme {
   theoryHours: number;
@@ -17,7 +17,7 @@ export interface ExaminationScheme {
  * Returns authentic examination and teaching scheme for a given course code.
  * Grounded in Purbanchal University & standard university academic regulations.
  */
-export function getCourseExaminationScheme(code: string, credits: number = 3): ExaminationScheme {
+export function getCourseExaminationScheme(code: string, _credits: number = 3): ExaminationScheme {
   const upper = code.toUpperCase();
 
   // Project courses
@@ -112,7 +112,7 @@ export function generateCourseMarkdown(course: {
   const scheme = getCourseExaminationScheme(course.code, course.credits);
   const units =
     course.syllabusUnits ||
-    (course.keyUnits || []).map((u, i) => ({
+    (course.keyUnits || []).map((u) => ({
       title: u,
       teachingHours: Math.round(45 / Math.max(1, (course.keyUnits || []).length)),
       subtopics: [u],

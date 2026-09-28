@@ -37,15 +37,16 @@ export default function OrgDashboardPage({ params }: { params: any }) {
       const orgData = orgSnap.data();
       setOrg({ id: orgSnap.id, ...orgData });
 
-      const [membersCount, examsCount] = await Promise.all([
+      const [membersCount, examsCount, attemptsCount] = await Promise.all([
         getCountFromServer(query(collection(db, "org_members"), where("org_id", "==", orgId))),
         getCountFromServer(query(collection(db, "exams"), where("org_id", "==", orgId))),
+        getCountFromServer(query(collection(db, "exam_attempts"), where("org_id", "==", orgId))),
       ]);
 
       setStats({ 
         members: membersCount.data().count, 
         exams: examsCount.data().count, 
-        attempts: 124 // Placeholder for demo, connect to real attempts collection later
+        attempts: attemptsCount.data().count,
       });
     } catch (err) { console.error(err); }
     finally { setLoading(false); }

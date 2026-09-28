@@ -265,7 +265,7 @@ export default function NotesWorkspace() {
               </div>
             ) : notes.length === 0 ? (
               <div className="p-10 text-center text-sm text-zinc-500">
-                No notes published yet. Click "New note" to write one, or run{" "}
+                No notes published yet. Click &quot;New note&quot; to write one, or run{" "}
                 <code className="bg-zinc-100 px-1 py-0.5 rounded text-xs">node scripts/publish-notes.mjs</code>{" "}
                 against <code className="bg-zinc-100 px-1 py-0.5 rounded text-xs">content/notes/</code>.
               </div>

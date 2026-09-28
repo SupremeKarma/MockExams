@@ -103,7 +103,7 @@ export default function ExaminerNewExamPage() {
           </dl>
 
           <p className="text-[11px] text-zinc-400 mt-5">
-            This is the exam container — questions are added on the next screen once it's created.
+            This is the exam container — questions are added on the next screen once it&apos;s created.
           </p>
         </aside>
       </div>
